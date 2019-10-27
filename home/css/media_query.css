@@ -1,0 +1,55 @@
+/* Extra Small Devices, Phones */
+
+@media (max-width: 767px) {
+    body {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.4), black), url(../img/sm.png);
+        background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.4), black), url(../img/sm.png);
+        overflow: hidden;
+        display: block;
+        width: 100%;
+        height: 100vh;
+        background-position: fixed;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        transform: translate3d(0px, 0px, 0px);
+        transform-style: preserve-3d;
+    }
+    .hadees h2 {
+        font-size: 25px;
+        color: #f7e171;
+        text-shadow: 2px 2px 2px black;
+    }
+    .hadees p {
+        font-size: 20px;
+        color: #fff;
+    }
+    .hadees {
+        overflow: hidden;
+    }
+    .ssub h2 {
+        font-size: 16px !important;
+    }
+    .main img {
+        width: 95px;
+    }
+    .tarm p {
+        font-size: 11px;
+    }
+    .tarm p span {
+        font-weight: 500;
+        font-size: 15px;
+        font-family: tradbdo;
+    }
+    .logomshary img {
+        width: 100%;
+        margin-top: -30%;
+        margin-bottom: -11%;
+        margin-left: 0;
+    }
+    .modal-footer {
+        padding-left: 100px;
+    }
+}
+
+
+/*==============================================================================================*/

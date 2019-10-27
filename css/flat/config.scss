@@ -1,0 +1,189 @@
+/*Define Application Fonts*/
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notonastaliqurdudraft.css);
+
+
+$primaryFont: 'Droid Arabic Kufi', sans-serif;
+$greetingLogoFont : 'Droid Arabic Kufi', sans-serif;
+
+
+@mixin FontFamily($font,$size,$color){
+  font-family: $font;
+  font-size: $size;
+  color: $color;
+}
+
+
+/* Define Application Color Scheme*/
+$primaryColor: #fff;
+$secondaryColor: #3067AB;
+$tertiaryColor: rgb(150,150,150);
+$backgroundColor: rgb(245,245,245);
+$errorColor : #FF7256;
+
+/* Define Application Box Shadows*/
+@mixin BoxShadow($color,$spread){
+  box-shadow: 0px 2px $spread $color;
+}
+/*Define Application Styles*/
+body {
+  background: $backgroundColor;
+}
+/*Main Section*/
+.mainHeader{
+  background: $secondaryColor;
+  @include BoxShadow(rgba(0,0,0,.2),4px);
+
+  h1 {
+    @include FontFamily($greetingLogoFont,24px,$primaryColor);
+  }
+}
+
+/*Form*/
+#greetingForm {
+
+  .errors{
+    background: $errorColor;
+    color: $primaryColor;
+    i{
+      color: $primaryColor;
+    }
+  }
+  label, h2 {
+    @include FontFamily($primaryFont,16px,$secondaryColor);
+    text-align: right;
+    font-size: 13px;
+  }
+
+  h2{
+    text-align: center;
+  }
+
+  input, select {
+    background: transparent;
+  }
+
+  .fieldset-controls, a.action-button {
+    background: $secondaryColor;
+      color: $primaryColor;
+      @include FontFamily($primaryFont,12px,$primaryColor);
+    input{
+      color: $primaryColor;
+      @include FontFamily($primaryFont,12px,$primaryColor);
+    }
+
+  }/* end controls*/
+
+  .select-panel {
+    border-top: 2px solid $secondaryColor;
+    background: #fff;
+    @include BoxShadow(rgba(0,0,0,.1),1px);
+
+    select{
+      color: $secondaryColor;
+
+    }
+    i {
+      color: $secondaryColor;
+    }
+  }/*end select-panel*/
+
+  .thumbnail.selected {
+    background: $secondaryColor;
+    padding: 3px;
+    padding-bottom: 1px;
+  }
+
+  input[type="text"]{
+    background: $primaryColor;
+    color: $tertiaryColor;
+    @include BoxShadow(rgba(0,0,0,.1),1px);
+  }
+
+  .input__label-content {
+    @include FontFamily($primaryFont,12px,$secondaryColor);
+  }
+
+  .input__label--nariko::before {
+    border-top: 2px solid $secondaryColor;
+  }
+
+  .input__field--nariko:focus + .input__label--nariko .input__label-content--nariko,
+  .input--filled .input__label-content--nariko {
+    color: $secondaryColor;
+  }
+
+  input[type="button"]:focus, input[type="submit"]:focus{
+    background-color: lighten($secondaryColor,10%);
+  }
+
+}/* end form*/
+
+#chooseAudio{
+  table {
+    border-top: 2px solid $secondaryColor;
+    background: $primaryColor;
+    @include BoxShadow(rgba(0,0,0,.2),4px);
+
+  }
+  table td{
+    text-align:center;
+    font-size: 12px;
+    height:auto;
+    vertical-align: middle;
+    color: $tertiaryColor;
+  }
+
+  th{
+    color: $secondaryColor;
+    @include FontFamily($primaryFont,10px,$secondaryColor);
+
+  }
+
+  input[type="radio"] + label{
+    border: 1px solid $tertiaryColor;
+
+  }
+
+  input[type="radio"]:checked + label > span{
+    background: $secondaryColor;
+  }
+
+  i.play-icon {
+    color: $secondaryColor;
+  }
+
+  .np-play,#play {
+    background:url(../../img/play_small.svg) no-repeat center;
+    background-size: 14px;
+  }
+  #paused, #playing{
+    background: url(../../img/pause_small.png) no-repeat center ;
+    background-size: 14px;
+  }
+
+}
+
+.url{
+  background: $primaryColor;
+  border-top: 2px solid $secondaryColor;
+  @include BoxShadow(rgba(0,0,0,.1),1px);
+  color: $tertiaryColor;
+
+}
+
+.exception{
+    width:90%;
+    margin: 0 auto;
+    padding: 15px;
+    background: $errorColor;
+    color: $primaryColor;
+}
+
+.choose-link {
+  background: $primaryColor;
+  color: $secondaryColor;
+  font-family: $primaryFont;
+  @include BoxShadow(rgba(0,0,0,.1),2px);
+  border-top: 2px solid $secondaryColor;
+}

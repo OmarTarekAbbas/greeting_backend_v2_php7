@@ -1,0 +1,40 @@
+@extends('home/home_template')
+
+@section('ar_css')
+    <link rel="stylesheet" type="text/css" href="{{url('home/css/bootstrap-ar.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url('home/css/thanks.css')}}">
+@stop
+
+
+
+@section('content')
+
+<div class="container">
+    <div class="row">
+        <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3" style="display: none;">
+                <br>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade unsubModel" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">خدمة مشاري بن راشد العفاسي لكفالة الايتام</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{Session::get('message')}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success " data-dismiss="modal">اغلاق</button>
+            </div>
+        </div>
+    </div>
+</div>
