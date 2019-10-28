@@ -28,7 +28,8 @@ class GenerateurlController extends Controller {
      */
     public function index() {
         //
-        $URLs = Generatedurl::paginate(15);
+        $URLs = Generatedurl::all();
+        //return $URLs;
         return view('admin.urls.index', compact('URLs'));
     }
 

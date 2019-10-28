@@ -32,10 +32,13 @@ class OperatorSnapController extends Controller
             ->join('occasions', 'occasions.id', '=', 'greetingimgs.occasion_id')
             ->join('categories', 'categories.id', '=', 'occasions.category_id')
             ->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
-            ->select(['greetingimgs.id','greetingimg_operator.popular_count as count',  'occasion_id', 'greetingimgs.title', 'path', 'RDate', 'EXDate', 'featured', 'rbt_id', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle'])
+            ->join('operators', 'operators.id', '=', 'greetingimg_operator.operator_id')
+            ->join('countries', 'countries.id', '=', 'operators.country_id')
+            ->select(['operators.name as op_name','countries.name as co_name','greetingimgs.id','greetingimg_operator.popular_count as count',  'occasion_id', 'greetingimgs.title', 'path', 'RDate', 'EXDate', 'featured', 'rbt_id', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle'])
             ->orderBy('count', 'desc')
+            ->limit(get_settings('OperatorSnap_limit'))
             ->get();
-        return view('admin.operatorsnap.index',compact('GreetingImgs'));
+       return view('admin.operatorsnap.index',compact('GreetingImgs'));
     }
 
 
@@ -44,10 +47,7 @@ class OperatorSnapController extends Controller
      *
      * @return Response
      */
-    public function create()
-    {
-
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -55,10 +55,7 @@ class OperatorSnapController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
-    {
-
-    }
+   
 
     /**
      * Display the specified resource.
@@ -66,10 +63,7 @@ class OperatorSnapController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
-    {
-        //
-    }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -77,11 +71,7 @@ class OperatorSnapController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
-    {
-
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -89,11 +79,7 @@ class OperatorSnapController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
-    {
-
-
-    }
+   
 
     /**
      * Remove the specified resource from storage.
@@ -101,10 +87,7 @@ class OperatorSnapController extends Controller
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
-    {
-
-    }
+    
 
 
 }

@@ -35,8 +35,10 @@
                             <thead>
                             <tr>
                                 <th>id</th>
-                                <th>operator</th>
-                                <th>Image</th>
+                                <th>Count</th>
+                                <th>operator Name</th>
+                                <th class='notexport'>Image</th>
+                                {{--  <th>Image</th>  --}}
                                 <th>Title</th>
                                 <th>Occasion</th>
                                 <th>Category</th>
@@ -47,17 +49,21 @@
                             <tbody style="text-align: center">
                             @if(count($GreetingImgs) > 0)
                                 @foreach($GreetingImgs as $GreetingImg)
+
                                     <tr>
                                         <td>{{$GreetingImg->id}}</td>
                                         <td>{{$GreetingImg->count}}</td>
+                                        <td>{{$GreetingImg->op_name}} / {{$GreetingImg->co_name}}</td>
                                         <td><img src="{{url($GreetingImg->path)}}" style="width: 100px;height: 100px" alt=""></td>
+                                        {{--  <td><img src="{{url($GreetingImg->path)}}" style="width: 100px;height: 100px" alt=""></td>  --}}
                                         <td>{{$GreetingImg->title}}</td>
                                         <td>{{$GreetingImg->occasionsTitle}}</td>
                                         <td>{{$GreetingImg->categoriesTitle}}</td>
                                         <td>{{$GreetingImg->RDate}}</td>
                                         <td>{{$GreetingImg->EXDate}}</td>
                                     </tr>
-                                @endforeach
+
+                            @endforeach
                             @endif
                             </tbody>
                         </table>
@@ -80,8 +86,13 @@
                 }],
                 dom: 'Bfrtip',
                 buttons: [
-                    'excel'
-                ],
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    }]
 
             });
         });
@@ -89,9 +100,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.flash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
 @stop

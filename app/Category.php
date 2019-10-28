@@ -16,4 +16,7 @@ class Category extends Model
         return $this->hasMany('App\Occasion');
     }
 }
+
+
+
 //App\Category::create(['title'=>'مناسبات دينية']);

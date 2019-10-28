@@ -79,7 +79,7 @@
                         </li>
                         @endforeach
                        @if(Session::has('MSISDN') && Session::get('MSISDN')!="")
-
+                        
                        @if(OP() == viva_kuwait_operator_id)
                        <li>
                             <a href="{{url('viva_profile'.'/'.UID())}}">

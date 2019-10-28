@@ -650,12 +650,15 @@ class FrontEndController extends Controller
             if (is_null($snap))
                 return view('front.error');
             $this->popularCount('greetingimgs', $ID);
+            $greetingimg_operator = \DB::table('greetingimg_operator')->where('operator_id',OP())->where('greetingimg_id',$ID)->first(); //count in table greetingimg_operator
+            $this->popularCount('greetingimg_operator', $greetingimg_operator->id);
             if ($snap->rbt_id) {
                 $rbt_sms = rbtSMS();
                 $code = rbtCode::where('audio_id', $snap->rbt_id)->where('operator_id', OP())->first();
                 if (!is_null($code))
                     $code = $code->code;
             }
+
             $title = $snap->title;
 
             $Occasion = Occasion::where('id', $snap->occasion_id)->first();
@@ -1869,6 +1872,21 @@ class FrontEndController extends Controller
         $AdvertisingUrl->save();
 
         return view('landing_v2.mobily_ksa', compact('MSISDN'));
+    }
+
+public function zain_ksa_test(Request $request){
+
+    $msisdn = "123456578" ;
+    session(['MSISDN' => $msisdn, 'Status' => 'active']);
+        $Url = Generatedurl::where('operator_id', 16)->latest()->first();
+        $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+        ->where('greetingimg_operator.operator_id', '=', 16)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+        if ($snap) {
+        return redirect(url('viewSnap2/' . $snap->id . '/' . $Url->UID));
+        } else {
+        return redirect(url('cuurentSnap/' . $Url->UID));
+        }
     }
 
     public function landing_ksa(Request $request)

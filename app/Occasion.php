@@ -9,7 +9,7 @@ class Occasion extends Model
     //
 
     protected $table = 'occasions';
-    protected $fillable = ['title','category_id','image','slider','parent_id'];
+    protected $fillable = ['title','category_id','image','slider','parent_id','occasion_RDate','occasion_EXDate'];
 
     public function category()
     {

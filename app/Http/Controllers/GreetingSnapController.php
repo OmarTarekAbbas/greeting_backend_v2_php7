@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Datatables;
 
@@ -89,28 +90,28 @@ class GreetingSnapController extends Controller {
          $occasions = $request->occasion_id;
          $File = $request->file('file');
          $Path = $this->UploadContent($request->file('file'), Carbon::now()->format('d-m-Y'));
-         foreach ($occasions as $k=>$occasion_id) {
-            $Items   = $request->except('occasion_id');
-            if($k>0){
-              $Name = $File->getClientOriginalName();
-              $NewName = rand(100, 999) . ' - ' . $Name;
-              $NewPath = 'Greetings/' . Carbon::now()->format('d-m-Y').'/'.$NewName;
-              copy(public_path($Path),public_path($NewPath));
-              $Items['path'] = $NewPath;
-            }
-            else
-            {
+         //foreach ($occasions as $k=>$occasion_id) {
+            $Items   = $request->all();
+            // if($k>0){
+            //   $Name = $File->getClientOriginalName();
+            //   $NewName = rand(100, 999) . ' - ' . $Name;
+            //   $NewPath = 'Greetings/' . Carbon::now()->format('d-m-Y').'/'.$NewName;
+            //   copy(public_path($Path),public_path($NewPath));
+            //   $Items['path'] = $NewPath;
+            // }
+            // else
+            // {
               $Items['path'] = $Path;
-            }
+            //}
             $Items['RDate'] = ($request->RDate) ? $request->RDate : Carbon::now()->format('Y-m-d');
             $Items['EXDate'] = ($request->EXDate) ? $request->EXDate : Carbon::createFromFormat('Y-m-d', $Items['RDate'])->addMonth()->format('Y-m-d');
             $Items['featured'] = ($request->input('featured') == 'on') ? 1 : 0;
             $Items['snap'] = 1;
-            $Items['occasion_id'] = $occasion_id;
+            //$Items['occasion_id'] = $occasion_id;
             $GImage = Greetingimg::create($Items);
             $sync = ($request->input('operator_list') ? : []);
             $GImage->operators()->sync($sync);
-         }
+         //}
         return redirect(url('admin/gsnap'));
     }
 
@@ -245,4 +246,11 @@ class GreetingSnapController extends Controller {
         return redirect()->back();
     }
 
+
+    public function getDate(Request $request)
+    {
+        $dates = \App\Occasion::find($request->id);
+
+        return  ['RDate' => $dates->occasion_RDate , 'EXDate' => $dates->occasion_EXDate];
+    }
 }

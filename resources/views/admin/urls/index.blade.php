@@ -20,7 +20,7 @@ You can add and delete Generated URLs
     <div class="col-xs-12">
         <div class="box">
             <div class="box-body table-responsive no-padding">
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-striped datatable">
                     <thead>
                         <tr>
                             <th>Operator Name</th>
@@ -39,8 +39,8 @@ You can add and delete Generated URLs
                         @foreach($URLs as $URL)
                         <?php $snap = $URL->operator->greetingimgs()->PublishedSnap()->count() ?>
                         <tr>
-                            <td><a href="{{ url('admin/operator/'.$URL->operator->id) }}"> {{ $URL->operator->name }} - {{ $URL->operator->country->name }}</a></td>
-                            <td>{{ $URL->occasion->title }}</td>
+                            <td><a href="{{ url('admin/operator/'.$URL->operator['id']) }}"> {{ $URL->operator['name'] }}-{{ $URL->operator->country['name'] }}</a></td>
+                            <td>{{ $URL->occasion['title'] }}</td>
                             <td>
                                 @if($URL->img == 1)
                                 <button type="button" class="btn btn-info btn-circle"><i class="ion-checkmark-round bg-blue-500"></i></button>
@@ -72,17 +72,17 @@ You can add and delete Generated URLs
                             </td>
                             <td>
                                 @if($snap> 0)
+                                <div style="display: none">{{url("snap/$URL->UID")}}</div>
                                 <span class="text text-info">link 1 : </span><input class="" value='{{url("snap/$URL->UID")}}'/>
                                 <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                                 <br/>
+                                <div style="display: none">{{url("cuurentSnap/$URL->UID")}}</div>
                                 <span class="text text-info">link 2 : </span>  <input class="" value='{{url("cuurentSnap/$URL->UID")}}'/>
                                 <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                                 <br/>
-
-                            <span class="text text-info">link 3 : </span>  <input class="" value='{{url("cuurentSnap_v2/$URL->UID")}}'/>
-
+                                <div style="display: none">{{url("cuurentSnap_v2/$URL->UID")}}</div>
+                                <span class="text text-info">link 3 : </span>  <input class="" value='{{url("cuurentSnap_v2/$URL->UID")}}'/>
                                 <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                               
                                 @else
                                 <a  target="_blank" href="{{url($URL->UID)}}">{{url($URL->UID)}}</a>
                                 @endif
@@ -107,18 +107,12 @@ You can add and delete Generated URLs
                                 <p class="text-danger">Expired Images Contents</p>
                                 @endif
 
-
-                    @elseif($URL->img == true)
-                                                @if($URL->operator->greetingimgs()->publisheSnapdocc($URL->occasion->id)->count() == 0)
-                                                    <p class="text-danger">Expired Images Contents</p>
-                                                @endif
-
-                    @endif
-
-
-
+                                @elseif($URL->img == true)
+                                    @if($URL->operator->greetingimgs()->publisheSnapdocc($URL->occasion->id)->count() == 0)
+                                        <p class="text-danger">Expired Images Contents</p>
+                                    @endif
+                                @endif
                             </td>
-
                         </tr>
                         @endforeach
 
@@ -128,7 +122,7 @@ You can add and delete Generated URLs
         </div>
     </div>
 </div>
-{!! $URLs->setPath('generateurls') !!}
+{{-- {!! $URLs->setPath('generateurls') !!} --}}
 <div class="row">
     <span class="divider"></span>
 </div>
@@ -136,7 +130,7 @@ You can add and delete Generated URLs
 @section('script')
 <script>
     $(document).ready(function () {
-
+        $('.datatable').DataTable()
         $(".copy").click(function () {
             var copyText = $(this).prev('input');
             console.log(copyText.attr('class'));
@@ -146,5 +140,6 @@ You can add and delete Generated URLs
             //alert("Copied the text: " + copyText.val());
         })
     })
+
 </script>
     @stop

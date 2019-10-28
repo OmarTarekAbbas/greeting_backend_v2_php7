@@ -12,9 +12,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 
-class OccasionsController extends Controller {
+class OccasionsController extends Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -23,7 +25,8 @@ class OccasionsController extends Controller {
      *
      * @return Response
      */
-    public function index() {
+    public function index()
+    {
         //
         $Occasions = Occasion::whereNull('parent_id')->paginate(15);
         return view('admin.occasions.index', compact('Occasions'));
@@ -34,65 +37,68 @@ class OccasionsController extends Controller {
      *
      * @return Response
      */
-    public function create() {
+    public function create()
+    {
         //
-        $Occasion =null;
-        $occasion_parent   = Occasion::pluck('title', 'id');
+        $Occasion = null;
+        $occasion_parent = Occasion::pluck('title', 'id');
         //$occasion_parent->prepend('Please Select Parent','Null');
         $Categories = Category::pluck('title', 'id');
-        return view('admin.occasions.add', compact('Categories','Occasion','occasion_parent'));
+        return view('admin.occasions.add', compact('Categories', 'Occasion', 'occasion_parent'));
     }
 
 
-        public function operatorAddSnapFromCategoypForm() {
+    public function operatorAddSnapFromCategoypForm()
+    {
         // $sql = 'SELECT  o.title , o.id FROM  occasions as o WHERE NOT EXISTS (select * from occasions as c where o.id = c.parent_id )';
         // $res = \DB::select($sql);
         // foreach ($res as $key => $value) {
         //   $Occasions[$value->id] = $value->title;
         // }
         $Occasions = Occasion::pluck('title', 'id');
-         $Ops = Operator::all();
+        $Ops = Operator::all();
         $Operators = array();
         foreach ($Ops as $Op) {
             $Operators[$Op->id] = $Op->country->name . ' - ' . $Op->name;
         }
 
-        return view('admin.occasions.addToOperator', compact('Occasions','Operators'));
+        return view('admin.occasions.addToOperator', compact('Occasions', 'Operators'));
     }
 
-     public function operatorAddSnapFromCategoySave(Request $request) {
-           $occ_id=  $request->occasion_id ;
-           $op_id =  $request->operator_id ;
-           $all_op = '';
-           foreach ($op_id as $opid) {
-             $Operator =  Operator::findOrFail($opid);
-             $sql = "SELECT id   FROM greetingimgs WHERE snap = 1 AND  ( occasion_id = $occ_id ) ";
-             $res = \DB::select($sql);
+    public function operatorAddSnapFromCategoySave(Request $request)
+    {
+        $occ_id = $request->occasion_id;
+        $op_id = $request->operator_id;
+        $all_op = '';
+        foreach ($op_id as $opid) {
+            $Operator = Operator::findOrFail($opid);
+            $sql = "SELECT id   FROM greetingimgs WHERE snap = 1 AND  ( occasion_id = $occ_id ) ";
+            $res = \DB::select($sql);
             foreach ($res as $snap) {
-              $snap_op = \App\GreetingimgOperator::where('operator_id',$opid)->where('greetingimg_id',$snap->id)->first();
-              if(!$snap_op)
-              {
-                \App\GreetingimgOperator::create([
-                  'greetingimg_id' => $snap->id,
-                  'operator_id' => $opid
-                ]);
-              }
+                $snap_op = \App\GreetingimgOperator::where('operator_id', $opid)->where('greetingimg_id', $snap->id)->first();
+                if (!$snap_op) {
+                    \App\GreetingimgOperator::create([
+                        'greetingimg_id' => $snap->id,
+                        'operator_id' => $opid
+                    ]);
+                }
 
             }
-            $all_op .=$Operator->name.' & ';
-           }
-           $all_op=rtrim($all_op,"& ");
-        session()->flash('success','snap added successfully to '.$all_op);
+            $all_op .= $Operator->name . ' & ';
+        }
+        $all_op = rtrim($all_op, "& ");
+        session()->flash('success', 'snap added successfully to ' . $all_op);
         return back();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         //
         $this->validate($request, [
             'title' => 'required|max:60',
@@ -106,6 +112,8 @@ class OccasionsController extends Controller {
             $file->move(public_path($path), $uniqueID . "." . $file->getClientOriginalExtension());
             $Items['image'] = $path . $uniqueID . "." . $file->getClientOriginalExtension();
         }
+        $Items['occasion_RDate'] = ($request->occasion_RDate) ? $request->occasion_RDate : Carbon::now()->format('Y-m-d');
+        $Items['occasion_EXDate'] = ($request->occasion_EXDate) ? $request->occasion_EXDate : Carbon::createFromFormat('Y-m-d', $Items['occasion_RDate'])->addMonth()->format('Y-m-d');
         Occasion::create($Items);
         return redirect(url('admin/occasions'));
     }
@@ -113,76 +121,91 @@ class OccasionsController extends Controller {
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function show($id)
     {
-      $occasion  = Occasion::find($id);
-      $Occasions =$occasion->sub_occasions()->paginate(15);
-      $Occasions->setPath($id);
-      return view('admin.occasions.index', compact('Occasions','occasion'));
+        $occasion = Occasion::find($id);
+        $Occasions = $occasion->sub_occasions()->paginate(15);
+        $Occasions->setPath($id);
+        return view('admin.occasions.index', compact('Occasions', 'occasion'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         //
         $Categories = Category::pluck('title', 'id');
-        $Occasion   = Occasion::find($id);
-        $occasion_parent   = Occasion::pluck('title', 'id');
+        $Occasion = Occasion::find($id);
+        $occasion_parent = Occasion::pluck('title', 'id');
         //$occasion_parent->prepend('Please Select Parent','Null');
-        return view('admin.occasions.edit', compact('Categories', 'Occasion','occasion_parent'));
+        return view('admin.occasions.edit', compact('Categories', 'Occasion', 'occasion_parent'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param Request $request
+     * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         //
         $this->validate($request, [
             'title' => 'required|max:60',
             'category_id' => 'required'
         ]);
-        $Occasion = Occasion::find($id);
-        $Items = $request->all();
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $uniqueID = time();
-            $path = "Greetings/Occasion/";
-            $file->move(public_path($path), $uniqueID . "." . $file->getClientOriginalExtension());
-            File::delete(public_path($Occasion->image));
-            $Items['image'] = $path . $uniqueID . "." . $file->getClientOriginalExtension();
+        if ($request->input('occasion_RDate') < $request->input('occasion_EXDate')) {
+            $Occasion = Occasion::find($id);
+            $Items = $request->all();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $uniqueID = time();
+                $path = "Greetings/Occasion/";
+                $file->move(public_path($path), $uniqueID . "." . $file->getClientOriginalExtension());
+                File::delete(public_path($Occasion->image));
+                $Items['image'] = $path . $uniqueID . "." . $file->getClientOriginalExtension();
+            }
+            $Occasion->update($Items);
+            $snap = Greetingimg::where('snap',1) ->where('occasion_id',$id)->get();
+            foreach($snap as $sn){
+                $sn->RDate = $request->occasion_RDate;
+                $sn->EXDate = $request->occasion_EXDate;
+                $sn->save();
+            }
+            return redirect(url($request->input('redirects_to')));
+        } else {
+            return redirect()->back()->withErrors(['rdate' => 'Start Date must be smaller than end date']);
         }
-        $Occasion->update($Items);
-        return redirect(url($request->input('redirects_to')));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         //
         Occasion::destroy($id);
         return redirect(url('admin/occasions'));
     }
 
-    public function AddImages($id) {
+    public function AddImages($id)
+    {
         return view('admin.occasions.addimages', compact('id'));
     }
 
-    public function UploadImages($id, Request $request) {
+    public function UploadImages($id, Request $request)
+    {
 
         $this->validate($request, [
             'file' => 'mimes:png',
@@ -198,7 +221,8 @@ class OccasionsController extends Controller {
         Greetingimg::create($Items);
     }
 
-    public function UploadContent($File, $Path) {
+    public function UploadContent($File, $Path)
+    {
         $Name = $File->getClientOriginalName();
         $NewName = rand(100, 999) . ' - ' . $Name;
         $File->move(public_path('Greetings/' . $Path), $NewName);

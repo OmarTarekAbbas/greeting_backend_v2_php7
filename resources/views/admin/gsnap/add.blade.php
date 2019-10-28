@@ -32,3 +32,26 @@ You can add and delete Snap Image
 
 
 @endsection
+
+@section('script')
+<script>
+
+    var token = '{{Session::token()}}';
+
+    $('#occasion_list').on('change', function () {   
+        $.ajax({
+            method: 'POST',
+            url: '{{url("admin/date")}}',
+            data: {
+                 id: $(this).val(),
+                 _token: token
+                }
+        })
+        .done(function (data) { 
+            $('#RDate').val(data.RDate);
+            $('#EXDate').val(data.EXDate);
+        });
+    });
+
+</script>
+@endsection

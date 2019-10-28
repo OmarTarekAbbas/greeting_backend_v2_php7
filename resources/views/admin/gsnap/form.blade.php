@@ -15,11 +15,11 @@
 
 <div class="form-group">
     {!! Form::label('occasion_id', 'Select occasion', ['class'=>'control-label']) !!}
-    @if(!isset($GreetingImg))
-    {!! Form::select('occasion_id[]', $Occasions, null, ['id' => 'occasion_list' ,'class'=>'form-control' ,'multiple']) !!}
-    @else
+    {{-- @if(!isset($GreetingImg)) --}}
+    {!! Form::select('occasion_id', $Occasions, null, ['id' => 'occasion_list' ,'class'=>'form-control']) !!}
+    {{-- @else
     {!! Form::select('occasion_id', $Occasions, null, ['id' => '' ,'class'=>'form-control' ,'']) !!}
-    @endif
+    @endif --}}
 </div>
 <div class="form-group margin-top-20">
     <input type="checkbox" class="js-switch" id="checkbox" name="featured" @if(isset($GreetingImg) && $GreetingImg->featured==1) checked @endif/><label for="checkbox" class="font-size-12 normal margin-left-10">Featured</label>
@@ -42,17 +42,19 @@
 
             {!! Form::label('RDate', 'Start Date', ['class'=>'control-label']) !!}
             <div class="input-group ">
-                {!! Form::text('RDate',null,['class'=>'form-control datepicker']) !!}
+                {!! Form::text('RDate',null,['class'=>'form-control datepicker','id'=>'RDate']) !!}
                 <span class="input-group-addon"><i class="ion-calendar"></i></span>
             </div>
         </div>
         <div class="col-xs-6">
             {!! Form::label('EXDate', 'End Date', ['class'=>'control-label']) !!}
             <div class="input-group ">
-                {!! Form::text('EXDate',null,['class'=>'form-control datepicker']) !!}
+                {!! Form::text('EXDate',null,['class'=>'form-control datepicker','id'=>'EXDate']) !!}
                 <span class="input-group-addon"><i class="ion-calendar"></i></span>
             </div>
         </div>
     </div>
 </div>
 @endif
+
+

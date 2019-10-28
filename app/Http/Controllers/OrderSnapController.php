@@ -34,6 +34,7 @@ class OrderSnapController extends Controller
            //->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
             ->select(['greetingimgs.id', 'greetingimgs.popular_count', 'occasion_id', 'greetingimgs.title', 'path', 'RDate', 'EXDate', 'featured', 'rbt_id', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle'])
             ->orderBy('popular_count', 'desc')
+            ->limit(get_settings('OrderSnap_limit'))
             ->get();
         return view('admin.ordersnap.index',compact('GreetingImgs'));
     }
@@ -62,10 +63,7 @@ class OrderSnapController extends Controller
      *
      * @return Response
      */
-    public function create()
-    {
-
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -73,10 +71,7 @@ class OrderSnapController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
-    {
-
-    }
+   
 
     /**
      * Display the specified resource.
@@ -84,10 +79,7 @@ class OrderSnapController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
-    {
-        //
-    }
+  
 
     /**
      * Show the form for editing the specified resource.
@@ -95,10 +87,7 @@ class OrderSnapController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
-    {
-
-    }
+   
 
     /**
      * Update the specified resource in storage.
@@ -107,11 +96,7 @@ class OrderSnapController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
-    {
-
-
-    }
+   
 
     /**
      * Remove the specified resource from storage.
@@ -119,10 +104,7 @@ class OrderSnapController extends Controller
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
-    {
-
-    }
+   
 
 
 }

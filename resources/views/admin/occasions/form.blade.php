@@ -35,3 +35,23 @@
     <label class=" control-label">Slider<span class="text-danger">*</span></label>
     {!! Form::select('slider',array('1' => 'YES' , '0' => 'NO'),null,['class'=>'form-control']) !!}
 </div>
+
+<div class="form-group" style="margin-bottom: 25px;">
+    <div class="row">
+        <div class="col-xs-6">
+            {!! Form::label('RDate', 'Start Date', ['class'=>'control-label']) !!}
+            <div class="input-group ">
+                {!! Form::text('occasion_RDate',null,['class'=>'form-control datepicker']) !!}
+                <span class="input-group-addon"><i class="ion-calendar"></i></span>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            {!! Form::label('EXDate', 'End Date', ['class'=>'control-label']) !!}
+            <div class="input-group ">
+                {!! Form::text('occasion_EXDate',null,['class'=>'form-control datepicker']) !!}
+                <span class="input-group-addon"><i class="ion-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+

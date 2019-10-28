@@ -31,6 +31,9 @@ class ChangeRbtSmsInOperatorsTable extends Migration
             $table->string('url_occasion_image')->nullable()->change();
             $table->bigInteger('UID')->nullable()->change();
         });
+        Schema::table('greetingimg_operator', function (Blueprint $table) {
+            $table->integer('popular_count')->default(0)->change();
+        });
     }
 
     /**

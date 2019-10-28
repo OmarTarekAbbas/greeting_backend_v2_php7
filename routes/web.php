@@ -69,7 +69,7 @@ Route::get('ooredoo_content_mt', 'HomeController@ooredoo_content_mt');
 Route::get('/', function () {
     return redirect('admin');
 });
-Route::get('/home', function () {
+Route::get('home', function () {
     return redirect('admin');
 });
 // new pages
@@ -103,6 +103,7 @@ Route::post('/zain_ksa_pincode_confirm', 'FrontEndController@zain_ksa_pincode_co
 define('zain_ksa_prefix','966');
 Route::get('zain_ksa_unsub','FrontEndController@zain_ksa_unsub');
 Route::post('zain_ksa_unsub_action','FrontEndController@zain_ksa_unsub_action');
+Route::get('zain_ksa_test','FrontEndController@zain_ksa_test');
 
 
 // Mobily saudi subscribe
@@ -163,6 +164,7 @@ Route::resource('admin/categories','CategoriesController');
 
 Route::get('admin/categories/{id}/occasion','CategoriesController@addOccasion');
 Route::resource('admin/occasions','OccasionsController');
+
 Route::get('admin/occasions/{id}/gimage','OccasionsController@AddImages');
 Route::post('admin/occasions/{id}/gimage','OccasionsController@UploadImages');
 
@@ -184,6 +186,8 @@ Route::get('admin/gimages/allData','GreetingimgsController@allData');
 Route::resource('admin/gimages','GreetingimgsController');
 Route::get('admin/gsnap/allData','GreetingSnapController@allData');
 Route::resource('admin/gsnap','GreetingSnapController');
+
+Route::post('admin/date', 'GreetingSnapController@getDate');//date ajax
 
 // resource controllers routes ordersnap
 //Route::get('admin/ordersnap/allData','OrderSnapController@allData');
@@ -324,4 +328,3 @@ Route::get('/categories/123456','FrontEndController@cat');
 
 /* =================== new landing ================== */
 Route::post('AddSubscriptionContractRequest', 'FrontEndController@AddSubscriptionContractRequest');
-

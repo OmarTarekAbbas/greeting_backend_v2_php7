@@ -4,15 +4,6 @@
 	<meta charset="UTF-8">
 	<title>@yield('title')</title>
     @include('head')
-    <meta name="token" content="{{ csrf_token() }}">
-
-        <script>
-        $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
-                }
-        });
-        </script>
     <style type="text/css" id="holderjs-style"></style>
 </head>
 <body class="fixed-leftside">
@@ -261,10 +252,7 @@
                         <li><a href="#" data-toggle="tooltip" title="Downloads"><i class="ion-archive"></i></a></li>
                     </ul>--}}
                 </div>
-                <a href="{{url('logout')}}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" class="button"><i class="ion-log-out"></i></a>
-                <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
+                <a href="{{ url('auth/logout') }}" class="button"><i class="ion-log-out"></i></a>
             </div>
             <!-- END RPOFILE -->
             <!-- BEGIN NAV -->
@@ -326,19 +314,19 @@
                 <li class="{{(preg_match('/\badmin\/gsnap/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/gsnap') }}">
                         <i class="ion-images"></i> <span>Snap Images</span>
-                        <span class="label pull-right">{{ \App\Greetingimg::where("snap",1)->count() }}</span>
+                        <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
                     </a>
                 </li>
                 <li class="{{(preg_match('/\badmin\/ordersnap/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/ordersnap') }}">
                         <i class="ion-images"></i> <span>SnapChat Ordering</span>
-                        <span class="label pull-right">{{ \App\Greetingimg::where("snap",1)->count() }}</span>
+                        <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
                     </a>
                 </li>
                 <li class="{{(preg_match('/\badmin\/operatorsnap/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/operatorsnap') }}">
                         <i class="ion-images"></i> <span>Operator SnapChat</span>
-                        <span class="label pull-right">{{ \App\Greetingimg::where("snap",1)->count() }}</span>
+                        <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
                     </a>
                 </li>
 
