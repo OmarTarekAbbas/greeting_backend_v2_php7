@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>@yield('title')</title>
     @include('head')
+    <meta name="token" content="{{ csrf_token() }}">
     <style type="text/css" id="holderjs-style"></style>
 </head>
 <body class="fixed-leftside">
@@ -252,7 +253,10 @@
                         <li><a href="#" data-toggle="tooltip" title="Downloads"><i class="ion-archive"></i></a></li>
                     </ul>--}}
                 </div>
-                <a href="{{ url('auth/logout') }}" class="button"><i class="ion-log-out"></i></a>
+                <a href="{{url('logout')}}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" class="button"><i class="ion-log-out"></i></a>
+                <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </div>
             <!-- END RPOFILE -->
             <!-- BEGIN NAV -->
@@ -474,6 +478,13 @@
             });
         });
     });
+
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                }
+        });
+
 		@if(isset($Occasion) && $Occasion->parent_id)
 		$('.parent_select').prepend('<option> select parent occcasion </option>');
 		$('.parent_select option:first').prop('disabled',true);

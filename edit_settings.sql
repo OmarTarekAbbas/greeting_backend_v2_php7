@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 
 INSERT INTO `settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
 (1, 'pagination_limit', '10', '2018-12-09 11:45:42', '2019-10-28 12:26:08'),
-(3, 'OperatorSnap_limit', '50', '2019-10-28 12:33:59', '2019-10-28 12:34:32');
+(3, 'OperatorSnap_limit', '50', '2019-10-28 12:33:59', '2019-10-28 12:34:32'),
 (4, 'OrderSnap_limit', '50', '2019-10-28 12:51:57', '2019-10-28 12:52:20');
 
 
