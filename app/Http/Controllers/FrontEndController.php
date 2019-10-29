@@ -1582,7 +1582,7 @@ class FrontEndController extends Controller
 
                 //  $company = $this->detectCompnay();
                 $company = "Og-" . $AdvertisingUrl->id;  // this new request from azeem to compare new ads company made by oneglobal
-                //    $URL = "http://ikwm-appvas.isys.mobi:2009/OoredooConsentInit/Consent.aspx?MSISDN=" . $msisdn . "&Scode=1368&ServiceID=S-SnaFiEwMY2&ServiceType=P-tQX2zvEwMY2&AdsCompany=" . $company;  // old ooredoo CG url 
+                //    $URL = "http://ikwm-appvas.isys.mobi:2009/OoredooConsentInit/Consent.aspx?MSISDN=" . $msisdn . "&Scode=1368&ServiceID=S-SnaFiEwMY2&ServiceType=P-tQX2zvEwMY2&AdsCompany=" . $company;  // old ooredoo CG url
                 $URL = "http://ikwm-appvas.isys.mobi:2025/consentrequest.aspx?MSISDN=" . $msisdn . "&Scode=1368&ServiceId=S-SnaFiEwMY2&ClientId=1935&UserId=O@IV&Password=O@iv@s&TranId=$AdvertisingUrl->id";
 
 
@@ -2243,10 +2243,10 @@ public function zain_ksa_test(Request $request){
             // if ($Msisdn->final_status == 1) {
             //     session(['MSISDN' => $msisdn, 'Status' => 'active']);
             //     $Url = Generatedurl::where('operator_id', 16)->latest()->first();
-                
+
             //                 $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator','greetingimg_operator.greetingimg_id','=','greetingimgs.id')
             //                 ->where('greetingimg_operator.operator_id','=',16)->where('greetingimgs.snap',1)->where('greetingimgs.Rdate','<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate','desc')->first();
-                            
+
             //         if($snap){
             //             $url = Generatedurl::where('operator_id',16)->orderBy('created_at','desc')->first();
             //             return redirect(url('viewSnap2/'.$snap->id.'/'.$url->UID));
@@ -2312,7 +2312,7 @@ public function zain_ksa_test(Request $request){
                 $Msisdn->save();
 
 
-                // update intech 
+                // update intech
                 if ($company == "intech") {  // intech integration
                     // call intech  api to notify that msisdn is subscribe successfully
                     $ADV_URL = "http://ict.intech-mena.com/Universal/v2.0/API/Postback?msisdn=" . $msisdn_wcc . "&operaterName=zain_ksa&operatorId=16&" . session::get('adv_params');
@@ -2422,10 +2422,10 @@ public function zain_ksa_test(Request $request){
             // if ($Msisdn->final_status == 1) {
             //     session(['MSISDN' => $msisdn, 'Status' => 'active']);
             //     $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
-                
+
             //                 $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator','greetingimg_operator.greetingimg_id','=','greetingimgs.id')
             //                 ->where('greetingimg_operator.operator_id','=',MOBILY_OP_ID)->where('greetingimgs.snap',1)->where('greetingimgs.Rdate','<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate','desc')->first();
-                            
+
             //         if($snap){
             //             $url = Generatedurl::where('operator_id',MOBILY_OP_ID)->orderBy('created_at','desc')->first();
             //             return redirect(url('viewSnap2/'.$snap->id.'/'.$url->UID));
@@ -2490,7 +2490,7 @@ public function zain_ksa_test(Request $request){
                 $Msisdn->save();
 
 
-                // update intech 
+                // update intech
                 if ($company == "intech") {  // intech integration
                     // call intech  api to notify that msisdn is subscribe successfully
                     $ADV_URL = "http://ict.intech-mena.com/Universal/v2.0/API/Postback?msisdn=" . $msisdn_wcc . "&operaterName=zain_ksa&operatorId=16&" . session::get('adv_params');
@@ -2560,7 +2560,7 @@ public function zain_ksa_test(Request $request){
                 $request->session()->flash('failed', 'pincode verified failed');
                 return view('landing_v2.mobily_ksa_pinCode', compact('msisdn'));
             }
-        
+
     }
 
     public function subscribeZain_v2(request $request)
@@ -3249,7 +3249,7 @@ public function zain_ksa_test(Request $request){
             }
             $rbt_sms = $url->operator->rbt_sms;
             $this->popularCount('greetingimgs', $greetingimg_id);
-            return view('front.new_snap_v2.inner_snap', compact('Rdata', 'occasion_id', 'codes', 'rbt_sms'));
+            return view('front.new_snap_v2.inner_snap', compact('Rdata',  'codes', 'rbt_sms'));
         } else {
             return redirect(url(redirect_operator() . '?prev_url=' . $current_url));
         }
