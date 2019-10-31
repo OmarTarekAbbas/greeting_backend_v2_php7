@@ -53,10 +53,10 @@ function OP() {
 function OP_switch($uid) {
     $url = Generatedurl::where('UID', $uid)->first();
     $op = $url->operator_id;
-    if($op == 13){ // 
-       $op = 51   ;
+    if($op == 13){ //
+        $op = 51   ;
     }elseif ( $op == 12) {
-         $op = 50   ;
+        $op = 50   ;
     }
     return $op;
 }
@@ -95,7 +95,13 @@ function snap_Occasions() {
     }
     $occasions_array = array_unique($occasions_array);
     foreach ($occasions_array as $k => $occasion) {
-        $occasions[] = Occasion::where('id', $occasion)->first();
+        if(get_settings('parent')){
+            $occasions[] = Occasion::where('id', $occasion)->whereNull('parent_id')->first(); //check an parent 1 e3rd kl parent_id fe el menu else e3rd kol 7aga
+        }
+        else{
+            $occasions[] = Occasion::where('id', $occasion)->first();
+        }
+
     }
     return array_filter($occasions);
 }

@@ -1,9 +1,9 @@
 <!-- ==================================== -->
-@extends('front.newdesign.template')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 <!-- ==================================== -->
 <!--=========== content start =================== -->
-@if(count($Rdata)>0)
+<?php if(count($Rdata)>0): ?>
 
 
 <style type="text/css">
@@ -46,7 +46,7 @@
     .main_category .right{
         right: 5%;
     }
-    @media  only screen and (min-width: 0) and (max-width: 600px) {
+    @media    only screen and (min-width: 0) and (max-width: 600px) {
         .main_category .right{
             right: -3%;
         }
@@ -56,23 +56,25 @@
 
 <div class="main">
       <div class="main_category">
-          @foreach($occasions as $key => $value)
+          <?php $__currentLoopData = $occasions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="category">
-               <a href="{{url('listSnap/'.$value->id .'/'.UID())}}" class="main_inner">
-                  <img src="{{ url('assets/front/newdesign')}}/img/frame.png">
+               <a href="<?php echo e(url('listSnap/'.$value->id .'/'.UID())); ?>" class="main_inner">
+                  <img src="<?php echo e(url('assets/front/newdesign')); ?>/img/frame.png">
 
                   <!-- <div class="view">
                     <i id="eye" class="fas fa-eye"></i> <span> 20</span>
                   </div> -->
 
                   <div class="title_photo">
-                     <img class="{{($key%2 == 0)?'left':'right'}}" src="{{  url($value->image) }}">
-                     <p class="{{($key%2 == 0)?'left_text':'right_text'}}">{{$value->title}}</p>
+                     <img class="<?php echo e(($key%2 == 0)?'left':'right'); ?>" src="<?php echo e(url($value->image)); ?>">
+                     <p class="<?php echo e(($key%2 == 0)?'left_text':'right_text'); ?>"><?php echo e($value->title); ?></p>
                   </div>
                </a>
             </div>
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       </div>
 </div>
-@endif
-@stop
+<?php endif; ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('front.newdesign.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\greeting_backend_v2_php7\resources\views/front/newdesign/snap.blade.php ENDPATH**/ ?>

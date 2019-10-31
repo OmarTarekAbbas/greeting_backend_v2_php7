@@ -65,20 +65,20 @@ You can add and delete Generated URLs
                             </td>
                             <td>
                                 <?php if($snap> 0): ?>
-                                <div style="display: none"><?php echo e(url("snap/$URL->UID")); ?></div>
-                                <span class="text text-info">link 1 : </span><input class="" value='<?php echo e(url("snap/$URL->UID")); ?>'/>
-                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                                <br/>
-                                <div style="display: none"><?php echo e(url("cuurentSnap/$URL->UID")); ?></div>
-                                <span class="text text-info">link 2 : </span>  <input class="" value='<?php echo e(url("cuurentSnap/$URL->UID")); ?>'/>
-                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                                <br/>
-                                <div style="display: none"><?php echo e(url("cuurentSnap_v2/$URL->UID")); ?></div>
-                                <span class="text text-info">link 3 : </span>  <input class="" value='<?php echo e(url("cuurentSnap_v2/$URL->UID")); ?>'/>
-                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                    <span class="text text-info">link 1 : </span><input class="" value='<?php echo e(url("snap/$URL->UID")); ?>'/>
+                                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                    <br/>
+                                    <span class="text text-info">link 2 : </span>  <input class="" value='<?php echo e(url("cuurentSnap/$URL->UID")); ?>'/>
+                                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                    <br/>
+
+                                    <span class="text text-info">link 3 : </span>  <input class="" value='<?php echo e(url("cuurentSnap_v2/$URL->UID")); ?>'/>
+
+                                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+
                                 <?php else: ?>
-                                <a  target="_blank" href="<?php echo e(url($URL->UID)); ?>"><?php echo e(url($URL->UID)); ?></a>
-                                <?php endif; ?>
+                                    <a  target="_blank" href="<?php echo e(url($URL->UID)); ?>"><?php echo e(url($URL->UID)); ?></a>
+                            <?php endif; ?>
                             <td>
                                 <?php echo Form::open(array('class' => 'form-inline col-lg-1','method' => 'GET', 'action' => array('GenerateurlController@edit', $URL->id))); ?>
 
@@ -125,20 +125,18 @@ You can add and delete Generated URLs
 </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
-<script>
-    $(document).ready(function () {
-        $('.datatable').DataTable()
-        $(".copy").click(function () {
-            var copyText = $(this).prev('input');
-            console.log(copyText.attr('class'));
-            copyText.select();
-            document.execCommand("copy");
-
-            //alert("Copied the text: " + copyText.val());
+    <script>
+        $(document).ready(function () {
+            $(".copy").click(function () {
+                var copyText = $(this).prev('input');
+                console.log(copyText.attr('class'));
+                copyText.select();
+                document.execCommand("copy");
+                //alert("Copied the text: " + copyText.val());
+            });
+            $('.datatable').DataTable()
         })
-    })
-
-</script>
-    <?php $__env->stopSection(); ?>
+    </script>
+<?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\greeting_backend_v2_php7\resources\views/admin/urls/index.blade.php ENDPATH**/ ?>

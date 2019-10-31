@@ -1302,7 +1302,8 @@ class FrontEndController extends Controller
         $rbt_sms = $url->operator->rbt_sms;
         $Occasion = Occasion::where('id', $occasion_id)->first();
         $pageTitle = $Occasion->title;
-        return view('front.newdesign.list_snap', compact('pageTitle', 'Rdata', 'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
+        $child_occasions = Occasion::where('parent_id',$occasion_id)->get(); // occasion_id parent_id
+        return view('front.newdesign.list_snap', compact('pageTitle','child_occasions', 'Rdata', 'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
     }
 
     public function cuurentSnap($UID)
@@ -1874,18 +1875,18 @@ class FrontEndController extends Controller
         return view('landing_v2.mobily_ksa', compact('MSISDN'));
     }
 
-public function zain_ksa_test(Request $request){
+    public function zain_ksa_test(Request $request){
 
-    $msisdn = "123456578" ;
-    session(['MSISDN' => $msisdn, 'Status' => 'active']);
+        $msisdn = "123456578" ;
+        session(['MSISDN' => $msisdn, 'Status' => 'active']);
         $Url = Generatedurl::where('operator_id', 16)->latest()->first();
         $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
-        ->where('greetingimg_operator.operator_id', '=', 16)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+            ->where('greetingimg_operator.operator_id', '=', 16)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
         if ($snap) {
-        return redirect(url('viewSnap2/' . $snap->id . '/' . $Url->UID));
+            return redirect(url('viewSnap2/' . $snap->id . '/' . $Url->UID));
         } else {
-        return redirect(url('cuurentSnap/' . $Url->UID));
+            return redirect(url('cuurentSnap/' . $Url->UID));
         }
     }
 
@@ -2255,15 +2256,15 @@ public function zain_ksa_test(Request $request){
             //             return redirect(url('cuurentSnap/'.$Url->UID));
             //         }
 
-                $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
-                    ->where('greetingimg_operator.operator_id', '=', 16)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                ->where('greetingimg_operator.operator_id', '=', 16)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
-                if ($snap) {
-                    $url = Generatedurl::where('operator_id', 16)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
-                } else {
+            if ($snap) {
+                $url = Generatedurl::where('operator_id', 16)->orderBy('created_at', 'desc')->first();
+                return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
+            } else {
 
-            // }
+                // }
 
 
             }
@@ -2433,133 +2434,133 @@ public function zain_ksa_test(Request $request){
             //             return redirect(url('cuurentSnap/'.$Url->UID));
             //         }
 
-                $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
-                    ->where('greetingimg_operator.operator_id', '=', MOBILY_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                ->where('greetingimg_operator.operator_id', '=', MOBILY_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
-                if ($snap) {
-                    $url = Generatedurl::where('operator_id', MOBILY_OP_ID)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
-                } else {
-                    return redirect(url('cuurentSnap/' . $Url->UID));
-                }
+            if ($snap) {
+                $url = Generatedurl::where('operator_id', MOBILY_OP_ID)->orderBy('created_at', 'desc')->first();
+                return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
+            } else {
+                return redirect(url('cuurentSnap/' . $Url->UID));
+            }
 
             // }
 
+        }
+
+
+        //  mobily KSA verify pincode
+        $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=$msisdn_wcc&serv=f&pincode=$pincode";  // mobily
+        $result = preg_replace('/\s+/', '', file_get_contents($URL));
+
+        // make log
+        $company = $this->detectCompnay();
+        $actionName = "Mobily KSA Pincode verify";
+        $parameters_arr = array(
+            'MSISDN' => $msisdn_wcc,
+            'link' => $URL,
+            'date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'company' => $company,
+            'result' => $result
+        );
+        $this->log($actionName, $URL, $parameters_arr);
+
+
+        if ($result == "0") {  // pincode verify success and the user is now subscribe
+            //update my database
+            $AdvertisingUrl = new AdvertisingUrl();
+            $AdvertisingUrl->adv_url = session::get('adv_params');
+            $AdvertisingUrl->msisdn = $msisdn_wcc;
+            $AdvertisingUrl->operatorId = MOBILY_OP_ID;
+            $AdvertisingUrl->status = 3;  // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
+            $AdvertisingUrl->operatorName = "zain_ksa";
+            $AdvertisingUrl->ads_compnay_name = $company;
+            if (session::get('publisherId_macro') !== NULL && session::get('publisherId_macro') != "") {
+                $AdvertisingUrl->publisherId_macro = session::get('publisherId_macro');
+                $AdvertisingUrl->transaction_id = session::get('transaction_id');
             }
+            $AdvertisingUrl->save();
+
+            // update msisdn
+            $Msisdn->ads_ur_id = $AdvertisingUrl->id;
+            $Msisdn->ad_company = $company;
+            if (session::get('transaction_id') !== NULL && session::get('transaction_id') != "") {
+                $Msisdn->transaction_id = session::get('transaction_id');
+            }
+            $Msisdn->final_status = 1;
+            $Msisdn->save();
 
 
-            //  mobily KSA verify pincode
-            $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=$msisdn_wcc&serv=f&pincode=$pincode";  // mobily
-            $result = preg_replace('/\s+/', '', file_get_contents($URL));
-
-            // make log
-            $company = $this->detectCompnay();
-            $actionName = "Mobily KSA Pincode verify";
-            $parameters_arr = array(
-                'MSISDN' => $msisdn_wcc,
-                'link' => $URL,
-                'date' => Carbon::now()->format('Y-m-d H:i:s'),
-                'company' => $company,
-                'result' => $result
-            );
-            $this->log($actionName, $URL, $parameters_arr);
+            // update intech
+            if ($company == "intech") {  // intech integration
+                // call intech  api to notify that msisdn is subscribe successfully
+                $ADV_URL = "http://ict.intech-mena.com/Universal/v2.0/API/Postback?msisdn=" . $msisdn_wcc . "&operaterName=zain_ksa&operatorId=16&" . session::get('adv_params');
+                $adv_result = file_get_contents($ADV_URL);
+                $adv_result = (array)json_decode($adv_result);
 
 
-            if ($result == "0") {  // pincode verify success and the user is now subscribe
-                //update my database
-                $AdvertisingUrl = new AdvertisingUrl();
-                $AdvertisingUrl->adv_url = session::get('adv_params');
-                $AdvertisingUrl->msisdn = $msisdn_wcc;
-                $AdvertisingUrl->operatorId = MOBILY_OP_ID;
-                $AdvertisingUrl->status = 3;  // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
-                $AdvertisingUrl->operatorName = "zain_ksa";
-                $AdvertisingUrl->ads_compnay_name = $company;
-                if (session::get('publisherId_macro') !== NULL && session::get('publisherId_macro') != "") {
-                    $AdvertisingUrl->publisherId_macro = session::get('publisherId_macro');
-                    $AdvertisingUrl->transaction_id = session::get('transaction_id');
+                if ($adv_result['UET Offer Log'] == "SUCCESS") {
+                    $AdvertisingUrl = new AdvertisingUrl();
+                    $AdvertisingUrl->adv_url = session::get('adv_params');
+                    $AdvertisingUrl->msisdn = $msisdn;
+                    $AdvertisingUrl->operatorId = MOBILY_OP_ID;
+                    $AdvertisingUrl->status = 4;  // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
+                    $AdvertisingUrl->operatorName = "zain_ksa";
+                    $AdvertisingUrl->ads_compnay_name = $company;
+                    $AdvertisingUrl->save();
+
+                    // make log
+                    $company = $this->detectCompnay();
+                    $actionName = "Intech Mobily KSA Subscribe Success";
+                    $URL = $ADV_URL;
+                    $parameters_arr = array(
+                        'MSISDN' => $msisdn_wcc,
+                        'link' => $ADV_URL,
+                        'date' => Carbon::now()->format('Y-m-d H:i:s'),
+                        'result' => $adv_result
+                    );
+                    $this->log($actionName, $URL, $parameters_arr);
                 }
-                $AdvertisingUrl->save();
-
-                // update msisdn
-                $Msisdn->ads_ur_id = $AdvertisingUrl->id;
-                $Msisdn->ad_company = $company;
-                if (session::get('transaction_id') !== NULL && session::get('transaction_id') != "") {
-                    $Msisdn->transaction_id = session::get('transaction_id');
-                }
-                $Msisdn->final_status = 1;
-                $Msisdn->save();
-
-
-                // update intech
-                if ($company == "intech") {  // intech integration
-                    // call intech  api to notify that msisdn is subscribe successfully
-                    $ADV_URL = "http://ict.intech-mena.com/Universal/v2.0/API/Postback?msisdn=" . $msisdn_wcc . "&operaterName=zain_ksa&operatorId=16&" . session::get('adv_params');
-                    $adv_result = file_get_contents($ADV_URL);
-                    $adv_result = (array)json_decode($adv_result);
-
-
-                    if ($adv_result['UET Offer Log'] == "SUCCESS") {
-                        $AdvertisingUrl = new AdvertisingUrl();
-                        $AdvertisingUrl->adv_url = session::get('adv_params');
-                        $AdvertisingUrl->msisdn = $msisdn;
-                        $AdvertisingUrl->operatorId = MOBILY_OP_ID;
-                        $AdvertisingUrl->status = 4;  // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
-                        $AdvertisingUrl->operatorName = "zain_ksa";
-                        $AdvertisingUrl->ads_compnay_name = $company;
-                        $AdvertisingUrl->save();
-
-                        // make log
-                        $company = $this->detectCompnay();
-                        $actionName = "Intech Mobily KSA Subscribe Success";
-                        $URL = $ADV_URL;
-                        $parameters_arr = array(
-                            'MSISDN' => $msisdn_wcc,
-                            'link' => $ADV_URL,
-                            'date' => Carbon::now()->format('Y-m-d H:i:s'),
-                            'result' => $adv_result
-                        );
-                        $this->log($actionName, $URL, $parameters_arr);
-                    }
-                }
+            }
 
 
 //                session()->flash('success', 'تم تسجيلك بنجاح في خدمة  فلاتر سناب شات');
 //                return redirect("/notification?action=5&mnc=103&msisdn=$msisdn_wcc&opsid=4&status=SS");
-                //  $request->session()->flash('success', 'تم الاشتراك بنجاح');
-                //return view('landing_v2.zain_ksa', compact('MSISDN'));
+            //  $request->session()->flash('success', 'تم الاشتراك بنجاح');
+            //return view('landing_v2.zain_ksa', compact('MSISDN'));
 
-                session(['MSISDN' => $msisdn, 'Status' => 'active']);
-                $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
+            session(['MSISDN' => $msisdn, 'Status' => 'active']);
+            $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
 
-                $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
-                    ->where('greetingimg_operator.operator_id', '=', MOBILY_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                ->where('greetingimg_operator.operator_id', '=', MOBILY_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
-                if ($snap) {
-                    $url = Generatedurl::where('operator_id', MOBILY_OP_ID)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
-                } else {
-                    return redirect(url('cuurentSnap/' . $Url->UID));
-                }
-
-
-            } elseif ($result == "Theproducthasbeensubscribed.") {  // alreday subscribe
-                session(['MSISDN' => $msisdn, 'Status' => 'active']);
-                $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
-
-                $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
-                    ->where('greetingimg_operator.operator_id', '=', MOBILY_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
-
-                if ($snap) {
-                    $url = Generatedurl::where('operator_id', MOBILY_OP_ID)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
-                } else {
-                    return redirect(url('cuurentSnap/' . $Url->UID));
-                }
-
+            if ($snap) {
+                $url = Generatedurl::where('operator_id', MOBILY_OP_ID)->orderBy('created_at', 'desc')->first();
+                return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
             } else {
-                $request->session()->flash('failed', 'pincode verified failed');
-                return view('landing_v2.mobily_ksa_pinCode', compact('msisdn'));
+                return redirect(url('cuurentSnap/' . $Url->UID));
             }
+
+
+        } elseif ($result == "Theproducthasbeensubscribed.") {  // alreday subscribe
+            session(['MSISDN' => $msisdn, 'Status' => 'active']);
+            $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
+
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                ->where('greetingimg_operator.operator_id', '=', MOBILY_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+            if ($snap) {
+                $url = Generatedurl::where('operator_id', MOBILY_OP_ID)->orderBy('created_at', 'desc')->first();
+                return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
+            } else {
+                return redirect(url('cuurentSnap/' . $Url->UID));
+            }
+
+        } else {
+            $request->session()->flash('failed', 'pincode verified failed');
+            return view('landing_v2.mobily_ksa_pinCode', compact('msisdn'));
+        }
 
     }
 

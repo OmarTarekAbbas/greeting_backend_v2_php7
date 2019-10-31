@@ -72,20 +72,20 @@ You can add and delete Generated URLs
                             </td>
                             <td>
                                 @if($snap> 0)
-                                <div style="display: none">{{url("snap/$URL->UID")}}</div>
-                                <span class="text text-info">link 1 : </span><input class="" value='{{url("snap/$URL->UID")}}'/>
-                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                                <br/>
-                                <div style="display: none">{{url("cuurentSnap/$URL->UID")}}</div>
-                                <span class="text text-info">link 2 : </span>  <input class="" value='{{url("cuurentSnap/$URL->UID")}}'/>
-                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                                <br/>
-                                <div style="display: none">{{url("cuurentSnap_v2/$URL->UID")}}</div>
-                                <span class="text text-info">link 3 : </span>  <input class="" value='{{url("cuurentSnap_v2/$URL->UID")}}'/>
-                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                    <span class="text text-info">link 1 : </span><input class="" value='{{url("snap/$URL->UID")}}'/>
+                                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                    <br/>
+                                    <span class="text text-info">link 2 : </span>  <input class="" value='{{url("cuurentSnap/$URL->UID")}}'/>
+                                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                    <br/>
+
+                                    <span class="text text-info">link 3 : </span>  <input class="" value='{{url("cuurentSnap_v2/$URL->UID")}}'/>
+
+                                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+
                                 @else
-                                <a  target="_blank" href="{{url($URL->UID)}}">{{url($URL->UID)}}</a>
-                                @endif
+                                    <a  target="_blank" href="{{url($URL->UID)}}">{{url($URL->UID)}}</a>
+                            @endif
                             <td>
                                 {!! Form::open(array('class' => 'form-inline col-lg-1','method' => 'GET', 'action' => array('GenerateurlController@edit', $URL->id))) !!}
                                 <button class="btn btn-info btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
@@ -128,18 +128,16 @@ You can add and delete Generated URLs
 </div>
 @stop
 @section('script')
-<script>
-    $(document).ready(function () {
-        $('.datatable').DataTable()
-        $(".copy").click(function () {
-            var copyText = $(this).prev('input');
-            console.log(copyText.attr('class'));
-            copyText.select();
-            document.execCommand("copy");
-
-            //alert("Copied the text: " + copyText.val());
+    <script>
+        $(document).ready(function () {
+            $(".copy").click(function () {
+                var copyText = $(this).prev('input');
+                console.log(copyText.attr('class'));
+                copyText.select();
+                document.execCommand("copy");
+                //alert("Copied the text: " + copyText.val());
+            });
+            $('.datatable').DataTable()
         })
-    })
-
-</script>
-    @stop
+    </script>
+@stop
