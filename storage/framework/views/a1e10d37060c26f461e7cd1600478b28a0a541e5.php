@@ -1,5 +1,5 @@
 <?php if($Img): ?>
-<?php echo Form::hidden('snapID',$Img->id,''); ?>
+<?php echo Form::hidden('snapID',$Img->id); ?>
 
 <?php endif; ?>
 <div class="form-group">
@@ -68,7 +68,7 @@
 
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     <?php endif; ?>
-    <div class="row" id="first_row" <?php if($codes && count($codes)>=1): ?> style='display:none' <?php endif; ?> >
+    <div class="row" id="first_row"  style='display:none' >
          <div class="col-md-6">
             <?php echo Form::select('operator_id[]',$operators,null,['class'=>'form-control']); ?>
 

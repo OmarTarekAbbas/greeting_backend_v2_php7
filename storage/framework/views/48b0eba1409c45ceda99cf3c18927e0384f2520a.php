@@ -15,7 +15,9 @@ You can add and delete Generated URLs
 <div class="row">
     <div class="right">
         <a href="<?php echo e(url('admin/generateurls/create')); ?>"><button class="btn btn-labeled btn-info"><i class="glyphicon glyphicon-plus"></i></span>Add New</button></a>
+        <?php if(get_settings('enable_delete')): ?>
         <a  id="delete_button" onclick="delete_selected('generatedurls')" class="btn btn-circle btn-danger show-tooltip" title="Delete All" href="#"><i class="fa fa-trash-o"></i></a>
+        <?php endif; ?>
     </div>
     <br>
     <div class="col-xs-12">

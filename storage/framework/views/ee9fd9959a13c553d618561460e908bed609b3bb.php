@@ -19,7 +19,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover table-striped">
+                    <table class="table table-hover table-striped datatable">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -70,13 +70,17 @@
         </div>
     </div>
 
-    <?php echo $Occasions->render(); ?>
 
     <div class="row">
         <span class="divider"></span>
     </div>
 
 
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script>
+    $('.datatable').DataTable()
+    </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\php7.2\xampp\htdocs\greeting_backend_v2_php7\resources\views/admin/occasions/index.blade.php ENDPATH**/ ?>

@@ -28,7 +28,7 @@ class OccasionsController extends Controller
     public function index()
     {
         //
-        $Occasions = Occasion::whereNull('parent_id')->paginate(15);
+        $Occasions = Occasion::all();
         return view('admin.occasions.index', compact('Occasions'));
     }
 

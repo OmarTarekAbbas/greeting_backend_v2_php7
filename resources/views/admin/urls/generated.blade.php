@@ -19,8 +19,11 @@
                 <div class="form-group">
                     @if($snap> 0)
                     <span class="text text-info">link 1 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('snap/'.$UID) }}" />
+                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     <span class="text text-info">link 2 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('cuurentSnap/'.$UID) }}" />
+                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     <span class="text text-info">link 3 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('cuurentSnap_v2/'.$UID) }}" />
+                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     @else
                     <input type="text" name="generatedurl" class="form-control input-lg" value="{{ url($UID) }}" />
                     @endif
@@ -34,3 +37,16 @@
 
 
 @endsection
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $(".copy").click(function () {
+                var copyText = $(this).prev('input');
+                console.log(copyText.attr('class'));
+                copyText.select();
+                document.execCommand("copy");
+                //alert("Copied the text: " + copyText.val());
+            });
+        })
+    </script>
+@stop

@@ -24,9 +24,9 @@ You can add and delete Snap Images
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Image</th>                            
+                            <th>Image</th>
                             <th>Title</th>
-                            <th>Occasion</th>                            
+                            <th>Occasion</th>
                             <th>Category</th>
                             <th>Start Date</th>
                             <th>End Date</th>
@@ -56,7 +56,7 @@ You can add and delete Snap Images
             ajax: "<?php echo url('admin/gsnap/allData'); ?>",
             columns: [
                 {data: 'id'},
-                {data: 'image',name:'path', searchable: false},                
+                {data: 'image',name:'path', searchable: false},
                 {data: 'title'},
                 {data: 'occasionsTitle'},
                 {data: 'categoriesTitle'},
@@ -73,4 +73,5 @@ You can add and delete Snap Images
     });
 </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\php7.2\xampp\htdocs\greeting_backend_v2_php7\resources\views/admin/gsnap/index.blade.php ENDPATH**/ ?>

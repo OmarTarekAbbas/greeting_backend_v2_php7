@@ -20,7 +20,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover table-striped">
+                    <table class="table table-hover table-striped datatable">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -67,10 +67,15 @@
         </div>
     </div>
 
-    {!! $Occasions->render() !!}
+
     <div class="row">
         <span class="divider"></span>
     </div>
 
 
+@endsection
+@section('script')
+    <script>
+    $('.datatable').DataTable()
+    </script>
 @endsection

@@ -35,7 +35,10 @@ class GreetingSnapController extends Controller {
         $GreetingImgs = Greetingimg::where("snap", 1)
                         ->join('occasions', 'occasions.id', '=', 'greetingimgs.occasion_id')
                         ->join('categories', 'categories.id', '=', 'occasions.category_id')
-                        ->select(['greetingimgs.id', 'occasion_id', 'greetingimgs.title', 'path', 'RDate', 'EXDate', 'featured', 'rbt_id', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle'])->get();
+                        // ->join('greetingimg_operator','greetingimg_operator.greetingimg_id','=','greetingimgs.id')
+                        // ->join('operators','operators.id','=','greetingimg_operator.operator_id')
+                        // ->join('countries','countries.id','=','operators.country_id')
+                        ->select(['greetingimgs.id' , 'occasion_id', 'greetingimgs.title', 'path', 'RDate', 'EXDate', 'featured', 'rbt_id', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle'])->get();
 
         return Datatables::of($GreetingImgs)
                         ->addColumn('image', '<img src="{{ url($path) }}" height="90px">')
@@ -45,7 +48,7 @@ class GreetingSnapController extends Controller {
                                 <button type="button" class="btn btn-danger btn-circle"><i class="ion-close-round bg-red-500"></i></button>
                                 @endif')
                         ->addColumn('operators', function(Greetingimg $GreetingImg) {
-                            return $GreetingImg->operators->count();
+                            return view('admin.gsnap.operator', compact('GreetingImg'))->render();
                         })
                         ->addColumn('action',function(Greetingimg $GreetingImg) {
                             return view('admin.gsnap.action', compact('GreetingImg'))->render();
