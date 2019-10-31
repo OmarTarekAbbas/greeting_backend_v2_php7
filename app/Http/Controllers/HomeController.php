@@ -251,12 +251,12 @@ class HomeController extends Controller {
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -264,7 +264,7 @@ class HomeController extends Controller {
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -333,12 +333,12 @@ class HomeController extends Controller {
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -346,7 +346,7 @@ class HomeController extends Controller {
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -694,7 +694,7 @@ class HomeController extends Controller {
             }
         }
 
-        session::set('pincode', $bin_code);
+        session::put('pincode', $bin_code);
 
 
         if ($Msisdn) {

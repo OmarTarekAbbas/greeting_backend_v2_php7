@@ -134,12 +134,12 @@ class GreetingSnapController extends Controller {
     public function edit($id) {
         //
         $GreetingImg = Greetingimg::find($id);
-        //$Occasions = Occasion::pluck('title', 'id');
-        $sql = 'SELECT  o.title , o.id FROM  occasions as o WHERE NOT EXISTS (select * from occasions as c where o.id = c.parent_id )';
-        $res = \DB::select($sql);
-        foreach ($res as $key => $value) {
-          $Occasions[$value->id] = $value->title;
-        }
+        $Occasions = Occasion::pluck('title', 'id');
+        // $sql = 'SELECT  o.title , o.id FROM  occasions as o WHERE NOT EXISTS (select * from occasions as c where o.id = c.parent_id )';
+        // $res = \DB::select($sql);
+        // foreach ($res as $key => $value) {
+        //   $Occasions[$value->id] = $value->title;
+        // }
         $Ops = Operator::all();
         $operators = array();
         foreach ($Ops as $Op) {

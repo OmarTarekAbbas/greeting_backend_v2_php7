@@ -972,12 +972,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -985,7 +985,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1054,12 +1054,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1067,7 +1067,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1148,12 +1148,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1161,7 +1161,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1281,7 +1281,6 @@ class FrontEndController extends Controller
 
     public function listSnap($ID, $UID)
     {
-
         $url = Generatedurl::where('UID', $UID)->first();
         if (is_null($url))
             return view('front.error');
@@ -1290,9 +1289,9 @@ class FrontEndController extends Controller
         $codes = [];
         $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion_id)->orderBy('RDate', 'desc')->limit(get_settings('pagination_limit'))->get();
 
-        if ($Rdata->isEmpty()) {
-            return view('front.newdesign.snap', compact('Rdata'));
-        }
+        // if ($Rdata->isEmpty()) {
+        //     return view('front.newdesign.snap', compact('Rdata'));
+        // }
         foreach ($Rdata as $key => $value) {
             if ($value->rbt_id != null) {
                 $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
@@ -1302,7 +1301,14 @@ class FrontEndController extends Controller
         $rbt_sms = $url->operator->rbt_sms;
         $Occasion = Occasion::where('id', $occasion_id)->first();
         $pageTitle = $Occasion->title;
-        $child_occasions = Occasion::where('parent_id',$occasion_id)->get(); // occasion_id parent_id
+        $child_occasions =[];
+        $childs = Occasion::where('parent_id',$occasion_id)->get(); // occasion_id parent_id
+        foreach($childs as $value){
+            $check = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $value->id)->first();
+            if($check){
+                $child_occasions[] = $value;
+            }
+        }
         return view('front.newdesign.list_snap', compact('pageTitle','child_occasions', 'Rdata', 'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
     }
 
@@ -1312,15 +1318,15 @@ class FrontEndController extends Controller
         if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
             $url = Generatedurl::where('UID', $UID)->first();
 
-            if (is_null($url))
-                return view('front.error');
+            // if (is_null($url))
+            //     return view('front.error');
 
             $occasion_id = Occasion();
             $codes = [];
             $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion_id)->orderBy('RDate', 'desc')->limit(get_settings('pagination_limit'))->get();
-            if ($Rdata->isEmpty()) {
-                return view('front.newdesign.snap', compact('Rdata'));
-            }
+            // if ($Rdata->isEmpty()) {
+            //     return view('front.newdesign.snap', compact('Rdata'));
+            // }
             //return $Rdata;
             foreach ($Rdata as $key => $value) {
                 $operator_id = $value->pivot->operator_id;
@@ -1337,7 +1343,15 @@ class FrontEndController extends Controller
             $rbt_sms = $url->operator->rbt_sms;
             $Occasion = Occasion::where('id', $occasion_id)->first();
             $pageTitle = $Occasion->title;
-            return view('front.newdesign.list_snap', compact('pageTitle', 'Rdata', 'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
+            $child_occasions =[];
+            $childs = Occasion::where('parent_id',$occasion_id)->get(); // occasion_id parent_id
+            foreach($childs as $value){
+                $check = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $value->id)->first();
+                if($check){
+                    $child_occasions[] = $value;
+                }
+            }
+            return view('front.newdesign.list_snap', compact('pageTitle', 'Rdata', 'rbt_sms', 'codes', 'occasion_id','child_occasions','Occasion'));
         } else {
             return redirect(url(redirect_operator()));
         }
@@ -1385,12 +1399,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1398,7 +1412,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1474,12 +1488,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1487,7 +1501,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1641,12 +1655,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1654,7 +1668,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1724,12 +1738,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1737,7 +1751,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1808,12 +1822,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1821,7 +1835,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1907,12 +1921,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::set('adv_params', $_SERVER['QUERY_STRING']);
+        session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::set('transaction_id', $transaction_id);
+            session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1920,7 +1934,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::set('publisherId_macro', $publisherId_macro);
+            session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -2752,7 +2766,7 @@ class FrontEndController extends Controller
             }
         }
 
-        session::set('pincode', $bin_code);
+        session::put('pincode', $bin_code);
 
 
         if ($Msisdn) {
@@ -3151,14 +3165,21 @@ class FrontEndController extends Controller
                 array_push($occasions_array, $value->occasion_id);
             }
             $occasions_array = array_unique($occasions_array);
-            foreach ($occasions_array as $k => $occasion) {
-                $parent = Occasion::where('id', $occasion)->first();
-                if (isset($parent) && $parent->parent_id) {
-                    //check that parent in this operator
-                    $check_parent = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $parent->parent_id)->get();
-                    $occasion = $parent->parent_id;
-                }
-                $occasions[] = Occasion::where('id', $occasion)->first();
+            // foreach ($occasions_array as $k => $occasion) {
+            //     $parent = Occasion::where('id', $occasion)->first();
+            //     if (isset($parent) && $parent->parent_id) {
+            //         //check that parent in this operator
+            //         $check_parent = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $parent->parent_id)->get();
+            //         $occasion = $parent->parent_id;
+            //     }
+            //     $occasions[] = Occasion::where('id', $occasion)->first();
+            // }
+            // $occasions = array_filter($occasions);
+            // $occasions = array_unique($occasions);
+            foreach ($occasions_array as $k => $occasion_id) {
+                $occasion = Occasion::where('id', $occasion_id)->first(); //check an parent 1 e3rd kl parent_id fe el menu else e3rd kol 7aga
+                $occasion = get_root($occasion);
+                $occasions[]  = $occasion;
             }
             $occasions = array_filter($occasions);
             $occasions = array_unique($occasions);

@@ -1,6 +1,6 @@
 <!--==================================== -->
-@extends('front.newdesign.template')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <?php
     $title = "";
     preg_match("/iPhone|iPad|iPod/", $_SERVER['HTTP_USER_AGENT'], $matches);
@@ -53,67 +53,67 @@
 
         <div class="main">
             <div class="container" style="min-height: 900px">
-                @if(count($Rdata) > 0)
+                <?php if(count($Rdata) > 0): ?>
                 <div class="main_category cat">
                     <div class="row" id="categoryStatus" action="inactive">
                         <!-- =============================== -->
-                    @foreach($Rdata as $key => $img)
-                        <!-- <div class="col-xs-2"><button class="copy_btn"><i class="fas fa-copy fa-lg"></i></button><input type="text" value="{{url(url('viewSnap2/'.$img->id.'/'.UID()))}}" /> </div> -->
+                    <?php $__currentLoopData = $Rdata; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $img): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <!-- <div class="col-xs-2"><button class="copy_btn"><i class="fas fa-copy fa-lg"></i></button><input type="text" value="<?php echo e(url(url('viewSnap2/'.$img->id.'/'.UID()))); ?>" /> </div> -->
                             <div class="col-xs-12 Rdata">
                                 <div class="inner_category">
-                                    <a href="#" data-type="<?= $img->rbt_id ? 1 : 0 ?>" data-link="{{$img->snap_link}}"
-                                       data-img_src="{{ url($img->path)}}" data-toggle="modal" data-target="#myModal"
+                                    <a href="#" data-type="<?= $img->rbt_id ? 1 : 0 ?>" data-link="<?php echo e($img->snap_link); ?>"
+                                       data-img_src="<?php echo e(url($img->path)); ?>" data-toggle="modal" data-target="#myModal"
                                        class="main_inner snap_info">
-                                        <img src="{{ url('assets/front/newdesign')}}/img/frame.png">
+                                        <img src="<?php echo e(url('assets/front/newdesign')); ?>/img/frame.png">
 
                                         <div class="view">
-                                            <i id="eye" eye-val="{{$img->popular_count}}" class="fas fa-eye"></i>
-                                            <span> {{$img->popular_count}}</span>
+                                            <i id="eye" eye-val="<?php echo e($img->popular_count); ?>" class="fas fa-eye"></i>
+                                            <span> <?php echo e($img->popular_count); ?></span>
                                         </div>
 
                                         <div class="title_photo_inner">
-                                            <img src="{{ url($img->path)}}">
+                                            <img src="<?php echo e(url($img->path)); ?>">
 
-                                            <a href="{{url('viewSnap2/'.$img->id.'/'.UID())}}">
-                                                <p style="color:#000 !important;">{{$img->title}}   </p>
+                                            <a href="<?php echo e(url('viewSnap2/'.$img->id.'/'.UID())); ?>">
+                                                <p style="color:#000 !important;"><?php echo e($img->title); ?>   </p>
                                             </a>
 
                                         </div>
-                                        @if($img->rbt_id)
-                                            <a class="icon" href="sms:{{$rbt_sms}}<?php echo $Att; ?>{{$codes[$key]}}"
+                                        <?php if($img->rbt_id): ?>
+                                            <a class="icon" href="sms:<?php echo e($rbt_sms); ?><?php echo $Att; ?><?php echo e($codes[$key]); ?>"
                                                style="display:none;"></a>
-                                        @endif
+                                        <?php endif; ?>
                                     </a>
                                 </div>
                             </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <!-- =============================== -->
                     </div>
                 </div>
-                @endif
-                @if(count($child_occasions) > 0)
+                <?php endif; ?>
+                <?php if(count($child_occasions) > 0): ?>
                 <div class="main_category cat">
-                    <h4>{{$pageTitle}}</h4>
+                    <h4><?php echo e($pageTitle); ?></h4>
                     <?php $i=0 ?>
-                    @foreach($child_occasions as $key=> $value)
+                    <?php $__currentLoopData = $child_occasions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=> $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="category">
-                        <a href="{{url('listSnap/'.$value->id .'/'.UID())}}" class="main_inner">
-                            <img src="{{ url('assets/front/newdesign')}}/img/frame.png">
+                        <a href="<?php echo e(url('listSnap/'.$value->id .'/'.UID())); ?>" class="main_inner">
+                            <img src="<?php echo e(url('assets/front/newdesign')); ?>/img/frame.png">
 
                             <!-- <div class="view">
                         <i id="eye" class="fas fa-eye"></i> <span> 20</span>
                       </div> -->
 
                             <div class="title_photo">
-                                <img class="{{($i%2 == 0)?'left':'right'}}" src="{{  url($value->image) }}">
-                                <p class="{{($i%2 == 0)?'left_text':'right_text'}}">{{$value->title}}</p>
+                                <img class="<?php echo e(($i%2 == 0)?'left':'right'); ?>" src="<?php echo e(url($value->image)); ?>">
+                                <p class="<?php echo e(($i%2 == 0)?'left_text':'right_text'); ?>"><?php echo e($value->title); ?></p>
                             </div>
                         </a>
                     </div>
                     <?php $i++; ?>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
-                @endif
+                <?php endif; ?>
             </div>
 
 
@@ -145,15 +145,15 @@
 
                 </div>
             </div>
-            <div class="load" style="position: fixed;top: 40%;left:40%"><img src="{{url('img/loading.gif')}}"
+            <div class="load" style="position: fixed;top: 40%;left:40%"><img src="<?php echo e(url('img/loading.gif')); ?>"
                                                                              width="10%"/></div>
 
 
             <!-- ==================================== -->
 
-        @stop
+        <?php $__env->stopSection(); ?>
         <!-- ==================================== -->
-        @section('script')
+        <?php $__env->startSection('script'); ?>
 
                 <script>
 
@@ -183,7 +183,7 @@
                         if ($(window).scrollTop() + $(window).height() > $("#categoryStatus").height() && action == 'inactive') {
                             $('#categoryStatus').attr('action', 'active');
                             var start = $('#categoryStatus .Rdata').length
-                            var occasion_id = {{$occasion_id}};
+                            var occasion_id = <?php echo e($occasion_id); ?>;
                             load_snap_data(start, occasion_id);
                         }
                     });
@@ -192,7 +192,7 @@
                         $('.load').show();
                         $.ajax({
                             type: 'GET',
-                            url: "{{url('loadMoreSnapNew')}}" + "?start=" + start + "&occasion_id=" + occasion_id + "&UID=" + {{UID()}},
+                            url: "<?php echo e(url('loadMoreSnapNew')); ?>" + "?start=" + start + "&occasion_id=" + occasion_id + "&UID=" + <?php echo e(UID()); ?>,
                             success: function (data) {
                                 if (data.html == '') {
                                     $('#categoryStatus').attr('action', 'active');
@@ -215,4 +215,6 @@
 
 
                 </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('front.newdesign.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\php7.2\xampp\htdocs\greeting_backend_v2_php7\resources\views/front/newdesign/list_snap.blade.php ENDPATH**/ ?>

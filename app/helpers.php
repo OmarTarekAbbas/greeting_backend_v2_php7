@@ -89,21 +89,30 @@ function snap_Occasions() {
     $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
 
     $occasions_array = [];
-    $occasions = [];
+    $occasions       = [];
     foreach ($snap as $key => $value) {
         array_push($occasions_array, $value->occasion_id);
     }
     $occasions_array = array_unique($occasions_array);
-    foreach ($occasions_array as $k => $occasion) {
-        if(get_settings('parent')){
-            $occasions[] = Occasion::where('id', $occasion)->whereNull('parent_id')->first(); //check an parent 1 e3rd kl parent_id fe el menu else e3rd kol 7aga
-        }
-        else{
-            $occasions[] = Occasion::where('id', $occasion)->first();
-        }
-
+    foreach ($occasions_array as $k => $occasion_id) {
+        $occasion = Occasion::where('id', $occasion_id)->first(); //check an parent 1 e3rd kl parent_id fe el menu else e3rd kol 7aga
+        $occasion = get_root($occasion);
+        $occasions[]  = $occasion;
     }
-    return array_filter($occasions);
+    $occasions = array_filter($occasions);
+    return array_unique($occasions);
+}
+
+function get_root($occasion)
+{
+    $UID = UID();
+    $url = Generatedurl::where('UID', $UID)->first();
+    $check_parent = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion->parent_id)->first();
+    if($occasion->parent_id && $check_parent){
+       $occasion = Occasion::where('id',$occasion->parent_id)->first();
+       return get_root($occasion);
+    }
+    return $occasion;
 }
 
 function get_paginationLimit() {
@@ -187,3 +196,4 @@ function redirect_operator() {
         return 'landing_v1';
     }
 }
+

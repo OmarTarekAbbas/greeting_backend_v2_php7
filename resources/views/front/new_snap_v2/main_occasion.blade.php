@@ -128,7 +128,7 @@
           <div class="fav_cat">
             <h2 style="text-align: center;color: #fff;border-bottom: 1px solid #000;border-top: 1px solid #000;padding-bottom: 7px;">{{$Rdata[0]->occasion->title}}</h2>
             <div class="row" id="categoryStatus" action="inactive">
-<!--              @foreach($Rdata as $value)
+              @foreach($Rdata as $value)
                 <div class="col-6 Rdata">
                     <div class="label_title">
                         <div class="row">
@@ -165,7 +165,7 @@
                         </a>
                     </div>
                 </div>
-              @endforeach-->
+              @endforeach
             </div>
           </div>
       </div>

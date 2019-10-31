@@ -328,3 +328,29 @@ Route::get('/categories/123456','FrontEndController@cat');
 
 /* =================== new landing ================== */
 Route::post('AddSubscriptionContractRequest', 'FrontEndController@AddSubscriptionContractRequest');
+Route::post('admin/delete_multiselect',function (Illuminate\Http\Request $request){
+    if (strlen($request['selected_list'])==0)
+    {
+        \Session::flash('failed','no_selected_item');
+        return back();
+    }
+    $selected_list =  explode(",",$request['selected_list']);
+    foreach ($selected_list as $item)
+    {
+        DB::table($request['table_name'])->where('id',$item)->delete() ;
+    }
+    \Session::flash('success', 'Delete All Successfully');
+
+    //delete_multiselect($request) ;
+    return back();
+});
+Route::get('admin/get_table_ids',function(Illuminate\Http\Request $request){
+    $table_name = $request['table_name'] ;
+    if(isset($table_name) && ! empty($table_name))
+    {
+        $query = "SELECT id FROM ".$table_name ;
+        $run = \DB::select($query)  ;
+        return $run ;
+    }
+    return $table_name;
+});
