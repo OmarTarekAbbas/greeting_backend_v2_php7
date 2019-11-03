@@ -1,28 +1,27 @@
-@extends('admin.master')
-@section('title')
+<?php $__env->startSection('title'); ?>
     Occasions
-@endsection
-@section('PageTitle')
-    @if(isset($occasion) && $occasion) {{$occasion->title}} @else Occasions @endif
-@endsection
-@section('PageDesc')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('PageTitle'); ?>
+    <?php if(isset($occasion) && $occasion): ?> <?php echo e($occasion->title); ?> <?php else: ?> Occasions <?php endif; ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('PageDesc'); ?>
     You can add and delete Occasions
-@endsection
-@section('breadcrumb')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('breadcrumb'); ?>
     <li class="active">Occasions</li>
-@endsection
-@section('PageContent')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('PageContent'); ?>
 
     <div class="row">
         <div class="right">
-            <a href="{{ url('admin/occasions/create') }}"><button class="btn btn-labeled btn-info"><i class="glyphicon glyphicon-plus"></i></span>Add New</button></a>
+            <a href="<?php echo e(url('admin/occasions/create')); ?>"><button class="btn btn-labeled btn-info"><i class="glyphicon glyphicon-plus"></i></span>Add New</button></a>
         </div>
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body table-responsive no-padding">
                   <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
                   <div id="tag_container">
-                    @include('admin.occasions.result')
+                    <?php echo $__env->make('admin.occasions.result', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                   </div>
                 </div>
             </div>
@@ -35,15 +34,15 @@
     </div>
 
 
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <script>
 function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
     filter = input.value
     $.ajax({
-        url: "{{url('admin/occasions')}}",
+        url: "<?php echo e(url('admin/occasions')); ?>",
         type: "get",
         data:{
             'search_value' : filter
@@ -113,4 +112,6 @@ function myFunction() {
 	}
 
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/greeting_backend_v2_php7/resources/views/admin/occasions/index.blade.php ENDPATH**/ ?>

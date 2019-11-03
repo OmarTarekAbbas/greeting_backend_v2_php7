@@ -25,10 +25,17 @@ class OccasionsController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $Occasions = Occasion::all();
+      $Occasions = Occasion::whereNull('parent_id')->latest('created_at');
+      if($request->has('search_value')){
+        $Occasions = Occasion::latest('created_at');
+          $Occasions = $Occasions->where('title','like','%'.$request->search_value.'%');
+      }
+      $Occasions = $Occasions->paginate(10);
+      if ($request->ajax()) {
+          return view('admin.occasions.result',compact('Occasions'));
+      }
         return view('admin.occasions.index', compact('Occasions'));
     }
 
