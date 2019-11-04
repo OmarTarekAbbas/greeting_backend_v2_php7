@@ -41,6 +41,36 @@ class OperatorSnapController extends Controller
        return view('admin.operatorsnap.index',compact('GreetingImgs'));
     }
 
+    public function operatorsnaplike()
+    {
+        $GreetingImgs = Greetingimg::where("snap", 1)
+            ->join('occasions', 'occasions.id', '=', 'greetingimgs.occasion_id')
+            ->join('categories', 'categories.id', '=', 'occasions.category_id')
+            ->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+            ->join('operators', 'operators.id', '=', 'greetingimg_operator.operator_id')
+            ->join('countries', 'countries.id', '=', 'operators.country_id')
+            ->select(['operators.name as op_name','countries.name as co_name','greetingimgs.id','greetingimg_operator.like as count',  'occasion_id', 'greetingimgs.title', 'path', 'RDate', 'EXDate', 'featured', 'rbt_id', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle'])
+            ->orderBy('count', 'desc')
+            ->limit(get_settings('OperatorSnap_limit'))
+            ->get();
+       return view('admin.operatorsnap.like_index',compact('GreetingImgs'));
+    }
+
+    public function operatorsnapdislike()
+    {
+        $GreetingImgs = Greetingimg::where("snap", 1)
+            ->join('occasions', 'occasions.id', '=', 'greetingimgs.occasion_id')
+            ->join('categories', 'categories.id', '=', 'occasions.category_id')
+            ->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+            ->join('operators', 'operators.id', '=', 'greetingimg_operator.operator_id')
+            ->join('countries', 'countries.id', '=', 'operators.country_id')
+            ->select(['operators.name as op_name','countries.name as co_name','greetingimgs.id','greetingimg_operator.dislike as count',  'occasion_id', 'greetingimgs.title', 'path', 'RDate', 'EXDate', 'featured', 'rbt_id', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle'])
+            ->orderBy('count', 'desc')
+            ->limit(get_settings('OperatorSnap_limit'))
+            ->get();
+       return view('admin.operatorsnap.dislike_index',compact('GreetingImgs'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -25,9 +25,9 @@ You can add and delete Snap Images
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Image</th>
+                            <th>Image</th>                            
                             <th>Title</th>
-                            <th>Occasion</th>
+                            <th>Occasion</th>                            
                             <th>Category</th>
                             <th>Start Date</th>
                             <th>End Date</th>
@@ -57,7 +57,7 @@ You can add and delete Snap Images
             ajax: "{!! url('admin/gsnap/allData') !!}",
             columns: [
                 {data: 'id'},
-                {data: 'image',name:'path', searchable: false},
+                {data: 'image',name:'path', searchable: false},                
                 {data: 'title'},
                 {data: 'occasionsTitle'},
                 {data: 'categoriesTitle'},

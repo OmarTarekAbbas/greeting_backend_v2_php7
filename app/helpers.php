@@ -54,9 +54,9 @@ function OP_switch($uid) {
     $url = Generatedurl::where('UID', $uid)->first();
     $op = $url->operator_id;
     if($op == 13){ //
-        $op = 51   ;
+       $op = 51   ;
     }elseif ( $op == 12) {
-        $op = 50   ;
+         $op = 50   ;
     }
     return $op;
 }
@@ -105,10 +105,10 @@ function snap_Occasions() {
 
 function get_root($occasion)
 {
-    $UID = UID();
-    $url = Generatedurl::where('UID', $UID)->first();
-    $check_parent = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion->parent_id)->first();
-    if($occasion->parent_id && $check_parent){
+    //$UID = UID();
+    //$url = Generatedurl::where('UID', $UID)->first();
+    //$check_parent = isset($occasion->parent_id) ? $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion->parent_id)->first():0;
+    if(isset($occasion->parent_id)){
        $occasion = Occasion::where('id',$occasion->parent_id)->first();
        return get_root($occasion);
     }
@@ -196,4 +196,3 @@ function redirect_operator() {
         return 'landing_v1';
     }
 }
-

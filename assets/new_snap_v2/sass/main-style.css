@@ -228,6 +228,20 @@ header {
   padding: 18px;
 }
 
+.main .daily_post .poster .border_poster .poster_filtar a .view {
+  position: absolute;
+  left: 15px;
+  bottom: 80px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.main .daily_post .poster .border_poster .poster_filtar a .view span {
+  position: absolute;
+  right: 0px;
+  bottom: 5px;
+}
+
 .main .filtars {
   margin-bottom: 15px;
 }
@@ -249,14 +263,14 @@ header {
   padding: 8px;
   position: relative;
   background-image: url(../img/Rounded-Rectangle%20.png);
-  width: 90%;
+  width: 95%;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   margin: auto;
 }
 
-.main .filtars .f_filtar .owl-carousel.owl_three .item i {
+.main .filtars .f_filtar .owl-carousel.owl_three .item .heart {
   position: absolute;
   left: 8px;
   bottom: 8px;
@@ -296,10 +310,10 @@ header {
   cursor: pointer;
 }
 
-.main .filtars .f_filtar .owl-carousel.owl_three .item i {
+.main .filtars .f_filtar .owl-carousel.owl_three .item .heart {
   position: absolute;
-  left: 8px;
-  bottom: 8px;
+  left: 4px;
+  bottom: 13px;
   color: #fff;
   cursor: pointer;
 }
@@ -314,7 +328,7 @@ header {
   margin: auto;
   display: block;
   padding: 10px;
-  height: 85px;
+  height: 95px;
 }
 
 .main .filtars .f_filtar .owl-carousel.owl_three .owl-nav.disabled {
@@ -333,6 +347,26 @@ header {
   position: absolute;
   left: 0px;
   bottom: 30%;
+}
+
+.main .filtars .f_filtar .view {
+  position: absolute;
+  left: 15px;
+  bottom: 80px;
+  color: #fff;
+  font-size: 11px;
+}
+
+.main .filtars .f_filtar .view #eye {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+}
+
+.main .filtars .f_filtar .view span {
+  position: absolute;
+  right: 0px;
+  bottom: 5px;
 }
 
 .owl-carousel .owl-nav button.owl-next {
@@ -408,10 +442,10 @@ header {
   margin-bottom: 20%;
 }
 
-.fav_cat .fav_item i {
+.fav_cat .fav_item .heart {
   position: absolute;
-  left: 6px;
-  bottom: 18px;
+  left: 15px;
+  bottom: 2px;
   color: #d62b2b;
   cursor: pointer;
 }
@@ -422,11 +456,32 @@ header {
 }
 
 .fav_cat .fav_item a img {
-  width: 100%;
+  width: 85%;
   margin: auto;
   display: block;
   padding: 15px;
-  height: 115px;
+  height: 105px;
+}
+
+.fav_cat .fav_item a .view {
+  position: absolute;
+  right: 32px;
+  bottom: -10px;
+  color: #d62b2b;
+  font-size: 13px;
+}
+
+.fav_cat .fav_item a .view #eye {
+  position: absolute;
+  left: 0;
+  bottom: 16px;
+}
+
+.fav_cat .fav_item a .view span {
+  position: absolute;
+  right: 5px;
+  bottom: 14px;
+  color: #d62b2b;
 }
 
 /*------------------------------------- end fav page --------------------------------------*/
@@ -531,7 +586,7 @@ footer a:hover i, footer a:focus i, footer a:active i {
 
 .category_title .i_arrow {
   float: left;
-  margin: 10px 10px 10px 30px;
+  margin: 10px 10px 10px 20px;
   color: #fff;
   text-decoration: none;
 }
@@ -554,12 +609,34 @@ footer a:hover i, footer a:focus i, footer a:active i {
   border-radius: 15px;
   padding: 8px;
   margin: 20px;
+  position: relative;
 }
 
 .inner_page img {
   width: 160px;
   margin: auto;
   display: block;
+}
+
+.inner_page .view {
+  position: relative;
+  left: 40px;
+  bottom: 0px;
+  color: #fff;
+  font-size: 19px;
+}
+
+.inner_page .view #eye {
+  position: absolute;
+  bottom: 20px;
+  left: -22px;
+  font-size: 15px;
+}
+
+.inner_page .view span {
+  position: absolute;
+  left: -20px;
+  bottom: -5px;
 }
 
 .button-inner {
@@ -588,11 +665,39 @@ footer a:hover i, footer a:focus i, footer a:active i {
   margin-top: 30%;
 }
 
-#snapModal img {
+#snapModal .modal-body {
+  position: relative;
+}
+
+#snapModal .modal-body img {
   width: 50%;
   margin: auto;
   display: block;
   padding: 8px;
+}
+
+#snapModal .modal-body .view {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  color: #fbf6f6;
+  background-color: #a63b37;
+  padding: 5px;
+  border-radius: 10px;
+  width: 65px;
+  height: 30px;
+}
+
+#snapModal .modal-body .view #eye {
+  position: absolute;
+  left: 35px;
+  bottom: 7px;
+}
+
+#snapModal .modal-body .view span {
+  position: absolute;
+  right: 38px;
+  bottom: 2px;
 }
 
 #snapModal .modal-footer a {

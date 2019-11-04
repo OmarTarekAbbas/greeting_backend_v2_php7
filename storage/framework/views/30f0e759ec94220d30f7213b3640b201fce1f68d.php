@@ -29,8 +29,8 @@ switch ($os) {
 <style type="text/css">
     .inner_category .view {
     position: absolute;
-    left: 51px;
-    bottom: 55px;
+    left: 45px;
+    bottom: 52px;
     color: #f23c57;
 }
 
@@ -55,15 +55,18 @@ switch ($os) {
                         <img src="<?php echo e(url('assets/front/newdesign')); ?>/img/frame.png">
 
                         <div class="view">
-                    <i id="eye" eye-val="<?php echo e($snap->popular_count); ?>" class="fas fa-eye"></i> <span> <?php echo e($snap->popular_count); ?></span>
-                  </div>
+                            <i id="eye" eye-val="<?php echo e($snap->popular_count); ?>" class="fas fa-eye"></i> <span> <?php echo e($snap->popular_count); ?></span>
+                        </div>
+                        <div class="view" style="top: 59%;right: 22%;font-size: 28px;">
+                            <i id="eye" data-id="<?php echo e($snap->id); ?>" class="fas fa-thumbs-up ajax_call"></i>
+                        </div>
 
                         <div class="title_photo_inner">
-                            <img src="<?php echo e(url($snap->path)); ?>">
+                            <img c src="<?php echo e(url($snap->path)); ?>">
                             <p ><?php echo e($snap->title); ?></p>
                         </div>
                         <?php if($snap->rbt_id): ?>
-                        <a class="icon"  href="sms:<?php echo e($rbt_sms); ?><?php echo $Att; ?><?php echo e($code); ?>" style="display:none;"></a>
+                        <a class="icon"   href="sms:<?php echo e($rbt_sms); ?><?php echo $Att; ?><?php echo e($code); ?>" style="display:none;"></a>
                         <?php endif; ?>
                     </a>
                 </div>
@@ -115,7 +118,11 @@ switch ($os) {
 
                 <div class="view">
                     <i id="eye" class="fas fa-eye"></i> <span> 20</span>
-                  </div>
+                </div>
+
+                <div class="view" style="/* background-color: transparent; */top: 3%;left: 21px;font-size: 25px;height: auto;width: fit-content;">
+                    <i id="eye" data-id="<?php echo e($snap->id); ?>" class="fas fa-thumbs-up ajax_call"></i>
+                </div>
 
             </div>
             <div class="modal-body snap-modal">
@@ -164,6 +171,20 @@ switch ($os) {
         $('#myModal #link').attr('href', link);
     });
 
+    $(document).on('click','.ajax_call',function(){
+        if($(this).hasClass('fa-thumbs-up')){ 
+            var str = '?id='+$(this).data('id')+'&type=1'
+            $.get('<?php echo e(url("like_dislike/".UID())); ?>'+str,function(response){
+                $('.ajax_call').removeClass('fa-thumbs-up').addClass('fa-thumbs-down')
+            })
+        }
+        else{
+            var str = '?id='+$(this).data('id')+'&type=2'
+            $.get('<?php echo e(url("like_dislike/".UID())); ?>'+str,function(response){
+                $('.ajax_call').removeClass('fa-thumbs-down').addClass('fa-thumbs-up')
+            })
+        }
+    })
 
 
 </script>

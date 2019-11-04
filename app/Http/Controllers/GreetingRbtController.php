@@ -293,7 +293,7 @@ class GreetingRbtController extends Controller {
         //
         $Greetingaudio = Greetingaudio::find($id);
         //  File::delete($Greetingaudio->path);
-        File::delete(base_path($Greetingaudio->path));
+        File::delete(public_path($Greetingaudio->path));
         $Greetingaudio->delete();
         return redirect(url('admin/grbts'));
     }

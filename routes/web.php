@@ -106,6 +106,7 @@ Route::post('zain_ksa_unsub_action','FrontEndController@zain_ksa_unsub_action');
 Route::get('zain_ksa_test','FrontEndController@zain_ksa_test');
 
 
+
 // Mobily saudi subscribe
 Route::get('landing_ksa','FrontEndController@landing_ksa');
 Route::get('landing_mobily_ksa','FrontEndController@landing_mobily_ksa');
@@ -191,9 +192,13 @@ Route::post('admin/date', 'GreetingSnapController@getDate');//date ajax
 
 // resource controllers routes ordersnap
 //Route::get('admin/ordersnap/allData','OrderSnapController@allData');
-Route::resource('admin/ordersnap','OrderSnapController');
+Route::get('admin/ordersnap','OrderSnapController@index');
+Route::get('admin/ordersnaplike','OrderSnapController@ordersnaplike');
+Route::get('admin/ordersnapdislike','OrderSnapController@ordersnapdislike');
 // resource controllers routes operatorsnap
-Route::resource('admin/operatorsnap','OperatorSnapController');
+Route::get('admin/operatorsnap','OperatorSnapController@index');
+Route::get('admin/operatorsnaplike','OperatorSnapController@operatorsnaplike');
+Route::get('admin/operatorsnapdislike','OperatorSnapController@operatorsnapdislike');
 
 Route::get('admin/gaudios/allData','GreetingaudiosController@allData');
 Route::get('admin/grbts/allData','GreetingRbtController@allData');
@@ -220,6 +225,11 @@ define('viva_kuwait_operator_id',13);
 Route::get('zain_iraq_landing', 'FrontEndController@zain_iraq_landing');
 Route::get('zain_iraq_success', 'FrontEndController@zain_iraq_success');
 Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild');
+
+/* Du Landing */
+Route::get('du_landing', 'FrontEndController@du_landing');
+Route::get('du_pinCode', 'FrontEndController@du_pinCode');
+Route::get('du_unsub', 'FrontEndController@du_unsub');
 
 
 
@@ -285,6 +295,9 @@ Route::get('viewSnap2/{ID}/{UID}','FrontEndController@inner_snap2');
 Route::get('link2/snapCategory/{UID}','FrontEndController@snapCategory');
 Route::get('listSnap/{id}/{UID}','FrontEndController@listSnap');
 Route::get('cuurentSnap/{UID}','FrontEndController@cuurentSnap');
+Route::get('home_v2/{UID}','FrontEndController@home_v2');
+Route::get('like_dislike/{UID}','FrontEndController@like_dislike');
+Route::get('Search_v3/{UID}','FrontEndController@Search_v3');
 // new dersign snap
 Route::get('cuurentSnap_v2/{UID}','FrontEndController@cuurentSnap_v2');
 Route::get('all_occasion/{UID}','FrontEndController@all_occasions');

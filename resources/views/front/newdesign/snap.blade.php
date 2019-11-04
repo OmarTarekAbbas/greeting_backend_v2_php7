@@ -43,7 +43,7 @@
     color: #111;
     font-weight: 800;
 }
-    .main_category .right{
+.main_category .right{
         right: 5%;
     }
     @media  only screen and (min-width: 0) and (max-width: 600px) {

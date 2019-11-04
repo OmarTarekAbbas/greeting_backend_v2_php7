@@ -31,6 +31,7 @@
                         </tr>
                         </thead>
                         <tbody>
+
                         @foreach($Operators as $Operator)
                             <tr>
                                 <td>{{ $Operator->id }}</td>

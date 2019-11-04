@@ -39,6 +39,32 @@ class OrderSnapController extends Controller
         return view('admin.ordersnap.index',compact('GreetingImgs'));
     }
 
+    public function ordersnaplike()
+    {
+        $GreetingImgs = Greetingimg::where("snap", 1)
+            ->join('occasions', 'occasions.id', '=', 'greetingimgs.occasion_id')
+            ->join('categories', 'categories.id', '=', 'occasions.category_id')
+           //->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+            ->select(['greetingimgs.id', 'greetingimgs.like', 'occasion_id', 'greetingimgs.title', 'path', 'RDate', 'EXDate', 'featured', 'rbt_id', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle'])
+            ->orderBy('like', 'desc')
+            ->limit(get_settings('OrderSnap_limit'))
+            ->get();
+        return view('admin.ordersnap.like_index',compact('GreetingImgs'));
+    }
+
+    public function ordersnapdislike()
+    {
+        $GreetingImgs = Greetingimg::where("snap", 1)
+            ->join('occasions', 'occasions.id', '=', 'greetingimgs.occasion_id')
+            ->join('categories', 'categories.id', '=', 'occasions.category_id')
+           //->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+            ->select(['greetingimgs.id', 'greetingimgs.dislike', 'occasion_id', 'greetingimgs.title', 'path', 'RDate', 'EXDate', 'featured', 'rbt_id', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle'])
+            ->orderBy('dislike', 'desc')
+            ->limit(get_settings('OrderSnap_limit'))
+            ->get();
+        return view('admin.ordersnap.dislike_index',compact('GreetingImgs'));
+    }
+
 /*    public function allData()
     {
         $GreetingImgs = Greetingimg::where("snap", 1)

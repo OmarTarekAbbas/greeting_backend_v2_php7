@@ -29,8 +29,8 @@ switch ($os) {
 <style type="text/css">
     .inner_category .view {
     position: absolute;
-    left: 51px;
-    bottom: 55px;
+    left: 45px;
+    bottom: 52px;
     color: #f23c57;
 }
 
@@ -55,15 +55,18 @@ switch ($os) {
                         <img src="{{ url('assets/front/newdesign')}}/img/frame.png">
 
                         <div class="view">
-                    <i id="eye" eye-val="{{$snap->popular_count}}" class="fas fa-eye"></i> <span> {{$snap->popular_count}}</span>
-                  </div>
+                            <i id="eye" eye-val="{{$snap->popular_count}}" class="fas fa-eye"></i> <span> {{$snap->popular_count}}</span>
+                        </div>
+                        <div class="view" style="top: 59%;right: 22%;font-size: 28px;">
+                            <i id="eye" data-id="{{$snap->id}}" class="fas fa-thumbs-up ajax_call"></i>
+                        </div>
 
                         <div class="title_photo_inner">
-                            <img src="{{ url($snap->path)}}">
+                            <img c src="{{ url($snap->path)}}">
                             <p >{{$snap->title}}</p>
                         </div>
                         @if($snap->rbt_id)
-                        <a class="icon"  href="sms:{{$rbt_sms}}<?php echo $Att; ?>{{$code}}" style="display:none;"></a>
+                        <a class="icon"   href="sms:{{$rbt_sms}}<?php echo $Att; ?>{{$code}}" style="display:none;"></a>
                         @endif
                     </a>
                 </div>
@@ -115,7 +118,11 @@ switch ($os) {
 
                 <div class="view">
                     <i id="eye" class="fas fa-eye"></i> <span> 20</span>
-                  </div>
+                </div>
+
+                <div class="view" style="/* background-color: transparent; */top: 3%;left: 21px;font-size: 25px;height: auto;width: fit-content;">
+                    <i id="eye" data-id="{{$snap->id}}" class="fas fa-thumbs-up ajax_call"></i>
+                </div>
 
             </div>
             <div class="modal-body snap-modal">
@@ -164,6 +171,20 @@ switch ($os) {
         $('#myModal #link').attr('href', link);
     });
 
+    $(document).on('click','.ajax_call',function(){
+        if($(this).hasClass('fa-thumbs-up')){ 
+            var str = '?id='+$(this).data('id')+'&type=1'
+            $.get('{{url("like_dislike/".UID())}}'+str,function(response){
+                $('.ajax_call').removeClass('fa-thumbs-up').addClass('fa-thumbs-down')
+            })
+        }
+        else{
+            var str = '?id='+$(this).data('id')+'&type=2'
+            $.get('{{url("like_dislike/".UID())}}'+str,function(response){
+                $('.ajax_call').removeClass('fa-thumbs-down').addClass('fa-thumbs-up')
+            })
+        }
+    })
 
 
 </script>

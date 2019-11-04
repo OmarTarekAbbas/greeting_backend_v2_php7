@@ -327,9 +327,34 @@
                         <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
                     </a>
                 </li>
+                <li class="{{(preg_match('/\badmin\/ordersnaplike/i',Request::url())) ? 'active' : ''}}">
+                    <a href="{{ url('admin/ordersnaplike') }}">
+                        <i class="ion-images"></i> <span>SnapChat Ordering Like</span>
+                        <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
+                    </a>
+                </li>
+                <li class="{{(preg_match('/\badmin\/ordersnapdislike/i',Request::url())) ? 'active' : ''}}">
+                    <a href="{{ url('admin/ordersnapdislike') }}">
+                        <i class="ion-images"></i> <span>SnapChat Ordering DisLike</span>
+                        <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
+                    </a>
+                </li>
                 <li class="{{(preg_match('/\badmin\/operatorsnap/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/operatorsnap') }}">
                         <i class="ion-images"></i> <span>Operator SnapChat</span>
+                        <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
+                    </a>
+                </li>
+                <li class="{{(preg_match('/\badmin\/operatorsnaplike/i',Request::url())) ? 'active' : ''}}">
+                    <a href="{{ url('admin/operatorsnaplike') }}">
+                        <i class="ion-images"></i> <span>Operator SnapChat Like</span>
+                        <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
+                    </a>
+                </li>
+
+                <li class="{{(preg_match('/\badmin\/operatorsnapdislike/i',Request::url())) ? 'active' : ''}}">
+                    <a href="{{ url('admin/operatorsnapdislike') }}">
+                        <i class="ion-images"></i> <span>Operator SnapChat DisLike</span>
                         <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
                     </a>
                 </li>
@@ -478,13 +503,11 @@
             });
         });
     });
-
-        $.ajaxSetup({
+     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
                 }
         });
-
 		@if(isset($Occasion) && $Occasion->parent_id)
 		$('.parent_select').prepend('<option> select parent occcasion </option>');
 		$('.parent_select option:first').prop('disabled',true);
