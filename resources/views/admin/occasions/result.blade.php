@@ -40,4 +40,4 @@
 
     </tbody>
 </table>
-{{ $Occasions->appends(Request::all())->render() }}
+{!! $Occasions->appends(Request::all())->render() !!}

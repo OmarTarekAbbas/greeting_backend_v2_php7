@@ -64,7 +64,7 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <a href="#" data-dismiss="modal">الغاء الامر</a>
+                <a href="#" data-dismiss="modal">{!! static_lang('close')?static_lang('close') : 'اغلق'  !!}</a>
                 <a href="{{$Rdata->snap_link}}">استخدام العدسة</a>
             </div>
         </div>

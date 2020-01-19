@@ -1,65 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
-    <title>Register New Account</title>
-    @include('head')
-</head>
-<body class="auth-page height-auto bg-teal-600">
-<!-- BEGIN CONTENT -->
-<div class="wrapper animated fadeInDown">
-    <div class="panel overflow-hidden">
-        <div class="bg-teal-500 padding-top-25 no-padding-bottom font-size-20 color-white text-center text-uppercase">
-            <i class="ion-person-add margin-right-5"></i> Create a new account
-        </div>
-        <form id="checkform" role="form" method="POST" action="{{ route('register') }}">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="alert bg-teal-500 text-center color-white no-radius no-margin padding-top-15 padding-bottom-30 padding-left-20 padding-right-20">create your own private account by one click</div>
-            <div class="box-body padding-md">
-                <div class="row">
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Register') }}</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    @endif
 
-                    <div class="form-group col-lg-12">
-                        <label for="name" class="control-label">Name</label>
-                        <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Full Name" required="required" value="{{ old('name') }}"/>
-                    </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="form-group col-lg-12">
-                    <label for="email" class="control-label">E-Mail</label>
-
-                        <input type="email" name="email" id="email" class="form-control input-lg" placeholder="E-Mail" required="required" value="{{ old('email') }}"/>
-
-                </div>
-
-                <div class="form-group">
-                    <label for="password" class="control-label">Password</label>
-                    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="repeat-password" class="control-label">Repeat Password</label>
-                    <input type="password" name="password_confirmation" id="repeat-password" class="form-control input-lg" placeholder="Password"/>
-                </div>
-
-
-                <button type="submit" class="btn btn-dark bg-green-500 padding-10 btn-block color-white">create account</button>
             </div>
-        </form>
-        <div class="panel-footer padding-md no-margin no-border bg-teal-500 text-center color-white">&copy; 2015 IVAS.</div>
+        </div>
     </div>
 </div>
-<!-- END CONTENT -->
+@endsection

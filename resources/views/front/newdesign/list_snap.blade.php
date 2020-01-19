@@ -75,7 +75,7 @@
                                             <img src="{{ url($img->path)}}">
 
                                             <a href="{{url('viewSnap2/'.$img->id.'/'.UID())}}">
-                                                <p style="color:#000 !important;">{{$img->title}}   </p>
+                                                <p style="color:#000 !important;">{{$img->getTranslation('title',getCode())}}   </p>
                                             </a>
 
                                         </div>
@@ -106,7 +106,7 @@
 
                             <div class="title_photo">
                                 <img class="{{($i%2 == 0)?'left':'right'}}" src="{{  url($value->image) }}">
-                                <p class="{{($i%2 == 0)?'left_text':'right_text'}}">{{$value->title}}</p>
+                                <p class="{{($i%2 == 0)?'left_text':'right_text'}}">{{$value->getTranslation('title',getCode())}}</p>
                             </div>
                         </a>
                     </div>
@@ -134,12 +134,12 @@
 
                         </div>
                         <div class="modal-body snap-modal">
-                            <a class="snap_button" id="link" href="">استخدم العدسة</a>
+                            <a class="snap_button" id="link" href="">{!! static_lang('usefilter')?static_lang('usefilter') : 'استخدم الفلتر'  !!}</a>
 
-                            <a class="snap_button cart" id="cart" href="">اشترى النغمة</a>
+                            <a class="snap_button cart" id="cart" href="">{!! static_lang('buytone')?static_lang('buytone') : 'اشتري النغمة'  !!}</a>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-snap" data-dismiss="modal">الغاء الامر</button>
+                            <button type="button" class="btn btn-snap" data-dismiss="modal">{!! static_lang('close')?static_lang('close') : 'اغلق'  !!}</button>
                         </div>
                     </div>
 

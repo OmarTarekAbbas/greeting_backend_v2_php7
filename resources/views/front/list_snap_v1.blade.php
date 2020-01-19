@@ -123,12 +123,12 @@ $snap_Occasions = snap_Occasions()
                 </button>
             </div>
             <div class="modal-body snap-modal">
-                <a class="snap_button" id="link" href="">استخدم العدسة</a>
+                <a class="snap_button" id="link" href="">{!! static_lang('usefilter') !!}</a>
 
-                <a class="snap_button cart" id="sms" href="">اشترى النغمة</a>
+                <a class="snap_button cart" id="sms" href="">{!! static_lang('buytone') !!}</a>
             </div>
             <div class="modal-footer">
-                <a data-dismiss="modal">الغاء الامر</a>
+                <a data-dismiss="modal">{!! static_lang('close') !!}</a>
             </div>
         </div>
     </div>

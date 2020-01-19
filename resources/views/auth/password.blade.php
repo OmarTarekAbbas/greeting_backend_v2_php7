@@ -14,11 +14,11 @@
 
     <div class="panel overflow-hidden">
         <div class="bg-light-blue-500 padding-top-25 no-margin-bottom font-size-20 color-white text-center text-uppercase">
-            <i class="ion-log-in margin-right-5"></i> Reset Password form
+            <i class="ion-log-in margin-right-5"></i> Reset Password form 
         </div>
 
 
-        <form role="form" method="POST" action="{{ route('password.email')  }}" id="checkform">
+        <form role="form" method="POST" action="{{ url('/password/email') }}" id="checkform">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

@@ -18,7 +18,7 @@
         </div>
 
 
-        <form role="form" method="POST" action="{{ route('password.update') }}" id="checkform">
+        <form role="form" method="POST" action="{{ url('/password/reset') }}" id="checkform">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="token" value="{{ $token }}">

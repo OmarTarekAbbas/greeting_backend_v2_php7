@@ -20,7 +20,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body table-responsive no-padding">
-                  <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                  <input type="text" id="myInput" class="search_input_occasion" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
                   <div id="tag_container">
                     @include('admin.occasions.result')
                   </div>

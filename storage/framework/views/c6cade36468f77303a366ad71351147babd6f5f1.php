@@ -18,7 +18,7 @@
         </div>
 
 
-        <form role="form" method="POST" action="<?php echo e(route('login')); ?>" id="checkform">
+        <form role="form" method="POST" action="<?php echo e(url('/login')); ?>" id="checkform">
 
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 

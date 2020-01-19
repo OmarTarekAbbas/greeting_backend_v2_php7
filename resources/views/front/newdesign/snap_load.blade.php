@@ -37,7 +37,7 @@ switch ($os) {
             <div class="title_photo_inner">
                 <img src="{{ url($img->path)}}">
                 <a   href="{{url('viewSnap2/'.$img->id.'/'.$url->UID)}}" >
-                    <p  style="color:#000 !important;" >{{$img->title}}   </p>
+                    <p  style="color:#000 !important;" >{{$img->getTranslation('title',getCode())}}   </p>
                 </a>
             </div>
             @if($img->rbt_id)

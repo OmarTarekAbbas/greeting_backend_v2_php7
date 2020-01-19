@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Session;
 
-class Controller extends BaseController
-{
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+abstract class Controller extends BaseController {
+
+    use DispatchesJobs,
+        ValidatesRequests;
 
     public function detectCompnay() {
         $company = "";
@@ -26,8 +27,8 @@ class Controller extends BaseController
 
         return $company;
     }
-
-
+    
+    
      public function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE)
     {
         $output = NULL;
@@ -52,7 +53,7 @@ class Controller extends BaseController
             "SA" => "South America"
         );
         if (filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
-            $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+            $ipdat = @json_decode($this->GetPageDataMain("http://www.geoplugin.net/json.gp?ip=" . $ip));
             if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
                 switch ($purpose) {
                     case "location":
@@ -93,4 +94,24 @@ class Controller extends BaseController
         }
         return $output;
     }
+
+
+    
+    public static function GetPageDataMain($URL)
+    {
+
+        $ch = curl_init();
+        $timeout = 500;
+        curl_setopt($ch, CURLOPT_URL, $URL);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    }
+
+
 }

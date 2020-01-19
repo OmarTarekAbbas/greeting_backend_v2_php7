@@ -18,7 +18,7 @@
         </div>
 
 
-        <form role="form" method="POST" action="{{ route('login') }}" id="checkform">
+        <form role="form" method="POST" action="{{ url('/login') }}" id="checkform">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

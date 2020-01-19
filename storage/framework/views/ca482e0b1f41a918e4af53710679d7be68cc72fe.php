@@ -19,64 +19,99 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Occasion Name</th>
-                            <th>Category</th>
-                            <th>Slider</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <?php $__currentLoopData = $Occasions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Occasion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <tr>
-                                <td><?php echo e($Occasion->id); ?></td>
-                                <td><?php echo e($Occasion->title); ?></td>
-                                <td><?php echo e($Occasion->category->title); ?></td>
-                                <td><?php if($Occasion->slider): ?> YES <?php else: ?> NO <?php endif; ?></td>
-                                <td>
-                                    <?php if(Auth::user()->admin == true): ?>
-                                    <?php echo Form::open(array('class' => 'form-inline col-lg-1','method' => 'GET', 'action' => array('OccasionsController@edit', $Occasion->id))); ?>
-
-                                    <button class="btn btn-info btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
-                                        <i class="fa fa-edit  "></i>
-                                    </button>
-                                    <?php echo Form::close(); ?>
-
-                                    <?php echo Form::open(array('class' => 'form-inline col-lg-1','method' => 'DELETE', 'action' => array('OccasionsController@destroy', $Occasion->id))); ?>
-
-                                    <button class="btn btn-danger btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete" onclick="return confirm('Are you sure you want to delete <?php echo e($Occasion->title); ?>')">
-                                        <i class="fa fa-trash-o "></i>
-                                    </button>
-                                    <?php echo Form::close(); ?>
-
-                                    <?php endif; ?>
-                                    <a href="<?php echo e(url('admin/occasions/'.$Occasion->id.'/gimage')); ?>"><button class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Images"><i class="ion-images"></i> </button> </a>
-                                    <a href="<?php echo e(url('admin/occasions/create?parent_id='.$Occasion->id.'&title='.$Occasion->title)); ?>"><button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Sub Occasion"><i class="ion-plus"></i> </button> </a>
-                                    <?php if(count($Occasion->sub_occasions) > 0): ?>
-                                      <a href="<?php echo e(url('admin/occasions/'.$Occasion->id)); ?>"><button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Show Sub Occasion"><i class="fa fa-arrow-right"></i> </button> </a>
-                                    <?php endif; ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                        </tbody>
-                    </table>
+                  <input type="text" id="myInput" class="search_input_occasion" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                  <div id="tag_container">
+                    <?php echo $__env->make('admin.occasions.result', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                  </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <?php echo $Occasions->render(); ?>
 
     <div class="row">
         <span class="divider"></span>
     </div>
 
 
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+<script>
+function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value
+    $.ajax({
+        url: "<?php echo e(url('admin/occasions')); ?>",
+        type: "get",
+        data:{
+            'search_value' : filter
+        }
+    }).done(function(data)
+        {
+            $("#tag_container").empty().html(data);
+        })
+
+        .fail(function(jqXHR, ajaxOptions, thrownError)
+        {
+            console.log('No response from server');
+        });
+}
+</script>
+
+<script type="text/javascript">
+
+	$(window).on('hashchange', function() {
+	        if (window.location.hash) {
+	            var page = window.location.hash.replace('#', '');
+	            if (page == Number.NaN || page <= 0) {
+	                return false;
+	            }else{
+	                getData(page,0);
+	            }
+	        }
+        });
+
+	$(document).ready(function()
+	{
+	     $(document).on('click', '.pagination a',function(event)
+	    {
+	        event.preventDefault();
+	        $('li').removeClass('active');
+	        $(this).parent('li').addClass('active');
+	        var myurl = $(this).attr('href');
+            var page=$(this).attr('href').split('page=')[1];
+            let url = new URL($(this).attr('href'));
+            search = url.searchParams.get('search_value') ? url.searchParams.get('search_value') : 0;  // to get search_value from url
+            console.log(search);
+	        getData(page,search);
+	    });
+
+	});
+	function getData(page , value){
+        append = '';
+        if(value){
+            append = '&search_value='+ value
+        }
+	        $.ajax(
+	        {
+	            url: '?page=' + page+append,
+	            type: "get",
+	            datatype: "html"
+	        })
+	        .done(function(data)
+	        {
+	            $("#tag_container").empty().html(data);
+	            //location.hash = page;
+	        })
+	        .fail(function(jqXHR, ajaxOptions, thrownError)
+	        {
+	              console.log('No response from server');
+	        });
+
+	}
+
+</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\greeting_backend_v2_php7\resources\views/admin/occasions/index.blade.php ENDPATH**/ ?>

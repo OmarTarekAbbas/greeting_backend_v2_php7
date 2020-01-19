@@ -43,23 +43,15 @@
     color: #111;
     font-weight: 800;
 }
-.main_category .right{
-        right: 5%;
-    }
-    @media  only screen and (min-width: 0) and (max-width: 600px) {
-        .main_category .right{
-            right: -3%;
-        }
-    }
 </style>
 
 
 <div class="main">
       <div class="main_category">
-          @foreach($occasions as $key => $value)
+          @foreach($occasions as $key => $value)          
             <div class="category">
                <a href="{{url('listSnap/'.$value->id .'/'.UID())}}" class="main_inner">
-                  <img src="{{ url('assets/front/newdesign')}}/img/frame.png">
+                  <img src="{{ url('assets/front/newdesign')}}/img/frame.png"> 
 
                   <!-- <div class="view">
                     <i id="eye" class="fas fa-eye"></i> <span> 20</span>
@@ -67,11 +59,11 @@
 
                   <div class="title_photo">
                      <img class="{{($key%2 == 0)?'left':'right'}}" src="{{  url($value->image) }}">
-                     <p class="{{($key%2 == 0)?'left_text':'right_text'}}">{{$value->title}}</p>
+                     <p class="{{($key%2 == 0)?'left_text':'right_text'}}">{{$value->getTranslation('title',getCode())}}</p>
                   </div>
                </a>
             </div>
-          @endforeach
+          @endforeach         
       </div>
 </div>
 @endif

@@ -36,4 +36,10 @@
 
 <!-- END JAVASCRIPTS -->
 <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript" src="<?php echo e(url('assets/ckeditor/ckeditor.js')); ?>"></script>
+<script type="text/javascript">
+   CKEDITOR.replace( 'ckeditor1' );
+   CKEDITOR.replace( 'ckeditor2' );
+</script>
 <?php /**PATH C:\xampp\htdocs\greeting_backend_v2_php7\resources\views/javascripts.blade.php ENDPATH**/ ?>
