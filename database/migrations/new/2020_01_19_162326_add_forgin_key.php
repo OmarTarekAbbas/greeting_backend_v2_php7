@@ -17,10 +17,10 @@ class AddForginKey extends Migration
         \DB::statement('ALTER TABLE categories ENGINE=INNODB;');
         Schema::table('occasions', function (Blueprint $table) {
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('CASCADE')->onDelete('CASCADE');
-            // $table->foreign('parent_id')->references('id')->on('occasions')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign('parent_id')->references('id')->on('occasions')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
         Schema::table('greetingimgs', function (Blueprint $table) {
-            //$table->foreign('occasion_id')->references('id')->on('occasions')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign('occasion_id')->references('id')->on('occasions')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
