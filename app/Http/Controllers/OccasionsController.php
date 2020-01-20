@@ -134,6 +134,7 @@ class OccasionsController extends Controller
         {
             $Occasion->setTranslation('title', $key, $value);
         }
+        //dd($Occasion);
         $Occasion->save();
        // Occasion::create($Items);
         return redirect(url('admin/occasions'));

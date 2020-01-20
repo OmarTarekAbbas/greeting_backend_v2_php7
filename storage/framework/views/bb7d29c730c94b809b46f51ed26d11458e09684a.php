@@ -13,7 +13,7 @@
     <?php $__currentLoopData = $Occasions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Occasion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <tr>
             <td><?php echo e($Occasion->id); ?></td>
-            <td><?php echo e($Occasion->title); ?></td>
+            <td><?php echo e($Occasion->getTranslation('title','ar')); ?></td>
             <td><?php echo e($Occasion->category->title); ?></td>
             <td><?php if($Occasion->slider): ?> YES <?php else: ?> NO <?php endif; ?></td>
             <td>
