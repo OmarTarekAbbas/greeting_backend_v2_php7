@@ -264,4 +264,12 @@ class GreetingimgsController extends Controller
         return redirect()->back();
     }
 
+    public function popular_count_increment(){
+
+            $num = rand (1000, 1500);
+
+            $GreetingImg = GreetingImg::where('popular_count', 0)->update(['popular_count' => $num]);
+
+    }
+
 }

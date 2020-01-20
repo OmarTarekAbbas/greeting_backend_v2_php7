@@ -33,4 +33,5 @@
 
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\greeting_backend_v2_php7\resources\views/admin/occasions/add.blade.php ENDPATH**/ ?>

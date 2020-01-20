@@ -9,6 +9,7 @@ use App\Operator;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Language;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 
@@ -32,6 +33,7 @@ class OccasionsController extends Controller
          $Occasions = Occasion::latest('created_at');
            $Occasions = $Occasions->where('title','like','%'.$request->search_value.'%');
        }
+
        $Occasions = $Occasions->paginate(10);
        if ($request->ajax()) {
            return view('admin.occasions.result',compact('Occasions'));
@@ -49,9 +51,10 @@ class OccasionsController extends Controller
         //
         $Occasion = null;
         $occasion_parent = Occasion::pluck('title', 'id');
+        $languages = Language::all();
         //$occasion_parent->prepend('Please Select Parent','Null');
         $Categories = Category::pluck('title', 'id');
-        return view('admin.occasions.add', compact('Categories', 'Occasion', 'occasion_parent'));
+        return view('admin.occasions.add', compact('Categories', 'Occasion','languages' ,'occasion_parent'));
     }
 
 
@@ -68,8 +71,8 @@ class OccasionsController extends Controller
         foreach ($Ops as $Op) {
             $Operators[$Op->id] = $Op->country->name . ' - ' . $Op->name;
         }
-
-        return view('admin.occasions.addToOperator', compact('Occasions', 'Operators'));
+        $languages = Language::all();
+        return view('admin.occasions.addToOperator', compact('Occasions', 'Operators','languages'));
     }
 
     public function operatorAddSnapFromCategoySave(Request $request)
@@ -106,12 +109,17 @@ class OccasionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $this->validate($request, [
-            'title' => 'required|max:60',
-            'category_id' => 'required'
-        ]);
-        $Items = $request->all();
+        $languages = Language::all();
+        $rules= array() ;
+        foreach($languages as $lang){
+            $rules["title.$lang->short_code"] = "required" ;
+        }
+        $rules['category_id']= "required";
+
+        $this->validate($request,$rules);
+
+        $Occasion = new Occasion();
+        $Items = $request->except('title');
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $uniqueID = time();
@@ -121,7 +129,14 @@ class OccasionsController extends Controller
         }
         $Items['occasion_RDate'] = ($request->occasion_RDate) ? $request->occasion_RDate : Carbon::now()->format('Y-m-d');
         $Items['occasion_EXDate'] = ($request->occasion_EXDate) ? $request->occasion_EXDate : Carbon::createFromFormat('Y-m-d', $Items['occasion_RDate'])->addMonth()->format('Y-m-d');
-        Occasion::create($Items);
+        $Occasion->fill($Items);
+        foreach ($request->title as $key => $value)
+        {
+            $Occasion->setTranslation('title', $key, $value);
+        }
+        //dd($Occasion);
+        $Occasion->save();
+       // Occasion::create($Items);
         return redirect(url('admin/occasions'));
     }
 
@@ -150,9 +165,10 @@ class OccasionsController extends Controller
         //
         $Categories = Category::pluck('title', 'id');
         $Occasion = Occasion::find($id);
-        $occasion_parent = Occasion::pluck('title', 'id');
+        $occasion_parent = Occasion::where('id', '!=', $Occasion->id)->pluck('title', 'id');
+        $languages = Language::all();
         //$occasion_parent->prepend('Please Select Parent','Null');
-        return view('admin.occasions.edit', compact('Categories', 'Occasion', 'occasion_parent'));
+        return view('admin.occasions.edit', compact('Categories', 'Occasion', 'occasion_parent','languages'));
     }
 
     /**
@@ -164,14 +180,17 @@ class OccasionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $this->validate($request, [
-            'title' => 'required|max:60',
-            'category_id' => 'required'
-        ]);
+        $languages = Language::all();
+        $rules= array() ;
+        foreach($languages as $lang){
+            $rules["title.$lang->short_code"] = "required" ;
+        }
+        $rules['category_id']= "required";
+        $this->validate($request,$rules);
+
         if ($request->input('occasion_RDate') < $request->input('occasion_EXDate')) {
             $Occasion = Occasion::find($id);
-            $Items = $request->all();
+            $Items = $request->except('title');
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $uniqueID = time();
@@ -179,6 +198,11 @@ class OccasionsController extends Controller
                 $file->move(public_path($path), $uniqueID . "." . $file->getClientOriginalExtension());
                 File::delete(public_path($Occasion->image));
                 $Items['image'] = $path . $uniqueID . "." . $file->getClientOriginalExtension();
+            }
+            $Occasion->fill($Items);
+            foreach ($request->title as $key => $value)
+            {
+                $Occasion->setTranslation('title', $key, $value);
             }
             $Occasion->update($Items);
             $snap = Greetingimg::where('snap',1) ->where('occasion_id',$id)->get();

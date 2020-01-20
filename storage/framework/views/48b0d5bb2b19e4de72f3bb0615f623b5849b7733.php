@@ -30,6 +30,7 @@
                         </tr>
                         </thead>
                         <tbody>
+
                         <?php $__currentLoopData = $Operators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Operator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td><?php echo e($Operator->id); ?></td>

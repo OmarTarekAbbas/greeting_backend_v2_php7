@@ -79,19 +79,29 @@ You can add and delete Generated URLs
                             </td>
                             <td>
                                 @if($snap> 0)
-                                    <span class="text text-info">link 1 : </span><input class="" value='{{url("snap/$URL->UID")}}'/>
-                                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                                    <br/>
-                                    <span class="text text-info">link 2 : </span>  <input class="" value='{{url("cuurentSnap/$URL->UID")}}'/>
-                                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                                    <br/>
+                                <span class="text text-info">link 1 : </span><input class="" value='{{url("snap/$URL->UID")}}'/>
+                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                <div style="display:none">{{url("snap/$URL->UID")}}</div>
+                                <br/>
+                                <span class="text text-info">link 2 : </span>  <input class="" value='{{url("cuurentSnap/$URL->UID")}}'/>
+                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                <div style="display:none">{{url("cuurentSnap/$URL->UID")}}</div>
+                                <br/>
 
-                                    <span class="text text-info">link 3 : </span>  <input class="" value='{{url("cuurentSnap_v2/$URL->UID")}}'/>
+                                <span class="text text-info">link 3 : </span>  <input class="" value='{{url("cuurentSnap_v2/$URL->UID")}}'/>
+                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                <div style="display:none">{{url("cuurentSnap_v2/$URL->UID")}}</div>
+                                <br/>
 
-                                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-
-                                @else
-                                    <a  target="_blank" href="{{url($URL->UID)}}">{{url($URL->UID)}}</a>
+                                <span class="text text-info">link 4 : </span>  <input class="" value='{{url("newdesignv4/$URL->UID")}}'/>
+                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                <div style="display:none">{{url("newdesignv4/$URL->UID")}}</div>
+                                <br/>
+                                <span class="text text-info">rotana: </span>  <input class="" value='{{url("rotana/$URL->UID")}}'/>
+                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                <div style="display:none">{{url("rotana/$URL->UID")}}</div>
+                            @else
+                                <a  target="_blank" href="{{url($URL->UID)}}">{{url($URL->UID)}}</a>
                             @endif
                             <td>
                                 {!! Form::open(array('class' => 'form-inline col-lg-1','method' => 'GET', 'action' => array('GenerateurlController@edit', $URL->id))) !!}
@@ -106,18 +116,12 @@ You can add and delete Generated URLs
                                 {!! Form::close() !!}
                             </td>
                             <td>
-                                @if($URL->video == true)
-                                @if($URL->operator->greetingaudios()->publishedocc($URL->occasion->id)->count() == 0)
-                                <p class="text-danger">Expired Audio Contents</p>
-
-                                @elseif($URL->operator->greetingimgs()->publishedocc($URL->occasion->id)->count() == 0)
-                                <p class="text-danger">Expired Images Contents</p>
-                                @endif
-
-                                @elseif($URL->img == true)
+                                @if($URL->img == true)
+                                @if($URL->occasion)
                                     @if($URL->operator->greetingimgs()->publisheSnapdocc($URL->occasion->id)->count() == 0)
                                         <p class="text-danger">Expired Images Contents</p>
                                     @endif
+                                @endif
                                 @endif
                             </td>
                         </tr>

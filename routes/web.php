@@ -2,15 +2,16 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Application Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
 |
 */
 
+Route::get('popularCountInc', 'GreetingimgsController@popular_count_increment');
 
 Auth::routes();
 
@@ -47,7 +48,7 @@ Route::get('/', function () {
 });
 Route::get('landing', 'HomeController@he_redirect');
 Route::get('ooredoo_login', 'HomeController@login'); // login page without any detection
-//Route::get('login', 'HomeController@login');
+Route::get('login', 'HomeController@login');
 Route::get('he_redirect', 'HomeController@he_redirect');  // this redirect to "ooredoo_he"
 Route::get('ooredoo_he', 'HomeController@ooredoo_he');
 Route::get('notification', 'HomeController@notification');  // notification for all subscribe
@@ -97,6 +98,7 @@ Route::get('/viva_profile/{uid}', 'HomeController@viva_profile');
 
 // Zain KSA
 Route::get('landing_zain_ksa','FrontEndController@landing_zain_ksa');
+
 // Route::post('/subscribeZainKsaConfirm', 'FrontEndController@subscribeZainKsaConfirm');
 Route::post('/ZainKsaPinCodeSend', 'FrontEndController@ZainKsaPinCodeSend');
 Route::post('/zain_ksa_pincode_confirm', 'FrontEndController@zain_ksa_pincode_confirm');
@@ -104,14 +106,17 @@ define('zain_ksa_prefix','966');
 Route::get('zain_ksa_unsub','FrontEndController@zain_ksa_unsub');
 Route::post('zain_ksa_unsub_action','FrontEndController@zain_ksa_unsub_action');
 Route::get('zain_ksa_test','FrontEndController@zain_ksa_test');
+Route::get('logout_zain_ksa/{uid}', 'FrontEndController@logout_zain_ksa');
 
-
+//all kuwait
+Route::get('landing_kuwait','FrontEndController@landing_kuwait');
 
 // Mobily saudi subscribe
 Route::get('landing_ksa','FrontEndController@landing_ksa');
 Route::get('landing_mobily_ksa','FrontEndController@landing_mobily_ksa');
 Route::post('/MobilyKsaPinCodeSend', 'FrontEndController@MobilyKsaPinCodeSend');
 Route::post('/mobily_ksa_pincode_confirm', 'FrontEndController@mobily_ksa_pincode_confirm');
+Route::get('logout_mobily_ksa/{uid}', 'FrontEndController@logout_mobily_ksa');
 define('MOBILY_OP_ID',14);
 
 
@@ -210,14 +215,17 @@ Route::resource('admin/cproviders','CprovidersController');
 Route::resource('admin/generateurls','GenerateurlController');
 Route::resource('admin/user','UsersController');
 Route::resource('admin/settings','SettingsController');
+Route::resource('admin/static_translation','StaticTranslationController');
+Route::resource('admin/language','LanguageController');
+Route::get('admin/lang/{lang}','LanguageController@switchLang');
 
 /* ------------ viva routes backend ---------------- */
-Route::get('landing_viva_new', 'HomeController@viva_login');
+Route::get('landing_stc', 'HomeController@viva_login');
 Route::post('viva_login_action', 'HomeController@viva_login_action');
 Route::get('viva_notification', 'HomeController@viva_notification');
-Route::get('landing_viva_1', 'HomeController@subscribeViva_1');
+Route::get('landing_stc_1', 'HomeController@subscribeViva_1');
 Route::get('logout_viva/{uid}', 'HomeController@logout');
-define('SNAP_VIVA_URL','https://filters.digizone.com.kw/landing_viva_new');
+define('SNAP_VIVA_URL','https://filters.digizone.com.kw/landing_stc');
 define('SNAP_VIVA_CHANNEL_ID',4493);
 define('viva_kuwait_operator_id',13);
 
@@ -228,6 +236,9 @@ Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild');
 
 /* Du Landing */
 Route::get('du_landing', 'FrontEndController@du_landing');
+Route::get('DuSecureRedirect', 'HomeController@DuSecureRedirect');
+
+
 Route::get('du_pinCode', 'FrontEndController@du_pinCode');
 Route::get('du_unsub', 'FrontEndController@du_unsub');
 
@@ -314,6 +325,41 @@ Route::post('unsusbcribe_zain_ksa','FrontEndController@unsusbcribe_zain_ksa');
 //Route::get('{etislate}/{UID}','FrontEndController@getMediaTypeEtislate');
  // Route::get('admin/rand_view','FrontEndController@random_view');
 
+ ///////////////////////////////////////
+ ////////////*new design v4*///////////////
+ ///////////////////////////////////////
+
+ Route::get('newdesignv4/{UID}','FrontEndController@newdesignv4');
+ Route::get('favourites/{UID}','FrontEndController@favouritesv4');
+ Route::get('newdesignv4/occasion/{UID}', 'FrontEndController@occasions_v4');
+ Route::get('newdesignv4/suboccasion/{OID}/{UID}', 'FrontEndController@suboccasions_v4');
+ Route::get('newdesignv4/filter/{OID}/{UID}', 'FrontEndController@filter_v4');
+ Route::get('Search_v4/{UID}','FrontEndController@Search_v4');
+
+
+
+ ///////////////////////////////////////
+ ////////////*new design v4*///////////////
+ ///////////////////////////////////////
+
+ ///////////////////////////////////////
+ ////////////*rotana*///////////////
+ ///////////////////////////////////////
+
+ Route::get('rotana/{UID}','FrontEndController@rotana');
+ Route::get('favourites_v5/{UID}','FrontEndController@favouritesv5');
+ Route::get('rotana/occasion/{UID}', 'FrontEndController@occasions_v5');
+ Route::get('rotana/suboccasion/{OID}/{UID}', 'FrontEndController@suboccasions_v5');
+Route::get('rotana/suboccasiontesty/{OID}/{UID}', 'FrontEndController@suboccasions_v6');
+ Route::get('rotana/filter/{OID}/{UID}', 'FrontEndController@filter_v5');
+ Route::get('Search_v5/{UID}','FrontEndController@Search_v5');
+
+
+ ///////////////////////////////////////
+ ////////////*rotana*///////////////
+ ///////////////////////////////////////
+
+
 
 Route::get('oocasion', function () {
     return view('front.new_snap_v2.oocasion');
@@ -367,3 +413,17 @@ Route::get('admin/get_table_ids',function(Illuminate\Http\Request $request){
     }
     return $table_name;
 });
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

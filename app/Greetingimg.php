@@ -4,13 +4,20 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Translatable;
 
 class Greetingimg extends Model {
 
     //
+    use Translatable;
     protected $table = 'greetingimgs';
 
-    protected $fillable = ['title', 'path', 'occasion_id', 'RDate', 'EXDate', 'featured', 'snap', 'snap_link'];
+    protected $fillable = ['title', 'path', 'vid_path', 'vid_type', 'occasion_id', 'RDate', 'EXDate', 'featured', 'popular_count', 'snap', 'snap_link'];
+
+    protected static function boot(){
+        parent::boot();
+
+    }
 
     public function occasion() {
         return $this->belongsTo('App\Occasion');
@@ -25,7 +32,7 @@ class Greetingimg extends Model {
     }
 
     public function getOperatorListAttribute() {
-        return $this->operators->pluck('id')->all();
+        return $this->operators->lists('id')->all();
     }
 
     public function processedimgs() {
@@ -45,11 +52,15 @@ class Greetingimg extends Model {
     }
 
     public function scopeOccasionslist($query) {
-        $query->where('RDate', '<=', Carbon::now()->format('Y-m-d'))->where('EXDate', '>=', Carbon::now()->format('Y-m-d'))->occasion()->unique()->pluck('title', 'id');
+        $query->where('RDate', '<=', Carbon::now()->format('Y-m-d'))->where('EXDate', '>=', Carbon::now()->format('Y-m-d'))->occasion()->unique()->lists('title', 'id');
     }
 
     public function scopePublishedSnap($query) {
         $query->where('snap', 1)->where('RDate', '<=', Carbon::now()->format('Y-m-d'))->where('EXDate', '>=', Carbon::now()->format('Y-m-d'));
+    }
+
+    public function scopePublishedSnapComming($query) {
+        $query->where('snap', 1)->where('EXDate', '>=', Carbon::now()->format('Y-m-d'));
     }
 
     public function scopeSlider($query) {

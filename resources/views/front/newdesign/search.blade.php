@@ -37,6 +37,7 @@
                 right: 1%;
                 color: #111;
                 font-weight: 800;
+                height: 40%;
             }
 
             .title_photo_inner img {
@@ -61,7 +62,7 @@
                         <!-- <div class="col-xs-2"><button class="copy_btn"><i class="fas fa-copy fa-lg"></i></button><input type="text" value="{{url(url('viewSnap2/'.$img->id.'/'.UID()))}}" /> </div> -->
                             <div class="col-xs-12 Rdata">
                                 <div class="inner_category">
-                                    <a href="#" data-type="<?= $img->rbt_id ? 1 : 0 ?>" data-link="{{$img->snap_link}}"
+                                    <a href="#" data-type="<?= isset($img->rbt_id) ? 1 : 0 ?>" data-link="{{$img->snap_link}}"
                                        data-img_src="{{ url($img->path)}}" data-toggle="modal" data-target="#myModal"
                                        class="main_inner snap_info">
                                         <img src="{{ url('assets/front/newdesign')}}/img/frame.png">
@@ -75,11 +76,11 @@
                                             <img src="{{ url($img->path)}}">
 
                                             <a href="{{url('viewSnap2/'.$img->id.'/'.UID())}}">
-                                                <p style="color:#000 !important;">{{$img->title}}   </p>
+                                                <p style="color:#000 !important;">{{$img->getTranslation('title',getCode())}}   </p>
                                             </a>
 
                                         </div>
-                                        @if($img->rbt_id)
+                                        @if(isset($img->rbt_id))
                                             <a class="icon" href="sms:{{$rbt_sms}}<?php echo $Att; ?>{{$codes[$key]}}"
                                                style="display:none;"></a>
                                         @endif
@@ -111,12 +112,12 @@
 
                         </div>
                         <div class="modal-body snap-modal">
-                            <a class="snap_button" id="link" href="">استخدم العدسة</a>
+                            <a class="snap_button" id="link" href="">{!! static_lang('usefilter')?static_lang('todayfilter') : 'فلتر اليوم'  !!}</a>
 
-                            <a class="snap_button cart" id="cart" href="">اشترى النغمة</a>
+                            <a class="snap_button cart" id="cart" href="">{!! static_lang('buytone')?static_lang('buytone') : 'اشتري النغمة'  !!}</a>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-snap" data-dismiss="modal">الغاء الامر</button>
+                            <button type="button" class="btn btn-snap" data-dismiss="modal">{!! static_lang('close')?static_lang('close') : 'اغلق'  !!}</button>
                         </div>
                     </div>
 

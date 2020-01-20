@@ -90,9 +90,9 @@
                 </div>
             </div>
             
-            <div class="cancel">
+            {{--  <div class="cancel">
                 <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('zain_ksa_unsub')}}">الرابط</a></p>
-            </div>  
+            </div>    --}}
             
             
         </div>

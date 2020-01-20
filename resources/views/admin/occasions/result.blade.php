@@ -13,7 +13,7 @@
     @foreach($Occasions as $Occasion)
         <tr>
             <td>{{ $Occasion->id }}</td>
-            <td>{{ $Occasion->title }}</td>
+            <td>{{ $Occasion->getTranslation('title','ar') }}</td>
             <td>{{ $Occasion->category->title }}</td>
             <td>@if($Occasion->slider) YES @else NO @endif</td>
             <td>
@@ -40,4 +40,4 @@
 
     </tbody>
 </table>
-{{ $Occasions->appends(Request::all())->render() }}
+{!! $Occasions->appends(Request::all())->render() !!}

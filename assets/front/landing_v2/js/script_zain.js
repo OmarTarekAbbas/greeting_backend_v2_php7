@@ -52,25 +52,29 @@ $('#phone').blur(function() {
 
 });
 $('#phone').keyup(function() {
-    var phone = $("#phone").val();
-    if (phone != "" && phone.length == 9) {
-        $("#zain_submit").attr('disabled',false)
-    }
-    else{
-        $("#zain_submit").attr('disabled',true)
-    }
-})
-/*
-$('.back').click(function () {
-    'use strict';
-    $('#video').css('display', 'block');
-    $('.strip').css('margin-top', -10);
-    $('.form_content').css('display', 'none');
-    $('.shbka').css('display', 'block');
-});
-*/
+        var phone = $("#phone").val();
+        if (phone != "" && phone.length == 9) {
+            $("#zain_submit").attr('disabled', false)
+        } else {
+            $("#zain_submit").attr('disabled', true)
+        }
+    })
+    /*
+    $('.back').click(function () {
+        'use strict';
+        $('#video').css('display', 'block');
+        $('.strip').css('margin-top', -10);
+        $('.form_content').css('display', 'none');
+        $('.shbka').css('display', 'block');
+    });
+    */
 
 
 $('#zain_submit').focusin(function() {
-    $('#form_zain').submit()
+    var phone = $("#phone").val();
+    if (phone != "" && phone.length == 9) {
+        $('#form_zain').submit();
+    } else {
+        return false;
+    }
 });

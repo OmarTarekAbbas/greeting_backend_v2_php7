@@ -20,7 +20,7 @@ You can add and delete Snap Images
         <div class="box">
             <div class="box-body table-responsive no-padding">
                 <br/>
-                <table class="table table-hover table-striped datatable ">
+                <table class="table table-hover table-striped datatable">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -53,7 +53,9 @@ You can add and delete Snap Images
         $('.datatable').DataTable({
             "processing": true,
             "serverSide": true,
+            stateSave: true,
             ajax: "<?php echo url('admin/gsnap/allData'); ?>",
+            
             columns: [
                 {data: 'id'},
                 {data: 'image',name:'path', searchable: false},                
@@ -65,12 +67,11 @@ You can add and delete Snap Images
                 {data: 'operators'},
                 {data: 'featured'},
                 {data: 'action', searchable: false}
-
-
             ] , "pageLength": <?php echo e(get_pageLength()); ?>
 
         });
     });
 </script>
 <?php $__env->stopSection(); ?>
+<!-- <?php echo e(get_pageLength()); ?> -->
 <?php echo $__env->make('admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\greeting_backend_v2_php7\resources\views/admin/gsnap/index.blade.php ENDPATH**/ ?>

@@ -111,8 +111,8 @@ $('.owl_two').owlCarousel({
         }
     }
 });
-$(".owl-prev").html('<i class="fas fa-chevron-left"></i>');
-$(".owl-next").html('<i class="fas fa-chevron-right"></i>');
+$(".owl-prev").html('<i class="fas fa-chevron-left fa-2x"></i>');
+$(".owl-next").html('<i class="fas fa-chevron-right fa-2x"></i>');
 //menu
 $(".show-menu").click(function () {
     'use strict';

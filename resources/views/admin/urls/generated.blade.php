@@ -24,6 +24,10 @@
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     <span class="text text-info">link 3 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('cuurentSnap_v2/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                    <span class="text text-info">link 4 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('newdesignv4/'.$UID) }}" />
+                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                    <span class="text text-info">rotana : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('rotana/'.$UID) }}" />
+                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     @else
                     <input type="text" name="generatedurl" class="form-control input-lg" value="{{ url($UID) }}" />
                     @endif

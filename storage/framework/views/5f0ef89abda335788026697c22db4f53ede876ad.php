@@ -22,4 +22,5 @@
 
 <!-- Select 2 Plugin -->
 <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"><?php /**PATH C:\xampp\htdocs\greeting_backend_v2_php7\resources\views/head.blade.php ENDPATH**/ ?>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+<link href="<?php echo e(asset('assets/css/our_style.css')); ?>" rel="stylesheet" /><?php /**PATH C:\xampp\htdocs\greeting_backend_v2_php7\resources\views/head.blade.php ENDPATH**/ ?>

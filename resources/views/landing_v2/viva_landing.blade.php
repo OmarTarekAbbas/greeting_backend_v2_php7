@@ -53,7 +53,7 @@
                             </div>-->
 
                             <div class="col-12">
-                                <img src="{{ url('assets/front/landing_v2')}}/img/viva.png" id="zain">
+                                <img src="{{ url('assets/front/landing_v2')}}/img/kw-stc-logo.png" id="zain">
                             </div>
 
                             <!--<div class="col-12">
@@ -110,7 +110,7 @@
 
         $(document).ready(function(){
           var msisdn =   $("#phone").val() ; 
-            if(msisdn != ""){
+          if(msisdn != "" && msisdn.length == 8 && msisdn!= "@_MSISDN"){
                 $("#viva_form").submit();
             }
         });

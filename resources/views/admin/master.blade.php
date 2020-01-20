@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<title>@yield('title')</title>
     @include('head')
-    <meta name="token" content="{{ csrf_token() }}">
     <style type="text/css" id="holderjs-style"></style>
 </head>
 <body class="fixed-leftside">
@@ -246,17 +245,14 @@
                 </div>
                 --}}
                 <div class="info">
-                    <a href="#">{{ Auth::user()->name }}</a>
+                    <a href="#">{{ \Auth::user()->name }}</a>
                     {{--<ul class="tools list-inline">
                         <li><a href="#" data-toggle="tooltip" title="Settings"><i class="ion-gear-a"></i></a></li>
                         <li><a href="#" data-toggle="tooltip" title="Events"><i class="ion-earth"></i></a></li>
                         <li><a href="#" data-toggle="tooltip" title="Downloads"><i class="ion-archive"></i></a></li>
                     </ul>--}}
                 </div>
-                <a href="{{url('logout')}}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" class="button"><i class="ion-log-out"></i></a>
-                <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
+                <a href="{{ url('logout') }}" class="button"><i class="ion-log-out"></i></a>
             </div>
             <!-- END RPOFILE -->
             <!-- BEGIN NAV -->
@@ -271,7 +267,21 @@
                 </li>
 
 
-                @if(Auth::user()->admin == true)
+                @if(\Auth::user()->admin == true)
+
+                <li class="{{(preg_match('/\badmin\/static_translation/i',Request::url())) ? 'active' : ''}}">
+                    <a href="{{ url('admin/static_translation') }}">
+                        <i class="ion-link"></i> <span>Static Translation</span>
+
+                    </a>
+                </li>
+                <li class="{{(preg_match('/\badmin\/language/i',Request::url())) ? 'active' : ''}}">
+                    <a href="{{ url('admin/language') }}">
+                        <i class="ion-code-working"></i> <span>Language</span>
+
+                    </a>
+                </li>
+
                 <li class="{{(preg_match('/\badmin\/country/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/country') }}">
                         <i class="ion-earth"></i> <span>Countries</span>
@@ -309,28 +319,28 @@
 
                       </li>
 
-                <li class="{{(preg_match('/\badmin\/gimages/i',Request::url())) ? 'active' : ''}}">
+                {{--  <li class="{{(preg_match('/\badmin\/gimages/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/gimages') }}">
                         <i class="ion-images"></i> <span>Greeting Images</span>
                         <span class="label pull-right">{{ \App\Greetingimg::where("snap",0)->count() }}</span>
                     </a>
-                </li>
+                </li>  --}}
                 <li class="{{(preg_match('/\badmin\/gsnap/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/gsnap') }}">
                         <i class="ion-images"></i> <span>Snap Images</span>
-                        <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
+                        <span class="label pull-right"></span>
                     </a>
                 </li>
                 <li class="{{(preg_match('/\badmin\/ordersnap/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/ordersnap') }}">
                         <i class="ion-images"></i> <span>SnapChat Ordering</span>
-                        <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
+                        <span class="label pull-right"></span>
                     </a>
                 </li>
                 <li class="{{(preg_match('/\badmin\/ordersnaplike/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/ordersnaplike') }}">
                         <i class="ion-images"></i> <span>SnapChat Ordering Like</span>
-                        <span class="label pull-right">{{--{{ \App\Greetingimg::where("snap",1)->count() }}--}}</span>
+                        <span class="label pull-right"></span>
                     </a>
                 </li>
                 <li class="{{(preg_match('/\badmin\/ordersnapdislike/i',Request::url())) ? 'active' : ''}}">
@@ -359,7 +369,7 @@
                     </a>
                 </li>
 
-                @if(Auth::user()->admin == true)
+                @if(\Auth::user()->admin == true)
                 <li class="{{(preg_match('/\badmin\/cproviders/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/cproviders') }}">
                         <i class="ion-person-stalker"></i> <span>Content providers</span>
@@ -400,7 +410,7 @@
                     </a>
                 </li>
 
-                @if(Auth::user()->admin == true)
+                @if(\Auth::user()->admin == true)
                     <li class="{{(preg_match('/\badmin\/user/i',Request::url())) ? 'active' : ''}}">
                         <a href="{{ url('admin/user') }}">
                             <i class="ion-person-stalker"></i> <span>Users</span>
@@ -503,18 +513,119 @@
             });
         });
     });
-     $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
-                }
-        });
 		@if(isset($Occasion) && $Occasion->parent_id)
 		$('.parent_select').prepend('<option> select parent occcasion </option>');
 		$('.parent_select option:first').prop('disabled',true);
 		@else
 		$('.parent_select').prepend('<option selected="selected"> select parent occcasion </option>');
 		$('.parent_select option:first').prop('disabled',true);
-		@endif
+        @endif
+    </script>
+   <script>
+    var check = false;
+
+    function select_all(table_name, has_media)
+    {
+        if (!check)
+        {
+            $('.select_all_template').prop("checked", !check);
+            $.get("{{url('admin/get_table_ids?table_name=')}}" + table_name, function (data, status) {
+                data.forEach(function (item) {
+                    collect_selected(item.id);
+                });
+            });
+            check = true;
+        }
+        else
+        {
+            $('.select_all_template').prop("checked", !check);
+            check = false;
+            clear_selected();
+        }
+    }
+
+</script>
+
+<script>
+
+    var selected_list = [];
+    var checker_list = [];
+    function collect_selected(element) {
+        var id;
+        if (!element.value)
+        {
+            id = element;
+        }
+        else {
+            id = element.value;
+        }
+
+        if (checker_list[id])
+        {
+            var index = selected_list.indexOf(id);
+            selected_list.splice(index, 1);
+            checker_list[id] = false;
+        }
+        else {
+            if (!selected_list.includes(id))
+            {
+                selected_list.push(id);
+                checker_list[id] = true;
+            }
+        }
+    }
+
+    function clear_selected()
+    {
+        selected_list = [];
+        checker_list = [];
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        // $('#example').DataTable();
+    });
+
+
+    function delete_selected(table_name) {
+        var confirmation = confirm('Are you sure you want to delete this ?');
+        if (confirmation)
+        {
+            var form = document.createElement("form");
+            var element = document.createElement("input");
+            var tb_name = document.createElement("input");
+            var csrf = document.createElement("input");
+            csrf.name = "_token";
+            csrf.value = "{{ csrf_token() }}";
+            csrf.type = "hidden";
+
+            form.method = "POST";
+            form.action = "{{url('admin/delete_multiselect')}}";
+
+            element.value = selected_list;
+            element.name = "selected_list";
+            element.type = "hidden";
+
+            tb_name.value = table_name;
+            tb_name.name = "table_name";
+            tb_name.type = "hidden";
+
+            form.appendChild(element);
+            form.appendChild(csrf);
+            form.appendChild(tb_name);
+
+            document.body.appendChild(form);
+
+            form.submit();
+        }
+    }
+
+    var initChosenWidgets = function () {
+        $(".chosen").chosen();
+    };
+
 </script>
 </body>
 <!-- END BODY -->

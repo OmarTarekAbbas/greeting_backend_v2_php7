@@ -7,6 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--Mobile Meta-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{url('assets/new_snap_v2/')}}/img/Snapchat-logo.png" type="image/x-icon"> <!-- Favicon-->
+    <meta name="keywords" content="خدمه فلاتر">
+    <meta name="description" content="استمتع بمجموعه من الفلاتر الحصرية">
+    <meta name="title" content="خدمه فلاتر"/> 
+    <meta property="og:title" content="خدمه فلاتر">
+    <meta property="og:description" content="استمتع بمجموعه من الفلاتر الحصرية">
+    <meta property="og:image" content="{{url('assets/new_snap_v2/')}}/img/Snapchat-logo.png">
+    <meta property="og:url" content="https://filters.digizone.com.kw/viewSnap2/1578/4167166">
     <title>New Snap WebApp</title>
     <link rel="stylesheet" href="{{url('assets/new_snap_v2/')}}/css/animate.css">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/front/newdesign')}}/css/all.css">
@@ -57,49 +65,96 @@
     <header>
         <div class="row">
             <div class="col-xs-2">
-                <a href="#" class="back_botton link"><i class="fas fa-chevron-left"></i></a></div>
-            <div class="col-xs-8">
-                <h1 class="title">{{isset($pageTitle)?$pageTitle:''}}</h1>
+                <a href="#" class="back_botton link">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
             </div>
+
+            <div class="col-xs-8" style="padding-right: 0; padding-left: 0;">
+                <h1 class="title">{{isset($pageTitle)?$pageTitle:'فلاتر'}}</h1>
+            </div>
+
             <div class="col-xs-2">
                 <a class="menu link" href="#">
                     <i class="fas fa-bars"></i>
                 </a>
 
-                {{-- <div class="translate_wrapper">
+                <!-- <div class="translate_wrapper">
                     <div class="current_lang">
                         <div class="lang">
+                            @if(App::getLocale() == 'en')
                             <img src="https://image.flaticon.com/icons/svg/299/299722.svg">
                             <span class="lang-txt">EN</span>
+                            @elseif(App::getLocale() == 'ar')
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Flag_of_the_Arab_League.svg">
+                            <span class="lang-txt">Ar</span>
+                            @elseif(App::getLocale() == 'or')
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Flag_of_Pakistan.svg/125px-Flag_of_Pakistan.svg.png">
+                            <span class="lang-txt">Ur</span>
+                            @else
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/1920px-Flag_of_the_Philippines.svg.png">
+                            <span class="lang-txt">Fe</span>
+                            @endif
                             <span class="fa fa-chevron-down chevron"></span>
                         </div>
                     </div>
 
                     <div class="more_lang">
-                        <div class="lang selected" data-value='en'>
-                            <img src="https://image.flaticon.com/icons/svg/299/299722.svg">
-                            <span class="lang-txt">English</span>
+                        <div class="lang {{(App::getLocale() == 'en')?'selected':''}}" data-value='en'>
+                            <a href="{{url('admin/lang/en')}}">
+                                <img src="https://image.flaticon.com/icons/svg/299/299722.svg">
+                                <span class="lang-txt">English</span>
+                            </a>
                         </div>
 
-                        <div class="lang" data-value="ar">
+                        <div class="lang {{(App::getLocale() == 'ar')?'selected':''}}" data-value="ar">
+                            <a href="{{url('admin/lang/ar')}}">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Flag_of_the_Arab_League.svg">
                                 <span class="lang-txt">العربية</span>
-                            </div>
+                            </a>
+                        </div>
+                    </div>
 
-                        <div class="lang" data-value='ur'>
+                </div> -->
+            </div>
+            <aside id="menu">
+                {{-- <div class="translate_wrapper">
+                    <div class="current_lang">
+                        <div class="lang">
+                            @if(App::getLocale() == 'en')
+                            <img src="https://image.flaticon.com/icons/svg/299/299722.svg">
+                            <span class="lang-txt">EN</span>
+                            @elseif(App::getLocale() == 'ar')
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Flag_of_the_Arab_League.svg">
+                            <span class="lang-txt">Ar</span>
+                            @elseif(App::getLocale() == 'or')
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Flag_of_Pakistan.svg/125px-Flag_of_Pakistan.svg.png">
-                            <span class="lang-txt">Urdu</span>
+                            <span class="lang-txt">Ur</span>
+                            @else
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/1920px-Flag_of_the_Philippines.svg.png">
+                            <span class="lang-txt">Fe</span>
+                            @endif
+                            <span class="fa fa-chevron-down chevron"></span>
+                        </div>
+                    </div>
+
+                    <div class="more_lang">
+                        <div class="lang {{(App::getLocale() == 'en')?'selected':''}}" data-value='en'>
+                            <a href="{{url('admin/lang/en')}}">
+                                <img src="https://image.flaticon.com/icons/svg/299/299722.svg">
+                                <span class="lang-txt">English</span>
+                            </a>
                         </div>
 
-                        <div class="lang" data-value='fil'>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/1920px-Flag_of_the_Philippines.svg.png">
-                            <span class="lang-txt">Filipino</span>
+                        <div class="lang {{(App::getLocale() == 'ar')?'selected':''}}" data-value="ar">
+                            <a href="{{url('admin/lang/ar')}}">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Flag_of_the_Arab_League.svg">
+                                <span class="lang-txt">العربية</span>
+                            </a>
                         </div>
                     </div>
 
                 </div> --}}
-            </div>
-            <aside id="menu">
                 <ul class="list-unstyled">
                     @if(Session::has('MSISDN') && Session::get('MSISDN')!="")
                     <div class="profile">
@@ -107,10 +162,11 @@
                         <!--                            <p>  مرحبا   <span> {{Session::get('MSISDN')}}</span></p>-->
                     </div>
                     @endif
+
                     <li>
                         <a href="{{url('home_v2/'.UID())}}">
                             <i class="fas fa-home"></i>
-                            <p>الرئيسية</p>
+                            <p>{!! static_lang('home')?static_lang('home') : 'الرثيسية'  !!}</p>
                         </a>
                     </li>
                     <?php $snap_Occasions = snap_Occasions() ?>
@@ -118,7 +174,7 @@
                     <li>
                         <a href="{{url('listSnap/'.$occasion->id.'/'.UID())}}">
                             <img src="{{  url($occasion->image) }}">
-                            <p>{{$occasion->title}}</p>
+                            <p>{{$occasion->getTranslation('title',getCode())}}</p>
                         </a>
                     </li>
                     @endforeach
@@ -128,11 +184,22 @@
                     <li>
                         <a href="{{url('viva_profile'.'/'.UID())}}">
                             <i class="fas fa-info"></i>
-                            <p>بياناتي</p>
+                            <p>{!! static_lang('info')?static_lang('info') : ''  !!}</p>
                         </a>
                     </li>
                     <li><a href="{{url('logout_viva/'.UID())}}"><i style="font-size: 21px;"
                                 class="fas fa-sign-out-alt"></i> خروج</a></li>
+                    @elseif(  OP() == 16  )
+
+                    <li><a href="{{url('logout_zain_ksa/'.UID())}}"><i style="font-size: 21px;"
+                        class="fas fa-sign-out-alt"></i> خروج</a></li>
+
+
+                        @elseif(  OP() == MOBILY_OP_ID  )
+
+                        <li><a href="{{url('logout_mobily_ksa/'.UID())}}"><i style="font-size: 21px;"
+                            class="fas fa-sign-out-alt"></i> خروج</a></li>
+
                     @endif
                     @endif
 

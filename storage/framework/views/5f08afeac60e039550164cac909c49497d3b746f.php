@@ -18,8 +18,23 @@
 <div class="form-group">
     <?php echo Form::label('title', 'Occasion name', ['class'=>'control-label']); ?>
 
-    <?php echo Form::text('title', null, ['class'=>'form-control','maxlenght'=>60]); ?>
+    <ul id="myTab1" class="nav nav-tabs">
+        <?php $i=0;?>
+        <?php $__currentLoopData = $languages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $language): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <li class="<?php echo e(($i++)? '':'active'); ?>"><a href="#translations<?php echo e($language->short_code); ?>" data-toggle="tab"> <?php echo e($language->title); ?></a></li>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
+      </ul>
+
+      <div class="tab-content">
+        <?php $i=0;?>
+        <?php $__currentLoopData = $languages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $language): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <div class="tab-pane fade in <?php echo e(($i++)? '':'active'); ?>" id="translations<?php echo e($language->short_code); ?>">
+            <?php echo Form::text("title[$language->short_code]", (isset($Occasion)) ? $Occasion->getTranslation('title',$language->short_code):null, ['class'=>'form-control','maxlenght'=>60,'placeholder'=>"$language->title" ]); ?>
+
+          </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      </div>
 </div>
 <div class="form-group">
     <?php echo Form::label('category_id', 'Select Category', ['class'=>'control-label']); ?>

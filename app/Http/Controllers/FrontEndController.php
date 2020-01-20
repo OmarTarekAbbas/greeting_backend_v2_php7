@@ -8,6 +8,7 @@ use App\Generatedurl;
 use App\Greetingimg;
 use App\Occasion;
 use App\Operator;
+use App\Category;
 use App\Processedimg;
 use App\Processedvid;
 use Illuminate\Database\Eloquent\Collection;
@@ -662,7 +663,7 @@ class FrontEndController extends Controller
             $title = $snap->title;
 
             $Occasion = Occasion::where('id', $snap->occasion_id)->first();
-            $pageTitle = $snap->title;
+            $pageTitle = $snap->getTranslation('title',getCode());
 
 
             return view('front.newdesign.list_snap_inner', compact('pageTitle', 'snap', 'rbt_sms', 'code', 'Occasion'));
@@ -674,6 +675,7 @@ class FrontEndController extends Controller
     public function like_dislike(request $request)
     {
         $greetingimg_operator  = \App\GreetingimgOperator::where('operator_id',OP())->where('greetingimg_id',$request->id)->first();
+
         $greetingimg           = \App\Greetingimg::where('id',$request->id)->first();
         if($request->type == 1){
             $greetingimg_operator->like  += 1;
@@ -822,7 +824,8 @@ class FrontEndController extends Controller
                         // call Headway api to notify that msisdn is subscribe successfully
                         // https://lead.mobra.in/18020607a4a0700ab706ec07?token=7c97db9
                         $HeadWay_URL = "https://lead.mobra.in/" . $transaction_id . "?token=7c97db9";
-                        $HeadWay_result = file_get_contents($HeadWay_URL);
+                       //  $HeadWay_result = file_get_contents($HeadWay_URL);
+                        $HeadWay_result =  $this->GetPageData($HeadWay_URL) ;
 
                         if ($HeadWay_result != "Click already converted") {
                             $AdvertisingUrl = new AdvertisingUrl();
@@ -851,7 +854,8 @@ class FrontEndController extends Controller
                     } elseif ($ad_company == "intech") {  // intech integration
                         // call intech  api to notify that msisdn is subscribe successfully
                         $ADV_URL = "http://ict.intech-mena.com/Universal/v2.0/API/Postback?msisdn=" . $msisdn . "&operaterName=$operator_name&operatorId=$operator_id&" . $AdvertisingUrlOld->adv_url;
-                        $adv_result = file_get_contents($ADV_URL);
+                      //  $adv_result = file_get_contents($ADV_URL);
+                        $adv_result = $this->GetPageData($ADV_URL) ;
                         $adv_result = (array)json_decode($adv_result);
 
 
@@ -991,12 +995,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::put('adv_params', $_SERVER['QUERY_STRING']);
+        Session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::put('transaction_id', $transaction_id);
+            Session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1004,7 +1008,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::put('publisherId_macro', $publisherId_macro);
+            Session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1073,12 +1077,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::put('adv_params', $_SERVER['QUERY_STRING']);
+        Session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::put('transaction_id', $transaction_id);
+            Session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1086,7 +1090,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::put('publisherId_macro', $publisherId_macro);
+            Session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1167,12 +1171,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::put('adv_params', $_SERVER['QUERY_STRING']);
+        Session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::put('transaction_id', $transaction_id);
+            Session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1180,7 +1184,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::put('publisherId_macro', $publisherId_macro);
+            Session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1307,6 +1311,7 @@ class FrontEndController extends Controller
 
         $occasion_id = $ID;
         $codes = [];
+        // dd($url);
         $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion_id)->orderBy('RDate', 'desc')->limit(get_settings('pagination_limit'))->get();
 
         // if ($Rdata->isEmpty()) {
@@ -1320,15 +1325,30 @@ class FrontEndController extends Controller
         }
         $rbt_sms = $url->operator->rbt_sms;
         $Occasion = Occasion::where('id', $occasion_id)->first();
-        $pageTitle = $Occasion->title;
+        // dd($occasion_id);
+        $pageTitle = $Occasion->getTranslation('title',getCode());
         $child_occasions =[];
         $childs = Occasion::where('parent_id',$occasion_id)->get(); // occasion_id parent_id
+
+
+
         foreach($childs as $value){
-            $check = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $value->id)->first();
-            if($check){
-                $child_occasions[] = $value;
+
+            $depend = Occasion::where('parent_id', $value->id)->first();
+            // dd($depend);
+            if(!empty($depend)){ //check if there is a child for a parent occassion
+                // $check = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $value->id)->first();
+                // if($check){
+                    $child_occasions[] = $value;
+                // }
+            }else{ // cheack if leafe occassion
+                $check = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $value->id)->first();
+                if(!empty($check)){
+                    $child_occasions[] = $value;
+                }
             }
         }
+        // dd($child_occasions);
         return view('front.newdesign.list_snap', compact('pageTitle', 'Rdata','child_occasions' ,'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
     }
 
@@ -1336,7 +1356,33 @@ class FrontEndController extends Controller
     {
         $current_url = \Request::fullUrl();
         if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+
             $url = Generatedurl::where('UID', $UID)->first();
+
+
+            if(OP() ==  16  || OP() ==  MOBILY_OP_ID){
+
+                    if(OP() ==  16  &&  Session::has('currentOp')  && Session::get('currentOp') == 16  ){  //  ZAIN NKSA
+
+                    }else{
+                        return redirect(url(redirect_operator()));
+                    }
+
+                    if(OP() ==  MOBILY_OP_ID   &&  Session::has('currentOp')  && Session::get('currentOp') == MOBILY_OP_ID   ){  // Mobily ksa
+
+                    } else{
+                        return redirect(url(redirect_operator()));
+                    }
+
+
+
+            }
+
+
+
+
+
+
 
             // if (is_null($url))
             //     return view('front.error');
@@ -1345,24 +1391,26 @@ class FrontEndController extends Controller
             $codes = [];
             $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion_id)->orderBy('RDate', 'desc')->limit(get_settings('pagination_limit'))->get();
             // if ($Rdata->isEmpty()) {
-            //     return view('front.newdesign.snap', compact('Rdata'));
-            // }
-            //return $Rdata;
-            foreach ($Rdata as $key => $value) {
-                $operator_id = $value->pivot->operator_id;
-                $greetingimg_id = $value->pivot->greetingimg_id;
-                $gop = GreetingimgOperator::where('greetingimg_id', $greetingimg_id)->where('operator_id', $url->operator_id)->first();
+                //     return view('front.newdesign.snap', compact('Rdata'));
+                // }
+                //return $Rdata;
+                foreach ($Rdata as $key => $value) {
+                    $operator_id = $value->pivot->operator_id;
+                    $greetingimg_id = $value->pivot->greetingimg_id;
+                    $gop = GreetingimgOperator::where('greetingimg_id', $greetingimg_id)->where('operator_id', $url->operator_id)->first();
 
-                $gop->popular_count = $gop->popular_count + 1;
-                $gop->save();
+                    // dd($gop->popular_count);
+                    $gop->popular_count = $gop->popular_count + 1;
+                    $gop->save();
                 if ($value->rbt_id != null) {
                     $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
                     $codes[$key] = $rbtCode ? $rbtCode->code : null;
                 }
             }
             $rbt_sms = $url->operator->rbt_sms;
+            // dd($occasion_id);
             $Occasion = Occasion::where('id', $occasion_id)->first();
-            $pageTitle = $Occasion->title;
+            $pageTitle = $Occasion->getTranslation('title',getCode());
             $child_occasions =[];
             $childs = Occasion::where('parent_id',$occasion_id)->get(); // occasion_id parent_id
             foreach($childs as $value){
@@ -1371,6 +1419,8 @@ class FrontEndController extends Controller
                     $child_occasions[] = $value;
                 }
             }
+
+            // dd('here');
             return view('front.newdesign.list_snap', compact('pageTitle','child_occasions', 'Rdata', 'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
         } else {
             return redirect(url(redirect_operator()));
@@ -1379,6 +1429,7 @@ class FrontEndController extends Controller
 
     public function loadMoreSnapNew(Request $request)
     {
+        // dd('here');
 
         $url = Generatedurl::where('UID', $request->UID)->first();
         $codes = [];
@@ -1421,12 +1472,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::put('adv_params', $_SERVER['QUERY_STRING']);
+        Session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::put('transaction_id', $transaction_id);
+            Session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1434,7 +1485,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::put('publisherId_macro', $publisherId_macro);
+            Session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1510,12 +1561,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::put('adv_params', $_SERVER['QUERY_STRING']);
+        Session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::put('transaction_id', $transaction_id);
+            Session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1523,7 +1574,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::put('publisherId_macro', $publisherId_macro);
+            Session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1677,12 +1728,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::put('adv_params', $_SERVER['QUERY_STRING']);
+        Session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::put('transaction_id', $transaction_id);
+            Session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1690,7 +1741,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::put('publisherId_macro', $publisherId_macro);
+            Session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1760,12 +1811,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::put('adv_params', $_SERVER['QUERY_STRING']);
+        Session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::put('transaction_id', $transaction_id);
+            Session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1773,7 +1824,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::put('publisherId_macro', $publisherId_macro);
+            Session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1844,12 +1895,12 @@ class FrontEndController extends Controller
 
 
         // setting all sessions
-        session::put('adv_params', $_SERVER['QUERY_STRING']);
+        Session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::put('transaction_id', $transaction_id);
+            Session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1857,7 +1908,7 @@ class FrontEndController extends Controller
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::put('publisherId_macro', $publisherId_macro);
+            Session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -1943,12 +1994,12 @@ public function zain_ksa_test(Request $request){
 
 
         // setting all sessions
-        session::put('adv_params', $_SERVER['QUERY_STRING']);
+        Session::put('adv_params', $_SERVER['QUERY_STRING']);
 
         // make check on transaction_id ( clickid_macro ) for headwar ads company
         if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
             $transaction_id = $_REQUEST['transaction_id'];
-            session::put('transaction_id', $transaction_id);
+            Session::put('transaction_id', $transaction_id);
         } else {
             $transaction_id = "";
         }
@@ -1956,7 +2007,7 @@ public function zain_ksa_test(Request $request){
 
         if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
             $publisherId_macro = $_REQUEST['publisherId_macro'];
-            session::put('publisherId_macro', $publisherId_macro);
+            Session::put('publisherId_macro', $publisherId_macro);
         } else {
             $publisherId_macro = "";
         }
@@ -2027,7 +2078,9 @@ public function zain_ksa_test(Request $request){
         //     $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/getSubscriberStatus?msisdn=$msisdn_wcc&servId=665";  // mobily
         $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/getSubscriberStatus?msisdn=$msisdn_wcc&servId=656";  // zain saudi
 
-        $result = preg_replace('/\s+/', '', file_get_contents($URL));
+
+      //  $result = preg_replace('/\s+/', '', file_get_contents($URL));
+        $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
         // make log
         $company = $this->detectCompnay();
@@ -2052,7 +2105,7 @@ public function zain_ksa_test(Request $request){
             if ($Msisdn && $Msisdn->final_status == 1) {
                 //  session()->flash('failed', 'انت مشترك بالفعل');
                 // return back();
-                session(['MSISDN' => $msisdn, 'Status' => 'active']);
+                session(['MSISDN' => $msisdn, 'Status' => 'active' ,'currentOp'=>16]);
                 if (isset($request->prev_url) && $request->prev_url != "") {
                     return redirect($request->prev_url);
                 } else {
@@ -2115,7 +2168,8 @@ public function zain_ksa_test(Request $request){
         //  Zain KSA send Pincode
         //   $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=$msisdn_wcc&serv=f";  // mobily
         $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/ZainKSAAPI?msisdn=$msisdn_wcc&serv=f";
-        $result = preg_replace('/\s+/', '', file_get_contents($URL));
+      //  $result = preg_replace('/\s+/', '', file_get_contents($URL));
+        $result= preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
         // make log
         $company = $this->detectCompnay();
@@ -2140,6 +2194,23 @@ public function zain_ksa_test(Request $request){
     }
 
 
+    public static function GetPageData($URL)
+    {
+
+        $ch = curl_init();
+        $timeout = 500;
+        curl_setopt($ch, CURLOPT_URL, $URL);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    }
+
+
     public function MobilyKsaPinCodeSend(request $request)
     {
         date_default_timezone_set("Africa/Cairo");
@@ -2153,7 +2224,8 @@ public function zain_ksa_test(Request $request){
         $company = $this->detectCompnay();
         // check status on Arpu
         $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/getSubscriberStatus?msisdn=$msisdn_wcc&servId=665";  // mobily
-        $result = preg_replace('/\s+/', '', file_get_contents($URL));
+      //  $result = preg_replace('/\s+/', '', file_get_contents($URL));
+        $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
         // make log
         $company = $this->detectCompnay();
@@ -2178,7 +2250,7 @@ public function zain_ksa_test(Request $request){
             if ($Msisdn && $Msisdn->final_status == 1) {
                 //  session()->flash('failed', 'انت مشترك بالفعل');
                 // return back();
-                session(['MSISDN' => $msisdn, 'Status' => 'active']);
+                session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>MOBILY_OP_ID]);
                 if (isset($request->prev_url) && $request->prev_url != "") {
                     return redirect($request->prev_url);
                 } else {
@@ -2236,7 +2308,8 @@ public function zain_ksa_test(Request $request){
 
         //  Mobily KSA send Pincode
         $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=$msisdn_wcc&serv=f";
-        $result = preg_replace('/\s+/', '', file_get_contents($URL));
+     //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
+        $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
         // make log
         $company = $this->detectCompnay();
@@ -2276,40 +2349,14 @@ public function zain_ksa_test(Request $request){
 
 
         $Msisdn = Msisdn::where('msisdn', '=', $msisdn_wcc)->where('operator_id', '=', 16)->orderBy('id', 'DESC')->first();
-        if ($Msisdn) {
-            // if ($Msisdn->final_status == 1) {
-            //     session(['MSISDN' => $msisdn, 'Status' => 'active']);
-            //     $Url = Generatedurl::where('operator_id', 16)->latest()->first();
 
-            //                 $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator','greetingimg_operator.greetingimg_id','=','greetingimgs.id')
-            //                 ->where('greetingimg_operator.operator_id','=',16)->where('greetingimgs.snap',1)->where('greetingimgs.Rdate','<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate','desc')->first();
-
-            //         if($snap){
-            //             $url = Generatedurl::where('operator_id',16)->orderBy('created_at','desc')->first();
-            //             return redirect(url('viewSnap2/'.$snap->id.'/'.$url->UID));
-            //         }else{
-
-            //             return redirect(url('cuurentSnap/'.$Url->UID));
-            //         }
-
-                $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
-                    ->where('greetingimg_operator.operator_id', '=', 16)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
-
-                if ($snap) {
-                    $url = Generatedurl::where('operator_id', 16)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
-                } else {
-
-            // }
-
-
-            }
-
+        if($Msisdn){
 
             //  Zain KSA verify pincode
             //    $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=$msisdn_wcc&serv=f&pincode=$pincode";  // mobily
             $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/ZainKSAAPI?msisdn=$msisdn_wcc&serv=f&pincode=$pincode";
-            $result = preg_replace('/\s+/', '', file_get_contents($URL));
+         //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
+            $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
             // make log
             $company = $this->detectCompnay();
@@ -2353,7 +2400,7 @@ public function zain_ksa_test(Request $request){
                 if ($company == "intech") {  // intech integration
                     // call intech  api to notify that msisdn is subscribe successfully
                     $ADV_URL = "http://ict.intech-mena.com/Universal/v2.0/API/Postback?msisdn=" . $msisdn_wcc . "&operaterName=zain_ksa&operatorId=16&" . session::get('adv_params');
-                    $adv_result = file_get_contents($ADV_URL);
+                    $adv_result = $this->GetPageData($ADV_URL);
                     $adv_result = (array)json_decode($adv_result);
 
                     // make log
@@ -2399,7 +2446,7 @@ public function zain_ksa_test(Request $request){
                 //  $request->session()->flash('success', 'تم الاشتراك بنجاح');
                 //return view('landing_v2.zain_ksa', compact('MSISDN'));
 
-                session(['MSISDN' => $msisdn, 'Status' => 'active']);
+                session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>16]);
                 $Url = Generatedurl::where('operator_id', 16)->latest()->first();
 
                 $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -2415,7 +2462,7 @@ public function zain_ksa_test(Request $request){
 
 
             } elseif ($result == "Theproducthasbeensubscribed.") {  // alreday subscribe
-                session(['MSISDN' => $msisdn, 'Status' => 'active']);
+                session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>16]);
                 $Url = Generatedurl::where('operator_id', 16)->latest()->first();
 
                 $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -2456,38 +2503,11 @@ public function zain_ksa_test(Request $request){
 
         $Msisdn = Msisdn::where('msisdn', '=', $msisdn_wcc)->where('operator_id', '=', MOBILY_OP_ID)->orderBy('id', 'DESC')->first();
         if ($Msisdn) {
-            // if ($Msisdn->final_status == 1) {
-            //     session(['MSISDN' => $msisdn, 'Status' => 'active']);
-            //     $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
-
-            //                 $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator','greetingimg_operator.greetingimg_id','=','greetingimgs.id')
-            //                 ->where('greetingimg_operator.operator_id','=',MOBILY_OP_ID)->where('greetingimgs.snap',1)->where('greetingimgs.Rdate','<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate','desc')->first();
-
-            //         if($snap){
-            //             $url = Generatedurl::where('operator_id',MOBILY_OP_ID)->orderBy('created_at','desc')->first();
-            //             return redirect(url('viewSnap2/'.$snap->id.'/'.$url->UID));
-            //         }else{
-            //             return redirect(url('cuurentSnap/'.$Url->UID));
-            //         }
-
-                $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
-                    ->where('greetingimg_operator.operator_id', '=', MOBILY_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
-
-                if ($snap) {
-                    $url = Generatedurl::where('operator_id', MOBILY_OP_ID)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
-                } else {
-                    return redirect(url('cuurentSnap/' . $Url->UID));
-                }
-
-            // }
-
-            }
-
 
             //  mobily KSA verify pincode
             $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=$msisdn_wcc&serv=f&pincode=$pincode";  // mobily
-            $result = preg_replace('/\s+/', '', file_get_contents($URL));
+         //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
+            $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
             // make log
             $company = $this->detectCompnay();
@@ -2531,7 +2551,7 @@ public function zain_ksa_test(Request $request){
                 if ($company == "intech") {  // intech integration
                     // call intech  api to notify that msisdn is subscribe successfully
                     $ADV_URL = "http://ict.intech-mena.com/Universal/v2.0/API/Postback?msisdn=" . $msisdn_wcc . "&operaterName=zain_ksa&operatorId=16&" . session::get('adv_params');
-                    $adv_result = file_get_contents($ADV_URL);
+                    $adv_result = $this->GetPageData($ADV_URL);
                     $adv_result = (array)json_decode($adv_result);
 
 
@@ -2565,7 +2585,7 @@ public function zain_ksa_test(Request $request){
                 //  $request->session()->flash('success', 'تم الاشتراك بنجاح');
                 //return view('landing_v2.zain_ksa', compact('MSISDN'));
 
-                session(['MSISDN' => $msisdn, 'Status' => 'active']);
+                session(['MSISDN' => $msisdn, 'Status' => 'active','currentOP'=>MOBILY_OP_ID]);
                 $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
 
                 $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -2580,7 +2600,7 @@ public function zain_ksa_test(Request $request){
 
 
             } elseif ($result == "Theproducthasbeensubscribed.") {  // alreday subscribe
-                session(['MSISDN' => $msisdn, 'Status' => 'active']);
+                session(['MSISDN' => $msisdn, 'Status' => 'active','currentOP'=>MOBILY_OP_ID]);
                 $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
 
                 $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -2594,6 +2614,12 @@ public function zain_ksa_test(Request $request){
                 }
 
             } else {
+                $request->session()->flash('failed', 'pincode verified failed');
+                return view('landing_v2.mobily_ksa_pinCode', compact('msisdn'));
+            }
+
+
+        }else {
                 $request->session()->flash('failed', 'pincode verified failed');
                 return view('landing_v2.mobily_ksa_pinCode', compact('msisdn'));
             }
@@ -2788,7 +2814,7 @@ public function zain_ksa_test(Request $request){
             }
         }
 
-        session::put('pincode', $bin_code);
+        Session::put('pincode', $bin_code);
 
 
         if ($Msisdn) {
@@ -3129,8 +3155,9 @@ public function zain_ksa_test(Request $request){
                 }
                 $suggests = $url->operator->greetingimgs()->PublishedSnap()->whereNotIn('greetingimgs.id', $fav_id)->orderBy('RDate', 'desc')->get();
             } else {
-                $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->get();
+                $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->get(); // published filter only
             }
+
             return view('front.new_snap_v2.home', compact('Rdata_today', 'favourites', 'sliders', 'suggests', 'populars'));
         } else {
             return redirect(url(redirect_operator() . '?prev_url=' . $current_url));
@@ -3170,11 +3197,473 @@ public function zain_ksa_test(Request $request){
             } else {
                 $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->get();
             }
-            return view('front.newdesign.home', compact('Rdata_today', 'favourites', 'sliders', 'suggests', 'populars'));
+
+
+            ///////////////////////////////////////////////////////
+
+            $Rdata_today2 = $url->operator->greetingimgs()->PublishedSnapComming()->GroupBy('greetingimgs.occasion_id')->orderBy('RDate', 'asc')->orderBy('greetingimgs.id', 'asc')->limit(10)->get();
+
+            // dd($Rdata_today2);
+
+            // foreach ($Rdata_today2 as $filter) {
+            //       echo $filter->id."========". $filter->occasion_id."============". $filter->title."================". $filter->RDate;
+            //       echo "<hr>" ;
+            //     }
+
+
+
+            //  $sqlQuery = "SELECT greetingimgs.id as greetingimgID , greetingimgs.title as greetingTitle , greetingimgs.occasion_id as gtOccassion , greetingimgs.RDate as RDate , greetingimg_operator.id as grImgOperatorId FROM `greetingimgs` INNER JOIN greetingimg_operator on greetingimgs.id = greetingimg_operator.greetingimg_id WHERE greetingimg_operator.operator_id = 8 AND greetingimgs.snap = 1 and greetingimgs.EXDate >= '2019-11-18' GROUP BY greetingimgs.occasion_id ORDER BY greetingimgs.RDate ASC , greetingimgs.id LIMIT 50";
+            //  $Rdata_today2 = DB::select(DB::raw($sqlQuery));
+
+          //   print_r($Rdata_today2) ; die;
+
+            //   foreach ($Rdata_today2 as $filter) {
+            //       echo $filter->greetingimgID."========". $filter->gtOccassion."============". $filter->greetingTitle."================". $filter->RDate;
+            //       echo "<hr>" ;
+            //     }
+            //     die;
+
+
+
+
+            return view('front.newdesign.home', compact('Rdata_today', 'favourites', 'sliders', 'suggests', 'populars', 'Rdata_today2'));
         } else {
             return redirect(url(redirect_operator()));
         }
     }
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////* start new design v4 *//////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+    function get_root($occasion)
+    {
+        //$UID = UID();
+        //$url = Generatedurl::where('UID', $UID)->first();
+        //$check_parent = isset($occasion->parent_id) ? $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion->parent_id)->first():0;
+        if(isset($occasion->parent_id)){
+        $occasion = Occasion::where('id',$occasion->parent_id)->first();
+        return get_root($occasion);
+        }
+        return $occasion;
+    }
+
+    public function newdesignv4($UID)
+    {
+        $current_url = \Request::fullUrl();
+        $favourites = [];
+        $fav_id = [];
+        if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+            $url = Generatedurl::where('UID', $UID)->first();
+            // if (is_null($url))
+            //     return view('front.error');
+            $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->get();
+            $populars = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->get();
+            $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
+
+            $newsnap = $url->operator->greetingimgs()->PublishedSnap()->whereNotNull('vid_path')->orderBy('id', 'desc')->limit(4)->get();
+
+            // dd($newsnap);
+            // foreach($newsnap as $id){
+            //     echo $id->id;
+            // }die;
+
+            $occasions_array = [];
+            $occasions = [];
+            foreach ($snap as $key => $value) {
+                array_push($occasions_array, $value->occasion_id);
+            }
+            $occasions_array = array_unique($occasions_array);
+            foreach ($occasions_array as $k => $occasion) {
+                $sliders[] = Occasion::where('id', $occasion)->first();
+            }
+            $sliders = array_filter($sliders);
+            // dd($sliders);
+            //$sliders = $url->operator->greetingimgs()->PublishedSnap()->Slider()->orderBy('RDate', 'desc')->get();
+            if ((Session::has('MSISDN') && Session::get('Status') == 'active'))
+                $favourites = $url->operator->greetingimgs()->Favourite(Session::get('MSISDN'))->PublishedSnap()->orderBy('RDate', 'desc')->limit(10)->get();
+            if ($favourites) {
+                foreach ($favourites as $fav) {
+                    array_push($fav_id, $fav->id);
+                }
+                $suggests = $url->operator->greetingimgs()->PublishedSnap()->whereNotIn('greetingimgs.id', $fav_id)->orderBy('RDate', 'desc')->get();
+            } else {
+                $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->get();
+            }
+
+            // get popluar filters according to greetingimg_operator.poplar_count   = actual popluar count
+            $Rdata_today2 = $url->operator->greetingimgs()->PublishedSnap()->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->limit(10)->get();
+
+
+            return view('front.newdesignv4.home', compact('newsnap', 'Rdata_today', 'favourites', 'sliders', 'suggests', 'populars', 'Rdata_today2'));
+        } else {
+            return redirect(url(redirect_operator()));
+        }
+    }
+
+    public function occasions_v4(Request $request, $UID){
+
+
+        $url = Generatedurl::where('UID', $UID)->first();
+        if (is_null($url))
+            return view('front.error');
+        $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
+        $occasions_array = [];
+        $occasions = [];
+        foreach ($snap as $key => $value) {
+            array_push($occasions_array, $value->occasion_id);
+        }
+        $occasions_array = array_unique($occasions_array);
+        foreach ($occasions_array as $k => $occasion) {
+            $sliders[] = Occasion::where('id', $occasion)->first();
+        }
+        $sliders = array_filter($sliders);
+
+        // dd(count($sliders));
+        $page = \Input::get('page', 1); // Get the ?page=1 from the url
+        $perPage = 8; // Number of items per page
+        $offset = ($page * $perPage) - $perPage;
+
+        $Occasions = array_slice($sliders, $offset, $perPage, true);
+
+        // dd($Occasions);
+
+        if($request->ajax()){
+            return view('front.newdesignv4.presult', compact('Occasions'));
+        }
+
+        return view('front.newdesignv4.search_page', compact('Occasions'));
+
+    }
+    public function suboccasions_v4(Request $request, $OID, $UID){
+
+        $url = Generatedurl::where('UID', $UID)->first();
+         if (is_null($url))
+             return view('front.error');
+
+        $occasion_id = $OID;
+        $codes = [];
+
+        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion_id)->orderBy('RDate', 'desc')->paginate(8);
+
+        // if ($Rdata->isEmpty()) {
+        //       return view('front.error');
+        // }
+        foreach ($Rdata as $key => $value) {
+            if ($value->rbt_id != null) {
+                $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
+                $codes[$key] = $rbtCode ? $rbtCode->code : null;
+            }
+        }
+        $rbt_sms = $url->operator->rbt_sms;
+        $Occasion = Occasion::where('id', $occasion_id)->first();
+
+        $pageTitle = $Occasion->getTranslation('title',getCode());
+        $child_occasions =[];
+        $childs = Occasion::where('parent_id',$occasion_id)->get(); // occasion_id parent_id
+        foreach($childs as $value){
+            $check = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $value->id)->first();
+            if($check){
+                $child_occasions[] = $value;
+            }
+        }
+
+        $page = \Input::get('page', 1); // Get the ?page=1 from the url
+        $perPage = 8; // Number of items per page
+        $offset = ($page * $perPage) - $perPage;
+
+        $child_occasions = array_slice($child_occasions, $offset, $perPage, true);
+
+        if($request->ajax())
+            return view('front.newdesignv4.snapsresult', compact('pageTitle', 'Rdata','child_occasions' ,'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
+
+        return view('front.newdesignv4.sub_categories', compact('pageTitle', 'Rdata','child_occasions' ,'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
+
+    }
+
+    public function filter_v4($OID, $UID){
+
+        $url = Generatedurl::where('UID', $UID)->first();
+        $occasion_id = $OID;
+        $Rdata = Greetingimg::where('id', $OID)->first();
+        return view('front.newdesignv4.inner_page', compact('Rdata'));
+
+    }
+
+
+    public function Search_v4(Request $request, $UID)
+    {
+        $current_url = \Request::fullUrl();
+        $search = $request->search;
+        Session::put('search', $search);
+        if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+            $url = Generatedurl::where('UID', $UID)->first();
+            if (is_null($url))
+                return view('front.error');
+            $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(8);
+            $codes = [];
+            foreach ($Rdata as $key => $value) {
+                if ($value->rbt_id != null) {
+                    $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
+                    $codes[$key] = $rbtCode ? $rbtCode->code : null;
+                }
+            }
+            $rbt_sms = $url->operator->rbt_sms;
+            if($request->ajax())
+                return view('front.newdesignv4.spresult', compact('Rdata', 'search','rbt_sms','codes'));
+            return view('front.newdesignv4.categories', compact('Rdata', 'search','rbt_sms','codes'));
+        } else {
+            return redirect(url(redirect_operator()));
+        }
+    }
+
+    public function favouritesv4(Request $request, $UID)
+    {
+        $current_url = \Request::fullUrl();
+        $favourites = [];
+        $fav_id = [];
+        if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+            $url = Generatedurl::where('UID', $UID)->first();
+
+            $populars = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(8);
+
+            if ((Session::has('MSISDN') && Session::get('Status') == 'active'))
+                $favourites = $url->operator->greetingimgs()->Favourite(Session::get('MSISDN'))->PublishedSnap()->orderBy('RDate', 'desc')->paginate(8);
+            if ($favourites) {
+                foreach ($favourites as $fav) {
+                    array_push($fav_id, $fav->id);
+                }
+                $suggests = $url->operator->greetingimgs()->PublishedSnap()->whereNotIn('greetingimgs.id', $fav_id)->orderBy('RDate', 'desc')->paginate(8);
+            } else {
+                $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->paginate(8);
+            }
+
+            // dd($suggests);
+            if($request->ajax())
+                return view('front.newdesignv4.fpresult', compact('favourites', 'suggests', 'populars'));
+
+            return view('front.newdesignv4.filter', compact('favourites', 'suggests', 'populars'));
+        } else {
+            return redirect(url(redirect_operator()));
+        }
+    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////* end new design v4 *////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////* start rotana v5 *//////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+public function rotana($UID)
+{
+    $current_url = \Request::fullUrl();
+    $favourites = [];
+    $fav_id = [];
+    if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+        $url = Generatedurl::where('UID', $UID)->first();
+        // if (is_null($url))
+        //     return view('front.error');
+        $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->get();
+        $populars = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->get();
+        $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
+
+        $newsnap = $url->operator->greetingimgs()->PublishedSnap()->whereNotNull('vid_path')->orderBy('id', 'desc')->limit(4)->get();
+
+        // dd($newsnap);
+        // foreach($newsnap as $id){
+        //     echo $id->id;
+        // }die;
+
+        $occasions_array = [];
+        $occasions = [];
+        foreach ($snap as $key => $value) {
+            array_push($occasions_array, $value->occasion_id);
+        }
+        $occasions_array = array_unique($occasions_array);
+        foreach ($occasions_array as $k => $occasion) {
+            $sliders[] = Occasion::where('id', $occasion)->first();
+        }
+        $sliders = array_filter($sliders);
+        // dd($sliders);
+        //$sliders = $url->operator->greetingimgs()->PublishedSnap()->Slider()->orderBy('RDate', 'desc')->get();
+        if ((Session::has('MSISDN') && Session::get('Status') == 'active'))
+            $favourites = $url->operator->greetingimgs()->Favourite(Session::get('MSISDN'))->PublishedSnap()->orderBy('RDate', 'desc')->limit(10)->get();
+        if ($favourites) {
+            foreach ($favourites as $fav) {
+                array_push($fav_id, $fav->id);
+            }
+            $suggests = $url->operator->greetingimgs()->PublishedSnap()->whereNotIn('greetingimgs.id', $fav_id)->orderBy('RDate', 'desc')->get();
+        } else {
+            $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->get();
+        }
+
+        // get popluar filters according to greetingimg_operator.poplar_count   = actual popluar count
+        $Rdata_today2 = $url->operator->greetingimgs()->PublishedSnap()->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->limit(10)->get();
+
+
+        return view('front.rotana.home', compact('newsnap', 'Rdata_today', 'favourites', 'sliders', 'suggests', 'populars', 'Rdata_today2'));
+    } else {
+        return redirect(url(redirect_operator()));
+    }
+}
+
+public function occasions_v5(Request $request, $UID){
+
+
+    $url = Generatedurl::where('UID', $UID)->first();
+    if (is_null($url))
+        return view('front.error');
+    $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
+    $occasions_array = [];
+    $occasions = [];
+    foreach ($snap as $key => $value) {
+        array_push($occasions_array, $value->occasion_id);
+    }
+    $occasions_array = array_unique($occasions_array);
+    foreach ($occasions_array as $k => $occasion) {
+        $sliders[] = Occasion::where('id', $occasion)->first();
+    }
+    $sliders = array_filter($sliders);
+
+    // dd(count($sliders));
+    $page = \Input::get('page', 1); // Get the ?page=1 from the url
+    $perPage = 8; // Number of items per page
+    $offset = ($page * $perPage) - $perPage;
+
+    $Occasions = array_slice($sliders, $offset, $perPage, true);
+
+    // dd($Occasions);
+
+    if($request->ajax()){
+        return view('front.rotana.presult', compact('Occasions'));
+    }
+
+    return view('front.rotana.search_page', compact('Occasions'));
+
+}
+public function suboccasions_v5(Request $request, $OID, $UID){
+
+    $url = Generatedurl::where('UID', $UID)->first();
+     if (is_null($url))
+         return view('front.error');
+
+    $occasion_id = $OID;
+    $codes = [];
+
+    $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion_id)->orderBy('RDate', 'desc')->orderBy('id', 'desc')->paginate(8);
+
+    // if ($Rdata->isEmpty()) {
+    //       return view('front.error');
+    // }
+    foreach ($Rdata as $key => $value) {
+        if ($value->rbt_id != null) {
+            $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
+            $codes[$key] = $rbtCode ? $rbtCode->code : null;
+        }
+    }
+    $rbt_sms = $url->operator->rbt_sms;
+    $Occasion = Occasion::where('id', $occasion_id)->first();
+
+    $pageTitle = $Occasion->getTranslation('title',getCode());
+    $child_occasions =[];
+    $childs = Occasion::where('parent_id',$occasion_id)->get(); // occasion_id parent_id
+    foreach($childs as $value){
+        $check = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $value->id)->first();
+        if($check){
+            $child_occasions[] = $value;
+        }
+    }
+
+    $page = \Input::get('page', 1); // Get the ?page=1 from the url
+    $perPage = 8; // Number of items per page
+    $offset = ($page * $perPage) - $perPage;
+
+    $child_occasions = array_slice($child_occasions, $offset, $perPage, true);
+
+    if($request->ajax())
+        return view('front.rotana.snapsresult', compact('pageTitle', 'Rdata','child_occasions' ,'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
+
+    return view('front.rotana.sub_categories', compact('pageTitle', 'Rdata','child_occasions' ,'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
+
+}
+
+public function filter_v5($OID, $UID){
+
+    $url = Generatedurl::where('UID', $UID)->first();
+    $occasion_id = $OID;
+    $Rdata = Greetingimg::where('id', $OID)->first();
+    return view('front.rotana.inner_page', compact('Rdata'));
+
+}
+
+
+public function Search_v5(Request $request, $UID)
+{
+    $current_url = \Request::fullUrl();
+    $search = $request->search;
+    Session::put('search', $search);
+    if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+        $url = Generatedurl::where('UID', $UID)->first();
+        if (is_null($url))
+            return view('front.error');
+        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(8);
+        $codes = [];
+        foreach ($Rdata as $key => $value) {
+            if ($value->rbt_id != null) {
+                $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
+                $codes[$key] = $rbtCode ? $rbtCode->code : null;
+            }
+        }
+        $rbt_sms = $url->operator->rbt_sms;
+        if($request->ajax())
+            return view('front.rotana.spresult', compact('Rdata', 'search','rbt_sms','codes'));
+        return view('front.rotana.categories', compact('Rdata', 'search','rbt_sms','codes'));
+    } else {
+        return redirect(url(redirect_operator()));
+    }
+}
+
+public function favouritesv5(Request $request, $UID)
+{
+    $current_url = \Request::fullUrl();
+    $favourites = [];
+    $fav_id = [];
+    if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+        $url = Generatedurl::where('UID', $UID)->first();
+
+        $populars = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(8);
+
+        if ((Session::has('MSISDN') && Session::get('Status') == 'active'))
+            $favourites = $url->operator->greetingimgs()->Favourite(Session::get('MSISDN'))->PublishedSnap()->orderBy('RDate', 'desc')->paginate(8);
+        if ($favourites) {
+            foreach ($favourites as $fav) {
+                array_push($fav_id, $fav->id);
+            }
+            $suggests = $url->operator->greetingimgs()->PublishedSnap()->whereNotIn('greetingimgs.id', $fav_id)->orderBy('RDate', 'desc')->paginate(8);
+        } else {
+            $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->paginate(8);
+        }
+
+        // dd($suggests);
+        if($request->ajax())
+            return view('front.rotana.fpresult', compact('favourites', 'suggests', 'populars'));
+
+        return view('front.rotana.filter', compact('favourites', 'suggests', 'populars'));
+    } else {
+        return redirect(url(redirect_operator()));
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////* end rotana v5 *////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     public function all_occasions($UID)
     {
@@ -3330,7 +3819,7 @@ public function zain_ksa_test(Request $request){
             }
             $rbt_sms = $url->operator->rbt_sms;
             $this->popularCount('greetingimgs', $greetingimg_id);
-            return view('front.new_snap_v2.inner_snap', compact('Rdata', 'codes', 'rbt_sms'));
+            return view('front.new_snap_v2.inner_snap', compact('Rdata',  'codes', 'rbt_sms'));
         } else {
             return redirect(url(redirect_operator() . '?prev_url=' . $current_url));
         }
@@ -3360,7 +3849,15 @@ public function zain_ksa_test(Request $request){
             if (is_null($url))
                 return view('front.error');
             $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->get();
-            return view('front.newdesign.search', compact('Rdata', 'search'));
+            $codes = [];
+            foreach ($Rdata as $key => $value) {
+                if ($value->rbt_id != null) {
+                    $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
+                    $codes[$key] = $rbtCode ? $rbtCode->code : null;
+                }
+            }
+            $rbt_sms = $url->operator->rbt_sms;
+            return view('front.newdesign.search', compact('Rdata', 'search','rbt_sms','codes'));
         } else {
             return redirect(url(redirect_operator()));
         }
@@ -3452,7 +3949,8 @@ public function zain_ksa_test(Request $request){
         $messidn = zain_ksa_prefix . $request->number;
         //  $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=' . $messidn . '&serv=f&action=unsub'; // Mobily
         $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/ZainKSAAPI?msisdn=' . $messidn . '&serv=f&action=unsub'; // zain saudi
-        $result = preg_replace('/\s+/', '', file_get_contents($url));
+     //   $result = preg_replace('/\s+/', '', file_get_contents($url));
+        $result = preg_replace('/\s+/', '', $this->GetPageData($url)) ;
 
 
         $company = $this->detectCompnay();
@@ -3555,7 +4053,10 @@ public function zain_ksa_test(Request $request){
             "SA" => "South America"
         );
         if (filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
-            $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+          //  $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+
+            $ipdat  = @json_decode($this->GetPageData("http://www.geoplugin.net/json.gp?ip=" . $ip)) ;
+
             if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
                 switch ($purpose) {
                     case "location":
@@ -3876,4 +4377,20 @@ public function zain_ksa_test(Request $request){
     {
         return view('landing_v2.du_unsub');
     }
+
+    public function logout_zain_ksa($uid){
+        Session::flush();
+        return redirect('landing_zain_ksa');
+    }
+
+    public function logout_mobily_ksa($uid){
+        Session::flush();
+        return redirect('landing_mobily_ksa');
+    }
+
+    public function landing_kuwait(){
+
+        return view('landing_v2.landing_kuwait');
+    }
+
 }

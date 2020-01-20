@@ -30,7 +30,7 @@ switch ($os) {
     .inner_category .view {
     position: absolute;
     left: 45px;
-    bottom: 52px;
+    bottom: 42%;
     color: #f23c57;
 }
 
@@ -49,7 +49,7 @@ switch ($os) {
             <!-- =============================== -->
             <div class="col-xs-12 Rdata">
                 <div class="inner_category inner daily_failter">
-                    <h4>فلتر اليوم</h4>
+                    <h4>{!! static_lang('todayfilter')?static_lang('todayfilter') : 'فلتر اليوم'  !!}</h4>
 
                     <a href="#" data-type="<?= $snap->rbt_id ? 1 : 0 ?>" data-link="{{$snap->snap_link}}"  data-img_src="{{ url($snap->path)}}"  data-toggle="modal" data-target="#myModal" class="main_inner snap_info">
                         <img src="{{ url('assets/front/newdesign')}}/img/frame.png">
@@ -57,13 +57,14 @@ switch ($os) {
                         <div class="view">
                             <i id="eye" eye-val="{{$snap->popular_count}}" class="fas fa-eye"></i> <span> {{$snap->popular_count}}</span>
                         </div>
-                        <div class="view" style="top: 59%;right: 22%;font-size: 28px;">
+
+                        <div class="view" style="top: 42%; left: 65% !important;font-size: 22px;">
                             <i id="eye" data-id="{{$snap->id}}" class="fas fa-thumbs-up ajax_call"></i>
                         </div>
 
                         <div class="title_photo_inner">
                             <img c src="{{ url($snap->path)}}">
-                            <p >{{$snap->title}}</p>
+                            <p >{{$snap->getTranslation('title',getCode())}}</p>
                         </div>
                         @if($snap->rbt_id)
                         <a class="icon"   href="sms:{{$rbt_sms}}<?php echo $Att; ?>{{$code}}" style="display:none;"></a>
@@ -77,7 +78,7 @@ switch ($os) {
 
             <div class="main_category cat">
 
-                <h4>التصنيفات</h4>
+                <h4>{!! static_lang('categ')?static_lang('categ') : 'الفئات'  !!}</h4>
 
                 <?php $snap_Occasions = snap_Occasions();$i=0 ?>
                 @foreach($snap_Occasions as $key=> $value)
@@ -126,12 +127,12 @@ switch ($os) {
 
             </div>
             <div class="modal-body snap-modal">
-                <a class="snap_button" id="link" href="">استخدم العدسة</a>
+                <a class="snap_button" id="link" href="">{!! static_lang('usefilter')?static_lang('usefilter') : 'استخدم الفلتر'  !!}</a>
 
-                <a class="snap_button cart" id="cart"  href="">اشترى النغمة</a>
+                <a class="snap_button cart" id="cart"  href="">{!! static_lang('buytone')?static_lang('buytone') : 'اشتري النغمة'  !!}</a>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-snap" data-dismiss="modal">الغاء الامر</button>
+                <button type="button" class="btn btn-snap" data-dismiss="modal">{!! static_lang('close')?static_lang('close') : 'اغلق'  !!}</button>
             </div>
         </div>
 

@@ -41,7 +41,7 @@
     <!-- daily post -->
     <div class="daily_post">
         <div class="daily_title">
-            <h4>فلتر اليوم</h4>
+            <h4>{!! static_lang('todayfilter')?static_lang('todayfilter') : 'فلتر اليوم'  !!}</h4>
         </div>
         <div class="poster">
             <div class="border_poster">
@@ -52,7 +52,7 @@
                               <h3>{{$Rdata_today[0]->title}}</h3>
                           </div>
                           <div class="p_poster">
-                              <h4>فلتر {{$Rdata_today[0]->title}}</h4>
+                              <h4>{{$Rdata_today[0]->getTranslation('title',getCode())}}</h4>
                           </div>
                       </div>
                       <div class="col-4 p-0">
@@ -145,7 +145,7 @@
     <!-- Suggestion -->
     <div class="filtars">
         <div class="f_title">
-            <h4>الاكثر شيوعا</h4>
+            <h4>{!! static_lang('mostp')?static_lang('mostp') : 'الاكثر شيوعا'  !!}</h4>
         </div>
         <div class="f_filtar">
           @if(count($populars) > 2)

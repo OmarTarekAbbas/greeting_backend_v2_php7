@@ -46,6 +46,7 @@ function ValidUID() {
 function OP() {
 
     $url = Generatedurl::where('UID', UID())->first();
+    // dd(UID());
     $op = $url->operator_id;
     return $op;
 }
@@ -192,7 +193,25 @@ function redirect_operator() {
         return 'landing_ooredoo';
     } else if (strpos($operator->name, 'Zain') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
         return 'landing_zain_ksa';
+    }else if (strpos($operator->name, 'Mobily') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
+        return 'landing_mobily_ksa';
     } else {
         return 'landing_v1';
     }
 }
+function getCode() {
+
+    $code = App::getLocale();
+    return $code;
+ }
+ 
+ function static_lang($value)
+ {
+   $static_translation = \App\StaticTranslation::where('key_word','like','%'.$value.'%')->first();
+   if($static_translation){
+
+       return $static_translation->getBody(getCode());
+   }
+   return false;
+ }
+ 

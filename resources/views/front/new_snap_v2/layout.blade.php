@@ -105,7 +105,7 @@
                         <a href="{{url('/main_occasion/'.UID())}}">
                             <div class="f-nav">
                                 <i class="fas fa-list-ul"></i>
-                                <span>التصنيفات</span>
+                                <span>{!! static_lang('categ')?static_lang('categ') : 'الفئات'  !!}</span>
                             </div>
                         </a>
                     </div>
