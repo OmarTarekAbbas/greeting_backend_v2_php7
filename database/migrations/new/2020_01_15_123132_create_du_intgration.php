@@ -15,7 +15,6 @@ class CreateDuIntgration extends Migration
         Schema::create('du_integration', function (Blueprint $table) {
             //
           // $uuid = DB::raw('select UUID()');
-
             $table->increments('id', true);
             $table->string('url', 400);
             $table->uuid('trxid');

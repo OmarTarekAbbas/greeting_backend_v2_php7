@@ -65,7 +65,7 @@ class GreetingSnapController extends Controller {
      */
     public function create() {
         //
-        $Occasions = Occasion::lists('title', 'id');
+        $Occasions = Occasion::pluck('title', 'id');
         // $sql = 'SELECT  o.title , o.id FROM  occasions as o WHERE NOT EXISTS (select * from occasions as c where o.id = c.parent_id )';
         // $res = \DB::select($sql);
         // foreach ($res as $key => $value) {
@@ -88,7 +88,7 @@ class GreetingSnapController extends Controller {
      * @return Response
      */
     public function store(Request $request) {
-        
+
         $languages = Language::all();
         $rules= array() ;
         foreach($languages as $lang){
@@ -103,10 +103,10 @@ class GreetingSnapController extends Controller {
          $vidFile = $request->file('vid_file');
         //  dd($vidFile);
          $Path = $this->UploadContent($request->file('file'), Carbon::now()->format('d-m-Y'));
-        
+
             // dd($Path2);
 
-            
+
 
             // $ffmpeg = FFMpeg\FFMpeg::create(
             //     array(
@@ -135,14 +135,14 @@ class GreetingSnapController extends Controller {
             if($request->file('vid_file')){
                 $File2 = $request->file('vid_file');
                 $Path2 = $this->UploadContent($request->file('vid_file'), Carbon::now()->format('d-m-Y'));
-                
+
                 $fileName = rand(100, 999) . '-' . $vidFile->getClientOriginalName();
                 $fileName = substr($fileName, 0, -4).'.jpg';
-    
+
                 $image_name = time().rand(0,999);
                 $image_preview = public_path('Greetings/'.Carbon::now()->format('d-m-Y').'/'.$image_name.'.jpg');
                 shell_exec("ffmpeg -threads 1 -i " . public_path($Path2) . " -ss 00:00:02.00 -vframes 1 " . $image_preview);
-    
+
                 $Items['vid_path'] = $Path2;
                 $Items['vid_type'] = 'Greetings/'.Carbon::now()->format('d-m-Y').'/'.$image_name.'.jpg';
             }
@@ -153,8 +153,8 @@ class GreetingSnapController extends Controller {
             {
                 $GImage->setTranslation('title', $key, $value);
             }
-            
-            
+
+
             // dd($GImage);
             $GImage->save();
 
@@ -183,7 +183,7 @@ class GreetingSnapController extends Controller {
     public function edit($id) {
         //
         $GreetingImg = Greetingimg::find($id);
-        $Occasions = Occasion::lists('title', 'id');
+        $Occasions = Occasion::pluck('title', 'id');
         // $sql = 'SELECT  o.title , o.id FROM  occasions as o WHERE NOT EXISTS (select * from occasions as c where o.id = c.parent_id )';
         // $res = \DB::select($sql);
         // foreach ($res as $key => $value) {
@@ -216,7 +216,7 @@ class GreetingSnapController extends Controller {
             $Path2 = $this->UploadContent($request->file('vid_file'), Carbon::now()->format('d-m-Y'));
             $fileName = rand(100, 999) . ' - ' . $File2->getClientOriginalName();
             $fileName = substr($fileName, 0, -4).'.jpg';
-            
+
             // $ffmpeg = FFMpeg\FFMpeg::create(
             //     array(
             // //   'ffmpeg.binaries'  => 'C:\ffmpeg\bin\ffmpeg.exe',
@@ -247,13 +247,13 @@ class GreetingSnapController extends Controller {
                 $languages = Language::all();
                 $rules= array() ;
                 foreach($languages as $lang){
-                    $rules["title.$lang->short_code"] = "required" ;    
+                    $rules["title.$lang->short_code"] = "required" ;
                 }
                 $this->validate($request,$rules);
 
                 if (is_null($request->file('file'))) {  // not change image
                     $GImage = Greetingimg::find($id);
-                   
+
                     $Items['featured'] = ($request->featured == 'on') ? 1 : 0;
                     $Items['snap'] = 1;
                   //  $GImage->fill($Items);
@@ -271,7 +271,7 @@ class GreetingSnapController extends Controller {
                     $Items['path'] = $Path;
                     $Items['featured'] = ($request->featured == 'on') ? 1 : 0;
                     $Items['snap'] = 1;
-                    
+
                     $GImage->fill($Items);
                     foreach ($request->title as $key => $value)
                     {
