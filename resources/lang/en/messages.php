@@ -3,7 +3,7 @@ return [
     'info' => 'بياناتي',
     'logout' => 'Logout',
     'todayfilter' => 'Today filter',
-    'yousef' => 'save',
+    'save' => 'save',
     'static_translations' => 'static translations',
     'save' => 'SAVE',
     'title' => 'SMS',
@@ -74,7 +74,7 @@ return [
         'fatch_dlr' => 'Fatch Dlr',
         'count' => 'Count',
         'subscribed' => 'subscribed',
-        
+
     ],
     'type' => [
         'type' => 'Type',
@@ -153,7 +153,7 @@ return [
         'post-ind' => 'List Posts',
         'update-post' => "Update Post",
         'post-img' => "Post Image",
-    ],  
+    ],
     'operators' =>[
         'operator-tap' => 'Operator',
         'operator-title' => 'Operator Title',
@@ -282,10 +282,10 @@ return [
         'quota-error' => 'user quota can not be greater then or equal to message sent',
         'updated' => 'updated successfuly',
         'no_selected_item' => 'No items selected',
-        'deleted' => 'Deleted Successfully' 
+        'deleted' => 'Deleted Successfully'
     ],
      'notification' => 'Notifications' ,
-    
+
       'reports' => 'Reports' ,
       'direct-message' => 'Direct Message' ,
       'template' => [

@@ -3,7 +3,8 @@
 	   'en' => 'English',
         'ar' => 'عربي',
         'or' => 'Urdu',
-        'fe' => 'felbain'
+        'fe' => 'felbain',
+        'Ku' => 'Kurd‏'
 	];
 
 

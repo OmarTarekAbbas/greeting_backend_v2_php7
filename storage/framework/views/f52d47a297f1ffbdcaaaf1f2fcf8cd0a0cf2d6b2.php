@@ -7,7 +7,7 @@
 			<div class="box box-black">
 				<div class="box-title">
 					<h3><i class="fa fa-table"></i><?php echo app('translator')->getFromJson('messages.static_translations'); ?></h3>
-	
+
 				</div>
 				<div class="box-content">
 				<div class="btn-toolbar pull-right">

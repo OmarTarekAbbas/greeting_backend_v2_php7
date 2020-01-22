@@ -3,7 +3,7 @@ return [
     'info' => 'بياناتي',
     'logout' => 'خروج',
     'todayfilter' => 'فلتر اليوم',
-    'yousef' => 'save',
+    'save' => 'save',
     'save' => 'SAVE',
     'title' => 'ألرسائل النصيه',
     'language' => 'english',
@@ -169,8 +169,8 @@ return [
         'no_selected_item' => 'لم يتم إختيار أي عنصر',
         'deleted' => 'تم الحذف بنجاح'
     ],
-     'notification' => 'اشعار' , 
-    
+     'notification' => 'اشعار' ,
+
     'reports' => 'تقارير' ,
     'direct-message' => 'رسالة سريعة'
     ,

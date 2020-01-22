@@ -30,6 +30,12 @@
 	<link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/magic.css">
 	<!-- Style CSS-->
 	<link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/style.css">
+    <style>
+    .yousefh3 {
+        font-size: 6vw;
+    }
+    </style>
+
 </head>
 
 <body>
@@ -63,12 +69,12 @@
 		</div>
 	</div>
 	<!-- end loading -->
-	
+
 	<!-- footer -->
 	<footer>
 		<div class="footer">
 			<div class="container-fluid">
-				<div class="row">  
+				<div class="row">
 					<div class="col-4">
 						<a href="{{url('newdesignv4/occasion/'.UID())}}">
 							<div class="f-nav">
