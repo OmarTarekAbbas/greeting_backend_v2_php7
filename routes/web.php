@@ -234,9 +234,11 @@ Route::get('zain_iraq_landing', 'FrontEndController@zain_iraq_landing');
 Route::get('zain_iraq_success', 'FrontEndController@zain_iraq_success');
 Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild');
 
-/* Du Landing */
-Route::get('du_landing', 'FrontEndController@du_landing');
+/* Du Landing = SecureD */
+Route::get('du_landing/{peroid?}/{lang?}', 'HomeController@du_landing');
+Route::get('du_landing_success', 'HomeController@du_landing_success');
 Route::get('DuSecureRedirect', 'HomeController@DuSecureRedirect');
+
 
 
 Route::get('du_pinCode', 'FrontEndController@du_pinCode');
