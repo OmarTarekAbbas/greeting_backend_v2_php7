@@ -32,17 +32,19 @@
                                 <td>{{ $Category->id }}</td>
                                 <td>{{ $Category->title }}</td>
                                 <td>
+                                    @if(get_settings('enable_parent'))
                                     {!! Form::open(array('class' => 'col-xs-1','method' => 'DELETE', 'action' => array('CategoriesController@destroy', $Category->id))) !!}
                                     <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete" type="submit" onclick="return confirm('Are you sure you want to delete {{ $Category->title }}')">
                                         <i class="fa fa-trash-o "></i>
                                     </button>
                                     {!! Form::close() !!}
+                                    @endif
                                     {!! Form::open(array('class' => 'form-inline col-lg-1','method' => 'GET', 'action' => array('CategoriesController@edit', $Category->id))) !!}
                                     <button class="btn btn-info btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
                                         <i class="fa fa-edit  "></i>
                                     </button>
                                     {!! Form::close() !!}
-                                    <a href="{{ url('admin/categories/'.$Category->id.'/occasion') }}"><button class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Occasion"><i class="ion-ios-bookmarks"></i> </button> </a>
+                                    <a href="{{ url('admin/occasions/create?category_id='.$Category->id) }}"><button class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Occasion"><i class="ion-ios-bookmarks"></i> </button> </a>
                                 </td>
                             </tr>
                         @endforeach
