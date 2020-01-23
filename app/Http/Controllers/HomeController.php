@@ -471,7 +471,7 @@ class HomeController extends Controller {
         $URL = "http://62.150.213.170:1001/ivasafasy/status.asp?mob=" . $msisdn;
        // $result = preg_replace('/\s+/', '', file_get_contents($URL));
         $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
-        
+
 
         // make log
         $company = $this->detectCompnay();
@@ -1015,8 +1015,8 @@ $sign=hash_hmac("sha256", utf8_encode($requestParam),utf8_encode($signkey),false
 $sign=$this->hextobin($sign);
 $checksum=urlencode(base64_encode($sign));
 
-//encryption with key     
-$key = base64_encode(pack("H*","37417B093AD16DD4C8F949117E14F0D2DE03A44F2BB9B9754B11EAEADEFE972E")); 
+//encryption with key
+$key = base64_encode(pack("H*","37417B093AD16DD4C8F949117E14F0D2DE03A44F2BB9B9754B11EAEADEFE972E"));
 $plaintext ="MSISDN=$MSISDN&productID=$productID&pName=$pName&pPrice=$pPrice&pVal=$pVal&CpId=$CpId&CpPwd=$CpPwd&CpName=$CpName&sRenewalPrice=$sRenewalPrice&sRenewalValidity=$sRenewalValidity&reqMode=WAP&reqType=Subscription&ismID=$ismID&transID=$transID&tncFontFamily=times&cpBgColor=silver&Wap_mdata=$image";
 
 $result=base64_encode($this->aes256_cbc_encrypt($key, $plaintext, "0000000000000000"));
@@ -1528,9 +1528,9 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
     public function du_landing(request $request)
     {
-     
-        $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ; 
-        $lang =  isset($request->lang) ? $request->lang : "ar" ; 
+
+        $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
+        $lang =  isset($request->lang) ? $request->lang : "ar" ;
         return view('landing_v2.du_landing',compact("peroid","lang"));
     }
 
@@ -1543,7 +1543,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         } else {
             $msisdn = "";
         }
-       
+
 
         require('uuid/UUID.php');
         $trxid = \UUID::v4();
@@ -1559,7 +1559,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 $serviceid = "flaterweekly";
                 $price = 14 ;
                 $num= 7;
-             
+
             }else{
                 $serviceid = "flaterdaily";
                 $price = 2 ;
@@ -1580,9 +1580,9 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         }
 
 
-     
-    
-     
+
+
+
 
         // activation api :   http://pay-with-du.ae/20/digizone/digizone-flaterdaily-1-ar-doi-web?origin=digizone&uid=971555802322&trxid=56833e8d-c21b-453b-9e2a-f33f20415ae2&serviceProvider=secured&serviceid=flaterdaily&plan=daily&price=2&locale=ar
         //  f5d1048a-995e-11e7-abc4-cec278b6b50a
@@ -1624,14 +1624,14 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
           );
           $this->log($actionName, $URL, $parameters_arr);
 
-          
+
         return view('landing_v2.du_landing_success');
     }
 
 
     //===============================Viva Integration "David" ==========================================//
 
-    public function viva_login(request $request) 
+    public function viva_login(request $request)
     {
         if (isset($_REQUEST['msisdn']) && $_REQUEST['msisdn'] != "") {
             $msisdn = preg_replace('/^965/', '', $_REQUEST['msisdn']);
@@ -1640,7 +1640,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         }
         return view('landing_v2.viva_landing', compact('msisdn'));
     }
-    public function viva_login_action(request $request) 
+    public function viva_login_action(request $request)
     {
         $msisdn = $request->input('number');
         if (!preg_match('/^[0-9]{8}$/', $msisdn)) {
@@ -1654,7 +1654,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             session(['MSISDN' => $msisdn, 'status' => 'active']);
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator','greetingimg_operator.greetingimg_id','=','greetingimgs.id')
                     ->where('greetingimg_operator.operator_id','=',13)->where('greetingimgs.snap',1)->where('greetingimgs.Rdate','<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate','desc')->first();
-                    
+
             if($snap){
                 $url = Generatedurl::where('operator_id',13)->where('occasion_id',$snap->occasion_id)->orderBy('created_at','desc')->first();
                 return redirect(url('viewSnap2/'.$snap->id.'/'.$url->UID));
@@ -1663,13 +1663,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             return redirect(url('/landing_stc_1?msisdn=965' . $msisdn));
         }
     }
-    public function viva_notification(request $request) 
+    public function viva_notification(request $request)
     {
 
 
         /*
           Activation: https://filters.digizone.com.kw/viva_notification?ChannelID=4493&ServiceID=808&User=kuwait@idex&Password=kuwait@!dex&STATUS=ACT-SB&OperatorID=41904&MSISDN=96555410856&RequestID=303263614
-          
+
           First Failed billing: https://filters.digizone.com.kw/viva_notification?Password=kuwait@!dex&ServiceID=808&OperatorID=41904&ChannelID=4493&STATUS=FFL-BL&User=kuwait@idex&MSISDN=96555410856&RequestID=303270353
 
           renewal success: https://filters.digizone.com.kw/viva_notification?Password=kuwait@!dex&ServiceID=808&OperatorID=41904&ChannelID=4493&STATUS=RSC-BL&User=kuwait@idex&MSISDN=96555410856&RequestID=303270353
@@ -1833,39 +1833,39 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
          }else{
              return redirect(url('/landing_viva_new'));
          }
-       
-        
+
+
      }
     public function logout($uid){
         Session::flush();
         return redirect('landing_viva_new');
     }
 
-    
+
     //===============================Viva Integration "David" ==========================================//
 
 
 
 
-    
+
 
     //======================================Ooredoo direct integration =============================================//
 
         // ========= ooredoo sequemce =============== //
-        public function he_redirect(Request $request) {   // this must be login page 
+        public function he_redirect(Request $request) {   // this must be login page
             // 	HE Detect   //
             $productID = productID;
             $pName = pName;
-            // plan will be calculate from above 
+            // plan will be calculate from above
             $CpId = CpId;
             $CpPwd = CpPwd;
             $CpName = CpName;
             $transID = uniqid();
-    
+
             $pName = pName ;
-    
+
             $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=$productID&pName=$pName&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$transID";
-    
+
             // make log
             $actionName = "Ooredoo He Forward";
             $parameters_arr = array(
@@ -1873,7 +1873,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 'date' => Carbon::now()->format('Y-m-d H:i:s')
             );
             $this->log($actionName, $url, $parameters_arr);
-    
+
             return redirect($url);
         }
 
@@ -1882,7 +1882,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
     public function ooredoo_he(Request $request) {
 
 
-        if ($request->input('MSISDN') != NULL) {  // HE detect 
+        if ($request->input('MSISDN') != NULL) {  // HE detect
             $MSISDN = $request->input('MSISDN');  // will be in format 965 XXX XXXX
             $MSISDN = str_replace("965", "", $MSISDN);  // remove 965
             // make log for HE foward
@@ -1904,19 +1904,19 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 return redirect('/');
             }
 
-            $subsType = $this->ooredoo_dbill_profile_check($MSISDN);  // profile check 
+            $subsType = $this->ooredoo_dbill_profile_check($MSISDN);  // profile check
 
             if ($subsType == "3") {    // non ooredoo users
                 session()->flash('failed', 'Non ooredoo users');
                 return redirect("ooredoo_login");
             } elseif ($subsType == "1") {  // postpaid  // monthly
-                // Monthly plane  
+                // Monthly plane
                 $pPrice = "3000";
                 $sRenewalPrice = "3000";
                 $pVal = "30";
                 $sRenewalValidity = "30";
             } elseif ($subsType == "2") {  // prepaid   //weekly or daily
-                // Daily plane  
+                // Daily plane
                 $pPrice = "150";
                 $sRenewalPrice = "150";
                 $pVal = "1";
@@ -1934,7 +1934,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         } else {  // Wifi users
             $MSISDN = "";
             $msisdn = "wifi";
-            // Daily plane 
+            // Daily plane
             $pPrice = "150";
             $sRenewalPrice = "150";
             $pVal = "1";
@@ -1949,7 +1949,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $AdvertisingUrl = new AdvertisingUrl();
         $AdvertisingUrl->adv_url = session::get('adv_params');
         $AdvertisingUrl->msisdn = $msisdn;
-        $AdvertisingUrl->status = 1;    // 1 mean go to CG page 
+        $AdvertisingUrl->status = 1;    // 1 mean go to CG page
         $AdvertisingUrl->operatorId = 50;
         $AdvertisingUrl->operatorName = "ooredoo_kuwait";
         $AdvertisingUrl->ads_compnay_name = $company;
@@ -1962,7 +1962,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         $productID = productID;
         $pName = pName;
-        // plan will be calculate from above 
+        // plan will be calculate from above
         $CpId = CpId;
         $CpPwd = CpPwd;
         $CpName = CpName;
@@ -1985,23 +1985,23 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $URL_before_encrpty = "http://consent.ooredoo.com.kw:8093/API/CCG?MSISDN=$MSISDN&productID=$productID&pName=$pName&pPrice=$pPrice&pVal=$pVal&CpId=$CpId&CpPwd=$CpPwd&CpName=$CpName&sRenewalPrice=$sRenewalPrice&sRenewalValidity=$sRenewalValidity&reqMode=WAP&reqType=Subscription&ismID=$ismID&transID=$transID&tncFontFamily=times&cpBgColor=silver&Wap_mdata=$image";
 
 
-            
+
 //checksum genaration with cpid
   $requestParam="MSISDN=$MSISDN&productID=$productID&pName=$pName&pPrice=$pPrice&pVal=$pVal&CpId=$CpId&CpPwd=$CpPwd&CpName=$CpName&sRenewalPrice=$sRenewalPrice&sRenewalValidity=$sRenewalValidity&reqMode=WAP&reqType=Subscription&ismID=$ismID&transID=$transID&tncFontFamily=times&cpBgColor=silver&Wap_mdata=$image";
   $signkey=CpId;//cpid
   $sign=hash_hmac("sha256", utf8_encode($requestParam),utf8_encode($signkey),false);
-   
+
   $sign=$this->hextobin($sign);
   $checksum=urlencode(base64_encode($sign));
-  
-  //encryption with key     
-  $key = base64_encode(pack("H*","37417B093AD16DD4C8F949117E14F0D2DE03A44F2BB9B9754B11EAEADEFE972E")); 
+
+  //encryption with key
+  $key = base64_encode(pack("H*","37417B093AD16DD4C8F949117E14F0D2DE03A44F2BB9B9754B11EAEADEFE972E"));
   $plaintext ="MSISDN=$MSISDN&productID=$productID&pName=$pName&pPrice=$pPrice&pVal=$pVal&CpId=$CpId&CpPwd=$CpPwd&CpName=$CpName&sRenewalPrice=$sRenewalPrice&sRenewalValidity=$sRenewalValidity&reqMode=WAP&reqType=Subscription&ismID=$ismID&transID=$transID&tncFontFamily=times&cpBgColor=silver&Wap_mdata=$image";
-  
+
   $result=base64_encode($this->aes256_cbc_encrypt($key, $plaintext, "0000000000000000"));
-  
+
   $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum=$checksum&CpId=$CpId";
-  
+
 
 
         // make log
@@ -2117,10 +2117,10 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             // viva check if alreday subscribe
 
             $Msisdn = Msisdn::where('phone_number', '=', $prefix . $MSISDN)->orderBy('id', 'DESC')->first();
-            // already acrive 
+            // already acrive
             if (isset($Msisdn) && $Msisdn->final_status == 1 && $Msisdn->renew_date >= $today_date) {
                 session(['phone_number' => $MSISDN, 'status' => 'active']);
-                // return redirect('/');           
+                // return redirect('/');
                 $Url = Generatedurl::where('operator_id', our_ooredoo_id)->latest()->first();
                 if ($Url)
                     return redirect(url() . "/cuurentSnap/" . $Url->UID);
@@ -2132,10 +2132,10 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 $Msisdn->operator_id = $operator_id;
                 $Msisdn->save();
 
-                // check result 
+                // check result
                 if ($Result == "SUCCESS") {
-                    // user is confirm to subscribe 
-                    // make profile check 
+                    // user is confirm to subscribe
+                    // make profile check
                     if (isset($Msisdn->plan_id) && $Msisdn->plan_id != 0) {
                         $subsType = $Msisdn->plan_id;
                     } else {
@@ -2144,7 +2144,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
                     $arr = $this->ooredoo_dbill_subscribe($MSISDN, $subsType, $TPCGID);
                     // SN/SR/RN    Subscription success
-                    // YR/RR/GR    renewal success 
+                    // YR/RR/GR    renewal success
                     if ($arr['result'] == "OK" || $arr['optionalParameter8'] == "operation#SN" || $arr['optionalParameter8'] == "operation#SR" || $arr['optionalParameter8'] == "operation#RN" || $arr['optionalParameter8'] == "operation#YR" || $arr['optionalParameter8'] == "operation#RR" || $arr['optionalParameter8'] == "operation#GR") {
                         $Msisdn->final_status = 1;
                         $Msisdn->type = $type;
@@ -2184,10 +2184,10 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     $message = "لم يوافق المستخدم ";
                 }
             } else {  // not found in our DB = like come by SC
-                // check result 
+                // check result
                 if ($Result == "SUCCESS") {
-                    // user is confirm to subscribe 
-                    // make profile check 
+                    // user is confirm to subscribe
+                    // make profile check
                     $subsType = $this->ooredoo_dbill_profile_check($MSISDN);
                     $arr = $this->ooredoo_dbill_subscribe($MSISDN, $subsType, $TPCGID);
                     if ($arr['result'] == "OK" || $arr['optionalParameter8'] == "operation#SN" || $arr['optionalParameter8'] == "operation#SR" || $arr['optionalParameter8'] == "operation#RN" || $arr['optionalParameter8'] == "operation#YR" || $arr['optionalParameter8'] == "operation#RR" || $arr['optionalParameter8'] == "operation#GR") {
@@ -2269,7 +2269,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $operator_name = "Ooredoo Kuwait";
         $today_date = date("Y-m-d");
         $message = "";
-        // handle if callingParty has country code or not 
+        // handle if callingParty has country code or not
         if ($request->input('callingParty') != NULL) {
             $msisdn = $request->input('callingParty');
             if (preg_match('/^965[0-9]{8}$/', $msisdn)) {
@@ -2379,7 +2379,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $notify->msisdn = $msisdn;
             $notify->Result = $result;
             $notify->transID = $sequenceNo;
-            $notify->FLOW = $bearerId;  // SMS  
+            $notify->FLOW = $bearerId;  // SMS
             $notify->save();
 
 
@@ -2396,7 +2396,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 $Msisdn->save();
                 $time = strtotime($today_date);
 
-                // check result 
+                // check result
                 if ($result == "OK" && $optParam2 == 1006 && ($operationId == "SN" || $operationId == "SR" || $operationId == "RN" || $operationId == "YR" || $operationId == "RR" || $operationId == "GR" )) {  // subscription   SN/SR/RN  Subscription success    /  YR/RR/GR   renewal success
                     $Msisdn->final_status = 1;
                     $Msisdn->type = $bearerId;
@@ -2504,7 +2504,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         echo json_encode($res);
     }
-    
+
     public function ooredoo_dbill_profile_check($MSISDN) {
 
         // 	SAMPLE PROFILE CHECK API   //
@@ -2512,24 +2512,24 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 $sequenceNo = uniqid();
                 // $callingParty = "96550167685";
                 $callingParty = "965" . $MSISDN;
-        
+
                 $serviceType = serviceType;
                 $serviceId = serviceId;
                 $bearerId = "WAP";
                 $asyncFlag = "N";
-        
-        
-                // HE 
+
+
+                // HE
                 /*
                   http://localhost:8080/
                   SingleSiteHE/getHE?productID=0145019900&pName=Photo+Stories+Weekly&CpI
                   d=shf&CpPwd=shf%401920&CpName=Shotformats&transID=fhdkhfsdk
                  */
-        
+
                 $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=S-WafflyEwMY2&pName=Waffarly&CpI
         d=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$sequenceNo";
-        
-        
+
+
                 $soap_request = "<?xml version='1.0' encoding='UTF-8'?>
                     <ocsRequest>
                     <requestType>1001</requestType>
@@ -2560,7 +2560,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     <optionalParameter11>msgText#-1</optionalParameter11>
                     </ocsRequest>
         ";
-        
+
                 $header = array(
                     "Content-type: text/xml;charset=\"utf-8\"",
                     "Accept: text/xml",
@@ -2569,7 +2569,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     "SOAPAction: \"run\"",
                     "Content-length: " . strlen($soap_request),
                 );
-        
+
                 $soap_do = curl_init();
                 curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
                 curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
@@ -2580,11 +2580,11 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 curl_setopt($soap_do, CURLOPT_POST, true);
                 curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
                 curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
-        
+
                 $data = curl_exec($soap_do);
                 curl_close($soap_do);
                 //print_r($data);
-        
+
                 $ob = simplexml_load_string($data);
                 //  print_r($ob);
                 // make log for every hit
@@ -2595,16 +2595,16 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     'date' => Carbon::now()->format('Y-m-d H:i:s'),
                 );
                 $this->log($actionName, $not_URL, $parameters_arr);
-        
+
                 $subsType = $ob->subsType;
                 return $subsType;
             }
-        
+
             public function ooredoo_dbill_subscribe($MSISDN, $subsType, $TPCGID) {
-        
+
         //   SAMPLE SUBSCRIPTION  API    //
-        
-        
+
+
                 $serviceNode = serviceNode;
                 //  $sequenceNo = uniqid();
                 $sequenceNo = $TPCGID;
@@ -2615,8 +2615,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 $bearerId = "WAP";
                 $asyncFlag = "N";
                 $planId = "CONTENTD1";
-        
-        
+
+
                 if ($subsType == "1") {  // Postpaid
                     $planId = "CONTENT30";
                 } elseif ($subsType == "2") {  // Prepaid
@@ -2625,9 +2625,9 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 } else {
                     $planId = "";
                 }
-        
-        
-        
+
+
+
                 $soap_request = "<?xml version='1.0' encoding='UTF-8'?>
         <ocsRequest>
         <requestType>1006</requestType>
@@ -2657,11 +2657,11 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         <optionalParameter10>contentId#-1</optionalParameter10>
         <optionalParameter11>msgText#-1</optionalParameter11>
         </ocsRequest>";
-        
-        
-        
-        
-        
+
+
+
+
+
                 $header = array(
                     "Content-type: text/xml;charset=\"utf-8\"",
                     "Accept: text/xml",
@@ -2670,7 +2670,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     "SOAPAction: \"run\"",
                     "Content-length: " . strlen($soap_request),
                 );
-        
+
                 $soap_do = curl_init();
                 curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
                 curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
@@ -2681,11 +2681,11 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 curl_setopt($soap_do, CURLOPT_POST, true);
                 curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
                 curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
-        
+
                 $data = curl_exec($soap_do);
                 curl_close($soap_do);
                 // print_r($data);
-        
+
                 $ob = simplexml_load_string($data);
                 //  print_r($ob);
                 // make log for every hit
@@ -2696,30 +2696,30 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     'date' => Carbon::now()->format('Y-m-d H:i:s'),
                 );
                 $this->log($actionName, $not_URL, $parameters_arr);
-        
+
                 $result = trim($ob->result);
                 $optionalParameter8 = trim($ob->optionalParameter8);
                 $arr['result'] = $result;
                 $arr['optionalParameter8'] = $optionalParameter8;
-        
+
                 return $arr;
             }
-        
+
             public function ooredoo_dbill_unsub($MSISDN) {
-        
+
         // 	SAMPLE PROFILE CHECK API   //
                 $serviceNode = $serviceNode;
                 $sequenceNo = uniqid();
                 //   $callingParty = "96550167685";
                 $callingParty = "965" . $MSISDN;
-        
+
                 $serviceType = serviceType;
                 $serviceId = serviceId;
                 $bearerId = "WAP";
                 $asyncFlag = "N";
                 $planId = "CONTENTD1";
-        
-        
+
+
                 $soap_request = "<?xml version='1.0' encoding='UTF-8'?>
         <ocsRequest>
         <requestType>1007</requestType>
@@ -2750,7 +2750,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         <optionalParameter11>msgText#-1</optionalParameter11>
         </ocsRequest>
         ";
-        
+
                 $header = array(
                     "Content-type: text/xml;charset=\"utf-8\"",
                     "Accept: text/xml",
@@ -2759,7 +2759,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     "SOAPAction: \"run\"",
                     "Content-length: " . strlen($soap_request),
                 );
-        
+
                 $soap_do = curl_init();
                 curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
                 curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
@@ -2770,11 +2770,11 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 curl_setopt($soap_do, CURLOPT_POST, true);
                 curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
                 curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
-        
+
                 $data = curl_exec($soap_do);
                 curl_close($soap_do);
                 // print_r($data);
-        
+
                 $ob = simplexml_load_string($data);
                 //  print_r($ob);
                 // make log for every hit
@@ -2785,25 +2785,25 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     'date' => Carbon::now()->format('Y-m-d H:i:s'),
                 );
                 $this->log($actionName, $not_URL, $parameters_arr);
-        
-        
+
+
                 $result = $ob->result;
                 $optionalParameter8 = $ob->optionalParameter8;
-        
+
                 $arr['result'] = $result;  // OK   //  DBILL:You have not subscribed this service      "if user is alreday unsub before"
                 $arr['optionalParameter8'] = $optionalParameter8;  // operation#SS   //  operation#N/A    "if user is alreday unsub before"
                 //  print_r($arr);
                 return $arr;
             }
-        
+
             public function ooredoo_sms_mt(request $request) {
-        
+
         // 	SAMPLE SMS MT API   //
                 $serviceNode = serviceNode;
                 $sequenceNo = uniqid();
                 $callingParty = "96550167685";
                 // $callingParty = "965" . $MSISDN;
-        
+
                 $serviceType = serviceType;
                 $serviceId = serviceId;
                 $bearerId = "WAP";
@@ -2812,8 +2812,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 $message = "hello";
                 $cli_SenderID = "1757";
                 $reqSource_SenderID = "1757";
-        
-        
+
+
                 $soap_request = "<?xml version='1.0' encoding='UTF-8'?>
         <ocsRequest>
            <requestType>2015</requestType>
@@ -2845,7 +2845,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
            <optionalParameter12>categoryId#-1</optionalParameter12>
         </ocsRequest>
         ";
-        
+
                 $header = array(
                     "Content-type: text/xml;charset=\"utf-8\"",
                     "Accept: text/xml",
@@ -2854,7 +2854,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     "SOAPAction: \"run\"",
                     "Content-length: " . strlen($soap_request),
                 );
-        
+
                 $soap_do = curl_init();
                 curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
                 curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
@@ -2865,7 +2865,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 curl_setopt($soap_do, CURLOPT_POST, true);
                 curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
                 curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
-        
+
                 $data = curl_exec($soap_do);
                 curl_close($soap_do);
                 // print_r($data);
@@ -2877,29 +2877,29 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     'date' => Carbon::now()->format('Y-m-d H:i:s'),
                 );
                 $this->log($actionName, $not_URL, $parameters_arr);
-        
+
                 $ob = simplexml_load_string($data);
                 print_r($ob);
-                $result = $ob->result; // OK   
+                $result = $ob->result; // OK
             }
-            
-            
+
+
              public function ooredoo_content_mt(request $request) {
-        
+
         // 	SAMPLE content send for all service subscribers   //
                 $serviceNode = serviceNode;
                 $sequenceNo = uniqid();
-        
-        
+
+
                 $serviceType = serviceType;
                 $serviceId = serviceId;
-             
-        
+
+
         $DlNAME = "dl:taisna" ;
         $message = "http://ivascloud.com/snapchat/viewSnap2/938/738989";
-        
+
         $shortCode = 1368 ;
-        
+
                 $soap_request = "<?xml version='1.0' encoding='UTF-8' ?>
         <request>
         <seqNo> $sequenceNo</seqNo>
@@ -2910,7 +2910,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         <serviceNode>$serviceNode</serviceNode>
         <message><content><![CDATA[$message]]></content></message>
         </request>";
-        
+
                 $header = array(
                     "Content-type: text/xml;charset=\"utf-8\"",
                     "Accept: text/xml",
@@ -2919,7 +2919,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     "SOAPAction: \"run\"",
                     "Content-length: " . strlen($soap_request),
                 );
-        
+
                 $soap_do = curl_init();
                 curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dl/service");   // https://dbill.ooredoo.com.kw/dl/service
                 curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
@@ -2930,10 +2930,10 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 curl_setopt($soap_do, CURLOPT_POST, true);
                 curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
                 curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
-        
+
                 $data = curl_exec($soap_do);
                 curl_close($soap_do);
-                 var_dump($data);  // OK  for success message 
+                 var_dump($data);  // OK  for success message
                 // make log for every hit
                 $actionName = "Ooredoo Content Mt Api";
                 $not_URL = "ooredoo_content_mt";
@@ -2943,18 +2943,18 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     'date' => Carbon::now()->format('Y-m-d H:i:s'),
                 );
                 $this->log($actionName, $not_URL, $parameters_arr);
-        
+
              //   $ob = simplexml_load_string($data);
              //   print_r($ob);
-                // $result = $ob->result; // OK   
+                // $result = $ob->result; // OK
             }
-        
+
 
 
             	// Ooredoo Encryption function
 	public function aes256_cbc_encrypt($key, $data) {
 		$key = base64_decode($key);
-	   
+
 		 echo '<br>';
 		//echo strlen($iv);
 		$iv = base64_decode("AAAAAAAAAAAAAAAAAAAAAA==");
@@ -2967,32 +2967,32 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 		return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
 	  }
 
-	  public function pkcs7_pad($text, $blocksize) 
-	  { 
-		  $pad = $blocksize - (strlen($text) % $blocksize); 
-		  return $text . str_repeat(chr($pad), $pad); 
-	  } 
-	  
+	  public function pkcs7_pad($text, $blocksize)
+	  {
+		  $pad = $blocksize - (strlen($text) % $blocksize);
+		  return $text . str_repeat(chr($pad), $pad);
+	  }
 
-	  
-	public function hextobin($hexstr) 
-	{ 
-		$n = strlen($hexstr); 
-		$sbin="";   
-		$i=0; 
-		while($i<$n) 
-		{       
-			$a =substr($hexstr,$i,2);           
-			$c = pack("H*",$a); 
-			if ($i==0){$sbin=$c;} 
-			else {$sbin.=$c;} 
-			$i+=2; 
-		} 
-		return $sbin; 
+
+
+	public function hextobin($hexstr)
+	{
+		$n = strlen($hexstr);
+		$sbin="";
+		$i=0;
+		while($i<$n)
+		{
+			$a =substr($hexstr,$i,2);
+			$c = pack("H*",$a);
+			if ($i==0){$sbin=$c;}
+			else {$sbin.=$c;}
+			$i+=2;
+		}
+		return $sbin;
 	}
 
 
-    
+
 	public function ooredoo_unsub() {
         $MSISDN = Session::get('phone_number');
         return view('ooredoo_landing_unsub', compact('MSISDN'));
@@ -3019,10 +3019,13 @@ public function ooredoo_unsub_action() {
 
         return redirect('/login');
 }
-    
+
 
     //======================================Ooredoo direct integration =============================================//
 
-    
-   
+    public function logoutadmin(Request $request) {
+        Session::flush();
+        return redirect('/login');
+      }
+
 }
