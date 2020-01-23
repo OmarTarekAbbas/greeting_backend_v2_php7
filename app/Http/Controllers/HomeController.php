@@ -2967,6 +2967,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 		return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
 	  }
 
+
 	  public function pkcs7_pad($text, $blocksize)
 	  {
 		  $pad = $blocksize - (strlen($text) % $blocksize);
