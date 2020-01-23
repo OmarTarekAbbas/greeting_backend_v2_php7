@@ -252,7 +252,7 @@
                         <li><a href="#" data-toggle="tooltip" title="Downloads"><i class="ion-archive"></i></a></li>
                     </ul>--}}
                 </div>
-                <a href="{{ url('logout') }}" class="button"><i class="ion-log-out"></i></a>
+                <a href="{{ url('logout_ad') }}" class="button"><i class="ion-log-out"></i></a>
             </div>
             <!-- END RPOFILE -->
             <!-- BEGIN NAV -->

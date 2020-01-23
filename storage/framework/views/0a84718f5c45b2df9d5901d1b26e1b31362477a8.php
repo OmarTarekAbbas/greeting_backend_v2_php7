@@ -36,7 +36,7 @@
                     <a href="#"><?php echo e(\Auth::user()->name); ?></a>
                     
                 </div>
-                <a href="<?php echo e(url('logout')); ?>" class="button"><i class="ion-log-out"></i></a>
+                <a href="<?php echo e(url('logout_ad')); ?>" class="button"><i class="ion-log-out"></i></a>
             </div>
             <!-- END RPOFILE -->
             <!-- BEGIN NAV -->

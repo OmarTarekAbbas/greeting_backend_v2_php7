@@ -14,6 +14,7 @@
 Route::get('popularCountInc', 'GreetingimgsController@popular_count_increment');
 
 Auth::routes();
+Route::get('logout_ad', 'HomeController@logoutadmin');
 
 Route::get( 'new_landing', 'FrontEndController@new_landing');
 Route::get('unsub', 'FrontEndController@unsub');
