@@ -2964,7 +2964,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 		$data = $this->pkcs7_pad($data , 16);
 	   //echo $data;
 		echo '<br>';
-		return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
+         // return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);  // this for php 5
+         return openssl_encrypt($data, 'aes-256-cbc' , $key, OPENSSL_RAW_DATA | OPENSSL_NO_PADDING, $iv);  // encryptiom in php 7.3
 	  }
 
 
