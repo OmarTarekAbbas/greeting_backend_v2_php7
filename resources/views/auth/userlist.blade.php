@@ -51,12 +51,12 @@
                             <td>
                                 {!! Form::open(array('class' => 'form-inline col-lg-1','method' => 'DELETE', 'action' => array('UsersController@destroy', $User->id))) !!}
                                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete" type="submit" onclick="return confirm('Are you sure you want to delete this ?')">
-                                    <i class="glyphicon glyphicon-trash"></i>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                                 {!! Form::close() !!}
                                 {!! Form::open(array('class' => 'form-inline col-lg-1','method' => 'GET', 'action' => array('UsersController@edit', $User->id))) !!}
                                 <button class="btn btn-info btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
-                                    <i class="glyphicon glyphicon-pencil"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
                                 {!! Form::close() !!}
 
