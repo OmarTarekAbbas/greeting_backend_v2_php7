@@ -1,5 +1,5 @@
 @if($Img)
-{!! Form::hidden('snapID',$Img->id,'') !!}
+{!! Form::hidden('snapID',$Img->id) !!}
 @endif
 <div class="form-group">
     {!! Form::label('title','Audio Title',['class'=>'control-label']) !!}
