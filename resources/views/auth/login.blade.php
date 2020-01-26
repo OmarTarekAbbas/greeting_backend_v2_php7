@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="" name="description"/>
     <meta content="" name="author"/>
@@ -47,7 +47,7 @@
                     <input type="checkbox" class="js-switch" id="checkbox" name="remember" /><label for="checkbox" class="font-size-12 normal margin-left-10">Remember Me</label>
                 </div>
 
-                    <a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
+                    <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
 
                 <button type="submit" class="btn btn-dark bg-light-green-500 padding-10 btn-block color-white"><i class="ion-log-in"></i> Sign in</button>
             </div>
