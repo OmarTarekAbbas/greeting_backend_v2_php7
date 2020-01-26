@@ -254,8 +254,8 @@ class GreetingRbtController extends Controller {
                     File::delete($Greetingaudio->path);
                     $Items = $request->all();
                     $Items['path'] = $Path;
-                    $Items['notification'] = ($request->input('type') == '1') ? 1 : 0;
-                    $Items['rbt'] = ($request->input('type') == '2') ? 1 : 0;
+                    // $Items['notification'] = ($request->input('type') == '1') ? 1 : 0;
+                    // $Items['rbt'] = ($request->input('type') == '2') ? 1 : 0;
                     $Items['featured'] = ($request->input('featured')) ? 1 : 0;
                     $Greetingaudio->update($Items);
                     $sync = ($request->input('operator_id') ? : []);

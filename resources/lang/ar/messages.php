@@ -1,6 +1,9 @@
 <?php
 return [
     'info' => 'بياناتي',
+    'short_code' => 'اختصار',
+    'right_to_list' => 'من اليمين للشمال',
+    'languages' => 'اللغات',
     'logout' => 'خروج',
     'todayfilter' => 'فلتر اليوم',
     'save' => 'save',

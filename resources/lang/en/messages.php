@@ -1,6 +1,8 @@
 <?php
 return [
     'info' => 'بياناتي',
+    'short_code' => 'SHORT CODE',
+    'right_to_list' => 'right to left',
     'logout' => 'Logout',
     'todayfilter' => 'Today filter',
     'save' => 'save',
@@ -8,6 +10,7 @@ return [
     'save' => 'SAVE',
     'title' => 'SMS',
     'language' => 'عربي',
+    'languages' => 'languages',
     'role' => 'Role',
     'create-role' => 'Create Role',
     'text-messages' => 'Text Messages',
