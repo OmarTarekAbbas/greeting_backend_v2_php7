@@ -13,7 +13,6 @@
 
 Route::get('popularCountInc', 'GreetingimgsController@popular_count_increment');
 
-Auth::routes();
 Route::get('logout_ad', 'HomeController@logoutadmin');
 
 Route::get( 'new_landing', 'FrontEndController@new_landing');
@@ -417,16 +416,5 @@ Route::get('admin/get_table_ids',function(Illuminate\Http\Request $request){
     return $table_name;
 });
 
+Auth::routes(['register' => false]);
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

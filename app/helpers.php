@@ -47,8 +47,13 @@ function OP() {
 
     $url = Generatedurl::where('UID', UID())->first();
     // dd(UID());
-    $op = $url->operator_id;
-    return $op;
+    if($url){
+        $op = $url->operator_id;
+        return $op;
+    }else{
+        return view('errors.404y');
+    }
+    
 }
 
 function OP_switch($uid) {
@@ -87,10 +92,14 @@ function get_pageLength() {
 function snap_Occasions() {
     $UID = UID();
     $url = Generatedurl::where('UID', $UID)->first();
+    
+    if($url)
     $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
 
     $occasions_array = [];
     $occasions       = [];
+    
+    if(isset($snap))
     foreach ($snap as $key => $value) {
         array_push($occasions_array, $value->occasion_id);
     }
