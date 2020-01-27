@@ -1,9 +1,11 @@
 <?php  $title = "خطأ";?>
 @extends('front.template')
 @section('content')
-  -->
    <style type="text/css">
    header {
+    display: none !important;
+   }
+   .buttom_menu {
     display: none !important;
    }
    </style>

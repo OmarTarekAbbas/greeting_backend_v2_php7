@@ -1,9 +1,9 @@
 <?php
 return [
     'info' => 'بياناتي',
-    'short_code' => 'اختصار',
-    'right_to_list' => 'من اليمين للشمال',
-    'languages' => 'اللغات',
+    'short_code' => 'short code',
+    'right_to_list' => 'right to left',
+    'languages' => 'languages',
     'logout' => 'خروج',
     'todayfilter' => 'فلتر اليوم',
     'save' => 'save',
@@ -42,7 +42,7 @@ return [
     'send' => 'ارسال',
     'update' => 'تعديل',
     'campain' => [
-        'title' => 'عنوان',
+        'title' => 'title',
         'send-message' => 'ارسال رساله جديده',
         'new-sender' => 'لاضافة مرسلين جدد',
         'template' => 'لاضافة مرسلين جدد',
@@ -208,7 +208,7 @@ return [
     'image' => 'صوره',
     'select_image' => 'أختيار صوره',
     'add_user' => 'أضافة مستخدم جديد',
-    'action' => 'إجراء',
+    'action' => 'action',
     'static_translations' => 'static_translations',
     'keyword' => 'KEYWORD',
     'translation' => 'TRANSLATION',

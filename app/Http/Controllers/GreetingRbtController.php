@@ -125,7 +125,8 @@ class GreetingRbtController extends Controller {
         $validator = Validator::make($request->all(), [
                     'file' => 'required',
                     'title' => 'required',
-                    'occasion_id' => 'required'
+                    'occasion_id' => 'required',
+                    'code.*' => 'required'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator);

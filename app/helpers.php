@@ -51,7 +51,7 @@ function OP() {
         $op = $url->operator_id;
         return $op;
     }else{
-        return view('errors.503');
+        return view('errors.404');
     }
 
 }
