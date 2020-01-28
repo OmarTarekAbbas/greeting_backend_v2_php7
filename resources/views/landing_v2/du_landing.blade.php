@@ -23,7 +23,7 @@
     }
 </style>
 @php
-App::setLocale($lang);    
+App::setLocale($lang);
 @endphp
 <body>
     <div class="main_container">
@@ -42,7 +42,7 @@ App::setLocale($lang);
 
             <div class="shbka">
                 <div class="container">
-                    <h3>@if ($lang == 'ar' && $peroid == 'daily') {{'اشترك الان في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{'اشترك الان في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Enjoy with daily flatter service'}} @else {{'Enjoy with weekly flatter service'}} @endif</h3>
+                    <h3 style="color: #630b0b;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
@@ -80,7 +80,7 @@ App::setLocale($lang);
                         <div class="form-group form-inline">
                             <input type="hidden" name="peroid"  value="{{$peroid}}"  >
                             <input type="hidden" name="lang"  value="{{$lang}}"  >
-    
+
                             <label for="phone"><span>971</span></label>
                             <input type="hidden" name="prev_url"  value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}"  >
                             <input type="tel" class="form-control" id="phone" required="" placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{9}">
@@ -95,19 +95,16 @@ App::setLocale($lang);
             -->
                 </div>
             </div>
-{{--              
+{{--
             <div class="cancel">
                 <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('du_unsub')}}">الرابط</a></p>
             </div>    --}}
-            
-            
+
+
         </div>
 
-        <!-- copyright -->
-        <div class="copy">
-            <p>copyright @ <span><?php echo date("Y") ?></span> DigiZone, all rights reserved.</p>
-        </div>
-        <!-- copyright -->
+
+
 
         <!-- loading -->
         <div class="loading-overlay">
