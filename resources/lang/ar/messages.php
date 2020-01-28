@@ -2,7 +2,6 @@
 return [
     'info' => 'بياناتي',
     'du_enjoy' => 'استمتع بوقتك',
-    'du_subscribe' => 'اشترك الان',
     'du_gym' => 'خدمة جيم',
     'subscribe' => 'اشترك',
     'du_enter_mob' => 'ادخل رقم الهاتف',

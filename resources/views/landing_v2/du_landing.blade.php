@@ -42,7 +42,7 @@ App::setLocale($lang);
 
             <div class="shbka">
                 <div class="container">
-                    <h3>@lang('messages.du_subscribe') @if ($lang == 'ar' && $peroid == 'daily') {{'يوميا'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{'اسبوعيا'}} @else {{$peroid}} @endif</h3>
+                    <h3>@if ($lang == 'ar' && $peroid == 'daily') {{'اشترك الان في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{'اشترك الان في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Enjoy with daily flatter service'}} @else {{'Enjoy with weekly flatter service'}} @endif</h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">

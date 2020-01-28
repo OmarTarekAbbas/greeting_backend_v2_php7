@@ -3,7 +3,6 @@ return [
     'info' => 'info',
     'du_enjoy' => 'Enjoy your time',
     'du_subscribe' => 'Subscribe ',
-    'du_gym' => 'GYM Services',
     'subscribe' => 'subscribe',
     'du_valid_num' => 'numbers only',
     'du_valid_num9' => 'nine numbers',
