@@ -1,6 +1,14 @@
 <?php
 return [
-    'info' => 'بياناتي',
+    'info' => 'info',
+    'du_enjoy' => 'Enjoy your time',
+    'du_subscribe' => 'Subscribe at',
+    'du_gym' => 'GYM Services',
+    'subscribe' => 'subscribe',
+    'du_valid_num' => 'numbers only',
+    'du_valid_num9' => 'nine numbers',
+    'du_enter_mob' => 'Enter your phone number',
+
     'short_code' => 'SHORT CODE',
     'right_to_list' => 'right to left',
     'logout' => 'Logout',
@@ -9,7 +17,7 @@ return [
     'static_translations' => 'static translations',
     'save' => 'SAVE',
     'title' => 'SMS',
-    'language' => 'عربي',
+    'language' => 'language',
     'languages' => 'languages',
     'role' => 'Role',
     'create-role' => 'Create Role',

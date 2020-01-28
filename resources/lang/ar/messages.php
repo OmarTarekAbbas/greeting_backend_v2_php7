@@ -1,6 +1,14 @@
 <?php
 return [
     'info' => 'بياناتي',
+    'du_enjoy' => 'استمتع بوقتك',
+    'du_subscribe' => 'اشترك الان',
+    'du_gym' => 'خدمة جيم',
+    'subscribe' => 'اشترك',
+    'du_enter_mob' => 'ادخل رقم الهاتف',
+    'du_valid_num' => 'أرقام فقط',
+    'du_valid_num9' => 'تسعة أرقام',
+
     'short_code' => 'short code',
     'right_to_list' => 'right to left',
     'languages' => 'languages',

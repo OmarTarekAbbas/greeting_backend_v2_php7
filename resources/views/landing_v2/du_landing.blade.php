@@ -22,7 +22,9 @@
         margin-top: 0;
     }
 </style>
-
+@php
+App::setLocale($lang);    
+@endphp
 <body>
     <div class="main_container">
         <div class="landing_page">
@@ -35,12 +37,12 @@
             </div>
 
             <div class="strip">
-                <h2>استمتع بوقتك مع فلاتر</h2>
+                <h2>@lang('messages.du_enjoy')</h2>
             </div>
 
             <div class="shbka">
                 <div class="container">
-                    <h3>اشترك الان</h3>
+                    <h3>@lang('messages.du_subscribe') @if ($lang == 'ar' && $peroid == 'daily') {{'يوميا'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{'اسبوعيا'}} @else {{$peroid}} @endif</h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
@@ -73,16 +75,16 @@
 
             <div class="container">
                 <div class="form_content">
-                    <form method="get" action="DuSecureRedirect" id="form_zain">
+                    <form method="get" action="{{url('DuSecureRedirect')}}" id="form_zain">
                       {{ csrf_field() }}
                         <div class="form-group form-inline">
                             <label for="phone"><span>971</span></label>
                             <input type="hidden" name="prev_url"  value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}"  >
-                            <input type="tel" class="form-control" id="phone" required="" placeholder="ادخل رقم تليفونك" name="number" required pattern="[0-9]{9}">
+                            <input type="tel" class="form-control" id="phone" required="" placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{9}">
                             <span class="validity"></span>
                         </div>
                         <!--<button class="btn back">رجوع</button>-->
-                        <button id="zain_submit"  class="btn" type="submit">اشترك</button>
+                        <button id="zain_submit"  class="btn" type="submit">@lang('messages.subscribe')</button>
                     </form>
                     <!--
                         <h5>للاشتراك يرجى الارسال الى <span>965</span></h5>
