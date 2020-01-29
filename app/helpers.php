@@ -204,7 +204,7 @@ function getCode() {
     $code = App::getLocale();
     return $code;
  }
- 
+
  function static_lang($value)
  {
    $static_translation = \App\StaticTranslation::where('key_word','like','%'.$value.'%')->first();
@@ -214,4 +214,3 @@ function getCode() {
    }
    return false;
  }
- 

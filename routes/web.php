@@ -41,11 +41,15 @@ define('serviceNode',"IVAS");
 
 
 
-
 // routes
 Route::get('/', function () {
     return redirect('landing');
 });
+// Route::get('/register', function () {
+//     echo "omar";
+// });
+Auth::routes(['register' => false]);
+
 Route::get('logout_ad', 'HomeController@logoutadmin');
 
 Route::get('landing', 'HomeController@he_redirect');
@@ -422,12 +426,6 @@ Route::get('admin/get_table_ids',function(Illuminate\Http\Request $request){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/register', function () {
+    return redirect('login');
+});

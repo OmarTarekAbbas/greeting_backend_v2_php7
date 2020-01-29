@@ -47,12 +47,12 @@
                     <input type="checkbox" class="js-switch" id="checkbox" name="remember" /><label for="checkbox" class="font-size-12 normal margin-left-10">Remember Me</label>
                 </div>
 
-                    <a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
+                    <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
 
                 <button type="submit" class="btn btn-dark bg-light-green-500 padding-10 btn-block color-white"><i class="ion-log-in"></i> Sign in</button>
             </div>
         </form>
-        <div class="panel-footer padding-md no-margin no-border bg-light-blue-500 text-center color-white">&copy; 2015 IVAS.</div>
+        <div class="panel-footer padding-md no-margin no-border bg-light-blue-500 text-center color-white">&copy; 2020 IVAS.</div>
     </div>
 </div>
 <!-- END CONTENT -->
