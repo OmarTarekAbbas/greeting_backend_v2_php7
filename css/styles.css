@@ -1,0 +1,388 @@
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+/*===========================================
+ * Place the footer at the bottom
+ */
+.mainSection{
+	height: 100%;
+	//margin-bottom:-40px;
+	position: relative;
+	overflow-y:auto;
+	padding-bottom: 80px;
+}
+
+.pageFooter {
+	height:40px;
+	position:relative;
+	bottom:0;
+}
+
+/*.clearFooter {
+	height: 40px;
+	clear: both;
+}*/
+
+/*===========================================
+ * Greeting Theme
+ */
+html,body {
+	overflow:hidden;
+}
+body{
+	font-family: 'Droid Arabic Kufi', sans-serif;
+	color: rgb(100,100,100);
+        position: relative;
+}
+.mainHeader {
+	height: 180px;
+	width: 100%;
+	position: absolute;
+	top:0;
+	left:0;
+	background: url('../img/green-gobbler.png') repeat;
+	z-index: 0;
+}
+
+.mainHeader h1 {
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 24px;
+	color: #01BBF3;
+	padding: 15px 0px 6px;
+}
+
+.mainSection {
+	overflow-x: hidden;
+overflow-y:scroll;
+-webkit-overflow-scrolling: touch;
+}
+
+table {
+	margin-top: 20px;
+}
+table td{
+	text-align:center;
+	font-size: 11px;
+	padding:8px 4px;
+	height:auto;
+	valign:center;
+}
+
+table td:last-child{
+	text-align:right;
+}
+
+
+/*===========================================
+ * Player
+ */
+.np-play{
+	cursor:pointer;
+}
+
+#play {
+	background:url(../img/play_small.svg) no-repeat center;
+	background-size: 12px;
+}
+#paused, #playing{
+	background: url(../img/pause_small.png) no-repeat center ;
+	background-size: 12px;
+}
+
+
+ td.np-play {
+	cursor: pointer;
+	background: url(../img/play_small.svg) no-repeat  center;
+	background-size: 12px;
+}
+			
+
+/*===========================================
+ * Greeting Form
+ */
+#greetingForm {
+	position: relative;
+	z-index: 2;
+	padding-top: 40px;
+	width: 90%;
+	margin:0 auto;
+	text-align: center;
+	min-height: 340px;
+}
+
+#greetingForm h2 {
+	margin-bottom: 10px;
+	color:#01BBF3;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+#greetingForm fieldset{
+	background: #fff;
+	width: 100%;
+	padding: 20px;
+	position: absolute;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	min-height: 240px;
+	margin-bottom: 60px;
+	overflow-y: auto;
+	overflow-x:hidden;
+	box-shadow: 1px 1px 4px rgba(60,60,60,.1),
+				-1px -1px 4px rgba(60,60,60,.1);
+}
+
+#greetingForm fieldset:not(:first-of-type){
+	display: none;
+}
+
+#greetingForm input[type="button"]{
+-webkit-appearance: none;
+}
+
+#greetingForm input[type="submit"]{
+-webkit-appearance: none;
+}
+
+#greetingForm input, #greetingForm select{
+	width: 100%;
+	margin: 0px auto 30px;
+	padding: 8px;
+	color: rgb(100,100,100);
+	direction:rtl;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	border: 1px solid rgb(200,200,200);
+	background: transparent;
+        outline:none;
+	
+}
+#greetingForm input[type="radio"]{
+	margin: 0px;
+	padding: 0px;
+}
+
+#greetingForm .action-button {
+	padding: 6px 0px;
+	background:#01BBF3;
+	color:#fff;
+	border:none;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	width: 50%;
+	cursor:pointer;
+	margin-top: 20px;
+	max-width: 100px;
+	font-family: 'Droid Arabic Kufi', sans-serif;
+        
+
+}
+
+#greetingForm .action-button:hover,
+#greetingForm .action-button:focus {
+	box-shadow: 0 0 0 2px #fff,
+	0 0 0 3px #01BBF3;
+        outline:none;
+}
+
+#progressbar {
+	overflow: hidden;
+	counter-reset:step;
+	margin: 15px 0px 20px;
+	
+}
+
+#progressbar li {
+	width: 33.33%;
+	float: right;
+	padding:4px;
+	font-weight: bold;
+	font-size: 12px;
+	color:#01BBF3;
+	position: relative;
+	text-transform: uppercase;
+}
+
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width:20px;
+	line-height:20px;
+	display: block;
+	background: #fff;
+	color: #01BBF3;
+	margin: 0 auto 5px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#progressbar li:after{
+	content:'';
+	height:2px;
+	width:100%;
+	background: #fff;
+	position: absolute;
+	z-index: -1;
+	left: -50%;
+	top: 13px;
+}
+
+#progressbar li:last-child:after{
+	content: none;
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after{
+	background: #01BBF3;
+	color: white;
+}
+
+.error {
+	color: red;
+	font-size: 10px;
+	margin-bottom: 5px;
+}
+
+.download .mainHeader {
+ height: 100px; 
+ padding-top:20px;
+}
+
+.mainSection.download  {
+overflow-y: auto;
+}
+.dl-url {
+width: 90%;
+background:#fff;
+border-radius:5px;
+margin: 130px auto 0px;
+color: #01BBF3;
+padding: 20px 5px;
+font-size: 14px;
+position: relative;
+z-index: 200;
+height: auto;
+}
+
+.dl-url a {
+width: 100%;
+text-align: center;
+}
+
+
+/*===========================================
+ * Footer
+ */
+.copyright{
+	width:90%;
+	margin:0 auto;
+}
+.ivas-logo {
+	height: 34px;
+	float:left;
+}
+
+.ivas-logo img {
+	height:100%;
+}
+
+@media screen and (min-width:266px) and (max-width:310px){
+.dl-url{
+font-size: 12px;
+}
+}
+
+
+@media screen and (max-width:265px){
+.dl-url{
+font-size: 10px;
+}
+}
+
+
+/*===========================================
+ * page loader
+ */
+
+.pageLoader {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   z-index: 3000;
+   -webkit-transform: translate(-50%,-50%);
+   -moz-transform: translate(-50%,-50%);
+   -ms-transform: translate(-50%,-50%);
+   -o-transform: translate(-50%,-50%);
+   transform: translate(-50%,-50%);
+   display:none;
+}
+
+a.action-button {
+display:block;
+padding: 10px 0px;
+	background:#01BBF3;
+	color:#fff;
+	border:none;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	//width: 50%;
+text-align:center;
+	cursor:pointer;
+	margin: 20px auto 0px;
+	max-width: 200px;
+	font-family: 'Droid Arabic Kufi', sans-serif;
+}
+
+.alert-box {
+    border-style: solid;
+    border-width: 1px;
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: normal;
+    margin-bottom: 1.25rem;
+    padding: 0.875rem 1.5rem 0.875rem 0.875rem;
+    position: relative;
+    transition: opacity 300ms ease-out;
+    background-color: #008CBA;
+    border-color: #0078a0;
+    color: #FFFFFF; }
+.alert-box .close {
+    right: 0.25rem;
+    background: inherit;
+    color: #333333;
+    font-size: 1.375rem;
+    line-height: .9;
+    margin-top: -0.6875rem;
+    opacity: 0.3;
+    padding: 0 6px 4px;
+    position: absolute;
+    top: 50%; }
+.alert-box .close:hover, .alert-box .close:focus {
+    opacity: 0.5; }
+.alert-box.radius {
+    border-radius: 3px; }
+.alert-box.round {
+    border-radius: 1000px; }
+.alert-box.success {
+    background-color: #43AC6A;
+    border-color: #3a945b;
+    color: #FFFFFF; }
+.alert-box.alert {
+    background-color: #f04124;
+    border-color: #de2d0f;
+    color: #FFFFFF; }
+.alert-box.secondary {
+    background-color: #e7e7e7;
+    border-color: #c7c7c7;
+    color: #4f4f4f; }
+.alert-box.warning {
+    background-color: #f08a24;
+    border-color: #de770f;
+    color: #FFFFFF; }
+.alert-box.info {
+    background-color: #a0d3e8;
+    border-color: #74bfdd;
+    color: #4f4f4f; }
+.alert-box.alert-close {
+    opacity: 0; }
