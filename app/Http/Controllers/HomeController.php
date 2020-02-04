@@ -1821,6 +1821,36 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         return Response(array('result' => $result));
     }
 
+
+    public function mobily_notification(request $request)
+    {
+        date_default_timezone_set("Africa/Cairo");
+        $URL = \Request::fullUrl();
+        $today = date("Y-m-d");
+        $time = strtotime($today);
+
+
+            $parameters_arr = array(
+                'link' => $URL,
+                'date' => Carbon::now()->format('Y-m-d H:i:s'),
+            );
+
+
+            // log for all history
+            $actionName = "Mobily Notification Url";
+            $this->log($actionName, $URL, $parameters_arr);
+
+
+
+
+            $result = array();
+            $result['status'] = "success";
+            $result['type'] = "mobily_notification_url";
+            $result['url'] = $URL;
+
+        return Response(array('result' => $result));
+    }
+
     public function viva_profile($uid){
         $phone=  \Session::get('MSISDN') ;
          if(isset($phone)){

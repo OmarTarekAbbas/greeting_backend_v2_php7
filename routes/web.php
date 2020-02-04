@@ -245,6 +245,10 @@ Route::get('du_pinCode', 'FrontEndController@du_pinCode');
 Route::get('du_unsub', 'FrontEndController@du_unsub');
 
 
+//Mobily Notification
+Route::get('mobily_notification', 'HomeController@mobily_notification');
+
+
 
 //Route::get('admin/ajax','OccasionsController@ajax');
 
