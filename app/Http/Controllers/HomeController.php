@@ -1579,15 +1579,14 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $local= "ar" ;
         }
 
-
-
+        $redirectUrl=  url('/newdesignv4/9130281/');
 
 
 
         // activation api :   http://pay-with-du.ae/20/digizone/digizone-flaterdaily-1-ar-doi-web?origin=digizone&uid=971555802322&trxid=56833e8d-c21b-453b-9e2a-f33f20415ae2&serviceProvider=secured&serviceid=flaterdaily&plan=daily&price=2&locale=ar
         //  f5d1048a-995e-11e7-abc4-cec278b6b50a
 
-        $URL = "http://pay-with-du.ae/20/digizone/digizone-{$serviceid}-{$num}-{$local}-doi-web?origin=digizone&uid=$msisdn&trxid=$trxid&serviceProvider=secured&serviceid=$serviceid&plan=$plan&price=$price&locale=$local";
+        $URL = "http://pay-with-du.ae/20/digizone/digizone-{$serviceid}-{$num}-{$local}-doi-web?origin=digizone&uid=$msisdn&trxid=$trxid&serviceProvider=secured&serviceid=$serviceid&plan=$plan&price=$price&locale=$local&redirectUrl=";
 
         // make log
         $actionName = "DU SecureD Pincode Send";
@@ -1627,6 +1626,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         return view('landing_v2.du_landing_success');
     }
+
 
 
     //===============================Viva Integration "David" ==========================================//
@@ -1821,6 +1821,36 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         return Response(array('result' => $result));
     }
 
+
+    public function mobily_notification(request $request)
+    {
+        date_default_timezone_set("Africa/Cairo");
+        $URL = \Request::fullUrl();
+        $today = date("Y-m-d");
+        $time = strtotime($today);
+
+
+            $parameters_arr = array(
+                'link' => $URL,
+                'date' => Carbon::now()->format('Y-m-d H:i:s'),
+            );
+
+
+            // log for all history
+            $actionName = "Mobily Notification Url";
+            $this->log($actionName, $URL, $parameters_arr);
+
+
+
+
+            $result = array();
+            $result['status'] = "success";
+            $result['type'] = "mobily_notification_url";
+            $result['url'] = $URL;
+
+        return Response(array('result' => $result));
+    }
+
     public function viva_profile($uid){
         $phone=  \Session::get('MSISDN') ;
          if(isset($phone)){
@@ -1840,11 +1870,6 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         Session::flush();
         return redirect('landing_viva_new');
     }
-
-    public function logoutadmin(Request $request) {
-        Session::flush();
-        return redirect('/login');
-      }
 
 
     //===============================Viva Integration "David" ==========================================//
@@ -2969,8 +2994,10 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 		$data = $this->pkcs7_pad($data , 16);
 	   //echo $data;
 		echo '<br>';
-		return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
+         // return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);  // this for php 5
+         return openssl_encrypt($data, 'aes-256-cbc' , $key, OPENSSL_RAW_DATA | OPENSSL_NO_PADDING, $iv);  // encryptiom in php 7.3
 	  }
+
 
 	  public function pkcs7_pad($text, $blocksize)
 	  {
@@ -3028,6 +3055,9 @@ public function ooredoo_unsub_action() {
 
     //======================================Ooredoo direct integration =============================================//
 
-
+    public function logoutadmin(Request $request) {
+        \Auth::logout();
+        return redirect('/login');
+      }
 
 }
