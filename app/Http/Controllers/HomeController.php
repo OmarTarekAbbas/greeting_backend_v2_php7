@@ -3056,7 +3056,7 @@ public function ooredoo_unsub_action() {
     //======================================Ooredoo direct integration =============================================//
 
     public function logoutadmin(Request $request) {
-        Session::flush();
+        \Auth::logout();
         return redirect('/login');
       }
 
