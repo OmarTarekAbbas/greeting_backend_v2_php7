@@ -102,14 +102,14 @@
                     <a href="{{url('rotana/filter/'.$Rdata_today[0]->id.'/'.UID())}}">
 
                         <div class="filter-img">
-                            <img class="img-fluid" src="{{url('/'.$Rdata_today[0]->path)}}" alt="today filter" style="margin-top: 13%">
+                            <img class="img-fluid" src="{{url('/'.$Rdata_today[0]->path)}}" alt="today filter" style="margin-top: 19%">
                             <i class="fas fa-heart fa-lg ajax_call" value="{{$Rdata_today[0]->id}}"></i>
                         </div>
                     </a>
                 </div>
                 <div class="col-4">
                     <div class="filter-title">
-                    <h3 class="text-center h5" style="color:#347742">{{$Rdata_today[0]->getTranslation('title',getCode())}}</span></h3>
+                    <h3 class="text-center" style="color:#347742">{{$Rdata_today[0]->getTranslation('title',getCode())}}</span></h3>
                     </div>
                 </div>
             </div>
