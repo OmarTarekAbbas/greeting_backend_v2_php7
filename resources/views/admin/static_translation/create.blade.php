@@ -18,10 +18,10 @@
                 </div>
                 <div class="box-content">
                      @if(isset($static_translation))
-                        {!! Form::model($static_translation, ['route' => ['admin.static_translation.update', $static_translation->id], 'method' => 'PUT', 'class' => 'form-horizontal', 'files'=>'true' ]) !!}
+                        {!! Form::model($static_translation, ['url' => ['admin/static_translation', $static_translation->id], 'method' => 'PUT', 'class' => 'form-horizontal', 'files'=>'true' ]) !!}
 
-                    @else
-                        {!! Form::open(['method' => 'POST', 'route' => 'admin.static_translation.store', 'class' => 'form-horizontal', 'files'=>'true' ]) !!}
+                    @else 
+                        {!! Form::open(['method' => 'POST', 'url' => 'admin/static_translation', 'class' => 'form-horizontal', 'files'=>'true' ]) !!}
 
 
                     @endif

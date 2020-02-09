@@ -32,7 +32,7 @@ class Greetingimg extends Model {
     }
 
     public function getOperatorListAttribute() {
-        return $this->operators->lists('id')->all();
+        return $this->operators->pluck('id')->all();
     }
 
     public function processedimgs() {
@@ -52,7 +52,7 @@ class Greetingimg extends Model {
     }
 
     public function scopeOccasionslist($query) {
-        $query->where('RDate', '<=', Carbon::now()->format('Y-m-d'))->where('EXDate', '>=', Carbon::now()->format('Y-m-d'))->occasion()->unique()->lists('title', 'id');
+        $query->where('RDate', '<=', Carbon::now()->format('Y-m-d'))->where('EXDate', '>=', Carbon::now()->format('Y-m-d'))->occasion()->unique()->pluck('title', 'id');
     }
 
     public function scopePublishedSnap($query) {

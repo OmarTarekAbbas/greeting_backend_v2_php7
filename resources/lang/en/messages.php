@@ -1,13 +1,23 @@
 <?php
 return [
-    'info' => 'بياناتي',
+    'info' => 'info',
+    'du_enjoy' => 'Enjoy your time',
+    'du_subscribe' => 'Subscribe ',
+    'subscribe' => 'subscribe',
+    'du_valid_num' => 'numbers only',
+    'du_valid_num9' => 'nine numbers',
+    'du_enter_mob' => 'Enter your phone number',
+
+    'short_code' => 'SHORT CODE',
+    'right_to_list' => 'right to left',
     'logout' => 'Logout',
     'todayfilter' => 'Today filter',
-    'yousef' => 'save',
+    'save' => 'save',
     'static_translations' => 'static translations',
     'save' => 'SAVE',
     'title' => 'SMS',
-    'language' => 'عربي',
+    'language' => 'language',
+    'languages' => 'languages',
     'role' => 'Role',
     'create-role' => 'Create Role',
     'text-messages' => 'Text Messages',
@@ -74,7 +84,7 @@ return [
         'fatch_dlr' => 'Fatch Dlr',
         'count' => 'Count',
         'subscribed' => 'subscribed',
-        
+
     ],
     'type' => [
         'type' => 'Type',
@@ -153,7 +163,7 @@ return [
         'post-ind' => 'List Posts',
         'update-post' => "Update Post",
         'post-img' => "Post Image",
-    ],  
+    ],
     'operators' =>[
         'operator-tap' => 'Operator',
         'operator-title' => 'Operator Title',
@@ -282,10 +292,10 @@ return [
         'quota-error' => 'user quota can not be greater then or equal to message sent',
         'updated' => 'updated successfuly',
         'no_selected_item' => 'No items selected',
-        'deleted' => 'Deleted Successfully' 
+        'deleted' => 'Deleted Successfully'
     ],
      'notification' => 'Notifications' ,
-    
+
       'reports' => 'Reports' ,
       'direct-message' => 'Direct Message' ,
       'template' => [

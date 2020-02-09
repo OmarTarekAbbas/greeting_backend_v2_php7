@@ -33,7 +33,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('category_id', 'Select Category', ['class'=>'control-label']) !!}
-    {!! Form::select('category_id', $Categories, null, ['class'=>'form-control']) !!}
+    {!! Form::select('category_id', $Categories, isset($_REQUEST['category_id']) ? $_REQUEST['category_id']:null, ['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('file', 'Select Image', ['class'=>'control-label']) !!}

@@ -13,7 +13,7 @@
     @foreach($Occasions as $Occasion)
         <tr>
             <td>{{ $Occasion->id }}</td>
-            <td>{{ $Occasion->getTranslation('title','ar') }}</td>
+            <td>{{ $Occasion->title }}</td>
             <td>{{ $Occasion->category->title }}</td>
             <td>@if($Occasion->slider) YES @else NO @endif</td>
             <td>
@@ -23,11 +23,13 @@
                     <i class="fa fa-edit  "></i>
                 </button>
                 {!! Form::close() !!}
+                @if(get_settings('enable_parent'))
                 {!! Form::open(array('class' => 'form-inline col-lg-1','method' => 'DELETE', 'action' => array('OccasionsController@destroy', $Occasion->id))) !!}
                 <button class="btn btn-danger btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete" onclick="return confirm('Are you sure you want to delete {{ $Occasion->title }}')">
                     <i class="fa fa-trash-o "></i>
                 </button>
                 {!! Form::close() !!}
+                @endif
                 @endif
                 <a href="{{ url('admin/occasions/'.$Occasion->id.'/gimage') }}"><button class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Images"><i class="ion-images"></i> </button> </a>
                 <a href="{{ url('admin/occasions/create?parent_id='.$Occasion->id.'&title='.$Occasion->title) }}"><button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Sub Occasion"><i class="ion-plus"></i> </button> </a>

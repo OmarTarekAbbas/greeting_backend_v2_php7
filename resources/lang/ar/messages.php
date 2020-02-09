@@ -1,9 +1,19 @@
 <?php
 return [
     'info' => 'بياناتي',
+    'du_enjoy' => 'استمتع بوقتك',
+    'du_gym' => 'خدمة جيم',
+    'subscribe' => 'اشترك',
+    'du_enter_mob' => 'ادخل رقم الهاتف',
+    'du_valid_num' => 'أرقام فقط',
+    'du_valid_num9' => 'تسعة أرقام',
+
+    'short_code' => 'short code',
+    'right_to_list' => 'right to left',
+    'languages' => 'languages',
     'logout' => 'خروج',
     'todayfilter' => 'فلتر اليوم',
-    'yousef' => 'save',
+    'save' => 'save',
     'save' => 'SAVE',
     'title' => 'ألرسائل النصيه',
     'language' => 'english',
@@ -39,7 +49,7 @@ return [
     'send' => 'ارسال',
     'update' => 'تعديل',
     'campain' => [
-        'title' => 'عنوان',
+        'title' => 'title',
         'send-message' => 'ارسال رساله جديده',
         'new-sender' => 'لاضافة مرسلين جدد',
         'template' => 'لاضافة مرسلين جدد',
@@ -169,8 +179,8 @@ return [
         'no_selected_item' => 'لم يتم إختيار أي عنصر',
         'deleted' => 'تم الحذف بنجاح'
     ],
-     'notification' => 'اشعار' , 
-    
+     'notification' => 'اشعار' ,
+
     'reports' => 'تقارير' ,
     'direct-message' => 'رسالة سريعة'
     ,
@@ -205,7 +215,7 @@ return [
     'image' => 'صوره',
     'select_image' => 'أختيار صوره',
     'add_user' => 'أضافة مستخدم جديد',
-    'action' => 'إجراء',
+    'action' => 'action',
     'static_translations' => 'static_translations',
     'keyword' => 'KEYWORD',
     'translation' => 'TRANSLATION',

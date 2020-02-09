@@ -41,7 +41,7 @@
     transform: scale(0.8);
     bottom: 32%;
     left: -3%;
-    width: 38%;
+    width: 52%;
 }
 
 .main .status .s_title {
@@ -82,7 +82,8 @@
                     <source src="{{url('/'.$snap->vid_path)}}" type="video/mp4" />
                 </video>
                 <a href="{{$snap->snap_link}}" class="user_filter">
-                    <h4 class=" use_filter_link text-center p-1">استخدم الفلتر</h4>
+                    <h4 class=" use_filter_link text-center p-1">استخدم الفلتر
+</h4>
                     <!-- <img src="{{url('assets/front/newdesignv4/')}}/images/use_filter.png" alt="Use Filter" class="w-25 use_filter_link"> -->
                 </a>
             </a>

@@ -82,7 +82,7 @@
                 <h5>الى <span>965</span><span> STOP1 </span>لالغاء الاشتراك ارسل</h5>-->
                 </div>
             </div>
-            
+
         </div>
 
         <!-- copyright -->
@@ -109,7 +109,7 @@
     <script>
 
         $(document).ready(function(){
-          var msisdn =   $("#phone").val() ; 
+          var msisdn =   $("#phone").val() ;
           if(msisdn != "" && msisdn.length == 8 && msisdn!= "@_MSISDN"){
                 $("#viva_form").submit();
             }
@@ -118,8 +118,8 @@
         $('#zain_submit').focusin(function () {
             $('#viva_form').submit()
         });
-        
-        </script>  
+
+        </script>
 
 </body>
 

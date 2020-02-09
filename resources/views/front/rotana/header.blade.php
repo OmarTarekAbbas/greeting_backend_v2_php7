@@ -47,9 +47,9 @@
 
 				<div class="col-9">
 					<div class="logo-title  ">
-						<img class="rounded-0" src="{{url('assets/front/rotana/')}}/images/Rotana-Flater- Logo.png" alt="Rotana Flater Logo">
+						<img class="rounded-0" src="{{url('assets/front/rotana/')}}/images/Rorana_flater logo_new.png" alt="Rotana Flater Logo">
 					</div>
-					
+
 				</div>
 			</div>
 		</header>
@@ -64,12 +64,12 @@
 		</div>
 	</div>
 	<!-- end loading -->
-	
+
 	<!-- footer -->
 	<footer>
 		<div class="footer">
 			<div class="container-fluid">
-				<div class="row">  
+				<div class="row">
 					<div class="col-4">
 						<a href="{{url('rotana/occasion/'.UID())}}">
 							<div class="f-nav">

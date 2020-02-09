@@ -13,7 +13,7 @@
 
 Route::get('popularCountInc', 'GreetingimgsController@popular_count_increment');
 
-Auth::routes();
+Route::get('logout_ad', 'HomeController@logoutadmin');
 
 Route::get( 'new_landing', 'FrontEndController@new_landing');
 Route::get('unsub', 'FrontEndController@unsub');
@@ -234,13 +234,19 @@ Route::get('zain_iraq_landing', 'FrontEndController@zain_iraq_landing');
 Route::get('zain_iraq_success', 'FrontEndController@zain_iraq_success');
 Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild');
 
-/* Du Landing */
-Route::get('du_landing', 'FrontEndController@du_landing');
+/* Du Landing = SecureD */
+Route::get('du_landing/{peroid?}/{lang?}', 'HomeController@du_landing');
+Route::get('du_landing_success', 'HomeController@du_landing_success');
 Route::get('DuSecureRedirect', 'HomeController@DuSecureRedirect');
+
 
 
 Route::get('du_pinCode', 'FrontEndController@du_pinCode');
 Route::get('du_unsub', 'FrontEndController@du_unsub');
+
+
+//Mobily Notification
+Route::get('mobily_notification', 'HomeController@mobily_notification');
 
 
 
@@ -414,16 +420,5 @@ Route::get('admin/get_table_ids',function(Illuminate\Http\Request $request){
     return $table_name;
 });
 
+Auth::routes(['register' => false]);
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

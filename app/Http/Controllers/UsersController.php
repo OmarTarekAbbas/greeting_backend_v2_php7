@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Role;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -33,8 +35,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
-        return view('auth.add');
+        $Roleids = Role::pluck('Title', 'id');
+        return view('auth.add', compact('Roleids'));
 
     }
 
@@ -49,7 +51,7 @@ class UsersController extends Controller
         $this->validate($request,[
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|min:6',
         ]);
         $req = Request::capture();
         $Items = $req->all();
