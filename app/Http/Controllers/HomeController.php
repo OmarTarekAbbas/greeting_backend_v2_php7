@@ -1628,6 +1628,107 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
     }
 
 
+    public function du_landingrotana(request $request)
+    {
+
+        $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
+        $lang =  isset($request->lang) ? $request->lang : "ar" ;
+        return view('landingrotana.du_landing',compact("peroid","lang"));
+    }
+
+    public function du_landing_successrotana(request $request) {
+        date_default_timezone_set("Africa/Cairo");
+
+        if (isset($_REQUEST['number']) && $_REQUEST['number'] != "") {
+            $msisdn = $_REQUEST['number'];
+            $msisdn="971".$msisdn ;
+        } else {
+            $msisdn = "";
+        }
+
+
+        require('uuid/UUID.php');
+        $trxid = \UUID::v4();
+
+        if (isset($_REQUEST['peroid']) && $_REQUEST['peroid'] != "") {
+            $plan = $_REQUEST['peroid'];
+
+            if($plan  == "daily"){
+                $serviceid = "flaterdaily";
+                $price = 2 ;
+                $num= 1 ;
+            }elseif ($plan  == "weekly") {
+                $serviceid = "flaterweekly";
+                $price = 14 ;
+                $num= 7;
+
+            }else{
+                $serviceid = "flaterdaily";
+                $price = 2 ;
+                $num= 1;
+            }
+        }else{ // default is daily
+            $serviceid = "flaterdaily";
+            $plan = "daily";
+            $price = 2 ;
+            $num= 1;
+        }
+
+
+        if (isset($_REQUEST['lang']) && $_REQUEST['lang'] != "") {
+            $local = $_REQUEST['lang'];
+        }else{ // default is arabic
+            $local= "ar" ;
+        }
+
+        $redirectUrl=  url('/newdesignv4/9130281/');
+
+
+
+        // activation api :   http://pay-with-du.ae/20/digizone/digizone-flaterdaily-1-ar-doi-web?origin=digizone&uid=971555802322&trxid=56833e8d-c21b-453b-9e2a-f33f20415ae2&serviceProvider=secured&serviceid=flaterdaily&plan=daily&price=2&locale=ar
+        //  f5d1048a-995e-11e7-abc4-cec278b6b50a
+
+        $URL = "http://pay-with-du.ae/20/digizone/digizone-{$serviceid}-{$num}-{$local}-doi-web?origin=digizone&uid=$msisdn&trxid=$trxid&serviceProvider=secured&serviceid=$serviceid&plan=$plan&price=$price&locale=$local&redirectUrl=";
+
+        // make log
+        $actionName = "DU SecureD Pincode Send";
+        $parameters_arr = array(
+            'date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'URL' => $URL
+        );
+        $this->log($actionName, $URL, $parameters_arr);
+
+     $DuIntgration =    new DuIntgration();
+     $DuIntgration->url = $URL ;
+     $DuIntgration->trxid = $trxid ;
+     $DuIntgration->uid = $msisdn ;
+     $DuIntgration->serviceid = $serviceid ;
+     $DuIntgration->plan = $plan ;
+     $DuIntgration->price = $price ;
+     $DuIntgration->local = $local ;
+     $DuIntgration->save();
+
+        return redirect($URL);
+    }
+
+
+
+    public function DuSecureRedirectrotana()
+    {
+        date_default_timezone_set("Africa/Cairo");
+        $URL = \Request::fullUrl();
+          // make log
+          $actionName = "DU SecureD Pincode Success";
+          $parameters_arr = array(
+              'date' => Carbon::now()->format('Y-m-d H:i:s'),
+              'URL' => $URL
+          );
+          $this->log($actionName, $URL, $parameters_arr);
+
+
+        return view('landingrotana.du_landing_success');
+    }
+
 
     //===============================Viva Integration "David" ==========================================//
 
