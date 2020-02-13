@@ -1642,13 +1642,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $number ="971".$request->number;
         $pero =$request->peroid;
         //dd($number);
-        $URL = "http://localhost/du_system/api/test";
+        $URL = "http://10.2.10.104:8080/du_system/api/test";
 
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $URL);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "msisdn=".$number."&serviceid=".$pero);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "msisdn=".$number."&serviceid=flater".$pero);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $server_output = curl_exec($ch);
