@@ -1627,6 +1627,43 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         return view('landing_v2.du_landing_success');
     }
 
+    public function du_unsubc(request $request)
+    {
+
+        $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
+        $lang =  isset($request->lang) ? $request->lang : "ar" ;
+        return view('landing_v2.du_unsub',compact("peroid","lang"));
+    }
+
+    public function du_unsubcr(request $request)
+    {
+        $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
+        $lang =  isset($request->lang) ? $request->lang : "ar" ;
+        $number ="971".$request->number;
+        $pero =$request->peroid;
+        //dd($number);
+        $URL = "http://localhost/du_system/api/test";
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $URL);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "msisdn=".$number."&serviceid=".$pero);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+
+        curl_close ($ch);
+
+        // Further processing ...
+        if ($server_output == "OK") {
+            return 'success';
+         } else {
+            return $server_output;
+          }
+
+    }
+
 
     public function du_landingrotana(request $request)
     {

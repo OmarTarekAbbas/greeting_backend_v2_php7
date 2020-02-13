@@ -238,6 +238,8 @@ Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild');
 Route::get('du_landing/{peroid?}/{lang?}', 'HomeController@du_landing');
 Route::get('du_landing_success', 'HomeController@du_landing_success');
 Route::get('DuSecureRedirect', 'HomeController@DuSecureRedirect');
+Route::get('du_unsubc/{peroid?}/{lang?}', 'HomeController@du_unsubc');
+Route::post('du_unsubcr', 'HomeController@du_unsubcr');
 /* Du LandingRotana */
 Route::get('du_landingrotana/{peroid?}/{lang?}', 'HomeController@du_landingrotana');
 Route::get('du_landingrotana', 'HomeController@du_landing_successrotana');

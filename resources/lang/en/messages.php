@@ -7,6 +7,7 @@ return [
     'du_valid_num' => 'numbers only',
     'du_valid_num9' => 'nine numbers',
     'du_enter_mob' => 'Enter your phone number',
+    'du_unsub' => 'Unsubscribe',
 
     'short_code' => 'SHORT CODE',
     'right_to_list' => 'right to left',
