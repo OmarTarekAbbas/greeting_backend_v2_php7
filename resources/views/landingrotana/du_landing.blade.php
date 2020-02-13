@@ -24,6 +24,15 @@
     .main_container{
         background-image: url("{{ url('assets/front/landing_v2/img/BG_Patterns.png')}}")  !important;
     }
+    .landing_page .strip{
+        background-image: url("{{ url('assets/front/landing_v2/img/stripro.png')}}")  !important;
+    }
+    .landing_page .form_content form .btn{
+        background-color: #3a813f;
+    }
+    .landing_page .form_content form .form-group label{
+        background-color: #3a813f;
+    }
 </style>
 @php
 App::setLocale($lang);
@@ -36,7 +45,7 @@ App::setLocale($lang);
                 <!-- <video width="100%" autoplay muted loop="true">
                     <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
                 </video> -->
-                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر">
+                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/download.jfif" alt="فلاتر">
             </div>
 
             <div class="strip">
@@ -45,7 +54,7 @@ App::setLocale($lang);
 
             <div class="shbka">
                 <div class="container">
-                    <h3 style="color: #630b0b;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>
+                    <h3 style="color: #e8ffe8;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر روتانا اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر روتانا الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Rotana Service'}} @else {{'Weekly Rotana Service'}} @endif</h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
