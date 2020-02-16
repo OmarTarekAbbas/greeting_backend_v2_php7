@@ -370,28 +370,10 @@ Route::get('oocasion', function () {
     return view('front.new_snap_v2.oocasion');
 });
 
-Route::get('/categories/123456','FrontEndController@cat');
-
-// Route::get('test/dir/{uid}',function(){
-//   $snap_Occasions = snap_Occasions();
-//   //return $snap_Occasions;
-//   $arr = [];
-//   foreach ($snap_Occasions as $key => $value) {
-//     //return $snap_Occasions[$key];
-//     echo $key.'--';
-//     // if($key%2 == 0){
-//     //   array_push($arr,'left');
-//     // }
-//     // else{
-//     //   array_push($arr,'right');
-//     // }
-//   }
-//   //return $arr;
-// });
 
 
-/* =================== new landing ================== */
-Route::post('AddSubscriptionContractRequest', 'FrontEndController@AddSubscriptionContractRequest');
+
+
 Route::post('admin/delete_multiselect',function (Illuminate\Http\Request $request){
     if (strlen($request['selected_list'])==0)
     {
