@@ -1642,7 +1642,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $number ="971".$request->number;
         $pero =$request->peroid;
         //dd($number);
-        $URL = "http://10.2.10.104:8080/du_system/api/test";
+        $URL = "https://dev.digizone.com.kw/du_system/api/test";
 
         $ch = curl_init();
 
@@ -1654,13 +1654,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $server_output = curl_exec($ch);
 
         curl_close ($ch);
-
+        return redirect('du_landing')->with('success', 'تم الغاء الاشتراك بنجاح');
         // Further processing ...
-        if ($server_output == "OK") {
-            return 'success';
-         } else {
-            return $server_output;
-          }
+        // if ($server_output == "OK") {
+        //     return redirect('du_landing')->with('success', 'Profile updated!');
+        //  } else {
+        //     return $server_output;
+        //   }
 
     }
 
@@ -1765,7 +1765,42 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         return view('landingrotana.du_landing_success');
     }
+    public function du_unsubcrotana(request $request)
+    {
 
+        $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
+        $lang =  isset($request->lang) ? $request->lang : "ar" ;
+        return view('landingrotana.du_unsub',compact("peroid","lang"));
+    }
+
+    public function du_unsubcrrotana(request $request)
+    {
+        $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
+        $lang =  isset($request->lang) ? $request->lang : "ar" ;
+        $number ="971".$request->number;
+        $pero =$request->peroid;
+        //dd($number);
+        $URL = "https://dev.digizone.com.kw/du_system/api/test";
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $URL);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "msisdn=".$number."&serviceid=flater".$pero);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+
+        curl_close ($ch);
+        return redirect('du_landingrotana')->with('success', 'تم الغاء الاشتراك بنجاح');
+        // Further processing ...
+        // if ($server_output == "OK") {
+        //     return redirect('du_landing')->with('success', 'Profile updated!');
+        //  } else {
+        //     return $server_output;
+        //   }
+
+    }
 
     public function du_landing_v2(request $request)
     {

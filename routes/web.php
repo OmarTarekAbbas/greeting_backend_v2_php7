@@ -244,6 +244,8 @@ Route::post('du_unsubcr', 'HomeController@du_unsubcr');
 Route::get('du_landingrotana/{peroid?}/{lang?}', 'HomeController@du_landingrotana');
 Route::get('du_landingrotana', 'HomeController@du_landing_successrotana');
 Route::get('du_landingrotana', 'HomeController@DuSecureRedirectrotana');
+Route::get('du_unsubcrotana/{peroid?}/{lang?}', 'HomeController@du_unsubcrotana');
+Route::post('du_unsubcrrotana', 'HomeController@du_unsubcrrotana');
 /* Du LandingRotana */
 Route::get('du_landing_v2/{peroid?}/{lang?}', 'HomeController@du_landing_v2');
 Route::get('du_landing_v2', 'HomeController@du_landing_success_v2');
