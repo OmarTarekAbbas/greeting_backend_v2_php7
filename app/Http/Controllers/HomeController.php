@@ -1654,13 +1654,11 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $server_output = curl_exec($ch);
 
         curl_close ($ch);
-        return redirect('du_landing')->with('success', 'تم الغاء الاشتراك بنجاح');
-        // Further processing ...
-        // if ($server_output == "OK") {
-        //     return redirect('du_landing')->with('success', 'Profile updated!');
-        //  } else {
-        //     return $server_output;
-        //   }
+        if ($server_output == false) {
+            return redirect('du_landing')->with('success', 'تم الغاء الاشتراك بنجاح');
+        } else {
+            return redirect('du_unsubc')->with('failed', 'الرقم غير صحيح');
+        }
 
     }
 
@@ -1792,13 +1790,11 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $server_output = curl_exec($ch);
 
         curl_close ($ch);
-        return redirect('du_landingrotana')->with('success', 'تم الغاء الاشتراك بنجاح');
-        // Further processing ...
-        // if ($server_output == "OK") {
-        //     return redirect('du_landing')->with('success', 'Profile updated!');
-        //  } else {
-        //     return $server_output;
-        //   }
+        if ($server_output == false) {
+            return redirect('du_landingrotana')->with('success', 'تم الغاء الاشتراك بنجاح');
+        } else {
+            return redirect('du_unsubcrotana')->with('failed', 'الرقم غير صحيح');
+        }
 
     }
 
