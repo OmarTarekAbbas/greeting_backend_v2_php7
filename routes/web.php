@@ -253,7 +253,7 @@ Route::get('du_landing_v2', 'HomeController@DuSecureRedirect_v2');
 
 Route::get('du_pinCode', 'FrontEndController@du_pinCode');
 Route::get('du_unsub', 'FrontEndController@du_unsub');
-
+ 
 
 //Mobily Notification
 Route::get('mobily_notification', 'HomeController@mobily_notification');
