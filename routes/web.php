@@ -252,12 +252,6 @@ Route::get('du_landing_v2', 'HomeController@du_landing_success_v2');
 Route::get('du_landing_v2', 'HomeController@DuSecureRedirect_v2');
 
 
-
-
-
-
-
-
 //Mobily Notification
 Route::get('mobily_notification', 'HomeController@mobily_notification');
 
