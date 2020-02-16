@@ -241,20 +241,15 @@ Route::get('DuSecureRedirect', 'HomeController@DuSecureRedirect');
 Route::get('du_unsubc/{peroid?}/{lang?}', 'HomeController@du_unsubc');
 Route::post('du_unsubcr', 'HomeController@du_unsubcr');
 /* Du LandingRotana */
-Route::get('du_landingrotana/{peroid?}/{lang?}', 'HomeController@du_landingrotana');
-Route::get('du_landingrotana', 'HomeController@du_landing_successrotana');
-Route::get('du_landingrotana', 'HomeController@DuSecureRedirectrotana');
-Route::get('du_unsubcrotana/{peroid?}/{lang?}', 'HomeController@du_unsubcrotana');
+Route::get('du_landing_rotana/{peroid?}/{lang?}', 'HomeController@du_landingrotana');
+Route::get('du_unsubc_rotana/{peroid?}/{lang?}', 'HomeController@du_unsubcrotana');
 Route::post('du_unsubcrrotana', 'HomeController@du_unsubcrrotana');
 /* Design4 purple  */
 Route::get('du_landing_v2/{peroid?}/{lang?}', 'HomeController@du_landing_v2');
-Route::get('du_landing_v2', 'HomeController@du_landing_success_v2');
-Route::get('du_landing_v2', 'HomeController@DuSecureRedirect_v2');
 
 
 //Mobily Notification
 Route::get('mobily_notification', 'HomeController@mobily_notification');
-
 
 
 //Route::get('admin/ajax','OccasionsController@ajax');
