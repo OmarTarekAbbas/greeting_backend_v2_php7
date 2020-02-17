@@ -39,15 +39,15 @@
 
 
 @media (min-width: 320px) and (max-width: 359px) {
-  
+
 .operator img{
     width: 58%;
 }
-  
+
 }
 
 .hero-bkg-animated {
-        
+
         height: 100vh;
         background-position: fixed;
         background-repeat: no-repeat;
@@ -144,7 +144,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
         <!-- copyright -->
@@ -161,8 +161,8 @@
         </div>
         <!-- end loading -->
     </div>
-  
- 
+
+
 
     <div class="modal" id="myModal">
         <div class="modal-body">
@@ -192,7 +192,21 @@
                }
           }
      });
-    
+     $('.operator').click(function(){
+         var operator = $(this).attr('sms') == '96946' ? 'Zain':$(this).attr('sms') == '1368' ? 'Oredoo' : 'Stc';
+         $.ajax({
+             url:"{{url('landing_kuwait')}}",
+             type:"get",
+             data:{
+                operator_name : operator
+             },
+             success:function(response){
+                console.log(response);
+
+             }
+         })
+     })
+
     </script>
 
 <script type="text/javascript">

@@ -4412,12 +4412,17 @@ public function favouritesv5(Request $request, $UID)
         $result['country'] = $country_from_ip;
         $result['deviceModel'] = $deviceModel;
        // $result['AllHeaders'] = $_SERVER;
-
-
-        $actionName = "Zain Kuwait logs";
+        $actionName = "Kuwait logs";
+        if($request->has('operator_name')){
+            $result['operator'] = $request->operator_name.' Kuwait';
+            $actionName = $request->operator_name." Kuwait logs";
+        }
         $URL = $request->fullUrl();
         $parameters_arr = $result;
         $this->log($actionName, $URL, $parameters_arr);  // log in
+        if($request->ajax()){
+            return 'done';
+        }
         return view('landing_v2.landing_kuwait');
     }
 
