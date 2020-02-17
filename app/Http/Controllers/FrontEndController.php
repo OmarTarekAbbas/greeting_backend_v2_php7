@@ -4416,18 +4416,15 @@ public function favouritesv5(Request $request, $UID)
         if($request->has('operator_name')){
             $result['operator'] = $request->operator_name.' Kuwait';
             $actionName = $request->operator_name." Kuwait logs";
-            $URL = $request->url;
-            $URL =   str_replace('&amp;',"&",$URL) ;
-        }else{
-            $URL = $request->fullUrl();
-        }
 
+        }
+        $URL = $request->fullUrl();
         $parameters_arr = $result;
         $this->log($actionName, $URL, $parameters_arr);  // log in
         if($request->ajax()){
             return 'done';
         }
-        return view('landing_v2.landing_kuwait',compact('URL'));
+        return view('landing_v2.landing_kuwait');
     }
 
 }

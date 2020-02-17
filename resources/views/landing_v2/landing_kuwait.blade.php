@@ -194,14 +194,12 @@
      });
      $('.operator').click(function(){
          var operator = $(this).attr('sms') == '96946' ? 'Zain':$(this).attr('sms') == '1368' ? 'Oredoo' : 'Stc';
-         var  url ="{{$URL}}" ;
          $.ajax({
-             url:"{{$URL}}",
+            url:location.href,
              type:"get",
-             dataType : "html",
              data:{
-                operator_name : operator ,
-                url :  url
+                operator_name : operator
+
              },
              success:function(response){
                 console.log(response);
