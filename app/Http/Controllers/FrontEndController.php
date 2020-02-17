@@ -4414,7 +4414,7 @@ public function favouritesv5(Request $request, $UID)
        // $result['AllHeaders'] = $_SERVER;
 
 
-        $actionName = "Zain Kuwait logs";
+        $actionName = "Kuwait logs";
         $URL = $request->fullUrl();
         $parameters_arr = $result;
         $this->log($actionName, $URL, $parameters_arr);  // log in
