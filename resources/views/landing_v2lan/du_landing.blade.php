@@ -117,8 +117,18 @@ App::setLocale($lang);
 
         </div>
 
+<div class="text-center">
 
-
+    @if ($lang == 'ar')
+    <div class="cancel">
+        <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('du_unsubc_v4'."/".$peroid."/".$lang )}}">الرابط</a></p>
+    </div>
+    @else
+    <div class="cancel">
+        <p>for unsubscribe please press on this <a href="{{url('du_unsubc_v4'."/".$peroid."/".$lang )}}">link</a></p>
+    </div>
+    @endif
+</div>
 
         <!-- loading -->
         <div class="loading-overlay">
