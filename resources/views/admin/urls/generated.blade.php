@@ -28,6 +28,8 @@
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     <span class="text text-info">rotana : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('rotana/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                    <span class="text text-info">Mbc : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('mbc/'.$UID) }}" />
+                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     @else
                     <input type="text" name="generatedurl" class="form-control input-lg" value="{{ url($UID) }}" />
                     @endif
