@@ -109,7 +109,7 @@
                 </div>
                 <div class="col-4">
                     <div class="filter-title">
-                    <h3 class="text-center" style="color:#347742;font-weight: bold;">{{$Rdata_today[0]->getTranslation('title',getCode())}}</span></h3>
+                    <h3 class="text-center" style="color:#d3181f;font-weight: bold;">{{$Rdata_today[0]->getTranslation('title',getCode())}}</span></h3>
                     </div>
                 </div>
             </div>
