@@ -1661,8 +1661,39 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         }
 
     }
+    public function du_unsubc_v4(request $request)
+    {
 
+        $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
+        $lang =  isset($request->lang) ? $request->lang : "ar" ;
+        return view('landing_v2lan.du_unsub',compact("peroid","lang"));
+    }
+    public function du_unsubcr_v4(request $request)
+    {
+        $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
+        $lang =  isset($request->lang) ? $request->lang : "ar" ;
+        $number ="971".$request->number;
+        $pero =$request->peroid;
+        //dd($number);
+        $URL = "https://dev.digizone.com.kw/du_system/api/test";
 
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $URL);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "msisdn=".$number."&serviceid=flater".$pero);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+
+        curl_close ($ch);
+        if ($server_output == false) {
+            return redirect('du_landing_v4')->with('success', 'تم الغاء الاشتراك بنجاح');
+        } else {
+            return redirect('du_unsubc_v4')->with('failed', 'الرقم غير صحيح');
+        }
+
+    }
     public function du_landingrotana(request $request)
     {
 

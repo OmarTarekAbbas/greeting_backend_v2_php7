@@ -17,16 +17,44 @@
       <![endif]-->
 </head>
 
+<style type="text/css">
+    .landing_page .strip {
+        margin-top: 0;
+    }
+    .main_container{
+        background-image: url("{{ url('assets/front/landing_v2/img/BG_Pattern_v2.png')}}")  !important;
+    }
+    .landing_page .strip{
+        background-image: url("{{ url('assets/front/landing_v2/img/strip_v2.png')}}")  !important;
+    }
+    .landing_page .form_content form .btn{
+        background-color: #7b407a;
+    }
+    .landing_page .form_content form .form-group label{
+        background-color: #7b407a;
+    }
+</style>
+@php
+App::setLocale($lang);
+@endphp
 <body>
     <div class="main_container">
         <div class="landing_page">
 
-            <div class="strip">
-                <h2>استمتع بوقتك مع فلاتر</h2>
+            <div class="start_video" id="video">
+                <!-- <video width="100%" autoplay muted loop="true">
+                    <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
+                </video> -->
+                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/045.jpg" alt="فلاتر">
             </div>
-            <br><br><br><br>
+
+            <div class="strip">
+                <h2>@lang('messages.du_unsub')</h2>
+            </div>
+
             <div class="shbka">
                 <div class="container">
+                <h3 style="color: #fff;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
@@ -45,7 +73,10 @@
                             </div>-->
 
                             <div class="col-12">
-                                <img src="{{ url('assets/front/landing_v2')}}/img/DuLogo.png" id="zain">
+                                {{--  <img src="{{ url('assets/front/landing_v2')}}/img/mobily.png" id="zain">  --}}
+                                {{-- <img src="{{ url('assets/front/landing_v2')}}/img/DuLogo.png" id="zain"> --}}
+                                <img src="{{ url('assets/front/landing_v2')}}/img/digi_zone_2.png" id="zain">
+
                             </div>
 
                             <!--<div class="col-12">
@@ -58,31 +89,33 @@
 
             <div class="container">
                 <div class="form_content">
-                    <!--<h5>ادخل رقم الهاتف</h5>-->
-                    <form method="post" action="unsusbcribe_zain_ksa" id="form_zain">
-                      {{ csrf_field() }}
+                    <form method="post" action="{{url('du_unsubcr_v4')}}" id="form_zain">
+                        {{ csrf_field() }}
                         <div class="form-group form-inline">
-                            <label for="phone"><span>{{zain_ksa_prefix}}</span></label>
-                            <input type="hidden" name="prev_url"  value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}"  >
-                            <input type="tel" class="form-control" id="phone" value="" placeholder="ادخل رقم تليفونك" name="number" required pattern="[0-9]{9}">
+                            <input type="hidden" name="peroid" value="{{$peroid}}">
+                            <label for="phone"><span>971</span></label>
+                            <input type="tel" class="form-control" id="phone" required=""
+                                placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{9}">
                             <span class="validity"></span>
                         </div>
-                        <!--<button class="btn back">رجوع</button>-->
-                        <button id="zain_submit" class="btn" type="submit" data-toggle="modal" data-target="#loginModal">الغاء</button>
+                        <button id="zain_submit" class="btn" type="submit">@lang('messages.du_unsub')</button>
                     </form>
-                    <!--<h5>للاشتراك يرجى الارسال الى <span>965</span></h5>
-                <h5>الى <span>965</span><span> STOP1 </span>لالغاء الاشتراك ارسل</h5>-->
+                    <!--
+                        <h5>للاشتراك يرجى الارسال الى <span>965</span></h5>
+                <h5>الى <span>971</span><span> STOP1 </span>لالغاء الاشتراك ارسل</h5>
+            -->
                 </div>
             </div>
+{{--
+            <div class="cancel">
+                <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('du_unsub')}}">الرابط</a></p>
+            </div>    --}}
 
 
         </div>
 
-        <!-- copyright -->
-        <div class="copy">
-            <p>copyright @ <span>2019</span> Ivas, all rights reserved.</p>
-        </div>
-        <!-- copyright -->
+
+
 
         <!-- loading -->
         <div class="loading-overlay">
@@ -91,21 +124,6 @@
             </div>
         </div>
         <!-- end loading -->
-
-        <!-- <div id="loginModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body text-right">
-                    <div class="alert alert-success" role="alert">تم تاكيد الكود بنجاح</div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     </div>
     <!-- script -->
     <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>

@@ -60,7 +60,9 @@
 
               <div class="col-12">
                 {{-- <img src="{{ url('assets/front/landing_v2')}}/img/mobily.png" id="zain"> --}}
-                <img src="{{ url('assets/front/landing_v2')}}/img/DuLogo.png" id="zain">
+                {{-- <img src="{{ url('assets/front/landing_v2')}}/img/DuLogo.png" id="zain"> --}}
+                <img src="{{ url('assets/front/landing_v2')}}/img/digi_zone_2.png" id="zain">
+
               </div>
 
               <!--<div class="col-12">

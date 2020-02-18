@@ -18,24 +18,28 @@
 </head>
 
 <style type="text/css">
-.landing_page .strip {
-    margin-top: 0;
-}
+    .landing_page .strip {
+        margin-top: 0;
+    }
 </style>
 <style type="text/css">
     .landing_page .strip {
         margin-top: 0;
     }
-    .main_container{
-        background-image: url("{{ url('assets/front/landing_v2/img/BG_Patterns.png')}}")  !important;
+
+    .main_container {
+        background-image: url("{{ url('assets/front/landing_v2/img/BG_Patterns.png')}}") !important;
     }
-    .landing_page .strip{
-        background-image: url("{{ url('assets/front/landing_v2/img/stripro.png')}}")  !important;
+
+    .landing_page .strip {
+        background-image: url("{{ url('assets/front/landing_v2/img/stripro.png')}}") !important;
     }
-    .landing_page .form_content form .btn{
+
+    .landing_page .form_content form .btn {
         background-color: #3a813f;
     }
-    .landing_page .form_content form .form-group label{
+
+    .landing_page .form_content form .form-group label {
         background-color: #3a813f;
     }
 </style>
@@ -78,7 +82,8 @@ App::setLocale($lang);
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 {{--  <img src="{{ url('assets/front/landing_v2')}}/img/mobily.png" id="zain"> --}}
-                                <img src="{{ url('assets/front/landing_v2')}}/img/DuLogo.png" id="zain">
+                                <img src="{{ url('assets/front/landing_v2')}}/img/digi_zone_2.png" id="zain">
+                                {{-- <img src="{{ url('assets/front/landing_v2')}}/img/DuLogo.png" id="zain"> --}}
                             </div>
                         </div>
                     </div>
