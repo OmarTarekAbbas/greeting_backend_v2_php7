@@ -88,7 +88,7 @@ App::setLocale($lang);
                             <span class="validity"></span>
                         </div>
                         <!--<button class="btn back">رجوع</button>-->
-                        <button id="zain_submit"  class="btn" type="submit"  onclick="this.disabled='true';" >@lang('messages.subscribe')</button>
+                        <button id="zain_submit"  class="btn" type="submit"   >@lang('messages.subscribe')</button>
                     </form>
                     <!--
                         <h5>للاشتراك يرجى الارسال الى <span>965</span></h5>
