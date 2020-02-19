@@ -1655,9 +1655,19 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         curl_close ($ch);
         if ($server_output == false) {
-            return redirect('du_landing')->with('success', 'تم الغاء الاشتراك بنجاح');
+            if ($lang == 'ar') {
+                $msg = 'تم الغاء الاشتراك بنجاح';
+            }else{
+                $msg = 'Unsubscribed Successfully';
+            }
+            return redirect('du_landing/'.$peroid.'/'.$lang)->with('success', $msg);
         } else {
-            return redirect('du_unsubc')->with('failed', 'الرقم غير صحيح');
+            if ($lang == 'ar') {
+                $msg = 'الرقم غير صحيح';
+            }else{
+                $msg = 'Wrong Number';
+            }
+            return redirect('du_unsubc/'.$peroid.'/'.$lang)->with('failed', $msg);
         }
 
     }
@@ -1688,9 +1698,19 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         curl_close ($ch);
         if ($server_output == false) {
-            return redirect('du_landing_v4')->with('success', 'تم الغاء الاشتراك بنجاح');
+            if ($lang == 'ar') {
+                $msg = 'تم الغاء الاشتراك بنجاح';
+            }else{
+                $msg = 'Unsubscribed Successfully';
+            }
+            return redirect('du_landing_v4/'.$peroid.'/'.$lang)->with('success', $msg);
         } else {
-            return redirect('du_unsubc_v4')->with('failed', 'الرقم غير صحيح');
+            if ($lang == 'ar') {
+                $msg = 'الرقم غير صحيح';
+            }else{
+                $msg = 'Wrong Number';
+            }
+            return redirect('du_unsubc_v4/'.$peroid.'/'.$lang)->with('failed', $msg);
         }
 
     }
@@ -1822,9 +1842,19 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         curl_close ($ch);
         if ($server_output == false) {
-            return redirect('du_landingrotana')->with('success', 'تم الغاء الاشتراك بنجاح');
+            if ($lang == 'ar') {
+                $msg = 'تم الغاء الاشتراك بنجاح';
+            }else{
+                $msg = 'Unsubscribed Successfully';
+            }
+            return redirect('du_landing_rotana/'.$peroid.'/'.$lang)->with('success', $msg);
         } else {
-            return redirect('du_unsubcrotana')->with('failed', 'الرقم غير صحيح');
+            if ($lang == 'ar') {
+                $msg = 'الرقم غير صحيح';
+            }else{
+                $msg = 'Wrong Number';
+            }
+            return redirect('du_unsubc_rotana/'.$peroid.'/'.$lang)->with('failed', $msg);
         }
 
     }

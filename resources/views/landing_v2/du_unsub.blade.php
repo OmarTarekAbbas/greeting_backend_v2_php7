@@ -75,7 +75,8 @@ App::setLocale($lang);
                     <form method="post" action="{{url('du_unsubcr')}}" id="form_zain">
                         {{ csrf_field() }}
                         <div class="form-group form-inline">
-                            <input type="hidden" name="peroid" value="{{$peroid}}">
+                            <input type="hidden" name="peroid"  value="{{$peroid}}"  >
+                            <input type="hidden" name="lang"  value="{{$lang}}"  >
                             <label for="phone"><span>971</span></label>
                             <input type="tel" class="form-control" id="phone" required=""
                                 placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{9}">
