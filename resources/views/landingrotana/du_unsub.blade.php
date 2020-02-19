@@ -82,7 +82,7 @@ App::setLocale($lang);
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 {{--  <img src="{{ url('assets/front/landing_v2')}}/img/mobily.png" id="zain"> --}}
-                                <img src="{{ url('assets/front/landing_v2')}}/img/logo.png" id="zain">
+                                {{-- <img src="{{ url('assets/front/landing_v2')}}/img/logo.png" id="zain"> --}}
                                 {{-- <img src="{{ url('assets/front/landing_v2')}}/img/DuLogo.png" id="zain"> --}}
                             </div>
                         </div>
