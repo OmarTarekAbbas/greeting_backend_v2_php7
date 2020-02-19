@@ -4418,10 +4418,9 @@ public function favouritesv5(Request $request, $UID)
             $actionName = $request->operator_name." Kuwait logs";
 
         }
-        if($request->has('click')){
-            $result['click'] = $request->click.' Kuwait';
-            $actionName = $request->click." Kuwait logs";
-
+        if($request->has('enterbtn')){
+            $result['enterbtn'] = $request->click.'Enter Kuwait';
+            $actionName = $request->click."Enter Kuwait logs";
         }
         $URL = $request->fullUrl();
         $parameters_arr = $result;
