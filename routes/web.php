@@ -239,15 +239,15 @@ Route::get('du_landing/{peroid?}/{lang?}', 'HomeController@du_landing');
 Route::get('du_landing_success', 'HomeController@du_landing_success');
 Route::get('DuSecureRedirect', 'HomeController@DuSecureRedirect');
 Route::get('du_unsubc/{peroid?}/{lang?}', 'HomeController@du_unsubc');
-Route::post('du_unsubcr', 'HomeController@du_unsubcr');
+Route::post('du_unsubcr/{peroid?}/{lang?}', 'HomeController@du_unsubcr');
 /* Du LandingRotana */
 Route::get('du_landing_rotana/{peroid?}/{lang?}', 'HomeController@du_landingrotana');
 Route::get('du_unsubc_rotana/{peroid?}/{lang?}', 'HomeController@du_unsubcrotana');
-Route::post('du_unsubcrrotana', 'HomeController@du_unsubcrrotana');
+Route::post('du_unsubcrrotana/{peroid?}/{lang?}', 'HomeController@du_unsubcrrotana');
 /* Design4 purple  */
 Route::get('du_landing_v2/{peroid?}/{lang?}', 'HomeController@du_landing_v2');
 Route::get('du_unsubc_v4/{peroid?}/{lang?}', 'HomeController@du_unsubc_v4');
-Route::post('du_unsubcr_v4', 'HomeController@du_unsubcr_v4');
+Route::post('du_unsubcr_v4/{peroid?}/{lang?}', 'HomeController@du_unsubcr_v4');
 
 //Mobily Notification
 Route::get('mobily_notification', 'HomeController@mobily_notification');
