@@ -234,7 +234,8 @@ Route::get('zain_iraq_landing', 'FrontEndController@zain_iraq_landing');
 Route::get('zain_iraq_success', 'FrontEndController@zain_iraq_success');
 Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild');
 
-/* Du Landing = SecureD */
+
+//=======================du  Integration ==========================================//
 Route::get('du_landing/{peroid?}/{lang?}', 'HomeController@du_landing');
 Route::get('du_landing_success', 'HomeController@du_landing_success');
 Route::get('DuSecureRedirect', 'HomeController@DuSecureRedirect');
@@ -248,6 +249,8 @@ Route::post('du_unsubcrrotana/{peroid?}/{lang?}', 'HomeController@du_unsubcrrota
 Route::get('du_landing_v2/{peroid?}/{lang?}', 'HomeController@du_landing_v2');
 Route::get('du_unsubc_v4/{peroid?}/{lang?}', 'HomeController@du_unsubc_v4');
 Route::post('du_unsubcr_v4/{peroid?}/{lang?}', 'HomeController@du_unsubcr_v4');
+define('DU_UNSUB_SYSTEM',"https://dev.digizone.com.kw/du_system/api/test");
+//=======================du  Integration ==========================================//
 
 //Mobily Notification
 Route::get('mobily_notification', 'HomeController@mobily_notification');
@@ -255,7 +258,7 @@ Route::get('mobily_notification', 'HomeController@mobily_notification');
 
 //Route::get('admin/ajax','OccasionsController@ajax');
 
-// to make processing on images 
+// to make processing on images
 Route::get('testar/{ImageID}/{Text}','GprocessorController@ArabicGreetingProcessor');
  // ex:   http://localhost:8000/testar/7/%D8%B9%D9%85%D8%A7%D8%AF
 // to write arabic text {Text} on specfic image {ImageID}   and the result store in "processedimgs" table
@@ -371,7 +374,7 @@ Route::get('rotana/suboccasiontesty/{OID}/{UID}', 'FrontEndController@suboccasio
  ////////////*Mbc*///////////////
  ///////////////////////////////////////
 
- Route::get('mbc/{UID}','FrontEndController@mbc'); 
+ Route::get('mbc/{UID}','FrontEndController@mbc');
  Route::get('favourites_mbc/{UID}','FrontEndController@favouritesmbc');
  Route::get('mbc/occasion/{UID}', 'FrontEndController@occasions_mbc');
  Route::get('mbc/suboccasion/{OID}/{UID}', 'FrontEndController@suboccasions_mbc');

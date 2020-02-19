@@ -82,7 +82,7 @@ App::setLocale($lang);
                                 placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{9}">
                             <span class="validity"></span>
                         </div>
-                        <button id="zain_submit" class="btn" type="submit">@lang('messages.du_unsub')</button>
+                        <button id="zain_submit" class="btn" type="submit"   onclick="this.disabled='true';" >@lang('messages.du_unsub')</button>
                     </form>
                 </div>
             </div>

@@ -1642,7 +1642,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $number ="971".$request->number;
         $pero =$request->peroid;
         //dd($number);
-        $URL = "https://dev.digizone.com.kw/du_system/api/test";
+        $URL = DU_UNSUB_SYSTEM;
 
         $ch = curl_init();
 
@@ -1685,7 +1685,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $number ="971".$request->number;
         $pero =$request->peroid;
         //dd($number);
-        $URL = "https://dev.digizone.com.kw/du_system/api/test";
+        $URL = DU_UNSUB_SYSTEM;
 
         $ch = curl_init();
 
@@ -1828,8 +1828,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $lang =  isset($request->lang) ? $request->lang : "ar" ;
         $number ="971".$request->number;
         $pero =$request->peroid;
-        //dd($number);
-        $URL = "https://dev.digizone.com.kw/du_system/api/test";
+
+        $URL = DU_UNSUB_SYSTEM;
 
         $ch = curl_init();
 
