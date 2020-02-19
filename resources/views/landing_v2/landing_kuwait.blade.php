@@ -212,7 +212,7 @@
             url:location.href,
              type:"get",
              data:{
-                operator_name : 'enter'
+                click : 'Enter'
              },
              success:function(response){
                 console.log(response);
