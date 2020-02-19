@@ -3665,6 +3665,219 @@ public function favouritesv5(Request $request, $UID)
 
 
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////* start mbc  *//////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+public function mbc($UID)
+{
+    $current_url = \Request::fullUrl();
+    $favourites = [];
+    $fav_id = [];
+    if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+        $url = Generatedurl::where('UID', $UID)->first();
+        // if (is_null($url))
+        //     return view('front.error');
+        $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->get();
+        $populars = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->get();
+        $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
+
+        $newsnap = $url->operator->greetingimgs()->PublishedSnap()->whereNotNull('vid_path')->orderBy('id', 'desc')->limit(4)->get();
+
+        // dd($newsnap);
+        // foreach($newsnap as $id){
+        //     echo $id->id;
+        // }die;
+
+        $occasions_array = [];
+        $occasions = [];
+        foreach ($snap as $key => $value) {
+            array_push($occasions_array, $value->occasion_id);
+        }
+        $occasions_array = array_unique($occasions_array);
+        foreach ($occasions_array as $k => $occasion) {
+            $sliders[] = Occasion::where('id', $occasion)->first();
+        }
+        $sliders = array_filter($sliders);
+        // dd($sliders);
+        //$sliders = $url->operator->greetingimgs()->PublishedSnap()->Slider()->orderBy('RDate', 'desc')->get();
+        if ((Session::has('MSISDN') && Session::get('Status') == 'active'))
+            $favourites = $url->operator->greetingimgs()->Favourite(Session::get('MSISDN'))->PublishedSnap()->orderBy('RDate', 'desc')->limit(10)->get();
+        if ($favourites) {
+            foreach ($favourites as $fav) {
+                array_push($fav_id, $fav->id);
+            }
+            $suggests = $url->operator->greetingimgs()->PublishedSnap()->whereNotIn('greetingimgs.id', $fav_id)->orderBy('RDate', 'desc')->get();
+        } else {
+            $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->get();
+        }
+
+        // get popluar filters according to greetingimg_operator.poplar_count   = actual popluar count
+        $Rdata_today2 = $url->operator->greetingimgs()->PublishedSnap()->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->limit(10)->get();
+
+
+        return view('front.mbc.home', compact('newsnap', 'Rdata_today', 'favourites', 'sliders', 'suggests', 'populars', 'Rdata_today2'));
+    } else {
+        return redirect(url(redirect_operator()));
+    }
+}
+
+public function occasions_mbc(Request $request, $UID){
+
+
+    $url = Generatedurl::where('UID', $UID)->first();
+    if (is_null($url))
+        return view('front.error');
+    $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
+    $occasions_array = [];
+    $occasions = [];
+    foreach ($snap as $key => $value) {
+        array_push($occasions_array, $value->occasion_id);
+    }
+    $occasions_array = array_unique($occasions_array);
+    foreach ($occasions_array as $k => $occasion) {
+        $sliders[] = Occasion::where('id', $occasion)->first();
+    }
+    $sliders = array_filter($sliders);
+
+    // dd(count($sliders));
+    $page = \Input::get('page', 1); // Get the ?page=1 from the url
+    $perPage = 8; // Number of items per page
+    $offset = ($page * $perPage) - $perPage;
+
+    $Occasions = array_slice($sliders, $offset, $perPage, true);
+
+    // dd($Occasions);
+
+    if($request->ajax()){
+        return view('front.mbc.presult', compact('Occasions'));
+    }
+
+    return view('front.mbc.search_page', compact('Occasions'));
+
+}
+public function suboccasions_mbc(Request $request, $OID, $UID){
+
+    $url = Generatedurl::where('UID', $UID)->first();
+     if (is_null($url))
+         return view('front.error');
+
+    $occasion_id = $OID;
+    $codes = [];
+
+    $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion_id)->orderBy('RDate', 'desc')->orderBy('id', 'desc')->paginate(8);
+
+    // if ($Rdata->isEmpty()) {
+    //       return view('front.error');
+    // }
+    foreach ($Rdata as $key => $value) {
+        if ($value->rbt_id != null) {
+            $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
+            $codes[$key] = $rbtCode ? $rbtCode->code : null;
+        }
+    }
+    $rbt_sms = $url->operator->rbt_sms;
+    $Occasion = Occasion::where('id', $occasion_id)->first();
+
+    $pageTitle = $Occasion->getTranslation('title',getCode());
+    $child_occasions =[];
+    $childs = Occasion::where('parent_id',$occasion_id)->get(); // occasion_id parent_id
+    foreach($childs as $value){
+        $check = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $value->id)->first();
+        if($check){
+            $child_occasions[] = $value;
+        }
+    }
+
+    $page = \Input::get('page', 1); // Get the ?page=1 from the url
+    $perPage = 8; // Number of items per page
+    $offset = ($page * $perPage) - $perPage;
+
+    $child_occasions = array_slice($child_occasions, $offset, $perPage, true);
+
+    if($request->ajax())
+        return view('front.mbc.snapsresult', compact('pageTitle', 'Rdata','child_occasions' ,'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
+
+    return view('front.mbc.sub_categories', compact('pageTitle', 'Rdata','child_occasions' ,'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
+
+}
+
+public function filter_mbc($OID, $UID){
+
+    $url = Generatedurl::where('UID', $UID)->first();
+    $occasion_id = $OID;
+    $Rdata = Greetingimg::where('id', $OID)->first();
+    return view('front.mbc.inner_page', compact('Rdata'));
+
+}
+
+
+public function Search_mbc(Request $request, $UID)
+{
+    $current_url = \Request::fullUrl();
+    $search = $request->search;
+    Session::put('search', $search);
+    if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+        $url = Generatedurl::where('UID', $UID)->first();
+        if (is_null($url))
+            return view('front.error');
+        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(8);
+        $codes = [];
+        foreach ($Rdata as $key => $value) {
+            if ($value->rbt_id != null) {
+                $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
+                $codes[$key] = $rbtCode ? $rbtCode->code : null;
+            }
+        }
+        $rbt_sms = $url->operator->rbt_sms;
+        if($request->ajax())
+            return view('front.mbc.spresult', compact('Rdata', 'search','rbt_sms','codes'));
+        return view('front.mbc.categories', compact('Rdata', 'search','rbt_sms','codes'));
+    } else {
+        return redirect(url(redirect_operator()));
+    }
+}
+
+public function favouritesmbc(Request $request, $UID)
+{
+    $current_url = \Request::fullUrl();
+    $favourites = [];
+    $fav_id = [];
+    if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+        $url = Generatedurl::where('UID', $UID)->first();
+
+        $populars = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(8);
+
+        if ((Session::has('MSISDN') && Session::get('Status') == 'active'))
+            $favourites = $url->operator->greetingimgs()->Favourite(Session::get('MSISDN'))->PublishedSnap()->orderBy('RDate', 'desc')->paginate(8);
+        if ($favourites) {
+            foreach ($favourites as $fav) {
+                array_push($fav_id, $fav->id);
+            }
+            $suggests = $url->operator->greetingimgs()->PublishedSnap()->whereNotIn('greetingimgs.id', $fav_id)->orderBy('RDate', 'desc')->paginate(8);
+        } else {
+            $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->paginate(8);
+        }
+
+        // dd($suggests);
+        if($request->ajax())
+            return view('front.mbc.fpresult', compact('favourites', 'suggests', 'populars'));
+
+        return view('front.mbc.filter', compact('favourites', 'suggests', 'populars'));
+    } else {
+        return redirect(url(redirect_operator()));
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////* end mbc *////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
     public function all_occasions($UID)
     {
         $UID = UID();

@@ -367,7 +367,22 @@ Route::get('rotana/suboccasiontesty/{OID}/{UID}', 'FrontEndController@suboccasio
  ///////////////////////////////////////
  ////////////*rotana*///////////////
  ///////////////////////////////////////
+ ///////////////////////////////////////
+ ////////////*Mbc*///////////////
+ ///////////////////////////////////////
 
+ Route::get('mbc/{UID}','FrontEndController@mbc'); 
+ Route::get('favourites_mbc/{UID}','FrontEndController@favouritesmbc');
+ Route::get('mbc/occasion/{UID}', 'FrontEndController@occasions_mbc');
+ Route::get('mbc/suboccasion/{OID}/{UID}', 'FrontEndController@suboccasions_mbc');
+ Route::get('mbc/suboccasiontesty/{OID}/{UID}', 'FrontEndController@suboccasions_mbc');
+ Route::get('mbc/filter/{OID}/{UID}', 'FrontEndController@filter_mbc');
+ Route::get('Search_v5/{UID}','FrontEndController@Search_mbc');
+
+
+ ///////////////////////////////////////
+ ////////////*Mbc*///////////////
+ ///////////////////////////////////////
 
 
 Route::get('oocasion', function () {
