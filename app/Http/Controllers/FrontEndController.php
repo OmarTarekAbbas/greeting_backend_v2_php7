@@ -4631,6 +4631,10 @@ public function favouritesmbc(Request $request, $UID)
             $actionName = $request->operator_name." Kuwait logs";
 
         }
+        if($request->has('enterbtn')){
+            $result['enterbtn'] = $request->click.'Enter Kuwait';
+            $actionName = $request->click."Enter Kuwait logs";
+        }
         $URL = $request->fullUrl();
         $parameters_arr = $result;
         $this->log($actionName, $URL, $parameters_arr);  // log in
