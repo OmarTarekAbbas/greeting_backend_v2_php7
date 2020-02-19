@@ -211,6 +211,9 @@
          $.ajax({
             url:location.href,
              type:"get",
+             data:{
+                operator_name : 'enter'
+             },
              success:function(response){
                 console.log(response);
              }
