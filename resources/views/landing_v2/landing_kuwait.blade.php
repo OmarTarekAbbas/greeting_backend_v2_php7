@@ -207,6 +207,15 @@
              }
          })
      })
+     $('#entry').click(function(){
+         $.ajax({
+            url:location.href,
+             type:"get",
+             success:function(response){
+                console.log(response);
+             }
+         })
+     })
 
     </script>
 

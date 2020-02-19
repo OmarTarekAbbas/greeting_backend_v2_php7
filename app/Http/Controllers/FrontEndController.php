@@ -4417,6 +4417,8 @@ public function favouritesv5(Request $request, $UID)
             $result['operator'] = $request->operator_name.' Kuwait';
             $actionName = $request->operator_name." Kuwait logs";
 
+        }else{
+            $actionName = $request->operator_name."enter kuwait logs";
         }
         $URL = $request->fullUrl();
         $parameters_arr = $result;
