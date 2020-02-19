@@ -255,7 +255,7 @@ Route::get('mobily_notification', 'HomeController@mobily_notification');
 
 //Route::get('admin/ajax','OccasionsController@ajax');
 
-// to make processing on images
+// to make processing on images 
 Route::get('testar/{ImageID}/{Text}','GprocessorController@ArabicGreetingProcessor');
  // ex:   http://localhost:8000/testar/7/%D8%B9%D9%85%D8%A7%D8%AF
 // to write arabic text {Text} on specfic image {ImageID}   and the result store in "processedimgs" table
