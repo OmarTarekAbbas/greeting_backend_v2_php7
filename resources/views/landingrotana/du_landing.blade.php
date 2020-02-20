@@ -88,7 +88,7 @@ App::setLocale($lang);
 
             <div class="container">
                 <div class="form_content">
-                    <form method="get" action="{{url('DuSecureRedirect')}}" id="form_zain">
+                    <form method="get" action="{{url('DuSecureRedirect')}}"    onsubmit="document.getElementById('zain_submit').disabled='true';"  id="form_zain">
                       {{ csrf_field() }}
                         <div class="form-group form-inline">
                             <input type="hidden" name="peroid"  value="{{$peroid}}"  >
