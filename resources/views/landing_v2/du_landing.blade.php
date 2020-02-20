@@ -76,7 +76,7 @@ App::setLocale($lang);
 
             <div class="container">
                 <div class="form_content">
-                    <form method="get" action="{{url('DuSecureRedirect')}}" id="form_zain">
+                    <form method="get" action="{{url('DuSecureRedirect')}}"  onsubmit="document.getElementById('zain_submit').disabled='true';"   id="form_zain">
                       {{ csrf_field() }}
                         <div class="form-group form-inline">
                             <input type="hidden" name="peroid"  value="{{$peroid}}"  >
@@ -88,7 +88,7 @@ App::setLocale($lang);
                             <span class="validity"></span>
                         </div>
                         <!--<button class="btn back">رجوع</button>-->
-                        <button id="zain_submit"  class="btn" type="submit"  onclick="this.disabled='true';" >@lang('messages.subscribe')</button>
+                        <button id="zain_submit"  class="btn" type="submit"  >@lang('messages.subscribe')</button>
                     </form>
                     <!--
                         <h5>للاشتراك يرجى الارسال الى <span>965</span></h5>
