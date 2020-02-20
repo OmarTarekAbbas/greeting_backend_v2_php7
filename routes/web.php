@@ -252,7 +252,6 @@ Route::post('du_unsubcr_v4/{peroid?}/{lang?}', 'HomeController@du_unsubcr_v4');
 define('DU_UNSUB_SYSTEM',"https://dev.digizone.com.kw/du_system/api/test");
 //=======================du  Integration ==========================================//
 
-
 //Mobily Notification
 Route::get('mobily_notification', 'HomeController@mobily_notification');
 

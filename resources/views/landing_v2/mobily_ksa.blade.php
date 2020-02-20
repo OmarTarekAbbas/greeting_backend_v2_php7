@@ -88,19 +88,23 @@
                 <h5>الى <span>965</span><span> STOP1 </span>لالغاء الاشتراك ارسل</h5>-->
                 </div>
             </div>
-            
-            {{--  <div class="cancel">
+
+            <div class="cancel" style="color:#000;">
+                <p>اشترك في الخدمة مقابل 5 ريال يوميا </p>
+            </div>
+
+             {{--  <div class="cancel">
                 <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('zain_ksa_unsub')}}">الرابط</a></p>
             </div>  --}}
-            
-            
+
+
         </div>
 
-        <!-- copyright -->
+
+
         <div class="copy">
-            <p>copyright @ <span>2019</span> Ivas, all rights reserved.</p>
+            <p>copyright @ <span><?php  echo date("Y")?></span> Digizone, all rights reserved.</p>
         </div>
-        <!-- copyright -->
 
         <!-- loading -->
         <div class="loading-overlay">
