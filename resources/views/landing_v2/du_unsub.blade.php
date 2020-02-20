@@ -72,7 +72,7 @@ App::setLocale($lang);
 
             <div class="container">
                 <div class="form_content">
-                    <form method="post" action="{{url('du_unsubcr')}}" id="form_zain">
+                    <form method="post" action="{{url('du_unsubcr')}}"  onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
                         {{ csrf_field() }}
                         <div class="form-group form-inline">
                             <input type="hidden" name="peroid"  value="{{$peroid}}"  >
@@ -82,7 +82,7 @@ App::setLocale($lang);
                                 placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{9}">
                             <span class="validity"></span>
                         </div>
-                        <button id="zain_submit" class="btn" type="submit"   onclick="this.disabled='true';" >@lang('messages.du_unsub')</button>
+                        <button id="zain_submit" class="btn" type="submit"    >@lang('messages.du_unsub')</button>
                     </form>
                 </div>
             </div>
