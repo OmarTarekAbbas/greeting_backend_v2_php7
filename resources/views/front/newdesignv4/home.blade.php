@@ -82,7 +82,7 @@
                     <source src="{{url('/'.$snap->vid_path)}}" type="video/mp4" />
                 </video>
                 <a href="{{$snap->snap_link}}" class="user_filter">
-                    <h4 class=" use_filter_link text-center p-1">Use The Filter
+                    <h4 class=" use_filter_link text-center p-1"> بكارئينانا فلتةرا
 
                     </h4>
                     <!-- <img src="{{url('assets/front/newdesignv4/')}}/images/use_filter.png" alt="Use Filter" class="w-25 use_filter_link"> -->
