@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-3">
         <div class="foot_link text-center">
-          <a id="indexed" class="active_menu" href="home.php">
+          <a id="indexed" class="active_menu" href="{{url('/rotanav2/'.uid())}}">
             <i class="fas fa-home fa-lg"></i>
           </a>
         </div>
@@ -115,7 +115,7 @@
 </style>
 
 <div class="the-frame">
-  <iframe class="full-screen-preview__frame" src="{{url('rotanav2/{UID}')}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 340px; border-radius: 10px;">
+  <iframe class="full-screen-preview__frame" src="{{url()->current()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 340px; border-radius: 10px;">
   </iframe>
 </div>
 
@@ -137,6 +137,3 @@
   }
   new WOW().init();
 </script>
-</body>
-
-</html>

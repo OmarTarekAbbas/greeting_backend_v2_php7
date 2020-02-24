@@ -20,7 +20,7 @@
         <div class="row">
           <div class="col-12">
             <div class="header_logo">
-              <a href="home.php">
+              <a href="{{url('/rotanav2/'.uid())}}">
                 <img class="d-block m-auto" src="{{url('assets/front/rotanav2/images/Rorana_flater_logo.png')}}" alt="Rotana Logo">
               </a>
             </div>
