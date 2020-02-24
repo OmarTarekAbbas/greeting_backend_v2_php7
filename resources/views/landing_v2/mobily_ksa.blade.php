@@ -89,8 +89,8 @@
                 </div>
             </div>
 
-            <div class="cancel" style="color:#000;">
-                <p>اشترك في الخدمة مقابل 5 ريال يوميا </p>
+            <div class="cancel" style="color:#000;font-family: initial;">
+                <p>اشترك في الخدمة مقابل 0,66 ريال يوميا </p>
             </div>
 
              {{--  <div class="cancel">
