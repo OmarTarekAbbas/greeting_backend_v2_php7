@@ -1640,7 +1640,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
         $lang =  isset($request->lang) ? $request->lang : "ar" ;
         $number ="971".$request->number;
-        $pero =$request->peroid;
+        $pero =$peroid;
+      //  echo  "serviceid=flater".$pero ; die;
         //dd($number);
         $URL = DU_UNSUB_SYSTEM;
 
@@ -1653,8 +1654,9 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         $server_output = curl_exec($ch);
 
+
         curl_close ($ch);
-        if ($server_output == false) {
+        if ($server_output == 1) {
             if ($lang == 'ar') {
                 $msg = 'تم الغاء الاشتراك بنجاح';
             }else{
