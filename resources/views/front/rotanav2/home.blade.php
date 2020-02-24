@@ -1,5 +1,6 @@
 <!-- Start Header -->
-@include('front.rotanav2.header')<!-- End Header -->
+@include('front.rotanav2.header')
+<!-- End Header -->
 
 <div class="main_home">
   <div class="row m-0">
@@ -125,4 +126,5 @@
 </div>
 
 <!-- Start Footer -->
-@include('front.rotanav2.footer')<!-- End Footer -->
+@include('front.rotanav2.footer')
+<!-- End Footer -->

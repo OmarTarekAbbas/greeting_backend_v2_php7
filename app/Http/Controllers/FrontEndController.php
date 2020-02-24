@@ -4645,9 +4645,64 @@ public function favouritesmbc(Request $request, $UID)
     }
 
 
+
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////* start rotanav2 *//////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
     public function rotanav2(){
         return view('front.rotanav2.home');
     }
 
+    public function rotanav2_today($UID)
+    {
+        $current_url = \Request::fullUrl();
+        $favourites = [];
+        $fav_id = [];
+        if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+            $url = Generatedurl::where('UID', $UID)->first();
+            $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->first();
+            $Rdata_today2 = $url->operator->greetingimgs()->PublishedSnap()->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->limit(10)->get();
+                $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
+                $cat = Category::where('id',$occasi->category_id)->first();
+                $occasis = Occasion::where('category_id', $cat->id)->get();
+                return view('front.rotanav2.today', compact('Rdata_today','Rdata_today2','occasi','cat','occasis'));
+        }else {
+            return redirect(url(redirect_operator()));
+        }
+    }
 
+    public function Search_rot(Request $request)
+    {
+        return view('front.rotanav2.search');
+    }
+    public function Search_v6(Request $request, $UID)
+{
+    $current_url = \Request::fullUrl();
+    $search = $request->search;
+    Session::put('search', $search);
+    if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+        $url = Generatedurl::where('UID', $UID)->first();
+        if (is_null($url))
+            return view('front.error');
+        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(8);
+        $codes = [];
+        foreach ($Rdata as $key => $value) {
+            if ($value->rbt_id != null) {
+                $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
+                $codes[$key] = $rbtCode ? $rbtCode->code : null;
+            }
+        }
+        $rbt_sms = $url->operator->rbt_sms;
+        if($request->ajax())
+            return view('front.rotanav2.search1', compact('Rdata', 'search','rbt_sms','codes'));
+        return view('front.rotanav2.search1', compact('Rdata', 'search','rbt_sms','codes'));
+    } else {
+        return redirect(url(redirect_operator()));
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////* start rotanav2 *//////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
 }
