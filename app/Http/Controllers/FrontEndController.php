@@ -4644,4 +4644,10 @@ public function favouritesmbc(Request $request, $UID)
         return view('landing_v2.landing_kuwait');
     }
 
+
+    public function rotanav2(){
+        return view('front.rotanav2.home');
+    }
+
+
 }
