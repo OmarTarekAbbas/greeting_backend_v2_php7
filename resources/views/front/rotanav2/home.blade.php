@@ -38,7 +38,7 @@
         </div>
 
         <div class="owl_one owl-carousel owl-theme" dir="ltr">
-          @foreach ($category->occasions()->get() as $item)
+          @foreach ($category->occasions()->limit(get_settings('pagination_slider'))->get() as $item)
           <div class="item">
             <a class="owl_one_img w-100" href="{{url('/rotanav2/'.$item->id.'/filter/'.uid())}}">
               <img class="m-auto d-block" src="{{url($item->image)}}" alt="New">
@@ -62,7 +62,7 @@
         </div>
 
         <div class="owl_two owl-carousel owl-theme" dir="ltr">
-          @foreach ($category->occasions()->get() as $item)
+          @foreach ($category->occasions()->limit(get_settings('pagination_slider'))->get() as $item)
           <div class="item">
             <a class="owl_two_img w-100" href="{{url('/rotanav2/'.$item->id.'/filter/'.uid())}}">
               <img class="m-auto d-block" src="{{url($item->image)}}" alt="New">
@@ -86,7 +86,7 @@
         </div>
 
         <div class="owl_three owl-carousel owl-theme" dir="ltr">
-          @foreach ($category->occasions()->get() as $item)
+          @foreach ($category->occasions()->limit(get_settings('pagination_slider'))->get() as $item)
           <div class="item">
             <a class="owl_three_img w-100" href="{{url('/rotanav2/'.$item->id.'/filter/'.uid())}}">
               <img class="m-auto d-block" src="{{url($item->image)}}" alt="New">

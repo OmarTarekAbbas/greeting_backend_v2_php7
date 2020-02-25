@@ -3495,7 +3495,7 @@ public function rotana($UID)
 
 public function occasions_rotana(Request $request, $CID, $UID){
 
-    $Occasions = Category::where('id', $CID)->first()->occasions()->paginate(13);
+    $Occasions = Category::where('id', $CID)->first()->occasions()->paginate(get_settings('pagination_limit'));
 
     if($request->ajax()){
         return view('front.rotanav2.ajaxoccasions', compact('Occasions'));
@@ -3506,7 +3506,7 @@ public function occasions_rotana(Request $request, $CID, $UID){
 
 public function filter_rotana(Request $request, $OID, $UID){
 
-    $filters = Greetingimg::where('occasion_id', $OID)->paginate(13);
+    $filters = Greetingimg::where('occasion_id', $OID)->paginate(get_settings('pagination_limit'));
 
     if($request->ajax()){
         return view('front.rotanav2.ajaxfilters', compact('filters'));
@@ -3526,7 +3526,7 @@ public function favorites_rotana_load(Request $request, $UID){
     $idsArray = explode(",", $ids);
 
     $url = Generatedurl::where('UID', $UID)->first();
-    $snap = $url->operator->greetingimgs()->PublishedSnap()->whereIn('greetingimgs.id', $idsArray)->orderBy('RDate', 'desc')->get();
+    $snap = $url->operator->greetingimgs()->PublishedSnap()->whereIn('greetingimgs.id', $idsArray)->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
     return view('front.rotanav2.ajaxfav', compact('snap'));
 
 }
@@ -3542,7 +3542,7 @@ public function rotanav2_today($UID){
         if(isset($Rdata_today)){
             $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
             $cat = Category::where('id',$occasi->category_id)->first();
-            $occasis = Occasion::where('category_id', $cat->id)->get();
+            $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
                 return view('front.rotanav2.today', compact('Rdata_today','Rdata_today2','occasi','cat','occasis'));
             }else{
                 return view('front.rotanav2.nofilter');
@@ -3562,7 +3562,7 @@ public function Search_v6(Request $request, $UID)
         $url = Generatedurl::where('UID', $UID)->first();
         if (is_null($url))
             return view('front.error');
-        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(12);
+        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
         $codes = [];
         foreach ($Rdata as $key => $value) {
             if ($value->rbt_id != null) {

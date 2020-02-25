@@ -17,7 +17,7 @@
                             <i class="fas fa-heart heart_heart"></i>
                         </a>
 
-                        <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
+                        <a class="first_list_img_share" href="#0" onclick="sharebtn('{{$item->id}}')" data-toggle="modal" data-target="#modalForShare">
                             <i class="fas fa-share-square"></i>
                         </a>
                     </a>
@@ -94,4 +94,5 @@ function load_snap_data(page) {
         }
     })
   }
+
 </script>
