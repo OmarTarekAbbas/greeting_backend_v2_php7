@@ -1,5 +1,5 @@
 <!-- Start Header -->
-<?php include 'header.php'; ?>
+@include('front.rotanav2.header')
 <!-- End Header -->
 
 <div class="main_fav">
@@ -7,7 +7,7 @@
     <section class="fav_sec w-100 mt-3">
       <div class="col-12">
         <div class="img_like">
-          <img class="w-25 d-block m-auto" src="images/like_2.png" alt="Like">
+          <img class="w-25 d-block m-auto" src="{{url('assets/front/rotanav2/images/like_2.png')}}" alt="Like">
         </div>
       </div>
     </section>
@@ -17,7 +17,7 @@
         <div class="col-4 p-0">
           <div class="fav_list_img">
             <a href="#0">
-              <img class="w-100" src="images/010.png" alt="Filter">
+              <img class="w-100" src="{{url('assets/front/rotanav2/images/010.png')}}" alt="Filter">
 
               <a class="first_list_img_heart" href="#0">
                 <i class="fas fa-heart heart_heart"></i>
@@ -145,5 +145,5 @@
 </div>
 
 <!-- Start Footer -->
-<?php include 'footer.php'; ?>
+@include('front.rotanav2.footer')
 <!-- End Footer -->

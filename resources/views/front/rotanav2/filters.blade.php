@@ -12,8 +12,7 @@
         <div class="first_list_img">
           <a href="{{url($item->snap_link)}}" target="_blank">
             <img class="w-100" src="{{url($item->path)}}" alt="Filter">
-            {{-- <p>{{$item->title}}</p> --}}
-            <a class="first_list_img_heart" href="#0">
+            <a id="{{$item->id}}" class="first_list_img_heart" href="#0">
               <i class="fas fa-heart heart_heart"></i>
             </a>
 
@@ -95,4 +94,28 @@
       }
     })
   }
+
+  $(document).ready(function () {
+    $('.first_list_img_heart').click(function (){
+      var filterid = $(this).attr('id');
+      var allfav = window.localStorage.getItem('favorite');
+      if(allfav != null && allfav != ""){// second time
+        var favArr = allfav.split(',');
+        var find = favArr.indexOf(filterid);
+        if(find == -1){ // add to favorite
+          favArr.push(filterid);
+          allfav = favArr.join(',');
+          window.localStorage.setItem('favorite', allfav);
+        }else{ // remove from favorite
+          favArr.splice(find, 1);
+          allfav = favArr.join(',');
+          window.localStorage.setItem('favorite', allfav);
+        }
+      }else{ //first time
+        allfav = filterid;
+        window.localStorage.setItem('favorite', allfav);
+      }
+      console.log(allfav);
+    });
+  });
 </script>

@@ -3538,33 +3538,7 @@ public function filter_rotana(Request $request, $OID, $UID){
 
 public function favorites_rotana(Request $request, $UID)
 {
-    $current_url = \Request::fullUrl();
-    $favourites = [];
-    $fav_id = [];
-    if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
-        $url = Generatedurl::where('UID', $UID)->first();
-
-        $populars = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(8);
-
-        if ((Session::has('MSISDN') && Session::get('Status') == 'active'))
-            $favourites = $url->operator->greetingimgs()->Favourite(Session::get('MSISDN'))->PublishedSnap()->orderBy('RDate', 'desc')->paginate(8);
-        if ($favourites) {
-            foreach ($favourites as $fav) {
-                array_push($fav_id, $fav->id);
-            }
-            $suggests = $url->operator->greetingimgs()->PublishedSnap()->whereNotIn('greetingimgs.id', $fav_id)->orderBy('RDate', 'desc')->paginate(8);
-        } else {
-            $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->paginate(8);
-        }
-
-        // dd($suggests);
-        if($request->ajax())
-            return view('front.rotana.fpresult', compact('favourites', 'suggests', 'populars'));
-
-        return view('front.rotana.filter', compact('favourites', 'suggests', 'populars'));
-    } else {
-        return redirect(url(redirect_operator()));
-    }
+    return view('front.rotanav2.fav');
 }
 
 public function suboccasions_v5(Request $request, $OID, $UID){

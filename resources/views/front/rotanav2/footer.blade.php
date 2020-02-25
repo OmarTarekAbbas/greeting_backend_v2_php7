@@ -13,7 +13,7 @@
 
       <div class="col-3">
         <div class="foot_link text-center">
-          <a href="fav.php">
+          <a href="{{url('/rotanav2/favorites/'.uid())}}">
             <i class="fas fa-heart fa-lg"></i>
           </a>
         </div>

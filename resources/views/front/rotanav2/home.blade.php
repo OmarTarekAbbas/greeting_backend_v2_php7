@@ -8,7 +8,7 @@
     <section class="video_sec w-100">
       <div class="col-12 p-0">
         <div class="owl-video owl-carousel owl-theme" dir="ltr">
-
+          @if (isset($newsnap) && $newsnap != null)
           @foreach ($newsnap as $item)
           <div class="item">
             <video class="video-fluid w-100" poster="{{url($item->vid_type)}}" controls>
@@ -16,7 +16,7 @@
             </video>
           </div>
           @endforeach
-
+          @endif
         </div>
     </section>
     {{-- category slider --}}
