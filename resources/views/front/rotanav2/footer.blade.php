@@ -137,3 +137,31 @@
   }
   new WOW().init();
 </script>
+
+<script>
+
+  function fav(filterid){
+    // var filterid = $(this).attr('id');
+    var allfav = window.localStorage.getItem('favorite');
+    if(allfav != null && allfav != ""){// second time
+      var favArr = allfav.split(',');
+      var find = favArr.indexOf(filterid);
+      if(find == -1){ // add to favorite
+        favArr.push(filterid);
+        allfav = favArr.join(',');
+        window.localStorage.setItem('favorite', allfav);
+      }else{ // remove from favorite
+        favArr.splice(find, 1);
+        allfav = favArr.join(',');
+        window.localStorage.setItem('favorite', allfav);
+      }
+    }else{ //first time
+      allfav = filterid;
+      window.localStorage.setItem('favorite', allfav);
+    }
+    console.log(allfav);
+  }
+
+</script>
+
+ 

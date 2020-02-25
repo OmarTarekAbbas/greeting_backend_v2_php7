@@ -13,106 +13,8 @@
     </section>
 
     <section class="fav_list w-100 mt-4">
-      <div class="row m-0">
-        <div class="col-4 p-0">
-          <div class="fav_list_img">
-            <a href="#0">
-              <img class="w-100" src="{{url('assets/front/rotanav2/images/010.png')}}" alt="Filter">
+      <div id="favoritesAjax" class="row m-0">
 
-              <a class="first_list_img_heart" href="#0">
-                <i class="fas fa-heart heart_heart"></i>
-              </a>
-
-              <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
-                <i class="fas fa-share-square"></i>
-              </a>
-            </a>
-          </div>
-        </div>
-
-        <div class="col-4 p-0">
-          <div class="fav_list_img">
-            <a href="#0">
-              <img class="w-100" src="images/011.png" alt="Filter">
-
-              <a class="first_list_img_heart" href="#0">
-                <i class="fas fa-heart heart_heart"></i>
-              </a>
-
-              <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
-                <i class="fas fa-share-square"></i>
-              </a>
-            </a>
-          </div>
-        </div>
-
-        <div class="col-4 p-0">
-          <div class="fav_list_img">
-            <a href="#0">
-              <img class="w-100" src="images/012.png" alt="Filter">
-
-              <a class="first_list_img_heart" href="#0">
-                <i class="fas fa-heart heart_heart"></i>
-              </a>
-
-              <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
-                <i class="fas fa-share-square"></i>
-              </a>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="fav_list w-100 mt-3">
-      <div class="row m-0">
-        <div class="col-4 p-0">
-          <div class="fav_list_img">
-            <a href="#0">
-              <img class="w-100" src="images/010.png" alt="Filter">
-
-              <a class="first_list_img_heart" href="#0">
-                <i class="fas fa-heart heart_heart"></i>
-              </a>
-
-              <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
-                <i class="fas fa-share-square"></i>
-              </a>
-            </a>
-          </div>
-        </div>
-
-        <div class="col-4 p-0">
-          <div class="fav_list_img">
-            <a href="#0">
-              <img class="w-100" src="images/011.png" alt="Filter">
-
-              <a class="first_list_img_heart" href="#0">
-                <i class="fas fa-heart heart_heart"></i>
-              </a>
-
-              <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
-                <i class="fas fa-share-square"></i>
-              </a>
-            </a>
-          </div>
-        </div>
-
-        <div class="col-4 p-0">
-          <div class="fav_list_img">
-            <a href="#0">
-              <img class="w-100" src="images/012.png" alt="Filter">
-
-              <a class="first_list_img_heart" href="#0">
-                <i class="fas fa-heart heart_heart"></i>
-              </a>
-
-              <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
-                <i class="fas fa-share-square"></i>
-              </a>
-            </a>
-          </div>
-        </div>
       </div>
     </section>
   </div>
@@ -147,3 +49,17 @@
 <!-- Start Footer -->
 @include('front.rotanav2.footer')
 <!-- End Footer -->
+
+<script>
+var allfav = window.localStorage.getItem('favorite');
+
+$.ajax({
+  type: "get",
+  url: "{{url('rotanav2/favorites_rotana_load').'/'.uid()}}",
+  data: {'ids' : allfav},
+  success: function (response) {
+    $('#favoritesAjax').html(response);
+  }
+});
+
+</script>
