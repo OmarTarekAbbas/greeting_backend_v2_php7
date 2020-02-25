@@ -342,7 +342,7 @@ Route::get('rotanav2/{CID}/occasion/{UID}', 'FrontEndController@occasions_rotana
 Route::get('rotanav2/{OID}/filter/{UID}', 'FrontEndController@filter_rotana');
 Route::get('rotanav2/favorites/{UID}', 'FrontEndController@favorites_rotana');
 Route::get('rotanav2/today/{UID}','FrontEndController@rotanav2_today');
-Route::get('rotanav2/Search_v6/{UID}','FrontEndController@Search_rot');
+// Route::get('rotanav2/Search_v6/{UID}','FrontEndController@Search_rot');
 Route::get('Search_v6/{UID}','FrontEndController@Search_v6');
 Route::get('rotanav2/inner/{FID}/{UID}', 'FrontEndController@filter_inner');
 

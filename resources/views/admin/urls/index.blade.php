@@ -97,7 +97,7 @@ You can add and delete Generated URLs
                                 <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                                 <div style="display:none">{{url("newdesignv4/$URL->UID")}}</div>
                                 <br/>
-                                <span class="text text-info">rotana: </span>  <input class="" value='{{url("rotana/$URL->UID")}}'/>
+                                <span class="text text-info">rotana: </span>  <input class="" value='{{url("rotanav2/$URL->UID")}}'/>
                                 <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                                 <div style="display:none">{{url("rotana/$URL->UID")}}</div>
                                 <br/>

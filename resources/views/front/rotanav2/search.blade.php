@@ -2,7 +2,7 @@
 @include('front.rotanav2.header')
 <!-- End Header -->
 
-<style>
+<!-- <style>
 .main_home,
 footer {
     opacity: 0.3;
@@ -122,7 +122,7 @@ footer {
                         </div>
                     </label>
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

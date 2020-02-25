@@ -1,5 +1,5 @@
 @foreach ($Rdata as $key=>$snap)
-            <div class="col-6 p-0">
+            <div class="col-4 p-0">
                 <div class="first_list_img">
                     <a href="{{url('rotanav2/inner/'.$snap->id.'/'.UID())}}">
                         <img class="w-100" src="{{url('/'.$snap->path)}}"
