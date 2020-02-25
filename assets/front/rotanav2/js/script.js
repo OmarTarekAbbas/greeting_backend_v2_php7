@@ -84,6 +84,8 @@ $('.owl-video').owlCarousel({
   center: true,
   nav: false,
   dots: false,
+  animateOut: 'lightSpeedOut',
+  animateIn: 'lightSpeedIn',
   responsive: {
     480: {
       items: 1

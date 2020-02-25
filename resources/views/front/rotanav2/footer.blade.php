@@ -78,8 +78,7 @@
     display: none;
 }
 
-
-.the-frame {
+  .the-frame {
     padding: 0;
     margin: 0;
     border-radius: 30px;
@@ -139,13 +138,20 @@
 
 @media only screen and (min-width: 600px) {
     body {
-        visibility: hidden;
+      visibility: hidden;
+      overflow: hidden
     }
 
     .enter {
         display: none;
     }
-}
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .the-frame {
+      top: 35%;
+    }
+  }
 </style>
 
 <div class="the-frame">
