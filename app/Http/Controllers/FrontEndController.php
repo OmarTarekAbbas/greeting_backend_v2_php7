@@ -4663,10 +4663,14 @@ public function favouritesmbc(Request $request, $UID)
             $url = Generatedurl::where('UID', $UID)->first();
             $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->first();
             $Rdata_today2 = $url->operator->greetingimgs()->PublishedSnap()->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->limit(10)->get();
+            if(isset($Rdata_today)){
                 $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
                 $cat = Category::where('id',$occasi->category_id)->first();
                 $occasis = Occasion::where('category_id', $cat->id)->get();
-                return view('front.rotanav2.today', compact('Rdata_today','Rdata_today2','occasi','cat','occasis'));
+                    return view('front.rotanav2.today', compact('Rdata_today','Rdata_today2','occasi','cat','occasis'));
+                }else{
+                    return view('front.rotanav2.nofilter');
+                }
         }else {
             return redirect(url(redirect_operator()));
         }
@@ -4685,7 +4689,7 @@ public function favouritesmbc(Request $request, $UID)
         $url = Generatedurl::where('UID', $UID)->first();
         if (is_null($url))
             return view('front.error');
-        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(8);
+        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(12);
         $codes = [];
         foreach ($Rdata as $key => $value) {
             if ($value->rbt_id != null) {
@@ -4695,12 +4699,28 @@ public function favouritesmbc(Request $request, $UID)
         }
         $rbt_sms = $url->operator->rbt_sms;
         if($request->ajax())
-            return view('front.rotanav2.search1', compact('Rdata', 'search','rbt_sms','codes'));
+        return view('front.rotanav2.snapsresult', compact('Rdata', 'search','rbt_sms','codes'));
         return view('front.rotanav2.search1', compact('Rdata', 'search','rbt_sms','codes'));
     } else {
         return redirect(url(redirect_operator()));
     }
 }
+
+public function filter_inner($FID, $UID){
+
+    $url = Generatedurl::where('UID', $UID)->first();
+    $occasion_id = $FID;
+    $Rdata = Greetingimg::where('id', $FID)->first();
+    $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
+    $cat = Category::where('id',$occasi->category_id)->first();
+    $occasis = Occasion::where('category_id', $cat->id)->get();
+    //  dd($occasis);
+    return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));
+}
+public function rotanav2_nofilter(Request $request)
+    {
+        return view('front.rotanav2.nofilter');
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////* start rotanav2 *//////////////////////////////////

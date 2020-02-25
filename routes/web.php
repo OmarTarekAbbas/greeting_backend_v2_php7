@@ -396,6 +396,8 @@ Route::get('rotana/suboccasiontesty/{OID}/{UID}', 'FrontEndController@suboccasio
  Route::get('rotanav2/today/{UID}','FrontEndController@rotanav2_today');
  Route::get('rotanav2/Search_v6/{UID}','FrontEndController@Search_rot');
  Route::get('Search_v6/{UID}','FrontEndController@Search_v6');
+ Route::get('rotanav2/inner/{FID}/{UID}', 'FrontEndController@filter_inner');
+ Route::get('rotanav2/no_filter', 'FrontEndController@rotanav2_nofilter');
 
 
  ///////////////////////////////////////
