@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rotana</title>
-  <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/all.min.css')}}">
-  <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/owl.carousel.min.css')}}">
-  <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/owl.theme.default.css')}}">
-  <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/animate.css')}}">
-  <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/style.css')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotana</title>
+    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/owl.theme.default.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/animate.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/style.css')}}">
 </head>
 
 <body>
@@ -24,7 +24,4 @@
                 <img class="d-block m-auto" src="{{url('assets/front/rotanav2/images/Rorana_flater_logo.png')}}" alt="Rotana Logo">
               </a>
             </div>
-          </div>
-        </div>
-      </div>
-    </header>
+        </header>

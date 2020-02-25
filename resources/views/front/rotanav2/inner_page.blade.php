@@ -9,6 +9,17 @@
 .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart {
     color: #a2a2a2;
 }
+.use_fil{
+    background: #a2a2a2;
+    width: 38%;
+    padding: 4px;
+    border-radius: 10px;
+    color: black;
+    height: 28px;
+    z-index: 9999999999999999999999999999;
+    position: absolute;
+    bottom: -2%;
+}
 </style>
 <div class="main_filter_2day">
     <section class="filter_2day w-100 mt-3">
@@ -16,47 +27,40 @@
             <div class="row m-0">
                 <div class="col-12">
                     <div class="filter_2day_title">
-                        <h6 class="text-white text-right">فلتر اليوم</h6>
+                        <h6 class="text-white text-right">{!! static_lang('usefilter')?static_lang('usefilter') : 'استخدم الفلتر'  !!}</h6>
                     </div>
                 </div>
-                @if(isset($Rdata_today))
                 <div class="col-10 m-auto d-block">
                     <div class="filter_2day_img mt-3">
-                        <a href="{{$Rdata_today->snap_link}}">
-                            <img class="w-100 d-block m-auto rounded" src="{{url('/'.$Rdata_today->path)}}"
-                                alt="Filter Today">
+                        <a href="#0">
+                            <img class="w-100 d-block m-auto rounded" src="{{url('/'.$Rdata->path)}}"
+                                alt="{{$Rdata->getTranslation('title',getCode())}}">
+                            <div>
+                                <a href="{{$Rdata->snap_link}}">
+                                <h6 class="text-right use_fil">{!! static_lang('usefilter')?static_lang('usefilter') : 'استخدم الفلتر'  !!}</h6>
+                                </a>
+                                <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
+                                    <i class="fas fa-share-square"></i>
+                                </a>
+                            </div>
 
-                            <a class="first_list_img_heart" href="#0">
-                                <i class="fas fa-heart fa-lg ajax_call" value="{{$Rdata_today->id}}"></i>
-                            </a>
-
-                            <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
-                                <i class="fas fa-share-square"></i>
-                            </a>
                         </a>
 
                     </div>
                 </div>
-                <!-- <h3 class="text-center" style="color: #dedede;font-weight: bold;margin-right: 40%;">{{$Rdata_today->getTranslation('title',getCode())}}</span></h3> -->
-                @endif
             </div>
         </div>
     </section>
-
     <section class="filter_slide w-100 mt-3">
         <div class="col-12 p-0">
             <div class="second_slide_title">
                 <a href="list.php">
-                    @if(isset($cat))
                     <h6 class="text-right text-white pt-0 pr-3">{{$cat->title}}
                         <i class="fas fa-th-large fa-1x float-left pl-3"></i>
                     </h6>
                 </a>
-                @endif
             </div>
         </div>
-
-        @if(isset($occasis))
         @if(count($occasis) < 2)
         <div class="owl_one owl-carousel owl-theme" dir="ltr">
             @elseif(count($occasis) == 2)
@@ -72,9 +76,8 @@
                     </div>
                     @endforeach
                 </div>
-                @endif
-
     </section>
+
 </div>
 
 

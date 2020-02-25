@@ -21,7 +21,7 @@
 
       <div class="col-3">
         <div class="foot_link text-center">
-          <a href="search.php">
+          <a href="{{url('rotanav2/Search_v6/'.UID())}}">
             <i class="fas fa-search fa-lg"></i>
           </a>
         </div>
@@ -29,7 +29,7 @@
 
       <div class="col-3">
         <div class="foot_link foot_link_img text-center">
-          <a href="today.php">
+          <a href="{{url('rotanav2/today/'.UID())}}">
             <img class="rotana_foot_img" src="{{url('assets/front/rotanav2/images/Rotana_Green.png')}}" alt="Rotana">
             <img class="rotana_foot_new" src="{{url('assets/front/rotanav2/images/New.png')}}" alt="Rotana new">
           </a>
