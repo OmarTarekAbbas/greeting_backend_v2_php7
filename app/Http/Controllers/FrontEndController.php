@@ -3496,7 +3496,7 @@ public function rotana($UID)
 public function occasions_rotana(Request $request, $CID, $UID){
 
     $Occasions = Category::where('id', $CID)->first()->occasions()->paginate(13);
-    
+
     if($request->ajax()){
         return view('front.rotanav2.ajaxoccasions', compact('Occasions'));
     }
@@ -3507,7 +3507,7 @@ public function occasions_rotana(Request $request, $CID, $UID){
 public function filter_rotana(Request $request, $OID, $UID){
 
     $filters = Greetingimg::where('occasion_id', $OID)->paginate(13);
-        
+
     if($request->ajax()){
         return view('front.rotanav2.ajaxfilters', compact('filters'));
     }
@@ -3554,6 +3554,7 @@ public function rotanav2_today($UID){
 
 public function Search_v6(Request $request, $UID)
 {
+    // dd($request->search);
     $current_url = \Request::fullUrl();
     $search = $request->search;
     Session::put('search', $search);

@@ -10,7 +10,36 @@
         </div>
     </section>
 </div>
-<script src="{{url('assets/front/rotanav2/js/jquery-3.3.1.min.js')}}"></script>
+<!-- Modal -->
+<div class="modal_share modal fade" id="modalForShare" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="rounded-social-buttons w-100 text-center">
+                    <a class="social-button facebook_link" href="" target="_blank"
+                        title="Facebook">
+                        <i class="fab fa-facebook-f facebook_icon"></i>
+                    </a>
+
+                    <a class="social-button whatsapp_link" href="" title="Whatsapp">
+                        <i class="fab fa-whatsapp whatsapp_icon"></i>
+                    </a>
+
+                    <a class="social-button twitter_link" href="" target="_blank" title="Twitter">
+                        <i class="fab fa-twitter twitter_icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Start Footer -->
+@include('front.rotanav2.footer')
+<!-- End Footer -->
+
 <script>
 $(window).on("scroll", function() {
     var action = $('#categoryStatus').attr('action');
@@ -34,19 +63,20 @@ function load_snap_data(page) {
 
             $('#categoryStatus').append(data);
             $('#categoryStatus').attr('action', 'inactive');
-
-            // document.getElementById("categoryStatus").insertAdjacentHTML(front.newdesignv4.presult);
-
         }
     })
 }
+
+$('.first_list_img_share').click(function(){
+    var id = $(this).attr('id');
+    var url = "{{url('/rotanav2').'/inner/'}}"+id+"/"+"{{UID()}}";
+
+    var facebook = "https://www.facebook.com/sharer/sharer.php?u="+url;
+    var whatsapp = "whatsapp://send?abid=+20111682831&text="+url;
+    var twitter = "http://twitter.com/share?url="+url;
+
+    $('.facebook_link').attr('href', facebook);
+    $('.twitter_link').attr('href', twitter);
+    $('.whatsapp_link').attr('href', whatsapp);
+});
 </script>
-<!-- Start Footer -->
-@include('front.rotanav2.footer')
-<!-- End Footer -->
-@section('script')
-
-
-
-
-@endsection

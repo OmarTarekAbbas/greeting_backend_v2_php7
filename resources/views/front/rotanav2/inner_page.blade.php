@@ -9,17 +9,7 @@
 .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart {
     color: #a2a2a2;
 }
-.use_fil{
-    background: #a2a2a2;
-    width: 38%;
-    padding: 4px;
-    border-radius: 10px;
-    color: black;
-    height: 28px;
-    z-index: 9999999999999999999999999999;
-    position: absolute;
-    bottom: -2%;
-}
+
 </style>
 <div class="main_filter_2day">
     <section class="filter_2day w-100 mt-3">

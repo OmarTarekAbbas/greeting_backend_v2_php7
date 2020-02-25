@@ -92,17 +92,17 @@
             <div class="modal-body">
                 <div class="rounded-social-buttons w-100 text-center">
                     <a class="social-button facebook_link"
-                        href="https://www.facebook.com/sharer/sharer.php?u={{URL::current()}}" target="_blank"
+                        href="https://www.facebook.com/sharer/sharer.php?u={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}" target="_blank"
                         title="Facebook">
                         <i class="fab fa-facebook-f facebook_icon"></i>
                     </a>
 
                     <a class="social-button whatsapp_link"
-                        href="whatsapp://send?abid=+20111682831&text={{URL::current()}}" title="Whatsapp">
+                        href="whatsapp://send?abid=+20111682831&text={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}" title="Whatsapp">
                         <i class="fab fa-whatsapp whatsapp_icon"></i>
                     </a>
 
-                    <a class="social-button twitter_link" href="http://twitter.com/share?url={{URL::current()}}"
+                    <a class="social-button twitter_link" href="http://twitter.com/share?url={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}"
                         target="_blank" title="Twitter">
                         <i class="fab fa-twitter twitter_icon"></i>
                     </a>

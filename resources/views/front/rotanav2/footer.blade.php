@@ -1,51 +1,85 @@
 </main>
 
-<footer class="footer_head w-100">
-  <div class="container">
-    <div class="row">
-      <div class="col-3">
-        <div class="foot_link text-center">
-          <a id="indexed" class="active_menu" href="{{url('/rotanav2/'.uid())}}">
-            <i class="fas fa-home fa-lg"></i>
-          </a>
-        </div>
-      </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
 
-      <div class="col-3">
-        <div class="foot_link text-center">
-          <a href="{{url('/rotanav2/favorites/'.uid())}}">
-            <i class="fas fa-heart fa-lg"></i>
-          </a>
-        </div>
-      </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="search_search">
+                                <form action="{{url('Search_v6/'.UID())}}" method="get" class="w-100">
+                                    <label class="w-100" for="search">
+                                        <input type="search" class="form-control w-100 text-center" name="search"
+                                            value="{{session('search')}}" id="search"
+                                            placeholder="{!! static_lang('search') ?static_lang('search') : 'بحث' !!}">
+                                        <div class="input_bg text-center">
+                                            <i class="fas fa-search fa-lg text-white pt-3"></i>
+                                        </div>
+                                    </label>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <div class="col-3">
-        <div class="foot_link text-center">
-          <a href="{{url('rotanav2/Search_v6/'.UID())}}">
-            <i class="fas fa-search fa-lg"></i>
-          </a>
         </div>
-      </div>
-
-      <div class="col-3">
-        <div class="foot_link foot_link_img text-center">
-          <a href="{{url('rotanav2/today/'.UID())}}">
-            <img class="rotana_foot_img" src="{{url('assets/front/rotanav2/images/Rotana_Green.png')}}" alt="Rotana">
-            <img class="rotana_foot_new" src="{{url('assets/front/rotanav2/images/New.png')}}" alt="Rotana new">
-          </a>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
+
+<footer class="footer_head w-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="foot_link text-center">
+                    <a id="indexed" class="active_menu" href="{{url('/rotanav2/'.uid())}}">
+                        <i class="fas fa-home fa-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="foot_link text-center">
+                    <a href="{{url('/rotanav2/favorites/'.uid())}}">
+                        <i class="fas fa-heart fa-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="foot_link text-center">
+                    <a href="#0" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fas fa-search fa-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="foot_link foot_link_img text-center">
+                    <a href="{{url('rotanav2/today/'.UID())}}">
+                        <img class="rotana_foot_img" src="{{url('assets/front/rotanav2/images/Rotana_Green.png')}}"
+                            alt="Rotana">
+                        <img class="rotana_foot_new" src="{{url('assets/front/rotanav2/images/New.png')}}"
+                            alt="Rotana new">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
 
 <style>
-  ::-webkit-scrollbar {
+::-webkit-scrollbar {
     display: none;
-  }
+}
 
 
-  .the-frame {
+.the-frame {
     padding: 0;
     margin: 0;
     border-radius: 30px;
@@ -61,62 +95,63 @@
     left: 50%;
     transform: translate(-50%, -50%);
     visibility: visible;
-  }
+}
 
-  .main .filter_services {
+.main .filter_services {
     height: 200px !important;
-  }
+}
 
-  @media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
     .the-frame {
-      display: none;
+        display: none;
     }
 
     .enter {
-      display: block;
+        display: block;
     }
 
     .enter h4 {
-      padding: 20px;
-      text-align: center;
-      color: #347742;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      font-size: 1.25rem;
+        padding: 20px;
+        text-align: center;
+        color: #347742;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        font-size: 1.25rem;
     }
 
     .enter a {
-      font-weight: bold;
-      font-size: 18px;
-      color: #fff;
-      padding: 5px 20px;
-      background-color: #347742;
-      border-radius: 5px;
-      text-decoration: none;
-      position: absolute;
-      top: 60%;
-      left: 38%;
-      transform: translate(-50%, -50%);
+        font-weight: bold;
+        font-size: 18px;
+        color: #fff;
+        padding: 5px 20px;
+        background-color: #347742;
+        border-radius: 5px;
+        text-decoration: none;
+        position: absolute;
+        top: 60%;
+        left: 38%;
+        transform: translate(-50%, -50%);
     }
-  }
+}
 
-  @media only screen and (min-width: 600px) {
+@media only screen and (min-width: 600px) {
     body {
-      visibility: hidden;
+        visibility: hidden;
     }
 
     .enter {
-      display: none;
+        display: none;
     }
-  }
+}
 </style>
 
 <div class="the-frame">
-  <iframe class="full-screen-preview__frame" src="{{url()->current()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 340px; border-radius: 10px;">
-  </iframe>
+    <iframe class="full-screen-preview__frame" src="{{url()->current()}}" name="preview-frame" frameborder="0"
+        noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 340px; border-radius: 10px;">
+    </iframe>
 </div>
 
 <!-- <div class="enter">
@@ -132,10 +167,10 @@
 <script src="{{url('assets/front/rotanav2/js/script.js')}}"></script>
 
 <script type="text/javascript">
-  if (screen.width <= 600) {
+if (screen.width <= 600) {
     // document.location.href = "#0";
-  }
-  new WOW().init();
+}
+new WOW().init();
 </script>
 
 <script>
