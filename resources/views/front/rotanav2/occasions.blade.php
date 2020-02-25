@@ -12,7 +12,7 @@
       <div class="col-4 p-0">
         <div class="first_list_img">
           <a href="{{url('/rotanav2/'.$item->id.'/filter/'.uid())}}">
-            <img class="w-100" src="{{url($item->image)}}" alt="Filter">
+            <img class="w-100 d-block m-auto rotate-scale-down" src="{{url($item->image)}}" alt="Filter">
           </a>
         </div>
       </div>
@@ -32,7 +32,7 @@
   $(window).on("scroll", function() {
     var action = $('#categoryStatus').attr('action');
     var page = $('#categoryStatus').attr('page');
-  
+
     if ($(window).scrollTop() + $(window).height() > $("#categoryStatus").height() && action == 'inactive') {
       $('#categoryStatus').attr('action', 'active');
       page++;
@@ -40,19 +40,19 @@
       load_snap_data(page);
     }
   });
-  
+
   function load_snap_data(page) {
     $('.load').show();
     $.ajax({
       type: 'GET',
       url: '?page=' + page,
       success: function(data) {
-  
+
         $('#categoryStatus').append(data);
         $('#categoryStatus').attr('action', 'inactive');
-  
-        // document.getElementById("categoryStatus").insertAdjacentHTML(front.newdesignv4.presult); 
-  
+
+        // document.getElementById("categoryStatus").insertAdjacentHTML(front.newdesignv4.presult);
+
       }
     })
   }

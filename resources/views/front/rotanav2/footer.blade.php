@@ -44,7 +44,6 @@
     display: none;
   }
 
-
   .the-frame {
     padding: 0;
     margin: 0;
@@ -106,10 +105,17 @@
   @media only screen and (min-width: 600px) {
     body {
       visibility: hidden;
+      overflow: hidden
     }
 
     .enter {
       display: none;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .the-frame {
+      top: 35%;
     }
   }
 </style>
