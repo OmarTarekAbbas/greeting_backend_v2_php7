@@ -230,19 +230,41 @@ button:active,
 }
 
 /* End Modal For Share */
+.not_fo {
+  width: 14.5%;
+  position: absolute;
+  top: 744%;
+  left: 22.4%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-53%, -50%);
+}
+
+.img_logo_st {
+  top: 587%;
+  position: absolute;
+  right: 13%;
+}
+
+.font_not_filter {
+  font-size: 5vw;
+  transform: translate(4%, 668%);
+}
+
+.use_fil {
+  background: #a2a2a2;
+  width: 38%;
+  padding: 4px;
+  border-radius: 10px;
+  color: black;
+  height: 28px;
+  z-index: 10000000000000002000000000000;
+  position: absolute;
+  bottom: -2%;
+}
+
 /* Start Search Page */
 .search_search {
   position: relative;
-}
-.search_search form {
-  position: absolute;
-  bottom: 25rem;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
 }
 .search_search form label input {
   height: 3rem;

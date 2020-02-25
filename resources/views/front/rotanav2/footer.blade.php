@@ -1,24 +1,5 @@
 </main>
 
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="search_search">
-                <form action="{{url('Search_v6/'.UID())}}" method="get" class="w-100">
-                    <label class="w-100" for="search">
-                        <input type="search" class="form-control w-100 text-center" name="search" value="" id="search"
-                            placeholder="{!! static_lang('search') ?static_lang('search') : 'بحث' !!}">
-                        <div class="input_bg text-center">
-                            <i class="fas fa-search fa-lg text-white pt-3"></i>
-                        </div>
-                    </label>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
