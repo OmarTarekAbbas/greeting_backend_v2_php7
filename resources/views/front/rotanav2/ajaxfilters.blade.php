@@ -4,7 +4,7 @@
     <a href="{{url($item->snap_link)}}" target="_blank">
       <img class="w-100" src="{{url($item->path)}}" alt="Filter">
       {{-- <p>{{$item->title}}</p> --}}
-      <a class="first_list_img_heart" onclick="fav('{{$item->id}}')" href="#0">
+      <a class="first_list_img_heart" onclick="fav('{{$item->id}}')" href="javascript:void(0)">
         <i class="fas fa-heart heart_heart"></i>
       </a>
 

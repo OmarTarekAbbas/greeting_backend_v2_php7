@@ -26,8 +26,8 @@
             <a href="{{$Rdata_today->snap_link}}">
               <img class="w-100 d-block m-auto rounded rotate-scale-down" src="{{url('/'.$Rdata_today->path)}}" alt="Filter Today">
 
-              <a class="first_list_img_heart" href="#0">
-                <i class="fas fa-heart fa-lg ajax_call" value="{{$Rdata_today->id}}"></i>
+              <a class="first_list_img_heart" onclick="fav('{{$Rdata_today->id}}');$(this).toggleClass('active_heart');" href="javascript:void(0)">
+                <i class="fas fa-heart fa-lg ajax_call"></i>
               </a>
 
               <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
@@ -46,7 +46,7 @@
   <section class="filter_slide w-100 mt-3">
     <div class="col-12 p-0">
       <div class="second_slide_title">
-        <a href="list.php">
+        <a href="{{url('/rotanav2/'.$cat->id.'/occasion/'.uid())}}">
           @if(isset($cat))
           <h6 class="text-right text-white pt-0 pr-3 scale-in-left">دراما
             <i class="fas fa-th-large fa-1x float-left pl-3 pulsate-bck"></i>
@@ -65,7 +65,7 @@
           @endif
           @foreach ($occasis as $occasi)
           <div class="item">
-            <a class="owl_filter_img w-100" href="#0">
+            <a class="owl_filter_img w-100" href="{{url('/rotanav2/'.$occasi->id.'/filter/'.uid())}}">
               <img class="w-100 m-auto d-block" src="{{url('/'.$occasi->image)}}" alt="{{$occasi->title}}">
             </a>
           </div>
