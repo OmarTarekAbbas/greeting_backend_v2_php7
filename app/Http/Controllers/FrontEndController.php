@@ -25,6 +25,8 @@ use App\Msisdn;
 use App\AdvertisingUrl;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+
 
 class FrontEndController extends Controller
 {
@@ -3596,11 +3598,16 @@ public function filter_inner($FID, $UID){
     $url = Generatedurl::where('UID', $UID)->first();
     $occasion_id = $FID;
     $Rdata = Greetingimg::where('id', $FID)->first();
-    $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
-    $cat = Category::where('id',$occasi->category_id)->first();
-    $occasis = Occasion::where('category_id', $cat->id)->get();
-    //  dd($occasis);
-    return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));
+    //  dd($Rdata == !null);
+    if($Rdata == !null){
+      $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
+      $cat = Category::where('id',$occasi->category_id)->first();
+      $occasis = Occasion::where('category_id', $cat->id)->get();
+      //  dd($occasis);
+      return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));     
+    }else{
+      return back();
+    }
 }
 
 
