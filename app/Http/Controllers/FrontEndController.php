@@ -3538,14 +3538,18 @@ public function rotanav2_today($UID){
     if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
         $url = Generatedurl::where('UID', $UID)->first();
         $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->first();
-        $Rdata_today2 = $url->operator->greetingimgs()->PublishedSnap()->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->limit(10)->get();
         if(isset($Rdata_today)){
             $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
             $cat = Category::where('id',$occasi->category_id)->first();
             $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
-                return view('front.rotanav2.today', compact('Rdata_today','Rdata_today2','occasi','cat','occasis'));
+                return view('front.rotanav2.today', compact('Rdata_today','occasi','cat','occasis'));
             }else{
-                return view('front.rotanav2.nofilter');
+              $Rdata_today2 = $url->operator->greetingimgs()->PublishedSnap()->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->limit(1)->get();
+              $occasi = Occasion::where('id', $Rdata_today2[0]->occasion_id)->first();
+              // dd($occasi);
+              $cat = Category::where('id',$occasi->category_id)->first();
+              $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
+              return view('front.rotanav2.today2', compact('Rdata_today2','occasi','cat','occasis'));
             }
     }else {
         return redirect(url(redirect_operator()));
