@@ -15,7 +15,7 @@
               <source src="{{url($item->vid_path)}}" />
             </video>
 
-            <a class="text-white text-center d-block" href="{{url($item->snap_link)}}" target="_blank">
+            <a class="fontIcon text-white text-center d-block" href="{{url($item->snap_link)}}" target="_blank">
               <i class="far fa-eye fa-2x"></i>
             </a>
           </div>
@@ -55,7 +55,7 @@
       <div class="col-12 p-0">
         <div class="second_slide_title">
           <a href="{{url('/rotanav2/'.$category->id.'/occasion/'.uid())}}">
-          <h6 class="text-right text-white pt-0 pr-3 scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s" data-wow-offset="100"> {{$category->title}}
+            <h6 class="text-right text-white pt-0 pr-3 scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s" data-wow-offset="100"> {{$category->title}}
               <i class="fas fa-th-large fa-1x float-left pl-3 pulsate-bck wow" data-wow-delay="1s" data-wow-duration="0.9s" data-wow-offset="100"></i>
             </h6>
           </a>

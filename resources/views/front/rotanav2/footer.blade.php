@@ -26,7 +26,7 @@
     height: 200px !important;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 1023px) {
     .the-frame {
       display: none;
     }
@@ -62,10 +62,10 @@
     }
   }
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 678px) {
     body {
       visibility: hidden;
-      overflow: hidden
+      overflow-x: hidden
     }
 
     .new_rotana {
