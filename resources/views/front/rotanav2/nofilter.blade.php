@@ -1,4 +1,3 @@
-
 <div class="col-12 mb-3 swirl-out-bck">
     <div class="sub_img">
         <img class="w-75 d-block img_logo_st" src="{{url('assets/front/rotanav2/images/strip.png')}}" alt="strip">
@@ -9,4 +8,3 @@
     </div>
 
 </div>
-

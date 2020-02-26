@@ -18,7 +18,7 @@
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                  </button>
+                </button>
                 <div class="rounded-social-buttons w-100 text-center">
                     <a class="social-button facebook_link" href="" target="_blank"
                         title="Facebook">

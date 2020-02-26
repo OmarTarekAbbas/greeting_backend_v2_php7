@@ -3521,13 +3521,21 @@ public function favorites_rotana(Request $request, $UID){
 }
 
 public function favorites_rotana_load(Request $request, $UID){
-
     $ids = $request->ids;
-    $idsArray = explode(",", $ids);
-
     $url = Generatedurl::where('UID', $UID)->first();
-    $snap = $url->operator->greetingimgs()->PublishedSnap()->whereIn('greetingimgs.id', $idsArray)->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
-    return view('front.rotanav2.ajaxfav', compact('snap'));
+
+    if(!empty($ids)){
+        $idsArray = explode(",", $ids);
+        $snap = $url->operator->greetingimgs()->PublishedSnap()->whereIn('greetingimgs.id', $idsArray)->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
+        return view('front.rotanav2.ajaxfav', compact('snap'));
+    }else{
+        if(get_settings('only_favorites') == 1){
+            $snap = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(12);
+            return view('front.rotanav2.ajaxfav', compact('snap'));
+        }else{
+            return view('front.rotanav2.nofilter');
+        }
+    }
 
 }
 
