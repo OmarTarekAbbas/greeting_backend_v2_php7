@@ -1,4 +1,4 @@
-@if ($Rdata != "")
+
 @foreach ($Rdata as $key=>$snap)
 <div class="col-4 p-0">
     <div class="first_list_img">
@@ -16,6 +16,4 @@
     </div>
 </div>
 @endforeach
-@else
-@include('front.rotanav2.nofilter')
-@endif
+

@@ -2,10 +2,10 @@
 @include('front.rotanav2.header')
 <!-- End Header -->
 
-
+@if(count($Rdata) > 0)
 <div class="main_list">
     <section class="first_list w-100 mt-3">
-        <div class="row m-auto" id="categoryStatus" action="inactive" page='1'>
+    <div class="row m-auto" id="categoryStatus" action="inactive" page='1'>
             @include('front.rotanav2.snapsresult')
         </div>
     </section>
@@ -37,7 +37,9 @@
         </div>
     </div>
 </div>
-
+@else
+@include('front.rotanav2.nofilter')
+@endif
 
 <!-- Start Footer -->
 @include('front.rotanav2.footer')
@@ -45,29 +47,31 @@
 
 <script>
 $(window).on("scroll", function() {
-    var action = $('#categoryStatus').attr('action');
-    var page = $('#categoryStatus').attr('page');
+  var action = $('#categoryStatus').attr('action');
+  var page = $('#categoryStatus').attr('page');
 
-    if ($(window).scrollTop() + $(window).height() > $("#categoryStatus").height() && action == 'inactive') {
-        // console.log('firrrrrrrrrrrrrrreeeeeeeeeeeeee');
-        $('#categoryStatus').attr('action', 'active');
-        page++;
-        $('#categoryStatus').attr('page', page);
-        load_snap_data(page);
-    }
+  if ($(window).scrollTop() + $(window).height() < $("#categoryStatus").height() && action == 'inactive') {
+    console.log($(window).height() < $("#categoryStatus").height());
+    $('#categoryStatus').attr('action', 'active');
+    page++;
+    $('#categoryStatus').attr('page', page);
+    load_snap_data(page);
+  }
 });
 
 function load_snap_data(page) {
-    $('.load').show();
-    $.ajax({
-        type: 'GET',
-        url: '?page=' + page,
-        success: function(data) {
+  $('.load').show();
+  $.ajax({
+    type: 'GET',
+    url: '?page=' + page,
+    success: function(data) {
 
-            $('#categoryStatus').append(data);
-            $('#categoryStatus').attr('action', 'inactive');
-        }
-    })
+      $('#categoryStatus').append(data);
+      $('#categoryStatus').attr('action', 'inactive');
+
+
+    }
+  })
 }
 
 $('.first_list_img_share').click(function(){
@@ -83,3 +87,5 @@ $('.first_list_img_share').click(function(){
     $('.whatsapp_link').attr('href', whatsapp);
 });
 </script>
+
+

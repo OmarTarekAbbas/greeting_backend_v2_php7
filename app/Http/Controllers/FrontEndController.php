@@ -3566,15 +3566,14 @@ public function rotanav2_today($UID){
 
 public function Search_v6(Request $request, $UID)
 {
-    // dd($request->search);
     $current_url = \Request::fullUrl();
     $search = $request->search;
     Session::put('search', $search);
     if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
-        $url = Generatedurl::where('UID', $UID)->first();
-        if (is_null($url))
-            return view('front.error');
-        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
+      $url = Generatedurl::where('UID', $UID)->first();
+      if (is_null($url))
+      return view('front.error');
+      $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
         $codes = [];
         foreach ($Rdata as $key => $value) {
             if ($value->rbt_id != null) {
@@ -3583,6 +3582,7 @@ public function Search_v6(Request $request, $UID)
             }
         }
         $rbt_sms = $url->operator->rbt_sms;
+
         if($request->ajax())
         return view('front.rotanav2.snapsresult', compact('Rdata', 'search','rbt_sms','codes'));
         return view('front.rotanav2.search1', compact('Rdata', 'search','rbt_sms','codes'));
