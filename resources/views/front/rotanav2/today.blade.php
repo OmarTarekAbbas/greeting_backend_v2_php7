@@ -78,15 +78,14 @@
 
 
 <!-- Modal -->
-<div class="modal_share modal fade" id="modalForShare" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-
+<div class="modal_share modal fade" id="modalForShare" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
             <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 <div class="rounded-social-buttons w-100 text-center">
                     <a class="social-button facebook_link"
                         href="https://www.facebook.com/sharer/sharer.php?u={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}" target="_blank"
@@ -106,9 +105,7 @@
                 </div>
             </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <!-- Start Footer -->
