@@ -44,7 +44,7 @@
     <section class="filter_slide w-100 mt-3">
         <div class="col-12 p-0">
             <div class="second_slide_title">
-                <a href="list.php">
+                <a href="{{url('/rotanav2/'.$cat->id.'/occasion/'.uid())}}">
                     <h6 class="text-right text-white pt-0 pr-3">{{$cat->title}}
                         <i class="fas fa-th-large fa-1x float-left pl-3"></i>
                     </h6>
@@ -60,7 +60,7 @@
                     @endif
                     @foreach ($occasis as $occasi)
                     <div class="item">
-                        <a class="owl_filter_img w-100" href="#0">
+                        <a class="owl_filter_img w-100" href="{{url('/rotanav2/'.$occasi->id.'/filter/'.uid())}}">
                             <img class="m-auto d-block" src="{{url('/'.$occasi->image)}}" alt="{{$occasi->title}}">
                         </a>
                     </div>
