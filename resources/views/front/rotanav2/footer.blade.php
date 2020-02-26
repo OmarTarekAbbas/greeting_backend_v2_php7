@@ -203,7 +203,7 @@ new WOW().init();
     console.log(allfav);
   }
 
-  function sharebtn(id){
+function sharebtn(id){
     var url = "{{url('/rotanav2').'/inner/'}}"+id+"/"+"{{UID()}}";
     console.log(url);
     var facebook = "https://www.facebook.com/sharer/sharer.php?u="+url;
@@ -213,6 +213,9 @@ new WOW().init();
     $('.facebook_link').attr('href', facebook);
     $('.twitter_link').attr('href', twitter);
     $('.whatsapp_link').attr('href', whatsapp);
+}
+function togglefav(){
+    $(this).toggleClass('active_heart');
 }
 
 </script>

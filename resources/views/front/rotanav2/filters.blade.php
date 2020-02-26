@@ -26,7 +26,7 @@
             @endforeach
             @else
 
-            <h2>No Filters!</h2>
+            @include('front.rotanav2.nofilter')
 
             @endif
 
@@ -42,6 +42,9 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 <div class="rounded-social-buttons w-100 text-center">
                     <a class="social-button facebook_link"
                         href="https://www.facebook.com/sharer/sharer.php?u={{URL::current()}}" target="_blank"

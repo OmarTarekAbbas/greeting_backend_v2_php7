@@ -211,7 +211,7 @@ button,
 
             &.first_list_img_heart {
               left: 31%;
-              color: $red_color;
+              // color: $red_color;
             }
           }
         }
@@ -365,8 +365,8 @@ button,
     position: absolute;
     top: 744%;
     left: 22.4%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-53%, -50%);
+    transform: translate(-52%, -69%);
+    -webkit-transform: translate(-52%, -69%);
 }
 
 .img_logo_st {
@@ -376,7 +376,7 @@ button,
 }
 .font_not_filter{
     font-size: 5vw;
-    transform: translate(4%, 668%);
+    transform: translate(5%, 875%);
 }
 .use_fil{
     background: #a2a2a2;
@@ -429,7 +429,7 @@ button,
 
 /* Start Search Page */
 .active_heart {
-  color: $white_color !important;
+  color: $red_color !important;
 }
 
 .slide-in-fwd-bottom {

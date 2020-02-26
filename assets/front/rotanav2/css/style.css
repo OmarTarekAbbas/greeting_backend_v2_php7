@@ -132,7 +132,6 @@ button:active,
 }
 .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share.first_list_img_heart {
   left: 31%;
-  color: #cd4c4c;
 }
 
 /* Start Footer */
@@ -239,8 +238,8 @@ button:active,
   position: absolute;
   top: 744%;
   left: 22.4%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-53%, -50%);
+  transform: translate(-52%, -69%);
+  -webkit-transform: translate(-52%, -69%);
 }
 
 .img_logo_st {
@@ -251,7 +250,7 @@ button:active,
 
 .font_not_filter {
   font-size: 5vw;
-  transform: translate(4%, 668%);
+  transform: translate(5%, 875%);
 }
 
 .use_fil {
@@ -294,7 +293,7 @@ button:active,
 /* End Search Page */
 /* Start Search Page */
 .active_heart {
-  color: #FFF !important;
+  color: #cd4c4c !important;
 }
 
 .slide-in-fwd-bottom {
