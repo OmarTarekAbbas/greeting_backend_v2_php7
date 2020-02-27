@@ -17,7 +17,7 @@
 
             <a href="{{$Rdata_today->snap_link}}">
               <img class="w-100 d-block m-auto rounded rotate-scale-down" src="{{url('/'.$Rdata_today->path)}}"
-                alt="Filter Today">
+                alt="{{$Rdata_today->title}}">
 
               <a class="first_list_img_heart" onclick="fav('{{$Rdata_today->id}}');$(this).toggleClass('active_heart');"
                 href="javascript:void(0)">

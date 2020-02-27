@@ -11,7 +11,7 @@
       <div class="col-4 p-0">
         <div class="first_list_img">
           <a href="{{url($item->snap_link)}}" target="_blank">
-            <img class="w-100" src="{{url($item->path)}}" alt="Filter">
+            <img class="w-100" src="{{url($item->path)}}" alt="{{$item->title}}">
 
             <a class="first_list_img_heart" onclick="fav('{{$item->id}}')" href="javascript:void(0)">
               <i id="{{$item->id}}" class="fas fa-heart heart_heart"></i>
