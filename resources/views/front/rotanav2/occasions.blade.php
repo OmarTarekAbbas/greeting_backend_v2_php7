@@ -8,7 +8,7 @@
       @foreach ($Occasions as $item)
       @if ($item->greetingimgs()->get()->count() > 0)
       <div class="col-4 p-0">
-        <div class="first_list_img">
+        <div class="first_list_img mb-2">
           <a href="{{url('/rotanav2/'.$item->id.'/filter/'.uid())}}">
             <img class="w-100 d-block m-auto rotate-scale-down wow" data-wow-delay="1s" data-wow-duration="0.9s" data-wow-offset="100" src="{{url($item->image)}}" alt="Filter">
           </a>
