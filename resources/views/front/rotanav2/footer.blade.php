@@ -92,7 +92,7 @@
           <div class="row m-0">
             <div class="col-12 p-0">
               <div class="search_search">
-                <form action="{{url('Search_v6/'.UID())}}" method="get" class="w-100 slide-in-fwd-bottom">
+                <form action="{{url('Search_v6/'.UID())}}" method="get" class="w-100 slide-search">
                   <label class="w-100" for="search">
                     <input type="search" class="form-control w-100 text-center" name="search" value="{{session('search')}}" id="search" placeholder="{!! static_lang('search') ?static_lang('search') : 'بحث' !!}">
                     <div class="input_bg text-center">
@@ -151,17 +151,10 @@
   </div>
 </footer>
 
-
-
 <div class="the-frame">
   <iframe class="full-screen-preview__frame" src="{{url()->current()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 340px; border-radius: 10px;">
   </iframe>
 </div>
-
-<!-- <div class="enter">
-    <h4>انت الان على الهاتف للدخول اضغط هنا</h4>
-    <a href="home.php" class="wow pulse" data-wow-delay="300ms" data-wow-iteration="infinite" data-wow-duration="1.5s">دخول</a>
-  </div> -->
 
 <script src="{{url('assets/front/rotanav2/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{url('assets/front/rotanav2/js/bootstrap.min.js')}}"></script>
