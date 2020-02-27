@@ -40,13 +40,13 @@
 @endsection
 
 @section('script')
-    
+
 
 <script>
   $(window).on("scroll", function() {
     var action = $('#categoryStatus').attr('action');
     var page = $('#categoryStatus').attr('page');
-  
+
     if ($(window).scrollTop() + $(window).height() > $("#categoryStatus").height() && action == 'inactive') {
       console.log('firrrrrrrrrrrrrrreeeeeeeeeeeeee');
       $('#categoryStatus').attr('action', 'active');
@@ -55,19 +55,19 @@
       load_snap_data(page);
     }
   });
-  
+
   function load_snap_data(page) {
     $('.load').show();
     $.ajax({
       type: 'GET',
       url: '?page=' + page,
       success: function(data) {
-  
+
         $('#categoryStatus').append(data);
         $('#categoryStatus').attr('action', 'inactive');
-  
-        // document.getElementById("categoryStatus").insertAdjacentHTML(front.newdesignv4.presult); 
-  
+
+        // document.getElementById("categoryStatus").insertAdjacentHTML(front.newdesignv4.presult);
+
       }
     })
   }

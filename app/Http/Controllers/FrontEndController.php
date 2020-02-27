@@ -25,6 +25,8 @@ use App\Msisdn;
 use App\AdvertisingUrl;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+
 
 class FrontEndController extends Controller
 {
@@ -3461,156 +3463,124 @@ public function zain_ksa_test(Request $request){
 public function rotana($UID)
 {
     $current_url = \Request::fullUrl();
-    $favourites = [];
-    $fav_id = [];
+
     if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
         $url = Generatedurl::where('UID', $UID)->first();
-        // if (is_null($url))
-        //     return view('front.error');
-        $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->get();
-        $populars = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->get();
+
         $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
 
         $newsnap = $url->operator->greetingimgs()->PublishedSnap()->whereNotNull('vid_path')->orderBy('id', 'desc')->limit(4)->get();
 
-        // dd($newsnap);
-        // foreach($newsnap as $id){
-        //     echo $id->id;
-        // }die;
-
         $occasions_array = [];
-        $occasions = [];
+        $categories = [];
+
         foreach ($snap as $key => $value) {
             array_push($occasions_array, $value->occasion_id);
         }
         $occasions_array = array_unique($occasions_array);
+
         foreach ($occasions_array as $k => $occasion) {
             $sliders[] = Occasion::where('id', $occasion)->first();
         }
         $sliders = array_filter($sliders);
-        // dd($sliders);
-        //$sliders = $url->operator->greetingimgs()->PublishedSnap()->Slider()->orderBy('RDate', 'desc')->get();
-        if ((Session::has('MSISDN') && Session::get('Status') == 'active'))
-            $favourites = $url->operator->greetingimgs()->Favourite(Session::get('MSISDN'))->PublishedSnap()->orderBy('RDate', 'desc')->limit(10)->get();
-        if ($favourites) {
-            foreach ($favourites as $fav) {
-                array_push($fav_id, $fav->id);
-            }
-            $suggests = $url->operator->greetingimgs()->PublishedSnap()->whereNotIn('greetingimgs.id', $fav_id)->orderBy('RDate', 'desc')->get();
-        } else {
-            $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->get();
+
+        foreach($sliders as $slider){
+            array_push($categories, $slider->category()->first());
         }
+        $categories = array_unique($categories);
 
-        // get popluar filters according to greetingimg_operator.poplar_count   = actual popluar count
-        $Rdata_today2 = $url->operator->greetingimgs()->PublishedSnap()->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->limit(10)->get();
-
-
-        return view('front.rotana.home', compact('newsnap', 'Rdata_today', 'favourites', 'sliders', 'suggests', 'populars', 'Rdata_today2'));
+        return view('front.rotanav2.home', compact('newsnap', 'categories'));
     } else {
         return redirect(url(redirect_operator()));
     }
 }
 
-public function occasions_v5(Request $request, $UID){
+public function occasions_rotana(Request $request, $CID, $UID){
 
-
-    $url = Generatedurl::where('UID', $UID)->first();
-    if (is_null($url))
-        return view('front.error');
-    $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
-    $occasions_array = [];
-    $occasions = [];
-    foreach ($snap as $key => $value) {
-        array_push($occasions_array, $value->occasion_id);
+    $occasions = Category::where('id', $CID)->first();
+    if(!empty($occasions)){
+        $Occasions = $occasions->occasions()->paginate(get_settings('pagination_limit'));
+    
+        if($request->ajax()){
+            return view('front.rotanav2.ajaxoccasions', compact('Occasions'));
+        }
+    
+        return view('front.rotanav2.occasions', compact('Occasions'));
+    }else{
+        return view('errors.404');
     }
-    $occasions_array = array_unique($occasions_array);
-    foreach ($occasions_array as $k => $occasion) {
-        $sliders[] = Occasion::where('id', $occasion)->first();
-    }
-    $sliders = array_filter($sliders);
+}
 
-    // dd(count($sliders));
-    $page = \Input::get('page', 1); // Get the ?page=1 from the url
-    $perPage = 8; // Number of items per page
-    $offset = ($page * $perPage) - $perPage;
+public function filter_rotana(Request $request, $OID, $UID){
 
-    $Occasions = array_slice($sliders, $offset, $perPage, true);
-
-    // dd($Occasions);
+    $filters = Greetingimg::where('occasion_id', $OID)->paginate(get_settings('pagination_limit'));
 
     if($request->ajax()){
-        return view('front.rotana.presult', compact('Occasions'));
+        return view('front.rotanav2.ajaxfilters', compact('filters'));
     }
 
-    return view('front.rotana.search_page', compact('Occasions'));
+    return view('front.rotanav2.filters', compact('filters'));
 
 }
-public function suboccasions_v5(Request $request, $OID, $UID){
 
+public function favorites_rotana(Request $request, $UID){
+    return view('front.rotanav2.fav');
+}
+
+public function favorites_rotana_load(Request $request, $UID){
+    $ids = $request->ids;
     $url = Generatedurl::where('UID', $UID)->first();
-     if (is_null($url))
-         return view('front.error');
 
-    $occasion_id = $OID;
-    $codes = [];
-
-    $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion_id)->orderBy('RDate', 'desc')->orderBy('id', 'desc')->paginate(8);
-
-    // if ($Rdata->isEmpty()) {
-    //       return view('front.error');
-    // }
-    foreach ($Rdata as $key => $value) {
-        if ($value->rbt_id != null) {
-            $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
-            $codes[$key] = $rbtCode ? $rbtCode->code : null;
-        }
-    }
-    $rbt_sms = $url->operator->rbt_sms;
-    $Occasion = Occasion::where('id', $occasion_id)->first();
-
-    $pageTitle = $Occasion->getTranslation('title',getCode());
-    $child_occasions =[];
-    $childs = Occasion::where('parent_id',$occasion_id)->get(); // occasion_id parent_id
-    foreach($childs as $value){
-        $check = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $value->id)->first();
-        if($check){
-            $child_occasions[] = $value;
+    if(!empty($ids)){
+        $idsArray = explode(",", $ids);
+        $snap = $url->operator->greetingimgs()->PublishedSnap()->whereIn('greetingimgs.id', $idsArray)->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
+        return view('front.rotanav2.ajaxfav', compact('snap'));
+    }else{
+        if(get_settings('only_favorites') == 0){
+            $snap = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(12);
+            return view('front.rotanav2.ajaxfav', compact('snap'));
+        }else{
+            return view('front.rotanav2.nofilter');
         }
     }
 
-    $page = \Input::get('page', 1); // Get the ?page=1 from the url
-    $perPage = 8; // Number of items per page
-    $offset = ($page * $perPage) - $perPage;
-
-    $child_occasions = array_slice($child_occasions, $offset, $perPage, true);
-
-    if($request->ajax())
-        return view('front.rotana.snapsresult', compact('pageTitle', 'Rdata','child_occasions' ,'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
-
-    return view('front.rotana.sub_categories', compact('pageTitle', 'Rdata','child_occasions' ,'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
-
 }
 
-public function filter_v5($OID, $UID){
-
-    $url = Generatedurl::where('UID', $UID)->first();
-    $occasion_id = $OID;
-    $Rdata = Greetingimg::where('id', $OID)->first();
-    return view('front.rotana.inner_page', compact('Rdata'));
-
+public function rotanav2_today($UID){
+    $current_url = \Request::fullUrl();
+    $favourites = [];
+    $fav_id = [];
+    if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+        $url = Generatedurl::where('UID', $UID)->first();
+        $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->first();
+        if(isset($Rdata_today)){
+            $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
+            $cat = Category::where('id',$occasi->category_id)->first();
+            $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
+                return view('front.rotanav2.today', compact('Rdata_today','occasi','cat','occasis'));
+            }else{
+              $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '<', Carbon::now()->format('Y-m-d'))->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->first();
+              $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
+              // dd($occasi);
+              $cat = Category::where('id',$occasi->category_id)->first();
+              $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
+              return view('front.rotanav2.today', compact('Rdata_today','occasi','cat','occasis'));
+            }
+    }else {
+        return redirect(url(redirect_operator()));
+    }
 }
 
-
-public function Search_v5(Request $request, $UID)
+public function Search_v6(Request $request, $UID)
 {
     $current_url = \Request::fullUrl();
     $search = $request->search;
     Session::put('search', $search);
     if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
-        $url = Generatedurl::where('UID', $UID)->first();
-        if (is_null($url))
-            return view('front.error');
-        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(8);
+      $url = Generatedurl::where('UID', $UID)->first();
+      if (is_null($url))
+      return view('front.error');
+      $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
         $codes = [];
         foreach ($Rdata as $key => $value) {
             if ($value->rbt_id != null) {
@@ -3619,42 +3589,29 @@ public function Search_v5(Request $request, $UID)
             }
         }
         $rbt_sms = $url->operator->rbt_sms;
+
         if($request->ajax())
-            return view('front.rotana.spresult', compact('Rdata', 'search','rbt_sms','codes'));
-        return view('front.rotana.categories', compact('Rdata', 'search','rbt_sms','codes'));
+        return view('front.rotanav2.snapsresult', compact('Rdata', 'search','rbt_sms','codes'));
+        return view('front.rotanav2.search1', compact('Rdata', 'search','rbt_sms','codes'));
     } else {
         return redirect(url(redirect_operator()));
     }
 }
 
-public function favouritesv5(Request $request, $UID)
-{
-    $current_url = \Request::fullUrl();
-    $favourites = [];
-    $fav_id = [];
-    if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
-        $url = Generatedurl::where('UID', $UID)->first();
+public function filter_inner($FID, $UID){
 
-        $populars = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(8);
-
-        if ((Session::has('MSISDN') && Session::get('Status') == 'active'))
-            $favourites = $url->operator->greetingimgs()->Favourite(Session::get('MSISDN'))->PublishedSnap()->orderBy('RDate', 'desc')->paginate(8);
-        if ($favourites) {
-            foreach ($favourites as $fav) {
-                array_push($fav_id, $fav->id);
-            }
-            $suggests = $url->operator->greetingimgs()->PublishedSnap()->whereNotIn('greetingimgs.id', $fav_id)->orderBy('RDate', 'desc')->paginate(8);
-        } else {
-            $suggests = $url->operator->greetingimgs()->PublishedSnap()->orderBy('like', 'desc')->paginate(8);
-        }
-
-        // dd($suggests);
-        if($request->ajax())
-            return view('front.rotana.fpresult', compact('favourites', 'suggests', 'populars'));
-
-        return view('front.rotana.filter', compact('favourites', 'suggests', 'populars'));
-    } else {
-        return redirect(url(redirect_operator()));
+    $url = Generatedurl::where('UID', $UID)->first();
+    $occasion_id = $FID;
+    $Rdata = Greetingimg::where('id', $FID)->first();
+    //  dd($Rdata == !null);
+    if($Rdata == !null){
+      $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
+      $cat = Category::where('id',$occasi->category_id)->first();
+      $occasis = Occasion::where('category_id', $cat->id)->get();
+      //  dd($occasis);
+      return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));     
+    }else{
+      return back();
     }
 }
 
@@ -4643,5 +4600,4 @@ public function favouritesmbc(Request $request, $UID)
         }
         return view('landing_v2.landing_kuwait');
     }
-
 }

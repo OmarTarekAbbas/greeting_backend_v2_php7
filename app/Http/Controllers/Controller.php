@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Session;
 
-abstract class Controller extends BaseController {
+abstract class Controller extends BaseController
+{
 
     use DispatchesJobs,
         ValidatesRequests;
 
-    public function detectCompnay() {
+    public function detectCompnay()
+    {
         $company = "";
-        if (session::get('adv_params') !== NULL && session::get('adv_params') != "") {
-            if (session::get('publisherId_macro') !== NULL && session::get('transaction_id') != "") {
+        if (session::get('adv_params') !== null && session::get('adv_params') != "") {
+            if (session::get('publisherId_macro') !== null && session::get('transaction_id') != "") {
                 $company = "headway";
             } else {
 
@@ -27,21 +29,24 @@ abstract class Controller extends BaseController {
 
         return $company;
     }
-    
-    
-     public function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE)
+
+    public function ip_info($ip = null, $purpose = "location", $deep_detect = true)
     {
-        $output = NULL;
-        if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
+        $output = null;
+        if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
             $ip = $_SERVER["REMOTE_ADDR"];
             if ($deep_detect) {
-                if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))
+                if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
                     $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-                if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP))
+                }
+
+                if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
                     $ip = $_SERVER['HTTP_CLIENT_IP'];
+                }
+
             }
         }
-        $purpose = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));
+        $purpose = str_replace(array("name", "\n", "\t", " ", "-", "_"), null, strtolower(trim($purpose)));
         $support = array("country", "countrycode", "state", "region", "city", "location", "address");
         $continents = array(
             "AF" => "Africa",
@@ -50,7 +55,7 @@ abstract class Controller extends BaseController {
             "EU" => "Europe",
             "OC" => "Australia (Oceania)",
             "NA" => "North America",
-            "SA" => "South America"
+            "SA" => "South America",
         );
         if (filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
             $ipdat = @json_decode($this->GetPageDataMain("http://www.geoplugin.net/json.gp?ip=" . $ip));
@@ -63,15 +68,19 @@ abstract class Controller extends BaseController {
                             "country" => @$ipdat->geoplugin_countryName,
                             "country_code" => @$ipdat->geoplugin_countryCode,
                             "continent" => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
-                            "continent_code" => @$ipdat->geoplugin_continentCode
+                            "continent_code" => @$ipdat->geoplugin_continentCode,
                         );
                         break;
                     case "address":
                         $address = array($ipdat->geoplugin_countryName);
-                        if (@strlen($ipdat->geoplugin_regionName) >= 1)
+                        if (@strlen($ipdat->geoplugin_regionName) >= 1) {
                             $address[] = $ipdat->geoplugin_regionName;
-                        if (@strlen($ipdat->geoplugin_city) >= 1)
+                        }
+
+                        if (@strlen($ipdat->geoplugin_city) >= 1) {
                             $address[] = $ipdat->geoplugin_city;
+                        }
+
                         $output = implode(", ", array_reverse($address));
                         break;
                     case "city":
@@ -95,8 +104,6 @@ abstract class Controller extends BaseController {
         return $output;
     }
 
-
-    
     public static function GetPageDataMain($URL)
     {
 
@@ -112,6 +119,5 @@ abstract class Controller extends BaseController {
         curl_close($ch);
         return $data;
     }
-
 
 }

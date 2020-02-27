@@ -26,7 +26,7 @@
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     <span class="text text-info">link 4 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('newdesignv4/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                    <span class="text text-info">rotana : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('rotana/'.$UID) }}" />
+                    <span class="text text-info">rotana : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('rotanav2/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     <span class="text text-info">Mbc : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('mbc/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
