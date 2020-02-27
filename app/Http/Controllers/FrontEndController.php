@@ -3601,15 +3601,19 @@ public function Search_v6(Request $request, $UID)
 public function filter_inner($FID, $UID){
 
     $url = Generatedurl::where('UID', $UID)->first();
-    $occasion_id = $FID;
-    $Rdata = Greetingimg::where('id', $FID)->first();
-    //  dd($Rdata == !null);
-    if($Rdata == !null){
-      $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
-      $cat = Category::where('id',$occasi->category_id)->first();
-      $occasis = Occasion::where('category_id', $cat->id)->get();
-      //  dd($occasis);
-      return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));
+    if ($url == !null) {
+        $occasion_id = $FID;
+        $Rdata = Greetingimg::where('id', $FID)->first();
+        //  dd($Rdata == !null);
+        if($Rdata == !null){
+          $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
+          $cat = Category::where('id',$occasi->category_id)->first();
+          $occasis = Occasion::where('category_id', $cat->id)->get();
+          //  dd($occasis);
+          return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));
+        }else{
+            return view('errors.404');
+        }
     }else{
         return view('errors.404');
     }
