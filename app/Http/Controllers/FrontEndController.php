@@ -3495,13 +3495,18 @@ public function rotana($UID)
 
 public function occasions_rotana(Request $request, $CID, $UID){
 
-    $Occasions = Category::where('id', $CID)->first()->occasions()->paginate(get_settings('pagination_limit'));
-
-    if($request->ajax()){
-        return view('front.rotanav2.ajaxoccasions', compact('Occasions'));
+    $occasions = Category::where('id', $CID)->first();
+    if(!empty($occasions)){
+        $Occasions = $occasions->occasions()->paginate(get_settings('pagination_limit'));
+    
+        if($request->ajax()){
+            return view('front.rotanav2.ajaxoccasions', compact('Occasions'));
+        }
+    
+        return view('front.rotanav2.occasions', compact('Occasions'));
+    }else{
+        return view('errors.404');
     }
-
-    return view('front.rotanav2.occasions', compact('Occasions'));
 }
 
 public function filter_rotana(Request $request, $OID, $UID){
@@ -3567,6 +3572,8 @@ public function rotanav2_today($UID){
 public function Search_v6(Request $request, $UID)
 {
     // dd($request->search);
+
+
     $current_url = \Request::fullUrl();
     $search = $request->search;
     Session::put('search', $search);

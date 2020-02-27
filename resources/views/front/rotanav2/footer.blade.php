@@ -181,43 +181,45 @@ new WOW().init();
 
 <script>
 
-  function fav(filterid){
-    // var filterid = $(this).attr('id');
-    var allfav = window.localStorage.getItem('favorite');
-    if(allfav != null && allfav != ""){// second time
-      var favArr = allfav.split(',');
-      var find = favArr.indexOf(filterid);
-      if(find == -1){ // add to favorite
-        favArr.push(filterid);
-        allfav = favArr.join(',');
-        window.localStorage.setItem('favorite', allfav);
-      }else{ // remove from favorite
-        favArr.splice(find, 1);
-        allfav = favArr.join(',');
-        window.localStorage.setItem('favorite', allfav);
-      }
-    }else{ //first time
-      allfav = filterid;
+
+function fav(filterid){
+  // var filterid = $(this).attr('id');
+  var allfav = window.localStorage.getItem('favorite');
+  if(allfav != null && allfav != ""){// second time
+    var favArr = allfav.split(',');
+    var find = favArr.indexOf(filterid);
+    if(find == -1){ // add to favorite
+      favArr.push(filterid);
+      allfav = favArr.join(',');
+      window.localStorage.setItem('favorite', allfav);
+    }else{ // remove from favorite
+      favArr.splice(find, 1);
+      allfav = favArr.join(',');
       window.localStorage.setItem('favorite', allfav);
     }
-    console.log(allfav);
+  }else{ //first time
+    allfav = filterid;
+    window.localStorage.setItem('favorite', allfav);
   }
+  console.log(allfav);
+}
 
 function sharebtn(id){
-    var url = "{{url('/rotanav2').'/inner/'}}"+id+"/"+"{{UID()}}";
-    console.log(url);
-    var facebook = "https://www.facebook.com/sharer/sharer.php?u="+url;
-    var whatsapp = "whatsapp://send?abid=+20111682831&text="+url;
-    var twitter = "http://twitter.com/share?url="+url;
+  var url = "{{url('/rotanav2').'/inner/'}}"+id+"/"+"{{UID()}}";
+  console.log(url);
+  var facebook = "https://www.facebook.com/sharer/sharer.php?u="+url;
+  var whatsapp = "whatsapp://send?abid=+20111682831&text="+url;
+  var twitter = "http://twitter.com/share?url="+url;
 
-    $('.facebook_link').attr('href', facebook);
-    $('.twitter_link').attr('href', twitter);
-    $('.whatsapp_link').attr('href', whatsapp);
+  $('.facebook_link').attr('href', facebook);
+  $('.twitter_link').attr('href', twitter);
+  $('.whatsapp_link').attr('href', whatsapp);
 }
 function togglefav(){
-    $(this).toggleClass('active_heart');
+  $(this).toggleClass('active_heart');
 }
 
 </script>
 
- 
+</body>
+</html>

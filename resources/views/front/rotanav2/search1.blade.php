@@ -83,3 +83,4 @@ $('.first_list_img_share').click(function(){
     $('.whatsapp_link').attr('href', whatsapp);
 });
 </script>
+

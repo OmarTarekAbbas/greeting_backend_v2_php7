@@ -23,10 +23,13 @@
         @if(isset($Rdata_today))
         <div class="col-10 m-auto d-block">
           <div class="filter_2day_img mt-3">
-            <a href="{{$Rdata_today->snap_link}}">
-              <img class="w-100 d-block m-auto rounded rotate-scale-down" src="{{url('/'.$Rdata_today->path)}}" alt="Filter Today">
 
-              <a class="first_list_img_heart" onclick="fav('{{$Rdata_today->id}}');$(this).toggleClass('active_heart');" href="javascript:void(0)">
+            <a href="{{$Rdata_today->snap_link}}">
+              <img class="w-100 d-block m-auto rounded rotate-scale-down" src="{{url('/'.$Rdata_today->path)}}"
+                alt="Filter Today">
+
+              <a class="first_list_img_heart" onclick="fav('{{$Rdata_today->id}}');$(this).toggleClass('active_heart');"
+                href="javascript:void(0)">
                 <i class="fas fa-heart fa-lg ajax_call"></i>
               </a>
 
@@ -78,7 +81,8 @@
 
 
 <!-- Modal -->
-<div class="modal_share modal fade" id="modalForShare" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal_share modal fade" id="modalForShare" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -86,29 +90,31 @@
           <span aria-hidden="true">&times;</span>
         </button>
 
-            <div class="modal-body">
-                <div class="rounded-social-buttons w-100 text-center">
-                    <a class="social-button facebook_link"
-                        href="https://www.facebook.com/sharer/sharer.php?u={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}" target="_blank"
-                        title="Facebook">
-                        <i class="fab fa-facebook-f facebook_icon"></i>
-                    </a>
+        <div class="modal-body">
+          <div class="rounded-social-buttons w-100 text-center">
+            <a class="social-button facebook_link"
+              href="https://www.facebook.com/sharer/sharer.php?u={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}"
+              target="_blank" title="Facebook">
+              <i class="fab fa-facebook-f facebook_icon"></i>
+            </a>
 
-                    <a class="social-button whatsapp_link"
-                        href="whatsapp://send?abid=+20111682831&text={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}" title="Whatsapp">
-                        <i class="fab fa-whatsapp whatsapp_icon"></i>
-                    </a>
+            <a class="social-button whatsapp_link"
+              href="whatsapp://send?abid=+20111682831&text={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}"
+              title="Whatsapp">
+              <i class="fab fa-whatsapp whatsapp_icon"></i>
+            </a>
 
-                    <a class="social-button twitter_link" href="http://twitter.com/share?url={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}"
-                        target="_blank" title="Twitter">
-                        <i class="fab fa-twitter twitter_icon"></i>
-                    </a>
-                </div>
-            </div>
+            <a class="social-button twitter_link"
+              href="http://twitter.com/share?url={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}" target="_blank"
+              title="Twitter">
+              <i class="fab fa-twitter twitter_icon"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <!-- Start Footer -->
