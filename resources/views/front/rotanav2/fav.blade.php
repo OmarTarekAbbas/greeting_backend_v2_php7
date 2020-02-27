@@ -7,7 +7,7 @@
     <section class="fav_sec w-100 mt-3">
       <div class="col-12">
         <div class="img_like">
-          <img class="w-25 d-block m-auto" src="{{url('assets/front/rotanav2/images/like_2.png')}}" alt="Like">
+          <img class="d-block m-auto" src="{{url('assets/front/rotanav2/images/like_2.png')}}" alt="Like">
         </div>
       </div>
     </section>

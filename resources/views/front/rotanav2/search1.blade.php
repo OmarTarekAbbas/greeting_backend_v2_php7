@@ -10,6 +10,7 @@
         </div>
     </section>
 </div>
+
 <!-- Modal -->
 <div class="modal_share modal fade" id="modalForShare" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -25,17 +26,17 @@
                         <i class="fab fa-facebook-f facebook_icon"></i>
                     </a>
 
-                    <a class="social-button whatsapp_link" href="" title="Whatsapp">
-                        <i class="fab fa-whatsapp whatsapp_icon"></i>
-                    </a>
+          <a class="social-button whatsapp_link" href="" title="Whatsapp">
+            <i class="fab fa-whatsapp whatsapp_icon"></i>
+          </a>
 
-                    <a class="social-button twitter_link" href="" target="_blank" title="Twitter">
-                        <i class="fab fa-twitter twitter_icon"></i>
-                    </a>
-                </div>
-            </div>
+          <a class="social-button twitter_link" href="" target="_blank" title="Twitter">
+            <i class="fab fa-twitter twitter_icon"></i>
+          </a>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 @else
 @include('front.rotanav2.nofilter')

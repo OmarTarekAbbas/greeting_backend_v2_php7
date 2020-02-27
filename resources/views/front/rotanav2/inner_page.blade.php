@@ -1,16 +1,7 @@
 <!-- Start Header -->
 @include('front.rotanav2.header')
 <!-- End Header -->
-<style>
-.new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share {
-    color: #a2a2a2;
-}
 
-.new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart {
-    color: #a2a2a2;
-}
-
-</style>
 <div class="main_filter_2day">
     <section class="filter_2day w-100 mt-3">
         <div class="container">
@@ -31,11 +22,14 @@
                                 </a>
                             </div>
 
-                        </a>
+              <div>
+                <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
+                  <i class="fas fa-share-square"></i>
+                </a>
+              </div>
+            </a>
 
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
     </section>
     <section class="filter_slide w-100 mt-3">
@@ -67,39 +61,31 @@
 
 </div>
 
-
 <!-- Modal -->
-<div class="modal_share modal fade" id="modalForShare" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+<div class="modal_share modal fade" id="modalForShare" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
 
-            <div class="modal-body">
-                <div class="rounded-social-buttons w-100 text-center">
-                    <a class="social-button facebook_link"
-                        href="https://www.facebook.com/sharer/sharer.php?u={{URL::current()}}" target="_blank"
-                        title="Facebook">
-                        <i class="fab fa-facebook-f facebook_icon"></i>
-                    </a>
+        <div class="rounded-social-buttons w-100 text-center">
+          <a class="social-button facebook_link" href="https://www.facebook.com/sharer/sharer.php?u={{URL::current()}}" target="_blank" title="Facebook">
+            <i class="fab fa-facebook-f facebook_icon"></i>
+          </a>
 
-                    <a class="social-button whatsapp_link"
-                        href="whatsapp://send?abid=+20111682831&text={{URL::current()}}" title="Whatsapp">
-                        <i class="fab fa-whatsapp whatsapp_icon"></i>
-                    </a>
+          <a class="social-button whatsapp_link" href="whatsapp://send?abid=+20111682831&text={{URL::current()}}" title="Whatsapp">
+            <i class="fab fa-whatsapp whatsapp_icon"></i>
+          </a>
 
-                    <a class="social-button twitter_link" href="http://twitter.com/share?url={{URL::current()}}"
-                        target="_blank" title="Twitter">
-                        <i class="fab fa-twitter twitter_icon"></i>
-                    </a>
-                </div>
-            </div>
+          <a class="social-button twitter_link" href="http://twitter.com/share?url={{URL::current()}}" target="_blank" title="Twitter">
+            <i class="fab fa-twitter twitter_icon"></i>
+          </a>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Start Footer -->

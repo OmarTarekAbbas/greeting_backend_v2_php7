@@ -9,6 +9,11 @@ $(function () {
   });
 });
 
+$('#search_input').click(function(){
+  $('.active_menu').removeClass('active_menu')
+  $(this).addClass('active_menu');
+})
+
 $('.owl_one').owlCarousel({
   loop: true,
   margin: 0,
