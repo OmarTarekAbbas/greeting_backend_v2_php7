@@ -3500,11 +3500,11 @@ public function occasions_rotana(Request $request, $CID, $UID){
     $occasions = Category::where('id', $CID)->first();
     if(!empty($occasions)){
         $Occasions = $occasions->occasions()->paginate(get_settings('pagination_limit'));
-    
+
         if($request->ajax()){
             return view('front.rotanav2.ajaxoccasions', compact('Occasions'));
         }
-    
+
         return view('front.rotanav2.occasions', compact('Occasions'));
     }else{
         return view('errors.404');
@@ -3609,7 +3609,7 @@ public function filter_inner($FID, $UID){
       $cat = Category::where('id',$occasi->category_id)->first();
       $occasis = Occasion::where('category_id', $cat->id)->get();
       //  dd($occasis);
-      return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));     
+      return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));
     }else{
         return view('errors.404');
     }
