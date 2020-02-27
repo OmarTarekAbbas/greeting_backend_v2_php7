@@ -73,18 +73,5 @@ function load_snap_data(page) {
     }
   })
 }
-
-$('.first_list_img_share').click(function(){
-    var id = $(this).attr('id');
-    var url = "{{url('/rotanav2').'/inner/'}}"+id+"/"+"{{UID()}}";
-
-    var facebook = "https://www.facebook.com/sharer/sharer.php?u="+url;
-    var whatsapp = "whatsapp://send?abid=+20111682831&text="+url;
-    var twitter = "http://twitter.com/share?url="+url;
-
-    $('.facebook_link').attr('href', facebook);
-    $('.twitter_link').attr('href', twitter);
-    $('.whatsapp_link').attr('href', whatsapp);
-});
 </script>
 
