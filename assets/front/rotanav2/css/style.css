@@ -236,10 +236,13 @@ button:active,
 .not_fo {
   width: 14.5%;
   position: absolute;
-  top: 744%;
-  left: 22.4%;
-  transform: translate(-52%, -69%);
-  -webkit-transform: translate(-52%, -69%);
+  top: 699%;
+  left: 22.2%;
+  transform: translate(-53%, -49%);
+  -webkit-transform: translate(-52%, -49%);
+  -moz-transform: translate(-52%, -69%);
+  -ms-transform: translate(-52%, -69%);
+  -o-transform: translate(-52%, -69%);
 }
 
 .img_logo_st {
@@ -250,7 +253,11 @@ button:active,
 
 .font_not_filter {
   font-size: 5vw;
-  transform: translate(5%, 875%);
+  transform: translate(5%, 894%);
+  -webkit-transform: translate(5%, 894%);
+  -moz-transform: translate(5%, 894%);
+  -ms-transform: translate(5%, 894%);
+  -o-transform: translate(5%, 894%);
 }
 
 .use_fil {

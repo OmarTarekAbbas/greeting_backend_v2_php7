@@ -25,6 +25,8 @@ use App\Msisdn;
 use App\AdvertisingUrl;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+
 
 class FrontEndController extends Controller
 {
@@ -3571,17 +3573,14 @@ public function rotanav2_today($UID){
 
 public function Search_v6(Request $request, $UID)
 {
-    // dd($request->search);
-
-
     $current_url = \Request::fullUrl();
     $search = $request->search;
     Session::put('search', $search);
     if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
-        $url = Generatedurl::where('UID', $UID)->first();
-        if (is_null($url))
-            return view('front.error');
-        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
+      $url = Generatedurl::where('UID', $UID)->first();
+      if (is_null($url))
+      return view('front.error');
+      $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
         $codes = [];
         foreach ($Rdata as $key => $value) {
             if ($value->rbt_id != null) {
@@ -3590,6 +3589,7 @@ public function Search_v6(Request $request, $UID)
             }
         }
         $rbt_sms = $url->operator->rbt_sms;
+
         if($request->ajax())
         return view('front.rotanav2.snapsresult', compact('Rdata', 'search','rbt_sms','codes'));
         return view('front.rotanav2.search1', compact('Rdata', 'search','rbt_sms','codes'));
@@ -3603,11 +3603,16 @@ public function filter_inner($FID, $UID){
     $url = Generatedurl::where('UID', $UID)->first();
     $occasion_id = $FID;
     $Rdata = Greetingimg::where('id', $FID)->first();
-    $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
-    $cat = Category::where('id',$occasi->category_id)->first();
-    $occasis = Occasion::where('category_id', $cat->id)->get();
-    //  dd($occasis);
-    return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));
+    //  dd($Rdata == !null);
+    if($Rdata == !null){
+      $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
+      $cat = Category::where('id',$occasi->category_id)->first();
+      $occasis = Occasion::where('category_id', $cat->id)->get();
+      //  dd($occasis);
+      return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));     
+    }else{
+      return back();
+    }
 }
 
 

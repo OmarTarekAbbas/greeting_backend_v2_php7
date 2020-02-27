@@ -22,13 +22,10 @@
                 </div>
                 <div class="col-10 m-auto d-block">
                     <div class="filter_2day_img mt-3">
-                        <a href="#0">
+                        <a href="{{$Rdata->snap_link}}" target="_blank">
                             <img class="w-100 d-block m-auto rounded" src="{{url('/'.$Rdata->path)}}"
                                 alt="{{$Rdata->getTranslation('title',getCode())}}">
                             <div>
-                                <a href="{{$Rdata->snap_link}}">
-                                <h6 class="text-right use_fil">{!! static_lang('usefilter')?static_lang('usefilter') : 'استخدم الفلتر'  !!}</h6>
-                                </a>
                                 <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
                                     <i class="fas fa-share-square"></i>
                                 </a>

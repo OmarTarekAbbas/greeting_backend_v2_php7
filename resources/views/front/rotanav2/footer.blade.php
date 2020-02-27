@@ -17,7 +17,8 @@
                                             value="{{session('search')}}" id="search"
                                             placeholder="{!! static_lang('search') ?static_lang('search') : 'بحث' !!}">
                                         <div class="input_bg text-center">
-                                            <i class="fas fa-search fa-lg text-white pt-3"></i>
+                                        <i class="fas fa-search fa-lg text-white pt-3"></i>
+
                                         </div>
                                     </label>
                                 </form>

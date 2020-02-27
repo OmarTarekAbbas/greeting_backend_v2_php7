@@ -1,9 +1,8 @@
-@if ($Rdata->count() > 0)
 @foreach ($Rdata as $key=>$snap)
 
 <div class="col-4 p-0">
     <div class="first_list_img">
-        <a href="{{url('rotanav2/inner/'.$snap->id.'/'.UID())}}">
+        <a href="{{$snap->snap_link}}" target="_blank">
             <img class="w-100" src="{{url('/'.$snap->path)}}" alt="{{$snap->getTranslation('title',getCode())}}">
 
             <a class="first_list_img_heart" onclick="fav('{{$snap->id}}')" href="javascript:void(0)">
@@ -28,6 +27,4 @@
     }
 </script>
 @endforeach
-@else
-@include('front.rotanav2.nofilter')
-@endif
+
