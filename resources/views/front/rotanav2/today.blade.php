@@ -8,7 +8,8 @@
       <div class="row m-0">
         <div class="col-12">
           <div class="filter_2day_title">
-            <h6 class="text-white text-right scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s" data-wow-offset="100">فلتر اليوم</h6>
+            <h6 class="text-white text-right scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s"
+              data-wow-offset="100">فلتر اليوم</h6>
           </div>
         </div>
         @if(isset($Rdata_today))
@@ -19,7 +20,7 @@
               <img class="w-100 d-block m-auto rounded rotate-scale-down" src="{{url('/'.$Rdata_today->path)}}"
                 alt="{{$Rdata_today->title}}">
 
-              <a class="first_list_img_heart" onclick="fav('{{$Rdata_today->id}}');$(this).toggleClass('active_heart');"
+              <a id="{{$Rdata_today->id}}"  class="first_list_img_heart" onclick="fav('{{$Rdata_today->id}}');$(this).toggleClass('active_heart');"
                 href="javascript:void(0)">
                 <i class="fas fa-heart fa-lg ajax_call"></i>
               </a>
@@ -42,8 +43,10 @@
       <div class="second_slide_title">
         <a href="{{url('/rotanav2/'.$cat->id.'/occasion/'.uid())}}">
           @if(isset($cat))
-          <h6 class="text-right text-white pt-0 pr-3 scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s" data-wow-offset="100">{{$cat->title}}
-            <i class="fas fa-th-large fa-1x float-left pl-3 pulsate-bck wow" data-wow-delay="1s" data-wow-duration="0.9s" data-wow-offset="100"></i>
+          <h6 class="text-right text-white pt-0 pr-3 scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s"
+            data-wow-offset="100">{{$cat->title}}
+            <i class="fas fa-th-large fa-1x float-left pl-3 pulsate-bck wow" data-wow-delay="1s"
+              data-wow-duration="0.9s" data-wow-offset="100"></i>
           </h6>
         </a>
         @endif
@@ -60,7 +63,8 @@
           @foreach ($occasis as $occasi)
           <div class="item">
             <a class="owl_filter_img w-100" href="{{url('/rotanav2/'.$occasi->id.'/filter/'.uid())}}">
-              <img class="w-100 m-auto d-block rotate-scale-down wow" data-wow-delay="1.6s" data-wow-duration="0.9s" data-wow-offset="150"  src="{{url('/'.$occasi->image)}}" alt="{{$occasi->title}}">
+              <img class="w-100 m-auto d-block rotate-scale-down wow" data-wow-delay="1.6s" data-wow-duration="0.9s"
+                data-wow-offset="150" src="{{url('/'.$occasi->image)}}" alt="{{$occasi->title}}">
             </a>
           </div>
           @endforeach
@@ -71,37 +75,46 @@
 
 <!-- Modal -->
 <div class="modal_share modal fade" id="modalForShare" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                <div class="rounded-social-buttons w-100 text-center">
-                    <a class="social-button facebook_link"
-                        href="https://www.facebook.com/sharer/sharer.php?u={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}" target="_blank"
-                        title="Facebook">
-                        <i class="fab fa-facebook-f facebook_icon"></i>
-                    </a>
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="rounded-social-buttons w-100 text-center">
+          <a class="social-button facebook_link"
+            href="https://www.facebook.com/sharer/sharer.php?u={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}"
+            target="_blank" title="Facebook">
+            <i class="fab fa-facebook-f facebook_icon"></i>
+          </a>
 
-            <a class="social-button whatsapp_link"
-              href="whatsapp://send?text={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}"
-              title="Whatsapp">
-              <i class="fab fa-whatsapp whatsapp_icon"></i>
-            </a>
+          <a class="social-button whatsapp_link"
+            href="whatsapp://send?text={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}" title="Whatsapp">
+            <i class="fab fa-whatsapp whatsapp_icon"></i>
+          </a>
 
-            <a class="social-button twitter_link"
-              href="http://twitter.com/share?url={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}" target="_blank"
-              title="Twitter">
-              <i class="fab fa-twitter twitter_icon"></i>
-            </a>
-          </div>
+          <a class="social-button twitter_link"
+            href="http://twitter.com/share?url={{url('rotanav2/inner/'.$Rdata_today->id.'/'.UID())}}" target="_blank"
+            title="Twitter">
+            <i class="fab fa-twitter twitter_icon"></i>
+          </a>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-</div>
+<script>
+  filterid = '{{$Rdata_today->id}}' ;
+  var allfav = window.localStorage.getItem('favorite');
+  var favArr = allfav.split(',');
+  var find = favArr.indexOf(filterid);
+  if(find == -1){ // not fav
 
+  }else{ // fav 
+      document.getElementById(filterid).classList.add("active_heart");
+  }
+</script>
 <!-- Start Footer -->
 @include('front.rotanav2.footer')
 <!-- End Footer -->
