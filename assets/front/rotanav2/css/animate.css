@@ -95,8 +95,8 @@
 }
 
 .pulsate-bck {
-  /* -webkit-animation: pulsate-bck ease-in-out infinite both; */
-  /* animation: pulsate-bck ease-in-out infinite both; */
+  -webkit-animation: pulsate-bck ease-in-out infinite both;
+  animation: pulsate-bck ease-in-out infinite both;
 }
 
 .pulsate-bck:hover,

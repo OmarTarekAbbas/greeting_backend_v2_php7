@@ -9,7 +9,7 @@
       @if ($filters->count() > 0)
       @foreach ($filters as $item)
       <div class="col-4 p-0">
-        <div class="first_list_img">
+        <div class="first_list_img mb-2">
           <a href="{{url($item->snap_link)}}" target="_blank">
             <img class="w-100" src="{{url($item->path)}}" alt="Filter">
 
@@ -30,8 +30,8 @@
                 var favArr = allfav.split(',');
                 var find = favArr.indexOf(filterid);
                 if(find == -1){ // not fav
-            
-                }else{ // fav 
+
+                }else{ // fav
                     document.getElementById(filterid).classList.add("active_heart");
                 }
       </script>

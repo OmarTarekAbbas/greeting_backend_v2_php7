@@ -392,8 +392,8 @@ button:active,
   }
 }
 .slide-search {
-  -webkit-animation: slide-search 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s both;
-  animation: slide-search 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s both;
+  -webkit-animation: slide-search 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-search 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   z-index: 99999999999999;
 }
 
@@ -612,7 +612,7 @@ button:active,
   }
   .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share {
     font-size: 1.65rem;
-    top: 93%;
+    top: 90%;
     left: 9%;
   }
   .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share.first_list_img_heart {
@@ -641,12 +641,18 @@ button:active,
   .new_rotana .main_filter_2day .filter_slide .owl_three .item .owl_filter_img img {
     height: 19.594rem;
   }
+  .new_rotana .main_list .first_list .no_filter .sub_img img {
+    height: 8rem;
+  }
+  .new_rotana .main_list .first_list .no_filter .sub_img h6 {
+    font-size: 1.95rem;
+  }
   .new_rotana .main_list .first_list .first_list_img a img {
     height: 19.531rem;
   }
   .new_rotana .main_list .first_list .first_list_img a.first_list_img_heart, .new_rotana .main_list .first_list .first_list_img a.first_list_img_share {
     font-size: 1.65rem;
-    top: 93%;
+    top: 90%;
     left: 10%;
   }
   .new_rotana .main_list .first_list .first_list_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_list .first_list .first_list_img a.first_list_img_share.first_list_img_heart {
