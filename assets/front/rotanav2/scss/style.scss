@@ -256,6 +256,7 @@ button,
         }
       }
     }
+
     .fav_list {
       .fav_list_img {
         border-right: 1px solid $black_color;
@@ -275,7 +276,7 @@ button,
             font-size: 1.1rem;
             color: $grey_color;
             position: absolute;
-            top: 90%;
+            top: 85%;
             left: 12%;
             transform: translate(-50%, -50%);
             -webkit-transform: translate(-50%, -50%);
@@ -289,6 +290,22 @@ button,
             }
           }
         }
+      }
+    }
+  }
+
+  /* End Fav Page */
+
+  /* Start Fav Page */
+  .no_filter {
+    .sub_img {
+      position: relative;
+
+      .font_not_filter {
+        position: absolute;
+        top: 28%;
+        left: 3%;
+        font-size: 1.1rem;
       }
     }
   }

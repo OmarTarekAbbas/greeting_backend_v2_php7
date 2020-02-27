@@ -46,6 +46,8 @@ button:active,
   /* End Filter Page */
   /* Start Fav Page */
   /* End Fav Page */
+  /* Start Fav Page */
+  /* End Fav Page */
 }
 .new_rotana .header_head {
   padding: 0.75rem 0;
@@ -184,7 +186,7 @@ button:active,
   font-size: 1.1rem;
   color: #d2d3d5;
   position: absolute;
-  top: 90%;
+  top: 85%;
   left: 12%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -194,6 +196,15 @@ button:active,
 }
 .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share.first_list_img_heart {
   left: 31%;
+}
+.new_rotana .no_filter .sub_img {
+  position: relative;
+}
+.new_rotana .no_filter .sub_img .font_not_filter {
+  position: absolute;
+  top: 28%;
+  left: 3%;
+  font-size: 1.1rem;
 }
 
 /* Start Footer */
