@@ -61,7 +61,7 @@
             <i class="fab fa-facebook-f facebook_icon"></i>
           </a>
 
-          <a class="social-button whatsapp_link" href="whatsapp://send?abid=+20111682831&text={{URL::current()}}"
+          <a class="social-button whatsapp_link" href="whatsapp://send?text={{URL::current()}}"
             title="Whatsapp">
             <i class="fab fa-whatsapp whatsapp_icon"></i>
           </a>

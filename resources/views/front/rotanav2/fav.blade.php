@@ -33,7 +33,7 @@
             <i class="fab fa-facebook-f facebook_icon"></i>
           </a>
 
-          <a class="social-button whatsapp_link" href="whatsapp://send?abid=+20111682831&text=Hello%2C%20World!" title="Whatsapp">
+          <a class="social-button whatsapp_link" href="whatsapp://send?text=Hello%2C%20World!" title="Whatsapp">
             <i class="fab fa-whatsapp whatsapp_icon"></i>
           </a>
 

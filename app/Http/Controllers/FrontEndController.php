@@ -3536,7 +3536,7 @@ public function favorites_rotana_load(Request $request, $UID){
         $snap = $url->operator->greetingimgs()->PublishedSnap()->whereIn('greetingimgs.id', $idsArray)->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
         return view('front.rotanav2.ajaxfav', compact('snap'));
     }else{
-        if(get_settings('only_favorites') == 1){
+        if(get_settings('only_favorites') == 0){
             $snap = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(12);
             return view('front.rotanav2.ajaxfav', compact('snap'));
         }else{
@@ -3559,7 +3559,7 @@ public function rotanav2_today($UID){
             $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
                 return view('front.rotanav2.today', compact('Rdata_today','occasi','cat','occasis'));
             }else{
-              $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->first();
+              $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '<', Carbon::now()->format('Y-m-d'))->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->first();
               $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
               // dd($occasi);
               $cat = Category::where('id',$occasi->category_id)->first();

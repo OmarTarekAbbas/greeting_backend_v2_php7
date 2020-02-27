@@ -214,7 +214,7 @@
     var url = "{{url('/rotanav2').'/inner/'}}" + id + "/" + "{{UID()}}";
     console.log(url);
     var facebook = "https://www.facebook.com/sharer/sharer.php?u=" + url;
-    var whatsapp = "whatsapp://send?abid=+20111682831&text=" + url;
+    var whatsapp = "whatsapp://send?text=" + url;
     var twitter = "http://twitter.com/share?url=" + url;
 
     $('.facebook_link').attr('href', facebook);
