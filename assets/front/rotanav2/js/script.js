@@ -17,7 +17,7 @@ $('#search_input').click(function(){
 $('.owl_one').owlCarousel({
   loop: true,
   margin: 0,
-  autoplay: true,
+  autoplay: false,
   autoplayTimeout: 3000,
   nav: false,
   dots: false,
@@ -38,7 +38,7 @@ $('.owl_one').owlCarousel({
 $('.owl_two').owlCarousel({
   loop: true,
   margin: 0,
-  autoplay: true,
+  autoplay: false,
   autoplayTimeout: 3000,
   nav: false,
   dots: false,
@@ -59,7 +59,7 @@ $('.owl_two').owlCarousel({
 $('.owl_three, .owl_filter').owlCarousel({
   loop: true,
   margin: 0,
-  autoplay: true,
+  autoplay: false,
   autoplayTimeout: 3000,
   nav: false,
   dots: false,
@@ -81,7 +81,7 @@ $('.owl-video').owlCarousel({
   items: 1,
   merge: true,
   loop: true,
-  autoplay: true,
+  autoplay: false,
   autoplayTimeout: 3000,
   margin: 0,
   video: true,

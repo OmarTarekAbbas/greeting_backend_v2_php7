@@ -174,7 +174,7 @@ button,
       .filter_2day_img {
         a {
           img {
-            height: 18.75rem;
+            height: 20.625rem;
             border-radius: 0.5rem;
             -webkit-border-radius: 0.5rem;
             -moz-border-radius: 0.5rem;
@@ -299,7 +299,7 @@ button,
   /* Start Fav Page */
   .no_filter {
     .sub_img {
-      margin-top: 35% ;
+      margin-top: 35%;
       position: relative;
 
       .font_not_filter {
@@ -756,6 +756,16 @@ button,
 
 
 /* Strat Media Quary */
+@media (min-width: 320px) and (max-width: 767px) {
+  body {
+    visibility: visible;
+    overflow-x: hidden;
+  }
+
+  .the-frame {
+    display: none;
+  }
+}
 @media (min-width: 768px) and (max-width: 1023px) {
   body {
     visibility: visible;
@@ -1034,7 +1044,7 @@ button,
   }
 
   .new_rotana {
-    padding-bottom: 7rem;
+    padding-bottom: 8rem;
     display: block !important;
 
     .main_home {
@@ -1042,7 +1052,7 @@ button,
 
       .video_sec {
         .video-fluid {
-          height: 25rem;
+          height: 36rem;
         }
 
         .fontIcon {
@@ -1070,7 +1080,7 @@ button,
           .item {
             .owl_three_img {
               img {
-                height: 26.156rem;
+                height: 26.063rem;
               }
             }
           }
@@ -1081,16 +1091,18 @@ button,
     .main_fav {
       .fav_list {
         .fav_list_img {
+          margin-bottom: 1.25rem !important;
+
           a {
             img {
-              height: 19.594rem;
+              height: 26.156rem;
             }
 
             &.first_list_img_heart,
             &.first_list_img_share {
-              font-size: 1.65rem;
-              top: 90%;
-              left: 9%;
+              font-size: 2.2rem;
+              top: 89%;
+              left: 10%;
 
               &.first_list_img_heart {
                 left: 23%;
@@ -1106,19 +1118,20 @@ button,
       .filter_2day {
         .filter_2day_title {
           h6 {
-            font-size: 1.5rem;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
           }
         }
 
         .filter_2day_img {
           a {
             img {
-              height: 40.625rem;
+              height: 58.797rem;
             }
 
             &.first_list_img_heart,
             &.first_list_img_share {
-              font-size: 1.5rem;
+              font-size: 2.2rem;
               top: 96%;
               left: 8%;
 
@@ -1136,8 +1149,8 @@ button,
 
             h6,
             i {
-              font-size: 1.5rem;
-              margin-bottom: 1rem;
+              font-size: 2rem;
+              margin-bottom: 1.5rem;
             }
           }
         }
@@ -1146,7 +1159,7 @@ button,
           .item {
             .owl_filter_img {
               img {
-                height: 19.594rem;
+                height: 26.063rem;
               }
             }
           }
@@ -1159,25 +1172,27 @@ button,
         .no_filter {
           .sub_img {
             img {
-              height: 8rem;
+              height: 11rem;
             }
 
             h6 {
-              font-size: 1.95rem;
+              font-size: 2.75rem;
             }
           }
         }
 
         .first_list_img {
+          margin-bottom: 1.25rem !important;
+
           a {
             img {
-              height: 19.531rem;
+              height: 26.063rem;
             }
 
             &.first_list_img_heart,
             &.first_list_img_share {
-              font-size: 1.65rem;
-              top: 90%;
+              font-size: 2.2rem;
+              top: 89%;
               left: 10%;
 
               &.first_list_img_heart {
@@ -1213,10 +1228,15 @@ button,
       &.foot_link_img {
         a {
           &.active_menu {
-            // color: $black_color;
             border-bottom: 2px solid $green_color;
-            padding: 0.95rem 0.25rem;
+            padding: 1.5rem 0.25rem;
+
+            .rotana_foot_new {
+              bottom: 0.75rem;
+            }
           }
+
+
         }
       }
     }
@@ -1224,23 +1244,30 @@ button,
 
   .modal_share {
     .modal-dialog {
+      max-width: 70%;
+
       .modal-content {
         .modal-body {
           .close {
-            font-size: 2rem;
+            font-size: 3.2rem;
           }
 
           .rounded-social-buttons {
+            padding: 1.5rem 0;
+
             .social-button {
-              width: 4.5rem;
-              height: 4.5rem;
-              line-height: 4.5rem;
-              border-radius: 2.5rem;
+              width: 6.5rem;
+              height: 6.5rem;
+              line-height: 7.5rem;
+              border-radius: 4.5rem;
+              margin-left: 1rem;
+              margin-right: 1rem;
+
 
               .facebook_icon,
               .whatsapp_icon,
               .twitter_icon {
-                font-size: 2.063rem;
+                font-size: 3.5rem;
               }
             }
           }
@@ -1266,18 +1293,19 @@ button,
 
               label {
                 input {
-                  height: 4rem;
-                  font-size: 1.85rem;
+                  height: 5.5rem;
+                  font-size: 2.5rem;
                 }
 
                 .input_bg {
-                  width: 4.75rem;
-                  height: 4rem;
-                  margin-top: -4.03rem;
+                  width: 7rem;
+                  height: 5.6rem;
+                  margin-top: -5.55rem;
 
                   button {
                     i {
-                      font-size: 1.95rem;
+                      font-size: 3.1rem;
+                      padding-top: 1.5rem !important;
                     }
                   }
                 }
