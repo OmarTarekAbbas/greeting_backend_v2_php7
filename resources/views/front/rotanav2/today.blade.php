@@ -4,7 +4,7 @@
 
 <div class="main_filter_2day">
   <section class="filter_2day w-100 mt-3">
-    <div class="container">
+    <div class="container m-0 p-0">
       <div class="row m-0">
         <div class="col-12">
           <div class="filter_2day_title">

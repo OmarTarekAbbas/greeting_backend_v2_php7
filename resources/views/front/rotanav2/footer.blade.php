@@ -1,5 +1,16 @@
 </main>
 <style>
+  @media (min-width: 1301px) {
+    body {
+      visibility: hidden;
+      overflow-x: hidden;
+    }
+
+    .new_rotana {
+      display: none;
+    }
+  }
+
   ::-webkit-scrollbar {
     display: none;
   }
@@ -24,63 +35,6 @@
 
   .main .filter_services {
     height: 200px !important;
-  }
-
-  @media only screen and (max-width: 1023px) {
-    .the-frame {
-      display: none;
-    }
-
-    .enter {
-      display: block;
-    }
-
-    .enter h4 {
-      padding: 20px;
-      text-align: center;
-      color: #347742;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      font-size: 1.25rem;
-    }
-
-    .enter a {
-      font-weight: bold;
-      font-size: 18px;
-      color: #fff;
-      padding: 5px 20px;
-      background-color: #347742;
-      border-radius: 5px;
-      text-decoration: none;
-      position: absolute;
-      top: 60%;
-      left: 38%;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  @media only screen and (min-width: 678px) {
-    body {
-      visibility: hidden;
-      overflow-x: hidden
-    }
-
-    .new_rotana {
-      display: none;
-    }
-
-    .enter {
-      display: none;
-    }
-  }
-
-  @media only screen and (min-width: 1024px) {
-    .the-frame {
-      top: 35%;
-    }
   }
 </style>
 <!-- Modal -->
@@ -200,8 +154,8 @@
       allfav = filterid;
       window.localStorage.setItem('favorite', allfav);
     }
-  console.log(allfav);
-}
+    console.log(allfav);
+  }
 
   function sharebtn(id) {
     var url = "{{url('/rotanav2').'/inner/'}}" + id + "/" + "{{UID()}}";
