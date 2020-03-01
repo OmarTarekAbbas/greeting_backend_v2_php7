@@ -115,6 +115,7 @@ class OccasionsController extends Controller
             $rules["title.$lang->short_code"] = "required" ;
         }
         $rules['category_id']= "required";
+        $rules['image']= "required";
 
         $this->validate($request,$rules);
 
@@ -186,6 +187,8 @@ class OccasionsController extends Controller
             $rules["title.$lang->short_code"] = "required" ;
         }
         $rules['category_id']= "required";
+        $rules['image']= "required";
+
         $this->validate($request,$rules);
 
         if ($request->input('occasion_RDate') < $request->input('occasion_EXDate')) {

@@ -13,7 +13,7 @@ class UpdateForeignOnGreetingimg extends Migration
      */
     public function up()
     {
-      \DB::statement("SET FOREIGN_KEY_CHECKS=0;");
+        \DB::statement("SET FOREIGN_KEY_CHECKS=0;");
         Schema::table('greetingimgs', function(Blueprint $table) {
             $table->foreign('occasion_id')->references('id')->on('occasions')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
