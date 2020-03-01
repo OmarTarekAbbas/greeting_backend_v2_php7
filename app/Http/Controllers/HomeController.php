@@ -1534,6 +1534,34 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         return view('landing_v2.du_landing',compact("peroid","lang"));
     }
 
+    /**
+     * cheeckSub function for check number is subscribe or not
+     *
+     * @param  String $number number for du
+     * @param  String $service service that subscribe in du
+     *
+     * @return Boolean 0,1
+     */
+    public function cheeckSub($number,$service)
+    {
+       // Get cURL resource
+       $curl = curl_init();
+       // Set some options - we are passing in a useragent too here
+       curl_setopt_array($curl, [
+           CURLOPT_RETURNTRANSFER => 1,
+           CURLOPT_URL => DU_CHECKSUB,
+           CURLOPT_POST => 1,
+           CURLOPT_POSTFIELDS => 'msisdn='.$number.'&serviceid='.$service,
+       ]);
+       // Send the request & save response to $resp
+       $resp = curl_exec($curl);
+       $res  = json_decode($resp);
+       // Close request to clear up some resources
+       curl_close($curl);
+
+       return $res;
+    }
+
     public function DuSecureRedirect(request $request) {
         date_default_timezone_set("Africa/Cairo");
 
@@ -1579,14 +1607,21 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $local= "ar" ;
         }
 
-        $redirectUrl=  url('/newdesignv4/9130281/');
+        $redirect = $this->check_redirect($request->type);
+
+        if($this->cheeckSub($msisdn,$serviceid)){
+            session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=> du_operator_id]);
+            return redirect($redirect);
+        }
+
+        $redirectUrl=  url($redirect);
 
 
 
         // activation api :   http://pay-with-du.ae/20/digizone/digizone-flaterdaily-1-ar-doi-web?origin=digizone&uid=971555802322&trxid=56833e8d-c21b-453b-9e2a-f33f20415ae2&serviceProvider=secured&serviceid=flaterdaily&plan=daily&price=2&locale=ar
         //  f5d1048a-995e-11e7-abc4-cec278b6b50a
 
-        $URL = "http://pay-with-du.ae/20/digizone/digizone-{$serviceid}-{$num}-{$local}-doi-web?origin=digizone&uid=$msisdn&trxid=$trxid&serviceProvider=secured&serviceid=$serviceid&plan=$plan&price=$price&locale=$local&redirectUrl=";
+        $URL = "http://pay-with-du.ae/20/digizone/digizone-{$serviceid}-{$num}-{$local}-doi-web?origin=digizone&uid=$msisdn&trxid=$trxid&serviceProvider=secured&serviceid=$serviceid&plan=$plan&price=$price&locale=$local&redirectUrl=$redirectUrl";
 
         // make log
         $actionName = "DU SecureD Pincode Send";
@@ -1609,7 +1644,32 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         return redirect($URL);
     }
 
-
+    /**
+     * check_redirect
+     *
+     * @param  String $url_type it,s about landing from rotana or v2 or normal
+     *
+     * @return String it.s url that shouid redirect to
+     */
+    public function check_redirect($url_type)
+    {
+        $url = Generatedurl::where('operator_id', du_operator_id)->latest()->first();
+        $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+            ->where('greetingimg_operator.operator_id', '=', du_operator_id)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+        if ($snap) {
+            $url = Generatedurl::where('operator_id', du_operator_id)->orderBy('created_at', 'desc')->first();
+            if($url_type == 'rotana'){
+                return 'rotana/filter/' . $snap->id . '/' . $url->UID;
+            }
+            return 'newdesignv4/filter/' . $snap->id . '/' . $url->UID;
+        } else {
+            $uid = $url ? $url->UID : '75231';
+            if($url_type == 'rotana'){
+                return 'rotana/'.$uid ;
+            }
+            return 'newdesignv4/' .  $uid;
+        }
+    }
 
     public function du_landing_success()
     {
