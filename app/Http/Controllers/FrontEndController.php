@@ -3380,7 +3380,7 @@ class FrontEndController extends Controller
     {
         $url = Generatedurl::where('UID', $UID)->first();
         Session::forget('currentOp');
-        return redirect(url(redirect_operator()));
+        return redirect(url(redirect_operator())); 
     }
 
     public function Search_v4(Request $request, $UID)
