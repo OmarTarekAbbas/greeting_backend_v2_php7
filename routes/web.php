@@ -11,6 +11,7 @@
 |
  */
 
+
 Route::get('popularCountInc', 'GreetingimgsController@popular_count_increment');
 
 Route::get('logout_ad', 'HomeController@logoutadmin');
@@ -239,6 +240,9 @@ define('DU_CHECKSUB',"https://du.notifications.digizone.com.kw/api/checkSub");
 define('du_operator_id',24);
 //=======================du  Integration ==========================================//
 
+//langing kuwait rotana
+Route::get('landing_kuwait_rotana','FrontEndController@landing_kuwait_rotana');
+
 //Mobily Notification
 Route::get('mobily_notification', 'HomeController@mobily_notification');
 
@@ -348,6 +352,8 @@ Route::get('rotanav2/today/{UID}','FrontEndController@rotanav2_today');
 Route::get('Search_v6/{UID}','FrontEndController@Search_v6');
 Route::get('rotanav2/inner/{FID}/{UID}', 'FrontEndController@filter_inner');
 
+
+
 //////////////////////////////////////
 /////////////*end rotana*/////////////
 //////////////////////////////////////
@@ -397,3 +403,5 @@ Route::get('admin/get_table_ids', function (Illuminate\Http\Request $request) {
 });
 
 Auth::routes(['register' => false]);
+
+
