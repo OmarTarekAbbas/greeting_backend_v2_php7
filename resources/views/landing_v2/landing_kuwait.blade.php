@@ -148,8 +148,8 @@
         </div>
 
         <!-- copyright -->
-        <div class="copy">
-            <p>copyright @ <span>2019</span> Ivas, all rights reserved.</p>
+        <div class="copy" style="font-size:10px;font-family:sans-serif">
+            <p>copyright @ {{date('Y')}} Ivas, all rights reserved.</p>
         </div>
         <!-- copyright -->
 
