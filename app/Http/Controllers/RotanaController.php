@@ -32,6 +32,7 @@ class RotanaController extends Controller
 
         return redirect($URL);
     }
+
     public function rotana_viva_login(request $request)
     {
         if (isset($_REQUEST['msisdn']) && $_REQUEST['msisdn'] != "") {
@@ -127,7 +128,7 @@ class RotanaController extends Controller
             }
 
         } else {
-            return redirect(url('landing_stc_1?msisdn=965' . $msisdn));
+            return redirect(url('rotana_landing_stc_1?msisdn=965' . $msisdn));
         }
     }
     public function rotana_viva_notification(request $request)

@@ -67,18 +67,16 @@
             <div class="container">
                 <div class="form_content">
                     <!--<h5>ادخل رقم الهاتف</h5>-->
-                    <form method="post" action="viva_login_action" id="viva_form">
+                    <form method="post" action="{{url('/viva_login_action')}}" id="form_zain">
                         {{ csrf_field() }}
                         <div class="form-group form-inline">
-                            <label for="phone"><span>965</span></label>
-                            <input type="hidden" name="prev_url"
-                                value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
-                            <input type="tel" class="form-control" value="{{$msisdn}}" id="phone"
-                                placeholder="ادخل رقم تليفونك" name="number" required pattern="[0-9]{8}">
-                            <span class="validity"></span>
+                            <label for="phone"><span>+ 965</span></label>
+                            <input type="number" class="form-control" id="phone" value=""
+                                placeholder="أدخل رقم تليفونك" name="number" required pattern="[0-9]{8}">
+                            <i style="display:none" class="ml-2 fa fa-check text-success"></i>
                         </div>
                         <!--<button class="btn back">رجوع</button>-->
-                        <button id="zain_submit" class="btn" type="submit">اشترك</button>
+                        <button id="zain_submit" class="btn" type="submit">أشترك</button>
                     </form>
                     <!--<h5>للاشتراك يرجى الارسال الى <span>965</span></h5>
                 <h5>الى <span>965</span><span> STOP1 </span>لالغاء الاشتراك ارسل</h5>-->
@@ -108,19 +106,48 @@
     <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script>
 
 
-    <script>
-        $(document).ready(function(){
-          var msisdn =   $("#phone").val() ;
-          if(msisdn != "" && msisdn.length == 8 && msisdn!= "@_MSISDN"){
-                $("#viva_form").submit();
-            }
-        });
+        <script>
+            jQuery(function () {
+                $("#phone").keyup(function () {
+                    var VAL = this.value;
 
-        $('#zain_submit').focusin(function () {
-            $('#viva_form').submit()
-        });
+                    var number = new RegExp('^[0-9]{8}$');
 
-    </script>
+                    if (number.test(VAL)) {
+                        $('.form-group i').addClass('fa-check')
+                        $('.form-group i').removeClass('fa-times')
+                        $('.form-group i').addClass('text-success')
+                        $('.form-group i').removeClass('text-danger')
+                        $('.form-group i').css('display','inline-block')
+                    }else if(number.test(VAL) == false){
+                        $('.form-group i').removeClass('fa-check')
+                        $('.form-group i').addClass('fa-times')
+                        $('.form-group i').removeClass('text-success')
+                        $('.form-group i').addClass('text-danger')
+                        $('.form-group i').css('display','inline-block')
+                    }
+                });
+            });
+            $( "#form_zain" ).submit(function( event ) {
+              var inputVal = $('#phone').val();
+              var numericReg = /^\d[0-8]*$/;
+              if(numericReg.test(inputVal)) {
+                  $('#numeric').hide();
+              }else{
+                  $('#numeric').show();
+              }
+              var numericReg = /^\d{8}$/;
+              if(numericReg.test(inputVal)) {
+                  $('#numericnum').hide();
+                  return;
+              }else{
+                  $('#numericnum').show();
+              }
+              $('#numeric').css('display', 'block ');
+              $('#numericnum').css('display', 'block ');
+              event.preventDefault();
+          });
+        </script>
 
 </body>
 

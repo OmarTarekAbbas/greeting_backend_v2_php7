@@ -11,6 +11,19 @@
 |
  */
 
+/* ------------ viva rotana routes backend ------------ */
+define('SNAP_VIVA_URL', url('rotana_landing_stc'));
+define('SNAP_VIVA_CHANNEL_ID', 1207);
+define('viva_kuwait_operator_id', viva_id());
+Route::get('rotana_landing_stc', 'RotanaController@rotana_viva_login');
+Route::get('rotana_viva_profile', 'RotanaController@rotana_viva_profile');
+Route::post('rotana_viva_login_action', 'RotanaController@rotana_viva_login_action');
+Route::get('rotana_viva_notification', 'RotanaController@rotana_viva_notification');
+Route::get('rotana_landing_stc_1', 'RotanaController@rotana_subscribeViva_1');
+Route::get('rotana_logout_viva/{opid?}', 'RotanaController@rotana_logout');
+
+
+
 Route::get('popularCountInc', 'GreetingimgsController@popular_count_increment');
 
 Route::get('logout_ad', 'HomeController@logoutadmin');
@@ -396,13 +409,3 @@ Route::get('admin/get_table_ids', function (Illuminate\Http\Request $request) {
 
 Auth::routes(['register' => false]);
 
-/* ------------ viva routes backend ------------ */
-define('SNAP_VIVA_URL', url('rotana_landing_stc'));
-define('SNAP_VIVA_CHANNEL_ID', 1207);
-define('viva_kuwait_operator_id', viva_id());
-Route::get('rotana_landing_stc', 'RotanaController@rotana_viva_login');
-Route::get('rotana_viva_profile', 'RotanaController@rotana_viva_profile');
-Route::post('rotana_viva_login_action', 'RotanaController@rotana_viva_login_action');
-Route::get('rotana_viva_notification', 'RotanaController@rotana_viva_notification');
-Route::get('rotana_landing_stc_1', 'RotanaController@rotana_subscribeViva_1');
-Route::get('rotana_logout_viva/{opid?}', 'RotanaController@rotana_logout');
