@@ -3176,7 +3176,7 @@ class FrontEndController extends Controller
             return redirect(url(redirect_operator()));
         }
     }
-////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////* start new design v4 *//////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////
     public function get_root($occasion)
@@ -3198,8 +3198,25 @@ class FrontEndController extends Controller
         $fav_id = [];
         if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
             $url = Generatedurl::where('UID', $UID)->first();
+
+            if (OP() == 16 || OP() == MOBILY_OP_ID) {
+
+                if (OP() == 16 && Session::has('currentOp') && Session::get('currentOp') == 16) { //  ZAIN NKSA
+
+                } else {
+                    return redirect(url(redirect_operator()));
+                }
+
+                if (OP() == MOBILY_OP_ID && Session::has('currentOp') && Session::get('currentOp') == MOBILY_OP_ID) { // Mobily ksa
+
+                } else {
+                    return redirect(url(redirect_operator()));
+                }
+
+            }
+
             // if (is_null($url))
-            //     return view('front.error');
+            // return view('front.error');
             $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->get();
             $populars = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->get();
             $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
@@ -3341,6 +3358,12 @@ class FrontEndController extends Controller
                 return view('front.error');
             }
 
+            if (Session::has('currentOp') && $url->operator_id == Session::get('currentOp')) {
+
+            } else {
+                return redirect(url(redirect_operator()));
+            }
+
             $occasion_id = $OID;
             $Rdata = Greetingimg::where('id', $OID)->first();
             if (is_null($Rdata)) {
@@ -3351,6 +3374,13 @@ class FrontEndController extends Controller
         } else {
             return redirect(redirect_operator() . '?prev_url=' . $current_url);
         }
+    }
+
+    public function logout_v4($UID)
+    {
+        $url = Generatedurl::where('UID', $UID)->first();
+        Session::forget('currentOp');
+        return redirect(url(redirect_operator()));
     }
 
     public function Search_v4(Request $request, $UID)
