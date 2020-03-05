@@ -211,9 +211,9 @@ Route::post('viva_login_action', 'HomeController@viva_login_action');
 Route::get('viva_notification', 'HomeController@viva_notification');
 Route::get('landing_stc_1', 'HomeController@subscribeViva_1');
 Route::get('logout_viva/{uid}', 'HomeController@logout');
-define('SNAP_VIVA_URL', 'https://filters.digizone.com.kw/landing_stc');
-define('SNAP_VIVA_CHANNEL_ID', 4493);
-define('viva_kuwait_operator_id', 13);
+// define('SNAP_VIVA_URL', 'https://filters.digizone.com.kw/landing_stc');
+// define('SNAP_VIVA_CHANNEL_ID', 4493);
+// define('viva_kuwait_operator_id', 13);
 
 /* Zain Iraq Landing */
 Route::get('zain_iraq_landing', 'FrontEndController@zain_iraq_landing');
@@ -234,7 +234,7 @@ Route::post('du_unsubcrrotana/{peroid?}/{lang?}', 'HomeController@du_unsubcrrota
 Route::get('du_landing_v2/{peroid?}/{lang?}', 'HomeController@du_landing_v2');
 Route::get('du_unsubc_v4/{peroid?}/{lang?}', 'HomeController@du_unsubc_v4');
 Route::post('du_unsubcr_v4/{peroid?}/{lang?}', 'HomeController@du_unsubcr_v4');
-define('DU_UNSUB_SYSTEM',"https://du.notifications.digizone.com.kw/api/unsub");
+define('DU_UNSUB_SYSTEM', "https://du.notifications.digizone.com.kw/api/unsub");
 //=======================du  Integration ==========================================//
 
 //Mobily Notification
@@ -342,8 +342,8 @@ Route::get('rotanav2/{CID}/occasion/{UID}', 'FrontEndController@occasions_rotana
 Route::get('rotanav2/{OID}/filter/{UID}', 'FrontEndController@filter_rotana');
 Route::get('rotanav2/favorites/{UID}', 'FrontEndController@favorites_rotana');
 Route::get('rotanav2/favorites_rotana_load/{UID}', 'FrontEndController@favorites_rotana_load');
-Route::get('rotanav2/today/{UID}','FrontEndController@rotanav2_today');
-Route::get('Search_v6/{UID}','FrontEndController@Search_v6');
+Route::get('rotanav2/today/{UID}', 'FrontEndController@rotanav2_today');
+Route::get('Search_v6/{UID}', 'FrontEndController@Search_v6');
 Route::get('rotanav2/inner/{FID}/{UID}', 'FrontEndController@filter_inner');
 
 //////////////////////////////////////
@@ -395,3 +395,14 @@ Route::get('admin/get_table_ids', function (Illuminate\Http\Request $request) {
 });
 
 Auth::routes(['register' => false]);
+
+/* ------------ viva routes backend ------------ */
+define('SNAP_VIVA_URL', url('rotana_landing_stc'));
+define('SNAP_VIVA_CHANNEL_ID', 1207);
+define('viva_kuwait_operator_id', viva_id());
+Route::get('rotana_landing_stc', 'RotanaController@rotana_viva_login');
+Route::get('rotana_viva_profile', 'RotanaController@rotana_viva_profile');
+Route::post('rotana_viva_login_action', 'RotanaController@rotana_viva_login_action');
+Route::get('rotana_viva_notification', 'RotanaController@rotana_viva_notification');
+Route::get('rotana_landing_stc_1', 'RotanaController@rotana_subscribeViva_1');
+Route::get('rotana_logout_viva/{opid?}', 'RotanaController@rotana_logout');
