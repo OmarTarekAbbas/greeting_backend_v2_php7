@@ -2102,7 +2102,7 @@ public function zain_ksa_test(Request $request){
 
             // check status for zain
 
-            if ($Msisdn && $Msisdn->final_status == 1) {
+         //   if ($Msisdn && $Msisdn->final_status == 1) {
                 //  session()->flash('failed', 'انت مشترك بالفعل');
                 // return back();
                 session(['MSISDN' => $msisdn, 'Status' => 'active' ,'currentOp'=>16]);
@@ -2121,14 +2121,14 @@ public function zain_ksa_test(Request $request){
 
                     if ($snap) {
                         $url = Generatedurl::where('operator_id', 16)->orderBy('created_at', 'desc')->first();
-                        return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
+                        return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $url->UID));
                     } else {
-                        return redirect(url('cuurentSnap/' . $Url->UID));
+                        return redirect(url('newdesignv4/' . $Url->UID));
                     }
 
 
                 }
-            }
+          //  }
 
         }
 
@@ -2247,7 +2247,7 @@ public function zain_ksa_test(Request $request){
 
             // check status for zain
 
-            if ($Msisdn && $Msisdn->final_status == 1) {
+          //  if ($Msisdn && $Msisdn->final_status == 1) {
                 //  session()->flash('failed', 'انت مشترك بالفعل');
                 // return back();
                 session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>MOBILY_OP_ID]);
@@ -2262,14 +2262,14 @@ public function zain_ksa_test(Request $request){
 
                     if ($snap) {
                         $url = Generatedurl::where('operator_id', MOBILY_OP_ID)->orderBy('created_at', 'desc')->first();
-                        return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
+                        return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $url->UID));
                     } else {
-                        return redirect(url('cuurentSnap/' . $Url->UID));
+                        return redirect(url('newdesignv4/' . $Url->UID));
                     }
 
 
                 }
-            }
+          //  }
 
         }
 
