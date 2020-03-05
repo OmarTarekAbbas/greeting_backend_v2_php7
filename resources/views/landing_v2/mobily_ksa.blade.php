@@ -21,6 +21,12 @@
     .landing_page .strip {
         margin-top: 0;
     }
+    .main_container{
+        background-image: url('{{url("assets/front/landing_v2/img/BG_Pattern_v2.png")}}');
+    }
+    .landing_page .strip {
+        background-image: url('{{url("assets/front/landing_v2/img/strip_v2.png")}}');
+    }
 </style>
 
 <body>
@@ -31,7 +37,7 @@
                 <!-- <video width="100%" autoplay muted loop="true">
                     <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
                 </video> -->
-                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر">
+                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/045.jpg" alt="فلاتر">
             </div>
 
             <div class="strip">
