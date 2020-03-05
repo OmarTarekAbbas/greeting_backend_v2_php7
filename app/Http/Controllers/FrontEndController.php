@@ -3335,12 +3335,12 @@ class FrontEndController extends Controller
         $current_url = \Request::fullUrl();
         if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
             $rbt_sms = $code = $title = null;
-            
+
             $url = Generatedurl::where('UID', $UID)->first();
             if (is_null($url)) {
                 return view('front.error');
             }
-            
+
             $occasion_id = $OID;
             $Rdata = Greetingimg::where('id', $OID)->first();
             if (is_null($Rdata)) {
