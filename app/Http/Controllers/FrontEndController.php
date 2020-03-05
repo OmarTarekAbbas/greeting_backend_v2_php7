@@ -3198,7 +3198,7 @@ class FrontEndController extends Controller
         $fav_id = [];
         if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
             $url = Generatedurl::where('UID', $UID)->first();
-            
+
             if (OP() == 16 || OP() == MOBILY_OP_ID) {
 
                 if (OP() == 16 && Session::has('currentOp') && Session::get('currentOp') == 16) { //  ZAIN NKSA
@@ -3357,13 +3357,14 @@ class FrontEndController extends Controller
             if (is_null($url)) {
                 return view('front.error');
             }
+            if (OP() == 16 || OP() == MOBILY_OP_ID) {
 
-            if (Session::has('currentOp') && $url->operator_id == Session::get('currentOp')) {
+                if (Session::has('currentOp') && $url->operator_id == Session::get('currentOp')) {
 
-            } else {
-                return redirect(url(redirect_operator()));
+                } else {
+                    return redirect(url(redirect_operator()));
+                }
             }
-
             $occasion_id = $OID;
             $Rdata = Greetingimg::where('id', $OID)->first();
             if (is_null($Rdata)) {
@@ -3380,7 +3381,7 @@ class FrontEndController extends Controller
     {
         $url = Generatedurl::where('UID', $UID)->first();
         Session::forget('currentOp');
-        return redirect(url(redirect_operator())); 
+        return redirect(url(redirect_operator()));
     }
 
     public function Search_v4(Request $request, $UID)
