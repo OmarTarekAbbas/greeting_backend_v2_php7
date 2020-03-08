@@ -71,6 +71,15 @@
         }
     }
 
+    .main_container{
+        /* background: #fff; */
+         background: url("{{url('assets/front/landing_v2/images/2.jpg')}}");
+         background-size: 100% 70%;
+      background-position: bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+      }
+
 </style>
 
 <body>
