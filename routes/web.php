@@ -113,6 +113,8 @@ Route::get('landing_kuwait','FrontEndController@landing_kuwait');
 
 //landing ksa
 Route::get('landing_ksa','FrontEndController@landing_ksa_new');
+Route::get('zain_iraq_landing_new', 'FrontEndController@zain_iraq_landing_new');
+
 // Mobily saudi subscribe
 Route::get('landing_ksa_old','FrontEndController@landing_ksa');
 Route::get('landing_mobily_ksa','FrontEndController@landing_mobily_ksa');
