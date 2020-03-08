@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--Mobile Meta-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Zain KSA Snap Landing Page</title>
+    <title>KSA Landing </title>
     <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/main-style_zain.css">
@@ -64,8 +64,12 @@
         }
     }
     .main_container{
-      background: #fff;
-      /* background: url("{{url('assets/front/landing_v2/images/2.png')}}") */
+      /* background: #fff; */
+       background: url("{{url('assets/front/landing_v2/images/2.jpg')}}");
+       background-size: 100% 70%;
+    background-position: bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
     }
 </style>
 
@@ -89,7 +93,7 @@
                 <div class="container">
                     <h3 style="color:#000">
                       {{-- <img src="{{url('assets/front/rotanav2/images/Rorana_flater_logo.png')}}" alt="loading_snap"> --}}
-                      أضغط هنا
+                      أختر شبكتك
                     </h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
