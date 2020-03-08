@@ -348,6 +348,7 @@ Route::post('unsusbcribe_zain_ksa','FrontEndController@unsusbcribe_zain_ksa');
  Route::get('newdesignv4/occasion/{UID}', 'FrontEndController@occasions_v4');
  Route::get('newdesignv4/suboccasion/{OID}/{UID}', 'FrontEndController@suboccasions_v4');
  Route::get('newdesignv4/filter/{OID}/{UID}', 'FrontEndController@filter_v4');
+ Route::get('newdesignv4/logout/{UID}', 'FrontEndController@logout_v4');
  Route::get('Search_v4/{UID}','FrontEndController@Search_v4');
 
 

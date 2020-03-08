@@ -69,13 +69,28 @@
 		</div>
 	</div>
 	<!-- end loading -->
+	@php
+	
+	if (session()->has('currentOp')) {
+		if(session()->get('currentOp') == 14 || session()->get('currentOp') == 16){
+			$class = 'col-3';
+			$display = 'block';
+		}else {
+			$class = 'col-4';
+			$display = 'none';
+		}
+	} else {
+		$class = 'col-4';
+		$display = 'none';
+	}
 
+	@endphp
 	<!-- footer -->
 	<footer>
 		<div class="footer">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-4">
+					<div class="{{$class}}">
 						<a href="{{url('newdesignv4/occasion/'.UID())}}">
 							<div class="f-nav">
 								<i class="fas fa-list-ul"></i>
@@ -83,7 +98,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="col-4">
+					<div class="{{$class}}">
 						<a href="{{url('favourites/'.UID())}}">
 							<div class="f-nav">
 								<i class="far fa-heart"></i>
@@ -91,11 +106,19 @@
 							</div>
 						</a>
 					</div>
-					<div class="col-4">
+					<div class="{{$class}}">
 						<a href="{{url('newdesignv4/'.UID())}}">
 							<div class="f-nav">
 								<i class="fas fa-home"></i>
 								<span>{!! static_lang('homee')?static_lang('homee') : 'الرئيسية'  !!}</span>
+							</div>
+						</a>
+					</div>
+					<div class="{{$class}}" style="display: {{$display}}">
+						<a href="{{url('newdesignv4/logout/'.UID())}}">
+							<div class="f-nav">
+								<i class="fas fa-sign-out-alt    "></i>
+								<span>{!! static_lang('logout')?static_lang('logout') : 'الخروج'  !!}</span>
 							</div>
 						</a>
 					</div>
