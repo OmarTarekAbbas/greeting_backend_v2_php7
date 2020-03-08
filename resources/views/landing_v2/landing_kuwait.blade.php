@@ -85,8 +85,8 @@
 
             <div class="start_video" id="video">
             <video width="100%" poster="{{ url('assets/front/landing_v2')}}/img/01.jpg" id="my_audio" controls>
-                <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
-                <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/ogg">
+                <source src="{{ url('assets/front/landing_v2')}}/video/2.mp4" type="video/mp4">
+                <source src="{{ url('assets/front/landing_v2')}}/video/2.mp4" type="video/ogg">
             </video>
                 <!-- <video width="100%" autoplay muted loop="true">
                     <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
