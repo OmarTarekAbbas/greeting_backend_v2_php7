@@ -109,13 +109,13 @@
                       @endif
                         <div class="row justify-content-center">
                           <div class="col-12">
-                            <a class="operator" sms='90355' body='1' href="">
+                            <a class="operator" sms='798940' body='1' href="">
                                 <img class="img-fluid w-75" src="{{ url('assets/front/landing_v2')}}/img/Zain__KSA.png" id="zain1">
                             </a>
                           </div>
                           <br>
                           <div class="col-12">
-                            <a class="operator" sms='903554' body='1' href="">
+                            <a class="operator" sms='604090' body='78' href="">
                                 <img class="img-fluid w-75" src="{{ url('assets/front/landing_v2')}}/img/Mobily_KSA.png" id="zain1">
                             </a>
                           </div>
@@ -164,7 +164,7 @@
           }
      });
      $('.operator').click(function(){
-         var operator = $(this).attr('sms') == '90355' ? 'Zain':'Mobily';
+         var operator = $(this).attr('sms') == '798940' ? 'Zain':'Mobily';
          $.ajax({
             url:location.href,
              type:"get",
