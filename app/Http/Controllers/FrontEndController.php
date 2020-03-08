@@ -4557,7 +4557,7 @@ class FrontEndController extends Controller
 
         return $result;
     }
-    public function zain_iraq_header(Request $request)
+    public function zain_iraq_header(Request $request,$type)
     {
         //dd('ok');
         $result = array();
@@ -4586,6 +4586,15 @@ class FrontEndController extends Controller
         $result['AllHeaders'] = $_SERVER;
 
         $actionName = "ZainIraqHeader";
+        if($type == 'success'){
+            $actionName = "ZainIraqHeader_success";
+        }
+        if($type == 'landing'){
+            $actionName = "ZainIraqHeader_landing";
+        }
+        if($type == 'faild'){
+            $actionName = "ZainIraqHeader_faild";
+        }
         $URL = $request->fullUrl();
         $parameters_arr = $result;
         $this->log($actionName, $URL, $parameters_arr); // log in
@@ -4594,19 +4603,19 @@ class FrontEndController extends Controller
 
     public function zain_iraq_landing(Request $request)
     {
-        $this->zain_iraq_header($request);
+        $this->zain_iraq_header($request,'landing');
         return view('front.zain_iraq.zain_iraq_landing');
     }
 
     public function zain_iraq_faild(Request $request)
     {
-        $this->zain_iraq_header($request);
+        $this->zain_iraq_header($request,'faild');
         return view('front.zain_iraq.zain_iraq_faild');
     }
 
     public function zain_iraq_success(Request $request)
     {
-        $this->zain_iraq_header($request);
+        $this->zain_iraq_header($request,'success');
         return view('front.zain_iraq.zain_iraq_success');
     }
 

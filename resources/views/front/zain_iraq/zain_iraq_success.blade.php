@@ -28,7 +28,7 @@
             text-decoration: none;
             width: 100%;
             height: 100%;
-            background-image: url('assets/front/zain_iraq_landing/landing_page-success.jpg');
+            background-image: url('assets/front/zain_iraq_landing/landing_page-success1.jpg');
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
