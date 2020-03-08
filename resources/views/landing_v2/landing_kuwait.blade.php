@@ -83,6 +83,7 @@
     <div class="main_container">
         <div class="landing_page">
 
+
             <div class="start_video" id="video">
             <video width="100%" poster="{{ url('assets/front/landing_v2')}}/img/01.jpg" id="my_audio" controls>
                 <source src="{{ url('assets/front/landing_v2')}}/video/2.mp4" type="video/mp4">
