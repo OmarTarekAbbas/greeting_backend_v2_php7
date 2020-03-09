@@ -104,7 +104,7 @@
                 <!-- <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر"> -->
             </div>
 
-            <div class="strip" style="color:#000; background-color:#fff !important; ">
+            <div class="strip" style="color:#000;">
                 <h2>استمتع بوقتك مع فلاتر</h2>
             </div>
 

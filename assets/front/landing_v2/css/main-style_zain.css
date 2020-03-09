@@ -20,6 +20,7 @@ body {
   background-attachment: fixed;
   position: fixed;
   overflow-y: scroll;
+  text-decoration: none;
 }
 
 /*----------------------------------------- landing page -----------------------------------------*/
@@ -46,7 +47,7 @@ body {
   transform: translate(-50%, -50%);
 }
 .landing_page .strip {
-  background-image: url("../img/strip.png");
+  background-image: url("../img/strip_white.png");
   width: 80%;
   margin: auto;
   text-align: center;
