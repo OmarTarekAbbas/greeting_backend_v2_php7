@@ -73,11 +73,11 @@
 
     .main_container{
         /* background: #fff; */
-         background: url("{{url('assets/front/landing_v2/images/2.jpg')}}");
-         background-size: 100% 70%;
-      background-position: bottom;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+         background: url("{{url('assets/front/landing_v2/images/3.jpg')}}");
+         background-size: 100% 59%;
+      background-position: unset;
+    background-repeat: unset;
+    background-attachment: unset;
       }
 
 </style>
