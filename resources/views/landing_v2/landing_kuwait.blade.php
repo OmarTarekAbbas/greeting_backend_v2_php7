@@ -104,13 +104,17 @@
                 <!-- <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر"> -->
             </div>
 
-            <div class="strip">
+            <div class="strip" style="color:#000; background-color:#fff !important; ">
                 <h2>استمتع بوقتك مع فلاتر</h2>
             </div>
 
             <div class="shbka">
                 <div class="container">
-                    <h3 style="text-decoration: underline white; color:black; text-shadow: 2px 2px white">اختر شبكتك</h3>
+
+                    <h3 style="color:#000">
+                        أختر شبكتك
+                      </h3>
+
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
