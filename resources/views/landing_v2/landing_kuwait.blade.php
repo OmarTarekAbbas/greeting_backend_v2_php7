@@ -159,7 +159,7 @@
 
         <!-- copyright -->
         <div class="copy" style="font-size:10px;font-family:sans-serif">
-            <p>copyright @ {{date('Y')}} Ivas, all rights reserved.</p>
+            <p style="color:#000;margin-top:5px">copyright @ {{date('Y')}} Digizone, all rights reserved.</p>
         </div>
         <!-- copyright -->
 

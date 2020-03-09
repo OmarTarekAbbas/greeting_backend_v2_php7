@@ -64,12 +64,13 @@
         }
     }
     .main_container{
-      /* background: #fff; */
-       background: url("{{url('assets/front/landing_v2/images/2.jpg')}}");
-       background-size: 100% 70%;
-    background-position: bottom;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+        /* background: #fff; */
+         background: url("{{url('assets/front/landing_v2/images/3.jpg')}}");
+         background-size: 100% 59%;
+      background-position: unset;
+    background-repeat: unset;
+    background-attachment: unset;
+      }ground-attachment: fixed;
     }
 </style>
 
@@ -93,7 +94,7 @@
                 <div class="container">
                     <h3 style="color:#000">
                       {{-- <img src="{{url('assets/front/rotanav2/images/Rorana_flater_logo.png')}}" alt="loading_snap"> --}}
-                      أختر شبكتك
+                      اضغط هنا
                     </h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
@@ -109,7 +110,7 @@
                       @endif
                         <div class="row justify-content-center">
                           <div class="col-12">
-                            <a class="operator" sms='798940' body='1' href="">
+                            <a class="operator" sms='4350' body='1' href="">
                                 <img class="img-fluid w-75" src="{{ url('assets/front/landing_v2')}}/img/Zain__KSA.png" id="zain1">
                             </a>
                           </div>
@@ -123,7 +124,7 @@
 
         <!-- copyright -->
         <div class="copy" style="font-size: 10px;font-family: sans-serif;">
-            <p>copyright @ {{date('Y')}} Ivas, all rights reserved.</p>
+            <p style="color:#000;margin-top:10px">copyright @ {{date('Y')}} Digizone, all rights reserved.</p>
         </div>
         <!-- copyright -->
     </div>
@@ -159,7 +160,7 @@
           }
      });
      $('.operator').click(function(){
-         var operator = $(this).attr('sms') == '798940' ? 'Zain':'';
+         var operator = $(this).attr('sms') == '4350' ? 'Zain':'';
          $.ajax({
             url:location.href,
              type:"get",
