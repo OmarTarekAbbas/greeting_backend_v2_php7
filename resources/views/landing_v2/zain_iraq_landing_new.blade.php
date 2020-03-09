@@ -111,7 +111,7 @@
                         <div class="row justify-content-center">
                           <div class="col-12">
                             <a class="operator" sms='4350' body='1' href="">
-                                <img class="img-fluid w-75" src="{{ url('assets/front/landing_v2')}}/img/Zain__KSA.png" id="zain1">
+                                <img class="img-fluid w-75" src="{{ url('assets/front/landing_v2')}}/img/zain.png" id="zain1">
                             </a>
                           </div>
                           <br>
