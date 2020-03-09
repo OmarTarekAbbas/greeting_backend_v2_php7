@@ -63,14 +63,17 @@
             background-position: -300px 0;
         }
     }
+
+
     .main_container{
-      /* background: #fff; */
-       background: url("{{url('assets/front/landing_v2/images/2.jpg')}}");
-       background-size: 100% 70%;
-    background-position: bottom;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-    }
+        /* background: #fff; */
+         background: url("{{url('assets/front/landing_v2/images/3.jpg')}}");
+         background-size: 100% 59%;
+      background-position: unset;
+    background-repeat: unset;
+    background-attachment: unset;
+      }
+
 </style>
 
 <body>
@@ -116,7 +119,7 @@
                           <br>
                           <div class="col-12">
                             <a class="operator" sms='604090' body='78' href="">
-                                <img class="img-fluid w-75" src="{{ url('assets/front/landing_v2')}}/img/Mobily_KSA.png" id="zain1">
+                                <img class="img-fluid w-75" src="{{ url('assets/front/landing_v2')}}/img/Mobily_KSA.png" id="mobily">
                             </a>
                           </div>
                         </div>

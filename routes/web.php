@@ -113,7 +113,7 @@ Route::get('landing_kuwait','FrontEndController@landing_kuwait');
 
 //landing ksa
 Route::get('landing_ksa','FrontEndController@landing_ksa_new');
-Route::get('zain_iraq_landing_new', 'FrontEndController@zain_iraq_landing_new');
+
 
 // Mobily saudi subscribe
 Route::get('landing_ksa_old','FrontEndController@landing_ksa');
@@ -234,6 +234,7 @@ define('SNAP_VIVA_CHANNEL_ID',4493);
 define('viva_kuwait_operator_id',13);
 
 /* Zain Iraq Landing */
+Route::get('zain_iraq_landing_new', 'FrontEndController@zain_iraq_landing_new');
 Route::get('zain_iraq_landing', 'FrontEndController@zain_iraq_landing');
 Route::get('zain_iraq_success', 'FrontEndController@zain_iraq_success');
 Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild');
