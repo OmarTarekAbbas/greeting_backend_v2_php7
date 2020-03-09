@@ -3203,11 +3203,7 @@ class FrontEndController extends Controller
 
                 if (OP() == 16 && Session::has('currentOp') && Session::get('currentOp') == 16) { //  ZAIN NKSA
 
-                } else {
-                    return redirect(url(redirect_operator()));
-                }
-
-                if (OP() == MOBILY_OP_ID && Session::has('currentOp') && Session::get('currentOp') == MOBILY_OP_ID) { // Mobily ksa
+                }elseif (OP() == MOBILY_OP_ID && Session::has('currentOp') && Session::get('currentOp') == MOBILY_OP_ID) { // Mobily ksa
 
                 } else {
                     return redirect(url(redirect_operator()));
