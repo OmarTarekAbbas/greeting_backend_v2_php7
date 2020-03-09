@@ -104,14 +104,14 @@
                 <!-- <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر"> -->
             </div>
 
-            <div class="strip" style="color:#000;">
-                <h2>استمتع بوقتك مع فلاتر</h2>
+            <div class="strip" style="color:#000">
+                <h2 style="font-size: 23px">استمتع بوقتك مع فلاتر</h2>
             </div>
 
             <div class="shbka">
                 <div class="container">
 
-                    <h3 style="color:#000">
+                    <h3 style="color:#000;font-weight:normal">
                         أختر شبكتك
                       </h3>
 

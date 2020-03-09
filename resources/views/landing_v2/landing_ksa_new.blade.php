@@ -87,17 +87,15 @@
             </video>
             </div>
 
-            <div class="strip">
-                <h2>استمتع بوقتك مع فلاتر</h2>
+            <div class="strip" style="color:#000">
+                <h2 style="font-size: 23px">استمتع بوقتك مع فلاتر</h2>
             </div>
-            <br>
 
             <div class="shbka">
                 <div class="container">
-                    <h3 style="color:#000">
-                      {{-- <img src="{{url('assets/front/rotanav2/images/Rorana_flater_logo.png')}}" alt="loading_snap"> --}}
-                      أختر شبكتك
-                    </h3>
+                    <h3 style="color:#000;font-weight:normal">
+                        أختر شبكتك
+                      </h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
