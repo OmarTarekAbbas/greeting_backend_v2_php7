@@ -3270,6 +3270,19 @@ class FrontEndController extends Controller
             return view('front.error');
         }
 
+        // $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
+        // $occasions_array = [];
+        // $occasions = [];
+        // foreach ($snap as $key => $value) {
+        //     array_push($occasions_array, $value->occasion_id);
+        // }
+        // $occasions_array = array_unique($occasions_array);
+        // foreach ($occasions_array as $k => $occasion) {
+        //     $sliders[] = Occasion::where('id', $occasion)->first();
+        //     // $occasion = get_root($occasion);
+        // }
+        // $sliders = array_filter($sliders);
+
         $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
         $occasions_array = [];
         $occasions = [];
@@ -3277,10 +3290,16 @@ class FrontEndController extends Controller
             array_push($occasions_array, $value->occasion_id);
         }
         $occasions_array = array_unique($occasions_array);
-        foreach ($occasions_array as $k => $occasion) {
-            $sliders[] = Occasion::where('id', $occasion)->first();
+
+        foreach ($occasions_array as $k => $occasion_id) {
+            $occasion = Occasion::where('id', $occasion_id)->first(); //check an parent 1 e3rd kl parent_id fe el menu else e3rd kol 7aga
+            $occasion = get_root($occasion);
+            $occasions[] = $occasion;
         }
-        $sliders = array_filter($sliders);
+        $occasions = array_filter($occasions);
+        $sliders = array_unique($occasions);
+
+
 
         // dd(count($sliders));
         $page = \Input::get('page', 1); // Get the ?page=1 from the url
