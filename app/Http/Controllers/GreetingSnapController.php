@@ -146,6 +146,11 @@ class GreetingSnapController extends Controller {
                 $Items['vid_path'] = $Path2;
                 $Items['vid_type'] = 'Greetings/'.Carbon::now()->format('d-m-Y').'/'.$image_name.'.jpg';
             }
+            if($request->file('imgPreFile')){
+                $ImgPrev = $request->file('imgPreFile');
+                $ImgPrevPath = $this->UploadContent($request->file('imgPreFile'), Carbon::now()->format('d-m-Y'));
+                $Items['vid_type'] = $ImgPrevPath;
+            }
             //$Items['occasion_id'] = $occasion_id;
             $GImage = Greetingimg::create($Items);
             $GImage->fill($Items);
@@ -239,7 +244,11 @@ class GreetingSnapController extends Controller {
             $GImage->update($Items);
          }
 
-
+        if($request->file('imgPreFile')){
+            $ImgPrev = $request->file('imgPreFile');
+            $ImgPrevPath = $this->UploadContent($request->file('imgPreFile'), Carbon::now()->format('d-m-Y'));
+            $Items['vid_type'] = $ImgPrevPath;
+        }
 
         // if (Auth::user()->admin == true) {  // if user is admin -- the operators multi select and startDate and endDate  will show --- so we make validation that  End date must be greater than start date
             if ($request->input('RDate') < $request->input('EXDate')) {

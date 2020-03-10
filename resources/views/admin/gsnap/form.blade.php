@@ -48,6 +48,7 @@
     {!! Form::text('snap_link',  null, ['class'=>'form-control']) !!}
 
 </div>
+
 <div class="form-group">
     {!! Form::label('snap_vid', 'Snap Video Link', ['class'=>'control-label']) !!}
     <ul id="myTab1" class="nav nav-tabs">
@@ -66,7 +67,10 @@
                 {!! Form::text('snap_vid',  null, ['class'=>'form-control']) !!}
             </div> --}}
         </div>
-        
+        <div class="form-group">
+            {!! Form::label('imgPreFile', 'Image Preview File', ['class'=>'control-label']) !!}
+            {!! Form::file('imgPreFile', ['class'=>'form-control']) !!}
+        </div>
         @if(isset($GreetingImg) && $GreetingImg->vid_path)
         <div class="row" style="margin-top:30px;">
             
@@ -77,6 +81,7 @@
         @endif
 
 </div>
+
 @if(Auth::user()->admin == true)
 <div class="form-group">
     {!! Form::label('operator_list', 'Select Operator') !!}
