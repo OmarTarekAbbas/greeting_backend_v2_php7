@@ -1784,6 +1784,26 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         return view('landingrotana.du_landing',compact("peroid","lang"));
     }
 
+    public function cheeckSub($number,$service)
+    {
+       // Get cURL resource
+       $curl = curl_init();
+       // Set some options - we are passing in a useragent too here
+       curl_setopt_array($curl, [
+           CURLOPT_RETURNTRANSFER => 1,
+           CURLOPT_URL => DU_CHECKSUB,
+           CURLOPT_POST => 1,
+           CURLOPT_POSTFIELDS => 'msisdn='.$number.'&serviceid='.$service,
+       ]);
+       // Send the request & save response to $resp
+       $resp = curl_exec($curl);
+       $res  = json_decode($resp);
+       // Close request to clear up some resources
+       curl_close($curl);
+
+       return $res;
+    }
+
     public function du_landing_successrotana(request $request) {
         date_default_timezone_set("Africa/Cairo");
 
@@ -1823,20 +1843,26 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         }
 
 
+
+
         if (isset($_REQUEST['lang']) && $_REQUEST['lang'] != "") {
             $local = $_REQUEST['lang'];
         }else{ // default is arabic
             $local= "ar" ;
         }
 
-        $redirectUrl=  url('/newdesignv4/9130281/');
 
+        $redirect =  url('/du_landing_rotana');
 
+        if($this->cheeckSub($msisdn,$serviceid)){
+            session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=> du_operator_id]);
+            return redirect($redirect);
+        }
 
         // activation api :   http://pay-with-du.ae/20/digizone/digizone-flaterdaily-1-ar-doi-web?origin=digizone&uid=971555802322&trxid=56833e8d-c21b-453b-9e2a-f33f20415ae2&serviceProvider=secured&serviceid=flaterdaily&plan=daily&price=2&locale=ar
         //  f5d1048a-995e-11e7-abc4-cec278b6b50a
 
-        $URL = "http://pay-with-du.ae/20/digizone/digizone-{$serviceid}-{$num}-{$local}-doi-web?origin=digizone&uid=$msisdn&trxid=$trxid&serviceProvider=secured&serviceid=$serviceid&plan=$plan&price=$price&locale=$local&redirectUrl=";
+        $URL = "http://pay-with-du.ae/20/digizone/digizone-{$serviceid}-{$num}-{$local}-doi-web?origin=digizone&uid=$msisdn&trxid=$trxid&serviceProvider=secured&serviceid=$serviceid&plan=$plan&price=$price&locale=$local&redirectUrl=$redirect";
 
         // make log
         $actionName = "DU SecureD Pincode Send";
@@ -1878,7 +1904,6 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
     }
     public function du_unsubcrotana(request $request)
     {
-
         $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
         $lang =  isset($request->lang) ? $request->lang : "ar" ;
         return view('landingrotana.du_unsub',compact("peroid","lang"));
