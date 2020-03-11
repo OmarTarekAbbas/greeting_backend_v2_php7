@@ -1784,26 +1784,6 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         return view('landingrotana.du_landing',compact("peroid","lang"));
     }
 
-    public function cheeckSub($number,$service)
-    {
-       // Get cURL resource
-       $curl = curl_init();
-       // Set some options - we are passing in a useragent too here
-       curl_setopt_array($curl, [
-           CURLOPT_RETURNTRANSFER => 1,
-           CURLOPT_URL => DU_CHECKSUB,
-           CURLOPT_POST => 1,
-           CURLOPT_POSTFIELDS => 'msisdn='.$number.'&serviceid='.$service,
-       ]);
-       // Send the request & save response to $resp
-       $resp = curl_exec($curl);
-       $res  = json_decode($resp);
-       // Close request to clear up some resources
-       curl_close($curl);
-
-       return $res;
-    }
-
     public function du_landing_successrotana(request $request) {
         date_default_timezone_set("Africa/Cairo");
 
