@@ -1659,13 +1659,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         if ($snap) {
             $url = Generatedurl::where('operator_id', du_operator_id)->orderBy('created_at', 'desc')->first();
             if($url_type == 'rotana'){
-                return 'rotana/filter/' . $snap->id . '/' . $url->UID;
+                return 'rotanav2/inner/' . $snap->id . '/' . $url->UID;
             }
             return 'newdesignv4/filter/' . $snap->id . '/' . $url->UID;
         } else {
             $uid = $url ? $url->UID : '75231';
             if($url_type == 'rotana'){
-                return 'rotana/'.$uid ;
+                return 'rotanav2/'.$uid ;
             }
             return 'newdesignv4/' .  $uid;
         }
