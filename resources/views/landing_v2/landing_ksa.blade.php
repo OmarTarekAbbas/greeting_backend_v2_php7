@@ -67,7 +67,7 @@
                             <div class="col-6 mobily_click">
                                 <img class="img_mobily_click" src="{{url('assets/front/landing_v2')}}/img/mobily.png" id="zain" style="width: 100% !important;height:65px">
                             </div>
- 
+
                             <div class="col-6 zain_click">
                                 <img  class="img_zain_click" src="{{url('assets/front/landing_v2')}}/img/zain_ksa.png"  id="zain" style="width: 85px !important;height:55px">
                             </div>
@@ -98,12 +98,12 @@
                 <h5>الى <span>965</span><span> STOP1 </span>لالغاء الاشتراك ارسل</h5>-->
                 </div>
             </div>
-            
+
             {{--  <div class="cancel">
                 <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('zain_ksa_unsub')}}">الرابط</a></p>
             </div>  --}}
-            
-            
+
+
         </div>
 
         <!-- copyright -->

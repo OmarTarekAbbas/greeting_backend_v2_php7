@@ -28,6 +28,7 @@ body {
 /*----------------------------------------- landing page -----------------------------------------*/
 .landing_page {
   margin-top: 1.65rem;
+
   .start_video {
     display: block;
 
@@ -223,7 +224,11 @@ body {
 
 .copy {
   text-align: center;
-  margin-top: 8%;
+  /* margin-top: 8%; */
+  position: fixed;
+  bottom: 0;
+  /* left: 0; */
+  width: 100%;
 
   p {
     font-size: 10px;
