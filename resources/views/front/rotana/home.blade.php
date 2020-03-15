@@ -167,7 +167,7 @@
 
                     <div class="col-12">
                         <div class="contant">
-                            @if(count($Rdata_today2) < 2) 
+                            @if(count($Rdata_today2) < 2)
                             <div class="owl-one owl-carousel owl-theme">
                                 @elseif(count($Rdata_today2) == 2)
                                 <div class="owl-two owl-carousel owl-theme">

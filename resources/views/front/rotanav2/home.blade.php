@@ -11,12 +11,12 @@
           @if (isset($newsnap) && $newsnap != null)
           @foreach ($newsnap as $item)
           <div class="item">
-            <video class="video-fluid w-100" poster="{{url($item->vid_type)}}" controls>
+            <video onplay="openFullscreen()" id="myvideo" class="video-fluid w-100" poster="{{url($item->vid_type)}}" controls>
               <source src="{{url($item->vid_path)}}" />
             </video>
 
             <a class="fontIcon text-white text-center d-block" href="{{url($item->snap_link)}}" target="_blank">
-              <i class="far fa-eye fa-2x"></i>
+              <i class="fas fa-download fa-2x"></i>
             </a>
           </div>
           @endforeach

@@ -60,52 +60,20 @@ button:active,
   object-fit: cover;
   height: 12.688rem;
 }
-.new_rotana .main_home .first_slide .owl_one .item {
-  border-right: 1px solid #161414;
-}
 .new_rotana .main_home .first_slide .owl_one .item .owl_one_img img {
   height: 25rem;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
-}
-.new_rotana .main_home .second_slide .owl_two .item {
-  border-right: 1px solid #161414;
 }
 .new_rotana .main_home .second_slide .owl_two .item .owl_two_img img {
   height: 9rem;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
-}
-.new_rotana .main_home .third_slide .owl_three .item {
-  border-right: 2px solid #161414;
 }
 .new_rotana .main_home .third_slide .owl_three .item .owl_three_img img {
   height: 9rem;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
-}
-.new_rotana .main_list .first_list .first_list_img {
-  border-right: 1px solid #161414;
 }
 .new_rotana .main_list .first_list .first_list_img a {
   position: relative;
 }
 .new_rotana .main_list .first_list .first_list_img a img {
   height: 9.188rem;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
 }
 .new_rotana .main_list .first_list .first_list_img a.first_list_img_heart, .new_rotana .main_list .first_list .first_list_img a.first_list_img_share {
   font-size: 1.2rem;
@@ -124,11 +92,6 @@ button:active,
 }
 .new_rotana .main_filter_2day .filter_2day .filter_2day_img a img {
   height: 20.625rem;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
 }
 .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart, .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share {
   font-size: 1rem;
@@ -145,25 +108,11 @@ button:active,
 .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share.first_list_img_heart {
   left: 24%;
 }
-.new_rotana .main_filter_2day .filter_slide .item {
-  border-right: 1px solid #161414;
-}
 .new_rotana .main_filter_2day .filter_slide .item .owl_filter_img img {
   height: 9.125rem;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
-}
-.new_rotana .main_filter_2day .filter_slide .owl_two .item {
-  border-right: 1px solid #161414;
 }
 .new_rotana .main_filter_2day .filter_slide .owl_two .item .owl_filter_img img {
   height: 12.5rem;
-}
-.new_rotana .main_filter_2day .filter_slide .owl_filter .item {
-  border-right: 1px solid #161414;
 }
 .new_rotana .main_filter_2day .filter_slide .owl_filter .item .owl_filter_img img {
   height: 9rem;
@@ -171,16 +120,8 @@ button:active,
 .new_rotana .main_fav .fav_sec .img_like img {
   width: 10%;
 }
-.new_rotana .main_fav .fav_list .fav_list_img {
-  border-right: 1px solid #161414;
-}
 .new_rotana .main_fav .fav_list .fav_list_img a img {
   height: 9.156rem;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
 }
 .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share {
   font-size: 1.1rem;

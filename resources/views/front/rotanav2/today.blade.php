@@ -17,7 +17,7 @@
           <div class="filter_2day_img mt-3">
 
             <a href="{{$Rdata_today->snap_link}}">
-              <img class="w-100 d-block m-auto rounded rotate-scale-down" src="{{url('/'.$Rdata_today->path)}}"
+              <img class="w-100 d-block m-auto rotate-scale-down" src="{{url('/'.$Rdata_today->path)}}"
                 alt="{{$Rdata_today->title}}">
 
               <a id="{{$Rdata_today->id}}"  class="first_list_img_heart" onclick="fav('{{$Rdata_today->id}}');$(this).toggleClass('active_heart');"
@@ -111,7 +111,7 @@
   var find = favArr.indexOf(filterid);
   if(find == -1){ // not fav
 
-  }else{ // fav 
+  }else{ // fav
       document.getElementById(filterid).classList.add("active_heart");
   }
 </script>
