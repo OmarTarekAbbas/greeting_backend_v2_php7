@@ -168,6 +168,7 @@ class RotanaController extends Controller
               }
 
 
+
         } else {
             return redirect(url('rotana_landing_stc_1?msisdn=965' . $msisdn));
         }
