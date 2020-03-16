@@ -124,8 +124,10 @@ class RotanaController extends Controller
 
               if ($snap) {
               return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
-              } else {
+              } elseif( $Url) {
               return redirect(url('rotanav2/' . $Url->UID));
+              }else{
+                return view('landing_v2.rotana_viva_landing', compact('msisdn'));
               }
 
             }
@@ -159,9 +161,11 @@ class RotanaController extends Controller
 
             if ($snap) {
             return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
-            } else {
-            return redirect(url('rotanav2/' . $Url->UID));
-            }
+            } elseif( $Url) {
+              return redirect(url('rotanav2/' . $Url->UID));
+              }else{
+                return view('landing_v2.rotana_viva_landing', compact('msisdn'));
+              }
 
 
         } else {
