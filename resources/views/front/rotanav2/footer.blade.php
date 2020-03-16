@@ -1,6 +1,6 @@
 </main>
 <style>
-  @media (min-width: 1301px) {
+  @media (min-width: 1100px) {
     body {
       visibility: hidden;
       overflow-x: hidden;
