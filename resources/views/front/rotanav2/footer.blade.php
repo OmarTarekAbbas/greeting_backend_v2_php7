@@ -1,13 +1,17 @@
 </main>
 <style>
-  @media (min-width: 1100px) {
+  @media (min-width: 1025px) {
     body {
       visibility: hidden;
       overflow-x: hidden;
     }
 
     .new_rotana {
-      display: none;
+      display: none !important;
+    }
+
+    .the-frame {
+      display: block;
     }
   }
 
