@@ -67,7 +67,7 @@
             <div class="container">
                 <div class="form_content">
                     <!--<h5>ادخل رقم الهاتف</h5>-->
-                    <form method="post" action="{{url('/viva_login_action')}}" id="form_zain">
+                    <form method="post" action="{{url('/rotana_viva_login_action')}}" id="form_zain">
                         {{ csrf_field() }}
                         <div class="form-group form-inline">
                             <label for="phone"><span>+ 965</span></label>
