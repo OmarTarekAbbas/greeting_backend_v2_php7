@@ -1,14 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Country;
 use App\Generatedurl;
 use App\Occasion;
 use App\Operator;
-use App\Country;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
-function menu() {
+function menu()
+{
 
     $url = "$_SERVER[REQUEST_URI]";
     $UID = basename(parse_url($url, PHP_URL_PATH));
@@ -26,14 +26,16 @@ function menu() {
     return compact('Imgs', 'Vid', 'Rbt', 'Not', 'Snap');
 }
 
-function UID() {
+function UID()
+{
 
     $url = "$_SERVER[REQUEST_URI]";
     $UID = basename(parse_url($url, PHP_URL_PATH));
     return $UID;
 }
 
-function ValidUID() {
+function ValidUID()
+{
 
     $valid = 0;
     $urlDetect = Generatedurl::where('UID', UID())->get();
@@ -43,39 +45,42 @@ function ValidUID() {
     return $valid;
 }
 
-function OP() {
+function OP()
+{
 
     $url = Generatedurl::where('UID', UID())->first();
     // dd(UID());
-    if($url){
+    if ($url) {
         $op = $url->operator_id;
         return $op;
-    }else{
+    } else {
         return view('errors.404');
     }
 
 }
 
-function OP_switch($uid) {
+function OP_switch($uid)
+{
     $url = Generatedurl::where('UID', $uid)->first();
     $op = $url->operator_id;
-    if($op == 13){ //
-       $op = 51   ;
-    }elseif ( $op == 12) {
-         $op = 50   ;
+    if ($op == 13) { //
+        $op = 51;
+    } elseif ($op == 12) {
+        $op = 50;
     }
     return $op;
 }
 
-
-function Occasion() {
+function Occasion()
+{
 
     $url = Generatedurl::where('UID', UID())->first();
     $occasion_id = $url->occasion_id;
     return $occasion_id;
 }
 
-function rbtSMS() {
+function rbtSMS()
+{
 
     $UID = UID();
     $url = Generatedurl::where('UID', $UID)->first();
@@ -83,31 +88,36 @@ function rbtSMS() {
     return $rbt_sms;
 }
 
-function get_pageLength() {
+function get_pageLength()
+{
 
     $length = 5;
     return $length;
 }
 
-function snap_Occasions() {
+function snap_Occasions()
+{
     $UID = UID();
     $url = Generatedurl::where('UID', $UID)->first();
 
-    if($url)
-    $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
+    if ($url) {
+        $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
+    }
 
     $occasions_array = [];
-    $occasions       = [];
+    $occasions = [];
 
-    if(isset($snap))
-    foreach ($snap as $key => $value) {
-        array_push($occasions_array, $value->occasion_id);
+    if (isset($snap)) {
+        foreach ($snap as $key => $value) {
+            array_push($occasions_array, $value->occasion_id);
+        }
     }
+
     $occasions_array = array_unique($occasions_array);
     foreach ($occasions_array as $k => $occasion_id) {
         $occasion = Occasion::where('id', $occasion_id)->first(); //check an parent 1 e3rd kl parent_id fe el menu else e3rd kol 7aga
         $occasion = get_root($occasion);
-        $occasions[]  = $occasion;
+        $occasions[] = $occasion;
     }
     $occasions = array_filter($occasions);
     return array_unique($occasions);
@@ -118,30 +128,34 @@ function get_root($occasion)
     //$UID = UID();
     //$url = Generatedurl::where('UID', $UID)->first();
     //$check_parent = isset($occasion->parent_id) ? $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion->parent_id)->first():0;
-    if(isset($occasion->parent_id)){
-       $occasion = Occasion::where('id',$occasion->parent_id)->first();
-       return get_root($occasion);
+    if (isset($occasion->parent_id)) {
+        $occasion = Occasion::where('id', $occasion->parent_id)->first();
+        return get_root($occasion);
     }
     return $occasion;
 }
 
-function get_paginationLimit() {
+function get_paginationLimit()
+{
 
     $limit = 5;
     return $limit;
 }
 
-function get_settings($key) {
+function get_settings($key)
+{
 
     $value = '';
     $setting = App\Setting::where('key', $key)->get()->first();
-    if ($setting)
+    if ($setting) {
         $value = $setting->value;
+    }
 
     return $value;
 }
 
-function check_op() {
+function check_op()
+{
     $operator = Operator::findOrfail(OP());
     return $operator->close;
     // $operator = Operator::join('countries', 'operators.country_id', '=', 'countries.id')
@@ -159,17 +173,18 @@ function check_op() {
     // }
 }
 
-function list_snap($ID, $UID) {
+function list_snap($ID, $UID)
+{
     $url = Generatedurl::where('UID', $UID)->first();
     $occasion_id = $ID;
     $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $occasion_id)->orderBy('RDate', 'desc')->get();
     return $Rdata;
 }
 
-function check_favourtite($number, $id) {
+function check_favourtite($number, $id)
+{
     $OP = OP();
     $operator = Operator::find(OP());
-
 
     $prefix = "965";
     if (strpos($operator->name, 'Zain') !== false && strpos($operator->country->name, 'Kuwait') !== false) {
@@ -185,12 +200,15 @@ function check_favourtite($number, $id) {
 
     $favourite = null;
     $msisdn = \App\Msisdn::where('msisdn', $prefix . $number)->where('operator_id', $OP)->first();
-    if ($msisdn)
+    if ($msisdn) {
         $favourite = \App\MsisdnGreetingimg::where('msisdn_id', $msisdn->id)->where('greetingimg_id', $id)->first();
+    }
+
     return $favourite ? true : false;
 }
 
-function redirect_operator() {
+function redirect_operator()
+{
     $operator = Operator::find(OP());
     $country = Country::find($operator->country_id);
     $current_url = \Request::fullUrl();
@@ -202,24 +220,32 @@ function redirect_operator() {
         return 'landing_ooredoo';
     } else if (strpos($operator->name, 'Zain') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
         return 'landing_zain_ksa';
-    }else if (strpos($operator->name, 'Mobily') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
+    } else if (strpos($operator->name, 'Mobily') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
         return 'landing_mobily_ksa';
     } else {
         return 'landing_v1';
     }
 }
-function getCode() {
+function getCode()
+{
 
     $code = App::getLocale();
     return $code;
- }
+}
 
- function static_lang($value)
- {
-   $static_translation = \App\StaticTranslation::where('key_word','like','%'.$value.'%')->first();
-   if($static_translation){
+function static_lang($value)
+{
+    $static_translation = \App\StaticTranslation::where('key_word', 'like', '%' . $value . '%')->first();
+    if ($static_translation) {
 
-       return $static_translation->getBody(getCode());
-   }
-   return false;
- }
+        return $static_translation->getBody(getCode());
+    }
+    return false;
+}
+
+function viva_id()
+{
+    $kuwait = \App\Country::where('name', 'kuwait')->first();
+    $viva = Operator::where('name', 'viva')->where('country_id', $kuwait->id)->first();
+    return $viva->id;
+}
