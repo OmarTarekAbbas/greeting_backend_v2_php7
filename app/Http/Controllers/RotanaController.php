@@ -178,11 +178,11 @@ class RotanaController extends Controller
     {
 
         /*
-        Activation: https://ivas.com.eg/rotana_viva_notification?ChannelID=1207&ServiceID=808&User=kuwait@idex&Password=kuwait@!dex&STATUS=ACT-SB&OperatorID=41904&MSISDN=96555410856&RequestID=303263614
+        Activation: https://rotana.digizone.com.kw/rotana_viva_notification?ChannelID=1207&ServiceID=808&User=kuwait@idex&Password=kuwait@!dex&STATUS=ACT-SB&OperatorID=41904&MSISDN=96555410856&RequestID=303263614
 
-        First Failed billing:  https://ivas.com.eg/greetings/rotana_viva_notification?Password=kuwait@!dex&ServiceID=808&OperatorID=41904&ChannelID=1207&STATUS=FFL-BL&User=kuwait@idex&MSISDN=96555410856&RequestID=303270353
+        First Failed billing:  https://rotana.digizone.com.kw/rotana_viva_notification?Password=kuwait@!dex&ServiceID=808&OperatorID=41904&ChannelID=1207&STATUS=FFL-BL&User=kuwait@idex&MSISDN=96555410856&RequestID=303270353
 
-        renewal success: https://ivas.com.eg/greetings/rotana_viva_notification?Password=kuwait@!dex&ServiceID=808&OperatorID=41904&ChannelID=1207&STATUS=RSC-BL&User=kuwait@idex&MSISDN=96555410856&RequestID=303270353
+        renewal success: https://rotana.digizone.com.kw/rotana_viva_notification?Password=kuwait@!dex&ServiceID=808&OperatorID=41904&ChannelID=1207&STATUS=RSC-BL&User=kuwait@idex&MSISDN=96555410856&RequestID=303270353
 
         Other possible status:
 
