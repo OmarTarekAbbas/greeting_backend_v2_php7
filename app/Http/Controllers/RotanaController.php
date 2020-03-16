@@ -3,6 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+use Carbon\Carbon;
+use App\Notify;
+use App\Msisdn;
+use App\AdvertisingUrl;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+use App\GreetingimgOperator;
+use DB;
+use App\Generatedurl;
+use App\Greetingimg;
+use App\Occasion;
+use App\Operator;
+use App\Category;
 
 class RotanaController extends Controller
 {
@@ -75,7 +91,7 @@ class RotanaController extends Controller
                 $today = date("Y-m-d");
                 $time = strtotime($today);
 
-                $Msisdn = Msisdn::where('phone_number', '=', $CGMSISDN)->orderBy('id', 'DESC')->first();
+                $Msisdn = Msisdn::where('msisdn', '=', $CGMSISDN)->orderBy('id', 'DESC')->first();
                 if ($Msisdn) {
                     $Msisdn->final_status = 1;
                     $Msisdn->subscribe_date = $today;
@@ -86,7 +102,7 @@ class RotanaController extends Controller
                 } else {
                     $Msisdn = new Msisdn();
                     $Msisdn->final_status = 1;
-                    $Msisdn->phone_number = $CGMSISDN;
+                    $Msisdn->msisdn = $CGMSISDN;
                     $Msisdn->operator_id = viva_kuwait_operator_id; // viva
                     $Msisdn->ad_company = "DF";
 
@@ -101,7 +117,17 @@ class RotanaController extends Controller
 
                 $msisdn = preg_replace('/^965/', '', $CGMSISDN);
                 session(['MSISDN_VIVA' => $msisdn, 'status' => 'active']);
-                return redirect('v1/' . viva_kuwait_operator_id);
+              // return redirect('v1/' . viva_kuwait_operator_id);
+              $Url = Generatedurl::where('operator_id', viva_kuwait_operator_id)->latest()->first();
+              $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+              ->where('greetingimg_operator.operator_id', '=', viva_kuwait_operator_id)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+              if ($snap) {
+              return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
+              } else {
+              return redirect(url('rotanav2/' . $Url->UID));
+              }
+
             }
 
         }
@@ -117,15 +143,26 @@ class RotanaController extends Controller
         }
 
         // check subscribe
-        $Msisdn = Msisdn::where('phone_number', '=', "965" . $msisdn)->where('final_status', '=', 1)->where('operator_id', '=', viva_kuwait_operator_id)->orderBy('id', 'DESC')->first();
+        $Msisdn = Msisdn::where('msisdn', '=', "965" . $msisdn)->where('final_status', '=', 1)->where('operator_id', '=', viva_kuwait_operator_id)->orderBy('id', 'DESC')->first();
         if ($Msisdn) {
             session(['MSISDN_VIVA' => $msisdn, 'status' => 'active']);
-            $post = Post::where('operator_id', viva_kuwait_operator_id)->where('active', 1)->where('created_at', '<=', Carbon::now())->latest('created_at')->first();
-            if ($post) {
-                return redirect(viva_kuwait_operator_id . '/landing/' . $post->uid);
+            // $post = Post::where('operator_id', viva_kuwait_operator_id)->where('active', 1)->where('created_at', '<=', Carbon::now())->latest('created_at')->first();
+            // if ($post) {
+            //     return redirect(viva_kuwait_operator_id . '/rotanav2/' . $post->uid);
+            // } else {
+            //     return redirect('v1/' . viva_kuwait_operator_id);
+            // }
+
+            $Url = Generatedurl::where('operator_id', viva_kuwait_operator_id)->latest()->first();
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+            ->where('greetingimg_operator.operator_id', '=', viva_kuwait_operator_id)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+            if ($snap) {
+            return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
             } else {
-                return redirect('v1/' . viva_kuwait_operator_id);
+            return redirect(url('rotanav2/' . $Url->UID));
             }
+
 
         } else {
             return redirect(url('rotana_landing_stc_1?msisdn=965' . $msisdn));
@@ -133,6 +170,7 @@ class RotanaController extends Controller
     }
     public function rotana_viva_notification(request $request)
     {
+
         /*
         Activation: https://ivas.com.eg/greetings/viva_notification?ChannelID=1207&ServiceID=808&User=kuwait@idex&Password=kuwait@!dex&STATUS=ACT-SB&OperatorID=41904&MSISDN=96555410856&RequestID=303263614
 
@@ -200,7 +238,7 @@ class RotanaController extends Controller
             $notify->save();
 
             // update msisdn status
-            $Msisdn = Msisdn::where('phone_number', '=', $msisdn)->orderBy('id', 'DESC')->first();
+            $Msisdn = Msisdn::where('msisdn', '=', $msisdn)->orderBy('id', 'DESC')->first();
             if ($Msisdn) {
                 if ($STATUS == "ACT-SB") {
                     $Msisdn->final_status = 0;
@@ -227,7 +265,7 @@ class RotanaController extends Controller
             } else {
 
                 $Msisdn = new Msisdn();
-                $Msisdn->phone_number = $msisdn;
+                $Msisdn->msisdn = $msisdn;
                 $Msisdn->operator_id = viva_kuwait_operator_id; // viva
                 $Msisdn->ad_company = "";
                 if ($STATUS == "ACT-SB") {
@@ -271,11 +309,27 @@ class RotanaController extends Controller
     public function rotana_viva_profile(request $request)
     {
         if (\Session::has('MSISDN') && \Session::get('MSISDN') != "") {
-            $msisdn = Msisdn::where('phone_number', '=', "965" . \Session::get('MSISDN'))->where('final_status', '=', 1)->where('operator_id', '=', viva_kuwait_operator_id)->orderBy('id', 'DESC')->first();
+            $msisdn = Msisdn::where('msisdn', '=', "965" . \Session::get('MSISDN'))->where('final_status', '=', 1)->where('operator_id', '=', viva_kuwait_operator_id)->orderBy('id', 'DESC')->first();
             return view('landing_v2.rotana_viva_profile', compact('msisdn'));
         } else {
             return redirect('rotana_landing_stc');
         }
 
     }
+
+    public function log($actionName, $URL, $parameters_arr)
+    {
+        date_default_timezone_set("Africa/Cairo");
+        $date = date("Y-m-d");
+        $log = new Logger($actionName);
+        // to create new folder with current date  // if folder is not found create new one
+        if (!File::exists(storage_path('logs/' . $date . '/' . $actionName))) {
+            File::makeDirectory(storage_path('logs/' . $date . '/' . $actionName), 0775, true, true);
+        }
+
+        $log->pushHandler(new StreamHandler(storage_path('logs/' . $date . '/' . $actionName . '/logFile.log', Logger::INFO)));
+        $log->addInfo($URL, $parameters_arr);
+    }
+
+
 }

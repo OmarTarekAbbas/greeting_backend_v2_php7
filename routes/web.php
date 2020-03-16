@@ -13,7 +13,7 @@
 
 /* ------------ viva rotana routes backend ------------ */
 define('SNAP_VIVA_URL', url('rotana_landing_stc'));
-define('SNAP_VIVA_CHANNEL_ID', 1207);
+define('SNAP_VIVA_CHANNEL_ID', 11289);
 define('viva_kuwait_operator_id', viva_id());
 Route::get('rotana_landing_stc', 'RotanaController@rotana_viva_login');
 Route::get('rotana_viva_profile', 'RotanaController@rotana_viva_profile');

@@ -87,7 +87,7 @@
 
         <!-- copyright -->
         <div class="copy">
-            <p>copyright @ <span>2019</span> Ivas, all rights reserved.</p>
+            <p>copyright @ <span><?php echo date("Y") ?></span> Digizone, all rights reserved.</p>
         </div>
         <!-- copyright -->
 
