@@ -11,6 +11,7 @@
 |
  */
 
+
 /* ------------ viva rotana routes backend ------------ */
 define('SNAP_VIVA_URL', url('rotana_landing_stc'));
 define('SNAP_VIVA_CHANNEL_ID', 11289);

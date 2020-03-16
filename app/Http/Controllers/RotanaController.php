@@ -144,7 +144,6 @@ class RotanaController extends Controller
             return back();
         }
 
-        echo $msisdn ; die;
 
         // check subscribe
         $Msisdn = Msisdn::where('msisdn', '=', "965" . $msisdn)->where('final_status', '=', 1)->where('operator_id', '=', viva_kuwait_operator_id)->orderBy('id', 'DESC')->first();
