@@ -1,19 +1,19 @@
 /* global $, window, document */
 
 //loading screen
-$(window).on('load', function () {
-    'use strict';
-    $('.loading-overlay .spinner').fadeOut(800, function () {
-        $(this).parent().fadeOut(500, function () {
-            $('body').css('overflow', 'auto');
-            $(this).remove();
-        });
-    });
-});
+// $(window).on('load', function () {
+//     'use strict';
+//     $('.loading-overlay .spinner').fadeOut(800, function () {
+//         $(this).parent().fadeOut(500, function () {
+//             $('body').css('overflow', 'auto');
+//             $(this).remove();
+//         });
+//     });
+// });
 
 
 // x
-$('#phone').keyup(function () {
+$('#phone').keyup(function() {
     'use strict';
     $('.validity').css('display', 'block');
     if ($(this).val() == '') {
@@ -33,13 +33,13 @@ $('#viva, #zain, #ooredoo').click(function () {
 */
 //---------------------------------------
 
-$('#phone').focusin(function () {
+$('#phone').focusin(function() {
     'use strict';
     $('#video').css('display', 'none');
     $('.strip').css('margin-top', 20);
 });
 
-$('#phone').blur(function () {
+$('#phone').blur(function() {
     'use strict';
     $('#video').css('display', 'block');
     $('.strip').css('margin-top', -10);
@@ -57,7 +57,6 @@ $('.back').click(function () {
 */
 
 
-$('#viva_submit').focusin(function () {
+$('#viva_submit').focusin(function() {
     $('#form_viva').submit()
 });
-
