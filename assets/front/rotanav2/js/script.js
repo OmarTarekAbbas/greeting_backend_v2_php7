@@ -105,15 +105,15 @@ $('.heart_heart').click(function () {
   $(this).toggleClass('active_heart');
 });
 
-var elem = document.getElementById("myvideo");
-function openFullscreen() {
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.mozRequestFullScreen) { /* Firefox */
-    elem.mozRequestFullScreen();
-  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { /* IE/Edge */
-    elem.msRequestFullscreen();
-  }
-}
+// var elem = document.getElementById("myvideo");
+// function openFullscreen() {
+//   if (elem.requestFullscreen) {
+//     elem.requestFullscreen();
+//   } else if (elem.mozRequestFullScreen) { /* Firefox */
+//     elem.mozRequestFullScreen();
+//   } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+//     elem.webkitRequestFullscreen();
+//   } else if (elem.msRequestFullscreen) { /* IE/Edge */
+//     elem.msRequestFullscreen();
+//   }
+// }
