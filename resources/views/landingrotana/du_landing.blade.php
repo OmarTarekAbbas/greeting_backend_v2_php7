@@ -21,18 +21,6 @@
     .landing_page .strip {
         margin-top: 0;
     }
-    .main_container{
-        background-image: url("{{ url('assets/front/landing_v2/img/BG_Patterns.png')}}")  !important;
-    }
-    .landing_page .strip{
-        background-image: url("{{ url('assets/front/landing_v2/img/stripro.png')}}")  !important;
-    }
-    .landing_page .form_content form .btn{
-        background-color: #3a813f;
-    }
-    .landing_page .form_content form .form-group label{
-        background-color: #3a813f;
-    }
 </style>
 @php
 App::setLocale($lang);
@@ -42,19 +30,23 @@ App::setLocale($lang);
         <div class="landing_page">
 
             <div class="start_video" id="video">
+                <video width="100%" poster="{{ url('assets/front/landing_v2')}}/img/01.jpg" id="my_audio" controls>
+                  <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/mp4">
+                  <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/ogg">
+                </video>
                 <!-- <video width="100%" autoplay muted loop="true">
-                    <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
-                </video> -->
-                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/download.jfif" alt="فلاتر">
-            </div>
+                            <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
+                        </video> -->
+                <!-- <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر"> -->
+              </div>
 
             <div class="strip">
-                <h2>@lang('messages.du_enjoy')</h2>
+                <h2 style="color:#000;font-size:20px;">@lang('messages.du_enjoy')</h2>
             </div>
 
             <div class="shbka">
                 <div class="container">
-                    <h3 style="color: #e8ffe8;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر روتانا اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر روتانا الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Rotana Service'}} @else {{'Weekly Rotana Service'}} @endif</h3>
+                    <h3 style="color: #000;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر روتانا اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر روتانا الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Rotana Service'}} @else {{'Weekly Rotana Service'}} @endif</h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
@@ -112,7 +104,7 @@ App::setLocale($lang);
 
             @if ($lang == 'ar')
             <div class="cancel">
-                <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('du_unsubc_rotana'."/".$peroid."/".$lang )}}">الرابط</a></p>
+                <p style="color: #5f4f4f">لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('du_unsubc_rotana'."/".$peroid."/".$lang )}}">الرابط</a></p>
             </div>
             @else
             <div class="cancel">
@@ -128,13 +120,6 @@ App::setLocale($lang);
 
 
 
-        <!-- loading -->
-        <div class="loading-overlay">
-            <div class="spinner">
-                <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
-            </div>
-        </div>
-        <!-- end loading -->
     </div>
     <!-- script -->
     <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>

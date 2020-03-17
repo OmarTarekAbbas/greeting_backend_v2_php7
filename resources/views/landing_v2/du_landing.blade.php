@@ -44,8 +44,6 @@ App::setLocale($lang);
                 <h2 style="color:#000;font-size:20px;">@lang('messages.du_enjoy')</h2>
             </div>
 
-
-
             <div class="shbka">
                 <div class="container">
                     <h3 style="color: #000;font-size:25px;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>

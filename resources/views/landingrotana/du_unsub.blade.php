@@ -22,27 +22,6 @@
         margin-top: 0;
     }
 </style>
-<style type="text/css">
-    .landing_page .strip {
-        margin-top: 0;
-    }
-
-    .main_container {
-        background-image: url("{{ url('assets/front/landing_v2/img/BG_Patterns.png')}}") !important;
-    }
-
-    .landing_page .strip {
-        background-image: url("{{ url('assets/front/landing_v2/img/stripro.png')}}") !important;
-    }
-
-    .landing_page .form_content form .btn {
-        background-color: #3a813f;
-    }
-
-    .landing_page .form_content form .form-group label {
-        background-color: #3a813f;
-    }
-</style>
 @php
 App::setLocale($lang);
 @endphp
@@ -55,16 +34,16 @@ App::setLocale($lang);
                 <!-- <video width="100%" autoplay muted loop="true">
                     <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
                 </video> -->
-                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/download.jfif" alt="فلاتر">
+                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر">
             </div>
 
             <div class="strip">
-                <h2>@lang('messages.du_unsub')</h2>
+                <h2 style="color:#000;">@lang('messages.du_unsub')</h2>
             </div>
 
             <div class="shbka">
                 <div class="container">
-                    <h3 style="color: #e8ffe8;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة روتانا '}}
+                    <h3 style="color: #000;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة روتانا '}}
                         @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة روتانا '}} @elseif($lang == 'en'
                         && $peroid == 'daily') {{' Rotana Service'}} @else {{' Rotana Service'}} @endif</h3>
                     <div class="zain_viva">
@@ -110,14 +89,6 @@ App::setLocale($lang);
 
 
 
-
-        <!-- loading -->
-        <div class="loading-overlay">
-            <div class="spinner">
-                <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
-            </div>
-        </div>
-        <!-- end loading -->
     </div>
     <!-- script -->
     <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>
