@@ -43,7 +43,7 @@ App::setLocale($lang);
 
             <div class="shbka">
                 <div class="container">
-                    <h3 style="color: #630b0b;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب '}}
+                    <h3 style="color: #000;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب '}}
                         @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب '}} @elseif($lang == 'en'
                         && $peroid == 'daily') {{' Flatter Service'}} @else {{' Flatter Service'}} @endif</h3>
                     <div class="zain_viva">
@@ -52,6 +52,7 @@ App::setLocale($lang);
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             {{ Session::get('success')}}
                         </div>
+
                         @elseif(Session::has('failed'))
                         <div class="alert alert-danger alert-dismissible">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
