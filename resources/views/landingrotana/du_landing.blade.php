@@ -46,7 +46,7 @@ App::setLocale($lang);
 
             <div class="shbka">
                 <div class="container">
-                    <h3 style="color: #000;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر روتانا اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر روتانا الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Rotana Service'}} @else {{'Weekly Rotana Service'}} @endif</h3>
+                    <h3  style="color: #000;font-size:25px;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر روتانا اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر روتانا الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Rotana Service'}} @else {{'Weekly Rotana Service'}} @endif</h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
