@@ -21,28 +21,59 @@
     .landing_page .strip {
         margin-top: 0;
     }
+    .modal{
+        text-align: center;
+        position: fixed;
+        width: 80%;
+        height: 150px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0 auto;
+        background-color: white;
+        opacity: 0.9;
+        padding: 10px;
+        border-radius: 7px;
+        color: black;
+    }
+    @media (min-width: 320px) and (max-width: 359px) {
+      .operator img
+      {
+          width: 58%;
+      }
+    }
+    .hero-bkg-animated {
+
+        height: 100vh;
+        background-position: fixed;
+        background-repeat: no-repeat;
+        background-size: 200% 100%;
+        transform: translate3d(0px, 0px, 0px);
+        transform-style: preserve-3d;
+        box-sizing: border-box;
+        -webkit-animation: slide 20s linear infinite;
+    }
+    .hero-bkg-animated h1 {
+        font-family: sans-serif;
+    }
+    @-webkit-keyframes slide {
+        from {
+            background-position: 0 0;
+        }
+        to {
+            background-position: -300px 0;
+        }
+    }
+    .main_container{
+      background: #161414;
+      /* background: url("{{url('assets/front/newdesignv4/images/BG.png')}}") */
+    }
 </style>
 <style type="text/css">
     .landing_page .strip {
         margin-top: 0;
     }
-
-    .main_container {
-        background-image: url("{{ url('assets/front/landing_v2/img/BG_Patterns.png')}}") !important;
-    }
-
-    .landing_page .strip {
-        background-image: url("{{ url('assets/front/landing_v2/img/stripro.png')}}") !important;
-    }
-
-    .landing_page .form_content form .btn {
-        background-color: #3a813f;
-    }
-
-    .landing_page .form_content form .form-group label {
-        background-color: #3a813f;
-    }
 </style>
+
 @php
 App::setLocale($lang);
 @endphp
