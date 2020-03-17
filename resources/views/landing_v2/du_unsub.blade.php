@@ -38,7 +38,7 @@ App::setLocale($lang);
             </div>
 
             <div class="strip">
-                <h2>@lang('messages.du_unsub')</h2>
+                <h2 style="color:#000;">@lang('messages.du_unsub')</h2>
             </div>
 
             <div class="shbka">
@@ -90,14 +90,6 @@ App::setLocale($lang);
 
 
 
-
-        <!-- loading -->
-        <div class="loading-overlay">
-            <div class="spinner">
-                <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
-            </div>
-        </div>
-        <!-- end loading -->
     </div>
     <!-- script -->
     <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>

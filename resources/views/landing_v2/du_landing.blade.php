@@ -29,20 +29,26 @@ App::setLocale($lang);
     <div class="main_container">
         <div class="landing_page">
 
-            <div class="start_video" id="video">
-                <!-- <video width="100%" autoplay muted loop="true">
-                    <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
-                </video> -->
-                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر">
-            </div>
+          <div class="start_video" id="video">
+            <video width="100%" poster="{{ url('assets/front/landing_v2')}}/img/01.jpg" id="my_audio" controls>
+              <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/mp4">
+              <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/ogg">
+            </video>
+            <!-- <video width="100%" autoplay muted loop="true">
+                        <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
+                    </video> -->
+            <!-- <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر"> -->
+          </div>
 
             <div class="strip">
-                <h2>@lang('messages.du_enjoy')</h2>
+                <h2 style="color:#000;font-size:20px;">@lang('messages.du_enjoy')</h2>
             </div>
+
+
 
             <div class="shbka">
                 <div class="container">
-                    <h3 style="color: #630b0b;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>
+                    <h3 style="color: #000;font-size:25px;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
@@ -114,13 +120,6 @@ App::setLocale($lang);
 
 
 
-        <!-- loading -->
-        <div class="loading-overlay">
-            <div class="spinner">
-                <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
-            </div>
-        </div>
-        <!-- end loading -->
     </div>
     <!-- script -->
     <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>
