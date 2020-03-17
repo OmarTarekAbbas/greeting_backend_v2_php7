@@ -1513,7 +1513,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         }
 
 
-        $URL = "http://cg.mobi-mind.net/?ID=370,458bc531,661,8061,3,IVAS,$ivas_portal_link$pended_url";
+        $URL = "http://cg.mobi-mind.net/?ID=640,db9b99b7,661,8061,3,IVAS,$ivas_portal_link$pended_url";
 
         // make log
         $actionName = "Viva Subscribe Track";
