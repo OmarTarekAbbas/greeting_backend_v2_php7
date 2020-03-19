@@ -3347,9 +3347,8 @@ class FrontEndController extends Controller
         $childs = Occasion::where('parent_id', $occasion_id)->get(); // occasion_id parent_id
         foreach ($childs as $value) {
             $check = $url->operator->greetingimgs()->PublishedSnap()->where('occasion_id', $value->id)->first();
-            if ($check) {
+            // if ($check)
                 $child_occasions[] = $value;
-            }
         }
 
         $page = \Input::get('page', 1); // Get the ?page=1 from the url
@@ -3357,6 +3356,7 @@ class FrontEndController extends Controller
         $offset = ($page * $perPage) - $perPage;
 
         $child_occasions = array_slice($child_occasions, $offset, $perPage, true);
+        // dd($child_occasions);
 
         if ($request->ajax()) {
             return view('front.newdesignv4.snapsresult', compact('pageTitle', 'Rdata', 'child_occasions', 'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
@@ -3605,6 +3605,7 @@ class FrontEndController extends Controller
         $offset = ($page * $perPage) - $perPage;
 
         $child_occasions = array_slice($child_occasions, $offset, $perPage, true);
+        // dd($child_occasions);
 
         if ($request->ajax()) {
             return view('front.rotana.snapsresult', compact('pageTitle', 'Rdata', 'child_occasions', 'rbt_sms', 'codes', 'occasion_id', 'Occasion'));
