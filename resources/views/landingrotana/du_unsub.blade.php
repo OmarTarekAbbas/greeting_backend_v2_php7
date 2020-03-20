@@ -142,10 +142,10 @@ App::setLocale($lang);
 
 
 
-        <!-- loading -->
-        <div class="loading-overlay">
+         <!-- loading -->
+         <div class="loading-overlay" style="background-color:#000">
             <div class="spinner">
-                <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
+                <img src="{{url('assets/front/rotanav2/images/Rorana_flater_logo.png')}}" alt="loading_snap">
             </div>
         </div>
         <!-- end loading -->

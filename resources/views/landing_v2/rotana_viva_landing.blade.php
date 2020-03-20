@@ -18,18 +18,18 @@
 </head>
 
 <body>
-    <div class="main_container">
+    <div class="main_container" style="background: #161414;">
         <div class="landing_page">
 
             <div class="start_video" id="video">
                 <!-- <video width="100%" autoplay muted loop="true">
                     <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
                 </video> -->
-                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر">
+                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/download.jfif" alt="فلاتر">
             </div>
 
             <div class="strip">
-                <h2>استمتع بوقتك مع فلاتر</h2>
+                <h3>استمتع بوقتك مع فلاتر روتانا</h3>
             </div>
 
             <div class="shbka">
