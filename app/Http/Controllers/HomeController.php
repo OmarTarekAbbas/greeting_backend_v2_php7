@@ -1722,14 +1722,14 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             }else{
                 $msg = 'Unsubscribed Successfully';
             }
-            return redirect('du_landing/'.$peroid.'/'.$lang)->with('success', $msg);
+            return redirect('du_unsubc_rotana/'.$peroid.'/'.$lang)->with('success', $msg);
         } else {
             if ($lang == 'ar') {
                 $msg = 'الرقم غير صحيح';
             }else{
                 $msg = 'Wrong Number';
             }
-            return redirect('du_unsubc/'.$peroid.'/'.$lang)->with('failed', $msg);
+            return redirect('du_unsubc_rotana/'.$peroid.'/'.$lang)->with('failed', $msg);
         }
 
     }
@@ -1780,21 +1780,21 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
     {
 
         $ip = $_SERVER["REMOTE_ADDR"];
-        
+
               if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
                   $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
               }
-        
+
               if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
                   $ip = $_SERVER['HTTP_CLIENT_IP'];
               }
-        
+
               if (isset($_SERVER['HTTP_USER_AGENT'])) {
                   $deviceModel = $_SERVER['HTTP_USER_AGENT'];
               } else {
                   $deviceModel = "";
               }
-        
+
               $country_from_ip = $this->ip_info("Visitor", "Country");
               $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
               $result['ip'] = $ip;
@@ -1805,7 +1805,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
               if ($request->has('operator_name')) {
                   $result['operator'] = $request->operator_name . ' Kuwait';
                   $actionName = $request->operator_name . " Kuwait logs";
-        
+
               }
               if ($request->has('enterbtn')) {
                   $result['enterbtn'] = 'Enter Kuwait';
@@ -1817,8 +1817,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
               if ($request->ajax()) {
                   return 'done';
               }
-        
-        
+
+
 
 
         $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;

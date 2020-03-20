@@ -93,10 +93,11 @@ App::setLocale($lang);
                 <h2>@lang('messages.du_unsub')</h2>
             </div>
 
+
             <div class="shbka">
                 <div class="container">
-                    <h3 style="color: #e8ffe8;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة روتانا '}}
-                        @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة روتانا '}} @elseif($lang == 'en'
+                    <h3 style="color: #e8ffe8;">@if ($lang == 'ar' && $peroid == 'daily') {{'في خدمة فلاتر روتانا'}}
+                        @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر روتانا '}} @elseif($lang == 'en'
                         && $peroid == 'daily') {{' Rotana Service'}} @else {{' Rotana Service'}} @endif</h3>
                     <div class="zain_viva">
                         @if(Session::has('success'))
