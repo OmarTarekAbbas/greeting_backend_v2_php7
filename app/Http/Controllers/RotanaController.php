@@ -52,6 +52,16 @@ class RotanaController extends Controller
 
     public function rotana_viva_login(request $request)
     {
+        // make log
+        $URL = \Request::fullUrl();
+        $actionName = "Viva Landing Page";
+        $parameters_arr = array(
+            'date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'URL' => $URL,
+        );
+        $this->log($actionName, $URL, $parameters_arr);
+
+
         if (isset($_REQUEST['msisdn']) && $_REQUEST['msisdn'] != "") {
             $msisdn = preg_replace('/^965/', '', $_REQUEST['msisdn']);
         } else {
@@ -100,7 +110,7 @@ class RotanaController extends Controller
                 'CGSTATUS'=>$_REQUEST['CGSTATUS'],
                 'status'=>$action
             );
-    
+
             $actionName = "Viva notification subscribe success";
             $this->log($actionName, $URL, $parameters_arr);
 
@@ -143,7 +153,7 @@ class RotanaController extends Controller
                 return view('landing_v2.rotana_viva_landing', compact('msisdn'));
               }
 
-            
+
 
             }
 
