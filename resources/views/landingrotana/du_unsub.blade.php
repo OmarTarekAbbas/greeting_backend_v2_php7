@@ -123,7 +123,7 @@ App::setLocale($lang);
 
             <div class="container">
                 <div class="form_content">
-                    <form method="post" action="{{url('du_unsubcrrotana')}}"   onsubmit="document.getElementById('zain_submit').disabled='true';"  id="form_zain">
+                    <form method="post" action="{{url('du_unsubcr')}}"   onsubmit="document.getElementById('zain_submit').disabled='true';"  id="form_zain">
                         {{ csrf_field() }}
                         <div class="form-group form-inline">
                             <input type="hidden" name="peroid"  value="{{$peroid}}"  >
