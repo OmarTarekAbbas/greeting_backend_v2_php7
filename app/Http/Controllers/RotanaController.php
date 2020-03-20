@@ -36,7 +36,8 @@ class RotanaController extends Controller
             $pended_url = "";
         }
 
-        $URL = "http://cg.mobi-mind.net/?ID=368,3b09d823,661,8061,3,IVAS,$ivas_portal_link$pended_url";
+        $URL = "http://cg.mobi-mind.net/?ID=640,db9b99b7,661,8061,3,IVAS,$ivas_portal_link$pended_url";
+
 
         // make log
         $actionName = "Viva Subscribe Track";
@@ -91,6 +92,18 @@ class RotanaController extends Controller
                 $today = date("Y-m-d");
                 $time = strtotime($today);
 
+                  // log
+              $parameters_arr = array(
+                'link' => $URL,
+                'date' => Carbon::now()->format('Y-m-d H:i:s'),
+                'msisdn'=>$_REQUEST['CGMSISDN'] ,
+                'CGSTATUS'=>$_REQUEST['CGSTATUS'],
+                'status'=>$action
+            );
+    
+            $actionName = "Viva notification subscribe success";
+            $this->log($actionName, $URL, $parameters_arr);
+
                 $Msisdn = Msisdn::where('msisdn', '=', $CGMSISDN)->orderBy('id', 'DESC')->first();
                 if ($Msisdn) {
                     $Msisdn->final_status = 1;
@@ -129,6 +142,8 @@ class RotanaController extends Controller
               }else{
                 return view('landing_v2.rotana_viva_landing', compact('msisdn'));
               }
+
+            
 
             }
 
@@ -303,6 +318,7 @@ class RotanaController extends Controller
         $result['type'] = "viva_notification_url";
         $result['url'] = $URL;
         $result['status'] = $STATUS;
+        $result['msisdn'] = $msisdn;
         $result['message'] = $message;
 
         return Response(array('result' => $result));
