@@ -40,7 +40,7 @@ class RotanaController extends Controller
 
 
         // make log
-        $actionName = "Viva Subscribe Track";
+        $actionName = "Viva CG Page";
         $parameters_arr = array(
             'date' => Carbon::now()->format('Y-m-d H:i:s'),
             'URL' => $URL,
