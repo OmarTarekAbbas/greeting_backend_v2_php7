@@ -1715,6 +1715,19 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $server_output = curl_exec($ch);
 
 
+              // make log for unsub
+              $actionName = "Roatana Flatter Unsub";
+              $URL = \Request::fullUrl();
+              $parameters_arr = array(
+                  'date' => Carbon::now()->format('Y-m-d H:i:s'),
+                  'msisdn'=>$number ,
+                  'serviceid'=>"flaterrotana".$pero,
+                  'URL' => $URL ,
+                  'du_result'=> $server_output
+              );
+              $this->log($actionName, $URL, $parameters_arr);
+
+
         curl_close ($ch);
         if ($server_output == 1) {
             if ($lang == 'ar') {
