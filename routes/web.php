@@ -13,6 +13,9 @@
 
 
 /* ------------ viva rotana routes backend ------------ */
+
+use Illuminate\Support\Facades\Route;
+
 define('SNAP_VIVA_URL', url('rotana_landing_stc'));
 define('SNAP_VIVA_CHANNEL_ID', 11289);
 define('viva_kuwait_operator_id', viva_id());
@@ -23,6 +26,7 @@ Route::get('rotana_viva_notification', 'RotanaController@rotana_viva_notificatio
 Route::get('rotana_landing_stc_1', 'RotanaController@rotana_subscribeViva_1');
 Route::get('rotana_logout_viva/{opid?}', 'RotanaController@rotana_logout');
 /* ------------ viva rotana routes backend ------------ */
+Route::get('/Orange_unsub', 'FrontEndController@unsub_or');
 
 
 Route::get('popularCountInc', 'GreetingimgsController@popular_count_increment');
@@ -248,13 +252,13 @@ Route::post('du_unsubcrrotana/{peroid?}/{lang?}', 'HomeController@du_unsubcrrota
 Route::get('du_landing_v2/{peroid?}/{lang?}', 'HomeController@du_landing_v2');
 Route::get('du_unsubc_v4/{peroid?}/{lang?}', 'HomeController@du_unsubc_v4');
 Route::post('du_unsubcr_v4/{peroid?}/{lang?}', 'HomeController@du_unsubcr_v4');
-define('DU_UNSUB_SYSTEM',"https://du.notifications.digizone.com.kw/api/unsub");
-define('DU_CHECKSUB',"https://du.notifications.digizone.com.kw/api/checkSub");
-define('du_operator_id',4);
+define('DU_UNSUB_SYSTEM', "https://du.notifications.digizone.com.kw/api/unsub");
+define('DU_CHECKSUB', "https://du.notifications.digizone.com.kw/api/checkSub");
+define('du_operator_id', 4);
 //=======================du  Integration ==========================================//
 
 //langing kuwait rotana
-Route::get('landing_kuwait_rotana','FrontEndController@landing_kuwait_rotana');
+Route::get('landing_kuwait_rotana', 'FrontEndController@landing_kuwait_rotana');
 
 //Mobily Notification
 Route::get('mobily_notification', 'HomeController@mobily_notification');
@@ -355,16 +359,48 @@ Route::get('Search_v4/{UID}', 'FrontEndController@Search_v4');
 //////////////////////////////////////
 ///////////////*rotana*///////////////
 //////////////////////////////////////
+Route::get('/', 'FrontEndController@landing_orange');
+Route::group(['middleware' => ['front']], function () {
+    Route::get('rotanav2/{UID}', 'FrontEndController@rotana');
+    Route::get('rotanav2/{CID}/occasion/{UID}', 'FrontEndController@occasions_rotana');
+    Route::get('rotanav2/{OID}/filter/{UID}', 'FrontEndController@filter_rotana');
+    Route::get('rotanav2/favorites/{UID}', 'FrontEndController@favorites_rotana');
+    Route::get('rotanav2/favorites_rotana_load/{UID}', 'FrontEndController@favorites_rotana_load');
+    Route::get('rotanav2/today/{UID}', 'FrontEndController@rotanav2_today');
+    Route::get('Search_v6/{UID}', 'FrontEndController@Search_v6');
+    Route::get('rotanav2/inner/{FID}/{UID}', 'FrontEndController@filter_inner');
+});
+Route::post('/AddSubscriptionContractRequest', 'FrontEndController@AddSubscriptionContractRequest_orange');
+//comfirm pin
+Route::post('/ConfirmPinCode', 'FrontEndController@ConfirmPinCode_orange');
+//unsub
+Route::post('/unSubscribe_orange', 'FrontEndController@unSubscribe_orange');
+Route::get('/ConfirmeDirectPay', 'FrontEndController@ConfirmeDirectPay_orange');
+// Binarywaves cred
+define('operatorCode', '60201');
+define('ServiceId', '120');
+define('ServiceAPIKey', '7TkVx0uqbb2FwiLAig1J');
+define('ServiceAPIPassword', 'EmsVjLvLjSurmQrXUm9S');
 
-Route::get('rotanav2/{UID}', 'FrontEndController@rotana');
-Route::get('rotanav2/{CID}/occasion/{UID}', 'FrontEndController@occasions_rotana');
-Route::get('rotanav2/{OID}/filter/{UID}', 'FrontEndController@filter_rotana');
-Route::get('rotanav2/favorites/{UID}', 'FrontEndController@favorites_rotana');
-Route::get('rotanav2/favorites_rotana_load/{UID}', 'FrontEndController@favorites_rotana_load');
-Route::get('rotanav2/today/{UID}', 'FrontEndController@rotanav2_today');
-Route::get('Search_v6/{UID}', 'FrontEndController@Search_v6');
-Route::get('rotanav2/inner/{FID}/{UID}', 'FrontEndController@filter_inner');
+//Initialize DirectPay
+define('test_InitializeDirectPay_url', 'http://196.219.241.226:9094/DCBAPI/OneTimePay/InitializeDirectPay');
+define('live_InitializeDirectPay_url', 'http://dc.binarywaves.com:8080/DCBAPI/OneTimePay/InitializeDirectPay');
 
+//Confirm eDirectPay
+define('test_ConfirmeDirectPay_url', 'http://196.219.241.226:9094/DCBAPI/OneTimePay/ConfirmDirectPay');
+define('live_ConfirmeDirectPay_url', 'http://dc.binarywaves.com:8080/DCBAPI/OneTimePay/InitializeDirectPay');
+
+// Initialize Subscribe
+define('test_InitializeSubscribe_url', 'http://196.219.241.226:9094/DCBAPI/Subscribe/InitializeSubscribe');
+define('live_InitializeSubscribe_url', 'http://dc.binarywaves.com:8080/DCBAPI/Subscribe/InitializeDirectPay');
+
+// pin code confirm
+define('test_VerifySubscribe_url', 'http://196.219.241.226:9094/DCBAPI/Subscribe/VerifySubscribePinCode');
+define('live_VerifySubscribe_url', 'http://dc.binarywaves.com:8080/DCBAPI/Subscribe/VerifySubscribePinCode');
+
+//unsubscribe
+define('test_UnSubscribe_url', 'http://196.219.241.226:9094/DCBAPI/Subscribe/UnSubscribe');
+define('live_UnSubscribe_url', 'http://dc.binarywaves.com:8080/DCBAPI/Subscribe/UnSubscribe');
 
 
 //////////////////////////////////////
