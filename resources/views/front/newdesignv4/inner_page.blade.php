@@ -7,7 +7,7 @@
 </style>
 @include('front.newdesignv4.search')
 
-
+@if($Rdata)
 <div class="main ">
   <section class="categories_page">
     <div class="containeer">
@@ -57,6 +57,9 @@
           </div>
         </div>
       </div>
+      @else
+      <h2 class="text-center text-secondary">Filter Not Found</h2>
+      @endif
     </div>
   </section>
 </div>
