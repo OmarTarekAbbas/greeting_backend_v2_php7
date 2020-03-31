@@ -3457,8 +3457,8 @@ class FrontEndController extends Controller
     public function rotana($UID)
     {
         $current_url = \Request::fullUrl();
-        session::put('url_current',$current_url);
-        if (!check_op() || (Session::has('phone_number') && Session::get('Status') == 'active')) {
+        session::put('rotana_UID', $current_url);
+        if ((Session::get('phone_number'))) {
             $url = Generatedurl::where('UID', $UID)->first();
 
             $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
@@ -3485,61 +3485,82 @@ class FrontEndController extends Controller
 
             return view('front.rotanav2.home', compact('newsnap', 'categories'));
         } else {
-            return redirect(redirect_operator() . '?prev_url=' . $current_url);
+            return redirect('/');
         }
     }
 
     public function occasions_rotana(Request $request, $CID, $UID)
     {
+        $current_url = \Request::fullUrl();
+        session::put('rotana_UID', $current_url);
+        if ((Session::get('phone_number'))) {
+            $occasions = Category::where('id', $CID)->first();
+            if (!empty($occasions)) {
+                $Occasions = $occasions->occasions()->paginate(get_settings('pagination_limit'));
 
-        $occasions = Category::where('id', $CID)->first();
-        if (!empty($occasions)) {
-            $Occasions = $occasions->occasions()->paginate(get_settings('pagination_limit'));
+                if ($request->ajax()) {
+                    return view('front.rotanav2.ajaxoccasions', compact('Occasions'));
+                }
 
-            if ($request->ajax()) {
-                return view('front.rotanav2.ajaxoccasions', compact('Occasions'));
+                return view('front.rotanav2.occasions', compact('Occasions'));
+            } else {
+                return view('errors.404');
             }
-
-            return view('front.rotanav2.occasions', compact('Occasions'));
         } else {
-            return view('errors.404');
+            return redirect('/');
         }
     }
 
     public function filter_rotana(Request $request, $OID, $UID)
     {
+        $current_url = \Request::fullUrl();
+        session::put('rotana_UID', $current_url);
+        if ((Session::get('phone_number'))) {
+            $filters = Greetingimg::where('occasion_id', $OID)->paginate(get_settings('pagination_limit'));
 
-        $filters = Greetingimg::where('occasion_id', $OID)->paginate(get_settings('pagination_limit'));
+            if ($request->ajax()) {
+                return view('front.rotanav2.ajaxfilters', compact('filters'));
+            }
 
-        if ($request->ajax()) {
-            return view('front.rotanav2.ajaxfilters', compact('filters'));
+            return view('front.rotanav2.filters', compact('filters'));
+        } else {
+            return redirect('/');
         }
-
-        return view('front.rotanav2.filters', compact('filters'));
-
     }
 
     public function favorites_rotana(Request $request, $UID)
     {
-        return view('front.rotanav2.fav');
+        $current_url = \Request::fullUrl();
+        session::put('rotana_UID', $current_url);
+        if ((Session::get('phone_number'))) {
+            return view('front.rotanav2.fav');
+        } else {
+            return redirect('/');
+        }
     }
 
     public function favorites_rotana_load(Request $request, $UID)
     {
-        $ids = $request->ids;
-        $url = Generatedurl::where('UID', $UID)->first();
+        $current_url = \Request::fullUrl();
+        session::put('rotana_UID', $current_url);
+        if ((Session::get('phone_number'))) {
+            $ids = $request->ids;
+            $url = Generatedurl::where('UID', $UID)->first();
 
-        if (!empty($ids)) {
-            $idsArray = explode(",", $ids);
-            $snap = $url->operator->greetingimgs()->PublishedSnap()->whereIn('greetingimgs.id', $idsArray)->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
-            return view('front.rotanav2.ajaxfav', compact('snap'));
-        } else {
-            if (get_settings('only_favorites') == 0) {
-                $snap = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(12);
+            if (!empty($ids)) {
+                $idsArray = explode(",", $ids);
+                $snap = $url->operator->greetingimgs()->PublishedSnap()->whereIn('greetingimgs.id', $idsArray)->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
                 return view('front.rotanav2.ajaxfav', compact('snap'));
             } else {
-                return view('front.rotanav2.nofilter');
+                if (get_settings('only_favorites') == 0) {
+                    $snap = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(12);
+                    return view('front.rotanav2.ajaxfav', compact('snap'));
+                } else {
+                    return view('front.rotanav2.nofilter');
+                }
             }
+        } else {
+            return redirect('/');
         }
 
     }
@@ -3547,9 +3568,11 @@ class FrontEndController extends Controller
     public function rotanav2_today($UID)
     {
         $current_url = \Request::fullUrl();
+        session::put('rotana_UID', $current_url);
+        $current_url = \Request::fullUrl();
         $favourites = [];
         $fav_id = [];
-        if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+        if ((Session::get('phone_number'))) {
             $url = Generatedurl::where('UID', $UID)->first();
             $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->first();
             if (isset($Rdata_today)) {
@@ -3566,16 +3589,17 @@ class FrontEndController extends Controller
                 return view('front.rotanav2.today', compact('Rdata_today', 'occasi', 'cat', 'occasis'));
             }
         } else {
-            return redirect(url(redirect_operator()));
+            return redirect('/');
         }
     }
 
     public function Search_v6(Request $request, $UID)
     {
         $current_url = \Request::fullUrl();
+        session::put('rotana_UID', $current_url);
         $search = $request->search;
         Session::put('search', $search);
-        if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+        if ((Session::get('phone_number'))) {
             $url = Generatedurl::where('UID', $UID)->first();
             if (is_null($url))
                 return view('front.error');
@@ -3593,29 +3617,35 @@ class FrontEndController extends Controller
                 return view('front.rotanav2.snapsresult', compact('Rdata', 'search', 'rbt_sms', 'codes'));
             return view('front.rotanav2.search1', compact('Rdata', 'search', 'rbt_sms', 'codes'));
         } else {
-            return redirect(url(redirect_operator()));
+            return redirect('/');
         }
     }
 
     public function filter_inner($FID, $UID)
     {
+        $current_url = \Request::fullUrl();
+        session::put('rotana_UID', $current_url);
+        if ((Session::get('phone_number'))) {
 
-        $url = Generatedurl::where('UID', $UID)->first();
-        if ($url == !null) {
-            $occasion_id = $FID;
-            $Rdata = Greetingimg::where('id', $FID)->first();
-            //  dd($Rdata == !null);
-            if ($Rdata == !null) {
-                $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
-                $cat = Category::where('id', $occasi->category_id)->first();
-                $occasis = Occasion::where('category_id', $cat->id)->get();
-                //  dd($occasis);
-                return view('front.rotanav2.inner_page', compact('Rdata', 'occasi', 'cat', 'occasis'));
+            $url = Generatedurl::where('UID', $UID)->first();
+            if ($url == !null) {
+                $occasion_id = $FID;
+                $Rdata = Greetingimg::where('id', $FID)->first();
+                //  dd($Rdata == !null);
+                if ($Rdata == !null) {
+                    $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
+                    $cat = Category::where('id', $occasi->category_id)->first();
+                    $occasis = Occasion::where('category_id', $cat->id)->get();
+                    //  dd($occasis);
+                    return view('front.rotanav2.inner_page', compact('Rdata', 'occasi', 'cat', 'occasis'));
+                } else {
+                    return view('errors.404');
+                }
             } else {
                 return view('errors.404');
             }
         } else {
-            return view('errors.404');
+            return redirect('/');
         }
     }
 
@@ -4636,8 +4666,8 @@ class FrontEndController extends Controller
     }
 
 
-
-    public function get_content_post($URL, $param) {
+    public function get_content_post($URL, $param)
+    {
 
         $content = json_encode($param);
 
@@ -4655,10 +4685,11 @@ class FrontEndController extends Controller
         return $result;
     }
 
-    public function get_content_get($URL, $param) {
+    public function get_content_get($URL, $param)
+    {
         $ch = curl_init();
         $data = http_build_query($param);
-        $getUrl = $URL."?".$data;
+        $getUrl = $URL . "?" . $data;
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -4669,7 +4700,8 @@ class FrontEndController extends Controller
         return $response;
     }
 
-    public function log_orange($actionName, $URL, $parameters_arr) {
+    public function log_orange($actionName, $URL, $parameters_arr)
+    {
         date_default_timezone_set("Africa/Cairo");
         $date = date("Y-m-d");
         $log = new Logger($actionName);
@@ -4717,12 +4749,11 @@ class FrontEndController extends Controller
         return view('front.rotanav2.new_landing');
     }
 
-    public function AddSubscriptionContractRequest_orange(Request $request) {
+    public function AddSubscriptionContractRequest_orange(Request $request)
+    {
         // 012 -> 60201 orange
         $msisdn = $request->MSISDN;
-
         $operatorCode = operatorCode;
-
         // make validation for egypt numbers that start with 2
         if (!preg_match('/^(02|2)?[0-9]{11}$/', $msisdn)) {
             session()->flash('failed', 'هذا الرقم غير صحيح');
@@ -4735,15 +4766,16 @@ class FrontEndController extends Controller
         $startDate = $date;
         $serviceId = ServiceId;
         $language = 2;
-        $message = $serviceId.$msisdn.$operatorCode.$startDate;
+        $message = $serviceId . $msisdn . $operatorCode . $startDate;
         $hash_parm1 = array(
             'hashedPassword' => ServiceAPIPassword,
             'msgConcatenated' => $message,
         );
-        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash',$hash_parm1);
+        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
         $hash_res = json_decode($result_jsons);
-        $this->log('AddSubscriptionContractRequesthash','http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
-        $this->log('AddSubscriptionContractRequesthash','http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
+
+        $this->log('AddSubscriptionContractRequesthash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
+        $this->log('AddSubscriptionContractRequesthash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
         $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
 
         $parameters_arr = array(
@@ -4764,7 +4796,7 @@ class FrontEndController extends Controller
         $actionName = "AddSubscriptionContractRequest";
         $parameters_arr['msg'] = $message;
         $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array) $result;
+        $result_arr = (array)$result;
 
         $this->log($actionName, $URL, $result_arr);  // log out
 
@@ -4819,8 +4851,7 @@ class FrontEndController extends Controller
             $Msisdndb->contract_id = $result->SubscriptioncontractID;
             $Msisdndb->save();
             return view('front.rotanav2.pinpage', compact('msisdn'));
-        }
-        else if($result->ResultCode == 72){
+        } else if ($result->ResultCode == 72) {
             $msisdndb = Msisdnorange::where('msisdn', $msisdn)->first();
             if ($msisdndb) {
                 $msisdndb->msisdn = $msisdn;
@@ -4834,27 +4865,25 @@ class FrontEndController extends Controller
                 $msisdndb->operatorCode = $operatorCode;
                 $msisdndb->save();
             }
-            session([
-                'phone_number' => $msisdn,
-                'status' => 'active'
-            ]);
+            session::put(['phone_number' => $msisdn, 'status' => 'active']);
 
-            session()->flash('success','مرحبا');
-            return redirect('rotanav2/');  // old confirm
-        }else {
-            session()->flash('failed','برجاء المحاولة في وقت لاحق');
+            session()->flash('success', 'مرحبا');
+            return redirect(session::get('rotana_UID'));  // old confirm
+        } else {
+            session()->flash('failed', 'برجاء المحاولة في وقت لاحق');
             return back();
         }
     }
 
-    public function ConfirmPinCode_orange(Request $request){
+    public function ConfirmPinCode_orange(Request $request)
+    {
         $pinCode = $request->pincode;
         $msisdn = $request->msisdn;
 
         // date_default_timezone_set("Africa/Cairo");
         // $msisdn = $request->msisdn;
 
-        if (!preg_match('/^(02|2)?[0-9]{11}$/', $msisdn)){
+        if (!preg_match('/^(02|2)?[0-9]{11}$/', $msisdn)) {
             session()->flash('error', 'هذا الرقم غير صحيح');
             return view('landing_v2.pinCode', compact('msisdn'));
         }
@@ -4867,7 +4896,7 @@ class FrontEndController extends Controller
         $serviceId = ServiceId;
         $language = 2;
 
-        $message = $serviceId.$SubscriptioncontractID.$pinCode;
+        $message = $serviceId . $SubscriptioncontractID . $pinCode;
 
         $hash_parm1 = array(
             'hashedPassword' => ServiceAPIPassword,
@@ -4875,10 +4904,10 @@ class FrontEndController extends Controller
         );
 
 
-        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash',$hash_parm1);
+        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
         $hash_res = json_decode($result_jsons);
-        $this->log('ConfirmPinCodehash','http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
-        $this->log('ConfirmPinCodehash','http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
+        $this->log('ConfirmPinCodehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
+        $this->log('ConfirmPinCodehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
         $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
 
 
@@ -4894,13 +4923,13 @@ class FrontEndController extends Controller
 
         $actionName = "VerifySubscriptionContract";
         $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array) $result;
+        $result_arr = (array)$result;
         $this->log($actionName, $URL, $result_arr);  // log out
 
         $Msisdn = Msisdnorange::where('contract_id', Session::get('contract_id'))
             ->orderBy('id', 'desc')->first();
 
-        if ($result->ResultCode == 0){
+        if ($result->ResultCode == 0) {
 
             $Msisdn = Msisdnorange::where('contract_id', Session::get('contract_id'))
                 ->orderBy('id', 'desc')
@@ -4933,17 +4962,18 @@ class FrontEndController extends Controller
             return redirect('index');
 
 
-        }else if($result->ResultCode == 62){
-            session()->flash('failed','الرقم غير صحيح');
+        } else if ($result->ResultCode == 62) {
+            session()->flash('failed', 'الرقم غير صحيح');
             return view('front.rotanav2.pinpage', compact('msisdn'));
-        }else {
-            session()->flash('failed','برجاء المحاولة وقت لاحق');
+        } else {
+            session()->flash('failed', 'برجاء المحاولة وقت لاحق');
             return view('front.rotanav2.pinpage', compact('msisdn'));
         }
 
     }
 
-    public function InitializeDirectPay(){
+    public function InitializeDirectPay()
+    {
 
         $Msisdn = Msisdnorange::where('contract_id', Session::get('contract_id'))
             ->orderBy('id', 'desc')
@@ -4954,7 +4984,7 @@ class FrontEndController extends Controller
         $msisdn = $Msisdn->msisdn;
 
 
-        if (!preg_match('/^(02|2)?[0-9]{11}$/', $msisdn)){
+        if (!preg_match('/^(02|2)?[0-9]{11}$/', $msisdn)) {
             session()->flash('error', 'هذا الرقم غير صحيح');
             return view('front.rotanav2.pinpage', compact('msisdn'));
         }
@@ -4964,7 +4994,7 @@ class FrontEndController extends Controller
 
         $serviceId = ServiceId;
 
-        $message = $serviceId.$msisdn.$operatorCode;
+        $message = $serviceId . $msisdn . $operatorCode;
 
         $hash_parm1 = array(
             'hashedPassword' => ServiceAPIPassword,
@@ -4972,10 +5002,10 @@ class FrontEndController extends Controller
         );
 
 
-        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash',$hash_parm1);
+        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
         $hash_res = json_decode($result_jsons);
-        $this->log('InitializeDirectPayhash','http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
-        $this->log('InitializeDirectPayhash','http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
+        $this->log('InitializeDirectPayhash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
+        $this->log('InitializeDirectPayhash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
         $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
 
         $parameters_arr = array(
@@ -4990,11 +5020,11 @@ class FrontEndController extends Controller
 
         $actionName = "InitializeDirectPay";
         $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array) $result;
+        $result_arr = (array)$result;
         $this->log($actionName, $URL, $result_arr);  // log out
 
 
-        if ($result->ResultCode == 0){
+        if ($result->ResultCode == 0) {
 
             $Msisdn = Msisdnorange::where('contract_id', Session::get('contract_id'))
                 ->orderBy('id', 'desc')
@@ -5015,13 +5045,14 @@ class FrontEndController extends Controller
 
 
         } else {
-            session()->flash('failed',$result->ResultCode);
+            session()->flash('failed', $result->ResultCode);
             return view('front.rotanav2.pinpage', compact('msisdn'));
         }
 
     }
 
-    public function ConfirmeDirectPay(Request $request){
+    public function ConfirmeDirectPay(Request $request)
+    {
 
         $URL = test_ConfirmeDirectPay_url;
 
@@ -5030,7 +5061,7 @@ class FrontEndController extends Controller
         $pinCode = $request->pincode;
         // $pincode = "148776";
 
-        $message = $serviceId.$transaction_id.$pinCode;
+        $message = $serviceId . $transaction_id . $pinCode;
 
         $hash_parm1 = array(
             'hashedPassword' => ServiceAPIPassword,
@@ -5038,10 +5069,10 @@ class FrontEndController extends Controller
         );
 
 
-        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash',$hash_parm1);
+        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
         $hash_res = json_decode($result_jsons);
-        $this->log('AddpayRequest','http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
-        $this->log('AddpayRequest','http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
+        $this->log('AddpayRequest', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
+        $this->log('AddpayRequest', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
         $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
 
         $parameters_arr = array(
@@ -5056,11 +5087,11 @@ class FrontEndController extends Controller
 
         $actionName = "ConfirmeDirectPay";
         $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array) $result;
+        $result_arr = (array)$result;
         $this->log($actionName, $URL, $result_arr);  // log out
 
 
-        if ($result->ResultCode == 0){
+        if ($result->ResultCode == 0) {
 
             $Msisdn = Msisdnorange::where('contract_id', Session::get('contract_id'))
                 ->orderBy('id', 'desc')
@@ -5072,21 +5103,23 @@ class FrontEndController extends Controller
             $Msisdn->save();
 
         } else {
-            session()->flash('failed',$result->ResultCode);
+            session()->flash('failed', $result->ResultCode);
             return view('front.rotanav2.pinpage', compact('msisdn'));
         }
 
 
     }
 
-    public function unsub_or(){
+    public function unsub_or()
+    {
         Session::forget('contract_id'); // to remove any contract_id from session
 
         return view('front.rotanav2.unsub');
 
     }
 
-    public function unSubscribe_orange(Request $request){
+    public function unSubscribe_orange(Request $request)
+    {
 
         $phone_number = $request->MSISDN;
 
@@ -5095,7 +5128,8 @@ class FrontEndController extends Controller
             return redirect()->back();
         }
 
-        $msisdn = Msisdnorange::where('msisdn', $phone_number)->where('status' , 'active')->orderBy('id', 'DESC')->first();
+        $msisdn = Msisdnorange::where('msisdn', $phone_number)->where('status', 'active')->orderBy('id', 'DESC')->first();
+
         if ($msisdn) {
             $SubscriptioncontractID = $msisdn->contract_id;
         } else {
@@ -5105,12 +5139,11 @@ class FrontEndController extends Controller
 
 
         $URL = test_UnSubscribe_url;
-
         session(['phone_number' => $phone_number]);
 
         $serviceId = ServiceId;
 
-        $message = $serviceId.$SubscriptioncontractID;
+        $message = $serviceId . $SubscriptioncontractID;
 
         $hash_parm1 = array(
             'hashedPassword' => ServiceAPIPassword,
@@ -5118,10 +5151,10 @@ class FrontEndController extends Controller
         );
 
 
-        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash',$hash_parm1);
+        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
         $hash_res = json_decode($result_jsons);
-        $this->log('unSubscribehash','http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
-        $this->log('unSubscribehash','http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
+        $this->log('unSubscribehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
+        $this->log('unSubscribehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
         $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
 
         $parameters_arr = array(
@@ -5134,15 +5167,15 @@ class FrontEndController extends Controller
 
         $actionName = "unSubscribe";
         $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array) $result;
+        $result_arr = (array)$result;
         $this->log($actionName, $URL, $result_arr);  // log out
-
+dd($result->ResultCode);
         if ($result->ResultCode == 0) {  // success
 
             $Msisdn = Msisdnorange::where('contract_id', Session::get('contract_id'))
                 ->orderBy('id', 'desc')
                 ->first();
-            if($Msisdn){
+            if ($Msisdn) {
                 // update msisdn status
                 $Msisdn->status = "inactive";
                 $Msisdn->save();
@@ -5153,24 +5186,24 @@ class FrontEndController extends Controller
 
                 redirect()->back();
             }
-        }else if($result->ResultCode == 72){
+        } else if ($result->ResultCode == 72) {
 
             $Msisdn = Msisdnorange::where('contract_id', $SubscriptioncontractID)
                 ->orderBy('id', 'desc')
                 ->first();
 
-            if($Msisdn){
+            if ($Msisdn) {
                 // update msisdn status
+
                 $Msisdn->status = "inactive";
+
                 $Msisdn->save();
 
                 session(['contract_id' => $result->SubscriptioncontractID]);
                 session()->flash('failed', 'تم الغاء الاشتراك');
-                dd(session::get('failed'));
-
                 redirect()->back();
             }
-        }else {
+        } else {
             session()->flash('failed', 'حدث خطأ ما');
             dd(session::get('failed'));
             redirect()->back();

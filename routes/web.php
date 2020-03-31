@@ -360,7 +360,7 @@ Route::get('Search_v4/{UID}', 'FrontEndController@Search_v4');
 ///////////////*rotana*///////////////
 //////////////////////////////////////
 Route::get('/', 'FrontEndController@landing_orange');
-Route::group(['middleware' => ['front']], function () {
+
     Route::get('rotanav2/{UID}', 'FrontEndController@rotana');
     Route::get('rotanav2/{CID}/occasion/{UID}', 'FrontEndController@occasions_rotana');
     Route::get('rotanav2/{OID}/filter/{UID}', 'FrontEndController@filter_rotana');
@@ -369,8 +369,8 @@ Route::group(['middleware' => ['front']], function () {
     Route::get('rotanav2/today/{UID}', 'FrontEndController@rotanav2_today');
     Route::get('Search_v6/{UID}', 'FrontEndController@Search_v6');
     Route::get('rotanav2/inner/{FID}/{UID}', 'FrontEndController@filter_inner');
-});
-Route::post('/AddSubscriptionContractRequest', 'FrontEndController@AddSubscriptionContractRequest_orange');
+
+    Route::post('/AddSubscriptionContractRequest', 'FrontEndController@AddSubscriptionContractRequest_orange');
 //comfirm pin
 Route::post('/ConfirmPinCode', 'FrontEndController@ConfirmPinCode_orange');
 //unsub

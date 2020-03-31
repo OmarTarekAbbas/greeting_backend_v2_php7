@@ -56,7 +56,7 @@
     <div class="content-container">
 
         <!-- HERE IS CONTENTS -->
-        {!! Form::open(['url'=>"unSubscribe",'method'=>'post', 'id'=>'directUnsubsHEDiv']) !!}
+        {!! Form::open(['url'=>"unSubscribe_orange",'method'=>'post', 'id'=>'directUnsubsHEDiv']) !!}
         <div class="pages login-page">
             <div class="maleo-card signup animated fadeInUp">
                 <img class="logo" src="{{asset('landing_page/img')}}/logo.png" alt="">
