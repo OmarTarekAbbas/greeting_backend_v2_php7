@@ -84,7 +84,7 @@
                         <input  id="MSISDN" @if(Session::has('phone_number')) value ="{{Session::get('phone_number')}}"  @endif type="number" class='form-control' style='direction: ltr; width: 200px; margin: auto;'  required="" pattern="[0-9]{11}" name="MSISDN" placeholder="رقم التليفون"></div>
                     <button class="btn-large btn block margin-bottom" type="submit">تأكيد</button>
 
-                     <div class="app-desc pag_color">ليس لديك حساب؟ <a class="primary-text" href="{{url('/')}}">تسجيل جديد</a></div>
+                     <div class="app-desc pag_color">ليس لديك حساب؟ <a class="primary-text" href="{{url('orange_landing')}}">تسجيل جديد</a></div>
                 </div>
             </div>
         </div>

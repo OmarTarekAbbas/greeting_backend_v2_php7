@@ -69,7 +69,18 @@
                 <h4 style='margin-top: 0; color: #ffffff; font-weight: 400'>خدمه روتانا</h4>
                 <div class="pd_page" id="div_wifi_box">
                     <div class="clearfix"></div>
+                    <div  style="margin: auto ; width: 80%">
+                        @if(Session::has('success'))
+                            <div class="alert alert-success alert-dismissible">
+                                {{ Session::get('success')}}
+                            </div>
+                        @elseif(Session::has('failed'))
+                            <div class="alert alert-danger alert-dismissible">
+                                {{ Session::get('failed')}}
+                            </div>
+                        @endif
 
+                    </div>
                     {{-- @include('partial.landing_flash')--}}
 
                     {!! Form::open(['url'=>"AddSubscriptionContractRequest",'method'=>'post']) !!}
