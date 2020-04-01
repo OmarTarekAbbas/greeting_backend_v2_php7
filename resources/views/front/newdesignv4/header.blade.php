@@ -8,6 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Mobile Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	@yield('header')
 	<!-- SEO Engine -->
 	<meta name="keywords" content="Snap , Filter , سناب , فلاتر , صور , Images">
 	<meta name="description" content="يقدم خدمة سناب عمل مؤثرات على الصور">

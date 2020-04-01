@@ -1,4 +1,7 @@
 @extends('front.newdesignv4.header')
+@section('header')
+<base target="_parent">
+@endsection
 @section('content')
 <style>
   .row {
