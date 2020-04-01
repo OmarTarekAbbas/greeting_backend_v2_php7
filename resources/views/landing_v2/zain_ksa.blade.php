@@ -130,8 +130,6 @@
   <div class="copy">
     <p>copyright @ <span><?php echo date("Y") ?></span> Digizone, all rights reserved.</p>
   </div>
-
-
   </div>
 
   <div class="the-frame">

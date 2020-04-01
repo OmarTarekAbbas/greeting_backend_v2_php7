@@ -237,10 +237,10 @@ body {
     width: 75%;
   }
   .landing_page .strip h2 {
-    font-size: 2.5rem;
+    font-size: 2.5rem !important;
   }
   .landing_page .shbka h3 {
-    font-size: 2.5rem;
+    font-size: 2.5rem !important;
   }
   .landing_page .shbka .zain_viva {
     margin-top: -2rem;
@@ -275,16 +275,16 @@ body {
     margin-top: 0;
   }
   .landing_page .start_video video {
-    height: 30rem;
+    height: 35rem;
   }
   .landing_page .strip {
     width: 75%;
   }
   .landing_page .strip h2 {
-    font-size: 2.75rem;
+    font-size: 2.75rem !important;
   }
   .landing_page .shbka h3 {
-    font-size: 2.75rem;
+    font-size: 2.75rem !important;
   }
   .landing_page .shbka .zain_viva {
     margin-top: -2rem;
