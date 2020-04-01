@@ -111,13 +111,7 @@
             <p>copyright @ <span><?php  echo date("Y")?></span> Digizone, all rights reserved.</p>
         </div>
 
-        <!-- loading -->
-        <div class="loading-overlay">
-            <div class="spinner">
-                <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
-            </div>
-        </div>
-        <!-- end loading -->
+
     </div>
     <!-- script -->
     <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>

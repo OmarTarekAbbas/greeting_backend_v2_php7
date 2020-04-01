@@ -3193,27 +3193,30 @@ class FrontEndController extends Controller
 
     public function newdesignv4($UID)
     {
+
+
         $current_url = \Request::fullUrl();
         $favourites = [];
         $fav_id = [];
         if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
             $url = Generatedurl::where('UID', $UID)->first();
 
-            if (OP() == 16 || OP() == MOBILY_OP_ID) {
 
-                if (OP() == 16 && Session::has('currentOp') && Session::get('currentOp') == 16) { //  ZAIN NKSA
+            if (OP() == 16 ) {
+              if (Session::has('currentOp') && Session::get('currentOp') == 16) { //  ZAIN NKSA
 
-                } else {
-                    return redirect(url(redirect_operator()));
-                }
-
-                if (OP() == MOBILY_OP_ID && Session::has('currentOp') && Session::get('currentOp') == MOBILY_OP_ID) { // Mobily ksa
-
-                } else {
-                    return redirect(url(redirect_operator()));
-                }
-
+              }else{
+                return redirect(url(redirect_operator()));
+              }
             }
+
+            if ( OP() == MOBILY_OP_ID) {
+               if(Session::has('currentOp') && Session::get('currentOp') == MOBILY_OP_ID){
+
+                }else{
+                  return redirect(url(redirect_operator()));
+                }
+              }
 
             // if (is_null($url))
             // return view('front.error');
@@ -3368,22 +3371,34 @@ class FrontEndController extends Controller
 
     public function filter_v4($OID, $UID)
     {
+
+
         $current_url = \Request::fullUrl();
         if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
+
             $rbt_sms = $code = $title = null;
 
             $url = Generatedurl::where('UID', $UID)->first();
             if (is_null($url)) {
                 return view('front.error');
             }
-            if (OP() == 16 || OP() == MOBILY_OP_ID) {
 
-                if (Session::has('currentOp') && $url->operator_id == Session::get('currentOp')) {
+            if (OP() == 16 ) {
+              if (Session::has('currentOp') && Session::get('currentOp') == 16) { //  ZAIN NKSA
 
-                } else {
-                    return redirect(url(redirect_operator()));
-                }
+              }else{
+                return redirect(url(redirect_operator()));
+              }
             }
+
+            if ( OP() == MOBILY_OP_ID) {
+               if(Session::has('currentOp') && Session::get('currentOp') == MOBILY_OP_ID){
+
+                }else{
+                  return redirect(url(redirect_operator()));
+                }
+              }
+
             $occasion_id = $OID;
             $Rdata = Greetingimg::where('id', $OID)->first();
             if (is_null($Rdata)) {
@@ -3392,7 +3407,7 @@ class FrontEndController extends Controller
 
             return view('front.newdesignv4.inner_page', compact('Rdata'));
         } else {
-            return redirect(redirect_operator() . '?prev_url=' . $current_url);
+            return redirect(redirect_operator() );
         }
     }
 
@@ -3400,6 +3415,8 @@ class FrontEndController extends Controller
     {
         $url = Generatedurl::where('UID', $UID)->first();
         Session::forget('currentOp');
+        Session::forget('MSISDN');
+        Session::forget('Status');
         return redirect(url(redirect_operator()));
     }
 

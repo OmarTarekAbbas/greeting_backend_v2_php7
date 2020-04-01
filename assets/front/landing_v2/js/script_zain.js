@@ -1,16 +1,5 @@
 /* global $, window, document */
 
-//loading screen
-// $(window).on('load', function() {
-//     'use strict';
-//     $('.loading-overlay .spinner').fadeOut(800, function() {
-//         $(this).parent().fadeOut(500, function() {
-//             $('body').css('overflow', 'auto');
-//             $(this).remove();
-//         });
-//     });
-// });
-
 
 // x
 $('#phone').keyup(function() {
