@@ -92,6 +92,12 @@ App::setLocale($lang);
 
 
     </div>
+
+
+    <div class="the-frame">
+      <iframe class="full-screen-preview__frame" src="{{url()->full()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 370px; border-radius: 10px;">
+      </iframe>
+    </div>
     <!-- script -->
     <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>
     <script src="{{ url('assets/front/landing_v2')}}/js/popper.min.js"></script>
