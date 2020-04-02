@@ -1920,7 +1920,31 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         return redirect($URL);
     }
 
-
+    public function check_landing_redirect(){
+      // $ip1 = "43.225.54.4";      //emirate
+      // $ip2 = "161.252.255.254"; //kuwait
+      $country  =  $this->ip_info('visitor', "Country");
+      $URL = '';
+      if($country == 'Kuwait'){
+        $ivas_portal_link = urlencode(SNAP_VIVA_URL);
+        $URL = "http://cg.mobi-mind.net/?ID=640,db9b99b7,661,8061,3,IVAS,$ivas_portal_link";
+      }
+      if($country == 'United Arab Emirates'){
+        $serviceid = "flaterrotanadaily";
+        $price = 2 ;
+        $num= 1 ;
+        $plan = 'daily';
+        $local= "ar" ;
+        require('uuid/UUID.php');
+        $trxid = \UUID::v4();
+        $redirect = $this->check_redirect('rotana');
+        $redirectUrl=  url($redirect);
+        $URL = "http://pay-with-du.ae/20/digizone/digizone-{$serviceid}-{$num}-{$local}-doi-web?origin=digizone&uid=&trxid=$trxid&serviceProvider=secured&serviceid=$serviceid&plan=$plan&price=$price&locale=$local&redirectUrl=$redirectUrl";
+    
+      }
+    
+      return redirect($URL);
+    }
 
     public function DuSecureRedirectrotana()
     {

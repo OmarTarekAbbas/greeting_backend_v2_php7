@@ -363,7 +363,7 @@ Route::get('rotanav2/favorites_rotana_load/{UID}', 'FrontEndController@favorites
 Route::get('rotanav2/today/{UID}', 'FrontEndController@rotanav2_today');
 Route::get('Search_v6/{UID}', 'FrontEndController@Search_v6');
 Route::get('rotanav2/inner/{FID}/{UID}', 'FrontEndController@filter_inner');
-
+Route::get('rotanav2/check/redirect', 'HomeController@check_landing_redirect');
 
 
 //////////////////////////////////////
