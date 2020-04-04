@@ -23,6 +23,20 @@
     .pag_color{
         color: white;
     }
+    .hemodal{
+        display: none;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #d0be9d85;
+        padding: 20px;
+    }
+    .hemodal div{
+        margin-top: 50%;
+    }
 </style>
     <body>
 
@@ -111,7 +125,15 @@
         </center>
 
     </div>
-    </body>
+
+    <div class="hemodal text-light">
+        <div class="text-center bg-dark p-3 rounded shadow">
+            <h4>مرحبا في خدمة روتانا فلاتر</h4>
+            <h6>هل تريد المتابعة برقم </h6>
+            <p id="hemsisdn"></p>
+            <a class="btn btn-success" onclick="Binary_functions2()">تسجيل الدخول</a>
+        </div>
+    </div>
 
 <!-- Start Footer -->
 @include('front.rotanav2.footer')

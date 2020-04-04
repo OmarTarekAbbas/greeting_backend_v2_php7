@@ -21,29 +21,6 @@ use Validator;
 class OrangeController extends Controller
 {
 
-    public function headerEnrichment(){
-
-        $dateString = date('yyyy-MM-dd HH:mm:ssZ');
-        $serviceId = ServiceId;
-        $ServiceAPIKey = ServiceAPIKey;
-        $ServiceAPIPassword = ServiceAPIPassword;
-        $signature = '';
-
-        $message = $serviceId . $dateString;
-        $hash_parm1 = array(
-            'hashedPassword' => $ServiceAPIPassword,
-            'msgConcatenated' => $message,
-        );
-        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
-        $hash_res = json_decode($result_jsons);
-
-        $this->log('headerEnrichment', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
-        $this->log('headerEnrichment', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);
-        $signature = $ServiceAPIKey . ":" . $hash_res->ResultCode;
-
-
-    }
-
     public function notificationStatuschange(Request $request){
         $vars['serviceId'] = $request->serviceId;
         $vars['subscContractId'] = $request->subscContractId;
@@ -197,7 +174,13 @@ class OrangeController extends Controller
         // make validation for egypt numbers that start with 2
         if (!preg_match('/^(02|2)?[0-9]{11}$/', $msisdn)) {
             session()->flash('failed', 'هذا الرقم غير صحيح');
-            return back();
+            if ($request->ajax()){
+                $data['val'] = 1;
+                $data['message'] = 'هذا الرقم غير صحيح';
+                return json_encode($data);
+            }else{
+                return back();
+            }
         }
         date_default_timezone_set("Africa/Cairo");
         $date = date("Y-m-d H:i:s");
@@ -277,12 +260,22 @@ class OrangeController extends Controller
                 $msisdndb->msisdn = $msisdn;
                 $msisdndb->status = 'active';
                 $msisdndb->operatorCode = $operatorCode;
+                if ($request->ajax()){
+                    $msisdndb->subscribe_type = 'HE';
+                }else{
+                    $msisdndb->subscribe_type = 'MB';
+                }
                 $msisdndb->save();
             } else {
                 $msisdndb = new Msisdnorange();
                 $msisdndb->msisdn = $msisdn;
                 $msisdndb->status = 'active';
                 $msisdndb->operatorCode = $operatorCode;
+                if ($request->ajax()){
+                    $msisdndb->subscribe_type = 'HE';
+                }else{
+                    $msisdndb->subscribe_type = 'MB';
+                }
                 $msisdndb->save();
             }
             Session(['contract_id' => $result->SubscriptioncontractID]);
@@ -290,28 +283,58 @@ class OrangeController extends Controller
             $Msisdndb = Msisdnorange::find($msisdndb->id);
             $Msisdndb->contract_id = $result->SubscriptioncontractID;
             $Msisdndb->save();
-            return view('front.rotanav2.orange.pinpage', compact('msisdn'));
+            if ($request->ajax()){
+                $data['val'] = 2;
+                $data['message'] = 'من فضلك ادخل كود التاكيد';
+                $returnHTML = view('front.rotanav2.orange.pinpage', compact('msisdn'))->render();
+                $data['html'] = $returnHTML;
+                return json_encode($data);
+            }else{
+                return view('front.rotanav2.orange.pinpage', compact('msisdn'));
+            }
         } else if ($result->ResultCode == 72) {
             $msisdndb = Msisdnorange::where('msisdn', $msisdn)->first();
             if ($msisdndb) {
                 $msisdndb->msisdn = $msisdn;
                 $msisdndb->status = 'active';
                 $msisdndb->operatorCode = $operatorCode;
+                if ($request->ajax()){
+                    $msisdndb->subscribe_type = 'HE';
+                }else{
+                    $msisdndb->subscribe_type = 'MB';
+                }
                 $msisdndb->save();
             } else {
                 $msisdndb = new Msisdnorange();
                 $msisdndb->msisdn = $msisdn;
                 $msisdndb->status = 'active';
                 $msisdndb->operatorCode = $operatorCode;
+                if ($request->ajax()){
+                    $msisdndb->subscribe_type = 'HE';
+                }else{
+                    $msisdndb->subscribe_type = 'MB';
+                }
                 $msisdndb->save();
             }
             session::put(['phone_number' => $msisdn, 'status' => 'active']);
 
             session()->flash('success', 'مرحبا');
-            return redirect(session::get('rotana_UID'));  // old confirm
+            if ($request->ajax()){
+                $data['val'] = 4;
+                $data['message'] = session::get('rotana_UID');
+                return json_encode($data);
+            }else{
+                return redirect(session::get('rotana_UID'));  // old confirm
+            }
         } else {
             session()->flash('failed', 'برجاء المحاولة في وقت لاحق');
-            return back();
+            if ($request->ajax()){
+                $data['val'] = 5;
+                $data['message'] = 'برجاء المحاولة في وقت لاحق';
+                return json_encode($data);
+            }else{
+                return back();
+            }
         }
     }
 
