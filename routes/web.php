@@ -29,20 +29,29 @@ Route::get('rotana_logout_viva/{opid?}', 'RotanaController@rotana_logout');
 
 /* ------------ start orange ------------ */
 
-Route::get('/Orange_unsub', 'OrangeController@unsub_or');
 Route::get('/orange_landing', 'OrangeController@landing_orange');
+Route::get('/Orange_unsub', 'OrangeController@unsub_or');
 
+//sub
 Route::post('/AddSubscriptionContractRequest', 'OrangeController@AddSubscriptionContractRequest_orange');
+
 //comfirm pin
 Route::post('/ConfirmPinCode', 'OrangeController@ConfirmPinCode_orange');
+
 //unsub
 Route::post('/unSubscribe_orange', 'OrangeController@unSubscribe_orange');
 Route::get('/ConfirmeDirectPay', 'OrangeController@ConfirmeDirectPay_orange');
+
 // Binarywaves cred
 define('operatorCode', '60201');
-define('ServiceId', '120');
-define('ServiceAPIKey', '7TkVx0uqbb2FwiLAig1J');
-define('ServiceAPIPassword', 'EmsVjLvLjSurmQrXUm9S');
+define('ServiceId', '132');
+define('ServiceName', 'RotanaFlatter');
+define('ServiceAPIKey', 'TqJYKszALRbLztyZAuo5mzrFtW1yyMMas6gr2lA8RxmfpuJ8zx');
+define('ServiceAPIPassword', '4abIRUzE5n0ACzEBT3MHxPuPNpMMPyNtzAhcyjOWrYPMHRvman');
+
+//notification urls
+Route::get('/notificationStatuschange', 'OrangeController@notificationStatuschange');
+Route::get('/notificationRecurringPayment', 'OrangeController@notificationRecurringPayment');
 
 //Initialize DirectPay
 define('test_InitializeDirectPay_url', 'http://196.219.241.226:9094/DCBAPI/OneTimePay/InitializeDirectPay');

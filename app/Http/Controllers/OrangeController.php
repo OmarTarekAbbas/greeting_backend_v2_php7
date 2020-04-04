@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Bin;
 use App\GreetingimgOperator;
+use App\Charging;
+use App\StatusChange;
 use App\Http\Controllers\Controller;
 use DB;
 
@@ -14,11 +16,82 @@ use Carbon\Carbon;
 use App\Msisdnorange;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
-
+use Validator;
 
 class OrangeController extends Controller
 {
 
+    public function headerEnrichment(){
+
+        $dateString = date('yyyy-MM-dd HH:mm:ssZ');
+        $serviceId = ServiceId;
+        $ServiceAPIKey = ServiceAPIKey;
+        $ServiceAPIPassword = ServiceAPIPassword;
+        $signature = '';
+
+        $message = $serviceId . $dateString;
+        $hash_parm1 = array(
+            'hashedPassword' => $ServiceAPIPassword,
+            'msgConcatenated' => $message,
+        );
+        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
+        $hash_res = json_decode($result_jsons);
+
+        $this->log('headerEnrichment', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
+        $this->log('headerEnrichment', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);
+        $signature = $ServiceAPIKey . ":" . $hash_res->ResultCode;
+
+
+    }
+
+    public function notificationStatuschange(Request $request){
+        $vars['serviceId'] = $request->serviceId;
+        $vars['subscContractId'] = $request->subscContractId;
+        $vars['statusId'] = $request->statusId;
+        $vars['statusChangeDesc'] = $request->statusChangeDesc;
+
+        $validator = Validator::make($request->all(), [
+            'serviceId' => 'required',
+            'subscContractId' => 'required',
+            'statusId' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $url = url('notificationStatuschange');
+
+        $this->log('Notification Status Change', $url, $vars);
+
+        StatusChange::create($vars);
+
+        return 'success';
+    }
+
+    public function notificationRecurringPayment(Request $request){
+        $vars['serviceId'] = $request->serviceId;
+        $vars['msisdn'] = $request->msisdn;
+        $vars['deductedAmount'] = $request->deductedAmount;
+
+        $validator = Validator::make($request->all(), [
+            'serviceId' => 'required',
+            'msisdn' => 'required',
+            'deductedAmount' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $url = url('notificationRecurringPayment');
+
+        $this->log('Notification Recurring Payment', $url, $vars);
+
+        Charging::create($vars);
+
+        return 'success';
+    }
 
     public function log($actionName, $URL, $parameters_arr)
     {
