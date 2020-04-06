@@ -363,5 +363,10 @@ class RotanaController extends Controller
         $log->addInfo($URL, $parameters_arr);
     }
 
+    public function rotana_subscribe()
+    {
+      return view('landing_v2.rotana_subscribe');
+    }
+
 
 }

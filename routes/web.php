@@ -21,6 +21,7 @@ Route::post('rotana_viva_login_action', 'RotanaController@rotana_viva_login_acti
 Route::get('rotana_viva_notification', 'RotanaController@rotana_viva_notification');
 Route::get('rotana_landing_stc_1', 'RotanaController@rotana_subscribeViva_1');
 Route::get('rotana_logout_viva/{opid?}', 'RotanaController@rotana_logout');
+Route::get('rotana_subscribe', 'RotanaController@rotana_subscribe');
 /* ------------ viva rotana routes backend ------------ */
 
 
