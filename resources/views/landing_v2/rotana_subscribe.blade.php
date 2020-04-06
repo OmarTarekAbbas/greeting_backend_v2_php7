@@ -69,7 +69,8 @@
 
       <div class="shbka">
         <div class="container">
-          <h3 class="mb-3 mt-3">اشترك الان</h3>
+          <h3 class="mb-3 mt-3">       اشترك الان بالضغط علي شبكتك
+          </h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -124,21 +125,7 @@
       </div>
 
       <div class="container">
-        <div class="form_content">
-          <!--<h5>ادخل رقم الهاتف</h5>-->
-          <form method="post" action="{{url('/rotana_viva_login_action')}}" id="form_zain">
-            {{ csrf_field() }}
-            <div class="form-group form-inline">
-              <label for="phone"><span>+ 965</span></label>
-              <input type="number" class="form-control" id="phone" value="" placeholder="أدخل رقم تليفونك" name="number" required pattern="[0-9]{8}">
-              <i style="display:none" class="ml-2 fa fa-check text-success"></i>
-            </div>
-            <!--<button class="btn back">رجوع</button>-->
-            <button id="zain_submit" class="btn" type="submit">أشترك</button>
-          </form>
-          <!--<h5>للاشتراك يرجى الارسال الى <span>965</span></h5>
-                <h5>الى <span>965</span><span> STOP1 </span>لالغاء الاشتراك ارسل</h5>-->
-        </div>
+
       </div>
 
     </div>
