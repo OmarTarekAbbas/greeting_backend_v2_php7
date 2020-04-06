@@ -363,5 +363,12 @@ class RotanaController extends Controller
         $log->addInfo($URL, $parameters_arr);
     }
 
+    public function rotana_country_landing(){
+      // $ip1 = "43.225.54.4";      //emirate
+      // $ip2 = "161.252.255.254"; //kuwait
+      $country  =  $this->ip_info('visitor', "Country");
+      return view('landing_v2.rotana_country_landing', compact('country'));
+    }
+
 
 }
