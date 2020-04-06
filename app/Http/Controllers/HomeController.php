@@ -1940,9 +1940,9 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $redirect = $this->check_redirect('rotana');
         $redirectUrl=  url($redirect);
         $URL = "http://pay-with-du.ae/20/digizone/digizone-{$serviceid}-{$num}-{$local}-doi-web?origin=digizone&uid=&trxid=$trxid&serviceProvider=secured&serviceid=$serviceid&plan=$plan&price=$price&locale=$local&redirectUrl=$redirectUrl";
-    
+
       }
-    
+
       return redirect($URL);
     }
 
