@@ -117,19 +117,19 @@ switch ($os) {
         <div class="row">
           @if($country == 'KSA')
           <div class="col-4">
-            <a href="sms:606068{{$Att}}37">
+            <a href="sms:606068{{$Att}}37" class="click_op" data-country = "{{$country}}" data-operator="Mobily">
               <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
             </a>
             <p>Mobily</p>
           </div>
           <div class="col-4">
-            <a href="sms:798940{{$Att}}10">
+            <a href="sms:798940{{$Att}}10" class="click_op" data-country = "{{$country}}" data-operator="Zain">
               <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
             </a>
             <p>Zain</p>
           </div>
           <div class="col-4">
-            <a href="sms:801267{{$Att}}6">
+            <a href="sms:801267{{$Att}}6" class="click_op" data-country = "{{$country}}" data-operator="STC">
               <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
             </a>
             <p>STC</p>
@@ -138,13 +138,13 @@ switch ($os) {
 
           @if($country == 'Egypt')
           <div class="col-6">
-            <a href="sms:9999{{$Att}}10083">
+            <a href="sms:9999{{$Att}}10083" class="click_op" data-country = "{{$country}}" data-operator="Vodafone">
               <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
             </a>
             <p>Vodafone</p>
           </div>
           <div class="col-6">
-            <a href="sms:8719{{$Att}}10">
+            <a href="sms:8719{{$Att}}10" class="click_op" data-country = "{{$country}}" data-operator="Orange">
               <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
             </a>
             <p>Orange </p>
@@ -153,13 +153,13 @@ switch ($os) {
 
           @if($country == 'Kuwait')
           <div class="col-6">
-            <a href="sms:50662{{$Att}}1">
+            <a href="sms:50662{{$Att}}1" class="click_op" data-country = "{{$country}}" data-operator="STC">
               <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
             </a>
             <p>STC</p>
           </div>
           <div class="col-6">
-            <a href="sms:90355{{$Att}}1">
+            <a href="sms:90355{{$Att}}1" class="click_op" data-country = "{{$country}}" data-operator="Zain">
               <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
             </a>
             <p>Zain </p>
@@ -168,7 +168,7 @@ switch ($os) {
 
           @if($country == 'United Arab Emirates')
           <div class="col-6">
-            <a href="sms:4971{{$Att}}10">
+            <a href="sms:4971{{$Att}}10" class="click_op" data-country = "{{$country}}" data-operator="DU">
               <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
             </a>
             <p>DU </p>
@@ -193,7 +193,27 @@ switch ($os) {
   <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script>
 
+  <script>
+    $('.click_op').click(function(){
+      var co = $(this).data('country')
+      var op = $(this).data('operator')
+      $.ajax({
+        method : 'get',
+        actions : '{{url("rotana_country_landing")}}',
+        data:{
+          country:co ,
+          operator_name : op
+        },
+        success:function(res){
+          console.log(res);
 
+        }
+      })
+      // $.get('{{url("rotana_country_landing")}}',{data:{}},function(res){
+      //   console.log(res);
+      // })
+    })
+  </script>
 
 
 </body>
