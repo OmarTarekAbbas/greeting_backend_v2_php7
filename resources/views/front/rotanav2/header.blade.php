@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/owl.theme.default.css')}}">
     <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/animate.css')}}">
     <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/style.css')}}">
+    <base target="_parent">
 </head>
 
 <body>
