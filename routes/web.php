@@ -11,6 +11,47 @@
 |
 */
 
+
+/************* Start config Timwe******************/
+define('PartnerId', '2534');
+define('productId', '10479');
+define('partnerRoleId', '2614');
+define('TimweServiceId', '2724');
+define('largeAccount', '92842');
+
+define('MTFreePricepointId', '46742');
+define('PricepintId10QAR', '46758');
+define('PricepintId5QAR', '46743');
+define('PricepintId2QAR', '46759');
+
+define('apikeysendMt', '98c489a1415047c4b19ab30436289de2');
+define('presharedkeysendMt', 'SkU0gO1lSHR7wdfP');
+
+define('apikeysubscription', '8086e440d80847a6b534c88a6c33a172');
+define('presharedkeysubscription', 'cutfvCPZrlzMo6t8');
+/************* end config Timwe******************/
+
+Route::get('ooredoo_qatar_landing', 'TimweController@index');
+Route::get('ooredoo_qatar_pin', 'TimweController@pincode');
+Route::get('ooredoo_qatar_unsub', 'TimweController@unsubscribe');
+
+//Timwe Api
+Route::post('generateKey', 'TimweController@generateKey');
+Route::post('{channel}/mt/{partnerRoleId}', 'TimweController@sendMt');
+Route::post('subscription/optin/{partnerRoleId}', 'TimweController@subscriptionOptIn');
+Route::post('subscription/confirm/{partnerRoleId}', 'TimweController@subscriptionConfirm');
+Route::post('subscription/optout/{partnerRoleId}', 'TimweController@subscriptionOptOut');
+/********************end ******************* */
+
+//notification Api
+Route::post('notification/mo/{partnerRole}', 'TimweController@notificationMo');
+Route::post('notification/mt/dn/{partnerRole}', 'TimweController@notificationMtDn');
+Route::post('notification/user-optin/{partnerRole}', 'TimweController@notificationUserOptin');
+Route::post('notification/user-optout/{partnerRole}', 'TimweController@notificationUserOptout');
+Route::post('notification/user-renewed/{partnerRole}', 'TimweController@notificationUserRenewed');
+/********************end ******************* */
+
+
 Route::get('popularCountInc', 'GreetingimgsController@popular_count_increment');
 
 Route::get('logout_ad', 'HomeController@logoutadmin');
