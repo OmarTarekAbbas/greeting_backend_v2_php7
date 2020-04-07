@@ -23,6 +23,7 @@ Route::get('rotana_landing_stc_1', 'RotanaController@rotana_subscribeViva_1');
 Route::get('rotana_logout_viva/{opid?}', 'RotanaController@rotana_logout');
 Route::get('rotana_subscribe_old', 'RotanaController@rotana_subscribe'); // baher and sayed
 Route::get('rotana_subscribe','RotanaController@rotana_country_landing');  // mohamed
+Route::get('rotanav2/check/redirect', 'HomeController@check_landing_redirect');
 /* ------------ viva rotana routes backend ------------ */
 
 
@@ -365,7 +366,7 @@ Route::get('rotanav2/favorites_rotana_load/{UID}', 'FrontEndController@favorites
 Route::get('rotanav2/today/{UID}', 'FrontEndController@rotanav2_today');
 Route::get('Search_v6/{UID}', 'FrontEndController@Search_v6');
 Route::get('rotanav2/inner/{FID}/{UID}', 'FrontEndController@filter_inner');
-Route::get('rotanav2/check/redirect', 'HomeController@check_landing_redirect');
+
 
 
 //////////////////////////////////////

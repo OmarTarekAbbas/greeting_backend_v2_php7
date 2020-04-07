@@ -120,60 +120,68 @@ switch ($os) {
           @if($country == 'KSA')
           <div class="col-4">
             <a href="sms:606068{{$Att}}37" class="click_op" data-country = "{{$country}}" data-operator="Mobily">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
+              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/MOBILE.png" alt="">
+              <p>Mobily</p>
             </a>
-            <p>Mobily</p>
+
           </div>
           <div class="col-4">
             <a href="sms:798940{{$Att}}10" class="click_op" data-country = "{{$country}}" data-operator="Zain">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
+              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/ZAIN_KSA.png" alt="">
+              <p>Zain</p>
             </a>
-            <p>Zain</p>
+
           </div>
           <div class="col-4">
             <a href="sms:801267{{$Att}}6" class="click_op" data-country = "{{$country}}" data-operator="STC">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
+              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/STC.png" alt="">
+              <p>STC</p>
             </a>
-            <p>STC</p>
+
           </div>
           @endif
 
           @if($country == 'Egypt')
           <div class="col-6">
             <a href="sms:9999{{$Att}}10083" class="click_op" data-country = "{{$country}}" data-operator="Vodafone">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
+              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/VODAFONE.png" alt="">
+              <p>Vodafone</p>
             </a>
-            <p>Vodafone</p>
+
           </div>
-          <div class="col-6">
+          {{--  <div class="col-6">
             <a href="sms:8719{{$Att}}10" class="click_op" data-country = "{{$country}}" data-operator="Orange">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
+              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/snap2.jpg" alt="">
+              <p>Orange </p>
             </a>
-            <p>Orange </p>
-          </div>
+
+          </div>  --}}
           @endif
 
           @if($country == 'Kuwait')
           <div class="col-6">
             <a href="sms:50662{{$Att}}1" class="click_op" data-country = "{{$country}}" data-operator="STC">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
+              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/STC.png" alt="">
+              <p>STC</p>
             </a>
-            <p>STC</p>
+
           </div>
           <div class="col-6">
             <a href="sms:90355{{$Att}}1" class="click_op" data-country = "{{$country}}" data-operator="Zain">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
+              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/ZAIN_KW.png" alt="">
+              <p>Zain </p>
             </a>
-            <p>Zain </p>
+
           </div>
           @endif
 
           @if($country == 'United Arab Emirates')
           <div class="col-6">
             <a href="sms:4971{{$Att}}10" class="click_op" data-country = "{{$country}}" data-operator="DU">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" alt="">
+              <img  width="100%" height="100px" src="{{ url('assets/front/landing_v2')}}/operators/DU.png" alt="">
+              <p>DU </p>
             </a>
-            <p>DU </p>
+
           </div>
           @endif
         </div>

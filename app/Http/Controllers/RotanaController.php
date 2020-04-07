@@ -389,12 +389,12 @@ class RotanaController extends Controller
       }
 
       $country = $this->ip_info('Visitor', "Country");
-      // $country = "KSA";
+      $country = "Kuwait";
       $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
       $result['ip'] = $ip;
       $result['country'] = $country;
       $result['deviceModel'] = $deviceModel;
-      $actionName = "Rotana Flatter Qrcode Subscribe landing";
+      $actionName = "Rotana Flatter Qrcode Subscribe landing"."-".$country;
       if ($request->has('operator_name')) {
           $result['operator'] = $request->operator_name . ' '.$request->country;
           $actionName = $actionName." ".$request->operator_name ." ". $request->country;
@@ -406,7 +406,47 @@ class RotanaController extends Controller
       if ($request->ajax()) {
           return 'done';
       }
+
+      if($country == 'United Arab Emirates'){
+        $serviceid = "flaterrotanadaily";
+        $price = 2 ;
+        $num= 1 ;
+        $plan = 'daily';
+        $local= "ar" ;
+        require('uuid/UUID.php');
+        $trxid = \UUID::v4();
+        $redirect = $this->check_redirect('rotana');
+        $redirectUrl=  url($redirect);
+        $URL = "http://pay-with-du.ae/20/digizone/digizone-{$serviceid}-{$num}-{$local}-doi-web?origin=digizone&uid=&trxid=$trxid&serviceProvider=secured&serviceid=$serviceid&plan=$plan&price=$price&locale=$local&redirectUrl=$redirectUrl";
+
+        return redirect($URL);
+
+      }
+
+
       return view('landing_v2.rotana_country_landing', compact('country'));
+    }
+
+
+
+    public function check_redirect($url_type)
+    {
+        $url = Generatedurl::where('operator_id', du_operator_id)->latest()->first();
+        $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+            ->where('greetingimg_operator.operator_id', '=', du_operator_id)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+        if ($snap) {
+            $url = Generatedurl::where('operator_id', du_operator_id)->orderBy('created_at', 'desc')->first();
+            if($url_type == 'rotana'){
+                return 'rotanav2/inner/' . $snap->id . '/' . $url->UID;
+            }
+            return 'newdesignv4/filter/' . $snap->id . '/' . $url->UID;
+        } else {
+            $uid = $url ? $url->UID : '75231';
+            if($url_type == 'rotana'){
+                return 'rotanav2/'.$uid ;
+            }
+            return 'newdesignv4/' .  $uid;
+        }
     }
 
 
