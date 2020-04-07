@@ -20,6 +20,7 @@ body {
   background-attachment: fixed;
   position: fixed;
   overflow-y: scroll;
+  text-decoration: none;
 }
 
 /*----------------------------------------- landing page -----------------------------------------*/
@@ -209,6 +210,48 @@ body {
   width: 90%;
   margin: 0 auto;
   display: block;
+}
+
+@media (min-width: 677.9px) and (max-width: 1023.9px) {
+  .landing_page .start_video video {
+    height: 37rem;
+    object-fit: fill;
+  }
+  .landing_page .strip {
+    margin-top: -1% !important;
+  }
+  .landing_page .strip h3 {
+    font-size: 2.2rem;
+  }
+  .landing_page .country .click_op img {
+    width: 100%;
+  }
+  .landing_page .country .click_op p {
+    font-size: 1.35rem;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1100px) {
+  .landing_page .start_video video {
+    height: 43rem;
+    object-fit: fill;
+  }
+  .landing_page .strip {
+    margin-top: -1% !important;
+  }
+  .landing_page .strip h3 {
+    font-size: 2.75rem;
+  }
+  .landing_page .shbka h3 {
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem !important;
+    margin-top: 2.5rem !important;
+  }
+  .landing_page .country .click_op img {
+    width: 100%;
+  }
+  .landing_page .country .click_op p {
+    font-size: 1.75rem;
+  }
 }
 
 /*# sourceMappingURL=main-style_zain.css.map */
