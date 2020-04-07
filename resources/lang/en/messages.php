@@ -335,5 +335,5 @@ return [
     'static_translations' => 'static_translations',
     'translation' => 'TRANSLATION',
 
-
+    'today_filter' => 'Today Filter'
 ];

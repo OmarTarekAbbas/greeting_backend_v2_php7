@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Language;
 use App\Http\Controllers\Controller;
 
 class CategoriesController extends Controller
@@ -26,7 +27,8 @@ class CategoriesController extends Controller
     {
         //
         $Categories = Category::paginate(15);
-        return view('admin.categories.index', compact('Categories'));
+        $languages = Language::all();
+        return view('admin.categories.index', compact('Categories','languages'));
     }
 
     /**
@@ -49,9 +51,16 @@ class CategoriesController extends Controller
     {
         //
         $this->validate($request, [
-            'title' => 'required|unique:categories'
+            'title' => 'required'
         ]);
-        Category::create($request->all());
+
+        $category = new Category();
+        foreach ($request->title as $key => $value)
+        {
+            $category->setTranslation('title', $key, $value);
+        }
+
+        $category->save();
         return redirect('admin/categories');
     }
 
@@ -76,7 +85,8 @@ class CategoriesController extends Controller
     {
         //
         $Category = Category::findOrFail($id);
-        return view('admin.categories.edit', compact('Category'));
+        $languages = Language::all();
+        return view('admin.categories.edit', compact('Category','languages'));
     }
 
     /**
@@ -89,7 +99,13 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        Category::find($id)->update($request->all());
+        $category = Category::find($id);
+        foreach ($request->title as $key => $value)
+        {
+            $category->setTranslation('title', $key, $value);
+        }
+
+        $category->save();
         return redirect(url($request->input('redirects_to')));
     }
 

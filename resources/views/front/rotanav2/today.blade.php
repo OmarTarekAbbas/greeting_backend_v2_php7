@@ -9,7 +9,7 @@
         <div class="col-12">
           <div class="filter_2day_title">
             <h6 class="text-white text-right scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s"
-              data-wow-offset="100">فلتر اليوم</h6>
+              data-wow-offset="100">@lang('messages.today_filter') </h6>
           </div>
         </div>
         @if(isset($Rdata_today))

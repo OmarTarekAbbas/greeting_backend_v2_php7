@@ -221,5 +221,5 @@ return [
     'keyword' => 'KEYWORD',
     'translation' => 'TRANSLATION',
 
-
+    'today_filter' => 'فلتر اليوم'
 ];

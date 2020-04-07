@@ -24,5 +24,10 @@
               <a href="{{url('/rotanav2/'.uid())}}">
                 <img class="d-block m-auto slide-in-fwd-bottom" src="{{url('assets/front/rotanav2/images/new_rotana.png')}}" alt="Rotana Logo">
               </a>
+              @if(getCode() == 'ar')
+              <a style="color:#fff" href="{{url('admin/lang/en')}}">En</a>
+              @else
+              <a style="color:#fff" href="{{url('admin/lang/ar')}}">Ar</a>
+              @endif
             </div>
         </header>

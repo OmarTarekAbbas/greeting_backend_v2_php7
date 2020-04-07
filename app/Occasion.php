@@ -10,6 +10,7 @@ class Occasion extends Model
     //
     use Translatable;
 
+
     protected $table = 'occasions';
     protected $fillable = ['title','category_id','image','slider','parent_id','occasion_RDate','occasion_EXDate'];
 

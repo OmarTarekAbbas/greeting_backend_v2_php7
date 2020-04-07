@@ -37,7 +37,7 @@
             <div class="second_slide_title">
               <a href="{{url('/rotanav2/'.$category->id.'/occasion/'.uid())}}">
                 <h6 class="text-right text-white pt-0 pr-3 scale-in-left wow" data-wow-delay="1.5s"
-                  data-wow-duration="0.5s" data-wow-offset="100"> {{$category->title}}
+                  data-wow-duration="0.5s" data-wow-offset="100"> {{$category->getTranslation('title',getCode())}}
                   <i class="fas fa-th-large fa-1x float-left pl-3 pulsate-bck wow" data-wow-delay="1s"
                     data-wow-duration="0.9s" data-wow-offset="100"></i>
                 </h6>
