@@ -389,7 +389,7 @@ class RotanaController extends Controller
       }
 
       $country = $this->ip_info('Visitor', "Country");
-      $country = "Kuwait";
+      //$country = "Kuwait";
       $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
       $result['ip'] = $ip;
       $result['country'] = $country;
