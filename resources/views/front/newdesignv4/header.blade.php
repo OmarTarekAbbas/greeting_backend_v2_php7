@@ -52,13 +52,21 @@
 					</div>
 				</div>
 
-				<div class="col-9">
+				<div class="col-7">
 					<div class="logo-title pulsate-bck ">
 						<a href="{{url('newdesignv4/'.UID())}}">
               <img class="rounded-0" src="{{url('assets/front/newdesignv4/')}}/images/FALATR_LOGO.png" alt="Falater Logo">
             </a>
 					</div>
-				</div>
+        </div>
+
+        <div class="col-2 p-3">
+          @if(getCode() == 'ar')
+          <a style="color:#fff" href="{{url('admin/lang/en')}}">En</a>
+          @else
+          <a style="color:#fff"  href="{{url('admin/lang/ar')}}">Ar</a>
+          @endif
+        </div>
 			</div>
 		</header>
 		<!-- header -->
