@@ -42,11 +42,13 @@
             <hr>
            {!! Form::open(['url'=>'subscription/confirm/'.partnerRoleId,'method'=>'post','class'=>'form']) !!}
                 <div class="form-group">
-                      <input type="tel" name="pincode" class="form-control" id="pincode" required pattern="[0-9]{6}">
+                      <input type="tel" style="font-family: cursive" name="pincode" class="form-control" id="pincode" required pattern="[0-9]{4}">
                 </div>
                 <button class="btn" type="submit" >تاكيد</button>
              {!! Form::close() !!}
+             <h6>ان لم تصلك رسالة تأكيد يرجي الضغط علي هذا <a href="{{url('ooredoo_qatar_landing' )}}">الرابط</a></h6>
         </div>
+
     </div>
 
     <div id="loginModal" class="modal fade" role="dialog">

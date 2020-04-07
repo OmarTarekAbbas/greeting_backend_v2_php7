@@ -77,7 +77,7 @@
             </div>
 
             <div class="strip">
-                <h2>@lang('messages.du_unsub')</h2>
+                <h2>الغاء الاشتراك</h2>
             </div>
 
 
@@ -117,7 +117,7 @@
                                 placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{8}">
                             <span class="validity"></span>
                         </div>
-                        <button id="zain_submit" class="btn" type="submit">@lang('messages.du_unsub')</button>
+                        <button id="zain_submit" class="btn" type="submit">الغاء الاشتراك</button>
                     </form>
                 </div>
             </div>

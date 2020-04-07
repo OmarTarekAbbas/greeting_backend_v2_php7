@@ -558,11 +558,11 @@ class TimweController extends Controller
         $result['date'] = date('Y-m-d H:i:s');
 
         $this->log($actionName, $URL, $result);
-
-        if($ReqResponse['code'] == 'SUCCESS'){
+        // dd($ReqResponse['responseData']['subscriptionResult']);
+        if($ReqResponse['responseData']['subscriptionResult'] == 'OPTOUT_CANCELED_OK'){
             return redirect('ooredoo_qatar_unsub')->with('success', 'تم الغاء الاشتراك بنجاح');
         }else{
-            return redirect('ooredoo_qatar_unsub')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+            return redirect('ooredoo_qatar_unsub')->with('failed', 'هذا الرقم غير مشترك بالخدمة');
         }
     }
 
