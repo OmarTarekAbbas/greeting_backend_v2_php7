@@ -3580,7 +3580,18 @@ public function Search_v6(Request $request, $UID)
       $url = Generatedurl::where('UID', $UID)->first();
       if (is_null($url))
       return view('front.error');
-      $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('greetingimgs.title', 'like', '%' . $request->search . '%')->limit(get_settings('pagination_limit'))->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
+      $Rdata = $url->operator->greetingimgs()->PublishedSnap()
+        ->join('translatables','translatables.record_id','=','greetingimgs.id')
+        ->join('tans_bodies','tans_bodies.translatable_id','translatables.id')
+        ->where('translatables.table_name','greetingimgs')
+        ->where('translatables.column_name','title')
+        ->where(function($q) use ($request){
+          $q->where('greetingimgs.title', 'like', '%' . $request->search . '%');
+          $q->orWhere('tans_bodies.body', 'like', '%' . $request->search . '%');
+        })
+      ->limit(get_settings('pagination_limit'))
+      ->orderBy('RDate', 'desc')
+      ->paginate(get_settings('pagination_limit'));
         $codes = [];
         foreach ($Rdata as $key => $value) {
             if ($value->rbt_id != null) {
