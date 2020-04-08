@@ -226,6 +226,21 @@ function redirect_operator()
         return 'landing_v1';
     }
 }
+
+function roatan_ksa_redirect_operator()
+{
+    $operator = Operator::find(OP());
+    $country = Country::find($operator->country_id);
+    $current_url = \Request::fullUrl();
+    if (strpos($operator->name, 'Zain') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
+        return 'landing_rotana_zain_ksa';
+    } else if (strpos($operator->name, 'STC') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
+        return 'landing_rotana_stc_ksa';
+    } else {
+        return 'landing_v1';
+    }
+}
+
 function getCode()
 {
 

@@ -124,6 +124,20 @@ Route::post('/mobily_ksa_pincode_confirm', 'FrontEndController@mobily_ksa_pincod
 Route::get('logout_mobily_ksa/{uid}', 'FrontEndController@logout_mobily_ksa');
 define('MOBILY_OP_ID', 14);
 
+// STC saudia sunscribe
+Route::get('landing_rotana_stc_ksa', 'KsaController@landing_stc_ksa');
+Route::post('/RotanaStcKsaPinCodeSend', 'KsaController@RotanaStcKsaPinCodeSend');
+Route::post('/rotana_stc_ksa_pincode_confirm', 'KsaController@rotana_stc_ksa_pincode_confirm');
+Route::get('logout_mobily_ksa/{uid}', 'KsaController@logout_mobily_ksa');
+define('STC_OP_ID', 15);
+
+// Zain saudia sunscribe
+Route::get('landing_rotana_zain_ksa', 'KsaController@landing_rotana_zain_ksa');
+Route::post('/RotanaZainKsaPinCodeSend', 'KsaController@RotanaZainKsaPinCodeSend');
+Route::post('/rotana_zain_ksa_pincode_confirm', 'KsaController@rotana_zain_ksa_pincode_confirm');
+Route::get('logout_mobily_ksa/{uid}', 'KsaController@logout_mobily_ksa');
+define('ZAIN_OP_ID',16);
+
 // susbcribe zain kuwait
 Route::post('/subscribeZain', 'HomeController@subscribeZain');
 Route::post('/subscribeZainConfirm', 'HomeController@subscribeZainConfirm');

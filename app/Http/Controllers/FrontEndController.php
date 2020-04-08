@@ -3467,6 +3467,23 @@ public function rotana($UID)
     if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
         $url = Generatedurl::where('UID', $UID)->first();
 
+        if(OP() ==  STC_OP_ID)
+        {
+          if(Session::has('currentOp')  && Session::get('currentOp') == STC_OP_ID  ){  //  ZAIN NKSA
+
+          }else{
+              return redirect(url(roatan_ksa_redirect_operator()));
+          }
+        }
+        if(OP() ==  ZAIN_OP_ID)
+        {
+          if(Session::has('currentOp')  && Session::get('currentOp') == ZAIN_OP_ID   ){  // Mobily ksa
+  
+          } else{
+              return redirect(url(roatan_ksa_redirect_operator()));
+          }
+        }
+
         $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
 
         $newsnap = $url->operator->greetingimgs()->PublishedSnap()->whereNotNull('vid_path')->orderBy('id', 'desc')->limit(4)->get();
@@ -3491,7 +3508,7 @@ public function rotana($UID)
 
         return view('front.rotanav2.home', compact('newsnap', 'categories'));
     } else {
-        return redirect(url(redirect_operator()));
+        return redirect(url(roatan_ksa_redirect_operator()));
     }
 }
 
@@ -3621,6 +3638,22 @@ public function filter_inner($FID, $UID){
           $cat = Category::where('id',$occasi->category_id)->first();
           $occasis = Occasion::where('category_id', $cat->id)->get();
           //  dd($occasis);
+          if(OP() ==  STC_OP_ID)
+          {
+            if(Session::has('currentOp')  && Session::get('currentOp') == STC_OP_ID  ){  //  ZAIN NKSA
+
+            }else{
+                return redirect(url(roatan_ksa_redirect_operator()));
+            }
+          }
+          if(OP() ==  ZAIN_OP_ID)
+          {
+            if(Session::has('currentOp')  && Session::get('currentOp') == ZAIN_OP_ID   ){  // Mobily ksa
+    
+            } else{
+                return redirect(url(roatan_ksa_redirect_operator()));
+            }
+          }
           return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));
         }else{
             return view('errors.404');
