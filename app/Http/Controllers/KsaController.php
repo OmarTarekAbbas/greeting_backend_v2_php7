@@ -139,7 +139,6 @@ class KsaController extends Controller
       $Msisdn = Msisdn::where('msisdn', '=', $msisdn_wcc)->where('operator_id', '=', ZAIN_OP_ID)->orderBy('id', 'DESC')->first();
 
       if ($result == "Active") {
-        return 'ok';
           //session()->flash('error', 'هذا الرقم مشرك بالفعل');
           // return back();
 
@@ -356,6 +355,44 @@ class KsaController extends Controller
               return view('landing_v2.ksa.zain.zain_ksa_pinCode', compact('msisdn'));
           }
 
+  }
+
+  public function RotanaZainKsaUnsub()
+  {
+      return view('landing_v2.ksa.zain.cancel');
+  }
+
+  public function RotanaZainKsaUnsubAction(Request $request)
+  {
+      $messidn = zain_ksa_prefix . $request->number;
+      //  $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=' . $messidn . '&serv=f&action=unsub'; // Mobily
+      $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/ZainKSAAPI?msisdn=' . $messidn . '&serv=f&action=unsub'; // zain saudi
+   //   $result = preg_replace('/\s+/', '', file_get_contents($url));
+      $result = preg_replace('/\s+/', '', $this->GetPageData($url)) ;
+
+
+      $company = $this->detectCompnay();
+      $actionName = "Zain Ksa Unsub";
+      $parameters_arr = array(
+          'MSISDN' => $messidn,
+          'link' => $url,
+          'date' => Carbon::now()->format('Y-m-d H:i:s'),
+          'company' => $company,
+          'result' => $result
+      );
+      $this->log($actionName, $url, $parameters_arr);
+
+      if ($result == '0') {
+          $msisdn = Msisdn::where('msisdn', $messidn)->orderBy('id', 'Desc')->first();
+          if ($msisdn) {
+              $msisdn->final_status = 0;
+              $msisdn->save();
+          }
+          Session::flash('success', 'لقد تم الغاء اشتراكك بنجاح');
+      } else {
+          Session::flash('failed', 'حدث مشكلة اثناء العملية من فضلك ادخل الرقم مرة اخرى');
+      }
+      return back();
   }
 
   // ZAIN ksa integration
@@ -690,6 +727,44 @@ class KsaController extends Controller
               return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
           }
 
+  }
+
+  public function RotanaStcKsaUnsub()
+  {
+      return view('landing_v2.ksa.stc.cancel');
+  }
+
+  public function RotanaStcKsaUnsubAction(Request $request)
+  {
+      $messidn = zain_ksa_prefix . $request->number;
+      //  $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=' . $messidn . '&serv=f&action=unsub'; // Mobily
+      $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=' . $messidn . '&serviceID=696&action=unsub'; // zain saudi
+   //   $result = preg_replace('/\s+/', '', file_get_contents($url));
+      $result = preg_replace('/\s+/', '', $this->GetPageData($url)) ;
+
+
+      $company = $this->detectCompnay();
+      $actionName = "Rotana STC Ksa Unsub";
+      $parameters_arr = array(
+          'MSISDN' => $messidn,
+          'link' => $url,
+          'date' => Carbon::now()->format('Y-m-d H:i:s'),
+          'company' => $company,
+          'result' => $result
+      );
+      $this->log($actionName, $url, $parameters_arr);
+
+      if ($result == '0') {
+          $msisdn = Msisdn::where('msisdn', $messidn)->orderBy('id', 'Desc')->first();
+          if ($msisdn) {
+              $msisdn->final_status = 0;
+              $msisdn->save();
+          }
+          Session::flash('success', 'لقد تم الغاء اشتراكك بنجاح');
+      } else {
+          Session::flash('failed', 'حدث مشكلة اثناء العملية من فضلك ادخل الرقم مرة اخرى');
+      }
+      return back();
   }
   
 

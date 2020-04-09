@@ -111,15 +111,14 @@
           <form method="post" action="{{url('/RotanaStcKsaPinCodeSend')}}" id="form_zain">
             {{ csrf_field() }}
             <div class="form-group form-inline">
-              <label for="phone"><span>+ 965</span></label>
+              <label for="phone"><span>+ 966</span></label>
               <input type="number" class="form-control" id="phone" value="" placeholder="أدخل رقم تليفونك" name="number" required pattern="[0-9]{9}">
               <i style="display:none" class="ml-2 fa fa-check text-success"></i>
             </div>
             <!--<button class="btn back">رجوع</button>-->
             <button id="zain_submit" class="btn" type="submit">أشترك</button>
           </form>
-          <!--<h5>للاشتراك يرجى الارسال الى <span>965</span></h5>
-                <h5>الى <span>965</span><span> STOP1 </span>لالغاء الاشتراك ارسل</h5>-->
+          <a href="{{url('rotana_stc_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>
         </div>
       </div>
 
