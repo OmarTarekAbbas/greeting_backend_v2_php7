@@ -559,7 +559,7 @@ class TimweController extends Controller
 
         $this->log($actionName, $URL, $result);
 
-        if($ReqResponse['subscriptionResult'] == 'OPTOUT_CANCELED_OK'){
+        if($ReqResponse['responseData']['subscriptionResult'] == 'OPTOUT_CANCELED_OK'){
             return redirect('ooredoo_qatar_unsub')->with('success', 'تم الغاء الاشتراك بنجاح');
         }else{
             return redirect('ooredoo_qatar_unsub')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
