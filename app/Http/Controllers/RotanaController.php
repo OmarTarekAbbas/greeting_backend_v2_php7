@@ -366,7 +366,6 @@ class RotanaController extends Controller
 
     public function rotana_subscribe(){
       return view('landing_v2.rotana_subscribe') ;
-
     }
 
     public function rotana_country_landing(Request $request){
@@ -389,7 +388,7 @@ class RotanaController extends Controller
       }
 
       $country = $this->ip_info('Visitor', "Country");
-      //$country = "Kuwait";
+      // $country = "United Arab Emirates";
       $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
       $result['ip'] = $ip;
       $result['country'] = $country;
@@ -412,7 +411,7 @@ class RotanaController extends Controller
         $price = 2 ;
         $num= 1 ;
         $plan = 'daily';
-        $local= "ar" ;
+        $local= "en" ;
         require('uuid/UUID.php');
         $trxid = \UUID::v4();
         $redirect = $this->check_redirect('rotana');

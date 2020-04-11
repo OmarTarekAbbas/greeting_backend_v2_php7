@@ -120,21 +120,21 @@ switch ($os) {
           @if($country == 'KSA')
           <div class="col-4">
             <a href="sms:606068{{$Att}}37" class="click_op" data-country = "{{$country}}" data-operator="Mobily">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/MOBILE.png" alt="">
+              <img   width="100px" height="100px"  src="{{ url('assets/front/landing_v2')}}/operators2/MOBILE.png" alt="">
               <p>Mobily</p>
             </a>
 
           </div>
           <div class="col-4">
             <a href="sms:798940{{$Att}}10" class="click_op" data-country = "{{$country}}" data-operator="Zain">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/ZAIN_KSA.png" alt="">
+              <img  width="100px" height="100px"  src="{{ url('assets/front/landing_v2')}}/operators2/ZAIN_KSA.png" alt="">
               <p>Zain</p>
             </a>
 
           </div>
           <div class="col-4">
             <a href="sms:801267{{$Att}}6" class="click_op" data-country = "{{$country}}" data-operator="STC">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/STC.png" alt="">
+              <img   width="100px" height="100px" src="{{ url('assets/front/landing_v2')}}/operators2/STC.png" alt="">
               <p>STC</p>
             </a>
 
@@ -142,16 +142,16 @@ switch ($os) {
           @endif
 
           @if($country == 'Egypt')
-          <div class="col-6">
-            <a href="sms:9999{{$Att}}10083" class="click_op" data-country = "{{$country}}" data-operator="Vodafone">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/VODAFONE.png" alt="">
+          <div class="col-12">
+            <a  href="sms:9999{{$Att}}10083" class="click_op" data-country = "{{$country}}" data-operator="Vodafone">
+              <img style="margin-left: 20%"   width="200px" height="200px"  src="{{ url('assets/front/landing_v2')}}/operators2/VODAFONE.png" alt="">
               <p>Vodafone</p>
             </a>
 
           </div>
           {{--  <div class="col-6">
             <a href="sms:8719{{$Att}}10" class="click_op" data-country = "{{$country}}" data-operator="Orange">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/snap2.jpg" alt="">
+              <img src="{{ url('assets/front/landing_v2')}}/operators/snap2.jpg" alt="">
               <p>Orange </p>
             </a>
 
@@ -161,14 +161,14 @@ switch ($os) {
           @if($country == 'Kuwait')
           <div class="col-6">
             <a href="sms:50662{{$Att}}1" class="click_op" data-country = "{{$country}}" data-operator="STC">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/STC.png" alt="">
+              <img width="100px" height="100px" src="{{ url('assets/front/landing_v2')}}/operators2/STC.png" alt="">
               <p>STC</p>
             </a>
 
           </div>
           <div class="col-6">
             <a href="sms:90355{{$Att}}1" class="click_op" data-country = "{{$country}}" data-operator="Zain">
-              <img  width="100%" height="200px" src="{{ url('assets/front/landing_v2')}}/operators/ZAIN_KW.png" alt="">
+              <img width="100px" height="100px" src="{{ url('assets/front/landing_v2')}}/operators2/ZAIN_KW.png" alt="">
               <p>Zain </p>
             </a>
 
@@ -178,7 +178,7 @@ switch ($os) {
           @if($country == 'United Arab Emirates')
           <div class="col-6">
             <a href="sms:4971{{$Att}}10" class="click_op" data-country = "{{$country}}" data-operator="DU">
-              <img  width="100%" height="100px" src="{{ url('assets/front/landing_v2')}}/operators/DU.png" alt="">
+              <img src="{{ url('assets/front/landing_v2')}}/operators2/DU.png" alt="">
               <p>DU </p>
             </a>
 
