@@ -86,7 +86,7 @@
             </div>
 
             <div class="strip">
-                <h2>@lang('messages.du_unsub')</h2>
+                <h2>الغاء الاشترك</h2>
             </div>
 
 
@@ -123,10 +123,10 @@
                         <div class="form-group form-inline">
                             <label for="phone"><span>971</span></label>
                             <input type="tel" class="form-control" id="phone" required=""
-                                placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{8}">
+                                placeholder="ادخل رقم الهاتف" name="number" required pattern="[0-9]{8}">
                             <span class="validity"></span>
                         </div>
-                        <button id="zain_submit" class="btn" type="submit">@lang('messages.du_unsub')</button>
+                        <button id="zain_submit" class="btn" type="submit">الغاء الاشترك</button>
                     </form>
                 </div>
             </div>
