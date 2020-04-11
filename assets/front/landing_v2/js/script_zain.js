@@ -53,7 +53,7 @@ $('#phone').blur(function() {
 });
 $('#phone').keyup(function() {
         var phone = $("#phone").val();
-        if (phone != "" && phone.length == 9) {
+        if (phone != "" && phone.length == 8) {
             $("#zain_submit").attr('disabled', false)
         } else {
             $("#zain_submit").attr('disabled', true)
@@ -72,7 +72,7 @@ $('#phone').keyup(function() {
 
 $('#zain_submit').focusin(function() {
     var phone = $("#phone").val();
-    if (phone != "" && phone.length == 9) {
+    if (phone != "" && phone.length == 8) {
         $('#form_zain').submit();
     } else {
         return false;
