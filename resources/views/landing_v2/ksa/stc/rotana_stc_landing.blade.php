@@ -116,9 +116,9 @@
               <i style="display:none" class="ml-2 fa fa-check text-success"></i>
             </div>
             <!--<button class="btn back">رجوع</button>-->
-            <button id="zain_submit" class="btn" type="submit">أشترك</button>
+            <button style="margin-bottom:30px;"  id="zain_submit" class="btn" type="submit">أشترك</button>
           </form>
-          <a href="{{url('rotana_stc_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>
+          <a  href="{{url('rotana_stc_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>
         </div>
       </div>
 

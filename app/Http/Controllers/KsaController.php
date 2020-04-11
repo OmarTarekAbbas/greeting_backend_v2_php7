@@ -86,7 +86,7 @@ class KsaController extends Controller
       $result['HeadeEnriched'] = $MSISDN;
       $result['adsCompnayName'] = $company;
       $result['deviceModel'] = $deviceModel;
-      $result['AllHeaders'] = $_SERVER;
+    //  $result['AllHeaders'] = $_SERVER;
 
       // make log
       $actionName = "Hit page ZAIN KSA";
@@ -121,7 +121,7 @@ class KsaController extends Controller
       $company = $this->detectCompnay();
       // check status on Arpu
       $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/getSubscriberStatus?msisdn=$msisdn_wcc&servId=706";  // ZAIN
-    //  $result = preg_replace('/\s+/', '', file_get_contents($URL));
+
       $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
       // make log
@@ -144,7 +144,7 @@ class KsaController extends Controller
 
           // check status for zain
 
-          if ($Msisdn && $Msisdn->final_status == 1) {
+       //   if ($Msisdn && $Msisdn->final_status == 1) {
               //  session()->flash('failed', 'انت مشترك بالفعل');
               // return back();
               session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>ZAIN_OP_ID]);
@@ -154,12 +154,11 @@ class KsaController extends Controller
                   ->where('greetingimg_operator.operator_id', '=', ZAIN_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
               if ($snap) {
-                  $url = Generatedurl::where('operator_id', ZAIN_OP_ID)->orderBy('created_at', 'desc')->first();
-                  return redirect(url('rotanav2/inner/' . $snap->id . '/' . $url->UID));
+                  return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
               } else {
                   return redirect(url('rotanav2/' . $Url->UID));
               }
-          }
+        // }
 
       }
 
@@ -213,14 +212,17 @@ class KsaController extends Controller
       );
       $this->log($actionName, $URL, $parameters_arr);
 
-      
-
       if ($result == "7" || $result == "1") {  // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
           return view('landing_v2.ksa.zain.zain_ksa_pinCode', compact('msisdn'));
+      }elseif($result =="Aninternalservererroroccurs."){
+        $request->session()->flash('failed', 'An internal server error occurs');
+          $MSISDN = $msisdn;
+          return view('landing_v2.ksa.zain.rotana_zain_landing', compact('msisdn'));
+
       } else {  // error
           $request->session()->flash('failed', 'pincode send is failed');
           $MSISDN = $msisdn;
-          return view('landing_v2.ksa.zain.rotana_zain_landing', compact('MSISDN'));
+          return view('landing_v2.ksa.zain.rotana_zain_landing', compact('msisdn'));
       }
   }
 
@@ -239,7 +241,18 @@ class KsaController extends Controller
 
 
       $Msisdn = Msisdn::where('msisdn', '=', $msisdn_wcc)->where('operator_id', '=', ZAIN_OP_ID)->orderBy('id', 'DESC')->first();
+
+
       if ($Msisdn) {
+
+      } else {
+          $Msisdn = new Msisdn();
+          $Msisdn->msisdn = $msisdn_wcc;
+          $Msisdn->operator_id = ZAIN_OP_ID ;
+      }
+
+
+   //   if ($Msisdn) {
 
           //  ZAIN KSA verify pincode
           $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/ZainKSAAPI?msisdn=$msisdn_wcc&serv=d&pincode=$pincode";  // ZAIN
@@ -323,14 +336,13 @@ class KsaController extends Controller
                   ->where('greetingimg_operator.operator_id', '=', ZAIN_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
               if ($snap) {
-                  $url = Generatedurl::where('operator_id', ZAIN_OP_ID)->orderBy('created_at', 'desc')->first();
-                  return redirect(url('rotanav2/inner/' . $snap->id . '/' . $url->UID));
+                  return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
               } else {
                   return redirect(url('rotanav2/' . $Url->UID));
               }
 
 
-          } elseif ($result == "Theproducthasbeensubscribed.") {  // alreday subscribe
+          }elseif ($result == "Theproducthasbeensubscribed.") {  // alreday subscribe
               session(['MSISDN' => $msisdn, 'Status' => 'active','currentOP'=>ZAIN_OP_ID]);
               $Url = Generatedurl::where('operator_id', ZAIN_OP_ID)->latest()->first();
 
@@ -338,8 +350,7 @@ class KsaController extends Controller
                   ->where('greetingimg_operator.operator_id', '=', ZAIN_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
                 if ($snap) {
-                    $url = Generatedurl::where('operator_id', ZAIN_OP_ID)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('rotanav2/inner/' . $snap->id . '/' . $url->UID));
+                    return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
                 } else {
                     return redirect(url('rotanav2/' . $Url->UID));
                 }
@@ -350,10 +361,10 @@ class KsaController extends Controller
           }
 
 
-      }else {
-              $request->session()->flash('failed', 'pincode verified failed');
-              return view('landing_v2.ksa.zain.zain_ksa_pinCode', compact('msisdn'));
-          }
+      // }else {
+      //         $request->session()->flash('failed', 'pincode verified failed');
+      //         return view('landing_v2.ksa.zain.zain_ksa_pinCode', compact('msisdn'));
+      //     }
 
   }
 
@@ -458,7 +469,7 @@ class KsaController extends Controller
       $result['HeadeEnriched'] = $MSISDN;
       $result['adsCompnayName'] = $company;
       $result['deviceModel'] = $deviceModel;
-      $result['AllHeaders'] = $_SERVER;
+     // $result['AllHeaders'] = $_SERVER;
 
       // make log
       $actionName = "Hit page STC KSA";
@@ -516,7 +527,7 @@ class KsaController extends Controller
 
           // check status for zain
 
-          if ($Msisdn && $Msisdn->final_status == 1) {
+        //  if ($Msisdn && $Msisdn->final_status == 1) {
               //  session()->flash('failed', 'انت مشترك بالفعل');
               // return back();
               session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>STC_OP_ID]);
@@ -531,7 +542,7 @@ class KsaController extends Controller
               } else {
                   return redirect(url('rotanav2/' . $Url->UID));
               }
-          }
+       //   }
 
       }
 
@@ -585,7 +596,6 @@ class KsaController extends Controller
       );
       $this->log($actionName, $URL, $parameters_arr);
 
-      
 
       if ($result == "7" || $result == "1") {  // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
           return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
@@ -606,15 +616,25 @@ class KsaController extends Controller
 
       if (!preg_match('/^[0-9]{9}$/', $msisdn)) {
           $request->session()->flash('error', 'هذا الرقم غير صحيح');
-          return view('landing_v2.ksa.stc.zain_ksa_pinCode', compact('msisdn'));
+          return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
       }
 
 
       $Msisdn = Msisdn::where('msisdn', '=', $msisdn_wcc)->where('operator_id', '=', STC_OP_ID)->orderBy('id', 'DESC')->first();
+
       if ($Msisdn) {
+
+      } else {
+          $Msisdn = new Msisdn();
+          $Msisdn->msisdn = $msisdn_wcc;
+          $Msisdn->operator_id = STC_OP_ID ;
+      }
+
+    //  if ($Msisdn) {
 
           //  STC KSA verify pincode
           $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=696&pincode=$pincode";  // STC
+
         //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
           $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
@@ -638,13 +658,14 @@ class KsaController extends Controller
               $AdvertisingUrl->msisdn = $msisdn_wcc;
               $AdvertisingUrl->operatorId = STC_OP_ID;
               $AdvertisingUrl->status = 3;  // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
-              $AdvertisingUrl->operatorName = "zain_ksa";
+              $AdvertisingUrl->operatorName = "stc_ksa";
               $AdvertisingUrl->ads_compnay_name = $company;
               if (session::get('publisherId_macro') !== NULL && session::get('publisherId_macro') != "") {
                   $AdvertisingUrl->publisherId_macro = session::get('publisherId_macro');
                   $AdvertisingUrl->transaction_id = session::get('transaction_id');
               }
               $AdvertisingUrl->save();
+
 
               // update msisdn
               $Msisdn->ads_ur_id = $AdvertisingUrl->id;
@@ -654,6 +675,7 @@ class KsaController extends Controller
               }
               $Msisdn->final_status = 1;
               $Msisdn->save();
+
 
 
               // update intech
@@ -667,10 +689,10 @@ class KsaController extends Controller
                   if ($adv_result['UET Offer Log'] == "SUCCESS") {
                       $AdvertisingUrl = new AdvertisingUrl();
                       $AdvertisingUrl->adv_url = session::get('adv_params');
-                      $AdvertisingUrl->msisdn = $msisdn;
+                      $AdvertisingUrl->msisdn = $msisdn_wcc;
                       $AdvertisingUrl->operatorId = STC_OP_ID;
                       $AdvertisingUrl->status = 4;  // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
-                      $AdvertisingUrl->operatorName = "zain_ksa";
+                      $AdvertisingUrl->operatorName = "stc_ksa";
                       $AdvertisingUrl->ads_compnay_name = $company;
                       $AdvertisingUrl->save();
 
@@ -695,14 +717,14 @@ class KsaController extends Controller
                   ->where('greetingimg_operator.operator_id', '=', STC_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
               if ($snap) {
-                  $url = Generatedurl::where('operator_id', STC_OP_ID)->orderBy('created_at', 'desc')->first();
-                  return redirect(url('rotanav2/inner/' . $snap->id . '/' . $url->UID));
+                 // $url = Generatedurl::where('operator_id', STC_OP_ID)->orderBy('created_at', 'desc')->first();
+                  return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
               } else {
                   return redirect(url('rotanav2/' . $Url->UID));
               }
 
 
-          } elseif ($result == "Theproducthasbeensubscribed.") {  // alreday subscribe
+          }elseif ($result == "Theproducthasbeensubscribed.") {  // alreday subscribe
               session(['MSISDN' => $msisdn, 'Status' => 'active','currentOP'=>STC_OP_ID]);
               $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
 
@@ -710,22 +732,22 @@ class KsaController extends Controller
                   ->where('greetingimg_operator.operator_id', '=', STC_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
                 if ($snap) {
-                    $url = Generatedurl::where('operator_id', STC_OP_ID)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('rotanav2/inner/' . $snap->id . '/' . $url->UID));
+                  //  $url = Generatedurl::where('operator_id', STC_OP_ID)->orderBy('created_at', 'desc')->first();
+                    return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
                 } else {
                     return redirect(url('rotanav2/' . $Url->UID));
                 }
 
-          } else {
+          }else {
               $request->session()->flash('failed', 'pincode verified failed');
               return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
           }
 
 
-      }else {
-              $request->session()->flash('failed', 'pincode verified failed');
-              return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
-          }
+      // }else {
+      //         $request->session()->flash('failed', 'pincode verified failed');
+      //         return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
+      //     }
 
   }
 
@@ -738,8 +760,7 @@ class KsaController extends Controller
   {
       $messidn = zain_ksa_prefix . $request->number;
       //  $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=' . $messidn . '&serv=f&action=unsub'; // Mobily
-      $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=' . $messidn . '&serviceID=696&action=unsub'; // zain saudi
-   //   $result = preg_replace('/\s+/', '', file_get_contents($url));
+      $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=' . $messidn . '&serviceID=696&action=unsub'; // Stc Ksa
       $result = preg_replace('/\s+/', '', $this->GetPageData($url)) ;
 
 
@@ -766,7 +787,7 @@ class KsaController extends Controller
       }
       return back();
   }
-  
+
 
   public static function GetPageData($URL)
   {

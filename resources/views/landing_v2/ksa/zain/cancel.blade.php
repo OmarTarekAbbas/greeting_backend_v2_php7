@@ -23,20 +23,20 @@
           background-repeat: no-repeat;
           background-attachment: fixed;
         }
-      
+
         .landing_page .strip {
           margin-top: -2.5%;
           background-image: url('assets/front/landing_v2/img/strip_green.png');
         }
-      
+
         .landing_page .shbka .zain_viva #zain {
           width: 32%;
         }
-      
+
         .landing_page .form_content form .form-group label {
           background-color: #141719;
         }
-      
+
         .landing_page .form_content form .btn {
           background-color: #FFF;
           color: #000;
@@ -49,10 +49,9 @@
 <body>
     <div class="main_container">
         <div class="landing_page">
-
-            <div class="strip">
-                <h2>استمتع بوقتك مع فلاتر</h2>
-            </div>
+          <div class="strip" style="margin-top:50px;">
+            <h2>الغاء اشتراك فلاتر روتانا  </h2>
+        </div>
             <br><br><br><br>
             <div class="shbka">
                 <div class="container">
@@ -97,7 +96,7 @@
                             <span class="validity"></span>
                         </div>
                         <!--<button class="btn back">رجوع</button>-->
-                        <button id="zain_submit" class="btn" type="submit" data-toggle="modal" data-target="#loginModal">الغاء</button>
+                        <button id="zain_submit" class="btn" type="submit" data-toggle="modal" data-target="#loginModal">تأكيد</button>
                     </form>
                     <!--<h5>للاشتراك يرجى الارسال الى <span>965</span></h5>
                 <h5>الى <span>965</span><span> STOP1 </span>لالغاء الاشتراك ارسل</h5>-->
@@ -107,19 +106,9 @@
 
         </div>
 
-        <!-- copyright -->
         <div class="copy">
-            <p>copyright @ <span>2019</span> Ivas, all rights reserved.</p>
-        </div>
-        <!-- copyright -->
-
-        <!-- loading -->
-        <div class="loading-overlay">
-            <div class="spinner">
-                <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
-            </div>
-        </div>
-        <!-- end loading -->
+          <p>copyright @ <span><?php  echo date("Y")?></span> Digizone, all rights reserved.</p>
+      </div>
 
         <!-- <div id="loginModal" class="modal fade" role="dialog">
         <div class="modal-dialog">

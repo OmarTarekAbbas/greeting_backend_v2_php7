@@ -68,7 +68,7 @@
 
       <div class="shbka">
         <div class="container">
-          <h3 class="mb-3 mt-3">اشترك الان</h3>
+          <h3 class="mt-3">اشترك الان</h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -89,17 +89,12 @@
             </div>
             @endif
             <div class="row justify-content-center">
-              <!--<div class="col-12">
-                                <img src="img/viva.png" id="viva">
-                            </div>-->
 
               <div class="col-12">
-                <img src="{{ url('assets/front/landing_v2')}}/img/zain_ksa.png" id="zain">
+                <img  width="30px" height="30px" src="{{ url('assets/front/landing_v2')}}/img/zain_ksa.png" id="zain">
               </div>
 
-              <!--<div class="col-12">
-                                <img src="img/oredoo.png" id="ooredoo">
-                            </div>-->
+
             </div>
           </div>
         </div>
@@ -116,7 +111,7 @@
               <i style="display:none" class="ml-2 fa fa-check text-success"></i>
             </div>
             <!--<button class="btn back">رجوع</button>-->
-            <button id="zain_submit" class="btn" type="submit">أشترك</button>
+            <button style="margin-bottom:30px;"  id="zain_submit" class="btn" type="submit">أشترك</button>
           </form>
           <a href="{{url('rotana_zain_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>
         </div>
@@ -136,7 +131,7 @@
   <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/popper.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
-  <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script>
+  {{-- <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script> --}}
 
 
   <script>
