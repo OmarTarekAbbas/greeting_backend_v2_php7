@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
-use Datatables;
+use DataTables;
 
 class GreetingNotificationController extends Controller {
 
@@ -40,7 +40,7 @@ class GreetingNotificationController extends Controller {
                         ->join('cproviders', 'cproviders.id', '=', 'greetingaudios.cprovider_id')
                         ->select(['greetingaudios.id', 'occasion_id', 'greetingaudios.title', 'path', 'RDate', 'EXDate', 'featured', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle', 'cproviders.name as cproviderName'])->get();
 
-        return Datatables::of($GreetingAudios)
+        return DataTables::of($GreetingAudios)
                         ->addColumn('featured', '@if($featured == 1)
                                 <button type="button" class="btn btn-info btn-circle"><i class="ion-checkmark-round bg-blue-500"></i></button>
                                 @else
@@ -67,7 +67,9 @@ class GreetingNotificationController extends Controller {
                                 {!! Form::close() !!}
                                 <audio src="{{ url($path) }}" controls onplay="pauseOther(this)"></audio>
                                 ')
-                        ->make(true);
+            ->escapeColumns([])
+
+            ->make(true);
     }
 
     /**

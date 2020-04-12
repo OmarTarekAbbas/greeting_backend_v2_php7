@@ -237,6 +237,7 @@ Route::get('admin/gimages/allData','GreetingimgsController@allData');
 Route::resource('admin/gimages','GreetingimgsController');
 Route::get('admin/gsnap/allData','GreetingSnapController@allData');
 Route::resource('admin/gsnap','GreetingSnapController');
+Route::get('export', 'GreetingSnapController@export')->name('export');
 
 Route::post('admin/date', 'GreetingSnapController@getDate');//date ajax
 

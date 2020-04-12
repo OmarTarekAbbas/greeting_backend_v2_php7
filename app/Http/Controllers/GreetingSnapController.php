@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use App\Language;
-use Datatables;
+use DataTables;
+use App\Exports\GreetingimgExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GreetingSnapController extends Controller {
 
@@ -42,7 +44,7 @@ class GreetingSnapController extends Controller {
                         // ->join('countries','countries.id','=','operators.country_id')
                         ->select(['greetingimgs.id' , 'occasion_id', 'greetingimgs.title', 'path', 'RDate', 'EXDate', 'featured', 'rbt_id', 'occasions.title as occasionsTitle', 'categories.title as categoriesTitle'])->get();
 
-                        return Datatables::of($GreetingImgs)
+                        return DataTables::of($GreetingImgs)
                         ->addColumn('image', '<img src="{{ url($path) }}" height="90px">')
                         ->addColumn('featured', '@if($featured == 1)
                                 <button type="button" class="btn btn-info btn-circle"><i class="ion-checkmark-round bg-blue-500"></i></button>
@@ -55,7 +57,9 @@ class GreetingSnapController extends Controller {
                         ->addColumn('action',function(Greetingimg $GreetingImg) {
                             return view('admin.gsnap.action', compact('GreetingImg'))->render();
                         })
-                        ->make(true);
+                            ->escapeColumns([])
+
+                            ->make(true);
     }
 
     /**
@@ -63,6 +67,11 @@ class GreetingSnapController extends Controller {
      *
      * @return Response
      */
+    public function export()
+    {
+        return Excel::download(new GreetingimgExport, 'Greetingimg.xlsx');
+    }
+
     public function create() {
         //
         $Occasions = Occasion::pluck('title', 'id');
