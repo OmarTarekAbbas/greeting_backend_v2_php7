@@ -19,7 +19,7 @@
         <?php $i=0;?>
         @foreach($languages as $language)
           <div class="tab-pane fade in {{($i++)? '':'active'}}" id="translations{{$language->short_code}}">
-             {!! Form::textarea("translations[$language->id]",(isset($static_translation)) ? $static_translation->getBody($language->short_code):null, ['class'=>'form-control input-lg ckeditor','placeholder'=>"$language->title"]) !!}
+             {!! Form::textarea("translations[$language->id]",(isset($static_translation)) ? $static_translation->getBody($language->short_code):null, ['class'=>'form-control input-lg','placeholder'=>"$language->title"]) !!}
           </div>
         @endforeach
       </div>
