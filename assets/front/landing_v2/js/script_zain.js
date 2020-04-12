@@ -22,24 +22,24 @@ $('#viva, #zain, #ooredoo').click(function () {
 */
 //---------------------------------------
 
-$('#phone').focusin(function() {
-    'use strict';
-    $('#video').css('display', 'none');
-    $('.strip').css('margin-top', 20);
-});
+// $('#phone').focusin(function() {
+//     'use strict';
+//     $('#video').css('display', 'none');
+//     $('.strip').css('margin-top', 20);
+// });
 
-$('#phone').blur(function() {
-    'use strict';
-    $('#video').css('display', 'block');
-    $('.strip').css('margin-top', -10);
+// $('#phone').blur(function() {
+//     'use strict';
+//     $('#video').css('display', 'block');
+//     $('.strip').css('margin-top', -10);
 
-    var phone = $("#phone").val();
-    if (phone != "" && phone.length == 8) {
-        $("#form").submit()
-    }
+//     var phone = $("#phone").val();
+//     if (phone != "" && phone.length == 8) {
+//         $("#form").submit()
+//     }
 
 
-});
+// });
 $('#phone').keyup(function() {
         var phone = $("#phone").val();
         if (phone != "" && phone.length == 9) {
