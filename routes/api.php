@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 /*****************start*****************/
-
-
+define('MobilyServiceId','102');
+define('PartnerCode','1852ue');
 
 /************notification************/
 Route::post('notification/mo/{PartnerCode}','MobilyController@notificationMO');

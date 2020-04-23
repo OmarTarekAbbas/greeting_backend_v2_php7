@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\MONotification;
+use App\OptInNotification;
+use App\OptoutNotification;
+use App\RenewalNotification;
+
 use Illuminate\Http\Request;
 use Validator;
 use Monolog\Handler\StreamHandler;
@@ -27,7 +32,7 @@ class MobilyController extends Controller
 
     public function notificationMO(Request $request, $PartnerCode)
     {
-        $PartnerCode = $PartnerCode;
+        $PartnerCode = PartnerCode;
 
         $validator = Validator::make($request->all(), [
             'serviceId' => 'required',
@@ -48,7 +53,7 @@ class MobilyController extends Controller
             "Content-Type: application/json",
         );
 
-        $vars['serviceId'] = $request->serviceId;
+        $vars['serviceId'] = MobilyServiceId;
         $vars['text'] = $request->text;
         $vars['msisdn'] = $request->msisdn;
         $vars['PartnerCode'] = $PartnerCode;
@@ -60,20 +65,27 @@ class MobilyController extends Controller
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
+        
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['requestId'] = 'requestId';
         $ReqResponse['code'] = 'SUCCESS';
+        
+        $MONotification['msisdn'] = $vars['msisdn'];
+        $MONotification['text'] = $vars['text'];
+        $MONotification['request'] = json_encode($vars);
+        $MONotification['response'] = json_encode($ReqResponse);
+
+        MONotification::create($MONotification);
 
         return json_encode($ReqResponse);
     }
 
     public function notificationOptIn(Request $request, $PartnerCode)
     {
-        $PartnerCode = $PartnerCode;
+        $PartnerCode = PartnerCode;
 
         $validator = Validator::make($request->all(), [
-            'serviceId' => 'required',
             'text' => 'required',
             'msisdn' => 'required',
         ]);
@@ -91,7 +103,7 @@ class MobilyController extends Controller
             "Content-Type: application/json",
         );
 
-        $vars['serviceId'] = $request->serviceId;
+        $vars['serviceId'] = MobilyServiceId;
         $vars['text'] = $request->text;
         $vars['msisdn'] = $request->msisdn;
         $vars['PartnerCode'] = $PartnerCode;
@@ -107,16 +119,22 @@ class MobilyController extends Controller
         $ReqResponse['inError'] = 'false';
         $ReqResponse['requestId'] = 'requestId';
         $ReqResponse['code'] = 'SUCCESS';
+
+        $OptInNotification['msisdn'] = $vars['msisdn'];
+        $OptInNotification['text'] = $vars['text'];
+        $OptInNotification['request'] = json_encode($vars);
+        $OptInNotification['response'] = json_encode($ReqResponse);
+
+        OptInNotification::create($OptInNotification);
 
         return json_encode($ReqResponse);
     }
 
     public function notificationOptOut(Request $request, $PartnerCode)
     {
-        $PartnerCode = $PartnerCode;
+        $PartnerCode = PartnerCode;
 
         $validator = Validator::make($request->all(), [
-            'serviceId' => 'required',
             'text' => 'required',
             'msisdn' => 'required',
         ]);
@@ -134,7 +152,7 @@ class MobilyController extends Controller
             "Content-Type: application/json",
         );
 
-        $vars['serviceId'] = $request->serviceId;
+        $vars['serviceId'] = MobilyServiceId;
         $vars['text'] = $request->text;
         $vars['msisdn'] = $request->msisdn;
         $vars['PartnerCode'] = $PartnerCode;
@@ -150,13 +168,20 @@ class MobilyController extends Controller
         $ReqResponse['inError'] = 'false';
         $ReqResponse['requestId'] = 'requestId';
         $ReqResponse['code'] = 'SUCCESS';
+
+        $OptoutNotification['msisdn'] = $vars['msisdn'];
+        $OptoutNotification['text'] = $vars['text'];
+        $OptoutNotification['request'] = json_encode($vars);
+        $OptoutNotification['response'] = json_encode($ReqResponse);
+
+        OptoutNotification::create($OptoutNotification);
 
         return json_encode($ReqResponse);
     }
 
     public function notificationRenewed(Request $request, $PartnerCode)
     {
-        $PartnerCode = $PartnerCode;
+        $PartnerCode = PartnerCode;
 
         $validator = Validator::make($request->all(), [
             'serviceId' => 'required',
@@ -177,7 +202,7 @@ class MobilyController extends Controller
             "Content-Type: application/json",
         );
 
-        $vars['serviceId'] = $request->serviceId;
+        $vars['serviceId'] = MobilyServiceId;
         $vars['text'] = $request->text;
         $vars['msisdn'] = $request->msisdn;
         $vars['PartnerCode'] = $PartnerCode;
@@ -193,6 +218,13 @@ class MobilyController extends Controller
         $ReqResponse['inError'] = 'false';
         $ReqResponse['requestId'] = 'requestId';
         $ReqResponse['code'] = 'SUCCESS';
+
+        $RenewalNotification['msisdn'] = $vars['msisdn'];
+        $RenewalNotification['text'] = $vars['text'];
+        $RenewalNotification['request'] = json_encode($vars);
+        $RenewalNotification['response'] = json_encode($ReqResponse);
+
+        RenewalNotification::create($RenewalNotification);
 
         return json_encode($ReqResponse);
     }
