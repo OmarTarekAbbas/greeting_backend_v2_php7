@@ -213,7 +213,7 @@ class KsaController extends Controller
       );
       $this->log($actionName, $URL, $parameters_arr);
 
-      
+
 
       if ($result == "7" || $result == "1") {  // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
           return view('landing_v2.ksa.zain.zain_ksa_pinCode', compact('msisdn'));
@@ -492,7 +492,7 @@ class KsaController extends Controller
       }
       $company = $this->detectCompnay();
       // check status on Arpu
-      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/getSubscriberStatus?msisdn=$msisdn_wcc&servId=696";  // STC
+      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/getSubscriberStatus?msisdn=$msisdn_wcc&servId=715";  // STC
     //  $result = preg_replace('/\s+/', '', file_get_contents($URL));
       $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
@@ -569,7 +569,7 @@ class KsaController extends Controller
 
 
       //  STC KSA send Pincode
-      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=696";
+      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=715";
     //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
       $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
@@ -585,7 +585,7 @@ class KsaController extends Controller
       );
       $this->log($actionName, $URL, $parameters_arr);
 
-      
+
 
       if ($result == "7" || $result == "1") {  // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
           return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
@@ -614,7 +614,7 @@ class KsaController extends Controller
       if ($Msisdn) {
 
           //  STC KSA verify pincode
-          $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=696&pincode=$pincode";  // STC
+          $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=715&pincode=$pincode";  // STC
         //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
           $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
@@ -738,7 +738,7 @@ class KsaController extends Controller
   {
       $messidn = zain_ksa_prefix . $request->number;
       //  $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=' . $messidn . '&serv=f&action=unsub'; // Mobily
-      $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=' . $messidn . '&serviceID=696&action=unsub'; // zain saudi
+      $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=' . $messidn . '&serviceID=715&action=unsub'; // zain saudi
    //   $result = preg_replace('/\s+/', '', file_get_contents($url));
       $result = preg_replace('/\s+/', '', $this->GetPageData($url)) ;
 
@@ -766,7 +766,7 @@ class KsaController extends Controller
       }
       return back();
   }
-  
+
 
   public static function GetPageData($URL)
   {
