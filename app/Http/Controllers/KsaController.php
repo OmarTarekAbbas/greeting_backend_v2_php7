@@ -299,6 +299,17 @@ class KsaController extends Controller
               $Msisdn->save();
 
 
+
+               // make log
+               $actionName = "ZAIN KSA pincode Verify Success";
+               $URL = $ADV_URL;
+               $parameters_arr = array(
+                   'MSISDN' => $msisdn_wcc,
+                   'date' => Carbon::now()->format('Y-m-d H:i:s'),
+               );
+               $this->log($actionName, $URL, $parameters_arr);
+
+
               // update intech
               if ($company == "intech") {  // intech integration
                   // call intech  api to notify that msisdn is subscribe successfully
