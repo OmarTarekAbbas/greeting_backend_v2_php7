@@ -1,13 +1,16 @@
 {
+	"variables": [],
 	"info": {
-		"_postman_id": "d264d95d-4792-4121-92b8-ce8ce3c5e1c3",
 		"name": "rotana",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "280960c3-a31d-ec6c-49a7-178ba5befe78",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "http://localhost/greeting_backend_v2_php7/api/notification/mo/1234",
 			"request": {
+				"url": "http://localhost/greeting_backend_v2_php7/api/notification/mo/1234",
 				"method": "POST",
 				"header": [
 					{
@@ -36,26 +39,14 @@
 						}
 					]
 				},
-				"url": {
-					"raw": "http://localhost/greeting_backend_v2_php7/api/notification/mo/1234",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"greeting_backend_v2_php7",
-						"api",
-						"notification",
-						"mo",
-						"1234"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
 		{
 			"name": "http://localhost/greeting_backend_v2_php7/api/notification/user-optin/1234",
 			"request": {
+				"url": "http://localhost/greeting_backend_v2_php7/api/notification/user-renewed/1234",
 				"method": "POST",
 				"header": [
 					{
@@ -84,26 +75,14 @@
 						}
 					]
 				},
-				"url": {
-					"raw": "http://localhost/greeting_backend_v2_php7/api/notification/user-renewed/1234",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"greeting_backend_v2_php7",
-						"api",
-						"notification",
-						"user-renewed",
-						"1234"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
 		{
 			"name": "http://localhost/greeting_backend_v2_php7/api/notification/user-optin/1234",
 			"request": {
+				"url": "http://localhost/greeting_backend_v2_php7/api/notification/user-renewed/1234",
 				"method": "POST",
 				"header": [
 					{
@@ -132,26 +111,14 @@
 						}
 					]
 				},
-				"url": {
-					"raw": "http://localhost/greeting_backend_v2_php7/api/notification/user-renewed/1234",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"greeting_backend_v2_php7",
-						"api",
-						"notification",
-						"user-renewed",
-						"1234"
-					]
-				}
+				"description": ""
 			},
 			"response": []
 		},
 		{
 			"name": "http://localhost/greeting_backend_v2_php7/api/notification/user-optin/1234",
 			"request": {
+				"url": "http://localhost/greeting_backend_v2_php7/api/notification/user-optout/1234",
 				"method": "POST",
 				"header": [
 					{
@@ -180,23 +147,99 @@
 						}
 					]
 				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/flatter_rotana/notificationStatuschange?serviceId&subscContractId&statusId&statusChangeDesc",
+			"request": {
 				"url": {
-					"raw": "http://localhost/greeting_backend_v2_php7/api/notification/user-optout/1234",
+					"raw": "http://localhost/flatter_rotana/notificationStatuschange?serviceId&subscContractId&statusId&statusChangeDesc",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"greeting_backend_v2_php7",
-						"api",
-						"notification",
-						"user-optout",
-						"1234"
-					]
-				}
+						"flatter_rotana",
+						"notificationStatuschange"
+					],
+					"query": [
+						{
+							"key": "serviceId",
+							"value": "",
+							"equals": false,
+							"description": ""
+						},
+						{
+							"key": "subscContractId",
+							"value": "",
+							"equals": false,
+							"description": ""
+						},
+						{
+							"key": "statusId",
+							"value": "",
+							"equals": false,
+							"description": ""
+						},
+						{
+							"key": "statusChangeDesc",
+							"value": "",
+							"equals": false,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/flatter_rotana/notificationRecurringPayment?serviceId=132&msisdn=201223872695&statusId=6&statusChangeDesc=user sent sms",
+			"request": {
+				"url": {
+					"raw": "http://localhost/flatter_rotana/notificationRecurringPayment?serviceId=132&msisdn=201223872695&deductedAmount=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"flatter_rotana",
+						"notificationRecurringPayment"
+					],
+					"query": [
+						{
+							"key": "serviceId",
+							"value": "132",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "msisdn",
+							"value": "201223872695",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "deductedAmount",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

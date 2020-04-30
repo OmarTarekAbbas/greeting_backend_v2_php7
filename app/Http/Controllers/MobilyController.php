@@ -30,8 +30,11 @@ class MobilyController extends Controller
         $log->addInfo($URL, $parameters_arr);
     }
 
-    public function notificationMO(Request $request, $PartnerCode)
+
+
+    public function notificationMO(Request $request)
     {
+
         $PartnerCode = PartnerCode;
 
         $validator = Validator::make($request->all(), [
@@ -49,6 +52,7 @@ class MobilyController extends Controller
             return json_encode($ReqResponse);
         }
 
+
         $headers = array(
             "Content-Type: application/json",
         );
@@ -65,19 +69,19 @@ class MobilyController extends Controller
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
-        
+
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
-        
+
         $MONotification['msisdn'] = $vars['msisdn'];
         $MONotification['text'] = $vars['text'];
         $MONotification['request'] = json_encode($vars);
         $MONotification['response'] = json_encode($ReqResponse);
         $id = MONotification::create($MONotification);
-        
+
         $ReqResponse['requestId'] = $id->id;
-        
+
         return json_encode($ReqResponse);
     }
 
@@ -118,14 +122,14 @@ class MobilyController extends Controller
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
-        
+
         $OptInNotification['msisdn'] = $vars['msisdn'];
         $OptInNotification['text'] = $vars['text'];
         $OptInNotification['request'] = json_encode($vars);
         $OptInNotification['response'] = json_encode($ReqResponse);
-        
+
         $id = OptInNotification::create($OptInNotification);
-        
+
         $ReqResponse['requestId'] = $id->id;
         return json_encode($ReqResponse);
     }
@@ -167,14 +171,14 @@ class MobilyController extends Controller
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
-        
+
         $OptoutNotification['msisdn'] = $vars['msisdn'];
         $OptoutNotification['text'] = $vars['text'];
         $OptoutNotification['request'] = json_encode($vars);
         $OptoutNotification['response'] = json_encode($ReqResponse);
-        
+
         $id = OptoutNotification::create($OptoutNotification);
-        
+
         $ReqResponse['requestId'] = $id->id;
         return json_encode($ReqResponse);
     }
@@ -217,14 +221,14 @@ class MobilyController extends Controller
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
-        
+
         $RenewalNotification['msisdn'] = $vars['msisdn'];
         $RenewalNotification['text'] = $vars['text'];
         $RenewalNotification['request'] = json_encode($vars);
         $RenewalNotification['response'] = json_encode($ReqResponse);
-        
+
         $id = RenewalNotification::create($RenewalNotification);
-        
+
         $ReqResponse['requestId'] = $id->id;
         return json_encode($ReqResponse);
     }

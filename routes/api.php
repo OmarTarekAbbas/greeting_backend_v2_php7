@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/*****************start*****************/
+/*****************Mobily Binary*****************/
 define('MobilyServiceId','102');
 define('PartnerCode','1852ue');
 
@@ -26,4 +26,6 @@ Route::post('notification/mo/{PartnerCode}','MobilyController@notificationMO');
 Route::post('notification/user-optin/{PartnerCode}','MobilyController@notificationOptIn');
 Route::post('notification/user-optout/{PartnerCode}','MobilyController@notificationOptOut');
 Route::post('notification/user-renewed/{PartnerCode}','MobilyController@notificationRenewed');
-/*****************end*******************/
+/*****************Mobily Binary*******************/
+
+
