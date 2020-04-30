@@ -120,6 +120,14 @@
 <script src="{{url('assets/front/rotanav2/js/owl.carousel.min.js')}}"></script>
 <script src="{{url('assets/front/rotanav2/js/wow.min.js')}}"></script>
 <script src="{{url('assets/front/rotanav2/js/script.js')}}"></script>
+<script>
+  var modal = Binary_functions();
+  if(modal){
+      console.log(modal)
+      $('#hemsisdn').html(modal);
+      $('.hemodal').css('display', 'block')
+  }
+</script>
 
 <script type="text/javascript">
   if (screen.width <= 600) {
@@ -173,3 +181,5 @@
     $('.whatsapp_link').attr('href', whatsapp);
   }
 </script>
+</body>
+</html>

@@ -65,7 +65,7 @@
                             <div class="dis">
                                 <ul>
                                     <li><p class="pag_color">يمكنك الغاء الاشتراك عن طريق هذا <a href="{{url('Orange_unsub')}}" style="color: #007bff;"> الرابط </a> </p></li>
-                                    <li>برجاء إرسال اى أسئلة أو شكاوى عن الخدمة إلى support@flatter.ivascloud.com</li>
+                                    {{-- <li>برجاء إرسال اى أسئلة أو شكاوى عن الخدمة إلى support@flatter.ivascloud.com</li> --}}
                                 </ul>
                             </div>
 
