@@ -212,6 +212,8 @@ class KsaController extends Controller
       );
       $this->log($actionName, $URL, $parameters_arr);
 
+
+
       if ($result == "7" || $result == "1") {  // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
           return view('landing_v2.ksa.zain.zain_ksa_pinCode', compact('msisdn'));
       }elseif($result =="Aninternalservererroroccurs."){
@@ -503,7 +505,7 @@ class KsaController extends Controller
       }
       $company = $this->detectCompnay();
       // check status on Arpu
-      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/getSubscriberStatus?msisdn=$msisdn_wcc&servId=696";  // STC
+      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/getSubscriberStatus?msisdn=$msisdn_wcc&servId=715";  // STC
     //  $result = preg_replace('/\s+/', '', file_get_contents($URL));
       $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
@@ -522,14 +524,7 @@ class KsaController extends Controller
       $Msisdn = Msisdn::where('msisdn', '=', $msisdn_wcc)->where('operator_id', '=', STC_OP_ID)->orderBy('id', 'DESC')->first();
 
       if ($result == "Active") {
-          //session()->flash('error', 'هذا الرقم مشرك بالفعل');
-          // return back();
 
-          // check status for zain
-
-        //  if ($Msisdn && $Msisdn->final_status == 1) {
-              //  session()->flash('failed', 'انت مشترك بالفعل');
-              // return back();
               session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>STC_OP_ID]);
               $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
 
@@ -537,12 +532,10 @@ class KsaController extends Controller
                   ->where('greetingimg_operator.operator_id', '=', STC_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
               if ($snap) {
-                  $url = Generatedurl::where('operator_id', STC_OP_ID)->orderBy('created_at', 'desc')->first();
-                  return redirect(url('rotanav2/inner/' . $snap->id . '/' . $url->UID));
+                  return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
               } else {
                   return redirect(url('rotanav2/' . $Url->UID));
               }
-       //   }
 
       }
 
@@ -580,7 +573,7 @@ class KsaController extends Controller
 
 
       //  STC KSA send Pincode
-      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=696";
+      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=715";
     //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
       $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
@@ -597,7 +590,9 @@ class KsaController extends Controller
       $this->log($actionName, $URL, $parameters_arr);
 
 
-      if ($result == "7" || $result == "1") {  // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
+
+      if ($result == "7" || $result == "1") {
+         // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
           return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
       } else {  // error
           $request->session()->flash('failed', 'pincode send is failed');
@@ -630,11 +625,8 @@ class KsaController extends Controller
           $Msisdn->operator_id = STC_OP_ID ;
       }
 
-    //  if ($Msisdn) {
-
           //  STC KSA verify pincode
-          $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=696&pincode=$pincode";  // STC
-
+          $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=715&pincode=$pincode";  // STC
         //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
           $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
@@ -678,6 +670,17 @@ class KsaController extends Controller
 
 
 
+                // make log
+                $actionName = "STC KSA Pincode Verify Success";
+                $URL = $ADV_URL;
+                $parameters_arr = array(
+                    'MSISDN' => $msisdn_wcc,
+                    'date' => Carbon::now()->format('Y-m-d H:i:s'),
+                );
+                $this->log($actionName, $URL, $parameters_arr);
+
+
+
               // update intech
               if ($company == "intech") {  // intech integration
                   // call intech  api to notify that msisdn is subscribe successfully
@@ -710,6 +713,8 @@ class KsaController extends Controller
                   }
               }
 
+
+              // Redirect to Stc content page
               session(['MSISDN' => $msisdn, 'Status' => 'active','currentOP'=>STC_OP_ID]);
               $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
 
@@ -717,7 +722,6 @@ class KsaController extends Controller
                   ->where('greetingimg_operator.operator_id', '=', STC_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
               if ($snap) {
-                 // $url = Generatedurl::where('operator_id', STC_OP_ID)->orderBy('created_at', 'desc')->first();
                   return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
               } else {
                   return redirect(url('rotanav2/' . $Url->UID));
@@ -732,7 +736,6 @@ class KsaController extends Controller
                   ->where('greetingimg_operator.operator_id', '=', STC_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
                 if ($snap) {
-                  //  $url = Generatedurl::where('operator_id', STC_OP_ID)->orderBy('created_at', 'desc')->first();
                     return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
                 } else {
                     return redirect(url('rotanav2/' . $Url->UID));
@@ -742,12 +745,6 @@ class KsaController extends Controller
               $request->session()->flash('failed', 'pincode verified failed');
               return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
           }
-
-
-      // }else {
-      //         $request->session()->flash('failed', 'pincode verified failed');
-      //         return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
-      //     }
 
   }
 
@@ -759,8 +756,9 @@ class KsaController extends Controller
   public function RotanaStcKsaUnsubAction(Request $request)
   {
       $messidn = zain_ksa_prefix . $request->number;
-      //  $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=' . $messidn . '&serv=f&action=unsub'; // Mobily
-      $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=' . $messidn . '&serviceID=696&action=unsub'; // Stc Ksa
+      $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=' . $messidn . '&serviceID=715&action=unsub'; // STC KSA
+
+   //   $result = preg_replace('/\s+/', '', file_get_contents($url));
       $result = preg_replace('/\s+/', '', $this->GetPageData($url)) ;
 
 

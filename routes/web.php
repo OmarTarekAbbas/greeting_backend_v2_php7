@@ -171,7 +171,7 @@ Route::post('/RotanaStcKsaPinCodeSend', 'KsaController@RotanaStcKsaPinCodeSend')
 Route::post('/rotana_stc_ksa_pincode_confirm', 'KsaController@rotana_stc_ksa_pincode_confirm');
 Route::get('rotana_stc_ksa_unsub', 'KsaController@RotanaStcKsaUnsub');
 Route::post('RotanaStcKsaUnsubAction', 'KsaController@RotanaStcKsaUnsubAction');
-define('STC_OP_ID', 15);  // Stc Ksa
+define('STC_OP_ID', 6);  // Stc Ksa
 
 // Zain KSA (Rotana Flatter)
 Route::get('landing_rotana_zain_ksa', 'KsaController@landing_rotana_zain_ksa');
