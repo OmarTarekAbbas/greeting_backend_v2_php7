@@ -21,6 +21,29 @@ use Validator;
 class OrangeController extends Controller
 {
 
+    // public function headerEnrichment(){
+
+    //     $dateString = date('yyyy-MM-dd HH:mm:ssZ');
+    //     $serviceId = ServiceId;
+    //     $ServiceAPIKey = ServiceAPIKey;
+    //     $ServiceAPIPassword = ServiceAPIPassword;
+    //     $signature = '';
+
+    //     $message = $serviceId . $dateString;
+    //     $hash_parm1 = array(
+    //         'hashedPassword' => $ServiceAPIPassword,
+    //         'msgConcatenated' => $message,
+    //     );
+    //     $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
+    //     $hash_res = json_decode($result_jsons);
+
+    //     $this->log('headerEnrichment', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
+    //     $this->log('headerEnrichment', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);
+    //     $signature = $ServiceAPIKey . ":" . $hash_res->ResultCode;
+
+
+    // }
+
     public function notificationStatuschange(Request $request){
         $vars['serviceId'] = $request->serviceId;
         $vars['subscContractId'] = $request->subscContractId;
