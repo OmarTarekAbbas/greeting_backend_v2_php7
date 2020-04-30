@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "d264d95d-4792-4121-92b8-ce8ce3c5e1c3",
+		"name": "rotana",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost/greeting_backend_v2_php7/api/notification/mo/1234",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "serviceId",
+							"value": "123546",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "msg",
+							"type": "text"
+						},
+						{
+							"key": "msisdn",
+							"value": "01112598314",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/greeting_backend_v2_php7/api/notification/mo/1234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"greeting_backend_v2_php7",
+						"api",
+						"notification",
+						"mo",
+						"1234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/greeting_backend_v2_php7/api/notification/user-optin/1234",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "serviceId",
+							"value": "123546",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "msg",
+							"type": "text"
+						},
+						{
+							"key": "msisdn",
+							"value": "01112598314",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/greeting_backend_v2_php7/api/notification/user-renewed/1234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"greeting_backend_v2_php7",
+						"api",
+						"notification",
+						"user-renewed",
+						"1234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/greeting_backend_v2_php7/api/notification/user-optin/1234",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "serviceId",
+							"value": "123546",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "msg",
+							"type": "text"
+						},
+						{
+							"key": "msisdn",
+							"value": "01112598314",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/greeting_backend_v2_php7/api/notification/user-renewed/1234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"greeting_backend_v2_php7",
+						"api",
+						"notification",
+						"user-renewed",
+						"1234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/greeting_backend_v2_php7/api/notification/user-optin/1234",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "serviceId",
+							"value": "123546",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "msg",
+							"type": "text"
+						},
+						{
+							"key": "msisdn",
+							"value": "01112598314",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/greeting_backend_v2_php7/api/notification/user-optout/1234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"greeting_backend_v2_php7",
+						"api",
+						"notification",
+						"user-optout",
+						"1234"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -81,7 +81,7 @@
             </div>
 
             <div class="strip">
-                <h2>@lang('messages.du_enjoy')</h2>
+                <h2>استمتع بوقتك</h2>
             </div>
 
             <div class="shbka">
@@ -126,11 +126,11 @@
                             <input type="hidden" name="type" value="rotana">
                             <label for="phone"><span>974</span></label>
                             <input type="hidden" name="prev_url"  value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}"  >
-                            <input type="tel" class="form-control" id="phone" required="" placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{8}">
+                            <input type="tel" class="form-control" id="phone" required="" placeholder="ادخل رقم الهاتف" name="number" required pattern="[0-9]{8}">
                             <span class="validity"></span>
                         </div>
                         <!--<button class="btn back">رجوع</button>-->
-                        <button id="zain_submit"  class="btn" type="submit">@lang('messages.subscribe')</button>
+                        <button id="zain_submit"  class="btn" type="submit">اشترك</button>
                     </form>
                     <!--
                         <h5>للاشتراك يرجى الارسال الى <span>965</span></h5>
