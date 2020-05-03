@@ -88,6 +88,7 @@
               {{ Session::get('error')}}
             </div>
             @endif
+            <br>
             <div class="row justify-content-center">
               <!--<div class="col-12">
                                 <img src="img/viva.png" id="viva">
@@ -104,7 +105,7 @@
           </div>
         </div>
       </div>
-
+      <br>
       <div class="container">
         <div class="form_content">
           <!--<h5>ادخل رقم الهاتف</h5>-->
@@ -118,7 +119,7 @@
             <!--<button class="btn back">رجوع</button>-->
             <button style="margin-bottom:30px;"  id="zain_submit" class="btn" type="submit">أشترك</button>
           </form>
-          <a  href="{{url('rotana_stc_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>
+          <a  href="{{url('rotana_stc_ksa_unsub')}}" class="btn btn-primary" type="">الغاء الاشتراك</a>
         </div>
       </div>
 

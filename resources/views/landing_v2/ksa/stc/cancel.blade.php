@@ -70,6 +70,7 @@
                           {{ Session::get('failed')}}
                       </div>
                       @endif
+                      <br>
                         <div class="row justify-content-center">
                             <!--<div class="col-12">
                                 <img src="img/viva.png" id="viva">
@@ -86,7 +87,7 @@
                     </div>
                 </div>
             </div>
-
+            <br>
             <div class="container">
                 <div class="form_content">
                     <!--<h5>ادخل رقم الهاتف</h5>-->

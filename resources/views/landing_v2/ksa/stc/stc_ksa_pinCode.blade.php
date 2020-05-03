@@ -18,6 +18,9 @@
 </head>
 
 <style>
+  body{
+    font-family: sans-serif;
+  }
   .main_container {
     background-image: url('assets/front/landing_v2/img/stc_BG.png');
     background-size: cover;
@@ -50,7 +53,7 @@
 <body>
 <div class="main_container">
   <div class="confirm_page">
-    <img src="{{ url('assets/front/rotanav2')}}/images/Rorana_flater_logo.png" alt="snap">
+    {{-- <img src="{{ url('assets/front/rotanav2')}}/images/Rorana_flater_logo.png" alt="snap"> --}}
 
     <div class="container">
 

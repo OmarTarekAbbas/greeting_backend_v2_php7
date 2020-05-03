@@ -516,7 +516,7 @@ class KsaController extends Controller
       }
       $company = $this->detectCompnay();
       // check status on Arpu
-      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/getSubscriberStatus?msisdn=$msisdn_wcc&servId=715";  // STC
+      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/getSubscriberStatus?msisdn=$msisdn_wcc&servId=696";  // STC
     //  $result = preg_replace('/\s+/', '', file_get_contents($URL));
       $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
@@ -584,7 +584,7 @@ class KsaController extends Controller
 
 
       //  STC KSA send Pincode
-      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=715";
+      $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=696";
     //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
       $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
@@ -637,7 +637,7 @@ class KsaController extends Controller
       }
 
           //  STC KSA verify pincode
-          $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=715&pincode=$pincode";  // STC
+          $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=696&pincode=$pincode";  // STC
         //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
           $result = preg_replace('/\s+/', '', $this->GetPageData($URL)) ;
 
@@ -767,7 +767,7 @@ class KsaController extends Controller
   public function RotanaStcKsaUnsubAction(Request $request)
   {
       $messidn = zain_ksa_prefix . $request->number;
-      $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=' . $messidn . '&serviceID=715&action=unsub'; // STC KSA
+      $url = 'http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=' . $messidn . '&serviceID=696&action=unsub'; // STC KSA
 
    //   $result = preg_replace('/\s+/', '', file_get_contents($url));
       $result = preg_replace('/\s+/', '', $this->GetPageData($url)) ;
