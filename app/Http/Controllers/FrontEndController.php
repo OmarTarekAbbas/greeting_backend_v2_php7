@@ -3397,7 +3397,15 @@ class FrontEndController extends Controller
                 }else{
                   return redirect(url(redirect_operator()));
                 }
-              }
+            }
+
+            if ( OP() == STC_OP_ID) {
+              if(Session::has('currentOp') && Session::get('currentOp') == STC_OP_ID){
+
+               }else{
+                 return redirect(url(redirect_operator()));
+               }
+           }
 
             $occasion_id = $OID;
             $Rdata = Greetingimg::where('id', $OID)->first();

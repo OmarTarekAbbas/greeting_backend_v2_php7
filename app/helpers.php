@@ -204,6 +204,8 @@ function redirect_operator() {
         return 'landing_zain_ksa';
     }else if (strpos($operator->name, 'Mobily') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
         return 'landing_mobily_ksa';
+    }else if (strpos($operator->name, 'STC') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
+      return 'landing_stc_ksa';
     } else {
         return 'landing_v1';
     }
@@ -222,4 +224,14 @@ function getCode() {
        return $static_translation->getBody(getCode());
    }
    return false;
+ }
+
+ function stc_op()
+ {
+  $country = Country::where('name','Saudi Arabia')->first();
+  if($country){
+    $op = Operator::where('country_id',$country->id)->where('name','STC')->first();
+    return $op->id;
+  }
+  return 1;
  }

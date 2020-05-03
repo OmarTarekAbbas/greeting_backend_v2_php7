@@ -194,6 +194,16 @@ Route::post('/unsubscribeOoredoo', 'HomeController@unsubscribeOoredoo');
 
 Route::get('/logout', 'FrontEndController@logout');
 
+//================================= Flatter KSA( STC )==============================//
+// STC KSA (Flatter)
+Route::get('landing_stc_ksa', 'KsaController@landing_stc_ksa');
+Route::post('/StcKsaPinCodeSend', 'KsaController@StcKsaPinCodeSend');
+Route::post('/stc_ksa_pincode_confirm', 'KsaController@stc_ksa_pincode_confirm');
+Route::get('stc_ksa_unsub', 'KsaController@StcKsaUnsub');
+Route::post('StcKsaUnsubAction', 'KsaController@StcKsaUnsubAction');
+define('STC_OP_ID', stc_op());  // Stc Ksa
+//=================================  Flatter KSA( ST )==============================//
+
 // load more
 Route::get('loadMoreSnap','FrontEndController@loadMoreSnap');
 Route::get('loadMoreSnapNew','FrontEndController@loadMoreSnapNew');
