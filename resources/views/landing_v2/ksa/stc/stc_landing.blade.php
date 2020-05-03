@@ -68,7 +68,7 @@
 
       <div class="shbka">
         <div class="container">
-          <h3 class="mb-3 mt-3">اشترك الان</h3>
+          <h3 >اشترك الان</h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -119,7 +119,7 @@
             <!--<button class="btn back">رجوع</button>-->
             <button style="margin-bottom:30px;"  id="zain_submit" class="btn" type="submit">أشترك</button>
           </form>
-          <a  href="{{url('stc_ksa_unsub')}}" class="btn btn-primary" type="">الغاء الاشتراك</a>
+          {{--  <a  href="{{url('stc_ksa_unsub')}}" class="btn btn-primary" type="">الغاء الاشتراك</a>  --}}
         </div>
       </div>
 
@@ -137,7 +137,15 @@
   <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/popper.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
-  <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script>
+  {{--  <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script>  --}}
+
+
+
+  <div class="the-frame">
+    <iframe class="full-screen-preview__frame" src="{{url()->full()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 370px; border-radius: 10px;">
+    </iframe>
+  </div>
+
 
 
   <script>
