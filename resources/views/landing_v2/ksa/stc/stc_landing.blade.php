@@ -18,6 +18,11 @@
 </head>
 
 <style>
+  @media (min-width: 1025px) {
+  body {
+    background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
+  }
+}
   .main_container {
     background-image: url('assets/front/landing_v2/img/stc_BG.png');
     background-size: cover;
@@ -138,15 +143,6 @@
   <script src="{{ url('assets/front/landing_v2')}}/js/popper.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
   {{--  <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script>  --}}
-
-
-
-  <div class="the-frame">
-    <iframe class="full-screen-preview__frame" src="{{url()->full()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 370px; border-radius: 10px;">
-    </iframe>
-  </div>
-
-
 
   <script>
     jQuery(function() {

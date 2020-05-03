@@ -18,6 +18,11 @@
 </head>
 
 <style type="text/css">
+@media (min-width: 1025px) {
+  body {
+    background-image: url('{{url("assets/front/landing_v2/img/snap_new_landing/BG.jpg")}}');
+  }
+}
   .modal {
     text-align: center;
     position: fixed;
