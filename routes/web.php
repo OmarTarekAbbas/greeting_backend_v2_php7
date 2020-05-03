@@ -15,6 +15,7 @@
 /* ------------ start orange ------------ */
 
 Route::get('/orange_landing', 'OrangeController@landing_orange');
+Route::get('/orange_landing_he', 'OrangeController@landing_orange_he');
 Route::get('/Orange_unsub', 'OrangeController@unsub_or');
 
 //sub
@@ -22,6 +23,7 @@ Route::post('/AddSubscriptionContractRequest', 'OrangeController@AddSubscription
 
 //comfirm pin
 Route::post('/ConfirmPinCode', 'OrangeController@ConfirmPinCode_orange');
+Route::post('/ReSendPinCode', 'OrangeController@ReSendPinCode');
 
 //unsub
 Route::post('/unSubscribe_orange', 'OrangeController@unSubscribe_orange');
@@ -38,25 +40,32 @@ define('ServiceAPIPassword', '4abIRUzE5n0ACzEBT3MHxPuPNpMMPyNtzAhcyjOWrYPMHRvman
 Route::get('/notificationStatuschange', 'OrangeController@notificationStatuschange');
 Route::get('/notificationRecurringPayment', 'OrangeController@notificationRecurringPayment');
 
+define('testURL' , 'http://196.219.241.226:9094/DCBAPI');
+define('liveURL' , 'http://dc.binarywaves.com:8080/DCBAPI');
+
 //Initialize DirectPay
-define('test_InitializeDirectPay_url', 'http://196.219.241.226:9094/DCBAPI/OneTimePay/InitializeDirectPay');
-define('live_InitializeDirectPay_url', 'http://dc.binarywaves.com:8080/DCBAPI/OneTimePay/InitializeDirectPay');
+define('test_InitializeDirectPay_url', '/OneTimePay/InitializeDirectPay');
+define('live_InitializeDirectPay_url', '/OneTimePay/InitializeDirectPay');
 
 //Confirm eDirectPay
-define('test_ConfirmeDirectPay_url', 'http://196.219.241.226:9094/DCBAPI/OneTimePay/ConfirmDirectPay');
-define('live_ConfirmeDirectPay_url', 'http://dc.binarywaves.com:8080/DCBAPI/OneTimePay/InitializeDirectPay');
+define('test_ConfirmeDirectPay_url', '/OneTimePay/ConfirmDirectPay');
+define('live_ConfirmeDirectPay_url', '/OneTimePay/InitializeDirectPay');
 
 // Initialize Subscribe
-define('test_InitializeSubscribe_url', 'http://196.219.241.226:9094/DCBAPI/Subscribe/InitializeSubscribe');
-define('live_InitializeSubscribe_url', 'http://dc.binarywaves.com:8080/DCBAPI/Subscribe/InitializeDirectPay');
+define('test_InitializeSubscribe_url', '/Subscribe/InitializeSubscribe');
+define('live_InitializeSubscribe_url', '/Subscribe/InitializeDirectPay');
 
 // pin code confirm
-define('test_VerifySubscribe_url', 'http://196.219.241.226:9094/DCBAPI/Subscribe/VerifySubscribePinCode');
-define('live_VerifySubscribe_url', 'http://dc.binarywaves.com:8080/DCBAPI/Subscribe/VerifySubscribePinCode');
+define('test_VerifySubscribe_url', '/Subscribe/VerifySubscribePinCode');
+define('live_VerifySubscribe_url', '/Subscribe/VerifySubscribePinCode');
+
+// pin code resend
+define('test_Resend_url', '/Subscribe/ReSendPinCode');
+define('live_Resend_url', '/Subscribe/VerifySubscribePinCode');
 
 //unsubscribe
-define('test_UnSubscribe_url', 'http://196.219.241.226:9094/DCBAPI/Subscribe/UnSubscribe');
-define('live_UnSubscribe_url', 'http://dc.binarywaves.com:8080/DCBAPI/Subscribe/UnSubscribe');
+define('test_UnSubscribe_url', '/Subscribe/UnSubscribe');
+define('live_UnSubscribe_url', '/Subscribe/UnSubscribe');
 /* ------------ end orange ------------ */
 
 

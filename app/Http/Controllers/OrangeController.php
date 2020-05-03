@@ -60,6 +60,26 @@ class OrangeController extends Controller
             return $validator->errors();
         }
 
+        $Msisdn = Msisdnorange::where('contract_id', $vars['subscContractId'])
+        ->orderBy('id', 'desc')
+        ->first();
+
+        if($Msisdn){
+            if($vars['statusId'] == 6){
+                // update msisdn status
+                $Msisdn->status = "active";
+                $Msisdn->final_status = "1";
+                $Msisdn->save();
+            }else{
+                // update msisdn status
+                $Msisdn->status = "inactive";
+                $Msisdn->final_status = "0";
+                $Msisdn->save();
+            }
+        }else{
+            return 'Msisdn not found!';
+        }
+
         $url = url('notificationStatuschange');
 
         $this->log('Notification Status Change', $url, $vars);
@@ -189,6 +209,41 @@ class OrangeController extends Controller
         return view('front.rotanav2.orange.new_landing');
     }
 
+    public function landing_orange_he(Request $request)
+    {
+        $result = array();
+        // get client ip
+        $ip = $_SERVER["REMOTE_ADDR"];
+
+        if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP))
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+
+
+        if (isset($_SERVER['HTTP_USER_AGENT'])) {
+            $deviceModel = $_SERVER['HTTP_USER_AGENT'];
+        } else {
+            $deviceModel = "";
+        }
+
+
+        $country_from_ip = $this->ip_info("Visitor", "Country");
+        $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
+        $result['ip'] = $ip;
+        $result['country'] = $country_from_ip;
+        $result['deviceModel'] = $deviceModel;
+        $result['AllHeaders'] = $_SERVER;
+
+
+        $actionName = "Orange Binary Hits";
+        $URL = $request->fullUrl();
+        $parameters_arr = $result;
+        $this->log_orange($actionName, $URL, $parameters_arr);  // log in
+
+        return view('front.rotanav2.orange.landing');
+    }
+
     public function AddSubscriptionContractRequest_orange(Request $request)
     {
         // 012 -> 60201 orange
@@ -208,7 +263,7 @@ class OrangeController extends Controller
         date_default_timezone_set("Africa/Cairo");
         $date = date("Y-m-d H:i:s");
         //first time subscribe
-        $URL = test_InitializeSubscribe_url;
+        $URL = testURL.test_InitializeSubscribe_url;
         $startDate = $date;
         $serviceId = ServiceId;
         $language = 2;
@@ -220,8 +275,10 @@ class OrangeController extends Controller
         $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
         $hash_res = json_decode($result_jsons);
 
-        $this->log('AddSubscriptionContractRequesthash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
-        $this->log('AddSubscriptionContractRequesthash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
+        $logParam['request'] = $hash_parm1;
+        $logParam['response'] = (array)$hash_res;
+
+        $this->log('AddSubscriptionContractRequesthash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $logParam);  // log in
         $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
 
         $parameters_arr = array(
@@ -241,11 +298,11 @@ class OrangeController extends Controller
         // create a log channel
         $actionName = "AddSubscriptionContractRequest";
         $parameters_arr['msg'] = $message;
-        $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array)$result;
 
-        $this->log($actionName, $URL, $result_arr);  // log out
-
+        $logParam1['request'] = $parameters_arr;
+        $logParam1['response'] = (array)$result;
+        
+        $this->log($actionName, $URL, $logParam1);  // log in
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -281,7 +338,7 @@ class OrangeController extends Controller
             $msisdndb = Msisdnorange::where('msisdn', $msisdn)->first();
             if ($msisdndb) {
                 $msisdndb->msisdn = $msisdn;
-                $msisdndb->status = 'active';
+                $msisdndb->status = 'inactive';
                 $msisdndb->operatorCode = $operatorCode;
                 if ($request->ajax()){
                     $msisdndb->subscribe_type = 'HE';
@@ -292,7 +349,7 @@ class OrangeController extends Controller
             } else {
                 $msisdndb = new Msisdnorange();
                 $msisdndb->msisdn = $msisdn;
-                $msisdndb->status = 'active';
+                $msisdndb->status = 'inactive';
                 $msisdndb->operatorCode = $operatorCode;
                 if ($request->ajax()){
                     $msisdndb->subscribe_type = 'HE';
@@ -375,7 +432,7 @@ class OrangeController extends Controller
         }
 
 
-        $URL = test_VerifySubscribe_url;
+        $URL = testURL.test_VerifySubscribe_url;
         $SubscriptioncontractID = Session::get('contract_id');
 
 
@@ -392,8 +449,11 @@ class OrangeController extends Controller
 
         $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
         $hash_res = json_decode($result_jsons);
-        $this->log('ConfirmPinCodehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
-        $this->log('ConfirmPinCodehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
+        
+        $logParam['request'] = $hash_parm1;
+        $logParam['response'] = (array)$hash_res;
+
+        $this->log('ConfirmPinCodehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $logParam);  // log in
         $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
 
 
@@ -408,9 +468,11 @@ class OrangeController extends Controller
         $result = json_decode($result_json);
 
         $actionName = "VerifySubscriptionContract";
-        $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array)$result;
-        $this->log($actionName, $URL, $result_arr);  // log out
+                
+        $logParam1['request'] = $parameters_arr;
+        $logParam1['response'] = (array)$result;
+
+        $this->log($actionName, $URL, $logParam1);  // log in
 
         $Msisdn = Msisdnorange::where('contract_id', Session::get('contract_id'))
             ->orderBy('id', 'desc')->first();
@@ -458,6 +520,71 @@ class OrangeController extends Controller
 
     }
 
+    public function ReSendPinCode(Request $request)
+    {
+
+        $URL = testURL.test_Resend_url;
+        $SubscriptioncontractID = Session::get('contract_id');
+
+
+        $serviceId = ServiceId;
+        $language = 2;
+
+        $message = $serviceId . $SubscriptioncontractID;
+
+        $hash_parm1 = array(
+            'hashedPassword' => ServiceAPIPassword,
+            'msgConcatenated' => $message,
+        );
+
+
+        $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
+        $hash_res = json_decode($result_jsons);
+        
+        $logParam['request'] = $hash_parm1;
+        $logParam['response'] = (array)$hash_res;
+
+        $this->log('ConfirmPinCodehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $logParam);  // log in
+        $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
+
+
+        $parameters_arr = array(
+            'serviceId' => $serviceId,
+            "subscContractId" => $SubscriptioncontractID,
+            "signature" => $signature,
+            "langId" => $language,
+        );
+        $result_json = $this->get_content_post($URL, $parameters_arr);
+        $result = json_decode($result_json);
+
+        $actionName = "VerifySubscriptionContract";
+                
+        $logParam1['request'] = $parameters_arr;
+        $logParam1['response'] = (array)$result;
+
+        $this->log($actionName, $URL, $logParam1);  // log in
+
+        $Msisdn = Msisdnorange::where('contract_id', Session::get('contract_id'))
+            ->orderBy('id', 'desc')->first();
+        $msisdn = $Msisdn->msisdn;
+
+        if ($result->ResultCode == 0) {
+
+            session([
+                'contract_id' => Session::get('contract_id'),
+                'phone_number' => $Msisdn->msisdn,
+                'status' => 'active'
+            ]);
+
+            session()->flash('success', 'لقد تم ارسال الكود بنجاح');
+            return view('front.rotanav2.orange.pinpage', compact('msisdn'));
+        } else {
+            session()->flash('failed', 'برجاء المحاولة وقت لاحق');
+            return view('front.rotanav2.orange.pinpage', compact('msisdn'));
+        }
+
+    }
+
     public function InitializeDirectPay()
     {
 
@@ -476,7 +603,7 @@ class OrangeController extends Controller
         }
 
 
-        $URL = test_InitializeDirectPay_url;
+        $URL = testURL.test_InitializeDirectPay_url;
 
         $serviceId = ServiceId;
 
@@ -490,8 +617,11 @@ class OrangeController extends Controller
 
         $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
         $hash_res = json_decode($result_jsons);
-        $this->log('InitializeDirectPayhash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
-        $this->log('InitializeDirectPayhash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
+
+        $logParam['request'] = $hash_parm1;
+        $logParam['response'] = (array)$hash_res;
+
+        $this->log('InitializeDirectPayhash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $logParam);  // log in
         $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
 
         $parameters_arr = array(
@@ -505,9 +635,11 @@ class OrangeController extends Controller
 
 
         $actionName = "InitializeDirectPay";
-        $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array)$result;
-        $this->log($actionName, $URL, $result_arr);  // log out
+        
+        $logParam1['request'] = $parameters_arr;
+        $logParam1['response'] = (array)$result;
+
+        $this->log($actionName, $URL, $logParam1);  // log in
 
 
         if ($result->ResultCode == 0) {
@@ -540,7 +672,7 @@ class OrangeController extends Controller
     public function ConfirmeDirectPay(Request $request)
     {
 
-        $URL = test_ConfirmeDirectPay_url;
+        $URL = testURL.test_ConfirmeDirectPay_url;
 
         $serviceId = ServiceId;
         $transaction_id = Session::get('TransactionId');
@@ -557,8 +689,11 @@ class OrangeController extends Controller
 
         $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
         $hash_res = json_decode($result_jsons);
-        $this->log('AddpayRequest', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
-        $this->log('AddpayRequest', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
+
+        $logParam['request'] = $hash_parm1;
+        $logParam['response'] = (array)$hash_res;
+
+        $this->log('AddpayRequest', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $logParam);  // log in
         $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
 
         $parameters_arr = array(
@@ -572,10 +707,11 @@ class OrangeController extends Controller
 
 
         $actionName = "ConfirmeDirectPay";
-        $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array)$result;
-        $this->log($actionName, $URL, $result_arr);  // log out
 
+        $logParam1['request'] = $parameters_arr;
+        $logParam1['response'] = (array)$result;
+
+        $this->log($actionName, $URL, $logParam1);  // log in
 
         if ($result->ResultCode == 0) {
 
@@ -623,7 +759,7 @@ class OrangeController extends Controller
         }
 
 
-        $URL = test_UnSubscribe_url;
+        $URL = testURL.test_UnSubscribe_url;
         session(['phone_number' => $phone_number]);
 
         $serviceId = ServiceId;
@@ -638,8 +774,11 @@ class OrangeController extends Controller
 
         $result_jsons = $this->get_content_get('http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);
         $hash_res = json_decode($result_jsons);
-        $this->log('unSubscribehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $hash_parm1);  // log in
-        $this->log('unSubscribehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', (array)$hash_res);  // log in
+
+        $logParam['request'] = $hash_parm1;
+        $logParam['response'] = (array)$hash_res;
+
+        $this->log('unSubscribehash', 'http://196.219.241.226:9094/DCBAPI/KeyGenerator/GenerateHash', $logParam);  // log in
         $signature = ServiceAPIKey . ":" . $hash_res->ResultCode;
 
         $parameters_arr = array(
@@ -651,9 +790,12 @@ class OrangeController extends Controller
         $result = json_decode($result_json);
 
         $actionName = "unSubscribe";
-        $this->log($actionName, $URL, $parameters_arr);  // log in
-        $result_arr = (array)$result;
-        $this->log($actionName, $URL, $result_arr);  // log out
+
+        $logParam1['request'] = $parameters_arr;
+        $logParam1['response'] = (array)$result;
+
+        $this->log($actionName, $URL, $logParam1);  // log in
+
         if ($result->ResultCode == 0) {  // success
 
             $Msisdn = Msisdnorange::where('contract_id', Session::get('contract_id'))
