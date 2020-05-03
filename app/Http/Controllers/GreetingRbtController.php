@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use App\Greetingimg;
 use Validator;
-use Datatables;
+use DataTables;
 
 class GreetingRbtController extends Controller {
 
@@ -56,7 +56,7 @@ class GreetingRbtController extends Controller {
         }
         $GreetingAudios = $GreetingAudios->get();
 
-        return Datatables::of($GreetingAudios)
+        return DataTables::of($GreetingAudios)
                         ->addColumn('featured', '@if($featured == 1)
                                 <button type="button" class="btn btn-info btn-circle"><i class="ion-checkmark-round bg-blue-500"></i></button>
                                 @else
@@ -83,7 +83,9 @@ class GreetingRbtController extends Controller {
                                 {!! Form::close() !!}
                                 <audio src="{{ url($path) }}" controls onplay="pauseOther(this)"></audio>
                                 ')
-                        ->make(true);
+            ->escapeColumns([])
+
+            ->make(true);
     }
 
     /**
