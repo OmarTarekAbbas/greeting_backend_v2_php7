@@ -30,38 +30,38 @@ $('#phone').keyup(function () {
 
 //---------------------------------------
 
-$('#viva, #zain, #ooredoo').click(function () {
-    'use strict';
-    $('.shbka').css('display', 'none');
-    $('#video').css('display', 'none');
-    $('.strip').css('margin-top', 20);
-    $('.form_content').css('display', 'block');
-});
+// $('#viva, #zain, #ooredoo').click(function () {
+//     'use strict';
+//     $('.shbka').css('display', 'none');
+//     $('#video').css('display', 'none');
+//     $('.strip').css('margin-top', 20);
+//     $('.form_content').css('display', 'block');
+// });
 
-//---------------------------------------
+// //---------------------------------------
 
-$('#phone').focusin(function () {
-    'use strict';
-    $('#video').css('display', 'none');
-    $('.strip').css('margin-top', 20);
-});
+// $('#phone').focusin(function () {
+//     'use strict';
+//     $('#video').css('display', 'none');
+//     $('.strip').css('margin-top', 20);
+// });
 
-$('#phone').blur(function () {
-    'use strict';
-    $('#video').css('display', 'block');
-    $('.strip').css('margin-top', -10);
+// $('#phone').blur(function () {
+//     'use strict';
+//     $('#video').css('display', 'block');
+//     $('.strip').css('margin-top', -10);
 
 
-});
+// });
 
-$('.back').click(function () {
-    'use strict';
-    $('#video').css('display', 'block');
-    $('.strip').css('margin-top', -10);
-    $('.form_content').css('display', 'none');
-    $('.shbka').css('display', 'block');
-});
+// $('.back').click(function () {
+//     'use strict';
+//     $('#video').css('display', 'block');
+//     $('.strip').css('margin-top', -10);
+//     $('.form_content').css('display', 'none');
+//     $('.shbka').css('display', 'block');
+// });
 
-$('#subscribe_button').focusin(function () {
-    window.location.replace("confirm.php");
-});
+// $('#subscribe_button').focusin(function () {
+//     window.location.replace("confirm.php");
+// });

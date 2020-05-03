@@ -112,7 +112,7 @@
             أختر شبكتك
           </h3>
 
-          <div class="zain_viva">
+          <div class="zain_viva pt-3">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -124,7 +124,7 @@
               {{ Session::get('failed')}}
             </div>
             @endif
-            <div class="row justify-content-center ml-0">
+            <div class="row justify-content-center pt-3 ml-0">
               <!--<div class="col-12">
                                 <img src="img/viva.png" id="viva">
                             </div>-->
@@ -184,6 +184,16 @@
     </div>
   </div>
 
+  <div class="the-frame">
+    <iframe class="full-screen-preview__frame" src="{{url()->full()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 370px; border-radius: 10px;">
+    </iframe>
+  </div>
+
+  <script>
+    if (screen.width <= 1025) {
+      // document.location.href = "{{url('front.home')}}";
+    }
+  </script>
 
   <!-- script -->
   <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>
@@ -246,6 +256,7 @@
       $('#myModal').hide();
     }
   </script>
+
 </body>
 
 </html>
