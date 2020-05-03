@@ -22,6 +22,12 @@
     margin-top: 0;
   }
 
+  @media (min-width: 1025px) {
+  body {
+    background-image: url('{{url("assets/front/landing_v2/img/BG_Pattern_v2.png")}}');
+  }
+}
+
   .main_container {
     background-image: url('{{url("assets/front/landing_v2/img/BG_Pattern_v2.png")}}');
   }
@@ -117,16 +123,6 @@
 
   </div>
 
-  <div class="the-frame">
-    <iframe class="full-screen-preview__frame" src="{{url()->full()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 370px; border-radius: 10px;">
-    </iframe>
-  </div>
-
-  <script>
-    if (screen.width <= 1025) {
-      // document.location.href = "{{url('front.home')}}";
-    }
-  </script>
 
   <!-- script -->
   <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>
