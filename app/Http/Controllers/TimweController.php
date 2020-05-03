@@ -68,7 +68,7 @@ class TimweController extends Controller
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
-        $ReqResponse['requestId'] = '44:1507734322453';
+        $ReqResponse['requestId'] = microtime();
         $ReqResponse['code'] = 'SUCCESS';
         $ReqResponse['inError”'] = 'false';
         $ReqResponse['message'] = 'string';
@@ -119,7 +119,7 @@ class TimweController extends Controller
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
-        $ReqResponse['requestId'] = '44:1507734322453';
+        $ReqResponse['requestId'] = microtime();
         $ReqResponse['code'] = 'SUCCESS';
         $ReqResponse['inError”'] = 'false';
         $ReqResponse['message'] = 'string';
@@ -172,7 +172,7 @@ class TimweController extends Controller
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
-        $ReqResponse['requestId'] = '44:1507734322453';
+        $ReqResponse['requestId'] = microtime();
         $ReqResponse['code'] = 'SUCCESS';
         $ReqResponse['inError”'] = 'false';
         $ReqResponse['message'] = 'string';
@@ -223,7 +223,7 @@ class TimweController extends Controller
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
-        $ReqResponse['requestId'] = '44:1507734322453';
+        $ReqResponse['requestId'] = microtime();
         $ReqResponse['code'] = 'SUCCESS';
         $ReqResponse['inError”'] = 'false';
         $ReqResponse['message'] = 'string';
@@ -276,7 +276,7 @@ class TimweController extends Controller
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
-        $ReqResponse['requestId'] = '44:1507734322453';
+        $ReqResponse['requestId'] = microtime();
         $ReqResponse['code'] = 'SUCCESS';
         $ReqResponse['inError”'] = 'false';
         $ReqResponse['message'] = 'string';
