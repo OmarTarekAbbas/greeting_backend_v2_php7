@@ -115,7 +115,7 @@ class MobilyController extends Controller
         // here json
         $JSON = $vars;
 
-        $actionName = "Notification MO";
+        $actionName = "Notification Optin";
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
@@ -164,7 +164,7 @@ class MobilyController extends Controller
         // here json
         $JSON = $vars;
 
-        $actionName = "Notification MO";
+        $actionName = "Notification OptOut";
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
