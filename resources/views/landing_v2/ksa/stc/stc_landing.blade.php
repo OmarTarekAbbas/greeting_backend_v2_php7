@@ -63,7 +63,7 @@
       </div>
 
       <div class="strip">
-        <h3>استمتع بوقتك مع فلاتر روتانا</h3>
+        <h3>استمتع بوقتك مع فلاتر </h3>
       </div>
 
       <div class="shbka">
@@ -109,7 +109,7 @@
       <div class="container">
         <div class="form_content">
           <!--<h5>ادخل رقم الهاتف</h5>-->
-          <form method="post" action="{{url('/RotanaStcKsaPinCodeSend')}}" id="form_zain">
+          <form method="post" action="{{url('/StcKsaPinCodeSend')}}" id="form_zain">
             {{ csrf_field() }}
             <div class="form-group form-inline">
               <label for="phone"><span>+ 966</span></label>
@@ -119,7 +119,7 @@
             <!--<button class="btn back">رجوع</button>-->
             <button style="margin-bottom:30px;"  id="zain_submit" class="btn" type="submit">أشترك</button>
           </form>
-          <a  href="{{url('rotana_stc_ksa_unsub')}}" class="btn btn-primary" type="">الغاء الاشتراك</a>
+          <a  href="{{url('stc_ksa_unsub')}}" class="btn btn-primary" type="">الغاء الاشتراك</a>
         </div>
       </div>
 

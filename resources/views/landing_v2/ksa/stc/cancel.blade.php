@@ -52,7 +52,7 @@
 
 
             <div class="strip" style="margin-top:50px;">
-              <h2>الغاء اشتراك فلاتر روتانا  </h2>
+              <h2>الغاء اشتراك فلاتر   </h2>
           </div>
 
             <br><br><br><br>
@@ -91,7 +91,7 @@
             <div class="container">
                 <div class="form_content">
                     <!--<h5>ادخل رقم الهاتف</h5>-->
-                    <form method="post" action="{{url('RotanaStcKsaUnsubAction')}}" id="form_zain">
+                    <form method="post" action="{{url('StcKsaUnsubAction')}}" id="form_zain">
                       {{ csrf_field() }}
                         <div class="form-group form-inline">
                             <label for="phone"><span>{{zain_ksa_prefix}}</span></label>

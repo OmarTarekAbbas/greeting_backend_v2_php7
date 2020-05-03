@@ -73,7 +73,7 @@
 
             <h2>ادخل كود التفعيل</h2>
             <hr>
-           {!! Form::open(['url'=>'rotana_stc_ksa_pincode_confirm','method'=>'post','class'=>'form','files'=>'true']) !!}
+           {!! Form::open(['url'=>'stc_ksa_pincode_confirm','method'=>'post','class'=>'form','files'=>'true']) !!}
                 <div class="form-group">
                       <input type="tel" name="pincode"   class="form-control" id="pincode" required pattern="[0-9]{6}">
                 </div>

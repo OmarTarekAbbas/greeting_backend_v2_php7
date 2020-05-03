@@ -153,23 +153,15 @@ Route::post('/unsubscribeOoredoo', 'HomeController@unsubscribeOoredoo');
 
 Route::get('/logout', 'FrontEndController@logout');
 
-//================================= Rotana Flatter KSA( STC - Zain )==============================//
-// STC KSA (Rotana Flatter)
-Route::get('landing_rotana_stc_ksa', 'KsaController@landing_stc_ksa');
-Route::post('/RotanaStcKsaPinCodeSend', 'KsaController@RotanaStcKsaPinCodeSend');
-Route::post('/rotana_stc_ksa_pincode_confirm', 'KsaController@rotana_stc_ksa_pincode_confirm');
-Route::get('rotana_stc_ksa_unsub', 'KsaController@RotanaStcKsaUnsub');
-Route::post('RotanaStcKsaUnsubAction', 'KsaController@RotanaStcKsaUnsubAction');
-define('STC_OP_ID', 6);  // Stc Ksa
-
-// Zain KSA (Rotana Flatter)
-Route::get('landing_rotana_zain_ksa', 'KsaController@landing_rotana_zain_ksa');
-Route::post('/RotanaZainKsaPinCodeSend', 'KsaController@RotanaZainKsaPinCodeSend');
-Route::post('/rotana_zain_ksa_pincode_confirm', 'KsaController@rotana_zain_ksa_pincode_confirm');
-Route::get('rotana_zain_ksa_unsub', 'KsaController@RotanaZainKsaUnsub');
-Route::post('RotanaZainKsaUnsubAction', 'KsaController@RotanaZainKsaUnsubAction');
-define('ZAIN_OP_ID',16); // zain ksa
-//================================= Rotana Flatter KSA( STC - Zain )==============================//
+//================================= Flatter KSA( STC )==============================//
+// STC KSA (Flatter)
+Route::get('landing_stc_ksa', 'KsaController@landing_stc_ksa');
+Route::post('/StcKsaPinCodeSend', 'KsaController@StcKsaPinCodeSend');
+Route::post('/stc_ksa_pincode_confirm', 'KsaController@stc_ksa_pincode_confirm');
+Route::get('stc_ksa_unsub', 'KsaController@StcKsaUnsub');
+Route::post('StcKsaUnsubAction', 'KsaController@StcKsaUnsubAction');
+define('STC_OP_ID', stc_op());  // Stc Ksa
+//=================================  Flatter KSA( ST )==============================//
 
 // load more
 Route::get('loadMoreSnap','FrontEndController@loadMoreSnap');
