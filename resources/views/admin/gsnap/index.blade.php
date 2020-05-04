@@ -21,7 +21,7 @@ You can add and delete Snap Images
         <div class="box">
             <div class="box-body table-responsive no-padding">
                 <br/>
-                <a class="btn btn-success" href="{{ route('export') }}"  style="margin-bottom: 10px;float: right">Export Snap Images</a>
+                {{--  <a class="btn btn-success" href="{{ route('export') }}"  style="margin-bottom: 10px;float: right">Export Snap Images</a>  --}}
 
                 <table class="table table-hover table-striped datatable">
                     <thead>

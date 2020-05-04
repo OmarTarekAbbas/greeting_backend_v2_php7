@@ -163,7 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
+       Yajra\Datatables\DatatablesServiceProvider::class,
+
         'Way\Generators\GeneratorsServiceProvider',
         'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
 
@@ -232,7 +233,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+      //  'DataTables' => Yajra\DataTables\Facades\DataTables::class,  // this make error for datatable 6
+        'Datatables' => yajra\Datatables\Datatables::class,
+
         'Input' => Illuminate\Support\Facades\Input::class,
     ],
 
