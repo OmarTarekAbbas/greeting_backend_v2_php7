@@ -68,7 +68,7 @@
 
       <div class="shbka">
         <div class="container">
-          <h3 class="mb-3 mt-3">اشترك الان</h3>
+          <h3 class="mt-3">اشترك الان</h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -118,7 +118,7 @@
             <!--<button class="btn back">رجوع</button>-->
             <button style="margin-bottom:30px;"  id="zain_submit" class="btn" type="submit">أشترك</button>
           </form>
-          <a  href="{{url('rotana_stc_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>
+          {{--  <a  href="{{url('rotana_stc_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>  --}}
         </div>
       </div>
 

@@ -113,7 +113,7 @@
             <!--<button class="btn back">رجوع</button>-->
             <button style="margin-bottom:30px;"  id="zain_submit" class="btn" type="submit">أشترك</button>
           </form>
-          <a href="{{url('rotana_zain_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>
+          {{--  <a href="{{url('rotana_zain_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>  --}}
         </div>
       </div>
 
