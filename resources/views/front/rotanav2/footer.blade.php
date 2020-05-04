@@ -101,7 +101,12 @@
         <div class="foot_link foot_link_img text-center">
           <a href="{{url('rotanav2/today/'.UID())}}">
             <img class="rotana_foot_img" src="{{url('assets/front/rotanav2/images/Rotana_Green.png')}}" alt="Rotana">
+            @if(getCode() == 'ar')
             <img class="rotana_foot_new" src="{{url('assets/front/rotanav2/images/New.png')}}" alt="Rotana new">
+            @endif
+            @if(getCode() == 'en' || getCode() == '')
+            <img class="rotana_foot_new" src="{{url('assets/front/rotanav2/images/new_english.png')}}" alt="Rotana new">
+            @endif
           </a>
         </div>
       </div>
