@@ -3478,7 +3478,7 @@ public function rotana($UID)
         if(OP() ==  ZAIN_OP_ID)
         {
           if(Session::has('currentOp')  && Session::get('currentOp') == ZAIN_OP_ID   ){  // Mobily ksa
-  
+
           } else{
               return redirect(url(roatan_ksa_redirect_operator()));
           }
@@ -3627,7 +3627,6 @@ public function Search_v6(Request $request, $UID)
 }
 
 public function filter_inner($FID, $UID){
-
     $url = Generatedurl::where('UID', $UID)->first();
     if ($url == !null) {
         $occasion_id = $FID;
@@ -3649,7 +3648,7 @@ public function filter_inner($FID, $UID){
           if(OP() ==  ZAIN_OP_ID)
           {
             if(Session::has('currentOp')  && Session::get('currentOp') == ZAIN_OP_ID   ){  // Mobily ksa
-    
+
             } else{
                 return redirect(url(roatan_ksa_redirect_operator()));
             }

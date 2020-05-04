@@ -36,7 +36,8 @@
         <div class="col-12 p-0">
             <div class="second_slide_title">
                 <a href="{{url('/rotanav2/'.$cat->id.'/occasion/'.uid())}}">
-                    <h6 class="text-right text-white pt-0 pr-3">{{$cat->title}}
+                    <h6 class="text-right text-white pt-0 pr-3">
+                      {{$cat->getTranslation('title',getCode())}}
                         <i class="fas fa-th-large fa-1x float-left pl-3"></i>
                     </h6>
                 </a>
