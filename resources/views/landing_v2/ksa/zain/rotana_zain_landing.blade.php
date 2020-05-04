@@ -19,7 +19,7 @@
 
 <style>
   .main_container {
-    background-image: url('assets/front/landing_v2/img/stc_BG.png');
+    background-image: url('assets/front/landing_v2/img/background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
