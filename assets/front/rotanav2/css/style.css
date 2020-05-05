@@ -817,6 +817,12 @@ footer {
     width: 25% !important;
     margin: 0 auto;
   }
+
+  .modal_search,
+.modal_share {
+    width: 25% !important;
+    left: 37%;
+  }
 }
 /* End Media Quary */
 
