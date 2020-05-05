@@ -156,18 +156,6 @@
 		<script src="{{url('assets/front/newdesignv4/')}}/js/script.js"></script>
 
 	</div>
-
-
-  <!-- <script type="text/javascript">
-    if (screen.width <= 1025) {
-      // document.location.href = "{{url('front.home')}}";
-    }
-  </script> -->
-
-  <div class="the-frame">
-    <iframe class="full-screen-preview__frame" src="{{url()->full()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 370px; border-radius: 10px;">
-    </iframe>
-  </div>
 	@yield('script')
 </body>
 

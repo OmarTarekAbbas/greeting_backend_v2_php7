@@ -23,45 +23,6 @@ body {
   background-attachment: fixed;
 }
 
-/* Start Frame For Desktop */
-.the-frame {
-  padding: 0;
-  margin: 0;
-  border-radius: 30px;
-  border-top: 15px solid #383838;
-  border-bottom: 15px solid #383838;
-  border-right: 15px solid #383838;
-  border-left: 15px solid #383838;
-  box-shadow: 0 6px 10px 0 rgba(245, 205, 205, 0.14), 0 1px 18px 0 rgba(247, 172, 172, 0.12), 0 3px 5px -1px rgba(158, 85, 85, 0.3);
-  width: 400px;
-  height: 600px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@media only screen and (max-width: 1025px) {
-  .the-frame {
-    display: none;
-  }
-}
-@media only screen and (min-width: 1025px) {
-  .main_container,
-header,
-footer {
-    display: none !important;
-  }
-
-  .main_container {
-    padding-bottom: 0 !important;
-  }
-
-  body {
-    overflow: hidden;
-  }
-}
-/* End Frame For Desktop */
 .main_container {
   width: 100%;
 }
@@ -516,7 +477,7 @@ header .logo-title img {
 }
 .categories_page .sub_img_title h1,
 .categories_page .sub_img_title h3 {
-  font-size: 5vw;
+  font-size: 1.75rem;
   color: #FFF;
   position: absolute;
   top: -36px;
@@ -1038,31 +999,11 @@ footer .footer a .f-nav i {
     font-size: 60px !important;
   }
 }
-@media (min-width: 1250px) and (max-width: 2000px) {
-  .main_container .welcome_page .logo img {
-    width: 23% !important;
-    margin: 2% auto !important;
-  }
-  .main_container a {
-    left: 47% !important;
-  }
-  .main_container header .logo-title {
-    margin-left: 17% !important;
-  }
-  .main_container header .logo-title img {
-    width: 15% !important;
-  }
-  .main_container .main .owl-video .item .video-fluid {
-    height: 500px !important;
-  }
-  .main_container .main .owl-theme .owl-nav.disabled + .owl-dots {
-    top: 97% !important;
-  }
-  .main_container .main .status .contant .filter-title {
-    padding-top: 100px !important;
-  }
-  .main_container .main .status .contant .filter-title h4 {
-    font-size: 70px !important;
+@media only screen and (min-width: 1025px) {
+  body,
+footer .footer {
+    width: 25%;
+    margin: 0 auto;
   }
 }
 /*------------------------------------------- End Media Queries ---------------------------------------*/
