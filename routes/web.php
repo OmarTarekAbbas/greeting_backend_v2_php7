@@ -237,7 +237,7 @@ Route::post('/RotanaZainKsaPinCodeSend', 'KsaController@RotanaZainKsaPinCodeSend
 Route::post('/rotana_zain_ksa_pincode_confirm', 'KsaController@rotana_zain_ksa_pincode_confirm');
 Route::get('rotana_zain_ksa_unsub', 'KsaController@RotanaZainKsaUnsub');
 Route::post('RotanaZainKsaUnsubAction', 'KsaController@RotanaZainKsaUnsubAction');
-define('ZAIN_OP_ID',16); // zain ksa
+define('ZAIN_OP_ID',7); // zain ksa
 //================================= Rotana Flatter KSA( STC - Zain )==============================//
 
 // susbcribe zain kuwait
