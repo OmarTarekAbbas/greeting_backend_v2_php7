@@ -1,42 +1,5 @@
 </main>
 <style>
-  @media (min-width: 1025px) {
-    body {
-      visibility: hidden;
-      overflow-x: hidden;
-    }
-
-    .new_rotana {
-      display: none !important;
-    }
-
-    .the-frame {
-      display: block;
-    }
-  }
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  .the-frame {
-    padding: 0;
-    margin: 0;
-    border-radius: 30px;
-    border-top: 15px solid #a0a19f;
-    border-bottom: 15px solid #a0a19f;
-    border-right: 15px solid #a0a19f;
-    border-left: 15px solid #a0a19f;
-    box-shadow: 0 6px 10px 0 rgba(245, 205, 205, 0.14), 0 1px 18px 0 rgba(247, 172, 172, 0.12), 0 3px 5px -1px rgba(158, 85, 85, 0.3);
-    width: 370px;
-    height: 600px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    visibility: visible;
-  }
-
   .main .filter_services {
     height: 200px !important;
   }
@@ -70,7 +33,7 @@
   </div>
 </div>
 
-<footer class="footer_head w-100">
+<footer class="footer_head">
   <div class="container">
     <div class="row">
       <div class="col-3">
@@ -114,11 +77,6 @@
   </div>
 </footer>
 
-<div class="the-frame">
-  <iframe class="full-screen-preview__frame" src="{{url()->current()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 340px; border-radius: 10px;">
-  </iframe>
-</div>
-
 <script src="{{url('assets/front/rotanav2/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{url('assets/front/rotanav2/js/bootstrap.min.js')}}"></script>
 <script src="{{url('assets/front/rotanav2/js/popper.min.js')}}"></script>
@@ -135,10 +93,6 @@
 </script>
 
 <script type="text/javascript">
-  if (screen.width <= 600) {
-    // document.location.href = "#0";
-  }
-
   wow = new WOW({
     boxClass: 'wow', // default
     animateClass: 'animated', // default

@@ -152,10 +152,11 @@ button:active,
 /* Start Footer */
 .footer_head {
   z-index: 9999;
+  width: 100%;
   padding: 0.75rem 0;
   background-color: #d2d3d5;
   position: fixed;
-  bottom: 0;
+  bottom: -1px;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }
@@ -517,26 +518,7 @@ button:active,
   }
 } */
 /* Strat Media Quary */
-@media (min-width: 320px) and (max-width: 767px) {
-  body {
-    visibility: visible;
-    overflow-x: hidden;
-  }
-
-  .the-frame {
-    display: none;
-  }
-}
 @media (min-width: 768px) and (max-width: 1023px) {
-  body {
-    visibility: visible;
-    overflow-x: hidden;
-  }
-
-  .the-frame {
-    display: none;
-  }
-
   .new_rotana {
     padding-bottom: 7rem;
     display: block !important;
@@ -673,16 +655,7 @@ button:active,
     font-size: 1.95rem;
   }
 }
-@media (min-width: 1024px) and (max-width: 1300px) {
-  body {
-    visibility: visible;
-    overflow-x: hidden;
-  }
-
-  .the-frame {
-    display: none;
-  }
-
+@media (min-width: 1024px) and (max-width: 1025px) {
   .new_rotana {
     padding-bottom: 8rem;
     display: block !important;
@@ -836,6 +809,13 @@ button:active,
   .modal_search .modal-dialog .modal-content .modal-body .search_search form label .input_bg button i {
     font-size: 3.1rem;
     padding-top: 1.5rem !important;
+  }
+}
+@media (min-width: 1025px) {
+  body,
+footer {
+    width: 25% !important;
+    margin: 0 auto;
   }
 }
 /* End Media Quary */
