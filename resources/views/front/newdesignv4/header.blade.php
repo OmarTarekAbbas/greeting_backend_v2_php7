@@ -33,7 +33,7 @@
 	<link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/style.css">
     <style>
     .yousefh3 {
-        font-size: 6vw;
+        font-size: 134%;
     }
     </style>
 
