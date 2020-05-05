@@ -18,11 +18,15 @@
 </head>
 
 <style>
-   @media (min-width: 1025px) {
-  body {
-    background-image: url('assets/front/landing_v2/img/stc_BG.png');
+  @media (min-width: 1025px) {
+    body {
+      background-image: url('assets/front/landing_v2/img/stc_BG.png');
+    }
   }
-}
+
+  .landing_page .start_video video {
+    height: 21.25rem;
+  }
 
 
   .main_container {
@@ -70,13 +74,13 @@
       </div>
 
       <div class="strip">
-        <h3>استمتع بوقتك مع فلاتر روتانا</h3>
+        <h3>اشترك الان مع فلاتر روتانا</h3>
       </div>
 
       <div class="shbka">
         <div class="container">
-          <h3 class="mb-3 mt-3">اشترك الان</h3>
-          <div class="zain_viva">
+          {{-- <h3 class="mt-3">اشترك الان</h3> --}}
+          <div class="zain_viva my-3">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

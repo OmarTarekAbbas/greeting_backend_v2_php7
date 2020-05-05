@@ -31,6 +31,9 @@ body {
 .landing_page .start_video {
   display: block;
 }
+.landing_page .start_video video {
+  object-fit: cover;
+}
 .landing_page .logo {
   width: 25%;
   display: block;

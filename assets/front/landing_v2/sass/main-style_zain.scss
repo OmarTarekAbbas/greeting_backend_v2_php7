@@ -33,6 +33,11 @@ body {
 .landing_page {
   .start_video {
     display: block;
+
+    video {
+      object-fit: cover;
+      // height: 19rem;
+    }
   }
 
   .logo {
