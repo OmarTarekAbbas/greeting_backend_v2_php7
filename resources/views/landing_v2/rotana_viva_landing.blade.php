@@ -18,6 +18,13 @@
 </head>
 
 <style>
+   @media (min-width: 1025px) {
+  body {
+    background-image: url('assets/front/landing_v2/img/stc_BG.png');
+  }
+}
+
+
   .main_container {
     background-image: url('assets/front/landing_v2/img/stc_BG.png');
     background-size: cover;
