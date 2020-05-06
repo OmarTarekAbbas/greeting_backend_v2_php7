@@ -400,6 +400,47 @@ class KsaController extends Controller
       return back();
   }
 
+  public function ksa_landing(Request $request){
+    // $ip1 = "43.225.54.4";      //emirate
+    // $ip2 = "161.252.255.254"; //kuwait
+    $ip = $_SERVER["REMOTE_ADDR"];
+
+    if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+
+    if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }
+
+    if (isset($_SERVER['HTTP_USER_AGENT'])) {
+        $deviceModel = $_SERVER['HTTP_USER_AGENT'];
+    } else {
+        $deviceModel = "";
+    }
+
+    // $country = $this->ip_info('Visitor', "Country");
+    $country = "KSA";
+    $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
+    $result['ip'] = $ip;
+    $result['country'] = $country;
+    $result['deviceModel'] = $deviceModel;
+    $actionName = "Flatter Qrcode Subscribe landing"."-".$country;
+    if ($request->has('operator_name')) {
+        $result['operator'] = $request->operator_name . ' '.$request->country;
+        $actionName = $actionName." ".$request->operator_name ." ". $request->country;
+
+    }
+    $URL = $request->fullUrl();
+    $parameters_arr = $result;
+    $this->log($actionName, $URL, $parameters_arr); // log in
+    if ($request->ajax()) {
+        return 'done';
+    }
+
+    return view('landing_v2.ksa_landing', compact('country'));
+  }
+
 
   public static function GetPageData($URL)
   {
