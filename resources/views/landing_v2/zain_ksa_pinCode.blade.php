@@ -1,5 +1,19 @@
 @extends('landing_v2.template_zain_ksa')
 @section('section')
+<style>
+  @media (min-width: 1025px) {
+    body {
+      background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
+    }
+  }
+  .main_container {
+    background-image: url('assets/front/landing_v2/img/stc_BG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+</style>
 
   <div class="confirm_page">
     <img src="{{ url('assets/front/landing_v2')}}/img/logo.png" alt="snap">

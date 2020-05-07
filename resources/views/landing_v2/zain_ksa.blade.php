@@ -15,6 +15,7 @@
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
       <![endif]-->
+
 </head>
 
 <style type="text/css">
@@ -24,16 +25,20 @@
 
   @media (min-width: 1025px) {
   body {
-    background-image: url('{{url("assets/front/landing_v2/img/BG_Pattern_v2.png")}}');
+    background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
   }
 }
-
   .main_container {
-    background-image: url('{{url("assets/front/landing_v2/img/BG_Pattern_v2.png")}}');
+    background-image: url('assets/front/landing_v2/img/stc_BG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 
+
   .landing_page .strip {
-    background-image: url('{{url("assets/front/landing_v2/img/strip_v2.png")}}');
+    background-image: url('assets/front/landing_v2/img/strip_green.png');
   }
 
   @media only screen and (max-width: 1025px) {
@@ -60,10 +65,10 @@
     <div class="landing_page">
 
       <div class="start_video" id="video">
-        <!-- <video width="100%" autoplay muted loop="true">
-                    <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
-                </video> -->
-        <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/045.jpg" alt="فلاتر">
+        <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
+          <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
+          <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
+        </video>
       </div>
 
       <div class="strip">
