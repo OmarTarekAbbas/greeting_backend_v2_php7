@@ -137,6 +137,7 @@ Route::post('/subscribeVivaKuwait', 'HomeController@subscribeVivaKuwait');
 Route::get('/viva_profile/{uid}', 'HomeController@viva_profile');
 
 
+//================================= Flatter Zain KSA ==============================//
 // Zain KSA
 Route::get('landing_zain_ksa','FrontEndController@landing_zain_ksa');
 
@@ -149,6 +150,8 @@ Route::post('zain_ksa_unsub_action','FrontEndController@zain_ksa_unsub_action');
 Route::get('zain_ksa_test','FrontEndController@zain_ksa_test');
 Route::get('logout_zain_ksa/{uid}', 'FrontEndController@logout_zain_ksa');
 
+//================================= Flatter Zain KSA ==============================//
+
 //all kuwait
 Route::get('landing_kuwait','FrontEndController@landing_kuwait');
 
@@ -156,6 +159,7 @@ Route::get('landing_kuwait','FrontEndController@landing_kuwait');
 Route::get('landing_ksa_1','FrontEndController@landing_ksa_new');
 
 
+//================================= Flatter Mobily KSA ==============================//
 // Mobily saudi subscribe
 Route::get('landing_ksa_old','FrontEndController@landing_ksa');
 Route::get('landing_mobily_ksa','FrontEndController@landing_mobily_ksa');
@@ -163,6 +167,7 @@ Route::post('/MobilyKsaPinCodeSend', 'FrontEndController@MobilyKsaPinCodeSend');
 Route::post('/mobily_ksa_pincode_confirm', 'FrontEndController@mobily_ksa_pincode_confirm');
 Route::get('logout_mobily_ksa/{uid}', 'FrontEndController@logout_mobily_ksa');
 define('MOBILY_OP_ID',14);
+//================================= Flatter Mobily KSA ==============================//
 
 
 // susbcribe zain kuwait
