@@ -124,6 +124,8 @@ class MobilyController extends Controller
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
+        $ReqResponse['requestId'] =  md5(uniqid(rand(), true));
+
 
         $OptInNotification['msisdn'] = $vars['msisdn'];
         $OptInNotification['text'] = $vars['text'];
@@ -132,7 +134,7 @@ class MobilyController extends Controller
 
         $id = OptInNotification::create($OptInNotification);
 
-        $ReqResponse['requestId'] = $id->id;
+      //  $ReqResponse['requestId'] = $id->id;
         return json_encode($ReqResponse);
     }
 
@@ -173,6 +175,8 @@ class MobilyController extends Controller
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
+        $ReqResponse['requestId'] =  md5(uniqid(rand(), true));
+
 
         $OptoutNotification['msisdn'] = $vars['msisdn'];
         $OptoutNotification['text'] = $vars['text'];
@@ -181,7 +185,7 @@ class MobilyController extends Controller
 
         $id = OptoutNotification::create($OptoutNotification);
 
-        $ReqResponse['requestId'] = $id->id;
+      //  $ReqResponse['requestId'] = $id->id;
         return json_encode($ReqResponse);
     }
 
@@ -223,6 +227,8 @@ class MobilyController extends Controller
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
+        $ReqResponse['requestId'] =  md5(uniqid(rand(), true));
+
 
         $RenewalNotification['msisdn'] = $vars['msisdn'];
         $RenewalNotification['text'] = $vars['text'];
@@ -231,7 +237,7 @@ class MobilyController extends Controller
 
         $id = RenewalNotification::create($RenewalNotification);
 
-        $ReqResponse['requestId'] = $id->id;
+       // $ReqResponse['requestId'] = $id->id;
         return json_encode($ReqResponse);
     }
 
