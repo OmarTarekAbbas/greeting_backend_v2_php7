@@ -73,6 +73,7 @@ class MobilyController extends Controller
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
+        $ReqResponse['requestId'] =  md5(uniqid(rand(), true));
 
         $MONotification['msisdn'] = $vars['msisdn'];
         $MONotification['text'] = $vars['text'];
@@ -80,7 +81,8 @@ class MobilyController extends Controller
         $MONotification['response'] = json_encode($ReqResponse);
         $id = MONotification::create($MONotification);
 
-        $ReqResponse['requestId'] = $id->id;
+       // $ReqResponse['requestId'] = $id->id;
+
 
         return json_encode($ReqResponse);
     }
