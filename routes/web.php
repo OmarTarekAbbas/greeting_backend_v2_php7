@@ -208,7 +208,7 @@ Route::get('stc_ksa_unsub', 'KsaController@StcKsaUnsub');
 Route::post('StcKsaUnsubAction', 'KsaController@StcKsaUnsubAction');
 define('STC_OP_ID', stc_op());  // Stc Ksa
 //=================================  Flatter KSA( ST )==============================//
-
+Route::get('landing_ksa_flatter','KsaController@ksa_landing');
 // load more
 Route::get('loadMoreSnap','FrontEndController@loadMoreSnap');
 Route::get('loadMoreSnapNew','FrontEndController@loadMoreSnapNew');
