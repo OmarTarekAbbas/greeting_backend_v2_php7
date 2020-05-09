@@ -17,17 +17,16 @@
       <![endif]-->
 
 </head>
-
 <style type="text/css">
   .landing_page .strip {
     margin-top: 0;
   }
 
   @media (min-width: 1025px) {
-    body {
-      background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
-    }
+  body {
+    background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
   }
+}
   .main_container {
     background-image: url('assets/front/landing_v2/img/stc_BG.png');
     background-size: cover;
@@ -40,7 +39,26 @@
   .landing_page .strip {
     background-image: url('assets/front/landing_v2/img/strip_green.png');
   }
+
+  @media only screen and (max-width: 1025px) {
+    .shbka .zain_viva {
+      margin-top: unset;
+      margin-bottom: unset;
+    }
+
+    .shbka .zain_viva #zain {
+      width: 40% !important;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1025px) {
+    .shbka .zain_viva {
+      margin-top: unset !important;
+      margin-bottom: unset !important;
+    }
+  }
 </style>
+
 
 <body>
   <div class="main_container">
@@ -108,7 +126,7 @@
         </div>
       </div>
 
-      <div class="cancel" style="color:#000;font-family: initial;">
+      <div class="cancel">
         <p>اشترك في الخدمة مقابل 0,66 ريال يوميا </p>
       </div>
 

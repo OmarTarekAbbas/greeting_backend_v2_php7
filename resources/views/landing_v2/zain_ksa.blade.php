@@ -48,7 +48,7 @@
     }
 
     .shbka .zain_viva #zain {
-      width: 30% !important;
+      width: 20% !important;
     }
   }
 
@@ -127,7 +127,7 @@
         </div>
       </div>
 
-      <div class="cancel" style="color:#000;">
+      <div class="cancel">
         <p>اشترك في الخدمة مقابل 5 ريال اسبوعيا </p>
       </div>
 
@@ -138,7 +138,7 @@
 
   </div>
 
-  <div class="copy">
+  <div class="copy" >
     <p>copyright @ <span><?php echo date("Y") ?></span> Digizone, all rights reserved.</p>
   </div>
   </div>
