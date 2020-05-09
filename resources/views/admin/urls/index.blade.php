@@ -36,7 +36,7 @@ You can add and delete Generated URLs
                             <th>Snap</th>
                             <th>URL</th>
                             <th>Actions</th>
-                            <th>Occasion Expire</th>
+                            {{-- <th>Occasion Expire</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -119,7 +119,7 @@ You can add and delete Generated URLs
                                 </button>
                                 {!! Form::close() !!}
                             </td>
-                            <td>
+                            {{-- <td>
                                 @if($URL->img == true)
                                 @if($URL->occasion)
                                     @if($URL->operator->greetingimgs()->publisheSnapdocc($URL->occasion->id)->count() == 0)
@@ -127,7 +127,7 @@ You can add and delete Generated URLs
                                     @endif
                                 @endif
                                 @endif
-                            </td>
+                            </td> --}}
                         </tr>
                         @endforeach
 
