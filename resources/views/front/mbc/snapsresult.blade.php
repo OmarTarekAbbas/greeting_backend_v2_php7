@@ -8,7 +8,7 @@
     </div>
 
     <div class="sub_img_title sub_img_title_small">
-      <h1 class="h4 text-center">{{$snap->getTranslation('title',getCode())}}</h1>
+      <h3 class="h4 text-center">{{$snap->getTranslation('title',getCode())}}</h3>
     </div>
   </div>
 </a>

@@ -473,7 +473,7 @@ header .logo-title img {
 }
 .categories_page .sub_img_title h1,
 .categories_page .sub_img_title h3 {
-  font-size: 1.75rem;
+  font-size: 1.15rem;
   color: #FFF;
   position: absolute;
   top: -36px;
@@ -483,6 +483,9 @@ header .logo-title img {
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
+}
+.categories_page .sub_img_title h3 {
+  font-size: 0.9rem;
 }
 .categories_page .download_share {
   cursor: pointer;
@@ -795,10 +798,13 @@ footer .sub-footer p span {
     left: 22.5% !important;
     width: 14% !important;
   }
-  .main .categories_page .sub_img_title h1,
-.main .categories_page .sub_img_title h3 {
-    font-size: 55px !important;
+  .main .categories_page .sub_img_title h1 {
+    font-size: 2.15rem;
     top: -80px !important;
+  }
+  .main .categories_page .sub_img_title h3 {
+    font-size: 2rem;
+    top: -60px !important;
   }
   .main .categories_page .sub_img_title_small h1 {
     font-size: 6vw !important;
@@ -960,10 +966,13 @@ footer .footer a .f-nav i {
   .main .categories_page .categories_page_title h3 {
     font-size: 65px !important;
   }
-  .main .categories_page .sub_img_title h1,
-.main .categories_page .sub_img_title h3 {
-    font-size: 80px !important;
-    top: -106px !important;
+  .main .categories_page .sub_img_title h1 {
+    font-size: 2.5rem;
+    top: -105px !important;
+  }
+  .main .categories_page .sub_img_title h3 {
+    font-size: 2.1rem;
+    top: -60px !important;
   }
   .main .categories_page .sub_img_title_small h1 {
     font-size: 4.5vw !important;

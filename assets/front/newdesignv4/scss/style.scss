@@ -595,7 +595,7 @@ header {
 
     h1,
     h3 {
-      font-size: 1.75rem;
+      font-size: 1.15rem;
       color: $white_color;
       position: absolute;
       top: -36px;
@@ -605,6 +605,10 @@ header {
       -moz-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
       -o-transform: translate(-50%, -50%);
+    }
+
+    h3 {
+      font-size: 0.9rem;
     }
   }
 
@@ -1007,10 +1011,14 @@ footer {
 
       .sub_img_title {
 
-        h1,
-        h3 {
-          font-size: 55px !important;
+        h1 {
+          font-size: 2.15rem;
           top: -80px !important;
+        }
+
+        h3 {
+          font-size: 2rem;
+          top: -60px !important;
         }
       }
 
@@ -1259,10 +1267,14 @@ footer {
 
       .sub_img_title {
 
-        h1,
+        h1 {
+          font-size: 2.5rem;
+          top: -105px !important;
+        }
+
         h3 {
-          font-size: 80px !important;
-          top: -106px !important;
+          font-size: 2.10rem;
+          top: -60px !important;
         }
       }
 
