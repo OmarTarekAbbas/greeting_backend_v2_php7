@@ -1,8 +1,4 @@
 /* general */
-::-webkit-scrollbar {
-  display: none;
-}
-
 a {
   text-decoration: none !important;
   cursor: pointer;
@@ -684,7 +680,7 @@ footer .sub-footer p span {
 }
 
 /*------------------------------------------- Start Media Queries ---------------------------------------*/
-@media (min-width: 768px) and (max-width: 1020px) {
+@media (min-width: 768px) and (max-width: 1023.9px) {
   header {
     height: 100px !important;
   }
@@ -693,10 +689,14 @@ footer .sub-footer p span {
     font-size: 30px !important;
   }
   header .logo-title {
-    padding-left: 75px !important;
+    text-align: center;
+    margin-top: 0.8rem;
   }
   header .logo-title img {
     width: 45%;
+  }
+  header .link_lang {
+    font-size: 1.5rem;
   }
 
   .search #myInput {
@@ -714,6 +714,9 @@ footer .sub-footer p span {
     width: 88% !important;
   }
 
+  .main .owl-video .item .user_filter .use_filter_link {
+    bottom: 16% !important;
+  }
   .main .owl-video .item .video-fluid {
     max-height: 400px !important;
   }
@@ -815,6 +818,10 @@ footer .sub-footer p span {
   .main .categories_page .download_share a .background_strip h3 {
     font-size: 50px !important;
   }
+  .main .categories_page .download_share a .yousefh3 {
+    font-size: 2rem;
+    top: 1.2rem;
+  }
   .main .search_for h4 {
     font-size: 40px !important;
   }
@@ -841,7 +848,7 @@ footer .footer a .f-nav i {
     font-size: 50px !important;
   }
 }
-@media (min-width: 1021px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 1025px) {
   header {
     height: 100px !important;
   }
@@ -850,10 +857,13 @@ footer .footer a .f-nav i {
     font-size: 30px !important;
   }
   header .logo-title {
-    padding-left: 75px !important;
+    text-align: center;
   }
   header .logo-title img {
     width: 40%;
+  }
+  header .link_lang {
+    font-size: 1.9rem;
   }
 
   .search #myInput {
@@ -973,6 +983,10 @@ footer .footer a .f-nav i {
   .main .categories_page .download_share a .background_strip h3 {
     font-size: 70px !important;
   }
+  .main .categories_page .download_share a .yousefh3 {
+    font-size: 2.35rem;
+    top: 2.5rem;
+  }
   .main .search_for h4 {
     font-size: 50px !important;
   }
@@ -1000,24 +1014,10 @@ footer .footer a .f-nav i {
   }
 }
 @media only screen and (min-width: 1025px) {
-  body {
+  body,
+footer .footer {
     width: 25%;
     margin: 0 auto;
-    padding: 0;
-    border-radius: 30px;
-    border-top: 15px solid #a0a19f;
-    border-bottom: 15px solid #a0a19f;
-    border-right: 15px solid #a0a19f;
-    border-left: 15px solid #a0a19f;
-    box-shadow: 0 6px 10px 0 rgba(245, 205, 205, 0.14), 0 1px 18px 0 rgba(247, 172, 172, 0.12), 0 3px 5px -1px rgba(158, 85, 85, 0.3);
-    height: unset;
-    visibility: visible;
-  }
-
-  footer .footer {
-    position: unset;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
   }
 }
 /*------------------------------------------- End Media Queries ---------------------------------------*/

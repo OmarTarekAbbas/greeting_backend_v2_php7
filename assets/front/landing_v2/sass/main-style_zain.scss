@@ -12,9 +12,9 @@ body {
   width: 100%;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
+// ::-webkit-scrollbar {
+//   display: none;
+// }
 
 .main_container {
   width: 100%;
@@ -403,9 +403,12 @@ body {
 
 @media (min-width: 1025px) {
   body,
-  .main_container,
-  .copy {
+  .main_container {
     width: 25%;
     margin: 0 auto;
+  }
+
+  .copy {
+    position: unset;
   }
 }
