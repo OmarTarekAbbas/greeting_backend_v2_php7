@@ -3662,6 +3662,14 @@ public function filter_inner($FID, $UID){
                 return redirect(url(roatan_ksa_redirect_operator()));
             }
           }
+          if(OP() ==  ooredoo)
+          {
+            if(Session::has('currentOp')  && Session::get('currentOp') == ooredoo   ){  // Mobily ksa
+
+            } else{
+                return redirect(url(roatan_ksa_redirect_operator()));
+            }
+          }
           return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));
         }else{
             return view('errors.404');

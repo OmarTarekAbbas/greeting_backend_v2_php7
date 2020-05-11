@@ -223,7 +223,7 @@ function redirect_operator()
     } else if (strpos($operator->name, 'Mobily') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
         return 'landing_mobily_ksa';
     }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'qatar') !== false) {
-        return 'ooredoo_qatar_landing';  
+        return 'ooredoo_qatar_landing';
     } else {
         return 'landing_v1';
     }
@@ -238,6 +238,8 @@ function roatan_ksa_redirect_operator()
         return 'landing_rotana_zain_ksa';
     } else if (strpos($operator->name, 'STC') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
         return 'landing_rotana_stc_ksa';
+    }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'qatar') !== false) {
+        return 'ooredoo_qatar_landing';
     } else {
         return 'landing_v1';
     }

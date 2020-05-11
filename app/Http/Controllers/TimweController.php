@@ -522,9 +522,9 @@ class TimweController extends Controller
                 ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
             if ($snap) {
-                return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
+                return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
             } else {
-                return redirect(url('newdesignv4/' . $Url->UID));
+                return redirect(url('rotanav2/' . $Url->UID));
             }
 
         }else{
@@ -616,9 +616,9 @@ class TimweController extends Controller
                 ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
             if ($snap) {
-                return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
+                return redirect(url('rotanav2/filter/' . $snap->id . '/' . $Url->UID));
             } else {
-                return redirect(url('newdesignv4/' . $Url->UID));
+                return redirect(url('rotanav2/' . $Url->UID));
             }
 
         }else{
