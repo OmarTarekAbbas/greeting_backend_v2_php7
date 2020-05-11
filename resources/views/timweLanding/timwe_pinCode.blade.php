@@ -14,23 +14,40 @@
 </head>
 
 <style>
-    .landing_page .start_video video{
-        object-fit: cover;
-        height: 13.875rem;
+    @media (min-width: 1025px) {
+    body {
+      background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
     }
-
-    .landing_page .strip {
-        margin-top: 0;
-    }
-
+  }
     .main_container {
-        background-image: url('{{url("assets/front/landing_v2/img/BG_Pattern_v2.png")}}');
+      background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
-
+  
     .landing_page .strip {
-        background-image: url('{{url("assets/front/landing_v2/img/strip_v2.png")}}');
+      margin-top: -2.5%;
+      background-image: url('{{url("assets/front/landing_v2/img/strip_green.png")}}');
     }
-</style>
+  
+    .landing_page .shbka .zain_viva #zain {
+      width: 32%;
+    }
+  
+    .landing_page .form_content form .form-group label {
+      background-color: #141719;
+    }
+  
+    .landing_page .form_content form .btn {
+      background-color: #FFF;
+      color: #000;
+      font-size: 1.35rem;
+      width: 45%;
+    }
+  </style>
+
 
 <body>
     <div class="main_container">

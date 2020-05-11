@@ -12,79 +12,41 @@
     <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/main-style_zain.css">
 </head>
-
-<style type="text/css">
-    .landing_page .strip {
-        margin-top: 0;
-    }
-    .modal{
-        text-align: center;
-        position: fixed;
-        width: 80%;
-        height: 150px;
-        top: 50%;
-        transform: translateY(-50%);
-        margin: 0 auto;
-        background-color: white;
-        opacity: 0.9;
-        padding: 10px;
-        border-radius: 7px;
-        color: black;
-    }
-    @media (min-width: 320px) and (max-width: 359px) {
-      .operator img
-      {
-          width: 58%;
-      }
-    }
-    .hero-bkg-animated {
-
-        height: 100vh;
-        background-position: fixed;
-        background-repeat: no-repeat;
-        background-size: 200% 100%;
-        transform: translate3d(0px, 0px, 0px);
-        transform-style: preserve-3d;
-        box-sizing: border-box;
-        -webkit-animation: slide 20s linear infinite;
-    }
-    .hero-bkg-animated h1 {
-        font-family: sans-serif;
-    }
-    @-webkit-keyframes slide {
-        from {
-            background-position: 0 0;
-        }
-        to {
-            background-position: -300px 0;
-        }
-    }
-
-</style>
-<style type="text/css">
-    .landing_page .strip {
-        margin-top: 0;
-    }
-</style>
-
 <style>
-    .landing_page .start_video video{
-        object-fit: cover;
-        height: 13.875rem;
+    @media (min-width: 1025px) {
+    body {
+      background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
     }
-
-    .landing_page .strip {
-        margin-top: 0;
-    }
-
+  }
     .main_container {
-        background-image: url('{{url("assets/front/landing_v2/img/BG_Pattern_v2.png")}}');
+      background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
-
+  
     .landing_page .strip {
-        background-image: url('{{url("assets/front/landing_v2/img/strip_v2.png")}}');
+      margin-top: -2.5%;
+      background-image: url('{{url("assets/front/landing_v2/img/strip_green.png")}}');
     }
-</style>
+  
+    .landing_page .shbka .zain_viva #zain {
+      width: 32%;
+    }
+  
+    .landing_page .form_content form .form-group label {
+      background-color: #141719;
+    }
+  
+    .landing_page .form_content form .btn {
+      background-color: #FFF;
+      color: #000;
+      font-size: 1.35rem;
+      width: 45%;
+    }
+  </style>
+
 
 <body>
     <div class="main_container">

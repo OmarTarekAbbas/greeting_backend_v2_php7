@@ -19,7 +19,7 @@
     }
   }
     .main_container {
-      background-image: url('assets/front/landing_v2/img/stc_BG.png');
+      background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -28,7 +28,7 @@
   
     .landing_page .strip {
       margin-top: -2.5%;
-      background-image: url('assets/front/landing_v2/img/strip_green.png');
+      background-image: url('{{url("assets/front/landing_v2/img/strip_green.png")}}');
     }
   
     .landing_page .shbka .zain_viva #zain {
