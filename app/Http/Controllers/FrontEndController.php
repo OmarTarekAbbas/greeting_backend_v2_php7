@@ -4686,4 +4686,47 @@ public function favouritesmbc(Request $request, $UID)
       }
       return view('landing_v2.landing_kuwait_rotana');
   }
+
+    public function landing_du_sub(Request $request)
+    {
+        $ip = $_SERVER["REMOTE_ADDR"];
+
+        if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+
+        if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }
+
+        if (isset($_SERVER['HTTP_USER_AGENT'])) {
+            $deviceModel = $_SERVER['HTTP_USER_AGENT'];
+        } else {
+            $deviceModel = "";
+        }
+
+        $country_from_ip = $this->ip_info("Visitor", "Country");
+        $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
+        $result['ip'] = $ip;
+        $result['country'] = $country_from_ip;
+        $result['deviceModel'] = $deviceModel;
+        // $result['AllHeaders'] = $_SERVER;
+        $actionName = "Du logs";
+        if ($request->has('operator_name')) {
+            $result['operator'] = $request->operator_name . 'Du';
+            $actionName = $request->operator_name . " landing logs";
+
+        }
+        if ($request->has('enterbtn')) {
+            $result['enterbtn'] = 'Enter Du';
+            $actionName = "Enter Du logs";
+        }
+        $URL = $request->fullUrl();
+        $parameters_arr = $result;
+        $this->log($actionName, $URL, $parameters_arr); // log in
+        if ($request->ajax()) {
+            return 'done';
+        }
+        return view('landing_v2.du_sub_landing');
+    }
 }

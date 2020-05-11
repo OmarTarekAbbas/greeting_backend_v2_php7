@@ -171,6 +171,15 @@ Route::get('snap_notification', 'HomeController@snap_notification');
 
 // ====================== ooredoo sequence  ==========================//
 
+
+//================================= Flatter du ==============================//
+
+
+Route::get('landing_du','FrontEndController@landing_du_sub');
+
+//================================= Flatter Mdu ==============================//
+
+
 Route::get('/', function () {
     return redirect('admin');
 });
