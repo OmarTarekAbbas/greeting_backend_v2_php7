@@ -71,6 +71,8 @@ define('live_UnSubscribe_url', '/Subscribe/UnSubscribe');
 
 
 /************* Start config Timwe******************/
+define('ooredoo',28);
+
 define('PartnerId', '2534');
 define('productId', '10461');
 define('partnerRoleId', '2614');

@@ -131,11 +131,11 @@
 
 
         <!-- loading -->
-        <div class="loading-overlay" style="background-color:#000">
+        {{-- <div class="loading-overlay" style="background-color:#000">
             <div class="spinner">
                 <img src="{{url('assets/front/rotanav2/images/Rorana_flater_logo.png')}}" alt="loading_snap">
             </div>
-        </div>
+        </div> --}}
         <!-- end loading -->
     </div>
     <!-- script -->

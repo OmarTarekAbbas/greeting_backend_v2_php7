@@ -3408,6 +3408,15 @@ public function zain_ksa_test(Request $request){
                     $codes[$key] = $rbtCode ? $rbtCode->code : null;
                 }
             }
+            
+            if ( OP() == ooredoo) {
+                if(Session::has('currentOp') && Session::get('currentOp') == ooredoo){
+  
+                 }else{
+                   return redirect(url(redirect_operator()));
+                 }
+             }
+  
             $rbt_sms = $url->operator->rbt_sms;
             if($request->ajax())
                 return view('front.newdesignv4.spresult', compact('Rdata', 'search','rbt_sms','codes'));
