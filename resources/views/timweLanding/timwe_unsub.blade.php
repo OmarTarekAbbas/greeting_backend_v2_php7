@@ -149,11 +149,11 @@
         </div>
 
     <!-- loading -->
-    <div class="loading-overlay">
+    {{-- <div class="loading-overlay">
         <div class="spinner">
             <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
         </div>
-    </div>
+    </div> --}}
     <!-- end loading -->
 </div>
 <!-- script -->

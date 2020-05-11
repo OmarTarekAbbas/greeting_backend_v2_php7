@@ -3407,6 +3407,14 @@ class FrontEndController extends Controller
                }
            }
 
+            if ( OP() == ooredoo) {
+              if(Session::has('currentOp') && Session::get('currentOp') == ooredoo){
+
+               }else{
+                 return redirect(url(redirect_operator()));
+               }
+           }
+
             $occasion_id = $OID;
             $Rdata = Greetingimg::where('id', $OID)->first();
             if (is_null($Rdata)) {

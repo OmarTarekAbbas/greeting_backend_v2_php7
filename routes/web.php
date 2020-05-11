@@ -13,6 +13,8 @@
 
 
 /************* Start config Timwe******************/
+define('ooredoo',28);
+
 define('PartnerId', '2534');
 define('productId', '10479');
 define('partnerRoleId', '2614');
