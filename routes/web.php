@@ -170,6 +170,13 @@ define('MOBILY_OP_ID',14);
 //================================= Flatter Mobily KSA ==============================//
 
 
+//================================= Flatter du ==============================//
+
+
+Route::get('landing_du','FrontEndController@landing_du_sub');
+
+//================================= Flatter Mdu ==============================//
+
 // susbcribe zain kuwait
 Route::post('/subscribeZain', 'HomeController@subscribeZain');
 Route::post('/subscribeZainConfirm', 'HomeController@subscribeZainConfirm');
