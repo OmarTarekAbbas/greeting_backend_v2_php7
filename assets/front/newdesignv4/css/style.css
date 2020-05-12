@@ -485,7 +485,7 @@ header .logo-title img {
   -o-transform: translate(-50%, -50%);
 }
 .categories_page .sub_img_title h3 {
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 .categories_page .download_share {
   cursor: pointer;
