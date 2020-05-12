@@ -4853,10 +4853,10 @@ class FrontEndController extends Controller
         $result['country'] = $country_from_ip;
         $result['deviceModel'] = $deviceModel;
         // $result['AllHeaders'] = $_SERVER;
-        $actionName = "Du logs";
+        $actionName = "Du Landing logs";
         if ($request->has('operator_name')) {
             $result['operator'] = $request->operator_name . 'Du';
-            $actionName = $request->operator_name . " landing logs";
+            $actionName = $request->operator_name . " Clicks Logs";
 
         }
         if ($request->has('enterbtn')) {
