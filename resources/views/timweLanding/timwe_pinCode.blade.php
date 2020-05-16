@@ -25,20 +25,20 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
     }
-  
+
     .landing_page .strip {
       margin-top: -2.5%;
       background-image: url('{{url("assets/front/landing_v2/img/strip_green.png")}}');
     }
-  
+
     .landing_page .shbka .zain_viva #zain {
       width: 32%;
     }
-  
+
     .landing_page .form_content form .form-group label {
       background-color: #141719;
     }
-  
+
     .landing_page .form_content form .btn {
       background-color: #FFF;
       color: #000;
@@ -111,7 +111,7 @@
     <!-- loading -->
     {{-- <div class="loading-overlay">
         <div class="spinner">
-            <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap"> 
+            <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
         </div>
     </div> --}}
     <!-- end loading -->

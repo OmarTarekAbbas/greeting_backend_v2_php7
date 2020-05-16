@@ -238,7 +238,7 @@ function roatan_ksa_redirect_operator()
         return 'landing_rotana_zain_ksa';
     } else if (strpos($operator->name, 'STC') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
         return 'landing_rotana_stc_ksa';
-    }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'qatar') !== false) {
+    }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'Qutar') !== false) {
         return 'ooredoo_qatar_landing';
     } else {
         return 'landing_v1';
@@ -267,4 +267,16 @@ function viva_id()
     $kuwait = \App\Country::where('name', 'kuwait')->first();
     $viva = Operator::where('name', 'viva')->where('country_id', $kuwait->id)->first();
     return $viva->id;
+}
+
+
+function timwe_op_id(){
+  $country = Country::where('name', 'Qutar')->first();
+  if(!empty($country)){
+      $op = Operator::where('country_id', $country->id)->where('name', 'ooredoo')->first();
+      if(!empty($op)){
+          return $op->id;
+      }
+  }
+  return 8;
 }

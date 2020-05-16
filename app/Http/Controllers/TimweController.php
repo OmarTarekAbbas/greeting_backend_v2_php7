@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\File;
 use App\TimWe;
 use App\timweUnsubscriber;
 use App\timweSubscriber;
+use App\Generatedurl;
+use App\Greetingimg;
+use Carbon\Carbon;
 class TimweController extends Controller
 {
 
@@ -506,7 +509,7 @@ class TimweController extends Controller
 
         if($ReqResponse['responseData']['subscriptionResult'] == 'OPTIN_ALREADY_ACTIVE'){
             $subscribe = timweSubscriber::where('msisdn', session('userIdentifier'))->where('serviceId', productId)->first();
-            
+
             if(empty($unsubscribe)){
                 timweSubscriber::create([
                     'msisdn' => session('userIdentifier'),
@@ -596,11 +599,12 @@ class TimweController extends Controller
 
         if($ReqResponse['code'] == 'SUCCESS'){
             if($ReqResponse['responseData']['subscriptionResult'] == 'OPTIN_CONF_WRONG_PIN'){
-                return redirect('ooredoo_qatar_pin')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+                return redirect('ooredoo_qatar_pin')->with('failed', 'رقم التحقق خاطئ يرجي المحاولة مرة اخري');
+
             }
 
            $subscribe = timweSubscriber::where('msisdn', session('userIdentifier'))->where('serviceId', productId)->first();
-            
+
            if(empty($subscribe)){
                timweSubscriber::create([
                    'msisdn' => session('userIdentifier'),
@@ -608,7 +612,7 @@ class TimweController extends Controller
                    'requestId' => $timewe->id,
                ]);
            }
-           
+
             session(['MSISDN' => '974'.$request->number, 'Status' => 'active','currentOp'=>ooredoo]);
             $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
 
@@ -616,7 +620,7 @@ class TimweController extends Controller
                 ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
             if ($snap) {
-                return redirect(url('rotanav2/filter/' . $snap->id . '/' . $Url->UID));
+                return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
             } else {
                 return redirect(url('rotanav2/' . $Url->UID));
             }
