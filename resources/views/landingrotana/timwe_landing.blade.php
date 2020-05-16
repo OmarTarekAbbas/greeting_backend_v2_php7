@@ -77,7 +77,10 @@
                 <!-- <video width="100%" autoplay muted loop="true">
                     <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
                 </video> -->
-                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/download.jfif" alt="فلاتر">
+                <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
+                    <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
+                    <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
+                </video>
             </div>
 
             <div class="strip">
@@ -140,7 +143,7 @@
             </div>
 
 
-            <div class="cancel">
+            <div class="cancel text-white">
                 <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('ooredoo_qatar_unsub' )}}">الرابط</a></p>
             </div>
 
@@ -150,11 +153,11 @@
 
 
         <!-- loading -->
-        <div class="loading-overlay" style="background-color:#000">
+        {{-- <div class="loading-overlay" style="background-color:#000">
             <div class="spinner">
                 <img src="{{url('assets/front/rotanav2/images/Rorana_flater_logo.png')}}" alt="loading_snap">
             </div>
-        </div>
+        </div> --}}
         <!-- end loading -->
     </div>
     <!-- script -->

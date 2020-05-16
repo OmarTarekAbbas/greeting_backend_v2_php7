@@ -7,93 +7,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--Mobile Meta-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Du Snap Rotana Page</title>
+    <title>snap Pin page</title>
     <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/main-style_zain.css">
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-      <script src="js/respond.min.js"></script>
-      <![endif]-->
 </head>
-
-<style type="text/css">
+<style>
+    @media (min-width: 1025px) {
+    body {
+        background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
+    }
+  }
+    .main_container {
+      background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+  
     .landing_page .strip {
-        margin-top: 0;
+      margin-top: -2.5%;
+      background-image: url('{{url("assets/front/landing_v2/img/strip_green.png")}}');
     }
-    .modal{
-        text-align: center;
-        position: fixed;
-        width: 80%;
-        height: 150px;
-        top: 50%;
-        transform: translateY(-50%);
-        margin: 0 auto;
-        background-color: white;
-        opacity: 0.9;
-        padding: 10px;
-        border-radius: 7px;
-        color: black;
+  
+    .landing_page .shbka .zain_viva #zain {
+      width: 32%;
     }
-    @media (min-width: 320px) and (max-width: 359px) {
-      .operator img
-      {
-          width: 58%;
-      }
+  
+    .landing_page .form_content form .form-group label {
+      background-color: #141719;
     }
-    .hero-bkg-animated {
-
-        height: 100vh;
-        background-position: fixed;
-        background-repeat: no-repeat;
-        background-size: 200% 100%;
-        transform: translate3d(0px, 0px, 0px);
-        transform-style: preserve-3d;
-        box-sizing: border-box;
-        -webkit-animation: slide 20s linear infinite;
+  
+    .landing_page .form_content form .btn {
+      background-color: #FFF;
+      color: #000;
+      font-size: 1.35rem;
+      width: 45%;
     }
-    .hero-bkg-animated h1 {
-        font-family: sans-serif;
-    }
-    @-webkit-keyframes slide {
-        from {
-            background-position: 0 0;
-        }
-        to {
-            background-position: -300px 0;
-        }
-    }
-    .main_container{
-      background: #161414;
-      /* background: url("{{url('assets/front/newdesignv4/images/BG.png')}}") */
-    }
-</style>
-<style type="text/css">
-    .landing_page .strip {
-        margin-top: 0;
-    }
-</style>
-
+  </style>
 <body>
     <div class="main_container">
         <div class="landing_page">
 
             <div class="start_video" id="video">
+                <video width="100%" height="240" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
+                    <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
+                    <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
+                  </video>
                 <!-- <video width="100%" autoplay muted loop="true">
-                    <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
-                </video> -->
-                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/download.jfif" alt="فلاتر">
-            </div>
+                            <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
+                        </video> -->
+                <!-- <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر"> -->
+              </div>
 
             <div class="strip">
-                <h2>الغاء الاشترك</h2>
+                <h2>الغاء الاشتراك</h2>
             </div>
 
 
-            <div class="shbka">
+            <div class="shbka pt-2">
                 <div class="container">
                     <h3 style="color: #e8ffe8;">في خدمة فلاتر روتانا</h3>
-                    <div class="zain_viva">
+                    <div class="zain_viva pt-4">
                         @if(Session::has('success'))
                         <div class="alert alert-success alert-dismissible">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -116,39 +92,44 @@
                 </div>
             </div>
 
-            <div class="container">
+            <div class="container pt-5">
                 <div class="form_content">
                     <form method="post" action="{{url('subscription/optout/'.partnerRoleId)}}"   onsubmit="document.getElementById('zain_submit').disabled='true';"  id="form_zain">
                         {{ csrf_field() }}
                         <div class="form-group form-inline">
                             <label for="phone"><span>971</span></label>
                             <input type="tel" class="form-control" id="phone" required=""
-                                placeholder="ادخل رقم الهاتف" name="number" required pattern="[0-9]{8}">
+                                placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}">
                             <span class="validity"></span>
                         </div>
-                        <button id="zain_submit" class="btn" type="submit">الغاء الاشترك</button>
+                        <button id="zain_submit" class="btn" type="submit">الغاء الاشتراك</button>
                     </form>
                 </div>
             </div>
         </div>
 
+    <!-- loading -->
+    {{-- <div class="loading-overlay">
+        <div class="spinner">
+            <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
+        </div>
+    </div> --}}
+    <!-- end loading -->
+</div>
+<!-- script -->
+<script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>
+<script src="{{ url('assets/front/landing_v2')}}/js/popper.min.js"></script>
+<script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
+<script src="{{ url('assets/front/landing_v2')}}/js/script_ooredoo.js"></script>
 
-
-
-         <!-- loading -->
-         {{-- <div class="loading-overlay" style="background-color:#000">
-            <div class="spinner">
-                <img src="{{url('assets/front/rotanav2/images/Rorana_flater_logo.png')}}" alt="loading_snap">
-            </div>
-        </div> --}}
-        <!-- end loading -->
-    </div>
-    <!-- script -->
-    <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>
-    <script src="{{ url('assets/front/landing_v2')}}/js/popper.min.js"></script>
-    <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
-    <script src="{{ url('assets/front/landing_v2')}}/js/script_zain.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+       var msisdn = $("#phone").val() ;
+       if(msisdn != ""){
+           $('#form').submit()
+       }
+});
+</script>
 
 </body>
-
 </html>
