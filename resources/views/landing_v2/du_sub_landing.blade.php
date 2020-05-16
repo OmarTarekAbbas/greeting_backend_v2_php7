@@ -72,12 +72,12 @@
       </div>
 
       <div class="strip">
-        <h2>استمتع بوقتك مع فلاتر</h2>
+        <h2 style="font-family: sans-serif">استمتع بوقتك مع فلاتر</h2>
       </div>
 
       <div class="shbka">
         <div class="container">
-          <h3>اشترك الان</h3>
+          <h3 style="font-family: sans-serif;font-size: 22px;">اضغط علي شبكتك</h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -96,7 +96,7 @@
                             </div>-->
 
               <div class="col-12" style="margin-top: 10%;">
-                <a class="operator" sms='798940' body='1' href="">
+                <a class="operator" sms='4971' body='R' href="">
                   <img src="{{ url('assets/front/landing_v2')}}/img/DuLogo.png" id="du_landing">
                 </a>
               </div>
@@ -141,7 +141,7 @@
       }
     });
     $('.operator').click(function() {
-      var operator = $(this).attr('sms') == '798940' ? 'Du' : '';
+      var operator = $(this).attr('sms') == '4971' ? 'Du' : '';
       $.ajax({
         url: location.href,
         type: "get",

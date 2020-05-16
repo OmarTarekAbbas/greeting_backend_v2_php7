@@ -3408,15 +3408,15 @@ public function zain_ksa_test(Request $request){
                     $codes[$key] = $rbtCode ? $rbtCode->code : null;
                 }
             }
-            
+
             if ( OP() == ooredoo) {
                 if(Session::has('currentOp') && Session::get('currentOp') == ooredoo){
-  
+
                  }else{
                    return redirect(url(redirect_operator()));
                  }
              }
-  
+
             $rbt_sms = $url->operator->rbt_sms;
             if($request->ajax())
                 return view('front.newdesignv4.spresult', compact('Rdata', 'search','rbt_sms','codes'));
@@ -4716,22 +4716,17 @@ public function favouritesmbc(Request $request, $UID)
             $ip = $_SERVER['HTTP_CLIENT_IP'];
         }
 
-        if (isset($_SERVER['HTTP_USER_AGENT'])) {
-            $deviceModel = $_SERVER['HTTP_USER_AGENT'];
-        } else {
-            $deviceModel = "";
-        }
+
 
         $country_from_ip = $this->ip_info("Visitor", "Country");
         $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
         $result['ip'] = $ip;
         $result['country'] = $country_from_ip;
-        $result['deviceModel'] = $deviceModel;
         // $result['AllHeaders'] = $_SERVER;
-        $actionName = "Du logs";
+        $actionName = "Du Landing";
         if ($request->has('operator_name')) {
-            $result['operator'] = $request->operator_name . 'Du';
-            $actionName = $request->operator_name . " landing logs";
+            $result['operator'] = $request->operator_name . '  Emirates';
+            $actionName = $request->operator_name . " Clicks logs";
 
         }
         if ($request->has('enterbtn')) {
