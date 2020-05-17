@@ -386,6 +386,23 @@ class TimweController extends Controller
         return $this->sendMt($sendMT);
     }
 
+
+    public function timwe_test(){
+
+      session(['MSISDN' => '97466671329', 'Status' => 'active','currentOp'=>ooredoo]);
+      $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
+
+      $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+          ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+      if ($snap) {
+          return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
+      } else {
+          return redirect(url('rotanav2/' . $Url->UID));
+      }
+
+  }
+
     public function sendMt(Request $request)
     {
         date_default_timezone_set('Asia/Qatar');
