@@ -3,7 +3,8 @@
 .mainSection {
   height: 100%;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 .errors {
   width: 100%;
@@ -12,17 +13,22 @@
   margin: 0 auto 20px;
   position: relative;
   font-family: verdana,arial,'sans-serif';
-  font-size: 12px; }
-  .errors i {
-    position: absolute;
-    text-align: center;
-    top: 0px;
-    right: 0px;
-    cursor: pointer;
-    height: 40px;
-    width: 40px; }
-  .errors i:before {
-    line-height: 40px; }
+  font-size: 12px;
+}
+
+.errors i {
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
+
+.errors i:before {
+  line-height: 40px;
+}
 
 .mainHeader {
   position: fixed;
@@ -30,21 +36,28 @@
   left: 0;
   width: 100%;
   height: 50px;
-  z-index: 100; }
-  .mainHeader h1 {
-    text-align: center;
-    width: 100%;
-    line-height: 50px;
-    padding: 0px 50px;
-    height: 50px; }
-  .mainHeader .operator_logo, .mainHeader .help {
-    height: 50px;
-    width: 50px;
-    position: absolute;
-    top: 0;
-    z-index: 201; }
-  .mainHeader .help {
-    right: 0; }
+  z-index: 100;
+}
+
+.mainHeader h1 {
+  text-align: center;
+  width: 100%;
+  line-height: 50px;
+  padding: 0px 50px;
+  height: 50px;
+}
+
+.mainHeader .operator_logo, .mainHeader .help {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  z-index: 201;
+}
+
+.mainHeader .help {
+  right: 0;
+}
 
 /*Form*/
 #greetingForm {
@@ -52,243 +65,324 @@
   width: 100%;
   margin: 0;
   padding: 50px 0 0;
-
+  height: 100%;
   /*end fieldset*/
-  /* Nariko text field styles --codrops*/ }
-  #greetingForm fieldset {
-    width: 100%;
-    min-height: 240px;
-    height: 100%;
-    position: relative;
-    overflow-y: auto;
-    overflow-x: hidden; }
-  #greetingForm fieldset:not(:first-of-type) {
-    display: none; }
-  #greetingForm input[type="button"], #greetingForm input[type="submit"] {
-    -webkit-appearance: none; }
-  #greetingForm input, #greetingForm select {
-    width: 100%;
-    margin: 0px auto 30px;
-    padding: 8px;
-    direction: rtl;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-family: "Droid Arabic Kufi", sans-serif !important ; }
-  #greetingForm .fieldset-wrapper {
-    padding: 30px 20px 120px; }
-  #greetingForm .fieldset-controls, #greetingForm a.action-button {
-    display: block;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 40px; }
-    #greetingForm .fieldset-controls input, #greetingForm a.action-button input {
-      width: 50%;
-      float: right;
-      height: 40px; }
-    #greetingForm .fieldset-controls .no-float, #greetingForm a.action-button .no-float {
-      width: 100%;
-      float: none; }
-    #greetingForm .fieldset-controls input[type="button"], #greetingForm .fieldset-controls input[type="submit"], #greetingForm a.action-button input[type="button"], #greetingForm a.action-button input[type="submit"] {
-      cursor: pointer; }
-  #greetingForm .select-panel {
-    position: relative;
-    height: 40px;
-    width: 100%;
-    margin-bottom: 35px;
-    border-top: 2px solid #005f8d; }
-    #greetingForm .select-panel select {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      border: none;
-      outline: none;
-      margin: 0px;
-      height: 40px; }
-    #greetingForm .select-panel i {
-      position: absolute;
-      z-index: 200;
-      top: 12px;
-      left: 8px; }
-  #greetingForm label {
-    display: block;
-    margin-bottom: 10px;
-    text-align: center; }
-  #greetingForm .image_picker_image {
-    max-width: 100%;
-     }
-  #greetingForm .image_picker_selector li {
-    padding: 0; }
-  #greetingForm .input {
-    position: relative;
-    z-index: 1;
-    display: inline-block;
-    width: 80%;
-   /*  max-width: 350px;  */
-    margin: 0 auto;
-    vertical-align: top; }
-  #greetingForm .input__field {
-    position: relative;
-    display: block;
-    float: right;
-    width: 60%;
-    border: none;
-    border-radius: 0;
-    font-weight: 400;
-    font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    -webkit-appearance: none;
-    /* for box shadows to show on iOS */ }
-  #greetingForm .input__field:focus {
-    outline: none; }
-  #greetingForm .input__label {
-    display: inline-block;
-    float: right;
-    padding: 0 1em;
-    width: 40%;
-    font-weight: bold;
-    font-size: 70.25%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none; }
-  #greetingForm .input__label-content {
-    position: relative;
-    display: block;
-    text-align: right;
-    padding: 1.6em 0;
-    width: 100%;
-    font-weight: normal; }
-  #greetingForm .graphic {
-    position: absolute;
-    top: 0;
-    left: 0;
-    fill: none; }
-  #greetingForm .icon {
-    color: #ddd;
-    font-size: 150%; }
-  #greetingForm .input--nariko {
-    overflow: hidden;
-    display: block;
-    margin: 0 auto;
-    padding-top: 2em; }
-  #greetingForm .input__field--nariko {
-    width: 100%;
-    background: #ffffff;
-    opacity: 1;
-    padding: 0.35em;
-    z-index: 100;
-    height: 40px;
-    margin: 0;
-    top: -11px; }
-  #greetingForm .input__label--nariko {
-    width: 100%;
-    position: absolute;
-    pointer-events: none;
-    text-align: left;
-    padding: 0 0.5em;
-  top: -5px;
-  }
-  #greetingForm .input__label--nariko::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    top: 100%;
-    left: 0;
-    -webkit-transform: translate3d(0, -3px, 0);
-    transform: translate3d(0, -3px, 0);
-    -webkit-transition: -webkit-transform 0.4s;
-    transition: transform 0.4s;
-    -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
-    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
-  #greetingForm .input__label-content--nariko {
-    padding: 0.5em 0;
-    -webkit-transform-origin: 0% 100%;
-    transform-origin: 0% 100%;
-    -webkit-transition: -webkit-transform 0.4s, color 0.4s;
-    transition: transform 0.4s, color 0.4s;
-    -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
-    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
-/*  #greetingForm .input__field--nariko:focus,
-  #greetingForm .input--filled .input__field--nariko {
-    cursor: text;
-    opacity: 1;
-    -webkit-transition: opacity 0s 0.4s;
-    transition: opacity 0s 0.4s; }
-  #greetingForm .input__field--nariko:focus + .input__label--nariko::before,
-  #greetingForm .input--filled .input__label--nariko::before {
-    -webkit-transition-delay: 0.05s;
-    transition-delay: 0.05s;
-    -webkit-transform: translate3d(0, -3.3em, 0);
-    transform: translate3d(0, -3.3em, 0); }*/
-  #greetingForm .input__field--nariko:focus + .input__label--nariko .input__label-content--nariko,
-  #greetingForm .input--filled .input__label-content--nariko {
-    color: #6B6E6E;
-  /*  -webkit-transform: translate3d(0, -3.3em, 0) scale3d(0.81, 0.81, 1);
-    transform: translate3d(0, -3.3em, 0) scale3d(0.81, 0.81, 1); */
-  }
-  #greetingForm a.action-button {
-    text-align: center;
-    line-height: 40px; }
+  /* Nariko text field styles --codrops*/
+}
+
+#greetingForm fieldset {
+  width: 100%;
+  min-height: 240px;
+  height: 100%;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#greetingForm fieldset:not(:first-of-type) {
+  display: none;
+}
+
+#greetingForm input[type="button"], #greetingForm input[type="submit"] {
+  -webkit-appearance: none;
+}
+
+#greetingForm input, #greetingForm select {
+  width: 100%;
+  margin: 0px auto 30px;
+  padding: 8px;
+  direction: rtl;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+#greetingForm .fieldset-wrapper {
+  padding: 30px 20px 120px;
+}
+
+#greetingForm .fieldset-controls, #greetingForm a.action-button {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+}
+
+#greetingForm .fieldset-controls input, #greetingForm a.action-button input {
+  width: 50%;
+  float: right;
+  height: 40px;
+}
+
+#greetingForm .fieldset-controls .no-float, #greetingForm a.action-button .no-float {
+  width: 100%;
+  float: none;
+}
+
+#greetingForm .fieldset-controls input[type="button"], #greetingForm .fieldset-controls input[type="submit"], #greetingForm a.action-button input[type="button"], #greetingForm a.action-button input[type="submit"] {
+  cursor: pointer;
+}
+
+#greetingForm .select-panel {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 35px;
+  border-top: 2px solid #005f8d;
+}
+
+#greetingForm .select-panel select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  margin: 0px;
+  height: 40px;
+}
+
+#greetingForm .select-panel i {
+  position: absolute;
+  z-index: 200;
+  top: 12px;
+  left: 8px;
+}
+
+#greetingForm label {
+  display: block;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#greetingForm .image_picker_image {
+  max-width: 100%;
+}
+
+#greetingForm .image_picker_selector li {
+  padding: 0;
+}
+
+#greetingForm .input {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  vertical-align: top;
+}
+
+#greetingForm .input__field {
+  position: relative;
+  display: block;
+  float: right;
+  width: 60%;
+  border: none;
+  border-radius: 0;
+  font-weight: 400;
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-appearance: none;
+  /* for box shadows to show on iOS */
+}
+
+#greetingForm .input__field:focus {
+  outline: none;
+}
+
+#greetingForm .input__label {
+  display: inline-block;
+  float: right;
+  padding: 0 1em;
+  width: 40%;
+  font-weight: bold;
+  font-size: 70.25%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#greetingForm .input__label-content {
+  position: relative;
+  display: block;
+  text-align: right;
+  padding: 1.6em 0;
+  width: 100%;
+  font-weight: normal;
+}
+
+#greetingForm .graphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: none;
+}
+
+#greetingForm .icon {
+  color: #ddd;
+  font-size: 150%;
+}
+
+#greetingForm .input--nariko {
+  overflow: hidden;
+  display: block;
+  margin: 0 auto;
+  padding-top: 2em;
+}
+
+#greetingForm .input__field--nariko {
+  width: 100%;
+  background: transparent;
+  opacity: 0;
+  padding: 0.35em;
+  z-index: 100;
+  height: 40px;
+  margin: 0;
+  top: -11px;
+}
+
+#greetingForm .input__label--nariko {
+  width: 100%;
+  position: absolute;
+  pointer-events: none;
+  text-align: left;
+  padding: 0 0.5em;
+}
+
+#greetingForm .input__label--nariko::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  -webkit-transform: translate3d(0, -3px, 0);
+  transform: translate3d(0, -3px, 0);
+  -webkit-transition: -webkit-transform 0.4s;
+  transition: -webkit-transform 0.4s;
+  transition: transform 0.4s;
+  transition: transform 0.4s, -webkit-transform 0.4s;
+  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+#greetingForm .input__label-content--nariko {
+  padding: 0.5em 0;
+  -webkit-transform-origin: 0% 100%;
+  transform-origin: 0% 100%;
+  -webkit-transition: -webkit-transform 0.4s, color 0.4s;
+  -webkit-transition: color 0.4s, -webkit-transform 0.4s;
+  transition: color 0.4s, -webkit-transform 0.4s;
+  transition: transform 0.4s, color 0.4s;
+  transition: transform 0.4s, color 0.4s, -webkit-transform 0.4s;
+  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+#greetingForm .input__field--nariko:focus,
+#greetingForm .input--filled .input__field--nariko {
+  cursor: text;
+  opacity: 1;
+  -webkit-transition: opacity 0s 0.4s;
+  transition: opacity 0s 0.4s;
+}
+
+#greetingForm .input__field--nariko:focus + .input__label--nariko::before,
+#greetingForm .input--filled .input__label--nariko::before {
+  -webkit-transition-delay: 0.05s;
+  transition-delay: 0.05s;
+  -webkit-transform: translate3d(0, -3.3em, 0);
+  transform: translate3d(0, -3.3em, 0);
+}
+
+#greetingForm .input__field--nariko:focus + .input__label--nariko .input__label-content--nariko,
+#greetingForm .input--filled .input__label-content--nariko {
+  color: #6B6E6E;
+  -webkit-transform: translate3d(0, -3.3em, 0) scale3d(0.81, 0.81, 1);
+  transform: translate3d(0, -3.3em, 0) scale3d(0.81, 0.81, 1);
+}
+
+#greetingForm a.action-button {
+  text-align: center;
+  line-height: 40px;
+}
 
 /*end form*/
 #chooseAudio table {
   margin-top: 20px;
-  background: #fff; }
+  background: #fff;
+}
+
 #chooseAudio table td {
   text-align: center;
   font-size: 11px;
   padding: 15px 4px;
   height: auto;
-  valign: center; }
+  valign: center;
+}
+
 #chooseAudio th {
-  padding: 15px 4px; }
+  padding: 15px 4px;
+}
+
 #chooseAudio .audio-radio {
-  position: relative; }
+  position: relative;
+}
+
 #chooseAudio input[type="radio"] {
   position: absolute;
   width: 16px;
   height: 16px;
   opacity: 0;
-  z-index: 210; }
+  z-index: 210;
+}
+
 #chooseAudio input[type="radio"] + label {
   height: 16px;
   width: 16px;
-  border-radius: 50%; }
+  border-radius: 50%;
+}
+
 #chooseAudio input[type="radio"]:checked + label > span {
   height: 8px;
   width: 8px;
-  border-radius: 50%; }
+  border-radius: 50%;
+}
+
 #chooseAudio .center {
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%); }
+  transform: translate(-50%, -50%);
+}
+
 #chooseAudio .np-play {
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .url {
   width: 90%;
   margin: 30px auto;
   text-align: center;
-  padding: 15px; }
+  padding: 15px;
+}
 
 .fa-download {
   position: absolute;
   width: 40px;
   height: 40px;
   left: 0;
-  top: 0; }
-  .fa-download::before {
-    line-height: 40px; }
+  top: 0;
+}
+
+.fa-download::before {
+  line-height: 40px;
+}
 
 .choose-link {
   width: 80%;
@@ -296,153 +390,29 @@
   display: block;
   background: #ccc;
   padding: 20px;
-  font-size: 14px; }
-  .choose-link i {
-    float: left;
-    width: 20%; }
-  .choose-link p {
-    float: right;
-    width: 80%;
-    text-align: right; }
+  font-size: 14px;
+}
+
+.choose-link i {
+  float: left;
+  width: 20%;
+}
+
+.choose-link p {
+  float: right;
+  width: 80%;
+  text-align: right;
+}
 
 @media screen and (min-width: 285px) and (max-width: 310px) {
   .url {
-    font-size: 14px; } }
+    font-size: 14px;
+  }
+}
+
 @media screen and (max-width: 284px) {
   .url {
-    font-size: 11px; } }
-
-
-/*image page*/
-
-figure.snip1191 {
-  font-family: 'Raleway', Arial, sans-serif;
-  position: relative;
-/*  float: left;*/
-  overflow: hidden;
-  margin: 10px auto;
-  min-width: 220px;
-  max-width: 310px;
-  max-height: 310px;
-  width: 100%;
-  background: #000000;
-  color: #333;
-  text-align: left;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    font-size: 11px;
+  }
 }
-
-figure.snip1191 * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.35s cubic-bezier(0.25, 0.5, 0.5, 0.9);
-  transition: all 0.35s cubic-bezier(0.25, 0.5, 0.5, 0.9);
-}
-
-figure.snip1191 img {
-  max-width: 100%;
-  vertical-align: top;
-}
-
-figure.snip1191 figcaption {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-
-figure.snip1191 h3 {
-  position: absolute;
-  top: 0;
-  text-transform: uppercase;
-  padding: 0px 25px;
-  line-height: 44px;
-  margin: 0;
-  left: 0;
-  font-weight: 800;
-  font-size: 20px;
-  background-color: #000000;
-  color: #ffffff;
-}
-
-figure.snip1191 h3:before {
-  position: absolute;
-  left: 100%;
-  border-style: solid;
-  border-width: 44px 12px 0 0;
-  border-color: #000000 transparent transparent;
-  content: '';
-  top: 0;
-}
-
-figure.snip1191 span {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  color: #ffffff;
-  background-color: #000000;
-  padding: 0 10px;
-  margin-right: -1px;
-  line-height: 40px;
-  font-size: 0.9em;
-  font-weight: 800;
-  text-transform: uppercase;
-  -webkit-transform: translateX(120%);
-  transform: translateX(120%);
-}
-
-figure.snip1191 span:before {
-  position: absolute;
-  right: 100%;
-  border-style: solid;
-  border-width: 0 0 40px 12px;
-  border-color: transparent transparent #000000;
-  content: '';
-  top: 0;
-}
-
-figure.snip1191 a {
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  position: absolute;
-}
-
-figure.snip1191.blue {
-  background-color: #3067AB;
-}
-
-figure.snip1191.blue h3,
-figure.snip1191.blue span {
-  background-color: #3067AB;
-}
-
-figure.snip1191.blue span:before {
-  border-color: transparent transparent #3067AB;
-}
-
-figure.snip1191.blue h3:before {
-  border-color: #3067AB transparent transparent;
-}
-
-
-
-figure.snip1191:hover img,
-figure.snip1191.hover img {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
-figure.snip1191:hover span,
-figure.snip1191.hover span {
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
-}
-
-
-
-
-
-
 /*# sourceMappingURL=layout.css.map */

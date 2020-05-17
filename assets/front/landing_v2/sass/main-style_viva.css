@@ -5,6 +5,10 @@
   src: url("../font/HSN_sadiyah.ttf");
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   font-family: myFont;
   height: 100%;
@@ -228,5 +232,13 @@ body {
   width: 90%;
   margin: 0 auto;
   display: block;
+}
+
+@media only screen and (min-width: 1025px) {
+  body,
+  .main_container {
+    width: 25%;
+    margin: 0 auto;
+  }
 }
 /*# sourceMappingURL=main-style_viva.css.map */

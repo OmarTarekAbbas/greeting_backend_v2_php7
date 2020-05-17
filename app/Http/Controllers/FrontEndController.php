@@ -4661,16 +4661,34 @@ class FrontEndController extends Controller
         return view('front.zain_iraq.zain_iraq_landing');
     }
 
+    public function zain_iraq_landing2(Request $request)
+    {
+        $this->zain_iraq_header($request,'landing');
+        return view('front.zain_iraq.zain_iraq_landing2');
+    }
+
     public function zain_iraq_faild(Request $request)
     {
         $this->zain_iraq_header($request,'faild');
         return view('front.zain_iraq.zain_iraq_faild');
     }
 
+    public function zain_iraq_faild2(Request $request)
+    {
+        $this->zain_iraq_header($request,'faild');
+        return view('front.zain_iraq.zain_iraq_faild2');
+    }
+
     public function zain_iraq_success(Request $request)
     {
         $this->zain_iraq_header($request,'success');
         return view('front.zain_iraq.zain_iraq_success');
+    }
+
+    public function zain_iraq_success2(Request $request)
+    {
+        $this->zain_iraq_header($request,'success');
+        return view('front.zain_iraq.zain_iraq_success2');
     }
 
     public function du_landing()

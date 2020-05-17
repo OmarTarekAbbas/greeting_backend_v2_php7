@@ -5,10 +5,6 @@
   src: url("../font/HSN_sadiyah.ttf");
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 body {
   font-family: myFont;
   height: 100%;
@@ -18,18 +14,29 @@ body {
 .main_container {
   width: 100%;
   height: 100%;
-  background-image: url("../img/BG_Pattern.png");
+  background-image: url("../img/snap_new_landing/BG.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: fixed;
   overflow-y: scroll;
+  text-decoration: none;
 }
 
 /*----------------------------------------- landing page -----------------------------------------*/
+.landing_page {
+  margin-top: 1.65rem;
+}
+
 .landing_page .start_video {
   display: block;
+}
+
+.landing_page .start_video video {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 13.875rem;
 }
 
 .landing_page .logo {
@@ -56,15 +63,20 @@ body {
 }
 
 .landing_page .strip {
-  background-image: url("../img/strip.png");
-  width: 80%;
+  width: 100%;
   margin: auto;
   text-align: center;
   padding: 4px;
   color: #fff;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  margin-top: -1%;
+  margin-top: 2%;
+}
+
+.landing_page .title {
+  text-align: center;
+  margin: 20px auto 0 auto;
+  color: #fff;
 }
 
 .landing_page .shbka {
@@ -146,6 +158,13 @@ body {
   width: 70%;
 }
 
+.landing_page .cancel {
+  text-align: center;
+  color: #fff;
+  padding: 20px 8px 0 8px;
+  font-size: 18px;
+}
+
 /*----------------------------------------- confirm page -----------------------------------------*/
 .confirm_page img {
   width: 80%;
@@ -200,6 +219,10 @@ body {
 .copy {
   text-align: center;
   margin-top: 8%;
+  position: relative;
+  bottom: 0;
+  /* left: 0; */
+  width: 100%;
 }
 
 .copy p {
@@ -234,11 +257,102 @@ body {
   display: block;
 }
 
-@media only screen and (min-width: 1025px) {
+@media (min-width: 768px) and (max-width: 1023.9px) {
+  .landing_page {
+    margin-top: 0;
+  }
+  .landing_page .start_video video {
+    height: 30rem;
+  }
+  .landing_page .strip {
+    width: 75%;
+  }
+  .landing_page .strip h2 {
+    font-size: 2.5rem !important;
+  }
+  .landing_page .shbka h3 {
+    font-size: 2.5rem !important;
+  }
+  .landing_page .shbka .zain_viva {
+    margin-top: -2rem;
+    margin-bottom: -2rem;
+  }
+  .landing_page .form_content form .form-group label,
+  .landing_page .form_content form .form-group input {
+    height: 4.5rem;
+    font-size: 2rem;
+    text-align: center;
+  }
+  .landing_page .form_content form .form-group input {
+    width: 85%;
+  }
+  .landing_page .form_content form .btn {
+    font-size: 2rem !important;
+    width: 55%;
+  }
+  .landing_page .cancel {
+    font-size: 22px;
+  }
+  .copy {
+    margin-top: 2%;
+  }
+  .copy p {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1025px) {
+  .landing_page {
+    margin-top: 0;
+  }
+  .landing_page .start_video video {
+    height: 35rem;
+  }
+  .landing_page .strip {
+    width: 75%;
+  }
+  .landing_page .strip h2 {
+    font-size: 2.75rem !important;
+  }
+  .landing_page .shbka h3 {
+    font-size: 2.75rem !important;
+  }
+  .landing_page .shbka .zain_viva {
+    margin-top: -2rem;
+    margin-bottom: -2rem;
+  }
+  .landing_page .form_content form .form-group label,
+  .landing_page .form_content form .form-group input {
+    height: 4.5rem;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .landing_page .form_content form .form-group input {
+    width: 85%;
+  }
+  .landing_page .form_content form .btn {
+    font-size: 2.5rem !important;
+    width: 55%;
+  }
+  .landing_page .cancel {
+    font-size: 27px;
+  }
+  .copy {
+    margin-top: 2%;
+  }
+  .copy p {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1025px) {
   body,
   .main_container {
     width: 25%;
     margin: 0 auto;
   }
+  .copy {
+    position: unset;
+  }
 }
-/*# sourceMappingURL=main-style_ooredoo.css.map */
+/*# sourceMappingURL=main-style_zain.css.map */
