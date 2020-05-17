@@ -29,3 +29,7 @@ Route::post('notification/user-renewed/{PartnerCode}','MobilyController@notifica
 /*****************Mobily Binary*******************/
 
 
+ // get link for ooredoo Qutar
+Route::get('rotana_timwe_get_lastest_url','TimweController@rotana_timwe_get_lastest_url');
+
+

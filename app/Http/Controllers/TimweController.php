@@ -403,6 +403,26 @@ class TimweController extends Controller
 
   }
 
+  public function rotana_timwe_get_lastest_url(){
+
+    $link = "";
+    $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
+
+    $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+        ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+    if ($snap) {
+        $link =  url('rotanav2/inner/' . $snap->id . '/' . $Url->UID);
+    } else {
+      $link =  url('rotanav2/inner/' . $snap->id . '/' . $Url->UID);
+    }
+
+    $result['link']=$link ;
+
+    return json_encode($result )  ;
+
+}
+
     public function sendMt(Request $request)
     {
         date_default_timezone_set('Asia/Qatar');
