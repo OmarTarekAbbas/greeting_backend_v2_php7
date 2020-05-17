@@ -71,7 +71,9 @@
             <h6 class="h_6 p-2 text-center h5" dir="rtl">3000 سناب شات فلتر</h6>
 
             <p class="w-100 text-center mt-3 text-white">اهلا بك في خدمة فلاتر من زين العراق</p>
-            <img class="w-50 m-auto d-block" src="assets/front/zain_iraq_landing/zain.png" alt="">
+            <a href="#0">
+              <img class="w-50 m-auto d-block" src="assets/front/zain_iraq_landing/zain.png" alt="">
+            </a>
             <div class="h_6 text-center p-1 w-75">سوف تحصل على يوم واحد مجاني عند الاشتراك</div>
             <p class="w-75 m-auto mb-3 text-center text-white">سعر الخدمة 240 دينار عراقي للرسالة الواحدة المستلمة بعد انتهاء الفترة المجانية. لالغاء الاشترا ك ارسل 0 الى 2680</p>
           </div>
