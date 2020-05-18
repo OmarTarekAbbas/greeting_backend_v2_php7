@@ -41,7 +41,7 @@
   .landing_page .strip {
     background-image: url('assets/front/landing_v2/img/strip_green.png');
   }
-  
+
   .landing_page .lang_lang a {
     color: #009fce;
   }
@@ -86,13 +86,13 @@ App::setLocale($lang);
         <h2>استمتع بوقتك مع فلاتر</h2>
       </div>
       <!-- <h5 class="text-center mt-3 lang_lang"><a href="{{url('/'.'du_landing/daily/en')}}">اللغة الانجليزيه</a></h5> -->
-      <h3 style="color: #000;font-size:25px;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>
+      <h3 style="color: #fff;font-size:25px; text-align: center;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>
           @if ($lang == 'ar')
-          <h5><a href="{{url('/'.'landing_du/daily/en')}}">اللغة الانجليزيه</a></h5>
+          <h5 class="text-center"><a href="{{url('/'.'landing_du/daily/en')}}">اللغة الانجليزيه</a></h5>
           @elseif($lang == 'en')
-          <h5><a href="{{url('/'.'landing_du/daily')}}">اللغة العربيه</a></h5>
+          <h5 class="text-center"><a href="{{url('/'.'landing_du/daily')}}">اللغة العربيه</a></h5>
           @else()
-          <h5><a href="{{url('/'.'landing_du/daily')}}">اللغة العربيه</a></h5>
+          <h5 class="text-center"><a href="{{url('/'.'landing_du/daily')}}">اللغة العربيه</a></h5>
           @endif
 
       <div class="shbka">
