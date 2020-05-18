@@ -8,6 +8,8 @@ return [
     'du_valid_num' => 'أرقام فقط',
     'du_valid_num9' => 'تسعة أرقام',
     'du_unsub' =>  'الغاء الاشتراك',
+    'du_enjoy_flu' =>  'استمتع بوقتك مع فلاتر',
+    'enter_seng' =>  'اضغط علي شبكتك',
 
     'short_code' => 'short code',
     'right_to_list' => 'right to left',

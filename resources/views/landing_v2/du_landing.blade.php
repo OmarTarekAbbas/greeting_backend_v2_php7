@@ -39,12 +39,29 @@ App::setLocale($lang);
             <div class="strip">
                 <h2>@lang('messages.du_enjoy')</h2>
 
-                <h5 class="mb-0"><a style="color: #630b0b;" href="#0">اللغة الانجليزية</a></h5>
+                @if ($lang == 'ar')
+                    <a href="{{url("du_landing/lang/en")}}" class="mb-0" style="color: #630b0b;">
+                        اللغة الانجليزية
+                    </a>
+                @else
+                    <a href="{{url("du_landing/lang/ar")}}" class="mb-0" style="color: #630b0b;">
+                        اللغة العربية
+                    </a>
+                @endif
             </div>
 
             <div class="shbka">
                 <div class="container">
-                    <h3 style="color: #630b0b;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>
+                    <h3 style="color: #630b0b;">
+                        @if ($lang == 'ar' || $peroid == 'daily')
+                            {{' في خدمة فلاتر سناب اليومية'}}
+                        @elseif($lang == 'ar' || $peroid == 'weekly')
+                            {{' في خدمة فلاتر سناب الاسبوعية'}}
+                        @elseif($lang == 'en' || $peroid == 'daily')
+                            {{'Daily Flatter Service'}}
+                        @else
+                            {{'Weekly Flatter Service'}}
+                        @endif</h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
