@@ -4904,7 +4904,10 @@ class FrontEndController extends Controller
         if ($request->ajax()) {
             return 'done';
         }
-        return view('landing_v2.du_sub_landing');
+
+        $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
+        $lang =  isset($request->lang) ? $request->lang : "ar" ;
+        return view('landing_v2.du_sub_landing',compact("peroid","lang"));
     }
 
 

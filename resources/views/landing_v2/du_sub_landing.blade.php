@@ -24,11 +24,13 @@
 
   @media (min-width: 1025px) {
   body {
-    background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
+    
+    background-image: url('assets/front/landing_v2/img/stc_BG.png') !important;
+
   }
 }
   .main_container {
-    background-image: url('assets/front/landing_v2/img/stc_BG.png');
+    background-image: url('assets/front/landing_v2/img/stc_BG.png') !important;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -39,6 +41,14 @@
   .landing_page .strip {
     background-image: url('assets/front/landing_v2/img/strip_green.png');
   }
+  
+  .landing_page .lang_lang a {
+    color: #009fce;
+  }
+
+  .shbka .zain_viva #du_landing {
+      width: 40% !important;
+    }
 
   @media only screen and (max-width: 1025px) {
     .shbka .zain_viva {
@@ -46,9 +56,7 @@
       margin-bottom: unset;
     }
 
-    .shbka .zain_viva #du_landing {
-      width: 40% !important;
-    }
+
   }
 
   @media (min-width: 768px) and (max-width: 1025px) {
@@ -59,6 +67,9 @@
   }
 </style>
 
+@php
+App::setLocale($lang);
+@endphp
 
 <body>
   <div class="main_container">
@@ -74,10 +85,20 @@
       <div class="strip">
         <h2>استمتع بوقتك مع فلاتر</h2>
       </div>
+      <!-- <h5 class="text-center mt-3 lang_lang"><a href="{{url('/'.'du_landing/daily/en')}}">اللغة الانجليزيه</a></h5> -->
+      <h3 style="color: #000;font-size:25px;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>
+          @if ($lang == 'ar')
+          <h5><a href="{{url('/'.'landing_du/daily/en')}}">اللغة الانجليزيه</a></h5>
+          @elseif($lang == 'en')
+          <h5><a href="{{url('/'.'landing_du/daily')}}">اللغة العربيه</a></h5>
+          @else()
+          <h5><a href="{{url('/'.'landing_du/daily')}}">اللغة العربيه</a></h5>
+          @endif
 
       <div class="shbka">
         <div class="container">
           <h3>اشترك الان</h3>
+
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">

@@ -175,7 +175,7 @@ define('MOBILY_OP_ID',14);
 //================================= Flatter du ==============================//
 
 
-Route::get('landing_du','FrontEndController@landing_du_sub');
+Route::get('landing_du/{peroid?}/{lang?}','FrontEndController@landing_du_sub');
 
 //================================= Flatter Mdu ==============================//
 

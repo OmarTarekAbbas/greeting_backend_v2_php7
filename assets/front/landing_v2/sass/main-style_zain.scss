@@ -12,9 +12,9 @@ body {
   width: 100%;
 }
 
-// ::-webkit-scrollbar {
-//   display: none;
-// }
+::-webkit-scrollbar {
+  display: none;
+}
 
 .main_container {
   width: 100%;
@@ -168,9 +168,9 @@ body {
 
   .cancel {
     text-align: center;
-    color: #fff;
+    color: #53565a;
     padding: 20px 8px 0 8px;
-    font-size: 18px;
+    font-size: small;
   }
 }
 

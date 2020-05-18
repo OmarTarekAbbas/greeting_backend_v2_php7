@@ -23,14 +23,14 @@
     margin-top: 0;
   }
 
+  .shbka .zain_viva #zain {
+      width: 30% !important;
+    }
+
   @media only screen and (max-width: 1025px) {
     .shbka .zain_viva {
       margin-top: unset;
       margin-bottom: unset;
-    }
-
-    .shbka .zain_viva #zain {
-      width: 30% !important;
     }
   }
 
