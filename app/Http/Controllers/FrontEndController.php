@@ -3218,6 +3218,15 @@ class FrontEndController extends Controller
                 }
               }
 
+
+              if ( OP() == ooredoo) {
+                if(Session::has('currentOp') && Session::get('currentOp') == ooredoo){
+
+                 }else{
+                   return redirect(url(redirect_operator()));
+                 }
+             }
+
             // if (is_null($url))
             // return view('front.error');
             $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->get();
@@ -3401,6 +3410,14 @@ class FrontEndController extends Controller
 
             if ( OP() == STC_OP_ID) {
               if(Session::has('currentOp') && Session::get('currentOp') == STC_OP_ID){
+
+               }else{
+                 return redirect(url(redirect_operator()));
+               }
+           }
+
+            if ( OP() == ooredoo) {
+              if(Session::has('currentOp') && Session::get('currentOp') == ooredoo){
 
                }else{
                  return redirect(url(redirect_operator()));

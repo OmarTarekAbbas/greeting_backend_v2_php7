@@ -7,7 +7,9 @@ use Validator;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Illuminate\Support\Facades\File;
-
+use App\TimWe;
+use App\timweUnsubscriber;
+use App\timweSubscriber;
 class TimweController extends Controller
 {
 
@@ -74,6 +76,14 @@ class TimweController extends Controller
         $ReqResponse['message'] = 'string';
         $ReqResponse['partnerNotifResponseBody'] = array('test1', 'test2');
 
+        $timewe = TimWe::create([
+          'api_request' => $URL,
+          'payload' => json_encode($vars),
+          'response' => json_encode($ReqResponse),
+          'header' => json_encode($headers),
+          'type'  =>$actionName
+        ]);
+
         return json_encode($ReqResponse);
     }
 
@@ -125,6 +135,13 @@ class TimweController extends Controller
         $ReqResponse['message'] = 'string';
         $ReqResponse['partnerNotifResponseBody'] = array('test1', 'test2');
 
+        $timewe = TimWe::create([
+          'api_request' => $URL,
+          'payload' => json_encode($vars),
+          'response' => json_encode($ReqResponse),
+          'header' => json_encode($headers),
+          'type'  =>$actionName
+        ]);
         return json_encode($ReqResponse);
     }
 
@@ -178,6 +195,14 @@ class TimweController extends Controller
         $ReqResponse['message'] = 'string';
         $ReqResponse['partnerNotifResponseBody'] = array('test1', 'test2');
 
+        $timewe = TimWe::create([
+          'api_request' => $URL,
+          'payload' => json_encode($vars),
+          'response' => json_encode($ReqResponse),
+          'header' => json_encode($headers),
+          'type'  =>$actionName
+        ]);
+
         return json_encode($ReqResponse);
     }
 
@@ -228,6 +253,14 @@ class TimweController extends Controller
         $ReqResponse['inError”'] = 'false';
         $ReqResponse['message'] = 'string';
         $ReqResponse['partnerNotifResponseBody'] = array('test1', 'test2');
+
+        $timewe = TimWe::create([
+          'api_request' => $URL,
+          'payload' => json_encode($vars),
+          'response' => json_encode($ReqResponse),
+          'header' => json_encode($headers),
+          'type'  =>$actionName
+        ]);
 
         return json_encode($ReqResponse);
     }
@@ -281,6 +314,13 @@ class TimweController extends Controller
         $ReqResponse['inError”'] = 'false';
         $ReqResponse['message'] = 'string';
         $ReqResponse['partnerNotifResponseBody'] = array('test1', 'test2');
+
+        $timewe = TimWe::create([
+          'api_request' => $URL,
+          'payload' => json_encode($vars),
+          'response' => json_encode($ReqResponse),
+          'type'  =>$actionName
+        ]);
 
         return json_encode($ReqResponse);
     }
@@ -336,14 +376,21 @@ class TimweController extends Controller
         }
     }
 
-    public function sendMt($channel, $partnerRole)
+    public function testMT(){
+        $sendMT = new Request();
+        $sendMT->msisdn = session('userIdentifier');
+        $sendMT->sms = url('/?OpID='.ooredoo);
+        return $this->sendMt($sendMT);
+    }
+
+    public function sendMt(Request $request)
     {
         date_default_timezone_set('Asia/Qatar');
 
-        $channel = $channel;
-        $partnerRoleId = $partnerRole;
+        $channel = 'sms';
+        $partnerRoleId = partnerRoleId;
 
-        require('uuid/UUID.php');
+        require_once('uuid/UUID.php');
         $trxid = \UUID::v4();
 
         $headers = array(
@@ -360,8 +407,8 @@ class TimweController extends Controller
         $vars["pricepointId"] = MTFreePricepointId;
         $vars["mcc"] = "427";
         $vars["mnc"] = "01";
-        $vars["text"] = "MESSAGE TO BE SENT TO USER";
-        $vars["msisdn"] = "9741234567";
+        $vars["text"] = $request->sms;
+        $vars["msisdn"] = $request->msisdn;
         $vars["largeAccount"] = largeAccount;
         $vars["sendDate"] = "'.$sendDate.'";
         $vars["priority"] = "NORMAL";
@@ -387,6 +434,14 @@ class TimweController extends Controller
 
         $this->log($actionName, $URL, $result);
 
+        $timewe = TimWe::create([
+          'api_request' => $URL,
+          'payload' => json_encode($vars),
+          'response' => json_encode($ReqResponse),
+          'header' => json_encode($headers),
+          'type'  =>$actionName
+        ]);
+
         return $ReqResponse;
     }
 
@@ -396,7 +451,7 @@ class TimweController extends Controller
 
         $partnerRoleId = $partnerRole;
 
-        require('uuid/UUID.php');
+        require_once('uuid/UUID.php');
         $trxid = \UUID::v4();
 
         $headers = array(
@@ -415,7 +470,7 @@ class TimweController extends Controller
         $vars["productId"] = productId;
         $vars["mcc"] = "427";
         $vars["mnc"] = "01";
-        $vars["entryChannel"] = "WAP";
+        $vars["entryChannel"] = "WEB";
         $vars["largeAccount"] = largeAccount;
         $vars["subKeyword"] = "";
         // $vars["trackingId"] = "12637414527";
@@ -441,10 +496,43 @@ class TimweController extends Controller
 
         $this->log($actionName, $URL, $result);
 
-        if($ReqResponse['code'] == 'SUCCESS'){
-            return view('timweLanding.timwe_pinCode');
+        $timewe = TimWe::create([
+          'api_request' => $URL,
+          'payload' => json_encode($vars),
+          'response' => json_encode($ReqResponse),
+          'header' => json_encode($headers),
+          'type'  =>$actionName
+        ]);
+
+        if($ReqResponse['responseData']['subscriptionResult'] == 'OPTIN_ALREADY_ACTIVE'){
+            $subscribe = timweSubscriber::where('msisdn', session('userIdentifier'))->where('serviceId', productId)->first();
+            
+            if(empty($unsubscribe)){
+                timweSubscriber::create([
+                    'msisdn' => session('userIdentifier'),
+                    'serviceId' => productId,
+                    'requestId' => $timewe->id,
+                ]);
+            }
+
+            session(['MSISDN' => '974'.$request->number, 'Status' => 'active','currentOp'=>ooredoo]);
+            $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
+
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+            if ($snap) {
+                return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
+            } else {
+                return redirect(url('newdesignv4/' . $Url->UID));
+            }
+
         }else{
-            return redirect('ooredoo_qatar_landing')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+            if($ReqResponse['code'] == 'SUCCESS'){
+                return view('timweLanding.timwe_pinCode');
+            }else{
+                return redirect('ooredoo_qatar_landing')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+            }
         }
     }
 
@@ -454,7 +542,7 @@ class TimweController extends Controller
 
         $partnerRoleId = $partnerRole;
 
-        require('uuid/UUID.php');
+        require_once('uuid/UUID.php');
         $trxid = \UUID::v4();
 
         $headers = array(
@@ -476,7 +564,7 @@ class TimweController extends Controller
         $vars["productId"] = productId;
         $vars["mcc"] = "427";
         $vars["mnc"] = "01";
-        $vars["entryChannel"] = "WAP";
+        $vars["entryChannel"] = "WEB";
         $vars["clientIp"] = "";
         $vars["transactionAuthCode"] = $request->pincode;
 
@@ -498,9 +586,41 @@ class TimweController extends Controller
 
         $this->log($actionName, $URL, $result);
 
+        $timewe = TimWe::create([
+          'api_request' => $URL,
+          'payload' => json_encode($vars),
+          'response' => json_encode($ReqResponse),
+          'header' => json_encode($headers),
+          'type'  =>$actionName
+        ]);
+
         if($ReqResponse['code'] == 'SUCCESS'){
-            //sessions
-            //redirect landing
+            if($ReqResponse['responseData']['subscriptionResult'] == 'OPTIN_CONF_WRONG_PIN'){
+                return redirect('ooredoo_qatar_pin')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+            }
+
+           $subscribe = timweSubscriber::where('msisdn', session('userIdentifier'))->where('serviceId', productId)->first();
+            
+           if(empty($subscribe)){
+               timweSubscriber::create([
+                   'msisdn' => session('userIdentifier'),
+                   'serviceId' => productId,
+                   'requestId' => $timewe->id,
+               ]);
+           }
+           
+            session(['MSISDN' => '974'.$request->number, 'Status' => 'active','currentOp'=>ooredoo]);
+            $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
+
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+            if ($snap) {
+                return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
+            } else {
+                return redirect(url('newdesignv4/' . $Url->UID));
+            }
+
         }else{
             return redirect('ooredoo_qatar_pin')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
         }
@@ -512,7 +632,7 @@ class TimweController extends Controller
 
         $partnerRoleId = $partnerRole;
 
-        require('uuid/UUID.php');
+        require_once('uuid/UUID.php');
         $trxid = \UUID::v4();
 
         $headers = array(
@@ -530,7 +650,7 @@ class TimweController extends Controller
         $vars["productId"] = productId;
         $vars["mcc"] = "427";
         $vars["mnc"] = "01";
-        $vars["entryChannel"] = "WAP";
+        $vars["entryChannel"] = "WEB";
         $vars["largeAccount"] = largeAccount;
         $vars["subKeyword"] = "SUB";
         // $vars["trackingId"] = "12637414527";
@@ -558,8 +678,25 @@ class TimweController extends Controller
         $result['date'] = date('Y-m-d H:i:s');
 
         $this->log($actionName, $URL, $result);
+
+        $timewe = TimWe::create([
+          'api_request' => $URL,
+          'payload' => json_encode($vars),
+          'response' => json_encode($ReqResponse),
+          'header' => json_encode($headers),
+          'type'  =>$actionName
+        ]);
+
         // dd($ReqResponse['responseData']['subscriptionResult']);
         if($ReqResponse['responseData']['subscriptionResult'] == 'OPTOUT_CANCELED_OK'){
+            $subscribe = timweSubscriber::where('msisdn', '974'.$request->number)->where('serviceId', productId)->first();
+            $subscribe->delete();
+
+            timweUnsubscriber::create([
+                'msisdn' => '974'.$request->number,
+                'serviceId' => productId,
+                'requestId' => $timewe->id,
+            ]);
             return redirect('ooredoo_qatar_unsub')->with('success', 'تم الغاء الاشتراك بنجاح');
         }else{
             return redirect('ooredoo_qatar_unsub')->with('failed', 'هذا الرقم غير مشترك بالخدمة');

@@ -206,6 +206,8 @@ function redirect_operator() {
         return 'landing_mobily_ksa';
     }else if (strpos($operator->name, 'STC') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
       return 'landing_stc_ksa';
+    }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'Qatar') !== false) {
+      return 'ooredoo_qatar_landing';
     } else {
         return 'landing_v1';
     }
@@ -235,3 +237,16 @@ function getCode() {
   }
   return 1;
  }
+
+
+
+ function timwe_op_id(){
+  $country = Country::where('name', 'Qatar')->first();
+  if(!empty($country)){
+      $op = Operator::where('country_id', $country->id)->where('name', 'ooredoo')->first();
+      if(!empty($op)){
+          return $op->id;
+      }
+  }
+  return 32;
+}
