@@ -100,7 +100,9 @@
     <div class="cancel text-center mt-4">
         {!! Form::open(['url'=>'subscription/optin/'.partnerRoleId,'method'=>'post','class'=>'form']) !!}
             <div class="form-group">
-                <input type="submit" value=" اضغط لارسال رمز التاكيد مرة اخري">
+              <input type="tel" class="form-control" @if(session()->has('pincodephone')) value="{{session()->get('pincodephone')}}" @endif id="phone" required=""
+              placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}" hidden>
+              <input type="submit" value=" اضغط لارسال رمز التاكيد مرة اخري">
             </div>
         {!! Form::close() !!}
     </div>

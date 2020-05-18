@@ -466,6 +466,7 @@ class TimweController extends Controller
 
         $vars["userIdentifier"] = '974'.$request->number;
         session()->put('userIdentifier', '974'.$request->number);
+        session()->put('pincodephone', $request->number);
         $vars["userIdentifierType"] = "MSISDN";
         $vars["productId"] = productId;
         $vars["mcc"] = "427";
