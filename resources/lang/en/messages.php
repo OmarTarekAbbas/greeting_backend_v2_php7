@@ -8,6 +8,8 @@ return [
     'du_valid_num9' => 'nine numbers',
     'du_enter_mob' => 'Enter your phone number',
     'du_unsub' => 'Unsubscribe',
+    'du_enjoy_flu' =>  'Enjoy your time with filters',
+    'enter_seng' =>  'Enter on your network',
 
     'short_code' => 'SHORT CODE',
     'right_to_list' => 'right to left',

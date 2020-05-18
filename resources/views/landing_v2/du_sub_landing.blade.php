@@ -10,7 +10,7 @@
   <title>Du Flatter</title>
   <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/main-style_zain.css">
+  <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/main-style_zain_du.css">
   <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
@@ -24,26 +24,13 @@
 
   @media (min-width: 1025px) {
   body {
-    
-    background-image: url('assets/front/landing_v2/img/stc_BG.png') !important;
-
   }
 }
   .main_container {
-    background-image: url('assets/front/landing_v2/img/stc_BG.png') !important;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-  }
-
-
-  .landing_page .strip {
-    background-image: url('assets/front/landing_v2/img/strip_green.png');
-  }
-
-  .landing_page .lang_lang a {
-    color: #009fce;
   }
 
   .shbka .zain_viva #du_landing {
@@ -55,8 +42,6 @@
       margin-top: unset;
       margin-bottom: unset;
     }
-
-
   }
 
   @media (min-width: 768px) and (max-width: 1025px) {
@@ -68,9 +53,8 @@
 </style>
 
 @php
-App::setLocale($lang);
+  App::setLocale($lang);
 @endphp
-
 <body>
   <div class="main_container">
     <div class="landing_page">
@@ -83,22 +67,21 @@ App::setLocale($lang);
       </div>
 
       <div class="strip">
-        <h2>استمتع بوقتك مع فلاتر</h2>
+        <h2 style="font-family: sans-serif">@lang('messages.du_enjoy_flu')</h2>
         @if ($lang == 'ar')
-          <h5 class="text-center mb-0"><a href="{{url('/'.'landing_du/daily/en')}}">اللغة الانجليزيه</a></h5>
-          @elseif($lang == 'en')
-          <h5 class="text-center"><a href="{{url('/'.'landing_du/daily')}}">اللغة العربيه</a></h5>
-          @else()
-          <h5 class="text-center"><a href="{{url('/'.'landing_du/daily')}}">اللغة العربيه</a></h5>
-          @endif
+          <a href="{{url("landing_du/lang/en")}}" class="mb-0" style="color: #fff;">
+            اللغة الانجليزية
+          </a>
+        @else
+          <a href="{{url("landing_du/lang/ar")}}" class="mb-0" style="color: #fff;">
+            اللغة العربية
+          </a>
+        @endif
       </div>
-      <!-- <h5 class="text-center mt-3 lang_lang"><a href="{{url('/'.'du_landing/daily/en')}}">اللغة الانجليزيه</a></h5> -->
-          
 
       <div class="shbka">
         <div class="container">
-          <h3 class="mt-2">اشترك الان</h3>
-
+          <h3 style="font-family: sans-serif;font-size: 22px;">@lang('messages.enter_seng')</h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -117,7 +100,7 @@ App::setLocale($lang);
                             </div>-->
 
               <div class="col-12" style="margin-top: 10%;">
-                <a class="operator" sms='4971' body='F' href="">
+                <a class="operator" sms='4971' body='R' href="">
                   <img src="{{ url('assets/front/landing_v2')}}/img/DuLogo.png" id="du_landing">
                 </a>
               </div>
