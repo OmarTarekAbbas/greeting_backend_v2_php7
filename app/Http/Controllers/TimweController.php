@@ -729,6 +729,7 @@ class TimweController extends Controller
     public function logout(){
         session()->forget('userIdentifier');
         session()->forget('status');
+        session()->forget('currentOp');
 
         return redirect('ooredoo_qatar_landing');
     }
