@@ -84,20 +84,20 @@ App::setLocale($lang);
 
       <div class="strip">
         <h2>استمتع بوقتك مع فلاتر</h2>
-      </div>
-      <!-- <h5 class="text-center mt-3 lang_lang"><a href="{{url('/'.'du_landing/daily/en')}}">اللغة الانجليزيه</a></h5> -->
-      <h3 style="color: #fff;font-size:25px; text-align: center;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر سناب اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر سناب الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Flatter Service'}} @else {{'Weekly Flatter Service'}} @endif</h3>
-          @if ($lang == 'ar')
-          <h5 class="text-center"><a href="{{url('/'.'landing_du/daily/en')}}">اللغة الانجليزيه</a></h5>
+        @if ($lang == 'ar')
+          <h5 class="text-center mb-0"><a href="{{url('/'.'landing_du/daily/en')}}">اللغة الانجليزيه</a></h5>
           @elseif($lang == 'en')
           <h5 class="text-center"><a href="{{url('/'.'landing_du/daily')}}">اللغة العربيه</a></h5>
           @else()
           <h5 class="text-center"><a href="{{url('/'.'landing_du/daily')}}">اللغة العربيه</a></h5>
           @endif
+      </div>
+      <!-- <h5 class="text-center mt-3 lang_lang"><a href="{{url('/'.'du_landing/daily/en')}}">اللغة الانجليزيه</a></h5> -->
+          
 
       <div class="shbka">
         <div class="container">
-          <h3>اشترك الان</h3>
+          <h3 class="mt-2">اشترك الان</h3>
 
           <div class="zain_viva">
             @if(Session::has('success'))
