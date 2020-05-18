@@ -8,6 +8,9 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Illuminate\Support\Facades\File;
 use App\TimWe;
+use App\Generatedurl;
+use App\Greetingimg;
+use Carbon\Carbon;
 use App\timweUnsubscriber;
 use App\timweSubscriber;
 class TimweController extends Controller
@@ -595,9 +598,11 @@ class TimweController extends Controller
           'type'  =>$actionName
         ]);
 
+        // if(true){
         if($ReqResponse['code'] == 'SUCCESS'){
+            // if(false){
             if($ReqResponse['responseData']['subscriptionResult'] == 'OPTIN_CONF_WRONG_PIN'){
-                return redirect('ooredoo_qatar_pin')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+                return redirect('ooredoo_qatar_pin')->with('failed', 'رقم التحقق خاطئ يرجي المحاولة مرة اخر'); // worng pincode
             }
 
            $subscribe = timweSubscriber::where('msisdn', session('userIdentifier'))->where('serviceId', productId)->first();

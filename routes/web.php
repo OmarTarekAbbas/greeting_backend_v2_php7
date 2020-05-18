@@ -501,4 +501,3 @@ Route::get('admin/get_table_ids',function(Illuminate\Http\Request $request){
 });
 
 Auth::routes(['register' => false]);
-
