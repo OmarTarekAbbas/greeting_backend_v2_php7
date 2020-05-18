@@ -598,9 +598,7 @@ class TimweController extends Controller
           'type'  =>$actionName
         ]);
 
-        // if(true){
         if($ReqResponse['code'] == 'SUCCESS'){
-            // if(false){
             if($ReqResponse['responseData']['subscriptionResult'] == 'OPTIN_CONF_WRONG_PIN'){
                 return redirect('ooredoo_qatar_pin')->with('failed', 'رقم التحقق خاطئ يرجي المحاولة مرة اخر'); // worng pincode
             }
@@ -726,5 +724,12 @@ class TimweController extends Controller
         curl_close($ch);
 
         return $sOutput;
+    }
+    
+    public function logout(){
+        session()->forget('userIdentifier');
+        session()->forget('status');
+
+        return redirect('ooredoo_qatar_landing');
     }
 }
