@@ -40,14 +40,14 @@
     background-image: url('assets/front/landing_v2/img/strip_green.png');
   }
 
+  .shbka .zain_viva #du_landing {
+      width: 40% !important;
+    }
+
   @media only screen and (max-width: 1025px) {
     .shbka .zain_viva {
       margin-top: unset;
       margin-bottom: unset;
-    }
-
-    .shbka .zain_viva #du_landing {
-      width: 40% !important;
     }
   }
 
