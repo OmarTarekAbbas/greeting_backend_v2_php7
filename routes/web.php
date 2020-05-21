@@ -156,6 +156,8 @@ Route::get('logout_zain_ksa/{uid}', 'FrontEndController@logout_zain_ksa');
 
 //all kuwait
 Route::get('landing_kuwait','FrontEndController@landing_kuwait');
+// lang kuwait ooredoo
+Route::get('landing_kuwait_ooredoo','FrontEndController@landing_kuwait_ooredoo');
 
 //landing ksa
 Route::get('landing_ksa_1','FrontEndController@landing_ksa_new');
