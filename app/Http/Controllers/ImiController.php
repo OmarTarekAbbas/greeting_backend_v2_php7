@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Generatedurl;
+use App\Greetingimg;
+use App\ImiNotification;
+use App\ImiRequests;
+use App\ImiUnsubscriber;
+use App\Subscriber;
+use Carbon\carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Validator;
-
-use App\ImiRequests;
-use App\ImiNotification;
-use App\Subscriber;
-use App\ImiUnsubscriber;
 
 class ImiController extends Controller
 {
@@ -89,8 +91,8 @@ class ImiController extends Controller
             "Authorization: " . $this->authorization(),
         );
 
-        $vars['ChargeUser']["msisdn"] = session()->get('msisdn');;
-        $vars['ChargeUser']["otpid"] = session()->get('otpid');;
+        $vars['ChargeUser']["msisdn"] = session()->get('msisdn');
+        $vars['ChargeUser']["otpid"] = session()->get('otpid');
         $vars['ChargeUser']["transid"] = microtime();
         $vars['ChargeUser']["ctype"] = "SUB";
         $vars['ChargeUser']["pcode"] = "1.00";
@@ -117,7 +119,7 @@ class ImiController extends Controller
             'header' => json_encode($headers),
             'request' => $JSON,
             'response' => json_encode($ReqResponse),
-            'type'  =>$actionName
+            'type' => $actionName,
         ]);
 
         return $ReqResponse;
@@ -156,7 +158,7 @@ class ImiController extends Controller
             'header' => json_encode($headers),
             'request' => $JSON,
             'response' => json_encode($ReqResponse),
-            'type'  =>$actionName
+            'type' => $actionName,
         ]);
 
         return $ReqResponse;
@@ -196,22 +198,22 @@ class ImiController extends Controller
             'header' => json_encode($headers),
             'request' => $JSON,
             'response' => json_encode($ReqResponse),
-            'type'  =>$actionName
+            'type' => $actionName,
         ]);
 
-        if($ReqResponse['service']['status'] == 0){
+        if ($ReqResponse['service']['status'] == 0) {
             Subscriber::create([
                 'msisdn' => session()->get('msisdn'),
                 'serviceId' => imi_serviceId,
                 'requestId' => $imi->id,
             ]);
             // $this->charging();
-            session(['MSISDN' => session()->get('msisdn'), 'status' => 'active' , 'imi_op_id' => imi_op_id()]);
+            session(['MSISDN' => session()->get('msisdn'), 'status' => 'active', 'currentOp' => imi_op_id()]);
 
-            $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
+            $Url = Generatedurl::where('operator_id', imi_op_id())->latest()->first();
 
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
-                ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+                ->where('greetingimg_operator.operator_id', '=', imi_op_id())->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
             if ($snap) {
                 return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
@@ -219,7 +221,7 @@ class ImiController extends Controller
                 return redirect(url('rotanav2/' . $Url->UID));
             }
 
-        }else{
+        } else {
             return redirect('imi/pincode')->with('failed', 'لقد حدث خطأ, برجاء المحاولة مرة اخري');
         }
     }
@@ -233,7 +235,7 @@ class ImiController extends Controller
         );
 
         $vars['service']["reqtype"] = "UNSUB";
-        $vars['service']["msisdn"] = phoneKey.$request->number;
+        $vars['service']["msisdn"] = phoneKey . $request->number;
         $vars['service']["serviceid"] = imi_serviceId;
         $vars['service']["chnl"] = "WAP";
         $vars['service']["scode"] = shortCode;
@@ -257,25 +259,25 @@ class ImiController extends Controller
             'header' => json_encode($headers),
             'request' => $JSON,
             'response' => json_encode($ReqResponse),
-            'type'  =>$actionName
+            'type' => $actionName,
         ]);
 
-        if($ReqResponse['service']['status'] == 0){
-            $subscriber = Subscriber::where('msisdn', phoneKey.$request->number)->where('serviceId', imi_serviceId)->first();
+        if ($ReqResponse['service']['status'] == 0) {
+            $subscriber = Subscriber::where('msisdn', phoneKey . $request->number)->where('serviceId', imi_serviceId)->first();
             $subscriber->delete();
 
-            $unsubscribe = ImiUnsubscriber::where('msisdn', phoneKey.$request->number)->where('serviceId', imi_serviceId)->first();
+            $unsubscribe = ImiUnsubscriber::where('msisdn', phoneKey . $request->number)->where('serviceId', imi_serviceId)->first();
 
-            if(empty($unsubscribe)){
+            if (empty($unsubscribe)) {
                 ImiUnsubscriber::create([
-                    'msisdn' => phoneKey.$request->number,
+                    'msisdn' => phoneKey . $request->number,
                     'serviceId' => imi_serviceId,
                     'requestId' => $imi->id,
                 ]);
             }
         }
 
-        return redirect('imi/unsubscribe')->with('success',$ReqResponse['service']['resdescription']);
+        return redirect('imi/unsubscribe')->with('success', $ReqResponse['service']['resdescription']);
     }
 
     public function subscriptionsCheck(Request $request)
@@ -288,7 +290,7 @@ class ImiController extends Controller
         );
 
         $vars['service']["reqtype"] = "CHECK";
-        $vars['service']["msisdn"] = phoneKey.$request->number;
+        $vars['service']["msisdn"] = phoneKey . $request->number;
 
         // optional params if we need a specific service id
         $vars['service']["serviceid"] = imi_serviceId;
@@ -314,46 +316,52 @@ class ImiController extends Controller
             'header' => json_encode($headers),
             'request' => $JSON,
             'response' => json_encode($ReqResponse),
-            'type'  =>$actionName
+            'type' => $actionName,
         ]);
 
-        $request->session()->put('msisdn', phoneKey.$request->number);
+        $request->session()->put('msisdn', phoneKey . $request->number);
 
+        if (isset($ReqResponse['services']) && count($ReqResponse['services']) > 0) { // user has subscribe sevices
 
+            foreach ($ReqResponse['services'] as $service) {
 
-if(isset($ReqResponse['services'])  && count($ReqResponse['services']) > 0 ){ // user has subscribe sevices
+                if ($service['serviceid'] == imi_serviceId) {
 
-  foreach($ReqResponse['services'] as   $service ){
+                    $subscriber = Subscriber::where('msisdn', session()->get('msisdn'))->where('serviceId', imi_serviceId)->first();
+                    if (empty($subscriber)) {
+                        Subscriber::create([
+                            'msisdn' => session()->get('msisdn'),
+                            'serviceId' => imi_serviceId,
+                            'requestId' => $imi->id,
+                        ]);
+                    }
 
-    if($service['serviceid']  == imi_serviceId){
+                    session(['MSISDN' => session()->get('msisdn'), 'status' => 'active' , 'currentOp' => imi_op_id()]);
 
-      $subscriber = Subscriber::where('msisdn', session()->get('msisdn'))->where('serviceId', imi_serviceId)->first();
-      if(empty($subscriber)){
-          Subscriber::create([
-              'msisdn' => session()->get('msisdn'),
-              'serviceId' => imi_serviceId,
-              'requestId' => $imi->id,
-          ]);
-      }
-      session(['MSISDN' => session()->get('msisdn'), 'status' => 'active' , 'imi_op_id' => imi_op_id()]);
-      return redirect('/?OpID='.imi_op_id());
+                    $Url = Generatedurl::where('operator_id', imi_op_id())->latest()->first();
+        
+                    $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                        ->where('greetingimg_operator.operator_id', '=', imi_op_id())->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+        
+                    if ($snap) {
+                        return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
+                    } else {
+                        return redirect(url('rotanav2/' . $Url->UID));
+                    }
 
-    }
+                }
 
-  }
+            }
 
-}else{
-    return $this->generateOTP();
-}
-
-
-
+        } else {
+            return $this->generateOTP();
+        }
 
     }
 
     /*
     localhost/mondia_php7/imi/notification?msisdn=<msisdn>&svcid=<svcid_value>&channel=XXX&action=<SUB/UNSUB/REN>&status=<Status>&Nextrenewaldate=2020-05-11 12.22.11&TransactionID=!Transactionid!
-    */
+     */
     public function imi_notification(Request $request)
     {
         $vars['msisdn'] = $request->msisdn;
@@ -430,7 +438,7 @@ if(isset($ReqResponse['services'])  && count($ReqResponse['services']) > 0 ){ //
             'header' => json_encode($headers),
             'request' => $JSON,
             'response' => json_encode($ReqResponse),
-            'type'  =>$actionName
+            'type' => $actionName,
         ]);
 
         session()->put('otpid', $ReqResponse['response']['otpid']);
@@ -446,8 +454,8 @@ if(isset($ReqResponse['services'])  && count($ReqResponse['services']) > 0 ){ //
             "Authorization: " . $this->authorization(),
         );
 
-        $otpid =  $request->session()->get('otpid');
-        $msisdn =  $request->session()->get('msisdn');
+        $otpid = $request->session()->get('otpid');
+        $msisdn = $request->session()->get('msisdn');
 
         $vars["reqtype"] = "VALOTP";
         $vars["msisdn"] = $msisdn;
@@ -473,13 +481,13 @@ if(isset($ReqResponse['services'])  && count($ReqResponse['services']) > 0 ){ //
             'header' => json_encode($headers),
             'request' => $JSON,
             'response' => json_encode($ReqResponse),
-            'type'  =>$actionName
+            'type' => $actionName,
         ]);
 
-        if($ReqResponse['response']['status'] == 0){ // true pincode
-            $request->session()->put('otpid', $ReqResponse['response']['otpid']);
-            return $this->subscriptionsRequest();
-        }else{
+        $request->session()->put('otpid', $ReqResponse['response']['otpid']);
+        return $this->subscriptionsRequest();
+        if ($ReqResponse['response']['status'] == 0) { // true pincode
+        } else {
             return redirect('imi/pincode')->with('failed', 'الكود خاظئ, برجاء المحاولة مرة اخري');
         }
     }
@@ -497,7 +505,7 @@ if(isset($ReqResponse['services'])  && count($ReqResponse['services']) > 0 ){ //
         $vars['service']["msisdn"] = $request->number;
 
         // optional params if we need a specific service id
-        $vars['service']["serviceid"] = 9;  // man elkeal sub keyword
+        $vars['service']["serviceid"] = 9; // man elkeal sub keyword
         $vars['service']["Status"] = "Active";
         $vars['service']["scode"] = shortCode;
 
@@ -520,13 +528,13 @@ if(isset($ReqResponse['services'])  && count($ReqResponse['services']) > 0 ){ //
             'header' => json_encode($headers),
             'request' => $JSON,
             'response' => json_encode($ReqResponse),
-            'type'  =>$actionName
+            'type' => $actionName,
         ]);
 
-        if($ReqResponse['response']['status'] == '0'){
+        if ($ReqResponse['response']['status'] == '0') {
             $res['status'] = 0;
             $res['message'] = 'success';
-        }else{
+        } else {
             $res['status'] = 1;
             $res['message'] = 'fail';
         }
@@ -534,7 +542,8 @@ if(isset($ReqResponse['services'])  && count($ReqResponse['services']) > 0 ){ //
         return json_encode($res);
     }
 
-    public function logout(){
+    public function logout()
+    {
         session()->forget('MSISDN');
         session()->forget('status');
         session()->forget('imi_op_id');
