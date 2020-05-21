@@ -207,7 +207,7 @@ class ImiController extends Controller
                 'serviceId' => imi_serviceId,
                 'requestId' => $imi->id,
             ]);
-            // $this->charging();
+            // $this->charg ing();
             session(['MSISDN' => session()->get('msisdn'), 'status' => 'active', 'currentOp' => imi_op_id()]);
 
             $Url = Generatedurl::where('operator_id', imi_op_id())->latest()->first();
@@ -484,9 +484,9 @@ class ImiController extends Controller
             'type' => $actionName,
         ]);
 
-        $request->session()->put('otpid', $ReqResponse['response']['otpid']);
-        return $this->subscriptionsRequest();
         if ($ReqResponse['response']['status'] == 0) { // true pincode
+            $request->session()->put('otpid', $ReqResponse['response']['otpid']);
+            return $this->subscriptionsRequest();
         } else {
             return redirect('imi/pincode')->with('failed', 'الكود خاظئ, برجاء المحاولة مرة اخري');
         }
