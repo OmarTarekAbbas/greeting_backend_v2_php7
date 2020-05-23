@@ -2852,12 +2852,14 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
             // viva check if alreday subscribe
 
+            $time = strtotime($today_date);
+
             $Msisdn = Msisdn::where('phone_number', '=', $msisdn)->orderBy('id', 'DESC')->first();
             if ($Msisdn) {  // found in our DB
                 $Msisdn->ooredoo_notify_id = $notify->id;
                 $Msisdn->operator_id = $operator_id;
                 $Msisdn->save();
-                $time = strtotime($today_date);
+
 
                 // check result
                 if ($result == "OK" && $optParam2 == 1006 && ($operationId == "SN" || $operationId == "SR" || $operationId == "RN" || $operationId == "YR" || $operationId == "RR" || $operationId == "GR" )) {  // subscription   SN/SR/RN  Subscription success    /  YR/RR/GR   renewal success
