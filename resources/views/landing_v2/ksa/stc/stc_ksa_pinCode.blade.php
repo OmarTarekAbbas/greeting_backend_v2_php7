@@ -75,7 +75,7 @@
             <hr>
            {!! Form::open(['url'=>'stc_ksa_pincode_confirm','method'=>'post','class'=>'form','files'=>'true']) !!}
                 <div class="form-group">
-                      <input type="tel" name="pincode"   class="form-control" id="pincode" required pattern="[0-9]{6}">
+                      <input type="tel" name="pincode"   class="form-control" id="pincode" required >
                 </div>
                 <input type="hidden"  name="msisdn" value="{{$msisdn}}">
 
