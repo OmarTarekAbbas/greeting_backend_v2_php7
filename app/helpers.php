@@ -240,6 +240,8 @@ function roatan_ksa_redirect_operator()
         return 'landing_rotana_stc_ksa';
     }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'Qutar') !== false) {
         return 'ooredoo_qatar_landing';
+    }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'palestine') !== false) {
+        return 'imi/login';
     } else {
         return 'landing_v1';
     }
@@ -280,3 +282,15 @@ function timwe_op_id(){
   }
   return 8;
 }
+
+function imi_op_id(){
+  $country = Country::where('name', 'palestine')->first();
+  if(!empty($country)){
+      $op = Operator::where('country_id', $country->id)->where('name', 'ooredoo')->first();
+      if(!empty($op)){
+          return $op->id;
+      }
+  }
+  return 30;
+}
+

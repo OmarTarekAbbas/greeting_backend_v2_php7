@@ -3503,6 +3503,15 @@ public function rotana($UID)
           }
         }
 
+        if(OP() ==  imi_op_id())
+        {
+          if(Session::has('currentOp')  && Session::get('currentOp') == imi_op_id()   ){  // Mobily ksa
+
+          } else{
+              return redirect(url(roatan_ksa_redirect_operator()));
+          }
+        }
+
         $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
 
         $newsnap = $url->operator->greetingimgs()->PublishedSnap()->whereNotNull('vid_path')->orderBy('id', 'desc')->limit(4)->get();

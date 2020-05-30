@@ -517,6 +517,58 @@ Route::get('Search_v5/{UID}', 'FrontEndController@Search_mbc');
 ////////////*Mbc*///////////////
 ///////////////////////////////////////
 
+/*******************start IMI digital *****************/
+
+define('UserID','Ziyadat');
+define('Password','6874');
+define('authorization','Basic aW1pbW9iaWxlOmltaW1vYmlsZTEyMw==');
+define('vendor','Afasi');
+define('imi_serviceId','4');
+define('shortCode','6876');
+define('phoneKey','972');
+
+Route::get('imi/login', 'ImiController@landing');
+Route::get('imi/pincode', 'ImiController@pinCode');
+Route::get('imi/unsubscribe', 'ImiController@unsub');
+Route::get('imi/logout', 'ImiController@logout');
+
+Route::get('authorization', 'ImiController@authorization'); // auth used in header
+
+$url = 'https://mazajak-c.ooredoo.ps/TPAPI'; // base URL
+
+//msisdn check status
+define('subscriptionsCheckUrl', $url.'/payment/CheckStatus');
+Route::post('subscriptions/check', 'ImiController@subscriptionsCheck');
+
+// send pincode
+define('generateOTPUrl', $url.'/payment/GenerateOTP');
+Route::post('generateOTP', 'ImiController@generateOTP');
+
+// validate pincode
+define('generateOTPValidateUrl', $url.'/payment/ValidateOTP');
+Route::post('generateOTPValidate', 'ImiController@generateOTPValidate');
+
+// subscribe
+define('subscriptionsRequestUrl', $url.'/payment/SUBUSER');
+Route::post('subscriptions/request', 'ImiController@subscriptionsRequest');
+
+//unsubscribe
+define('unsubscriptionUrl', $url.'/payment/UnSubUser');
+Route::post('subscriptions/unsubscription', 'ImiController@unsubscription');
+
+//charge user
+define('chargingUrl', $url.'/charging/chargeuser');
+Route::get('charging', 'ImiController@charging');
+
+//msisdn subscribed services
+define('getServicesUrl', $url.'/GetServiceDetails/GetSerDetails');
+Route::get('subscriptions/getservices', 'ImiController@getServices');
+
+//notification
+Route::get('imi/notification', 'ImiController@imi_notification');
+
+/*******************end IMI digital *****************/
+
 Route::get('oocasion', function () {
     return view('front.new_snap_v2.oocasion');
 });
