@@ -3683,12 +3683,24 @@ public function filter_inner($FID, $UID){
           }
           if(OP() ==  ooredoo)
           {
-            if(Session::has('currentOp')  && Session::get('currentOp') == ooredoo   ){  // Mobily ksa
+            if(Session::has('currentOp')  && Session::get('currentOp') == ooredoo   ){   // Timwe
 
             } else{
                 return redirect(url(roatan_ksa_redirect_operator()));
             }
           }
+
+
+          if(OP() ==  imi_op_id())
+          {
+            if(Session::has('currentOp')  && Session::get('currentOp') == imi_op_id()   ){  // IMI
+
+            } else{
+                return redirect(url(roatan_ksa_redirect_operator()));
+            }
+          }
+
+
           return view('front.rotanav2.inner_page', compact('Rdata','occasi','cat','occasis'));
         }else{
             return view('errors.404');

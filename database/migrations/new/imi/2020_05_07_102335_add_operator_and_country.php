@@ -15,15 +15,15 @@ class AddOperatorAndCountry extends Migration
     {
         \DB::table('countries')->insert(
             array(
-                'id' => 30,
+                'id' => 6,
                 'name' => 'palestine'
             )
         );
         \DB::table('operators')->insert(
             array(
-                'id' => 30,
+                'id' => 9,
                 'name' => 'ooredoo',
-                'country_id' => 8
+                'country_id' => 6
             )
         );
     }
