@@ -14,7 +14,7 @@ class AddOoredooOperator extends Migration
     public function up()
     {
       \DB::statement("INSERT INTO `countries` (`id`, `name`, `created_at`, `updated_at`) VALUES
-      (16, 'Qatar', '2020-04-22 13:56:08', '2020-04-22 13:56:08');");
+      (16, 'qatar', '2020-04-22 13:56:08', '2020-04-22 13:56:08');");
       \DB::statement("INSERT INTO `operators` (`id`, `name`, `created_at`, `updated_at`, `country_id`) VALUES
       (32, 'ooredoo', '2020-04-22 13:57:00', '2020-04-22 13:57:00', 16);");
     }
