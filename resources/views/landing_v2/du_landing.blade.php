@@ -38,6 +38,8 @@ App::setLocale($lang);
 
             <div class="strip">
                 <h2>@lang('messages.du_enjoy')</h2>
+
+                <h5 class="mb-0"><a style="color: #630b0b;" href="#0">اللغة الانجليزية</a></h5>
             </div>
 
             <div class="shbka">
