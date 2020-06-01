@@ -18,27 +18,27 @@
             <div class="box">
                 <div class="form-group">
                     @if($snap> 0)
-                    <span class="text text-info">link 1 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('snap/'.$UID) }}" />
+                    <div class="text text-info">link 1 : </div><input style="width: 420px" type="text" name="generatedurl" class="" value="{{ url('snap/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                    <span class="text text-info">link 2 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('cuurentSnap/'.$UID) }}" />
+                    <div class="text text-info">link 2 : </div><input style="width: 420px" type="text" name="generatedurl" class="" value="{{ url('cuurentSnap/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                    <span class="text text-info">link 3 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('cuurentSnap_v2/'.$UID) }}" />
+                    <div class="text text-info">link 3 : </div><input style="width: 420px" type="text" name="generatedurl" class="" value="{{ url('cuurentSnap_v2/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                    <span class="text text-info">link 4 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('newdesignv4/'.$UID) }}" />
+                    <div class="text text-info">link 4 : </div><input style="width: 420px" type="text" name="generatedurl" class="" value="{{ url('newdesignv4/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                    <span class="text text-info">rotana : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('rotanav2/'.$UID) }}" />
+                    <div class="text text-info">rotana : </div><input style="width: 420px" type="text" name="generatedurl" class="" value="{{ url('rotanav2/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
-                    <span class="text text-info">Mbc : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('mbc/'.$UID) }}" />
+                    <div class="text text-info">Mbc : </div><input style="width: 420px" type="text" name="generatedurl" class="" value="{{ url('mbc/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     @else
-                    <input type="text" name="generatedurl" class="form-control input-lg" value="{{ url($UID) }}" />
+                    <input style="width: 420px" type="text" name="generatedurl" class="" value="{{ url($UID) }}" />
                     @endif
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <span class="divider"></span>
+        <div class="divider"></div>
     </div>
 
 
@@ -47,7 +47,7 @@
     <script>
         $(document).ready(function () {
             $(".copy").click(function () {
-                var copyText = $(this).prev('input');
+                var copyText = $(this).prev('input style="width: 420px"');
                 console.log(copyText.attr('class'));
                 copyText.select();
                 document.execCommand("copy");
