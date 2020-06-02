@@ -2071,6 +2071,32 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         } else {
             $msisdn = "";
         }
+
+
+        $ip = $_SERVER["REMOTE_ADDR"];
+
+        if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP))
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+
+
+        $country_from_ip = $this->ip_info("Visitor", "Country");
+
+        $URL = \Request::fullUrl();
+        // make log
+        $actionName = "Stc Kuwait Landing page";
+        $parameters_arr = array(
+            'date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'URL' => $URL ,
+            'msisdn' => $msisdn ,
+            'ip' => $ip ,
+            'country' => $country_from_ip ,
+
+        );
+        $this->log($actionName, $URL, $parameters_arr);
+
+
         return view('landing_v2.viva_landing', compact('msisdn'));
     }
     public function viva_login_action(request $request)
