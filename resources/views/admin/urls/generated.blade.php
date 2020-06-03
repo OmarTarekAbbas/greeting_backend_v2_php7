@@ -12,13 +12,23 @@
     <li class="active">Generated URL</li>
 @endsection
 @section('PageContent')
-
+<style>
+    .form-control, .wysihtml5-sandbox{
+        width: 50%;
+    }
+    .btn.btn-info{
+        float: right;
+        margin-top: -2%;
+        margin-right: 46%;
+    }
+</style>
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
                 <div class="form-group">
                     @if($snap> 0)
-                    <span class="text text-info">link 1 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('snap/'.$UID) }}" />
+                    <span class="text text-info">link 1 : </span>
+                        <input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('snap/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     <span class="text text-info">link 2 : </span><input type="text" name="generatedurl" class="form-control input-lg" value="{{ url('cuurentSnap/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>

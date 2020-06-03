@@ -32,4 +32,4 @@
         <img src="{{url($GeneratedURL->url_occasion_image)}}" alt="" class="img-thumbnail" style="height:200px"/>
     </div>
     @endif
-</div>   
+</div>
