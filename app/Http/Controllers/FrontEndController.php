@@ -4826,6 +4826,51 @@ class FrontEndController extends Controller
         return view('landing_v2.landing_kuwait_ooredoo');
     }
 
+    public function landing_kuwait_stc(Request $request)
+    {
+
+        $ip = $_SERVER["REMOTE_ADDR"];
+
+        if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+
+        if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }
+
+        $country_from_ip = $this->ip_info("Visitor", "Country");
+        $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
+        $result['ip'] = $ip;
+        $result['country'] = $country_from_ip;
+        $actionName = "Kuwait STC landing logs";
+
+        if ($request->has('operator_name')) {
+            $result['operator'] = $request->operator_name . ' Kuwait';
+            $actionName = $request->operator_name . " Kuwait Clicks Logs";
+            if($request->has('msa')){
+              $actionName = "msagency ads logs";
+              $URL = "http://msagency.go2cloud.org/aff_lsr?offer_id=34&transaction_id=$request->msa";
+              $response = $this->GetPageData($URL);
+              $result ['Msagency']= $URL;
+              $result ['response']= $response;
+              $respo= new \App\Respo();
+              $respo->complete_url = $URL;
+              $respo->respons = $response;
+              $respo->op = $result['operator'];
+              $respo->save();
+            }
+        }
+
+        $URL = $request->fullUrl();
+        $parameters_arr = $result;
+        $this->log($actionName, $URL, $parameters_arr); // log in
+        if ($request->ajax()) {
+            return 'done';
+        }
+        return view('landing_v2.landing_kuwait_stc');
+    }
+
     public function landing_ksa_new(Request $request)
     {
 
