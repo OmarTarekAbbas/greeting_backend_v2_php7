@@ -12,7 +12,16 @@
     <li class="active">Generated URL</li>
 @endsection
 @section('PageContent')
-
+<style>
+    .form-control, .wysihtml5-sandbox{
+        width: 50%;
+    }
+    .btn.btn-info{
+        float: right;
+        margin-top: -2%;
+        margin-right: 46%;
+    }
+</style>
     <div class="row">
         <div class="col-xs-12">
             <div class="box">

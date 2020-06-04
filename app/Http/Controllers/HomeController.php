@@ -2071,6 +2071,32 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         } else {
             $msisdn = "";
         }
+
+
+        $ip = $_SERVER["REMOTE_ADDR"];
+
+        if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP))
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+
+
+        $country_from_ip = $this->ip_info("Visitor", "Country");
+
+        $URL = \Request::fullUrl();
+        // make log
+        $actionName = "Stc Kuwait Landing page";
+        $parameters_arr = array(
+            'date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'URL' => $URL ,
+            'msisdn' => $msisdn ,
+            'ip' => $ip ,
+            'country' => $country_from_ip ,
+
+        );
+        $this->log($actionName, $URL, $parameters_arr);
+
+
         return view('landing_v2.viva_landing', compact('msisdn'));
     }
     public function viva_login_action(request $request)
@@ -2852,12 +2878,14 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
             // viva check if alreday subscribe
 
+            $time = strtotime($today_date);
+
             $Msisdn = Msisdn::where('phone_number', '=', $msisdn)->orderBy('id', 'DESC')->first();
             if ($Msisdn) {  // found in our DB
                 $Msisdn->ooredoo_notify_id = $notify->id;
                 $Msisdn->operator_id = $operator_id;
                 $Msisdn->save();
-                $time = strtotime($today_date);
+
 
                 // check result
                 if ($result == "OK" && $optParam2 == 1006 && ($operationId == "SN" || $operationId == "SR" || $operationId == "RN" || $operationId == "YR" || $operationId == "RR" || $operationId == "GR" )) {  // subscription   SN/SR/RN  Subscription success    /  YR/RR/GR   renewal success

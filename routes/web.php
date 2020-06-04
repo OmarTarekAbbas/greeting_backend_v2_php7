@@ -157,6 +157,8 @@ Route::get('logout_zain_ksa/{uid}', 'FrontEndController@logout_zain_ksa');
 
 //all kuwait
 Route::get('landing_kuwait','FrontEndController@landing_kuwait');
+// lang kuwait ooredoo
+Route::get('landing_kuwait_ooredoo','FrontEndController@landing_kuwait_ooredoo');
 
 //landing ksa
 Route::get('landing_ksa_1','FrontEndController@landing_ksa_new');
@@ -176,7 +178,7 @@ define('MOBILY_OP_ID',14);
 //================================= Flatter du ==============================//
 
 
-Route::get('landing_du','FrontEndController@landing_du_sub');
+Route::get('landing_du/{peroid?}/{lang?}','FrontEndController@landing_du_sub');
 
 //================================= Flatter Mdu ==============================//
 
@@ -296,7 +298,7 @@ Route::post('viva_login_action', 'HomeController@viva_login_action');
 Route::get('viva_notification', 'HomeController@viva_notification');
 Route::get('landing_stc_1', 'HomeController@subscribeViva_1');
 Route::get('logout_viva/{uid}', 'HomeController@logout');
-define('SNAP_VIVA_URL','https://filters.digizone.com.kw/landing_stc');
+define('SNAP_VIVA_URL','https://filtersnew.digizone.com.kw/landing_stc');
 define('SNAP_VIVA_CHANNEL_ID',4493);
 define('viva_kuwait_operator_id',13);
 
