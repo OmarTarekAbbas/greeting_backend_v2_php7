@@ -82,6 +82,20 @@
   <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script>
 
+
+  <script>
+ document.querySelector("video").addEventListener('play', function(e) {
+      $.ajax({
+        type: "get",
+        url: "{{url('landing_rotana')}}",
+        success: function (response) {
+          if(Response == 'done'){
+            console.log('done');
+          }
+        }
+      });
+    }, true);
+  </script>
 </body>
 
 </html>
