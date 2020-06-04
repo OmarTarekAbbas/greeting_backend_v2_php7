@@ -504,6 +504,42 @@ class KsaController extends Controller
       return view('landing_v2.ksa.stc.rotana_stc_landing', compact('MSISDN'));
   }
 
+  public function landing_rotana(Request $request)
+  {
+      date_default_timezone_set('Africa/Cairo');
+
+      // make log with all parameters
+      $result = array();
+      // get client ip
+      $ip = $_SERVER["REMOTE_ADDR"];
+
+      if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))
+          $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+      if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP))
+          $ip = $_SERVER['HTTP_CLIENT_IP'];
+
+
+      if (isset($_SERVER['HTTP_USER_AGENT'])) {
+          $deviceModel = $_SERVER['HTTP_USER_AGENT'];
+      } else {
+          $deviceModel = "";
+      }
+
+      $country_from_ip = $this->ip_info("Visitor", "Country");
+      $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
+      $result['ip'] = $ip;
+      $result['country'] = $country_from_ip;
+      $result['deviceModel'] = $deviceModel;
+
+      // make log
+      $actionName = "Landing Rotana";
+      $URL = $request->fullUrl();
+      $parameters_arr = $result;
+      $this->log($actionName, $URL, $parameters_arr);
+
+      return view('landing_v2.landing_rotana');
+  }
+
   public function RotanaStcKsaPinCodeSend(request $request)
   {
       date_default_timezone_set("Africa/Cairo");

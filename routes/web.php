@@ -14,6 +14,8 @@
 
 /* ------------ start orange ------------ */
 
+Route::get('landing_rotana', 'KsaController@landing_rotana');
+
 Route::get('/orange_landing', 'OrangeController@landing_orange');
 Route::get('/orange_landing_he', 'OrangeController@landing_orange_he');
 Route::get('/Orange_unsub', 'OrangeController@unsub_or');
