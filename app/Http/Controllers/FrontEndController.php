@@ -4850,7 +4850,8 @@ class FrontEndController extends Controller
             $actionName = $request->operator_name . " Kuwait Clicks Logs";
             if($request->has('msa')){
               $actionName = "msagency ads logs";
-              $URL = "http://msagency.go2cloud.org/aff_lsr?offer_id=34&transaction_id=$request->msa";
+              $URL = "http://msagency.go2cloud.org/aff_lsr?offer_id=35&transaction_id=$request->msa";
+
               $response = $this->GetPageData($URL);
               $result ['Msagency']= $URL;
               $result ['response']= $response;
