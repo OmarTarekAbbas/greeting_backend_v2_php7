@@ -177,7 +177,9 @@ Route::get('snap_notification', 'HomeController@snap_notification');
 
 //================================= Flatter du ==============================//
 
-
+Route::get('landing_du', function () {
+  return redirect('landing_du/lang/en');
+});
 Route::get('landing_du/{peroid?}/{lang?}','FrontEndController@landing_du_sub');
 
 //================================= Flatter Mdu ==============================//
