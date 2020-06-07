@@ -60,14 +60,14 @@
     <div class="landing_page">
 
       <div class="start_video" id="video">
-        <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
+        <video width="100%" style="height: 388px;" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
         </video>
       </div>
 
       <div class="strip">
-        <h2 style="font-family: sans-serif">@lang('messages.du_enjoy_flu')</h2>
+        <h4 style="font-family: sans-serif">@lang('messages.du_enjoy_flu')</h4>
         @if ($lang == 'ar')
           <a href="{{url("landing_du/lang/en")}}" class="mb-0" style="color: #fff;">
             اللغة الانجليزية
