@@ -67,6 +67,9 @@
       background: #161414;
       /* background: url("{{url('assets/front/newdesignv4/images/BG.png')}}") */
     }
+    .landing_page .strip{
+      background-image: url(assets/front/landing_v2/img/strip_green.png);
+    }
 </style>
 
 @php
@@ -76,12 +79,12 @@ App::setLocale($lang);
     <div class="main_container">
         <div class="landing_page">
 
-            <div class="start_video" id="video">
-                <!-- <video width="100%" autoplay muted loop="true">
-                    <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
-                </video> -->
-                <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/download.jfif" alt="فلاتر">
-            </div>
+          <div class="start_video" id="video">
+            <video width="100%" style="height: 300px;" poster="{{ url('assets/front/landing_v2')}}/video/rotana_post.png" id="my_audio" controls>
+              <source src="{{ url('assets/front/landing_v2')}}/video/1591283770.mp4" type="video/mp4">
+              <source src="{{ url('assets/front/landing_v2')}}/video/1591283770.mp4" type="video/ogg">
+            </video>
+          </div>
 
             <div class="strip">
                 <h2>@lang('messages.du_enjoy')</h2>
@@ -89,7 +92,7 @@ App::setLocale($lang);
 
             <div class="shbka">
                 <div class="container">
-                    <h3 style="color: #fff;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر روتانا اليومية'}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر روتانا الاسبوعية'}} @elseif($lang == 'en' && $peroid == 'daily') {{'Daily Rotana Service'}} @else {{'Weekly Rotana Service'}} @endif</h3>
+                    <h3 style="color: #fff;">@if ($lang == 'ar' && $peroid == 'daily') {{' في خدمة فلاتر روتانا '}} @elseif($lang == 'ar' && $peroid == 'weekly') {{' في خدمة فلاتر روتانا '}} @elseif($lang == 'en' && $peroid == 'daily') {{' Rotana Service'}} @else {{' Rotana Service'}} @endif</h3>
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
