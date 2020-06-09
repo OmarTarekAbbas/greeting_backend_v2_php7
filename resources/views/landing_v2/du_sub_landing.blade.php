@@ -34,7 +34,7 @@
   }
 
   .shbka .zain_viva #du_landing {
-      width: 28% !important;
+      width: 23% !important;
     }
 
   @media only screen and (max-width: 1025px) {
@@ -67,7 +67,7 @@
       </div>
 
       <div class="strip">
-        <h5 style="font-family: sans-serif;font-size: 13px">@lang('messages.du_enjoy_flu')</h5>
+        <h5 style="font-family: sans-serif;font-size: 19px">@lang('messages.du_enjoy_flu')</h5>
         @if ($lang == 'ar')
           <a href="{{url("landing_du/lang/en")}}" class="mb-0" style="color: #fff;">
             اللغة الانجليزية
