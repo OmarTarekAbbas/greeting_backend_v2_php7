@@ -34,7 +34,7 @@
   }
 
   .shbka .zain_viva #du_landing {
-      width: 40% !important;
+      width: 28% !important;
     }
 
   @media only screen and (max-width: 1025px) {
