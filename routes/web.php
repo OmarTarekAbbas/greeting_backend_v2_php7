@@ -80,6 +80,8 @@ define('productId', '10461');
 define('partnerRoleId', '2614');
 define('TimweServiceId', '2724');
 define('largeAccount', '92842');
+define('heUser', 'user');
+define('hePass', 'pass');
 
 define('MTFreePricepointId', '46742');
 define('PricepintId10QAR', '46758');
@@ -93,6 +95,9 @@ define('apikeysubscription', '8086e440d80847a6b534c88a6c33a172');
 define('presharedkeysubscription', 'cutfvCPZrlzMo6t8');
 /************* end config Timwe******************/
 
+Route::get('/ooredoo_qatar_landing_he', 'TimweController@landing_timwe_he');
+Route::get('/msisdnRedirect', 'TimweController@msisdnRedirect');
+Route::post('/heRedirect', 'TimweController@heRedirect');
 Route::get('ooredoo_qatar_landing', 'TimweController@index');
 Route::get('ooredoo_qatar_pin', 'TimweController@pincode');
 Route::get('ooredoo_qatar_unsub', 'TimweController@unsubscribe');
@@ -100,6 +105,7 @@ Route::get('timwe_test', 'TimweController@timwe_test');
 
 //Timwe Api
 Route::post('generateKey', 'TimweController@generateKey');
+Route::get('decryptMsisdn', 'TimweController@decryptMsisdn');
 Route::post('{channel}/mt/{partnerRoleId}', 'TimweController@sendMt');
 Route::post('subscription/optin/{partnerRoleId}', 'TimweController@subscriptionOptIn');
 Route::post('subscription/confirm/{partnerRoleId}', 'TimweController@subscriptionConfirm');

@@ -90,13 +90,11 @@
       <div class="container pt-3">
         <div class="form_content">
           <!--<h5>ادخل رقم الهاتف</h5>-->
-          <form method="post" action="{{url('subscription/optin/'.partnerRoleId)}}" onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
+          <form method="post" action="{{url('/heRedirect')}}" onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
             {{ csrf_field() }}
             <div class="form-group form-inline">
               <input type="hidden" name="type" value="rotana">
-              <label for="phone"><span>974</span></label>
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
-              <input type="tel" class="form-control" id="phone" required="" placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}">
               <span class="validity"></span>
             </div>
             <!--<button class="btn back">رجوع</button>-->

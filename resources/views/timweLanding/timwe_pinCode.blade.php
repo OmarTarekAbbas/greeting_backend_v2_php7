@@ -64,6 +64,7 @@
             <div class="strip">
                 <h2>ادخل كود التفعيل</h2>
             </div>
+            <h4 class="text-white">قيمة الاشتراك 5 ريال / الاسبوع</h4>
 
             <div class="shbka pt-5">
                 <div class="container">
@@ -105,6 +106,11 @@
         {!! Form::close() !!}
     </div>
     <!-- copyright -->
+    <ul class="terms text-center text-white">
+      <li>خدمة فلاتر تمكنك من متابعة احدث الفلاتر اليومية</li>
+      <li>سيتم تجديد الاشتراك اسبوعيا بشكل تلقائي</li>
+      <li>اذا اردت الغاء الخدمة يمكنك ارسال رسالة للرقم 200</li>
+    </ul>
     <div class="copy">
         <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
     </div>
