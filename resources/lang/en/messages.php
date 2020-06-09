@@ -8,7 +8,7 @@ return [
     'du_valid_num9' => 'nine numbers',
     'du_enter_mob' => 'Enter your phone number',
     'du_unsub' => 'Unsubscribe',
-    'du_enjoy_flu' =>  'Enjoy your time with filters',
+    'du_enjoy_flu' =>  'On your Snapchat Get Exclusive Rotana Snap Filters Cinema, Drama Serial, Action Movies & Romance',
     'enter_seng' =>  'Enter on your network',
 
     'short_code' => 'SHORT CODE',

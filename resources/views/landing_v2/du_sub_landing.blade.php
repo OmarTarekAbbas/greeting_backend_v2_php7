@@ -67,7 +67,7 @@
       </div>
 
       <div class="strip">
-        <h5 style="font-family: sans-serif">@lang('messages.du_enjoy_flu')</h5>
+        <h5 style="font-family: sans-serif;font-size: 13px">@lang('messages.du_enjoy_flu')</h5>
         @if ($lang == 'ar')
           <a href="{{url("landing_du/lang/en")}}" class="mb-0" style="color: #fff;">
             اللغة الانجليزية
@@ -81,7 +81,7 @@
 
       <div class="shbka">
         <div class="container">
-          <h3 style="font-family: sans-serif;font-size: 18px;">@lang('messages.enter_seng')</h3>
+          <h3 style="font-family: sans-serif;font-size: 17px;">@lang('messages.enter_seng')</h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
