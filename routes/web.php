@@ -304,14 +304,15 @@ define('SNAP_VIVA_URL','https://filtersnew.digizone.com.kw/landing_stc');
 define('SNAP_VIVA_CHANNEL_ID',4493);
 define('viva_kuwait_operator_id',13);
 
+
 /* Zain Iraq Landing */
 Route::get('landing_iraq_1', 'FrontEndController@zain_iraq_landing_new');
-Route::get('zain_iraq_landing', 'FrontEndController@zain_iraq_landing');
-Route::get('zain_iraq_landing2', 'FrontEndController@zain_iraq_landing2');
-Route::get('zain_iraq_success', 'FrontEndController@zain_iraq_success');
-Route::get('zain_iraq_success2', 'FrontEndController@zain_iraq_success2');
-Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild');
-Route::get('zain_iraq_faild2', 'FrontEndController@zain_iraq_faild2');
+Route::get('zain_iraq_landing_old', 'FrontEndController@zain_iraq_landing');
+Route::get('zain_iraq_success_old', 'FrontEndController@zain_iraq_success');
+Route::get('zain_iraq_faild_old', 'FrontEndController@zain_iraq_faild');
+Route::get('zain_iraq_landing', 'FrontEndController@zain_iraq_landing2');
+Route::get('zain_iraq_success', 'FrontEndController@zain_iraq_success2');
+Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild2');
 
 
 //=======================du  Integration ==========================================//
