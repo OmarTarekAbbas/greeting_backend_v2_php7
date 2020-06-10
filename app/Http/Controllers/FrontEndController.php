@@ -4653,8 +4653,8 @@ class FrontEndController extends Controller
         $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
         $result['ip'] = $ip;
         $result['country'] = $country_from_ip;
-        $result['deviceModel'] = $deviceModel;
-        $result['AllHeaders'] = $_SERVER;
+      //  $result['deviceModel'] = $deviceModel;
+      //  $result['AllHeaders'] = $_SERVER;
 
         $actionName = "ZainIraqHeader";
         if($type == 'success'){
