@@ -70,6 +70,7 @@
       <div class="shbka">
         <div class="container">
           <h3>اشترك الان</h3>
+          <h4 class="text-white">قيمة الاشتراك 5 ريال / الاسبوع</h4>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -108,6 +109,11 @@
       <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('ooredoo_qatar_unsub' )}}">الرابط</a></p>
     </div>
     <!-- copyright -->
+    <ul class="terms text-center text-white">
+      <li>خدمة فلاتر تمكنك من متابعة احدث الفلاتر اليومية</li>
+      <li>سيتم تجديد الاشتراك اسبوعيا بشكل تلقائي</li>
+      <li>اذا اردت الغاء الخدمة يمكنك ارسال رسالة للرقم 200</li>
+    </ul>
     <div class="copy">
       <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
     </div>
