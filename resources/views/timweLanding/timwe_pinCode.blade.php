@@ -32,6 +32,10 @@
     background-image: url('{{url("assets/front/landing_v2/img/strip_green.png")}}');
   }
 
+  .landing_page .shbka h4 {
+    font-size: 0.9rem;
+  }
+
   .landing_page .shbka .zain_viva #zain {
     width: 32%;
   }

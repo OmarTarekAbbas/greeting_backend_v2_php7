@@ -36,9 +36,12 @@
     font-size: 1.5rem;
   }
 
-  .landing_page .shbka h3,
+  .landing_page .shbka h3 {
+    font-size: 1rem;
+  }
+
   .landing_page .shbka h4 {
-    font-size: 1.25rem;
+    font-size: 0.9rem;
   }
 
   .landing_page .shbka .zain_viva #zain {
