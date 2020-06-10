@@ -313,6 +313,7 @@ Route::get('zain_iraq_faild_old', 'FrontEndController@zain_iraq_faild');
 Route::get('zain_iraq_landing', 'FrontEndController@zain_iraq_landing2');
 Route::get('zain_iraq_success', 'FrontEndController@zain_iraq_success2');
 Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild2');
+Route::get('zain_iraq_test', 'FrontEndController@zain_iraq_test');
 
 
 //=======================du  Integration ==========================================//

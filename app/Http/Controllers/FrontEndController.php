@@ -4696,6 +4696,57 @@ class FrontEndController extends Controller
         return view('front.zain_iraq.zain_iraq_faild2');
     }
 
+    public function zain_iraq_test(Request $request)
+    {
+      define('ServiceKey', 'BPMgnXIBfLoxjEnE6WUx');
+      //In case of Missing URL Parameter @TransID Replace @{UNIQUE_TRANSACTION_ID} With Actual Transaction ID
+      define('TransactionID', (isset($_GET['transaction_id']) ? $_GET['transaction_id'] : time()));
+      define('APIURL', 'https://sg.apiserver.shield.monitoringservice.co/'.ServiceKey.'/'.TransactionID.'/JS');
+
+
+        define('ApiSnippetUrl', 'https://uk.api.shield.monitoringservice.co/');
+      $secreteHeaderParams = array(
+        'Upgrade-Insecure-Requests'
+      );
+      $head = apache_request_headers();
+      if(is_array($head) !== false){
+        foreach ($secreteHeaderParams as $shp) {
+          if(array_key_exists($shp, $head)){
+            unset($head[$shp]);
+          }
+        }
+        $h = urlencode(json_encode($head));
+      }else{
+        $h = "";
+      }
+      $ctx = stream_context_create(array('http' => array('user_agent' => $_SERVER['HTTP_USER_AGENT'], 'timeout' => 5)));
+      $params = http_build_query(array(
+        'lpu' => urlencode((isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http')."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']),
+        'timestamp' => str_replace('.', '', isset($_SERVER['REQUEST_TIME_FLOAT']) ? $_SERVER['REQUEST_TIME_FLOAT'] : microtime(true)),
+        'user_ip' => $_SERVER['REMOTE_ADDR'],
+        'head' => $h
+      ));
+      $response = json_decode(file_get_contents(APIURL."?".$params, null, $ctx));
+      if(!empty($response)){
+        $source = $response->source;
+        $uniqid = $response->uniqid; // Unique Key To Use For Block API Call
+      }else{
+        $uniqid = md5($params['user_ip'].'-'.TransactionID.'-'.microtime(true)); // Unique Key To Use For Block API Call
+        $source = "(function(s, o, u, r, k){
+            b = s.URL;
+            v = (b.substr(b.indexOf(r)).replace(r + '=', '')).toString();
+            r = (v.indexOf('&') !== -1) ? v.split('&')[0] : v;
+            a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.setAttribute('crossorigin', 'anonymous');
+            a.src = u+'script.js?ak='+k+'&lpi='+r+'&lpu='+encodeURIComponent(b)+'&key=$uniqid';
+            m.parentNode.insertBefore(a, m);
+        })(document, 'script', '".ApiSnippetUrl."', 'TransID', '".ServiceKey."');";
+      }
+    header('<script>'+$source+'</script>');
+    }
+
     public function zain_iraq_success(Request $request)
     {
         $this->zain_iraq_header($request,'success');
