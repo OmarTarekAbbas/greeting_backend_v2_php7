@@ -31,11 +31,15 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-image:unset;
   }
 
   .shbka .zain_viva #du_landing {
       width: 23% !important;
     }
+  .landing_page .shbka h3{
+    font-weight: 500;
+  }
 
   @media only screen and (max-width: 1025px) {
     .shbka .zain_viva {
@@ -67,7 +71,7 @@
       </div>
 
       <div class="strip">
-        <h5 style="font-family: sans-serif;font-size: 19px">@lang('messages.du_enjoy_flu')</h5>
+        <h5 style="font-family: sans-serif;font-size: 12px;">@lang('messages.du_enjoy_flu')</h5>
         @if ($lang == 'ar')
           <a href="{{url("landing_du/lang/en")}}" class="mb-0" style="color: #fff;">
             اللغة الانجليزية
@@ -81,16 +85,16 @@
 
       <div class="shbka">
         <div class="container">
-          <h3 style="font-family: sans-serif;font-size: 17px;">@lang('messages.enter_seng')</h3>
+          <h3 style="font-family: sans-serif;font-size: 17px;color: black;">@lang('messages.enter_seng')</h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
-              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color: black;">&times;</a>
               {{ Session::get('success')}}
             </div>
             @elseif(Session::has('failed'))
             <div class="alert alert-danger alert-dismissible">
-              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <a href="#" class="close" data-dismiss="alert" aria-label="close" style="color: black;">&times;</a>
               {{ Session::get('failed')}}
             </div>
             @endif
@@ -117,7 +121,7 @@
 
 
   <div class="copy">
-    <p>copyright @ <span><?php echo date("Y") ?></span> Digizone, all rights reserved.</p>
+    <p style="color: black;">copyright @ <span><?php echo date("Y") ?></span> Digizone, all rights reserved.</p>
   </div>
 
 
