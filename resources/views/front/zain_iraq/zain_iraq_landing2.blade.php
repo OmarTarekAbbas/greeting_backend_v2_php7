@@ -34,6 +34,8 @@ if (!empty($response)) {
             m.parentNode.insertBefore(a, m);
     })(document, 'script', '" . ApiSnippetUrl . "', '" . TransactionID . "', '" . ServiceKey . "');";
 }
+
+
 ?>
 
 <!-- $uniqid Will Be Used To Call Block API -->
@@ -117,7 +119,7 @@ if (!empty($response)) {
             <h6 class="h_6 p-2 text-center h5" dir="rtl">3000 سناب شات فلتر</h6>
 
             <p class="w-100 text-center mt-3 text-white">اهلا بك في خدمة فلاتر من زين العراق</p>
-            <a href="http://www.social-sms.com/iq/HE/v1.2/oneclick/sub.php?serviceId={}&spId={}&shortcode={}&uniqid=$uniqid">
+            <a href="http://www.social-sms.com/iq/HE/v1.2/oneclick/sub.php?serviceId={}&spId={}&shortcode={}&uniqid={{$uniqid}}">
               <img class="w-50 m-auto d-block" src="assets/front/zain_iraq_landing/zain.png" alt="">
             </a>
             <div class="h_6 text-center p-1 w-75">سوف تحصل على يوم واحد مجاني عند الاشتراك</div>
