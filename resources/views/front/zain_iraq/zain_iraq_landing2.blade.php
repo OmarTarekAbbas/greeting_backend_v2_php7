@@ -1,4 +1,5 @@
 <?php
+
 define('ServiceKey', 'BPMgnXIBfLoxjEnE6WUx');
 define('uniqueUrlIdentifier', 'token');
 
@@ -37,7 +38,6 @@ if (!empty($response)) {
 ?>
 
 <!-- $uniqid Will Be Used To Call Block API -->
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,7 +118,7 @@ if (!empty($response)) {
 
             <p class="w-100 text-center mt-3 text-white">اهلا بك في خدمة فلاتر من زين العراق</p>
             <p class="w-100 text-center mt-3 text-white">اشترك الان بالضغط علي زين</p>
-            <a href="http://www.social-sms.com/iq/HE/v1.2/oneclick/sub.php?serviceId=1878&spId=157&shortcode=2680&uniqid=$uniqid">
+            <a href="">
               <img class="w-50 m-auto d-block" src="assets/front/zain_iraq_landing/zain.png" alt="">
             </a>
             <div class="h_6 text-center p-1 w-75">سوف تحصل على يوم واحد مجاني عند الاشتراك</div>
