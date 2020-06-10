@@ -47,11 +47,11 @@ if (!empty($response)) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Zain Iraq</title>
-    <script type="text/javascript">
-        //<![CDATA[
-        <?=$source?>
-        //]]>
-    </script>
+  <script type="text/javascript">
+    //<![CDATA[
+    <?=$source?>
+    //]]>
+</script>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="{{ url('assets/front/zain_iraq_landing/bootstrap.min.css')}}">
 
