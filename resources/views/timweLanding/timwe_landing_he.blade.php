@@ -70,7 +70,7 @@
       <div class="shbka">
         <div class="container">
           <h3>اشترك الان</h3>
-          <h4 class="text-white">قيمة الاشتراك 5 ريال / الاسبوع</h4>
+          <h4 class="text-white">قيمة الاشتراك 10 ريال / الاسبوع</h4>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
