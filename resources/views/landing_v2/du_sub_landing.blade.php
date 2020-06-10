@@ -85,7 +85,7 @@
 
       <div class="shbka">
         <div class="container">
-          <h3 style="font-family: sans-serif;font-size: 17px;color: black;">@lang('messages.enter_seng')</h3>
+          <h3 style="font-family: sans-serif;font-size: 14px;color: black;">@lang('messages.enter_seng')</h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">

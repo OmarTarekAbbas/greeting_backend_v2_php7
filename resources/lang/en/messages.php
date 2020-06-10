@@ -9,7 +9,7 @@ return [
     'du_enter_mob' => 'Enter your phone number',
     'du_unsub' => 'Unsubscribe',
     'du_enjoy_flu' =>  'On your Snapchat Get Exclusive Rotana Snap Filters Cinema Drama Serial Action Movies & Romance',
-    'enter_seng' =>  'Enter on your network',
+    'enter_seng' =>  'To receive your Filters click on Du tab below',
 
     'short_code' => 'SHORT CODE',
     'right_to_list' => 'right to left',
