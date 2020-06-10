@@ -32,8 +32,21 @@
     background-image: url('{{url("assets/front/landing_v2/img/strip_green.png")}}');
   }
 
+  .landing_page .strip h2 {
+    font-size: 1.5rem;
+  }
+
+  .landing_page .shbka h3,
+  .landing_page .shbka h4 {
+    font-size: 1.25rem;
+  }
+
   .landing_page .shbka .zain_viva #zain {
     width: 32%;
+  }
+
+  .landing_page .form_content {
+    margin: 0% auto 0 auto;
   }
 
   .landing_page .form_content form .form-group label {
@@ -46,6 +59,8 @@
     font-size: 1.35rem;
     width: 45%;
   }
+
+  .terms {font-size: 0.7rem;}
 </style>
 
 <body>
@@ -87,7 +102,7 @@
         </div>
       </div>
 
-      <div class="container pt-3">
+      <div class="container pt-2">
         <div class="form_content">
           <!--<h5>ادخل رقم الهاتف</h5>-->
           <form method="post" action="{{url('subscription/optin/'.partnerRoleId)}}" onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
@@ -105,14 +120,14 @@
         </div>
       </div>
     </div>
-    <div class="cancel text-center mt-4 text-white">
+    <div class="cancel text-center mt-3 text-white">
       <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('ooredoo_qatar_unsub' )}}">الرابط</a></p>
     </div>
     <!-- copyright -->
-    <ul class="terms text-center text-white">
-      <li>خدمة فلاتر تمكنك من متابعة احدث الفلاتر اليومية</li>
-      <li>سيتم تجديد الاشتراك اسبوعيا بشكل تلقائي</li>
-      <li>اذا اردت الغاء الخدمة يمكنك ارسال رسالة للرقم 200</li>
+    <ul class="terms text-center text-white" dir="rtl">
+      <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة  10 ريال فى الاسبوع</li>
+      <li>يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال  SUB RF الى 92842</li>
+      <li>يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
     </ul>
     <div class="copy">
       <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
