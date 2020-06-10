@@ -116,10 +116,10 @@
       {!! Form::close() !!}
     </div>
     <!-- copyright -->
-    <ul class="terms text-center text-white" dir="rtl">
-      <li>خدمة فلاتر تمكنك من متابعة احدث الفلاتر اليومية</li>
-      <li>سيتم تجديد الاشتراك اسبوعيا بشكل تلقائي</li>
-      <li>اذا اردت الغاء الخدمة يمكنك ارسال رسالة للرقم 200</li>
+    <ul class="terms text-right text-white" dir="rtl">
+      <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة  10 ريال فى الاسبوع</li>
+      <li>يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال  SUB RF الى 92842</li>
+      <li>يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
     </ul>
     <div class="copy">
       <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
