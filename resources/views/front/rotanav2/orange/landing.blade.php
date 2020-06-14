@@ -25,7 +25,7 @@
       $message = $serviceId . $dateString;
 
       $signature = $ServiceAPIKey . ":" . hash_hmac("sha256", $ServiceAPIPassword, $message);
-      $js = "https://bw.ghaneely.com/BWOHETest/HeaderHandler.ashx?service=" . $serviceId . "&date=" . $dateString . "&signature=" . $signature . "&demo=true&msisdn=201223872695";
+      $js = "http://bw.ghaneely.com/BWOHETest/HeaderHandler.ashx?service=" . $serviceId . "&date=" . $dateString . "&signature=" . $signature . "&demo=true&msisdn=201223872695";
     ?>
 
     <script src="<?php echo $js; ?>" type="text/javascript"></script>
