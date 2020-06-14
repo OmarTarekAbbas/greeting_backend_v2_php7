@@ -238,7 +238,7 @@
             <h4>مرحبا في خدمة روتانا فلاتر</h4>
             <h6>هل تريد المتابعة برقم </h6>
             <p id="hemsisdn"></p>
-            <a class="btn btn-success" onclick="Binary_functions2()">تسجيل الدخول</a>
+            <a class="btn btn-success" onclick="Binary_functions2()">اشتراك</a>
         </div>
     </div>
 
