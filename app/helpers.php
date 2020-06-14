@@ -240,6 +240,8 @@ function roatan_ksa_redirect_operator()
         return 'landing_rotana_stc_ksa';
     }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'Qutar') !== false) {
         return 'ooredoo_qatar_landing';
+    }else if (strpos($operator->name, 'Mobily') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
+      return 'landing_rotana_mobily_ksa';
     }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'palestine') !== false) {
         return 'imi/login';
     } else {
@@ -292,5 +294,16 @@ function imi_op_id(){
       }
   }
   return 30;
+}
+
+function MOBILY_KSA_HE(){
+  $country = Country::where('name', 'Saudi Arabia')->first();
+  if(!empty($country)){
+    $op = Operator::where('country_id', $country->id)->where('name', 'Mobily')->first();
+    if(!empty($op)){
+      return $op->id;
+    }
+  }
+  return 5;
 }
 
