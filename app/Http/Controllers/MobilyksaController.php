@@ -43,7 +43,7 @@ class MobilyksaController extends Controller
 
     $actionName = "Mobily KSA Check";
     $parameters_arr = array(
-      'MSISDN' => $msisdn,
+      'MSISDN' => $code.$msisdn,
       'link' => $URL,
       'date' => Carbon::now()->format('Y-m-d H:i:s'),
       'result' => $result,

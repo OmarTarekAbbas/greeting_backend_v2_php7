@@ -244,12 +244,11 @@ Route::post('/mobily_ksa_pincode_confirm', 'FrontEndController@mobily_ksa_pincod
 Route::get('logout_mobily_ksa/{uid}', 'FrontEndController@logout_mobily_ksa');
 define('MOBILY_OP_ID', 14);
 
-//================================= Rotana Flatter KSA( start - Mobily )==============================//
-// STC KSA (Rotana Flatter)
+//================================= Rotana Flatter Mobily KSA ==============================//
 Route::get('landing_rotana_mobily_ksa', 'MobilyksaController@landing_rotana_mobily_ksa');
 Route::post('/RotanaMobilyKsaSend', 'MobilyksaController@RotanaMobilyKsaSend');
 define('MOBILY_KSA_OP_ID', MOBILY_KSA_HE());  // Stc Ksa
-//================================= Rotana Flatter KSA( end - Mobily )==============================//
+//================================= Rotana Flatter Mobily KSA==============================//
 
 
 //================================= Rotana Flatter KSA( STC - Zain )==============================//
