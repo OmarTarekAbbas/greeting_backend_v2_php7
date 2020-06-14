@@ -44,15 +44,17 @@
 
 @endsection
 @section('script')
-    <script>
-        $(document).ready(function () {
-            $(".copy").click(function () {
-                var copyText = $(this).prev('input style="width: 420px"');
-                console.log(copyText.attr('class'));
-                copyText.select();
-                document.execCommand("copy");
-                //alert("Copied the text: " + copyText.val());
-            });
-        })
-    </script>
+  <script>
+    $(document).ready(function () {
+      $(".copy").click(function () {
+        var copyText = $(this).prev('input');
+        console.log(copyText.attr('class'));
+        copyText.select();
+        document.execCommand("copy");
+        //alert("Copied the text: " + copyText.val());
+      });
+    })
+  </script>
 @stop
+
+
