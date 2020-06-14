@@ -137,7 +137,12 @@
         padding: 20px;
     }
     .hemodal div{
+        margin-top: 12%;
+    }
+    @media (min-width: 320px) and (max-width: 1023.9px) {
+      .hemodal div{
         margin-top: 50%;
+    }
     }
 </style>
     <body>
