@@ -41,12 +41,12 @@ class MobilyksaController extends Controller
     $JSON = json_decode($result);
     $JSON = $JSON->responseData->subscriptionStatus;
 
-    $actionName = "Mobily KSA Check";
+    $actionName = "Mobily KSA Binary Check Status";
     $parameters_arr = array(
       'MSISDN' => $code.$msisdn,
       'link' => $URL,
       'date' => Carbon::now()->format('Y-m-d H:i:s'),
-      'result' => $result,
+      'result' => json_decode($result,true)
     );
 
     $this->log($actionName, $URL, $parameters_arr);
