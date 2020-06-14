@@ -3690,7 +3690,6 @@ public function filter_inner($FID, $UID){
             }
           }
 
-
           if(OP() ==  imi_op_id())
           {
             if(Session::has('currentOp')  && Session::get('currentOp') == imi_op_id()   ){  // IMI
@@ -3698,6 +3697,16 @@ public function filter_inner($FID, $UID){
             } else{
                 return redirect(url(roatan_ksa_redirect_operator()));
             }
+
+          }
+          if(OP() ==  MOBILY_KSA_HE())
+          {
+            if(Session::has('currentOp')  && Session::get('currentOp') == MOBILY_KSA_HE()   ){  // IMI
+
+            } else{
+              return redirect(url(roatan_ksa_redirect_operator()));
+            }
+
           }
 
 
