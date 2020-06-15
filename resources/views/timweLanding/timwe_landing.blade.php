@@ -114,7 +114,7 @@
               <input type="hidden" name="type" value="rotana">
               <label for="phone"><span>974</span></label>
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
-              <input type="tel" class="form-control" id="phone" required="" placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}">
+              <input type="tel" class="form-control" id="phone" required="" placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}">
               <span class="validity"></span>
             </div>
             <!--<button class="btn back">رجوع</button>-->
