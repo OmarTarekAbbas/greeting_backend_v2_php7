@@ -104,7 +104,7 @@
                             </div>-->
 
               <div class="col-12" style="margin-top: 10%;">
-                <a class="operator" sms='4971' body='R' href="">
+                <a class="operator" sms='4971' body='2' href="">
                   <img src="{{ url('assets/front/landing_v2')}}/img/DuLogo.png" id="du_landing">
                 </a>
               </div>
