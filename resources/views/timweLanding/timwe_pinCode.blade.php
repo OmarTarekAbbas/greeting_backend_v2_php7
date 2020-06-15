@@ -33,7 +33,7 @@
   }
 
   .landing_page .shbka h4 {
-    font-size: 0.9rem;
+    font-size: 17px;
   }
 
   .landing_page .shbka .zain_viva #zain {
@@ -76,7 +76,7 @@
         <h2>ادخل كود التفعيل</h2>
       </div>
       <div class="shbka mt-1">
-        <h4 class="text-white">قيمة الاشتراك 10 ريال / الاسبوع</h4>
+        <h4 class="text-white">قيمة الاشتراك 15 ريال / الاسبوع</h4>
       </div>
 
 
@@ -105,7 +105,7 @@
           <div class="form-group">
             <input style="width: 100% !important" type="tel" style="font-family: cursive" name="pincode" class="form-control" id="pincode" required pattern="[0-9]{4}">
           </div>
-          <button class="btn" type="submit">تاكيد</button>
+          <button class="btn" type="submit">تأكيد</button>
           {!! Form::close() !!}
         </div>
       </div>
@@ -121,8 +121,8 @@
     </div>
     <!-- copyright -->
     <ul class="terms text-right text-white" dir="rtl">
-      <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة  10 ريال فى الاسبوع</li>
-      <li>يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال  SUB RF الى 92842</li>
+      <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة  15 ريال فى الاسبوع</li>
+      <li>يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال  Unsub RF الى 92842</li>
       <li>يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
     </ul>
     <div class="copy">
