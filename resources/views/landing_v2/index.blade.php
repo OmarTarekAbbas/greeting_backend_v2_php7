@@ -71,6 +71,7 @@
     <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
     <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script>
 
+    <script></script>
 </body>
 
 </html>
