@@ -71,7 +71,17 @@
     <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
     <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script>
 
-    <script></script>
+    <script>
+    $(window).on('load', function () {
+        'use strict';
+        $('.loading-overlay .spinner').fadeOut(800, function () {
+            $(this).parent().fadeOut(500, function () {
+                $('body').css('overflow', 'auto');
+                $(this).remove();
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>
