@@ -71,7 +71,7 @@ class MobilyksaController extends Controller
 
     $this->log($actionName, $URL, $parameters_arr);
     if (isset($JSON)) {
-      if ($JSON == "CANCELED") {
+      if ($JSON == "ACTIVE") {
         session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => MOBILY_KSA_OP_ID]);
         $Url = Generatedurl::where('operator_id', MOBILY_KSA_OP_ID)->latest()->first();
         $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
