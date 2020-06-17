@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\MobilySubscriber;
+use App\MobilyUnsubscriber;
 use App\MONotification;
-use App\OptInNotification;
-use App\OptoutNotification;
-use App\RenewalNotification;
 
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\File;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use Illuminate\Support\Facades\File;
+use Validator;
 
 class MobilyController extends Controller
 {
@@ -29,8 +28,6 @@ class MobilyController extends Controller
         $log->pushHandler(new StreamHandler(storage_path('logs/' . $date . '/' . $actionName . '/logFile.log', Logger::INFO)));
         $log->addInfo($URL, $parameters_arr);
     }
-
-
 
     public function notificationMO(Request $request)
     {
@@ -52,7 +49,6 @@ class MobilyController extends Controller
             return json_encode($ReqResponse);
         }
 
-
         $headers = array(
             "Content-Type: application/json",
         );
@@ -69,20 +65,17 @@ class MobilyController extends Controller
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
-
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
-        $ReqResponse['requestId'] =  md5(uniqid(rand(), true));
+        $ReqResponse['requestId'] = md5(uniqid(rand(), true));
 
         $MONotification['msisdn'] = $vars['msisdn'];
         $MONotification['text'] = $vars['text'];
         $MONotification['request'] = json_encode($vars);
         $MONotification['response'] = json_encode($ReqResponse);
+        $MONotification['type'] = $actionName;
         $id = MONotification::create($MONotification);
-
-       // $ReqResponse['requestId'] = $id->id;
-
 
         return json_encode($ReqResponse);
     }
@@ -124,17 +117,39 @@ class MobilyController extends Controller
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
-        $ReqResponse['requestId'] =  md5(uniqid(rand(), true));
+        $ReqResponse['requestId'] = md5(uniqid(rand(), true));
 
+        $MONotification['msisdn'] = $vars['msisdn'];
+        $MONotification['text'] = $vars['text'];
+        $MONotification['request'] = json_encode($vars);
+        $MONotification['response'] = json_encode($ReqResponse);
+        $MONotification['type'] = $actionName;
+        $id = MONotification::create($MONotification);
 
-        $OptInNotification['msisdn'] = $vars['msisdn'];
-        $OptInNotification['text'] = $vars['text'];
-        $OptInNotification['request'] = json_encode($vars);
-        $OptInNotification['response'] = json_encode($ReqResponse);
+        //condition if text success
+        if($vars['text'] == 'success'){
+            $MobilySubscriber = MobilySubscriber::where('msisdn', $vars['msisdn'])->first();
+    
+            if ($MobilySubscriber) {
+                $MobilySubscriber->notificationId = $id->id;
+                $MobilySubscriber->status = 1;
+                $MobilySubscriber->save();
+            }else{
+                $MobilySubscriber['msisdn'] = $vars['msisdn'];
+                $MobilySubscriber['notificationId'] = $id->id;
+                $MobilySubscriber['status'] = 1;
+        
+                MobilySubscriber::create($MobilySubscriber);
+            }
+        }else{
+            $MobilySubscriber = MobilySubscriber::where('msisdn', $vars['msisdn'])->first();
 
-        $id = OptInNotification::create($OptInNotification);
+            if ($MobilySubscriber) {
+                $MobilySubscriber->status = 0;
+                $MobilySubscriber->save();
+            }
+        }
 
-      //  $ReqResponse['requestId'] = $id->id;
         return json_encode($ReqResponse);
     }
 
@@ -175,17 +190,32 @@ class MobilyController extends Controller
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
-        $ReqResponse['requestId'] =  md5(uniqid(rand(), true));
+        $ReqResponse['requestId'] = md5(uniqid(rand(), true));
 
+        $MONotification['msisdn'] = $vars['msisdn'];
+        $MONotification['text'] = $vars['text'];
+        $MONotification['request'] = json_encode($vars);
+        $MONotification['response'] = json_encode($ReqResponse);
+        $MONotification['type'] = $actionName;
+        $id = MONotification::create($MONotification);
 
-        $OptoutNotification['msisdn'] = $vars['msisdn'];
-        $OptoutNotification['text'] = $vars['text'];
-        $OptoutNotification['request'] = json_encode($vars);
-        $OptoutNotification['response'] = json_encode($ReqResponse);
+        $MobilySubscriber = MobilySubscriber::where('msisdn', $vars['msisdn'])->first();
+        if ($MobilySubscriber) {
+            $MobilySubscriber->delete();
+        }
 
-        $id = OptoutNotification::create($OptoutNotification);
+        $MobilyUnsubscriber = MobilyUnsubscriber::where('msisdn', $vars['msisdn'])->first();
 
-      //  $ReqResponse['requestId'] = $id->id;
+        if ($MobilyUnsubscriber) {
+            $MobilyUnsubscriber->notificationId = $id->id;
+            $MobilyUnsubscriber->save();
+        }else{
+            $MobilyUnsubscriber['msisdn'] = $vars['msisdn'];
+            $MobilyUnsubscriber['notificationId'] = $id->id;
+            
+            MobilyUnsubscriber::create($MobilyUnsubscriber);
+        }
+
         return json_encode($ReqResponse);
     }
 
@@ -227,17 +257,31 @@ class MobilyController extends Controller
         $ReqResponse['message'] = 'SUCCESS';
         $ReqResponse['inError'] = 'false';
         $ReqResponse['code'] = 'SUCCESS';
-        $ReqResponse['requestId'] =  md5(uniqid(rand(), true));
+        $ReqResponse['requestId'] = md5(uniqid(rand(), true));
 
+        $MONotification['msisdn'] = $vars['msisdn'];
+        $MONotification['text'] = $vars['text'];
+        $MONotification['request'] = json_encode($vars);
+        $MONotification['response'] = json_encode($ReqResponse);
+        $MONotification['type'] = $actionName;
+        $id = MONotification::create($MONotification);
 
-        $RenewalNotification['msisdn'] = $vars['msisdn'];
-        $RenewalNotification['text'] = $vars['text'];
-        $RenewalNotification['request'] = json_encode($vars);
-        $RenewalNotification['response'] = json_encode($ReqResponse);
+        if($vars['text'] == 'success'){
+            $MobilySubscriber = MobilySubscriber::where('msisdn', $vars['msisdn'])->first();
+    
+            if ($MobilySubscriber) {
+                $MobilySubscriber->notificationId = $id->id;
+                $MobilySubscriber->status = 1;
+                $MobilySubscriber->save();
+            }else{
+                $MobilySubscriber['msisdn'] = $vars['msisdn'];
+                $MobilySubscriber['notificationId'] = $id->id;
+                $MobilySubscriber['status'] = 1;
+        
+                MobilySubscriber::create($MobilySubscriber);
+            }
+        }
 
-        $id = RenewalNotification::create($RenewalNotification);
-
-       // $ReqResponse['requestId'] = $id->id;
         return json_encode($ReqResponse);
     }
 

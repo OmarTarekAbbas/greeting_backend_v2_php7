@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MONotification extends Model
 {
-    protected $fillable = ['msisdn', 'text', 'request', 'response'];
+    protected $table = 'mobily_notifications';
+    protected $fillable = ['msisdn', 'text', 'request', 'response', 'type'];
 
 }
