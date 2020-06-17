@@ -20,20 +20,21 @@
 <style>
   @media (min-width: 1025px) {
     body {
-      background-image: url('assets/front/landing_v2/img/background.jpg');
+      /* background-image: url('assets/front/landing_v2/img/background.jpg'); */
     }
   }
 
   .main_container {
-    background-image: url('assets/front/landing_v2/img/background.jpg');
+    /* background-image: url('assets/front/landing_v2/img/background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: fixed; */
+    background: #FFF;
   }
 
   .landing_page .strip {
-    margin-top: -2.5%;
+    margin-top: 0;
     background-image: url('assets/front/landing_v2/img/strip_green.png');
   }
 
@@ -42,39 +43,37 @@
   }
 
   .landing_page .form_content form .form-group label {
-    background-color: #141719;
+    background-color: #084f27;
   }
 
   .landing_page .form_content form .btn {
-    background-color: #FFF;
-    color: #000;
+    background-color: #084f27;
+    color: #fff;
     font-size: 1.35rem;
     width: 45%;
   }
+
+  .copy p {color: #000;}
 </style>
 
 <body>
   <div class="main_container">
     <div class="landing_page">
 
-      <div class="start_video" id="video">
-        <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
-          <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
-          <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
+    <div class="start_video" id="video">
+        <video width="100%" style="height: 280px;" poster="{{ url('assets/front/landing_v2')}}/video/rotana_post.png" id="my_audio" controls>
+          <source src="{{ url('assets/front/landing_v2')}}/video/1591283770.mp4" type="video/mp4">
+          <source src="{{ url('assets/front/landing_v2')}}/video/1591283770.mp4" type="video/ogg">
         </video>
-        <!-- <video width="100%" autoplay muted loop="true">
-                    <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
-                </video> -->
-        <!-- <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر"> -->
       </div>
 
       <div class="strip">
-        <h3>اشترك الان مع فلاتر روتانا</h3>
+        <h5 style="font-family: sans-serif;font-size: 12px;">@lang('messages.du_enjoy_flu')</h5>
       </div>
 
       <div class="shbka">
         <div class="container">
-          {{-- <h3 class="mt-3">اشترك الان</h3> --}}
+          <h3 class="mt-2 text-dark">اشترك الان</h3>
           <div class="zain_viva my-3">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">

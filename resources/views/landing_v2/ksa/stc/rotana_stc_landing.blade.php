@@ -64,7 +64,7 @@
       </div>
 
       <div class="strip">
-      <h5 style="font-family: sans-serif;font-size: 12px;">@lang('messages.du_enjoy_flu')</h5>
+        <h5 style="font-family: sans-serif;font-size: 12px;">@lang('messages.du_enjoy_flu')</h5>
       </div>
 
       <div class="shbka">
