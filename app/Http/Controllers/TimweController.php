@@ -433,7 +433,7 @@ class TimweController extends Controller
         $iv = base64_decode('yzXzUhr3OAt1A47g7zmYxw=='); //key
         $presharedKey = base64_decode('r/RloSflFkLj3Pq2gFmdBQ=='); //key encryption
         $method = "AES-128-CBC"; // method
-        
+
         $decrypted = openssl_decrypt($phrasetoEncrypt, $method, $presharedKey, OPENSSL_PKCS1_PADDING, $iv);
         return $decrypted; // msisdn decrypted
     }

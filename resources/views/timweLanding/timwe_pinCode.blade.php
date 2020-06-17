@@ -76,7 +76,7 @@
         <h2>ادخل كود التفعيل</h2>
       </div>
       <div class="shbka mt-1">
-        <h4 class="text-white">قيمة الاشتراك 15 ريال / الاسبوع</h4>
+        <h4 class="text-white" style="font-size:25px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
       </div>
 
 
