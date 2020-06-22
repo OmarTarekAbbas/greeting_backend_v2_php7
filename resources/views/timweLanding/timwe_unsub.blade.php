@@ -101,7 +101,7 @@
                         <div class="form-group form-inline">
                             <label for="phone"><span>971</span></label>
                             <input type="tel" class="form-control" @if(session()->has('userIdentifier')) value="{{substr(session()->get('userIdentifier'), 3)}}" @endif id="phone" required=""
-                                placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}">
+                                placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}">
                             <span class="validity"></span>
                         </div>
                         <button id="zain_submit" class="btn" type="submit">الغاء الاشتراك</button>
