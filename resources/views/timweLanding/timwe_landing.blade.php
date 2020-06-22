@@ -70,6 +70,7 @@
       <div class="shbka">
         <div class="container">
           <h3>اشترك الان</h3>
+          <h4 class="text-white font-weight-bold" style="font-size:25px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -86,7 +87,7 @@
         </div>
       </div>
 
-      <div class="container pt-3">
+      <div class="container">
         <div class="form_content">
           <!--<h5>ادخل رقم الهاتف</h5>-->
           <form method="post" action="{{url('subscription/optin/'.partnerRoleId)}}" onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
@@ -107,6 +108,15 @@
     <div class="cancel text-center mt-4 text-white">
       <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('ooredoo_qatar_unsub' )}}">الرابط</a></p>
     </div>
+
+    <div class="container">
+      <ul class="terms text-right text-white pr-3" dir="rtl">
+        <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة 15 ريال فى الاسبوع</li>
+        <li>يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال Unsub RF الى 92842</li>
+        <li>يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
+      </ul>
+    </div>
+
     <!-- copyright -->
     <div class="copy">
       <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
