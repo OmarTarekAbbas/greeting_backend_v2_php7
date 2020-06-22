@@ -32,6 +32,10 @@
     background-image: url('{{url("assets/front/landing_v2/img/strip_green.png")}}');
   }
 
+  .landing_page .shbka h3 {
+    font-size: 1rem;
+}
+
   .landing_page .shbka .zain_viva #zain {
     width: 32%;
   }
@@ -70,7 +74,7 @@
       <div class="shbka">
         <div class="container">
           <h3>اشترك الان</h3>
-          <h4 class="text-white font-weight-bold" style="font-size:25px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
+          <h4 class="text-white font-weight-bold" style="font-size:22px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -96,7 +100,7 @@
               <input type="hidden" name="type" value="rotana">
               <label for="phone"><span>974</span></label>
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
-              <input type="tel" class="form-control" id="phone" required="" placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}">
+              <input type="tel" class="form-control" id="phone" required="" placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}">
               <span class="validity"></span>
             </div>
             <!--<button class="btn back">رجوع</button>-->

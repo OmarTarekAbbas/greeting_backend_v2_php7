@@ -43,7 +43,7 @@
       background-color: #FFF;
       color: #000;
       font-size: 1.35rem;
-      width: 45%;
+      width: 55%;
     }
   </style>
 
