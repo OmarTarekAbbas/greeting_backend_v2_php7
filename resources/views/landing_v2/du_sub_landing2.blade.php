@@ -136,7 +136,7 @@ App::setLocale($lang);
             <div class="form-group form-inline">
               <input type="hidden" name="peroid" value="{{$peroid}}">
               <input type="hidden" name="lang" value="{{$lang}}">
-              <input type="hidden" name="type" value="design4">
+              <input type="hidden" name="type" value="rotana">
               <label for="phone"><span>971</span></label>
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
               <input type="tel" class="form-control" id="phone" required="" placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{9}">

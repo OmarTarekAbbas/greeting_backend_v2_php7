@@ -1526,7 +1526,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         return redirect($URL);
     }
 
-    public function du_landing(request $request)
+    public function du_landing_dcb(request $request)
     {
 
         $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;

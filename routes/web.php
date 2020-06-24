@@ -382,7 +382,7 @@ Route::get('zain_iraq_success', 'FrontEndController@zain_iraq_success');
 Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild');
 
 //=======================du  Integration ==========================================//
-Route::get('du_landing/{peroid?}/{lang?}', 'HomeController@du_landing');
+Route::get('du_landing_dcb/{peroid?}/{lang?}', 'HomeController@du_landing_dcb');
 Route::get('du_landing_success', 'HomeController@du_landing_success');
 Route::get('DuSecureRedirect', 'HomeController@DuSecureRedirect');
 Route::get('du_unsubc/{peroid?}/{lang?}', 'HomeController@du_unsubc');
