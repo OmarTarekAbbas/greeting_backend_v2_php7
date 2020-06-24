@@ -1531,7 +1531,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         $peroid = isset( $request->peroid )  ?  $request->peroid  : "daily" ;
         $lang =  isset($request->lang) ? $request->lang : "ar" ;
-        return view('landing_v2.du_landing',compact("peroid","lang"));
+        return view('landing_v2.du_sub_landing2',compact("peroid","lang"));
     }
 
     /**
