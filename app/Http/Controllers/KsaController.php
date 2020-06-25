@@ -615,7 +615,7 @@ class KsaController extends Controller
         );
         $this->log($actionName, $URL, $parameters_arr);
 
-        if ($result == "7" || $result == "1") {
+        if ($result == "7" || $result == "1" ) {
             // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
             return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
         } else { // error
@@ -690,8 +690,7 @@ class KsaController extends Controller
             $Msisdn->save();
 
             // make log
-            $actionName = "STC KSA Pincode Verify Success";
-            $URL = $ADV_URL;
+            $actionName = "STC KSA Pincode Verify Success" ;
             $parameters_arr = array(
                 'MSISDN' => $msisdn_wcc,
                 'date' => Carbon::now()->format('Y-m-d H:i:s'),
