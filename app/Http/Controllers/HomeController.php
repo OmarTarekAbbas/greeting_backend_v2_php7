@@ -1698,6 +1698,16 @@ class HomeController extends Controller
         ));
         $response = curl_exec($curl);
         curl_close($curl);
+        $actionName = "Du Subscription";
+        $URL = \Request::fullUrl();
+        $parameters_arr = array(
+          'date' => Carbon::now()->format('Y-m-d H:i:s'),
+          'msisdn' => $msisdn,
+          'URL' => $URL,
+          'URLApi' => $URL_Api,
+          'result' => $response
+        );
+        $this->log($actionName, $URL, $parameters_arr);
         $JSON = json_decode($response);
         $JSON = $JSON->reason;
         if ($JSON == 'subscription Failed') {
