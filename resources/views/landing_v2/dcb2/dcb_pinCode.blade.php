@@ -11,6 +11,7 @@
   <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/main-style_zain.css">
+  <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/pin.css">
   <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
@@ -18,18 +19,7 @@
 </head>
 
 <style>
-  .main_container {
-    background-image: url('assets/front/landing_v2/img/stc_BG.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
 
-  .landing_page .strip {
-    margin-top: -2.5%;
-    background-image: url('assets/front/landing_v2/img/strip_green.png');
-  }
 
   .landing_page .shbka .zain_viva #zain {
     width: 32%;
@@ -48,6 +38,9 @@
 </style>
 
 <body>
+@php
+  App::setLocale($lang);
+@endphp
 <div class="main_container">
   <div class="confirm_page">
     <img src="{{ url('assets/front/rotanav2')}}/images/Rorana_flater_logo.png" alt="snap">
@@ -68,7 +61,7 @@
             </div>
             @endif
 
-            <h2>ادخل كود التفعيل</h2>
+            <h2>@lang('messages.click_pincode')</h2>
             <hr>
            {!! Form::open(['url'=>'checkpincode_confirm','method'=>'post','class'=>'form','files'=>'true']) !!}
                 <div class="form-group">
@@ -76,10 +69,10 @@
                 </div>
                 <input type="hidden"  name="msisdn" value="{{$msisdn}}">
 
-                <button class="btn" type="submit" >تاكيد</button>
+                <button class="btn" type="submit" >@lang('messages.taked')</button>
              {!! Form::close() !!}
 
-              <a href="{{url('/ResendPincode')}}"><p>اعاده ارسال كود التحقق</p></a>
+              <a href="{{url('/ResendPincode')}}"><p> @lang('messages.resend_pincode')</p></a>
 
         </div>
     </div>

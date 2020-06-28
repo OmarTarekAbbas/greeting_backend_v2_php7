@@ -1560,13 +1560,13 @@ class HomeController extends Controller
   {
     $peroid = isset($request->peroid) ? $request->peroid : "daily";
     $lang = isset($request->lang) ? $request->lang : "ar";
+    Session::put('lang', $lang);
     return view('landing_v2.dcb2.du_landing_dcb2', compact("peroid", "lang"));
   }
 
   public function DuDcbRedirect(request $request)
   {
     date_default_timezone_set("Africa/Cairo");
-
     if (isset($_REQUEST['number']) && $_REQUEST['number'] != "") {
       $msisdn = $_REQUEST['number'];
       $msisdn = "971" . $msisdn;
@@ -1653,18 +1653,23 @@ class HomeController extends Controller
     );
     $this->log($actionName, $URL, $parameters_arr);
     if ($response == "1") {
-      return redirect('checkpincode');
+      return redirect('checkpincode/'.session::get("lang"));
     } else {
-      $request->session()->flash('failed', 'يوجد غط يرجا الضغط علي اعاده ارسال كود التحقق');
-      return redirect('checkpincode');
+      if (session::get("lang") == 'ar'){
+        $request->session()->flash('failed','يوجد خطأ يرجى الضغط علي اعاده ارسال كود التحقق');
+      }else{
+        $request->session()->flash('failed','There is an error, please click to resend the verification code');
+      }
+      return redirect('checkpincode/'.session::get("lang"));
     }
 
   }
 
   public function checkpincode(request $request)
   {
+    $lang = isset($request->lang) ? $request->lang : "ar";
     $msisdn = Session::get('msisdn_dcb');
-    return view('landing_v2.dcb2.dcb_pinCode', compact('msisdn'));
+    return view('landing_v2.dcb2.dcb_pinCode', compact('msisdn','lang'));
   }
 
   public function checkpincode_confirm(request $request)
@@ -1673,13 +1678,12 @@ class HomeController extends Controller
     $pincode = $request->input('pincode');
     $msisdn = Session::get('msisdn_dcb');
 
-    $created = Pincode::orderBy('id', 'DESC')->first('created_at');
     $date = Carbon::now()->format('Y/m/d H:i:s');
-    $created = Carbon::parse($date)->addHour();
     $PinCode = Pincode::where('msisdn', '=', $msisdn)->where('pincode', '=', $pincode)->orderBy('id', 'DESC')->first();
     if ($PinCode) {
-      $expire = Pincode::where('msisdn', '=', $msisdn)->where('pincode', '=', $pincode)->where('expire_date_time', '<', $created)->orderBy('id', 'DESC')->first();
-      if ($expire) {
+      $expire_date_time= $PinCode->expire_date_time;
+      $created_at= $PinCode->created_at;
+      if ($expire_date_time >= $created_at) {
         $curl = curl_init();
         $URL_Api = "https://du.notifications.digizone.com.kw/api/logmessage?msisdn={$msisdn}&message=2&action=dcb";
         curl_setopt_array($curl, array(
@@ -1696,13 +1700,20 @@ class HomeController extends Controller
         curl_close($curl);
         $JSON = json_decode($response);
         $JSON = $JSON->reason;
-
         if ($JSON == 'subscription Failed') {
-          $request->session()->flash('subscription_failed',trans('messages.unSubscription'));
-          return redirect('du_landing_dcb2');
+          if (session::get("lang") == 'ar'){
+            $request->session()->flash('subscription_failed','انت غير مشترك');
+          }else{
+            $request->session()->flash('subscription_failed','Subscription Failed');
+          }
+          return redirect('du_landing_dcb2/lang/'.session::get("lang"));
         } elseif ($JSON == 'The user has insufficient funds') {
-          $request->session()->flash('subscription_failed',trans('messages.insufficient'));
-          return redirect('du_landing_dcb2');
+          if (session::get("lang") == 'ar'){
+            $request->session()->flash('subscription_failed','رصيدك غير كافي');
+          }else{
+            $request->session()->flash('subscription_failed','you have insufficient funds');
+          }
+          return redirect('du_landing_dcb2/lang/'.session::get("lang"));
         } elseif ($JSON == 'ALREADY SUBSCRIBED USER') {
           $serviceid = "flaterrotanadaily";
           $redirect = $this->check_redirect("rotana");
@@ -1711,13 +1722,21 @@ class HomeController extends Controller
         }
 
       } else {
-        $request->session()->flash('failed', 'انتهاء وقت الكود برجاء ارسال الكود مره اخره');
-        return redirect('checkpincode');
+        if (session::get("lang") == 'ar'){
+          $request->session()->flash('failed','انتهاء وقت الكود برجاء ارسال الكود مره اخرى');
+        }else{
+          $request->session()->flash('failed','Resend the pincode');
+        }
+        return redirect('checkpincode/'.session::get("lang"));
       }
 
     } else {
-      $request->session()->flash('failed', 'غط في كود التفعيل برجاء ادخال كود التفعيل الصحيح');
-      return redirect('checkpincode');
+      if (session::get("lang") == 'ar'){
+        $request->session()->flash('failed','خطأ في كود التفعيل برجاء ادخال كود التفعيل الصحيح');
+      }else{
+        $request->session()->flash('failed','Activation error. Please enter the correct activation code');
+      }
+      return redirect('checkpincode/'.session::get("lang"));
     }
   }
 
@@ -1761,10 +1780,14 @@ class HomeController extends Controller
     );
     $this->log($actionName, $URL, $parameters_arr);
     if ($response == "1") {
-      return redirect('checkpincode');
+      return redirect('checkpincode/'.session::get("lang"));
     } else {
-      $request->session()->flash('failed', 'يوجد غط يرجا الضغط علي اعاده ارسال كود التحقق');
-      return redirect('checkpincode');
+      if (session::get("lang") == 'ar'){
+        $request->session()->flash('failed','يوجد خطأ يرجى الضغط علي اعاده ارسال كود التحقق');
+      }else{
+        $request->session()->flash('failed','There is an error, please click to resend the verification code');
+      }
+      return redirect('checkpincode/'.session::get("lang"));
     }
 
   }

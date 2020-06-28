@@ -403,9 +403,9 @@ define('du_operator_id',4);
 //======================= start dcb 2 25/6/2020 ==========================================//
 Route::get('du_landing_dcb2/{peroid?}/{lang?}', 'HomeController@du_landing_dcb_2');
 Route::post('DuDcbRedirect', 'HomeController@DuDcbRedirect');
-Route::get('checkpincode', 'HomeController@checkpincode');
+Route::get('checkpincode/{lang?}', 'HomeController@checkpincode');
 Route::post('checkpincode_confirm', 'HomeController@checkpincode_confirm');
-Route::get('ResendPincode', 'HomeController@ResendPincode');
+Route::get('ResendPincode/{lang?}', 'HomeController@ResendPincode');
 
 
 //======================= end dcb 2 25/6/2020 ==========================================//
