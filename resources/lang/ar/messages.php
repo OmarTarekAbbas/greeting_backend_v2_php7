@@ -10,7 +10,8 @@ return [
     'du_unsub' =>  'الغاء الاشتراك',
     'du_enjoy_flu' =>  ' للحصول على سناب شات الخاص بك احصل على روتانا سناب فلاتر حصرية للسينما المسلسل الدرامي أفلام الحركة والرومانسية',
     'enter_seng' =>  'اضغط علي شبكتك',
-
+    'unSubscription' => 'انت غير مشترك',
+    'insufficient' => 'رصيدك غير كافي',
     'short_code' => 'short code',
     'right_to_list' => 'right to left',
     'languages' => 'languages',

@@ -79,7 +79,7 @@
                 <button class="btn" type="submit" >تاكيد</button>
              {!! Form::close() !!}
 
-                <p>اعاده ارسال كود التحقق</p>
+              <a href="{{url('/ResendPincode')}}"><p>اعاده ارسال كود التحقق</p></a>
 
         </div>
     </div>

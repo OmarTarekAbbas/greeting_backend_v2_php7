@@ -1555,6 +1555,7 @@ class HomeController extends Controller
     return view('landing_v2.du_sub_landing2', compact("peroid", "lang"));
   }
 
+//======================= start dcb 2 25/6/2020 ==========================================//
   public function du_landing_dcb_2(request $request)
   {
     $peroid = isset($request->peroid) ? $request->peroid : "daily";
@@ -1668,45 +1669,106 @@ class HomeController extends Controller
 
   public function checkpincode_confirm(request $request)
   {
+    date_default_timezone_set("Africa/Cairo");
     $pincode = $request->input('pincode');
     $msisdn = Session::get('msisdn_dcb');
-    $Msisdn = Pincode::where('msisdn', '=', $msisdn)->where('pincode', '=', $pincode)->orderBy('id', 'DESC')->first();
-    if ($Msisdn) {
-      $curl = curl_init();
-      $URL_Api = "https://du.notifications.digizone.com.kw/api/logmessage?msisdn={$msisdn}&message=2";
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => $URL_Api,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-      ));
-      $response = curl_exec($curl);
-      curl_close($curl);
-      $JSON = json_decode($response);
-      $JSON = $JSON->reason;
 
-      if ($JSON == 'subscription Failed') {
-        $request->session()->flash('subscription_failed', 'Subscription Failed');
-        return redirect('du_landing_dcb2');
-      }  elseif ($JSON == 'The user has insufficient funds') {
-        $request->session()->flash('subscription_failed', 'you have insufficient funds');
-        return redirect('du_landing_dcb2');
-    }
-      elseif ($JSON == 'ALREADY SUBSCRIBED USER') {
-        $serviceid = "flaterrotanadaily";
-        $redirect = $this->check_redirect("rotana");
+    $created = Pincode::orderBy('id', 'DESC')->first('created_at');
+    $date = Carbon::now()->format('Y/m/d H:i:s');
+    $created = Carbon::parse($date)->addHour();
+    $PinCode = Pincode::where('msisdn', '=', $msisdn)->where('pincode', '=', $pincode)->orderBy('id', 'DESC')->first();
+    if ($PinCode) {
+      $expire = Pincode::where('msisdn', '=', $msisdn)->where('pincode', '=', $pincode)->where('expire_date_time', '<', $created)->orderBy('id', 'DESC')->first();
+      if ($expire) {
+        $curl = curl_init();
+        $URL_Api = "https://du.notifications.digizone.com.kw/api/logmessage?msisdn={$msisdn}&message=2&action=dcb";
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => $URL_Api,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET",
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $JSON = json_decode($response);
+        $JSON = $JSON->reason;
+
+        if ($JSON == 'subscription Failed') {
+          $request->session()->flash('subscription_failed',trans('messages.unSubscription'));
+          return redirect('du_landing_dcb2');
+        } elseif ($JSON == 'The user has insufficient funds') {
+          $request->session()->flash('subscription_failed',trans('messages.insufficient'));
+          return redirect('du_landing_dcb2');
+        } elseif ($JSON == 'ALREADY SUBSCRIBED USER') {
+          $serviceid = "flaterrotanadaily";
+          $redirect = $this->check_redirect("rotana");
           session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => du_operator_id]);
           return redirect($redirect);
+        }
+
+      } else {
+        $request->session()->flash('failed', 'انتهاء وقت الكود برجاء ارسال الكود مره اخره');
+        return redirect('checkpincode');
       }
+
     } else {
       $request->session()->flash('failed', 'غط في كود التفعيل برجاء ادخال كود التفعيل الصحيح');
       return redirect('checkpincode');
     }
   }
+
+  public function ResendPincode(request $request)
+  {
+    date_default_timezone_set("Africa/Cairo");
+    $msisdn = Session::get('msisdn_dcb');
+    $random = mt_rand(1000, 9999);
+    $pincode_random = $random;
+    $pincode = new Pincode();
+    $pincode->msisdn = $msisdn;
+    $pincode->pincode = $pincode_random;
+    $date = Carbon::now()->format('Y/m/d H:i:s');
+    $pincode->expire_date_time = Carbon::parse($date)->addHour();
+    $pincode->save();
+    $curl = curl_init();
+    $URL_Api = "https://du.notifications.digizone.com.kw/api/du_send_pincode?msisdn={$msisdn}&message={$pincode_random}&service_name=flaterrotanadaily";
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => $URL_Api,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "POST",
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    //echo $response;
+    $actionName = "Du Rotana ResendPincode Again";
+    $URL = \Request::fullUrl();
+    $parameters_arr = array(
+      'date' => Carbon::now()->format('Y-m-d H:i:s'),
+      'msisdn' => $msisdn,
+      'pincode' => $pincode_random,
+      'URL' => $URL,
+      'URLApi' => $URL_Api,
+      'result' => $response
+    );
+    $this->log($actionName, $URL, $parameters_arr);
+    if ($response == "1") {
+      return redirect('checkpincode');
+    } else {
+      $request->session()->flash('failed', 'يوجد غط يرجا الضغط علي اعاده ارسال كود التحقق');
+      return redirect('checkpincode');
+    }
+
+  }
+//======================= end dcb 2 25/6/2020 ==========================================//
 
   /**
    * cheeckSub function for check number is subscribe or not

@@ -7,6 +7,8 @@ return [
     'du_valid_num' => 'numbers only',
     'du_valid_num9' => 'nine numbers',
     'du_enter_mob' => 'Enter your phone number',
+    'unSubscription' => 'Subscription Failed',
+    'insufficient' => 'you have insufficient funds',
     'du_unsub' => 'Unsubscribe',
     'du_enjoy_flu' =>  'On your Snapchat Get Exclusive Rotana Snap Filters Cinema Drama Serial Action Movies & Romance',
     'enter_seng' =>  'To receive your Filters click on Du tab below',
