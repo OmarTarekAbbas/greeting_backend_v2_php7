@@ -282,7 +282,7 @@ class KsaController extends Controller
 
             // make log
             $actionName = "ZAIN KSA pincode Verify Success";
-            $URL = $ADV_URL;
+
             $parameters_arr = array(
                 'MSISDN' => $msisdn_wcc,
                 'date' => Carbon::now()->format('Y-m-d H:i:s'),
