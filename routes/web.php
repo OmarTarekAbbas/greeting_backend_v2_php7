@@ -258,7 +258,7 @@ Route::post('/RotanaStcKsaPinCodeSend', 'KsaController@RotanaStcKsaPinCodeSend')
 Route::post('/rotana_stc_ksa_pincode_confirm', 'KsaController@rotana_stc_ksa_pincode_confirm');
 Route::get('rotana_stc_ksa_unsub', 'KsaController@RotanaStcKsaUnsub');
 Route::post('RotanaStcKsaUnsubAction', 'KsaController@RotanaStcKsaUnsubAction');
-Route::get('stc_ksa_login', 'KsaController@stc_ksa_login');
+//Route::get('stc_ksa_login', 'KsaController@stc_ksa_login');
 
 define('STC_OP_ID', 6);  // Stc Ksa
 
