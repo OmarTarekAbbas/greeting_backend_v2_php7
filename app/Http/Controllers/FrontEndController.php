@@ -3678,8 +3678,8 @@ public function filter_inner($FID, $UID){
           //  dd($occasis);
           if(OP() ==  STC_OP_ID)
           {
-            if(Session::has('currentOp')  && Session::get('currentOp') == STC_OP_ID  ){  //  ZAIN NKSA
 
+            if(Session::has('currentOp')  && Session::get('currentOp') == STC_OP_ID  ){  //  STC KSA
             }else{
                 return redirect(url(roatan_ksa_redirect_operator()));
             }

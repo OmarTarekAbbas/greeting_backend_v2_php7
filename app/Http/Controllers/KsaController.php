@@ -320,7 +320,7 @@ class KsaController extends Controller
                 }
             }
 
-            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOP' => ZAIN_OP_ID]);
+            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => ZAIN_OP_ID]);
             $Url = Generatedurl::where('operator_id', ZAIN_OP_ID)->latest()->first();
 
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -333,7 +333,7 @@ class KsaController extends Controller
             }
 
         } elseif ($result == "Theproducthasbeensubscribed.") { // alreday subscribe
-            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOP' => ZAIN_OP_ID]);
+            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => ZAIN_OP_ID]);
             $Url = Generatedurl::where('operator_id', ZAIN_OP_ID)->latest()->first();
 
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -729,7 +729,7 @@ class KsaController extends Controller
             }
 
             // Redirect to Stc content page
-            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOP' => STC_OP_ID]);
+            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => STC_OP_ID]);
             $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
 
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -742,7 +742,7 @@ class KsaController extends Controller
             }
 
         } elseif ($result == "Theproducthasbeensubscribed.") { // alreday subscribe
-            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOP' => STC_OP_ID]);
+            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => STC_OP_ID]);
             $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
 
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -759,6 +759,25 @@ class KsaController extends Controller
             return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
         }
 
+    }
+
+
+    public function stc_ksa_login()
+    {
+
+        // Redirect to Stc content page
+        $msisdn = "559209701" ;
+            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => STC_OP_ID]);
+            $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
+
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                ->where('greetingimg_operator.operator_id', '=', STC_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+            if ($snap) {
+                return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
+            } else {
+                return redirect(url('rotanav2/' . $Url->UID));
+            }
     }
 
     public function RotanaStcKsaUnsub()
