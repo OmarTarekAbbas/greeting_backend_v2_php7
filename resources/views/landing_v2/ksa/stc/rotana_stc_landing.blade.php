@@ -69,7 +69,7 @@
 
       <div class="shbka">
         <div class="container">
-          <h3 class="mt-1">اشترك الان</h3>
+          <h5 class="mt-1 mb-2">خدمة فلاتر روتانا اشترك الان</h5>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -121,6 +121,11 @@
           </form>
           {{--  <a  href="{{url('rotana_stc_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>  --}}
         </div>
+      </div>
+
+
+      <div class="cancel" style="color: black">
+        <p>اشترك في الخدمة مقابل 1,00 ريال يوميا </p>
       </div>
 
     </div>
