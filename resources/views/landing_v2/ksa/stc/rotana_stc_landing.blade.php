@@ -124,8 +124,9 @@
       </div>
 
 
-      <div class="cancel" style="color: black">
+      <div class="cancel" style="color: black;font-size:15px">
         <p>اشترك في الخدمة مقابل 1,00 ريال يوميا </p>
+        <p>لالغاء الاشتراك يرجي ارسالة رسالة فارغة الي 800444</p>
       </div>
 
     </div>
