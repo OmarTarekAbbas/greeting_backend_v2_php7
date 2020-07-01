@@ -63,9 +63,9 @@
         </video>
       </div>
 
-      <div class="strip">
+      {{--  <div class="strip">
         <h5 style="font-family: sans-serif;font-size: 12px;">@lang('messages.du_enjoy_flu')</h5>
-      </div>
+      </div>  --}}
 
       <div class="shbka">
         <div class="container">
@@ -125,7 +125,7 @@
 
 
       <div class="cancel" style="color: black;font-size:15px">
-        <p>اشترك في الخدمة مقابل 1,00 ريال يوميا </p>
+        <p>اشترك في خدمة فلاتر روتانا مقابل 1,00 ريال يوميا </p>
         <p>لالغاء الاشتراك يرجي ارسالة رسالة فارغة الي 800444</p>
       </div>
 
