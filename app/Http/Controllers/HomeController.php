@@ -1681,8 +1681,8 @@ class HomeController extends Controller
     $date = Carbon::now()->format('Y/m/d H:i:s');
     $PinCode = Pincode::where('msisdn', '=', $msisdn)->where('pincode', '=', $pincode)->orderBy('id', 'DESC')->first();
     if ($PinCode) {
-      $expire_date_time= $PinCode->expire_date_time;
-      $created_at= $PinCode->created_at;
+      $expire_date_time= $PinCode->expire_date_time; /*"2020-07-05 17:28:19"*/
+      $created_at = Carbon::now()->format('Y-m-d H:i:s');/*"2020-07-05 16:30:00"*/
       if ($expire_date_time >= $created_at) {
         $curl = curl_init();
         $URL_Api = "https://du.notifications.digizone.com.kw/api/logmessage?msisdn={$msisdn}&message=2&action=dcb";

@@ -402,6 +402,8 @@ define('DU_CHECKSUB',"https://du.notifications.digizone.com.kw/api/checkSub");
 define('du_operator_id',4);
 //=======================du  Integration ==========================================//
 
+
+
 //======================= start dcb 2 25/6/2020 ==========================================//
 Route::get('du_landing_dcb2/{peroid?}/{lang?}', 'HomeController@du_landing_dcb_2');
 Route::post('DuDcbRedirect', 'HomeController@DuDcbRedirect');
