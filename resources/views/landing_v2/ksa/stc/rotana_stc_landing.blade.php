@@ -31,6 +31,7 @@
     margin-top: 0;
     background-image: url('assets/front/landing_v2/img/strip_green.png');
   }
+
   .landing_page .shbka h3 {
     color: #000;
   }
@@ -50,20 +51,22 @@
     width: 45%;
   }
 
-  .copy p {color: #000;}
+  .copy p {
+    color: #000;
+  }
 </style>
 
 <body>
   <div class="main_container">
     <div class="landing_page">
       <div class="start_video" id="video">
-        <video width="100%" style="height: 280px;" poster="{{ url('assets/front/landing_v2')}}/video/rotana_post.png" id="my_audio" controls>
+        <video width="100%" style="height: 225px;" poster="{{ url('assets/front/landing_v2')}}/video/rotana_post.png" id="my_audio" controls>
           <source src="{{ url('assets/front/landing_v2')}}/video/1591283770.mp4" type="video/mp4">
           <source src="{{ url('assets/front/landing_v2')}}/video/1591283770.mp4" type="video/ogg">
         </video>
       </div>
 
-      {{--  <div class="strip">
+      {{-- <div class="strip">
         <h5 style="font-family: sans-serif;font-size: 12px;">@lang('messages.du_enjoy_flu')</h5>
       </div>  --}}
 
@@ -95,7 +98,7 @@
                             </div>-->
 
               <div class="col-12">
-                <img src="{{ url('assets/front/landing_v2')}}/img/stc_new.png" id="zain">
+                <img style="width: 21%;" src="{{ url('assets/front/landing_v2')}}/img/stc_new.png" id="zain">
               </div>
 
               <!--<div class="col-12">
@@ -117,17 +120,19 @@
               <i style="display:none" class="ml-2 fa fa-check text-success"></i>
             </div>
             <!--<button class="btn back">رجوع</button>-->
-            <button style="margin-bottom:30px;"  id="zain_submit" class="btn" type="submit">أشترك</button>
+            <button style="margin-bottom:30px;" id="zain_submit" class="btn" type="submit">أشترك</button>
           </form>
-          {{--  <a  href="{{url('rotana_stc_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a>  --}}
+          {{-- <a  href="{{url('rotana_stc_ksa_unsub')}}" class="btn" type="">الغاء الاشتراك</a> --}}
         </div>
       </div>
 
 
-      <div class="cancel" style="color: black;font-size:14px">
-        <p> تكلفة الاشتراك في هذه الخدمة 1 ريال يومياً</p>
-        <p>يمكنك إلغاء الاشتراك في أي وقت عبر إرسال غ 9 الى 801267 </p>
-        <p>لعملاء المفوتر سيتم اضافة نسبة 15% ضريبة القيمة المضافة على سعر الخدمة.</p>
+      <div class="cancel text-right p-0" style="color: black;font-size:14px">
+        <ul dir="rtl">
+          <li>تكلفة الاشتراك في هذه الخدمة 1 ريال يومياً</li>
+          <li>يمكنك إلغاء الاشتراك في أي وقت عبر إرسال غ 9 الى 801267</li>
+          <li>لعملاء المفوتر سيتم اضافة نسبة 15% ضريبة القيمة المضافة على سعر الخدمة.</li>
+        </ul>
       </div>
 
     </div>
