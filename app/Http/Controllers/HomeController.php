@@ -1729,6 +1729,11 @@ class HomeController extends Controller
           $redirect = $this->check_redirect("rotana");
           session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => du_operator_id]);
           return redirect($redirect);
+        }  elseif ($JSON == 'The user has been successfully activated') {
+          $serviceid = "flaterrotanadaily";
+          $redirect = $this->check_redirect("rotana");
+          session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => du_operator_id]);
+          return redirect($redirect);
         }
 
       } else {
