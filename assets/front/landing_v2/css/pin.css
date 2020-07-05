@@ -1,0 +1,12 @@
+.main_container {
+  background-image: url(../img/stc_BG.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.landing_page .strip {
+  margin-top: -2.5%;
+  background-image: url('../img/strip_green.png');
+}
