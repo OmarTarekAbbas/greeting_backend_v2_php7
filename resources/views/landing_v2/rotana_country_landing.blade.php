@@ -29,6 +29,11 @@
   .landing_page .strip {
     margin-top: -2.5%;
     background-image: url('assets/front/landing_v2/img/strip_green.png');
+    padding: 10px 4px;
+  }
+
+  .landing_page .strip h3 {
+    font-size: 1.4rem;
   }
 
   .landing_page .shbka .zain_viva #zain {
@@ -93,9 +98,7 @@ switch ($os) {
 
       <div class="shbka">
         <div class="container">
-          <h3 class="mb-3 mt-3">
-            للاشتراك اختر الشبكة الخاصة بك
-                 </h3>
+          <h3 class="mb-2 mt-2" style="font-size: 1.2rem;">للاشتراك اختر الشبكة الخاصة بك</h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -144,7 +147,7 @@ switch ($os) {
           @if($country == 'Egypt')
           <div class="col-12">
             <a  href="sms:9999{{$Att}}10083" class="click_op" data-country = "{{$country}}" data-operator="Vodafone">
-              <img style="margin-left: 20%"   width="200px" height="200px"  src="{{ url('assets/front/landing_v2')}}/operators2/VODAFONE.png" alt="">
+              <img class="m-auto d-block" width="200px" height="125px"  src="{{ url('assets/front/landing_v2')}}/operators2/VODAFONE.png" alt="">
               <p>Vodafone</p>
             </a>
 
