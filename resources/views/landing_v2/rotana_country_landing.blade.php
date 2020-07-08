@@ -94,8 +94,8 @@ switch ($os) {
       <div class="shbka">
         <div class="container">
           <h3 class="mb-3 mt-3">
-            اشترك الان يالضغط علي شيكتك
-          </h3>
+            للاشتراك اختر الشبكة الخاصة بك
+                 </h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
