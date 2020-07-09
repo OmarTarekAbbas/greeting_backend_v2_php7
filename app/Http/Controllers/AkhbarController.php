@@ -80,13 +80,10 @@ class AkhbarController extends Controller
 
     public function filter(Request $request, $OID, $UID)
     {
-
         $filters = Greetingimg::where('occasion_id', $OID)->paginate(get_settings('pagination_limit'));
-
         if ($request->ajax()) {
             return view('front.akhbar.ajaxfilters', compact('filters'));
         }
-
         return view('front.akhbar.filters', compact('filters'));
 
     }
@@ -96,25 +93,21 @@ class AkhbarController extends Controller
         $current_url = \Request::fullUrl();
         $favourites = [];
         $fav_id = [];
-        if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
-            $url = Generatedurl::where('UID', $UID)->first();
-            $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->first();
-            if (isset($Rdata_today)) {
-                $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
-                $cat = Category::where('id', $occasi->category_id)->first();
-                $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
-                return view('front.akhbar.today', compact('Rdata_today', 'occasi', 'cat', 'occasis'));
-            } else {
-                $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '<', Carbon::now()->format('Y-m-d'))->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->first();
-                $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
-                // dd($occasi);
-                $cat = Category::where('id', $occasi->category_id)->first();
-                $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
-                return view('front.akhbar.today', compact('Rdata_today', 'occasi', 'cat', 'occasis'));
-            }
-        } else {
-            return redirect(url(redirect_operator()));
-        }
+      $url = Generatedurl::where('UID', $UID)->first();
+      $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->first();
+      if (isset($Rdata_today)) {
+        $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
+        $cat = Category::where('id', $occasi->category_id)->first();
+        $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
+        return view('front.akhbar.today', compact('Rdata_today', 'occasi', 'cat', 'occasis'));
+      } else {
+        $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '<', Carbon::now()->format('Y-m-d'))->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->first();
+        $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
+        // dd($occasi);
+        $cat = Category::where('id', $occasi->category_id)->first();
+        $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
+        return view('front.akhbar.today', compact('Rdata_today', 'occasi', 'cat', 'occasis'));
+      }
     }
 
     public function search(Request $request, $UID)
@@ -122,41 +115,37 @@ class AkhbarController extends Controller
         $current_url = \Request::fullUrl();
         $search = $request->search;
         Session::put('search', $search);
-        if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
-            $url = Generatedurl::where('UID', $UID)->first();
-            if (is_null($url)) {
-                return view('front.error');
-            }
+      $url = Generatedurl::where('UID', $UID)->first();
+      if (is_null($url)) {
+        return view('front.error');
+      }
 
-            $Rdata = $url->operator->greetingimgs()->PublishedSnap()
-                ->join('translatables', 'translatables.record_id', '=', 'greetingimgs.id')
-                ->join('tans_bodies', 'tans_bodies.translatable_id', 'translatables.id')
-                ->where('translatables.table_name', 'greetingimgs')
-                ->where('translatables.column_name', 'title')
-                ->where(function ($q) use ($request) {
-                    $q->where('greetingimgs.title', 'like', '%' . $request->search . '%');
-                    $q->orWhere('tans_bodies.body', 'like', '%' . $request->search . '%');
-                })
-                ->limit(get_settings('pagination_limit'))
-                ->orderBy('RDate', 'desc')
-                ->paginate(get_settings('pagination_limit'));
-            $codes = [];
-            foreach ($Rdata as $key => $value) {
-                if ($value->rbt_id != null) {
-                    $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
-                    $codes[$key] = $rbtCode ? $rbtCode->code : null;
-                }
-            }
-            $rbt_sms = $url->operator->rbt_sms;
-
-            if ($request->ajax()) {
-                return view('front.akhbar.snapsresult', compact('Rdata', 'search', 'rbt_sms', 'codes'));
-            }
-
-            return view('front.akhbar.search1', compact('Rdata', 'search', 'rbt_sms', 'codes'));
-        } else {
-            return redirect(url(redirect_operator()));
+      $Rdata = $url->operator->greetingimgs()->PublishedSnap()
+        ->join('translatables', 'translatables.record_id', '=', 'greetingimgs.id')
+        ->join('tans_bodies', 'tans_bodies.translatable_id', 'translatables.id')
+        ->where('translatables.table_name', 'greetingimgs')
+        ->where('translatables.column_name', 'title')
+        ->where(function ($q) use ($request) {
+          $q->where('greetingimgs.title', 'like', '%' . $request->search . '%');
+          $q->orWhere('tans_bodies.body', 'like', '%' . $request->search . '%');
+        })
+        ->limit(get_settings('pagination_limit'))
+        ->orderBy('RDate', 'desc')
+        ->paginate(get_settings('pagination_limit'));
+      $codes = [];
+      foreach ($Rdata as $key => $value) {
+        if ($value->rbt_id != null) {
+          $rbtCode = rbtCode::where('audio_id', $value->rbt_id)->where('operator_id', $url->operator_id)->first();
+          $codes[$key] = $rbtCode ? $rbtCode->code : null;
         }
+      }
+      $rbt_sms = $url->operator->rbt_sms;
+
+      if ($request->ajax()) {
+        return view('front.akhbar.snapsresult', compact('Rdata', 'search', 'rbt_sms', 'codes'));
+      }
+
+      return view('front.akhbar.search1', compact('Rdata', 'search', 'rbt_sms', 'codes'));
     }
 
     public function filter_inner($FID, $UID)
@@ -170,46 +159,6 @@ class AkhbarController extends Controller
                 $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
                 $cat = Category::where('id', $occasi->category_id)->first();
                 $occasis = Occasion::where('category_id', $cat->id)->get();
-                //  dd($occasis);
-                if (OP() == STC_OP_ID) {
-
-                    if (Session::has('currentOp') && Session::get('currentOp') == STC_OP_ID) { //  STC KSA
-                    } else {
-                        return redirect(url(roatan_ksa_redirect_operator()));
-                    }
-                }
-                if (OP() == ZAIN_OP_ID) {
-                    if (Session::has('currentOp') && Session::get('currentOp') == ZAIN_OP_ID) { // Mobily ksa
-
-                    } else {
-                        return redirect(url(roatan_ksa_redirect_operator()));
-                    }
-                }
-                if (OP() == ooredoo) {
-                    if (Session::has('currentOp') && Session::get('currentOp') == ooredoo) { // Timwe
-
-                    } else {
-                        return redirect(url(roatan_ksa_redirect_operator()));
-                    }
-                }
-
-                if (OP() == imi_op_id()) {
-                    if (Session::has('currentOp') && Session::get('currentOp') == imi_op_id()) { // IMI
-
-                    } else {
-                        return redirect(url(roatan_ksa_redirect_operator()));
-                    }
-
-                }
-                if (OP() == MOBILY_KSA_HE()) {
-                    if (Session::has('currentOp') && Session::get('currentOp') == MOBILY_KSA_HE()) { // IMI
-
-                    } else {
-                        return redirect(url(roatan_ksa_redirect_operator()));
-                    }
-
-                }
-
                 return view('front.akhbar.inner_page', compact('Rdata', 'occasi', 'cat', 'occasis'));
             } else {
                 return view('errors.404');
@@ -223,7 +172,7 @@ class AkhbarController extends Controller
         return view('front.akhbar.fav');
     }
 
-    
+
     public function favorites_load(Request $request, $UID){
         $ids = $request->ids;
         $url = Generatedurl::where('UID', $UID)->first();
