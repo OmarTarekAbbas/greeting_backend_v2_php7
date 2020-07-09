@@ -38,27 +38,15 @@ class AkhbarController extends Controller
 
         $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
 
-        $newsnap = $url->operator->greetingimgs()->PublishedSnap()->whereNotNull('vid_path')->orderBy('id', 'desc')->limit(4)->get();
-
+        dd($snap->take(10));
         $occasions_array = [];
-        $categories = [];
 
         foreach ($snap as $key => $value) {
             array_push($occasions_array, $value->occasion_id);
         }
         $occasions_array = array_unique($occasions_array);
 
-        foreach ($occasions_array as $k => $occasion) {
-            $sliders[] = Occasion::where('id', $occasion)->first();
-        }
-        $sliders = array_filter($sliders);
-
-        foreach ($sliders as $slider) {
-            array_push($categories, $slider->category()->first());
-        }
-        $categories = array_unique($categories);
-
-        return view('front.akhbar.home', compact('newsnap', 'categories'));
+        return view('front.akhbar.home', compact('snap'));
     }
 
     public function occasions(Request $request, $CID, $UID)
@@ -170,46 +158,6 @@ class AkhbarController extends Controller
                 $occasi = Occasion::where('id', $Rdata->occasion_id)->first();
                 $cat = Category::where('id', $occasi->category_id)->first();
                 $occasis = Occasion::where('category_id', $cat->id)->get();
-                //  dd($occasis);
-                if (OP() == STC_OP_ID) {
-
-                    if (Session::has('currentOp') && Session::get('currentOp') == STC_OP_ID) { //  STC KSA
-                    } else {
-                        return redirect(url(roatan_ksa_redirect_operator()));
-                    }
-                }
-                if (OP() == ZAIN_OP_ID) {
-                    if (Session::has('currentOp') && Session::get('currentOp') == ZAIN_OP_ID) { // Mobily ksa
-
-                    } else {
-                        return redirect(url(roatan_ksa_redirect_operator()));
-                    }
-                }
-                if (OP() == ooredoo) {
-                    if (Session::has('currentOp') && Session::get('currentOp') == ooredoo) { // Timwe
-
-                    } else {
-                        return redirect(url(roatan_ksa_redirect_operator()));
-                    }
-                }
-
-                if (OP() == imi_op_id()) {
-                    if (Session::has('currentOp') && Session::get('currentOp') == imi_op_id()) { // IMI
-
-                    } else {
-                        return redirect(url(roatan_ksa_redirect_operator()));
-                    }
-
-                }
-                if (OP() == MOBILY_KSA_HE()) {
-                    if (Session::has('currentOp') && Session::get('currentOp') == MOBILY_KSA_HE()) { // IMI
-
-                    } else {
-                        return redirect(url(roatan_ksa_redirect_operator()));
-                    }
-
-                }
-
                 return view('front.akhbar.inner_page', compact('Rdata', 'occasi', 'cat', 'occasis'));
             } else {
                 return view('errors.404');
