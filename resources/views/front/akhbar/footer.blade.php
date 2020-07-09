@@ -38,7 +38,7 @@
     <div class="row">
       <div class="col-3">
         <div class="foot_link text-center">
-          <a id="indexed" class="active_menu" href="{{url('/rotanav2/'.uid())}}">
+          <a id="indexed" class="active_menu" href="{{url('/akhbar/'.uid())}}">
             <i class="fas fa-home fa-lg"></i>
           </a>
         </div>
@@ -46,7 +46,7 @@
 
       <div class="col-3">
         <div class="foot_link text-center">
-          <a href="{{url('/rotanav2/favorites/'.uid())}}">
+          <a href="{{url('/akhbar/favorites/'.uid())}}">
             <i class="fas fa-heart fa-lg"></i>
           </a>
         </div>
@@ -62,7 +62,7 @@
 
       <div class="col-3">
         <div class="foot_link foot_link_img text-center">
-          <a href="{{url('rotanav2/today/'.UID())}}">
+          <a href="{{url('akhbar/today/'.UID())}}">
             <img class="rotana_foot_img" src="{{url('assets/front/rotanav2/images/Rotana_Green.png')}}" alt="Rotana">
             @if(getCode() == 'ar')
             <img class="rotana_foot_new" src="{{url('assets/front/rotanav2/images/New.png')}}" alt="Rotana new">
@@ -129,7 +129,7 @@
   }
 
   function sharebtn(id) {
-    var url = "{{url('/rotanav2').'/inner/'}}" + id + "/" + "{{UID()}}";
+    var url = "{{url('/akhbar').'/inner/'}}" + id + "/" + "{{UID()}}";
     console.log(url);
     var facebook = "https://www.facebook.com/sharer/sharer.php?u=" + url;
     var whatsapp = "whatsapp://send?text=" + url;
