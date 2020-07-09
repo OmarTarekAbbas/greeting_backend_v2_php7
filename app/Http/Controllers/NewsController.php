@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\News;
 use App\Occasion;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class NewsController extends Controller
 {
@@ -16,7 +17,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::all();
-        return ('admin.news.index',compact('news'));
+        return view('admin.news.index',compact('news'));
     }
 
     /**
@@ -29,7 +30,7 @@ class NewsController extends Controller
         $occasions = Occasion::all();
         $news      = null;
 
-        return view('admin.news.form',compact('occasions','news'));
+        return view('admin.news.add',compact('occasions','news'));
     }
 
     /**
@@ -44,7 +45,7 @@ class NewsController extends Controller
         'title' => 'required|string',
         'description' => 'required',
         'image'=> 'required:mimes:jpeg,png,gif,webp,jpg|max:2048',
-        'occasion_id' => 'required|occasions:exsist'
+        'occasion_id' => 'required'
       ]);
 
       $news = News::create($request->all());
@@ -73,8 +74,9 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
+      // return $news;
       $occasions = Occasion::all();
-      return view('admin.news.form',compact('occasions','news'));
+      return view('admin.news.edit',compact('occasions','news'));
     }
 
     /**
@@ -90,7 +92,7 @@ class NewsController extends Controller
         'title' => 'required|string',
         'description' => 'required',
         'image'=> '',
-        'occasion_id' => 'required|occasions:exsist'
+        'occasion_id' => 'required'
       ]);
 
       $news = $news->update($request->all());

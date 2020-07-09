@@ -311,6 +311,13 @@
                     </a>
                 </li>
 
+                <li class="{{(preg_match('/\badmin\/news/i',Request::url())) ? 'active' : ''}}">
+                  <a href="{{ url('admin/news') }}">
+                      <i class="ion-ios-bookmarks"></i> <span>News Slider</span>
+                      <span class="label pull-right">{{ \App\News::all()->count() }}</span>
+                  </a>
+                </li>
+
 
                       <li class="{{(preg_match('/\badmin\/addSnapFromCategoyForm/i',Request::url())) ? 'active' : ''}}">
                     <a href="{{ url('admin/addSnapFromCategoyForm') }}">

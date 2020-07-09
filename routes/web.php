@@ -314,6 +314,8 @@ Route::get('admin', 'CategoriesController@adminindex');
 Route::resource('admin/country', 'CountriesController');
 Route::get('admin/country/{id}/operator', 'CountriesController@addOperator');
 
+Route::resource('admin/news', 'NewsController');
+
 Route::resource('admin/operator', 'OperatorsController');
 
 Route::resource('admin/categories', 'CategoriesController');

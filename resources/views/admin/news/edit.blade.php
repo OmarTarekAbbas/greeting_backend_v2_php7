@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                {!! Form::model($news,['method'=>'PATCH','action'=>['NewsController@update',$news->id],'files'=>true]) !!}
+                {!! Form::model($news,['method'=>'PATCH','action'=>['NewsController@update',$news],'files'=>true]) !!}
                 {!! Form::hidden('redirects_to', URL::previous()) !!}
                 @include('admin.news.form')
                 <div class="form-group">
