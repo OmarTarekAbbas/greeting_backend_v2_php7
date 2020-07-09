@@ -36,7 +36,7 @@
 <footer class="footer_head">
   <div class="container">
     <div class="row">
-      <div class="col-3">
+      <div class="col-4">
         <div class="foot_link text-center">
           <a id="indexed" class="active_menu" href="{{url('/akhbar/'.uid())}}">
             <i class="fas fa-home fa-lg"></i>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="col-3">
+      <div class="col-4">
         <div class="foot_link text-center">
           <a href="{{url('/akhbar/favorites/'.uid())}}">
             <i class="fas fa-heart fa-lg"></i>
@@ -52,24 +52,10 @@
         </div>
       </div>
 
-      <div class="col-3">
+      <div class="col-4">
         <div class="foot_link text-center">
           <a id="search_input" href="#0" data-toggle="modal" data-target="#exampleModal">
             <i class="fas fa-search fa-lg"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="col-3">
-        <div class="foot_link foot_link_img text-center">
-          <a href="{{url('akhbar/today/'.UID())}}">
-            <img class="rotana_foot_img" src="{{url('assets/front/rotanav2/images/Rotana_Green.png')}}" alt="Rotana">
-            @if(getCode() == 'ar')
-            <img class="rotana_foot_new" src="{{url('assets/front/rotanav2/images/New.png')}}" alt="Rotana new">
-            @endif
-            @if(getCode() == 'en' || getCode() == '')
-            <img class="rotana_foot_new" src="{{url('assets/front/rotanav2/images/new_english.png')}}" alt="Rotana new">
-            @endif
           </a>
         </div>
       </div>
@@ -77,12 +63,12 @@
   </div>
 </footer>
 
-<script src="{{url('assets/front/rotanav2/js/jquery-3.3.1.min.js')}}"></script>
-<script src="{{url('assets/front/rotanav2/js/bootstrap.min.js')}}"></script>
-<script src="{{url('assets/front/rotanav2/js/popper.min.js')}}"></script>
-<script src="{{url('assets/front/rotanav2/js/owl.carousel.min.js')}}"></script>
-<script src="{{url('assets/front/rotanav2/js/wow.min.js')}}"></script>
-<script src="{{url('assets/front/rotanav2/js/script.js')}}"></script>
+<script src="{{url('assets/front/akhbar/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url('assets/front/akhbar/js/bootstrap.min.js')}}"></script>
+<script src="{{url('assets/front/akhbar/js/popper.min.js')}}"></script>
+<script src="{{url('assets/front/akhbar/js/owl.carousel.min.js')}}"></script>
+<script src="{{url('assets/front/akhbar/js/wow.min.js')}}"></script>
+<script src="{{url('assets/front/akhbar/js/script.js')}}"></script>
 <script>
   var modal = Binary_functions();
   if(modal){

@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rotana</title>
-    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/all.min.css')}}">
-    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/owl.theme.default.css')}}">
-    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/animate.css')}}">
-    <link rel="stylesheet" href="{{url('assets/front/rotanav2/css/style.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/akhbar/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/akhbar/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/akhbar/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/akhbar/css/owl.theme.default.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/akhbar/css/animate.css')}}">
+    <link rel="stylesheet" href="{{url('assets/front/akhbar/css/style.css')}}">
     <base target="_parent">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -92,12 +92,7 @@
           <div class="col-12">
             <div class="header_logo">
               <a href="{{url('/akhbar/'.uid())}}">
-                <img class="d-block m-auto slide-in-fwd-bottom" src="{{url('assets/front/rotanav2/images/new_rotana.png')}}" alt="Rotana Logo">
+                <img class="d-block m-auto slide-in-fwd-bottom" src="{{url('assets/front/akhbar/images/Cutting/logo.png')}}" alt="Rotana Logo">
               </a>
-              @if(getCode() == 'ar')
-              <a style="color:#fff" href="{{url('admin/lang/en')}}">En</a>
-              @else
-              <a style="color:#fff" href="{{url('admin/lang/ar')}}">Ar</a>
-              @endif
             </div>
         </header>
