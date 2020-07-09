@@ -1,5 +1,5 @@
 <!-- Start Header -->
-@include('front.rotanav2.header')
+@include('front.akhbar.header')
 <!-- End Header -->
 
 <div class="main_fav">
@@ -47,7 +47,7 @@
 </div>
 
 <!-- Start Footer -->
-@include('front.rotanav2.footer')
+@include('front.akhbar.footer')
 <!-- End Footer -->
 
 <script>
@@ -55,7 +55,7 @@ var allfav = window.localStorage.getItem('favorite');
 
 $.ajax({
   type: "get",
-  url: "{{url('rotanav2/favorites_load').'/'.uid()}}",
+  url: "{{url('akhbar/favorites_load').'/'.uid()}}",
   data: {'ids' : allfav},
   success: function (response) {
     $('#favoritesAjax').html(response);

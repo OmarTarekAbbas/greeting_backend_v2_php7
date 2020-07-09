@@ -219,4 +219,28 @@ class AkhbarController extends Controller
         }
     }
 
+    public function favorites(Request $request, $UID){
+        return view('front.akhbar.fav');
+    }
+
+    
+    public function favorites_load(Request $request, $UID){
+        $ids = $request->ids;
+        $url = Generatedurl::where('UID', $UID)->first();
+
+        if(!empty($ids)){
+            $idsArray = explode(",", $ids);
+            $snap = $url->operator->greetingimgs()->PublishedSnap()->whereIn('greetingimgs.id', $idsArray)->orderBy('RDate', 'desc')->paginate(get_settings('pagination_limit'));
+            return view('front.akhbar.ajaxfav', compact('snap'));
+        }else{
+            if(get_settings('only_favorites') == 0){
+                $snap = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(12);
+                return view('front.akhbar.ajaxfav', compact('snap'));
+            }else{
+                return view('front.akhbar.nofilter');
+            }
+        }
+
+    }
+
 }

@@ -542,6 +542,8 @@ Route::get('akhbar/{OID}/filter/{UID}', 'AkhbarController@filter');
 Route::get('akhbar/today/{UID}', 'AkhbarController@today');
 Route::get('akhbar/inner/{FID}/{UID}', 'AkhbarController@filter_inner');
 Route::get('search_akhbar/{UID}', 'AkhbarController@search');
+Route::get('akhbar/favorites/{UID}', 'AkhbarController@favorites');
+Route::get('akhbar/favorites_load/{UID}', 'AkhbarController@favorites_load');
 
 //////////////////////////////////////
 /////////////*end akhbar*/////////////
