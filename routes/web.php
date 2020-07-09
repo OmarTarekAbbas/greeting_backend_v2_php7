@@ -258,6 +258,8 @@ Route::post('/RotanaStcKsaPinCodeSend', 'KsaController@RotanaStcKsaPinCodeSend')
 Route::post('/rotana_stc_ksa_pincode_confirm', 'KsaController@rotana_stc_ksa_pincode_confirm');
 Route::get('rotana_stc_ksa_unsub', 'KsaController@RotanaStcKsaUnsub');
 Route::post('RotanaStcKsaUnsubAction', 'KsaController@RotanaStcKsaUnsubAction');
+//Route::get('stc_ksa_login', 'KsaController@stc_ksa_login');
+
 define('STC_OP_ID', 6);  // Stc Ksa
 
 // Zain KSA (Rotana Flatter)
@@ -382,7 +384,7 @@ Route::get('zain_iraq_success', 'FrontEndController@zain_iraq_success');
 Route::get('zain_iraq_faild', 'FrontEndController@zain_iraq_faild');
 
 //=======================du  Integration ==========================================//
-Route::get('du_landing/{peroid?}/{lang?}', 'HomeController@du_landing');
+Route::get('du_landing_dcb/{peroid?}/{lang?}', 'HomeController@du_landing_dcb');
 Route::get('du_landing_success', 'HomeController@du_landing_success');
 Route::get('DuSecureRedirect', 'HomeController@DuSecureRedirect');
 Route::get('du_unsubc/{peroid?}/{lang?}', 'HomeController@du_unsubc');
@@ -399,6 +401,18 @@ define('DU_UNSUB_SYSTEM',"https://du.notifications.digizone.com.kw/api/unsub");
 define('DU_CHECKSUB',"https://du.notifications.digizone.com.kw/api/checkSub");
 define('du_operator_id',4);
 //=======================du  Integration ==========================================//
+
+
+
+//======================= start dcb 2 25/6/2020 ==========================================//
+Route::get('du_landing_dcb2/{peroid?}/{lang?}', 'HomeController@du_landing_dcb_2');
+Route::post('DuDcbRedirect', 'HomeController@DuDcbRedirect');
+Route::get('checkpincode/{lang?}', 'HomeController@checkpincode');
+Route::post('checkpincode_confirm', 'HomeController@checkpincode_confirm');
+Route::get('ResendPincode/{lang?}', 'HomeController@ResendPincode');
+
+
+//======================= end dcb 2 25/6/2020 ==========================================//
 
 //langing kuwait rotana
 Route::get('landing_kuwait_rotana','FrontEndController@landing_kuwait_rotana');

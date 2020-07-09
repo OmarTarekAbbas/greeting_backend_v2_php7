@@ -282,7 +282,7 @@ class KsaController extends Controller
 
             // make log
             $actionName = "ZAIN KSA pincode Verify Success";
-            $URL = $ADV_URL;
+
             $parameters_arr = array(
                 'MSISDN' => $msisdn_wcc,
                 'date' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -320,7 +320,7 @@ class KsaController extends Controller
                 }
             }
 
-            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOP' => ZAIN_OP_ID]);
+            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => ZAIN_OP_ID]);
             $Url = Generatedurl::where('operator_id', ZAIN_OP_ID)->latest()->first();
 
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -333,7 +333,7 @@ class KsaController extends Controller
             }
 
         } elseif ($result == "Theproducthasbeensubscribed.") { // alreday subscribe
-            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOP' => ZAIN_OP_ID]);
+            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => ZAIN_OP_ID]);
             $Url = Generatedurl::where('operator_id', ZAIN_OP_ID)->latest()->first();
 
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -615,7 +615,7 @@ class KsaController extends Controller
         );
         $this->log($actionName, $URL, $parameters_arr);
 
-        if ($result == "7" || $result == "1") {
+        if ($result == "7" || $result == "1" ) {
             // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
             return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
         } else { // error
@@ -690,8 +690,7 @@ class KsaController extends Controller
             $Msisdn->save();
 
             // make log
-            $actionName = "STC KSA Pincode Verify Success";
-            $URL = $ADV_URL;
+            $actionName = "STC KSA Pincode Verify Success" ;
             $parameters_arr = array(
                 'MSISDN' => $msisdn_wcc,
                 'date' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -730,7 +729,7 @@ class KsaController extends Controller
             }
 
             // Redirect to Stc content page
-            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOP' => STC_OP_ID]);
+            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => STC_OP_ID]);
             $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
 
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -743,7 +742,7 @@ class KsaController extends Controller
             }
 
         } elseif ($result == "Theproducthasbeensubscribed.") { // alreday subscribe
-            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOP' => STC_OP_ID]);
+            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => STC_OP_ID]);
             $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
 
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -760,6 +759,25 @@ class KsaController extends Controller
             return view('landing_v2.ksa.stc.stc_ksa_pinCode', compact('msisdn'));
         }
 
+    }
+
+
+    public function stc_ksa_login()
+    {
+
+        // Redirect to Stc content page
+        $msisdn = "559209701" ;
+            session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => STC_OP_ID]);
+            $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
+
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                ->where('greetingimg_operator.operator_id', '=', STC_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+            if ($snap) {
+                return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID));
+            } else {
+                return redirect(url('rotanav2/' . $Url->UID));
+            }
     }
 
     public function RotanaStcKsaUnsub()

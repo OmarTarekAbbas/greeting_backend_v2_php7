@@ -124,12 +124,7 @@ App::setLocale($lang);
                 <p>for unsubscribe please press on this <a href="{{url('du_unsubc'."/".$peroid."/".$lang )}}">link</a></p>
             </div>
             @endif
-
-
-
-
         </div>
-
 
 
 
