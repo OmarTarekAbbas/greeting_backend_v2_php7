@@ -26,11 +26,10 @@
 
               <div class="share_fav">
                 <a class="first_list_img_heart" href="#0">
-                  <i class="fas fa-heart"></i>
+                  <i class="heart_heart fas fa-heart"></i>
                 </a>
               </div>
             </a>
-
           </div>
         </div>
   </section>

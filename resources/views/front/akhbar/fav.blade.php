@@ -7,14 +7,13 @@
     <section class="fav_sec w-100 mt-3">
       <div class="col-12">
         <div class="img_like">
-          <img class="d-block m-auto" src="{{url('assets/front/rotanav2/images/like_2.png')}}" alt="Like">
+          <i class="d-block text-center fas fa-heart"></i>
         </div>
       </div>
     </section>
 
     <section class="fav_list w-100 mt-4">
       <div id="favoritesAjax" class="row m-0">
-
       </div>
     </section>
   </div>
