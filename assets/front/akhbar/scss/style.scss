@@ -39,7 +39,7 @@ button,
 }
 
 .akhbar_now {
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
 
   /* Start Header */
   .header_head {
@@ -140,12 +140,26 @@ button,
   .main_filter_2day {
     .filter_2day {
       .filter_2day_title {
-        h6 {
+
+        h6,
+        p {
           color: $blue_color;
+        }
+
+        p {
+          font-size: 0.85rem;
         }
       }
 
       .filter_2day_img {
+        &.today_filter {
+          a {
+            img {
+              height: 9.375rem;
+            }
+          }
+        }
+
         a {
           img {
             height: 25rem;
@@ -154,6 +168,7 @@ button,
 
         .share_fav {
           position: relative;
+
           .first_list_img_heart,
           .first_list_img_share {
             font-size: 1.5rem;
@@ -176,35 +191,39 @@ button,
     }
 
     .filter_slide {
-      .item {
-        // border-right: 1px solid $black_color;
+      .second_slide_title {
+        a {
+          color: $blue_color;
 
-        .owl_filter_img {
-          img {
-            height: 9.125rem;
-          }
-        }
-      }
+          h6 {
+            font-size: 1.25rem;
 
-      .owl_two {
-        .item {
-          // border-right: 1px solid $black_color;
-
-          .owl_filter_img {
-            img {
-              height: 12.5rem;
+            i {
+              margin-top: 0.5rem;
             }
           }
         }
       }
 
-      .owl_filter {
-        .item {
-          // border-right: 1px solid $black_color;
+      .today_img {
+        .share_fav {
+          position: relative;
 
-          .owl_filter_img {
-            img {
-              height: 9rem;
+          .first_list_img_heart,
+          .first_list_img_share {
+            font-size: 1rem;
+            color: $blue_color;
+            position: absolute;
+            top: 1rem;
+            left: 16%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+
+            &.first_list_img_heart {
+              left: 35%;
             }
           }
         }
@@ -432,7 +451,7 @@ button,
                 &:focus,
                 &:hover,
                 &:active {
-                  box-shadow: 0 0 0 0.2rem rgb(8, 79, 39);
+                  box-shadow: 0 0 0 0.3rem $blue_color;
                   border-color: $white_color;
                 }
               }

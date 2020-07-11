@@ -35,7 +35,7 @@ button:active,
 }
 
 .akhbar_now {
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
   /* Start Header */
   /* End Header */
   /* Start Home Page */
@@ -99,8 +99,15 @@ button:active,
 .akhbar_now .main_list .first_list .first_list_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_list .first_list .first_list_img a.first_list_img_share.first_list_img_heart {
   left: 31%;
 }
-.akhbar_now .main_filter_2day .filter_2day .filter_2day_title h6 {
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_title h6,
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_title p {
   color: #00256e;
+}
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_title p {
+  font-size: 0.85rem;
+}
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_img.today_filter a img {
+  height: 9.375rem;
 }
 .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a img {
   height: 25rem;
@@ -125,14 +132,34 @@ button:active,
 .akhbar_now .main_filter_2day .filter_2day .filter_2day_img .share_fav .first_list_img_share.first_list_img_heart {
   left: 27%;
 }
-.akhbar_now .main_filter_2day .filter_slide .item .owl_filter_img img {
-  height: 9.125rem;
+.akhbar_now .main_filter_2day .filter_slide .second_slide_title a {
+  color: #00256e;
 }
-.akhbar_now .main_filter_2day .filter_slide .owl_two .item .owl_filter_img img {
-  height: 12.5rem;
+.akhbar_now .main_filter_2day .filter_slide .second_slide_title a h6 {
+  font-size: 1.25rem;
 }
-.akhbar_now .main_filter_2day .filter_slide .owl_filter .item .owl_filter_img img {
-  height: 9rem;
+.akhbar_now .main_filter_2day .filter_slide .second_slide_title a h6 i {
+  margin-top: 0.5rem;
+}
+.akhbar_now .main_filter_2day .filter_slide .today_img .share_fav {
+  position: relative;
+}
+.akhbar_now .main_filter_2day .filter_slide .today_img .share_fav .first_list_img_heart,
+.akhbar_now .main_filter_2day .filter_slide .today_img .share_fav .first_list_img_share {
+  font-size: 1rem;
+  color: #00256e;
+  position: absolute;
+  top: 1rem;
+  left: 16%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+.akhbar_now .main_filter_2day .filter_slide .today_img .share_fav .first_list_img_heart.first_list_img_heart,
+.akhbar_now .main_filter_2day .filter_slide .today_img .share_fav .first_list_img_share.first_list_img_heart {
+  left: 35%;
 }
 .akhbar_now .main_fav .fav_sec .img_like img {
   width: 10%;
@@ -277,7 +304,7 @@ button:active,
   border-radius: 22px;
 }
 .modal_search .modal-dialog .modal-content .modal-body .search_search form label input:focus, .modal_search .modal-dialog .modal-content .modal-body .search_search form label input:hover, .modal_search .modal-dialog .modal-content .modal-body .search_search form label input:active {
-  box-shadow: 0 0 0 0.2rem #084f27;
+  box-shadow: 0 0 0 0.3rem #00256e;
   border-color: #FFF;
 }
 .modal_search .modal-dialog .modal-content .modal-body .search_search form label .input_bg {
