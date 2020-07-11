@@ -4,27 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\GreetingimgOperator;
-use DB;
 use App\Generatedurl;
 use App\Greetingimg;
 use App\Occasion;
 use App\Operator;
-use App\Category;
-use App\Processedimg;
-use App\Processedvid;
+use App\News;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\URL;
-use App\rbtCode;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Carbon\Carbon;
-use App\Notify;
-use App\Msisdn;
-use App\AdvertisingUrl;
-use App\News;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
@@ -37,7 +28,7 @@ class AkhbarController extends Controller
 
         $url = Generatedurl::where('UID', $UID)->first();
 
-        $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->paginate(18);
+        $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->paginate(15);
 
         $occasions_array = [];
 
@@ -74,7 +65,7 @@ class AkhbarController extends Controller
             return view('front.error');
         }
 
-        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('title', 'like', '%' . $request->search . '%')->paginate(18);
+        $Rdata = $url->operator->greetingimgs()->PublishedSnap()->where('title', 'like', '%' . $request->search . '%')->paginate(15);
 
         if ($request->ajax()) {
             return view('front.akhbar.snapsresult', compact('Rdata', 'search'));
