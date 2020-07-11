@@ -58,18 +58,10 @@ class AkhbarController extends Controller
     public function news($NID,$UID)
     {
         $current_url = \Request::fullUrl();
-        $favourites = [];
-        $fav_id = [];
         $url = Generatedurl::where('UID', $UID)->first();
-        $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->first();
-        $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
-        $cat = Category::where('id', $occasi->category_id)->first();
-        $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
-        return view('front.akhbar.today', compact('Rdata_today', 'occasi', 'cat', 'occasis'));
-        // $current_url = \Request::fullUrl();
-        // $url = Generatedurl::where('UID', $UID)->first();
-        // $news = News::where('id', $NID)->where('published_date', '<=', Carbon::now()->format('Y-m-d'))->get();
-        // return view('front.akhbar.today', compact('news'));
+        $snaps = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '<=', Carbon::now()->format('Y-m-d'))->limit(3)->get();
+        $news = News::where('id', $NID)->where('published_date', '<=', Carbon::now()->format('Y-m-d'))->first();
+        return view('front.akhbar.today', compact('snaps', 'news'));
     }
 
     public function search(Request $request, $UID)

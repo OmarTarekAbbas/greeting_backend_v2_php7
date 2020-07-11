@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Jul 09, 2020 at 03:59 PM
+-- Generation Time: Jul 11, 2020 at 01:52 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -116,7 +116,8 @@ INSERT INTO `categories` (`id`, `title`, `created_at`, `updated_at`) VALUES
 (13, 'Wither	', '2018-10-18 08:19:43', '2018-10-18 08:19:43'),
 (14, 'Country	', '2018-10-18 08:19:55', '2018-10-18 08:19:55'),
 (15, 'films	', '2018-11-04 11:03:53', '2018-11-04 11:03:53'),
-(18, 'Social', '2019-12-10 10:53:21', '2019-12-10 10:53:21');
+(18, 'Social', '2019-12-10 10:53:21', '2019-12-10 10:53:21'),
+(19, 'akhbar', '2020-07-11 06:31:28', '2020-07-11 06:31:28');
 
 -- --------------------------------------------------------
 
@@ -413,7 +414,8 @@ INSERT INTO `generatedurls` (`id`, `operator_id`, `occasion_id`, `img`, `audio`,
 (282, 25, 73, 1, 0, 0, 4355282, '', '', '2019-12-24 09:31:37', '2019-12-24 09:31:37'),
 (283, 26, 73, 1, 0, 0, 8231283, '', '', '2019-12-24 09:31:45', '2019-12-24 09:31:45'),
 (284, 27, 73, 1, 0, 0, 4810284, '', '', '2019-12-24 09:31:52', '2019-12-24 09:31:52'),
-(285, 8, 100, 1, 0, 0, 5304285, NULL, '', '2020-01-23 09:45:06', '2020-01-23 09:45:06');
+(285, 8, 100, 1, 0, 0, 5304285, NULL, '', '2020-01-23 09:45:06', '2020-01-23 09:45:06'),
+(286, 17, 104, 1, 0, 0, 1878286, NULL, '', '2020-07-11 06:34:53', '2020-07-11 06:34:53');
 
 -- --------------------------------------------------------
 
@@ -1564,7 +1566,8 @@ INSERT INTO `greetingimgs` (`id`, `title`, `path`, `vid_type`, `vid_path`, `occa
 (1595, 'علي العهد باقون', 'Greetings/19-01-2020/853-002.png', NULL, NULL, 73, '2020-01-23', '2020-01-24', '2020-01-19 13:13:26', '2020-01-19 13:13:26', 150, 330, 'Fonts/29ltbukralight.ttf', 24, 0, 255, 255, 255, 128, 128, 128, 0, 0, 0, 15, 1, 1276, 0, 0, 1, 1, 'https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=2a58f4e7d66f4db2a36a7e484942f45f&metadata=01', NULL),
 (1596, '5 اعوام من الحزم والعزم', 'Greetings/19-01-2020/339-003.png', NULL, NULL, 73, '2020-01-23', '2020-01-24', '2020-01-19 13:14:16', '2020-01-19 13:14:16', 150, 330, 'Fonts/29ltbukralight.ttf', 24, 0, 255, 255, 255, 128, 128, 128, 0, 0, 0, 15, 1, 1424, 0, 0, 1, 1, 'https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=f39fe446f1984d58a93ae293de98046c&metadata=01', NULL),
 (1597, 'نجدد الولاء', 'Greetings/19-01-2020/736-004.png', NULL, NULL, 73, '2020-01-24', '2020-01-24', '2020-01-19 13:14:50', '2020-01-19 13:14:50', 150, 330, 'Fonts/29ltbukralight.ttf', 24, 0, 255, 255, 255, 128, 128, 128, 0, 0, 0, 15, 1, 1300, 0, 0, 1, 1, 'https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=8d2f09948b5347baa735dd1342714aaa&metadata=01', NULL),
-(1601, 'test', 'Greetings/23-01-2020/393-mobinil.png', 'Greetings/23-01-2020/1579784565966.jpg', 'Greetings/23-01-2020/594-video2.mp4', 103, '2020-01-15', '2030-01-15', '2020-01-23 11:02:46', '2020-01-23 11:02:46', 150, 330, 'Fonts/29ltbukralight.ttf', 24, 0, 255, 255, 255, 128, 128, 128, 0, 0, 0, 15, 1, 1445, 0, 0, 0, 1, '', NULL);
+(1601, 'test', 'Greetings/23-01-2020/393-mobinil.png', 'Greetings/23-01-2020/1579784565966.jpg', 'Greetings/23-01-2020/594-video2.mp4', 103, '2020-01-15', '2030-01-15', '2020-01-23 11:02:46', '2020-01-23 11:02:46', 150, 330, 'Fonts/29ltbukralight.ttf', 24, 0, 255, 255, 255, 128, 128, 128, 0, 0, 0, 15, 1, 1445, 0, 0, 0, 1, '', NULL),
+(1602, 'zamalek', 'Greetings/11-07-2020/517-904326660520956.png', 'Greetings/11-07-2020/1594456401613.jpg', 'Greetings/11-07-2020/383-746.mp4', 104, '2020-07-11', '2020-08-11', '2020-07-11 06:33:21', '2020-07-11 06:33:21', 150, 330, 'Fonts/29ltbukralight.ttf', 24, 0, 255, 255, 255, 128, 128, 128, 0, 0, 0, 15, 1, 1229, 0, 0, 1, 1, 'https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=5190090f73104bd9af7504cb96bae1dd&metadata=01', NULL);
 
 -- --------------------------------------------------------
 
@@ -16192,7 +16195,8 @@ INSERT INTO `greetingimg_operator` (`greetingimg_id`, `operator_id`, `popular_co
 (1598, 8, 0, 0, 0, '2020-01-23 07:26:18', '2020-01-23 07:26:18', 14652),
 (1599, 8, 0, 0, 0, '2020-01-23 09:34:16', '2020-01-23 09:34:16', 14653),
 (1600, 8, 0, 0, 0, '2020-01-23 09:41:16', '2020-01-23 09:41:16', 14654),
-(1601, 8, 0, 0, 0, '2020-01-23 11:02:46', '2020-01-23 11:02:46', 14655);
+(1601, 8, 0, 0, 0, '2020-01-23 11:02:46', '2020-01-23 11:02:46', 14655),
+(1602, 17, 0, 0, 0, '2020-07-11 06:33:22', '2020-07-11 06:33:22', 14656);
 
 -- --------------------------------------------------------
 
@@ -16281,7 +16285,9 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2020_01_19_162125_add_null_value_to_greetingimgs', 14),
 ('2018_10_16_105750_create_roles_table', 15),
 ('2020_01_26_101630_operator_rbt_sms_nullable', 15),
-('2020_01_26_110517_country_operator_innodb', 15);
+('2020_01_26_110517_country_operator_innodb', 15),
+('2020_07_09_143114_create_news_table', 16),
+('2020_07_09_150741_add_published_date_to_news_table', 16);
 
 -- --------------------------------------------------------
 
@@ -16334,6 +16340,30 @@ CREATE TABLE `msisdn_greetingimgs` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `occasion_id` int(10) UNSIGNED DEFAULT NULL,
+  `published_date` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `description`, `image`, `occasion_id`, `published_date`, `created_at`, `updated_at`) VALUES
+(1, 'club of century', '<p>zamalek reveal his new title club of century</p>', '1594456470300.jpg', 104, '2020-07-11', '2020-07-11 06:34:30', '2020-07-11 06:34:36');
 
 -- --------------------------------------------------------
 
@@ -16442,7 +16472,8 @@ INSERT INTO `occasions` (`id`, `title`, `category_id`, `created_at`, `updated_at
 (100, 'أجتماعي', 18, '2019-12-10 10:55:24', '2019-12-10 11:02:04', 'Greetings/Occasion/1575982524.png', NULL, 1, '2019-12-10', '2027-05-01'),
 (101, 'الدورى الاسبانى', 8, '2019-12-18 11:00:34', '2019-12-18 11:11:44', 'Greetings/Occasion/1576674034.png', 82, 1, '2019-12-10', '2020-05-31'),
 (102, 'رأس السنه 2020', 2, '2019-12-24 08:47:07', '2019-12-31 13:45:07', 'Greetings/Occasion/1577184427.png', 73, 1, '2019-12-25', '2020-01-03'),
-(103, 'اسلامي', 1, '2020-01-16 07:59:02', '2020-01-16 07:59:22', 'Greetings/Occasion/1579168762.png', NULL, 1, '2020-01-15', '2030-01-15');
+(103, 'اسلامي', 1, '2020-01-16 07:59:02', '2020-01-16 07:59:22', 'Greetings/Occasion/1579168762.png', NULL, 1, '2020-01-15', '2030-01-15'),
+(104, 'filgoal', 19, '2020-07-11 06:31:58', '2020-07-11 06:31:58', 'Greetings/Occasion/1594456318.jpg', NULL, 1, '2020-07-11', '2020-08-11');
 
 -- --------------------------------------------------------
 
@@ -17978,6 +18009,12 @@ ALTER TABLE `msisdn_greetingimgs`
   ADD KEY `msisdn_greetingimgs_ibfk_2` (`msisdn_id`);
 
 --
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `notify`
 --
 ALTER TABLE `notify`
@@ -18094,7 +18131,7 @@ ALTER TABLE `advertising_urls`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -18118,7 +18155,7 @@ ALTER TABLE `du_integration`
 -- AUTO_INCREMENT for table `generatedurls`
 --
 ALTER TABLE `generatedurls`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=287;
 
 --
 -- AUTO_INCREMENT for table `greetingaudios`
@@ -18130,13 +18167,13 @@ ALTER TABLE `greetingaudios`
 -- AUTO_INCREMENT for table `greetingimgs`
 --
 ALTER TABLE `greetingimgs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1602;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1603;
 
 --
 -- AUTO_INCREMENT for table `greetingimg_operator`
 --
 ALTER TABLE `greetingimg_operator`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14656;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14657;
 
 --
 -- AUTO_INCREMENT for table `languages`
@@ -18157,6 +18194,12 @@ ALTER TABLE `msisdn_greetingimgs`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `notify`
 --
 ALTER TABLE `notify`
@@ -18166,13 +18209,13 @@ ALTER TABLE `notify`
 -- AUTO_INCREMENT for table `occasions`
 --
 ALTER TABLE `occasions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `operators`
 --
 ALTER TABLE `operators`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `processedimgs`

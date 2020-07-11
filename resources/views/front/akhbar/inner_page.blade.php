@@ -25,7 +25,7 @@
               </div>
 
               <div class="share_fav">
-                <a class="first_list_img_heart" href="#0">
+                <a class="first_list_img_heart" onclick="fav('{{$Rdata->id}}')" href="javascript:void(0)">
                   <i class="heart_heart fas fa-heart"></i>
                 </a>
               </div>
