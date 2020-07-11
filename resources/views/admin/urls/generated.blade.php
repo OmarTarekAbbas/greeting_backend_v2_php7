@@ -30,6 +30,8 @@
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     <div class="text text-info">Mbc : </div><input style="width: 420px" type="text" name="generatedurl" class="" value="{{ url('mbc/'.$UID) }}" />
                     <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                    <div class="text text-info">Akhbar : </div><input style="width: 420px" type="text" name="generatedurl" class="" value="{{ url('akhbar/'.$UID) }}" />
+                    <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                     @else
                     <input style="width: 420px" type="text" name="generatedurl" class="" value="{{ url($UID) }}" />
                     @endif
