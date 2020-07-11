@@ -27,41 +27,25 @@
       <div class="row m-0">
         <div class="col-4 p-0">
           <div class="all_content_img">
-            <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/01.png" alt="Filter">
+            <a href="#0">
+              <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/01.png" alt="Filter">
+            </a>
           </div>
         </div>
 
         <div class="col-4 p-0">
           <div class="all_content_img">
-            <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/02.png" alt="Filter">
+            <a href="#0">
+              <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/02.png" alt="Filter">
+            </a>
           </div>
         </div>
 
         <div class="col-4 p-0">
           <div class="all_content_img">
-            <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/03.png" alt="Filter">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="all_content w-100 mb-3">
-      <div class="row m-0">
-        <div class="col-4 p-0">
-          <div class="all_content_img">
-            <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/04.png" alt="Filter">
-          </div>
-        </div>
-
-        <div class="col-4 p-0">
-          <div class="all_content_img">
-            <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/05.png" alt="Filter">
-          </div>
-        </div>
-
-        <div class="col-4 p-0">
-          <div class="all_content_img">
-            <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/06.png" alt="Filter">
+            <a href="#0">
+              <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/03.png" alt="Filter">
+            </a>
           </div>
         </div>
       </div>
@@ -71,20 +55,51 @@
       <div class="row m-0">
         <div class="col-4 p-0">
           <div class="all_content_img">
-            <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/01.png" alt="Filter">
+            <a href="#0">
+              <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/04.png" alt="Filter">
+            </a>
           </div>
         </div>
 
         <div class="col-4 p-0">
           <div class="all_content_img">
-            <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/02.png" alt="Filter">
+            <a href="#0">
+              <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/05.png" alt="Filter">
+            </a>
           </div>
         </div>
 
         <div class="col-4 p-0">
           <div class="all_content_img">
-            <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/03.png" alt="Filter">
+            <a href="#0">
+              <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/06.png" alt="Filter">
+            </a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="all_content w-100 mb-3">
+      <div class="row m-0">
+        <div class="col-4 p-0">
+          <div class="all_content_img">
+            <a href="#0">
+              <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/01.png" alt="Filter">
+            </a> </div>
+        </div>
+
+        <div class="col-4 p-0">
+          <div class="all_content_img">
+            <a href="#0">
+              <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/02.png" alt="Filter">
+            </a> </div>
+        </div>
+
+        <div class="col-4 p-0">
+          <div class="all_content_img">
+            <a href="#0">
+              <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/03.png" alt="Filter">
+            </a> </div>
         </div>
       </div>
     </section>
