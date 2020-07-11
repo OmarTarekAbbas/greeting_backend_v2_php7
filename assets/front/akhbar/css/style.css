@@ -86,7 +86,7 @@ button:active,
 }
 .akhbar_now .main_list .first_list .first_list_img a.first_list_img_heart, .akhbar_now .main_list .first_list .first_list_img a.first_list_img_share {
   font-size: 1.2rem;
-  color: #00256e !important;
+  color: #7d7d7d !important;
   position: absolute;
   top: 10.25rem;
   left: 12%;
@@ -121,7 +121,7 @@ button:active,
 .akhbar_now .main_filter_2day .filter_2day .filter_2day_img .share_fav .first_list_img_heart,
 .akhbar_now .main_filter_2day .filter_2day .filter_2day_img .share_fav .first_list_img_share {
   font-size: 1.5rem;
-  color: #00256e;
+  color: #7d7d7d;
   position: absolute;
   top: 1.5rem;
   left: 12%;
@@ -150,7 +150,7 @@ button:active,
 .akhbar_now .main_filter_2day .filter_slide .today_img .share_fav .first_list_img_heart,
 .akhbar_now .main_filter_2day .filter_slide .today_img .share_fav .first_list_img_share {
   font-size: 1rem;
-  color: #00256e;
+  color: #7d7d7d;
   position: absolute;
   top: 1rem;
   left: 16%;
@@ -173,7 +173,7 @@ button:active,
 }
 .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_heart, .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_share {
   font-size: 1.1rem;
-  color: #00256e;
+  color: #7d7d7d;
   position: absolute;
   top: 10rem;
   left: 12%;
@@ -338,7 +338,7 @@ button:active,
 
 /* End Modal For Share */
 .active_heart {
-  color: #7d7d7d !important;
+  color: #00256e !important;
 }
 
 .slide-in-fwd-bottom {

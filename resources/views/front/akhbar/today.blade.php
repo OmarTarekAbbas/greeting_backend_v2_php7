@@ -6,7 +6,7 @@
   <section class="filter_2day w-100 mt-3">
     <div class="container m-0 p-0">
       @if(isset($Rdata_today))
-      <div class="col-10 m-auto d-block">
+      <div class="col-10 m-auto d-block p-0">
         <div class="filter_2day_img today_filter mt-3">
           <a href="{{$Rdata_today->snap_link}}">
             <img class="d-block w-100 rounded" src="../../assets/front/akhbar/images/Cutting/Slider_Image.png" alt="fillter">
