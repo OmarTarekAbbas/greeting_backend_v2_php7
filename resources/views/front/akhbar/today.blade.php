@@ -19,7 +19,7 @@
         </div>
 
         <div class="col-12">
-          <div class="filter_2day_title">
+          <div class="filter_2day_title text-right">
           <p class="text-center font-weight-bold">{!!$news->description!!}</p>
           </div>
         </div>
