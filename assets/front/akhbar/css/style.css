@@ -86,9 +86,9 @@ button:active,
 }
 .akhbar_now .main_list .first_list .first_list_img a.first_list_img_heart, .akhbar_now .main_list .first_list .first_list_img a.first_list_img_share {
   font-size: 1.2rem;
-  color: #d2d3d5;
+  color: #00256e !important;
   position: absolute;
-  top: 85%;
+  top: 10.25rem;
   left: 12%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -175,7 +175,7 @@ button:active,
   font-size: 1.1rem;
   color: #00256e;
   position: absolute;
-  top: 85%;
+  top: 10rem;
   left: 12%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
