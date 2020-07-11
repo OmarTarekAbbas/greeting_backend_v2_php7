@@ -104,6 +104,10 @@ You can add and delete Generated URLs
                                 <span class="text text-info">Mbc:   </span>  <input class="" value='{{url("mbc/$URL->UID")}}'/>
                                 <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
                                 <div style="display:none">{{url("mbc/$URL->UID")}}</div>
+                                <br/>
+                                <span class="text text-info">Akhbar:   </span>  <input class="" value='{{url("akhbar/$URL->UID")}}'/>
+                                <button class="btn btn-info btn-xs copy" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fa fa-copy"></i></button>
+                                <div style="display:none">{{url("akhbar/$URL->UID")}}</div>
                             @else
                                 <a  target="_blank" href="{{url($URL->UID)}}">{{url($URL->UID)}}</a>
                             @endif

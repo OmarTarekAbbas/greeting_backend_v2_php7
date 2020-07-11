@@ -14,10 +14,20 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $news = News::all();
-        return view('admin.news.index',compact('news'));
+      $news = News::latest('created_at');
+      if($request->has('search_value')){
+        $news = $news->whereLike(['title','published_date','description'],$request->search_value)
+                ->orWhereHas('occasion',function($q) use ($request){
+                  $q->whereLike(['title'],$request->search_value);
+                });
+      }
+      $news = $news->paginate(10);
+      if ($request->ajax()) {
+          return view('admin.news.result',compact('news'));
+      }
+        return view('admin.news.index', compact('news'));
     }
 
     /**
