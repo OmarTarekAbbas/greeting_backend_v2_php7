@@ -9,14 +9,14 @@
         <div class="col-12">
           <div class="filter_2day_title">
             <!-- <h6 class=" text-right">{!! static_lang('usefilter')?static_lang('usefilter') : 'استخدم الفلتر' !!}</h6> -->
-            <h6 class=" text-right">فلتر أخبار 1</h6>
+            <h6 class=" text-right">{{ $Rdata->title }}</h6>
           </div>
         </div>
 
         <div class="col-10 m-auto d-block">
           <div class="filter_2day_img mt-3">
             <a href="{{$Rdata->snap_link}}" target="_blank">
-              <img class="d-block w-100 rounded" src="./../../../assets/front/akhbar/images/Cutting/filter.png" alt="fillter">
+              <img class="d-block w-100 rounded" src="{{$Rdata->path}}" alt="fillter">
 
               <div class="share_fav">
                 <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
