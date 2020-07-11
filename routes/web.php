@@ -539,8 +539,6 @@ Route::get('rotanav2/inner/{FID}/{UID}', 'FrontEndController@filter_inner');
 //////////////////////////////////////
 
 Route::get('akhbar/{UID}', 'AkhbarController@index');
-// Route::get('akhbar/{CID}/occasion/{UID}', 'AkhbarController@occasions');
-// Route::get('akhbar/{OID}/filter/{UID}', 'AkhbarController@filter');
 Route::get('akhbar/news/{NID}/{UID}', 'AkhbarController@news');
 Route::get('akhbar/inner/{FID}/{UID}', 'AkhbarController@filter_inner');
 Route::get('search_akhbar/{UID}', 'AkhbarController@search');
