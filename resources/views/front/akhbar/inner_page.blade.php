@@ -26,7 +26,7 @@
 
               <div class="share_fav">
                 <a class="first_list_img_heart" onclick="fav('{{$Rdata->id}}')" href="javascript:void(0)">
-                  <i class="heart_heart fas fa-heart"></i>
+                  <i id="{{$Rdata->id}}" class="heart_heart fas fa-heart"></i>
                 </a>
               </div>
             </a>
@@ -65,3 +65,14 @@
 <!-- Start Footer -->
 @include('front.akhbar.footer')
 <!-- End Footer -->
+<script>
+  filterid = '{{$Rdata->id}}';
+  var allfav = window.localStorage.getItem('favorite');
+  var favArr = allfav.split(',');
+  var find = favArr.indexOf(filterid);
+  if (find == -1) { // not fav
+
+  } else { // fav
+    document.getElementById(filterid).classList.add("active_heart");
+  }
+</script>

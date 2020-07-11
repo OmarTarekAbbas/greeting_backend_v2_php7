@@ -53,12 +53,23 @@
 
             <div class="share_fav">
               <a class="first_list_img_heart" href="#0" onclick="fav('{{$snap->id}}')">
-                <i class="heart_heart fas fa-heart"></i>
+                <i id="{{$snap->id}}" class="heart_heart fas fa-heart"></i>
               </a>
             </div>
           </a>
         </div>
       </div>
+      <script>
+        filterid = '{{$snap->id}}';
+        var allfav = window.localStorage.getItem('favorite');
+        var favArr = allfav.split(',');
+        var find = favArr.indexOf(filterid);
+        if (find == -1) { // not fav
+      
+        } else { // fav
+          document.getElementById(filterid).classList.add("active_heart");
+        }
+      </script>      
       @endforeach
 
     </div>
@@ -90,17 +101,6 @@
     </div>
   </div>
 </div>
-{{-- <script>
-  filterid = '{{$Rdata_today->id}}';
-  var allfav = window.localStorage.getItem('favorite');
-  var favArr = allfav.split(',');
-  var find = favArr.indexOf(filterid);
-  if (find == -1) { // not fav
-
-  } else { // fav
-    document.getElementById(filterid).classList.add("active_heart");
-  }
-</script> --}}
 <!-- Start Footer -->
 @include('front.akhbar.footer')
 <!-- End Footer -->
