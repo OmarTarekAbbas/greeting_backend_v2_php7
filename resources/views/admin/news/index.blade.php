@@ -20,51 +20,9 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body table-responsive no-padding">
-                  {{-- <input type="text" id="myInput" class="search_input_occasion" placeholder="Search for names.." title="Type in a name"> --}}
+                  <input type="text" id="myInput" class="search_input_occasion" onkeyup="myFunction()"  placeholder="Search for names.." title="Type in a name">
                   <div id="tag_container">
-                    <table class="table table-hover table-striped dataTable">
-                      <thead>
-                      <tr>
-                          <th>ID</th>
-                          <th>Image</th>
-                          <th>News title</th>
-                          <th>Occasion</th>
-                          <th>Published Date</th>
-                          <th>Actions</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-
-                      @foreach($news as $item)
-                          <tr>
-                              <td>{{ $item->id }}</td>
-                              <td>
-                                <img src="{{$item->image}}" width="100" height="100" alt="$item->title ">
-                              </td>
-                              <td>{{ $item->title }}</td>
-                              <td>{{ $item->occasion->title }}</td>
-                              <td>{{ $item->published_date }}</td>
-                              <td>
-                                  @if(Auth::user()->admin == true)
-                                    {!! Form::open(array('class' => 'form-inline col-lg-1','method' => 'GET', 'action' => array('NewsController@edit', $item))) !!}
-                                    <button class="btn btn-info btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Edit">
-                                        <i class="fa fa-edit  "></i>
-                                    </button>
-                                    {!! Form::close() !!}
-                                    @if(get_settings('enable_parent'))
-                                    {!! Form::open(array('class' => 'form-inline col-lg-1','method' => 'DELETE', 'action' => array('NewsController@destroy', $item))) !!}
-                                    <button class="btn btn-danger btn-sm" type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete" onclick="return confirm('Are you sure you want to delete {{ $item->title }}')">
-                                        <i class="fa fa-trash-o "></i>
-                                    </button>
-                                    {!! Form::close() !!}
-                                    @endif
-                                  @endif
-                              </td>
-                          </tr>
-                      @endforeach
-
-                      </tbody>
-                  </table>
+                    @include('admin.news.result')
                   </div>
                 </div>
             </div>
@@ -80,6 +38,79 @@
 @endsection
 @section('script')
 <script>
-   $('.datatable').DataTable()
+function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value
+    $.ajax({
+        url: "{{url('admin/news')}}",
+        type: "get",
+        data:{
+            'search_value' : filter
+        }
+    }).done(function(data)
+        {
+            $("#tag_container").empty().html(data);
+        })
+
+        .fail(function(jqXHR, ajaxOptions, thrownError)
+        {
+            console.log('No response from server');
+        });
+}
+</script>
+
+<script type="text/javascript">
+
+	$(window).on('hashchange', function() {
+	        if (window.location.hash) {
+	            var page = window.location.hash.replace('#', '');
+	            if (page == Number.NaN || page <= 0) {
+	                return false;
+	            }else{
+	                getData(page,0);
+	            }
+	        }
+        });
+
+	$(document).ready(function()
+	{
+	     $(document).on('click', '.pagination a',function(event)
+	    {
+	        event.preventDefault();
+	        $('li').removeClass('active');
+	        $(this).parent('li').addClass('active');
+	        var myurl = $(this).attr('href');
+            var page=$(this).attr('href').split('page=')[1];
+            let url = new URL($(this).attr('href'));
+            search = url.searchParams.get('search_value') ? url.searchParams.get('search_value') : 0;  // to get search_value from url
+            console.log(search);
+	        getData(page,search);
+	    });
+
+	});
+	function getData(page , value){
+        append = '';
+        if(value){
+            append = '&search_value='+ value
+        }
+	        $.ajax(
+	        {
+	            url: '?page=' + page+append,
+	            type: "get",
+	            datatype: "html"
+	        })
+	        .done(function(data)
+	        {
+	            $("#tag_container").empty().html(data);
+	            //location.hash = page;
+	        })
+	        .fail(function(jqXHR, ajaxOptions, thrownError)
+	        {
+	              console.log('No response from server');
+	        });
+
+	}
+
 </script>
 @stop
