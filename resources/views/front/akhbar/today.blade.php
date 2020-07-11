@@ -5,13 +5,11 @@
 <div class="main_filter_2day">
   <section class="filter_2day w-100 mt-3">
     <div class="container m-0 p-0">
-      @if(isset($news))
-      <div class="col-10 m-auto d-block">
+      <div class="col-10 m-auto d-block p-0">
         <div class="filter_2day_img today_filter mt-3">
           <img class="d-block w-100 rounded" src="{{url($news->image)}}" alt="fillter">
         </div>
       </div>
-      @endif
 
       <div class="row m-0">
         <div class="col-12">
