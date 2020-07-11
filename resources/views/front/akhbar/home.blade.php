@@ -9,7 +9,7 @@
         <div class="owl_one owl-carousel owl-theme" dir="ltr">
           @foreach ($news as $item)
           <div class="item">
-            <a href="{{url('news'.'/'.$item->id.'/'.UID())}}">
+            <a href="{{url('akhbar/news'.'/'.$item->id.'/'.UID())}}">
               <img class="d-block w-100 rounded" src="{{$item->image}}" alt="Slider">
               <div class="img_title">
                 <p class="w-100 text-center mb-0">{{$item->title}}</p>
