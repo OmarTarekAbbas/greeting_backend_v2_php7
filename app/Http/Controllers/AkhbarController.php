@@ -24,6 +24,7 @@ use Carbon\Carbon;
 use App\Notify;
 use App\Msisdn;
 use App\AdvertisingUrl;
+use App\News;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
@@ -38,7 +39,6 @@ class AkhbarController extends Controller
 
         $snap = $url->operator->greetingimgs()->PublishedSnap()->orderBy('RDate', 'desc')->get();
 
-        dd($snap->take(10));
         $occasions_array = [];
 
         foreach ($snap as $key => $value) {
@@ -46,7 +46,9 @@ class AkhbarController extends Controller
         }
         $occasions_array = array_unique($occasions_array);
 
-        return view('front.akhbar.home', compact('snap'));
+        $news = News::whereIn('occasion_id', $occasions_array)->where('published_date', '=', Carbon::now()->format('Y-m-d'))->get();
+        
+        return view('front.akhbar.home', compact('snap' , 'news'));
     }
 
     public function occasions(Request $request, $CID, $UID)
