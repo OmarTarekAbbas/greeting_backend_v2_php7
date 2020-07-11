@@ -47,8 +47,6 @@
         $('#categoryStatus').append(data);
         $('#categoryStatus').attr('action', 'inactive');
 
-        // document.getElementById("categoryStatus").insertAdjacentHTML(front.newdesignv4.presult);
-
       }
     })
   }

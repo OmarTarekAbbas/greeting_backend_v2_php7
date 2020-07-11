@@ -16,7 +16,7 @@
         <div class="col-10 m-auto d-block">
           <div class="filter_2day_img mt-3">
             <a href="{{$Rdata->snap_link}}" target="_blank">
-              <img class="d-block w-100 rounded" src="{{$Rdata->path}}" alt="fillter">
+              <img class="d-block w-100 rounded" src="{{url($Rdata->path)}}" alt="fillter">
 
               <div class="share_fav">
                 <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">

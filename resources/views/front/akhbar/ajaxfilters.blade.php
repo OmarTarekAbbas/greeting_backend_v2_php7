@@ -1,28 +1,9 @@
-@foreach ($filters as $item)
-<div class="col-4 p-0">
-  <div class="first_list_img">
-    <a href="{{url($item->snap_link)}}" target="_blank">
-      <img class="w-100" src="{{url($item->path)}}" alt="{{$item->title}}">
-      {{-- <p>{{$item->title}}</p> --}}
-      <a class="first_list_img_heart" onclick="fav('{{$item->id}}')" href="javascript:void(0)">
-        <i id="{{$item->id}}" class="fas fa-heart heart_heart"></i>
-      </a>
-
-      <a class="first_list_img_share" href="#0" onclick="sharebtn('{{$item->id}}')" data-toggle="modal" data-target="#modalForShare">
-        <i class="fas fa-share-square"></i>
-      </a>
+@foreach ($snap as $item)
+<div class="col-4 py-1 px-0">
+  <div class="all_content_img">
+    <a href="{{url('akhbar/inner'.'/'.$item->id.'/'.UID())}}">
+      <img class="d-block w-100 rounded" src="{{url('/'.$item->path)}}" alt="{{$item->title}}">
     </a>
   </div>
 </div>
-<script>
-  filterid = '{{$item->id}}' ;
-  var allfav = window.localStorage.getItem('favorite');
-  var favArr = allfav.split(',');
-  var find = favArr.indexOf(filterid);
-  if(find == -1){ // not fav
-
-  }else{ // fav 
-      document.getElementById(filterid).classList.add("active_heart");
-  }
-</script>
 @endforeach

@@ -26,9 +26,9 @@
         <p class="w-100 text-right font-weight-bold">فلاتر</p>
       </div>
 
-      <div class="row m-0">
+      <div class="row m-0" id="filterajax" action="inactive" page='1'>
 
-        @foreach ($snap->take(10) as $item)
+        @foreach ($snap as $item)
         <div class="col-4 py-1 px-0">
           <div class="all_content_img">
             <a href="{{url('akhbar/inner'.'/'.$item->id.'/'.UID())}}">
@@ -47,3 +47,31 @@
 <!-- Start Footer -->
 @include('front.akhbar.footer')
 <!-- End Footer -->
+
+<script>
+  $(window).on("scroll", function() {
+    var action = $('#filterajax').attr('action');
+    var page = $('#filterajax').attr('page');
+
+    if ($(window).scrollTop() + $(window).height() > $("#filterajax").height() && action == 'inactive') {
+      $('#filterajax').attr('action', 'active');
+      page++;
+      $('#filterajax').attr('page', page);
+      load_snap_data(page);
+    }
+  });
+
+  function load_snap_data(page) {
+    $('.load').show();
+    $.ajax({
+      type: 'GET',
+      url: '?page=' + page,
+      success: function(data) {
+
+        $('#filterajax').append(data);
+        $('#filterajax').attr('action', 'inactive');
+
+      }
+    })
+  }
+</script>
