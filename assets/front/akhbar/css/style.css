@@ -6,7 +6,7 @@ body {
   direction: rtl;
   width: 100%;
   height: 100%;
-  background-color: #d8d8d8;
+  background-color: #FFF;
 }
 
 ::-webkit-scrollbar {
@@ -34,7 +34,7 @@ button:active,
   color: #FFF;
 }
 
-.new_rotana {
+.akhbar_now {
   padding-bottom: 4rem;
   /* Start Header */
   /* End Header */
@@ -49,16 +49,16 @@ button:active,
   /* Start Fav Page */
   /* End Fav Page */
 }
-.new_rotana .header_head {
+.akhbar_now .header_head {
   padding: 0.75rem 0;
 }
-.new_rotana .header_head .header_logo a img {
+.akhbar_now .header_head .header_logo a img {
   width: 25%;
 }
-.new_rotana .main_home .slider_sec .owl_one .item .img_title {
+.akhbar_now .main_home .slider_sec .owl_one .item .img_title {
   position: relative;
 }
-.new_rotana .main_home .slider_sec .owl_one .item .img_title p {
+.akhbar_now .main_home .slider_sec .owl_one .item .img_title p {
   background: #0000006b;
   padding: 0.5rem 0.25rem;
   font-size: 0.85rem;
@@ -66,25 +66,25 @@ button:active,
   top: -2.25rem;
   left: 0;
 }
-.new_rotana .main_home .slider_sec .owl-carousel .owl-dots.disabled {
+.akhbar_now .main_home .slider_sec .owl-carousel .owl-dots.disabled {
   display: block;
   margin-top: 0;
 }
-.new_rotana .main_home .slider_sec .owl-theme .owl-dots .owl-dot.active span,
-.new_rotana .main_home .slider_sec .owl-theme .owl-dots .owl-dot:hover span {
+.akhbar_now .main_home .slider_sec .owl-theme .owl-dots .owl-dot.active span,
+.akhbar_now .main_home .slider_sec .owl-theme .owl-dots .owl-dot:hover span {
   background: #00256e;
 }
-.new_rotana .main_home .all_content .title p {
+.akhbar_now .main_home .all_content .title p {
   padding: 0 1rem;
   color: #00256e;
 }
-.new_rotana .main_list .first_list .first_list_img a {
+.akhbar_now .main_list .first_list .first_list_img a {
   position: relative;
 }
-.new_rotana .main_list .first_list .first_list_img a img {
+.akhbar_now .main_list .first_list .first_list_img a img {
   height: 9.188rem;
 }
-.new_rotana .main_list .first_list .first_list_img a.first_list_img_heart, .new_rotana .main_list .first_list .first_list_img a.first_list_img_share {
+.akhbar_now .main_list .first_list .first_list_img a.first_list_img_heart, .akhbar_now .main_list .first_list .first_list_img a.first_list_img_share {
   font-size: 1.2rem;
   color: #d2d3d5;
   position: absolute;
@@ -96,13 +96,13 @@ button:active,
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
 }
-.new_rotana .main_list .first_list .first_list_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_list .first_list .first_list_img a.first_list_img_share.first_list_img_heart {
+.akhbar_now .main_list .first_list .first_list_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_list .first_list .first_list_img a.first_list_img_share.first_list_img_heart {
   left: 31%;
 }
-.new_rotana .main_filter_2day .filter_2day .filter_2day_img a img {
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_img a img {
   height: 20.625rem;
 }
-.new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart, .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share {
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart, .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share {
   font-size: 1rem;
   color: #a2a2a2;
   position: absolute;
@@ -114,25 +114,25 @@ button:active,
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
 }
-.new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share.first_list_img_heart {
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share.first_list_img_heart {
   left: 24%;
 }
-.new_rotana .main_filter_2day .filter_slide .item .owl_filter_img img {
+.akhbar_now .main_filter_2day .filter_slide .item .owl_filter_img img {
   height: 9.125rem;
 }
-.new_rotana .main_filter_2day .filter_slide .owl_two .item .owl_filter_img img {
+.akhbar_now .main_filter_2day .filter_slide .owl_two .item .owl_filter_img img {
   height: 12.5rem;
 }
-.new_rotana .main_filter_2day .filter_slide .owl_filter .item .owl_filter_img img {
+.akhbar_now .main_filter_2day .filter_slide .owl_filter .item .owl_filter_img img {
   height: 9rem;
 }
-.new_rotana .main_fav .fav_sec .img_like img {
+.akhbar_now .main_fav .fav_sec .img_like img {
   width: 10%;
 }
-.new_rotana .main_fav .fav_list .fav_list_img a img {
+.akhbar_now .main_fav .fav_list .fav_list_img a img {
   height: 9.156rem;
 }
-.new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share {
+.akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_heart, .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_share {
   font-size: 1.1rem;
   color: #d2d3d5;
   position: absolute;
@@ -144,14 +144,14 @@ button:active,
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
 }
-.new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share.first_list_img_heart {
+.akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_share.first_list_img_heart {
   left: 31%;
 }
-.new_rotana .no_filter .sub_img {
+.akhbar_now .no_filter .sub_img {
   margin-top: 35%;
   position: relative;
 }
-.new_rotana .no_filter .sub_img .font_not_filter {
+.akhbar_now .no_filter .sub_img .font_not_filter {
   position: absolute;
   top: 28%;
   left: 3%;
@@ -517,62 +517,62 @@ button:active,
 } */
 /* Strat Media Quary */
 @media (min-width: 768px) and (max-width: 1023px) {
-  .new_rotana {
+  .akhbar_now {
     padding-bottom: 7rem;
     display: block !important;
   }
-  .new_rotana .main_home {
+  .akhbar_now .main_home {
     padding-bottom: 5rem;
   }
-  .new_rotana .main_fav .fav_list .fav_list_img a img {
+  .akhbar_now .main_fav .fav_list .fav_list_img a img {
     height: 19.594rem;
   }
-  .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share {
+  .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_heart, .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_share {
     font-size: 1.65rem;
     top: 90%;
     left: 9%;
   }
-  .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share.first_list_img_heart {
+  .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_share.first_list_img_heart {
     left: 23%;
     color: #cd4c4c;
   }
-  .new_rotana .main_filter_2day .filter_2day .filter_2day_title h6 {
+  .akhbar_now .main_filter_2day .filter_2day .filter_2day_title h6 {
     font-size: 1.5rem;
   }
-  .new_rotana .main_filter_2day .filter_2day .filter_2day_img a img {
+  .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a img {
     height: 40.625rem;
   }
-  .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart, .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share {
+  .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart, .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share {
     font-size: 1.5rem;
     top: 96%;
     left: 8%;
   }
-  .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share.first_list_img_heart {
+  .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share.first_list_img_heart {
     left: 16%;
   }
-  .new_rotana .main_filter_2day .filter_slide .second_slide_title a h6,
-.new_rotana .main_filter_2day .filter_slide .second_slide_title a i {
+  .akhbar_now .main_filter_2day .filter_slide .second_slide_title a h6,
+.akhbar_now .main_filter_2day .filter_slide .second_slide_title a i {
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
-  .new_rotana .main_filter_2day .filter_slide .owl_three .item .owl_filter_img img {
+  .akhbar_now .main_filter_2day .filter_slide .owl_three .item .owl_filter_img img {
     height: 19.594rem;
   }
-  .new_rotana .main_list .first_list .no_filter .sub_img img {
+  .akhbar_now .main_list .first_list .no_filter .sub_img img {
     height: 8rem;
   }
-  .new_rotana .main_list .first_list .no_filter .sub_img h6 {
+  .akhbar_now .main_list .first_list .no_filter .sub_img h6 {
     font-size: 1.95rem;
   }
-  .new_rotana .main_list .first_list .first_list_img a img {
+  .akhbar_now .main_list .first_list .first_list_img a img {
     height: 19.531rem;
   }
-  .new_rotana .main_list .first_list .first_list_img a.first_list_img_heart, .new_rotana .main_list .first_list .first_list_img a.first_list_img_share {
+  .akhbar_now .main_list .first_list .first_list_img a.first_list_img_heart, .akhbar_now .main_list .first_list .first_list_img a.first_list_img_share {
     font-size: 1.65rem;
     top: 90%;
     left: 10%;
   }
-  .new_rotana .main_list .first_list .first_list_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_list .first_list .first_list_img a.first_list_img_share.first_list_img_heart {
+  .akhbar_now .main_list .first_list .first_list_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_list .first_list .first_list_img a.first_list_img_share.first_list_img_heart {
     left: 24%;
   }
 
@@ -634,69 +634,69 @@ button:active,
   }
 }
 @media (min-width: 1024px) and (max-width: 1025px) {
-  .new_rotana {
+  .akhbar_now {
     padding-bottom: 8rem;
     display: block !important;
   }
-  .new_rotana .main_home {
+  .akhbar_now .main_home {
     padding-bottom: 5rem;
   }
-  .new_rotana .main_fav .fav_list .fav_list_img {
+  .akhbar_now .main_fav .fav_list .fav_list_img {
     margin-bottom: 1.25rem !important;
   }
-  .new_rotana .main_fav .fav_list .fav_list_img a img {
+  .akhbar_now .main_fav .fav_list .fav_list_img a img {
     height: 26.156rem;
   }
-  .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share {
+  .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_heart, .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_share {
     font-size: 2.2rem;
     top: 89%;
     left: 10%;
   }
-  .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_fav .fav_list .fav_list_img a.first_list_img_share.first_list_img_heart {
+  .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_fav .fav_list .fav_list_img a.first_list_img_share.first_list_img_heart {
     left: 23%;
     color: #cd4c4c;
   }
-  .new_rotana .main_filter_2day .filter_2day .filter_2day_title h6 {
+  .akhbar_now .main_filter_2day .filter_2day .filter_2day_title h6 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
   }
-  .new_rotana .main_filter_2day .filter_2day .filter_2day_img a img {
+  .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a img {
     height: 58.797rem;
   }
-  .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart, .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share {
+  .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart, .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share {
     font-size: 2.2rem;
     top: 96%;
     left: 8%;
   }
-  .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share.first_list_img_heart {
+  .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share.first_list_img_heart {
     left: 16%;
   }
-  .new_rotana .main_filter_2day .filter_slide .second_slide_title a h6,
-.new_rotana .main_filter_2day .filter_slide .second_slide_title a i {
+  .akhbar_now .main_filter_2day .filter_slide .second_slide_title a h6,
+.akhbar_now .main_filter_2day .filter_slide .second_slide_title a i {
     font-size: 2rem;
     margin-bottom: 1.5rem;
   }
-  .new_rotana .main_filter_2day .filter_slide .owl_three .item .owl_filter_img img {
+  .akhbar_now .main_filter_2day .filter_slide .owl_three .item .owl_filter_img img {
     height: 26.063rem;
   }
-  .new_rotana .main_list .first_list .no_filter .sub_img img {
+  .akhbar_now .main_list .first_list .no_filter .sub_img img {
     height: 11rem;
   }
-  .new_rotana .main_list .first_list .no_filter .sub_img h6 {
+  .akhbar_now .main_list .first_list .no_filter .sub_img h6 {
     font-size: 2.75rem;
   }
-  .new_rotana .main_list .first_list .first_list_img {
+  .akhbar_now .main_list .first_list .first_list_img {
     margin-bottom: 1.25rem !important;
   }
-  .new_rotana .main_list .first_list .first_list_img a img {
+  .akhbar_now .main_list .first_list .first_list_img a img {
     height: 26.063rem;
   }
-  .new_rotana .main_list .first_list .first_list_img a.first_list_img_heart, .new_rotana .main_list .first_list .first_list_img a.first_list_img_share {
+  .akhbar_now .main_list .first_list .first_list_img a.first_list_img_heart, .akhbar_now .main_list .first_list .first_list_img a.first_list_img_share {
     font-size: 2.2rem;
     top: 89%;
     left: 10%;
   }
-  .new_rotana .main_list .first_list .first_list_img a.first_list_img_heart.first_list_img_heart, .new_rotana .main_list .first_list .first_list_img a.first_list_img_share.first_list_img_heart {
+  .akhbar_now .main_list .first_list .first_list_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_list .first_list .first_list_img a.first_list_img_share.first_list_img_heart {
     left: 24%;
   }
 

@@ -85,7 +85,7 @@
 </head>
 
 <body>
-  <main class="new_rotana">
+  <main class="akhbar_now">
     <header class="header_head w-100">
       <div class="container">
         <div class="row">
