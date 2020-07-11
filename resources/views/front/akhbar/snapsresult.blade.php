@@ -25,5 +25,9 @@
   } else { // fav
     document.getElementById(filterid).classList.add("active_heart");
   }
+  $('.heart_heart').click(function () {
+    $(this).toggleClass('active_heart');
+  });
+
 </script>
 @endforeach
