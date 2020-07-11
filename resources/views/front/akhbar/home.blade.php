@@ -15,6 +15,15 @@
               </div>
             </a>
           </div>
+
+          <div class="item">
+            <a href="#0">
+              <img class="d-block w-100 rounded" src="../assets/front/akhbar/images/Cutting/Slider_Image.png" alt="Slider">
+              <div class="img_title">
+                <p class="w-100 text-center mb-0">02</p>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </section>
