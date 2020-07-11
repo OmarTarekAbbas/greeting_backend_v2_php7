@@ -47,64 +47,50 @@ class AkhbarController extends Controller
         $occasions_array = array_unique($occasions_array);
 
         $news = News::whereIn('occasion_id', $occasions_array)->where('published_date', '=', Carbon::now()->format('Y-m-d'))->get();
-        
+
         return view('front.akhbar.home', compact('snap' , 'news'));
     }
 
-    public function occasions(Request $request, $CID, $UID)
-    {
+    // public function occasions(Request $request, $CID, $UID)
+    // {
 
-        $occasions = Category::where('id', $CID)->first();
-        if (!empty($occasions)) {
-            $Occasions = $occasions->occasions()->paginate(get_settings('pagination_limit'));
+    //     $occasions = Category::where('id', $CID)->first();
+    //     if (!empty($occasions)) {
+    //         $Occasions = $occasions->occasions()->paginate(get_settings('pagination_limit'));
 
-            if ($request->ajax()) {
-                return view('front.akhbar.ajaxoccasions', compact('Occasions'));
-            }
+    //         if ($request->ajax()) {
+    //             return view('front.akhbar.ajaxoccasions', compact('Occasions'));
+    //         }
 
-            return view('front.akhbar.occasions', compact('Occasions'));
-        } else {
-            return view('errors.404');
-        }
-    }
+    //         return view('front.akhbar.occasions', compact('Occasions'));
+    //     } else {
+    //         return view('errors.404');
+    //     }
+    // }
 
-    public function filter(Request $request, $OID, $UID)
-    {
+    // public function filter(Request $request, $OID, $UID)
+    // {
 
-        $filters = Greetingimg::where('occasion_id', $OID)->paginate(get_settings('pagination_limit'));
+    //     $filters = Greetingimg::where('occasion_id', $OID)->paginate(get_settings('pagination_limit'));
 
-        if ($request->ajax()) {
-            return view('front.akhbar.ajaxfilters', compact('filters'));
-        }
+    //     if ($request->ajax()) {
+    //         return view('front.akhbar.ajaxfilters', compact('filters'));
+    //     }
 
-        return view('front.akhbar.filters', compact('filters'));
+    //     return view('front.akhbar.filters', compact('filters'));
 
-    }
+    // }
 
-    public function today($UID)
+    public function news($NID,$UID)
     {
         $current_url = \Request::fullUrl();
         $favourites = [];
         $fav_id = [];
-        if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
-            $url = Generatedurl::where('UID', $UID)->first();
-            $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '=', Carbon::now()->format('Y-m-d'))->orderBy('RDate', 'desc')->first();
-            if (isset($Rdata_today)) {
-                $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
-                $cat = Category::where('id', $occasi->category_id)->first();
-                $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
-                return view('front.akhbar.today', compact('Rdata_today', 'occasi', 'cat', 'occasis'));
-            } else {
-                $Rdata_today = $url->operator->greetingimgs()->PublishedSnap()->where('RDate', '<', Carbon::now()->format('Y-m-d'))->orderBy('greetingimg_operator.popular_count', 'desc')->orderBy('RDate', 'desc')->orderBy('greetingimgs.id', 'desc')->GroupBy('greetingimgs.occasion_id')->first();
-                $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
-                // dd($occasi);
-                $cat = Category::where('id', $occasi->category_id)->first();
-                $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
-                return view('front.akhbar.today', compact('Rdata_today', 'occasi', 'cat', 'occasis'));
-            }
-        } else {
-            return redirect(url(redirect_operator()));
-        }
+        $url = Generatedurl::where('UID', $UID)->first();
+        $occasi = Occasion::where('id', $Rdata_today->occasion_id)->first();
+        $cat = Category::where('id', $occasi->category_id)->first();
+        $occasis = Occasion::where('category_id', $cat->id)->paginate(get_settings('pagination_limit'));
+        return view('front.akhbar.today', compact('Rdata_today'));
     }
 
     public function search(Request $request, $UID)
@@ -173,7 +159,6 @@ class AkhbarController extends Controller
         return view('front.akhbar.fav');
     }
 
-    
     public function favorites_load(Request $request, $UID){
         $ids = $request->ids;
         $url = Generatedurl::where('UID', $UID)->first();
