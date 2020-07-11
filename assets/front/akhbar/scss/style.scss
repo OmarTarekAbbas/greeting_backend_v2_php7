@@ -139,18 +139,27 @@ button,
   /* Start Filter Page */
   .main_filter_2day {
     .filter_2day {
+      .filter_2day_title {
+        h6 {
+          color: $blue_color;
+        }
+      }
+
       .filter_2day_img {
         a {
           img {
-            height: 20.625rem;
+            height: 25rem;
           }
+        }
 
-          &.first_list_img_heart,
-          &.first_list_img_share {
-            font-size: 1rem;
-            color: #a2a2a2;
+        .share_fav {
+          position: relative;
+          .first_list_img_heart,
+          .first_list_img_share {
+            font-size: 1.5rem;
+            color: $blue_color;
             position: absolute;
-            top: 95%;
+            top: 1.5rem;
             left: 12%;
             transform: translate(-50%, -50%);
             -webkit-transform: translate(-50%, -50%);
@@ -159,7 +168,7 @@ button,
             -o-transform: translate(-50%, -50%);
 
             &.first_list_img_heart {
-              left: 24%;
+              left: 27%;
             }
           }
         }

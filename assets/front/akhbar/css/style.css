@@ -99,14 +99,21 @@ button:active,
 .akhbar_now .main_list .first_list .first_list_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_list .first_list .first_list_img a.first_list_img_share.first_list_img_heart {
   left: 31%;
 }
-.akhbar_now .main_filter_2day .filter_2day .filter_2day_img a img {
-  height: 20.625rem;
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_title h6 {
+  color: #00256e;
 }
-.akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart, .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share {
-  font-size: 1rem;
-  color: #a2a2a2;
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_img a img {
+  height: 25rem;
+}
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_img .share_fav {
+  position: relative;
+}
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_img .share_fav .first_list_img_heart,
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_img .share_fav .first_list_img_share {
+  font-size: 1.5rem;
+  color: #00256e;
   position: absolute;
-  top: 95%;
+  top: 1.5rem;
   left: 12%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -114,8 +121,9 @@ button:active,
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
 }
-.akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_heart.first_list_img_heart, .akhbar_now .main_filter_2day .filter_2day .filter_2day_img a.first_list_img_share.first_list_img_heart {
-  left: 24%;
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_img .share_fav .first_list_img_heart.first_list_img_heart,
+.akhbar_now .main_filter_2day .filter_2day .filter_2day_img .share_fav .first_list_img_share.first_list_img_heart {
+  left: 27%;
 }
 .akhbar_now .main_filter_2day .filter_slide .item .owl_filter_img img {
   height: 9.125rem;
