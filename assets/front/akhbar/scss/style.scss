@@ -140,7 +140,7 @@ button,
   .main_filter_2day {
     .filter_2day {
       .filter_2day_title {
-
+        margin-top: 1rem;
         h6,
         p {
           color: $blue_color;
@@ -492,7 +492,7 @@ button,
 /* End Modal For Share */
 
 .active_heart {
-  color: $red_color !important;
+  color: $grey_color !important;
 }
 
 .slide-in-fwd-bottom {

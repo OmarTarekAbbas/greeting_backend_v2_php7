@@ -10,16 +10,7 @@
         <div class="filter_2day_img today_filter mt-3">
           <a href="{{$Rdata_today->snap_link}}">
             <img class="d-block w-100 rounded" src="../../assets/front/akhbar/images/Cutting/Slider_Image.png" alt="fillter">
-
-            <a id="{{$Rdata_today->id}}" class="first_list_img_heart" onclick="fav('{{$Rdata_today->id}}');$(this).toggleClass('active_heart');" href="javascript:void(0)">
-              <i class="fas fa-heart fa-lg ajax_call"></i>
-            </a>
-
-            <a class="first_list_img_share" href="#0" data-toggle="modal" data-target="#modalForShare">
-              <i class="fas fa-share-square fa-lg"></i>
-            </a>
           </a>
-
         </div>
       </div>
       @endif
@@ -30,9 +21,7 @@
             <h6 class=" text-right scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s" data-wow-offset="100">@lang('messages.today_filter') </h6>
           </div>
         </div>
-      </div>
 
-      <div class="row m-0">
         <div class="col-12">
           <div class="filter_2day_title">
             <p class="text-center font-weight-bold">تحاول خدمات الإنقاذ والجنود في اليابان الوصول إلى آلاف المنازل المنكوبة بالفيضانات المدمرة والانزلاقات الأرضية التي أودت بحياة 60 شخصاً على الأقل وتسببت بأضرار كبيرة منذ السبت الماضي</p>
@@ -69,7 +58,7 @@
 
             <div class="share_fav">
               <a class="first_list_img_heart" href="#0">
-                <i class="fas fa-heart"></i>
+                <i class="heart_heart fas fa-heart"></i>
               </a>
             </div>
           </a>
@@ -89,7 +78,7 @@
 
             <div class="share_fav">
               <a class="first_list_img_heart" href="#0">
-                <i class="fas fa-heart"></i>
+                <i class="heart_heart fas fa-heart"></i>
               </a>
             </div>
           </a>
@@ -109,7 +98,7 @@
 
             <div class="share_fav">
               <a class="first_list_img_heart" href="#0">
-                <i class="fas fa-heart"></i>
+                <i class="heart_heart fas fa-heart"></i>
               </a>
             </div>
           </a>
