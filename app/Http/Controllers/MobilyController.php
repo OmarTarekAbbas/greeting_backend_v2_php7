@@ -129,7 +129,7 @@ class MobilyController extends Controller
         //condition if text success
         if($vars['text'] == 'success'){
             $MobilySubscriber = MobilySubscriber::where('msisdn', $vars['msisdn'])->first();
-    
+
             if ($MobilySubscriber) {
                 $MobilySubscriber->notificationId = $id->id;
                 $MobilySubscriber->status = 1;
@@ -138,7 +138,7 @@ class MobilyController extends Controller
                 $MobilySubscriber['msisdn'] = $vars['msisdn'];
                 $MobilySubscriber['notificationId'] = $id->id;
                 $MobilySubscriber['status'] = 1;
-        
+
                 MobilySubscriber::create($MobilySubscriber);
             }
         }else{
@@ -212,7 +212,7 @@ class MobilyController extends Controller
         }else{
             $MobilyUnsubscriber['msisdn'] = $vars['msisdn'];
             $MobilyUnsubscriber['notificationId'] = $id->id;
-            
+
             MobilyUnsubscriber::create($MobilyUnsubscriber);
         }
 
@@ -250,7 +250,7 @@ class MobilyController extends Controller
         // here json
         $JSON = $vars;
 
-        $actionName = "Notification MO";
+        $actionName = "Notification Renew";
         $URL = $request->fullUrl();
         $this->log($actionName, $URL, $vars);
 
@@ -268,7 +268,7 @@ class MobilyController extends Controller
 
         if($vars['text'] == 'success'){
             $MobilySubscriber = MobilySubscriber::where('msisdn', $vars['msisdn'])->first();
-    
+
             if ($MobilySubscriber) {
                 $MobilySubscriber->notificationId = $id->id;
                 $MobilySubscriber->status = 1;
@@ -277,7 +277,7 @@ class MobilyController extends Controller
                 $MobilySubscriber['msisdn'] = $vars['msisdn'];
                 $MobilySubscriber['notificationId'] = $id->id;
                 $MobilySubscriber['status'] = 1;
-        
+
                 MobilySubscriber::create($MobilySubscriber);
             }
         }
