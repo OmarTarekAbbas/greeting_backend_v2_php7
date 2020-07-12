@@ -40,7 +40,7 @@
       @foreach ($snaps as $snap)
       <div class="col-4 p-0">
         <div class="today_img mt-3">
-          <a href="#0" target="_blank">
+          <a href="{{url('akhbar/inner'.'/'.$snap->id.'/'.UID())}}" target="_blank">
             <img class="d-block w-100 rounded" src="{{url($snap->path)}}" alt="filter">
 
             <div class="share_fav">
