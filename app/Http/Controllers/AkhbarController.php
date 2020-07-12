@@ -37,7 +37,7 @@ class AkhbarController extends Controller
         }
         $occasions_array = array_unique($occasions_array);
 
-        $news = News::whereIn('occasion_id', $occasions_array)->where('published_date', '<=', Carbon::now()->format('Y-m-d'))->latest('published_date')->get();
+        $news = News::whereIn('occasion_id', $occasions_array)->where('published_date', '<=', Carbon::now()->format('Y-m-d'))->latest('published_date')->limit(6)->get();
 
         if(request()->ajax()){
             return view('front.akhbar.ajaxfilters', compact('snap'));
