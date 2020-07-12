@@ -3,7 +3,6 @@ html {
 }
 
 body {
-  direction: rtl;
   width: 100%;
   height: 100%;
   background-color: #FFF;
@@ -124,7 +123,7 @@ button:active,
   color: #7d7d7d;
   position: absolute;
   top: 1.5rem;
-  left: 12%;
+  left: 38%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -133,7 +132,7 @@ button:active,
 }
 .akhbar_now .main_filter_2day .filter_2day .filter_2day_img .share_fav .first_list_img_heart.first_list_img_heart,
 .akhbar_now .main_filter_2day .filter_2day .filter_2day_img .share_fav .first_list_img_share.first_list_img_heart {
-  left: 27%;
+  left: 55%;
 }
 .akhbar_now .main_filter_2day .filter_slide .second_slide_title a {
   color: #00256e;
@@ -315,8 +314,7 @@ button:active,
   width: 3.75rem;
   height: 3rem;
   background-color: #FFF;
-  border-top-right-radius: 22px;
-  border-bottom-right-radius: 22px;
+  border-radius: 22px;
   margin-top: -3rem;
   margin-right: -1px;
   /* position: absolute;
