@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Jul 12, 2020 at 11:05 AM
+-- Generation Time: Jul 12, 2020 at 10:46 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -435,6 +435,10 @@ CREATE TABLE `msisdns` (
   `plan` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `msisdns`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -471,7 +475,7 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `title`, `description`, `image`, `occasion_id`, `published_date`, `created_at`, `updated_at`) VALUES
-(3, 'بدء امتحاني الكيمياء والجغرافيا لطلاب الثانوية العامة', '<p arabic=\"\" color:=\"\" droid=\"\" font-size:=\"\" font-weight:=\"\" line-height:=\"\" medium=\"\" none=\"\" outline:=\"\" style=\"box-sizing: border-box; margin: 0px 0px 1.25em; padding: 0px; direction: rtl; font-family: \" text-align:=\"\" text-rendering:=\"\">بدأ منذ قليل 667 ألف طالب وطالبة بالثانوية العامة أداء امتحان الكيمياء والجغرافيا، وذلك في 2216 لجنة سير رئيسية و56 ألف و591 لجنة فرعية على مستوى الجمهورية.<br style=\"box-sizing: border-box; outline: none medium !important;\" />\r\nوبدأ طلاب الثانوية العامة التوافد على لجان الامتحانات لأداء المسح الحراري قبل أداء الامتحان، وذلك عن طريق الكواشف الحرارية في الثامنة صباحا ،وكذلك المرور من بوابات التعقيم واستلام غطاء الأحذية والمعقمات الشخصية قبل بدء الامتحان.</p>', '1594543532157.jpg', 1, '2020-07-11', '2020-07-12 06:42:19', '2020-07-12 06:58:18'),
+(3, 'بدء امتحاني الكيمياء والجغرافيا لطلاب الثانوية العامة', '<p arabic=\"\" color:=\"\" droid=\"\" font-size:=\"\" font-weight:=\"\" line-height:=\"\" medium=\"\" none=\"\" outline:=\"\" style=\"box-sizing: border-box; margin: 0px 0px 1.25em; padding: 0px; direction: rtl; font-family: \" text-align:=\"\" text-rendering:=\"\">بدأ منذ قليل 667 ألف طالب وطالبة بالثانوية العامة أداء امتحان الكيمياء والجغرافيا، وذلك في 2216 لجنة سير رئيسية و56 ألف و591 لجنة فرعية على مستوى الجمهورية.<br style=\"box-sizing: border-box; outline: none medium !important;\" />\r\nوبدأ طلاب الثانوية العامة التوافد على لجان الامتحانات لأداء المسح الحراري قبل أداء الامتحان، وذلك عن طريق الكواشف الحرارية في الثامنة صباحا ،وكذلك المرور من بوابات التعقيم واستلام غطاء الأحذية والمعقمات الشخصية قبل بدء الامتحان.</p>', '1594543532157.jpg', 1, '2020-07-12', '2020-07-12 06:42:19', '2020-07-12 06:45:32'),
 (4, 'اتخاذ الإجراءات القانونية ضد 350 طالبًا بتهمة الغش', '<p arabic=\"\" color:=\"\" droid=\"\" font-size:=\"\" font-weight:=\"\" line-height:=\"\" medium=\"\" none=\"\" outline:=\"\" style=\"box-sizing: border-box; margin: 0px 0px 1.25em; padding: 0px; direction: rtl; font-family: \" text-rendering:=\"\">عقدت وزارة التربية والتعليم والتعليم الفني، اجتماعًا مع مديري المديريات ورؤساء لجان السير وأعضاء غرف العمليات بالإدارات والمديريات على مستوى الجمهورية عبر شبكة الفيديو كونفرانس، للتصدي لبعض التجاوزات التي حدثت في بعض لجان شهادة الثانوية العامة للعام الدراسي 2019-2020 خلال الامتحانات السابقة.</p>', '1594543541915.jpg', 1, '2020-07-12', '2020-07-12 06:43:43', '2020-07-12 06:46:02');
 
 -- --------------------------------------------------------
