@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRenewalNotificationsTable extends Migration
+class CreateMobilySubscribersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateRenewalNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('renewal_notifications', function (Blueprint $table) {
+        Schema::create('mobily_subscribers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('msisdn', 20);
-            $table->text('text');
-            $table->text('request');
-            $table->text('response');
+            $table->string('msisdn', 90);
+            $table->bigInteger('notificationId')->unsigned();
+            $table->boolean('status');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateRenewalNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('renewal_notifications');
+        Schema::dropIfExists('mobily_subscribers');
     }
 }

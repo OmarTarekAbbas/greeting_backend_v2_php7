@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOptoutNotificationsTable extends Migration
+class CreateMobilyUnsubscribersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateOptoutNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('optout_notifications', function (Blueprint $table) {
+        Schema::create('mobily_unsubscribers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('msisdn', 20);
-            $table->text('text');
-            $table->text('request');
-            $table->text('response');
+            $table->string('msisdn', 90);
+            $table->bigInteger('notificationId')->unsigned();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateOptoutNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('optout_notifications');
+        Schema::dropIfExists('mobily_unsubscribers');
     }
 }
