@@ -37,7 +37,7 @@ class AkhbarController extends Controller
         }
         $occasions_array = array_unique($occasions_array);
 
-        $news = News::whereIn('occasion_id', $occasions_array)->where('published_date', '=', Carbon::now()->format('Y-m-d'))->get();
+        $news = News::whereIn('occasion_id', $occasions_array)->where('published_date', '<=', Carbon::now()->format('Y-m-d'))->latest('published_date')->get();
 
         if(request()->ajax()){
             return view('front.akhbar.ajaxfilters', compact('snap'));
@@ -105,6 +105,7 @@ class AkhbarController extends Controller
         }else{
             if(get_settings('only_favorites') == 0){
                 $snap = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(12);
+                session()->flash('only_favorites', 'only_favorites');
                 return view('front.akhbar.ajaxfav', compact('snap'));
             }else{
                 return view('front.akhbar.nofilter');
