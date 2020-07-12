@@ -3594,6 +3594,7 @@ public function favorites_rotana_load(Request $request, $UID){
     }else{
         if(get_settings('only_favorites') == 0){
             $snap = $url->operator->greetingimgs()->PublishedSnap()->Popular()->orderBy('RDate', 'desc')->paginate(12);
+            session()->flash('only_favorites', 'only_favorites');
             return view('front.rotanav2.ajaxfav', compact('snap'));
         }else{
             return view('front.rotanav2.nofilter');
