@@ -510,7 +510,7 @@ class TimweController extends Controller
 
         if($ReqResponse['responseData']['subscriptionResult'] == 'OPTIN_ALREADY_ACTIVE'){
             $subscribe = timweSubscriber::where('msisdn', session('userIdentifier'))->where('serviceId', productId)->first();
-            
+
             if(empty($unsubscribe)){
                 timweSubscriber::create([
                     'msisdn' => session('userIdentifier'),
@@ -600,11 +600,11 @@ class TimweController extends Controller
 
         if($ReqResponse['code'] == 'SUCCESS'){
             if($ReqResponse['responseData']['subscriptionResult'] == 'OPTIN_CONF_WRONG_PIN'){
-                return redirect('ooredoo_qatar_pin')->with('failed', 'رقم التحقق خاطئ يرجي المحاولة مرة اخر'); // worng pincode
+                return redirect('ooredoo_qatar_pin')->with('failed', 'رقم التحقق خاطئ يرجي المحاولة مرة اخري'); // worng pincode
             }
 
            $subscribe = timweSubscriber::where('msisdn', session('userIdentifier'))->where('serviceId', productId)->first();
-            
+
            if(empty($subscribe)){
                timweSubscriber::create([
                    'msisdn' => session('userIdentifier'),
@@ -612,7 +612,7 @@ class TimweController extends Controller
                    'requestId' => $timewe->id,
                ]);
            }
-           
+
             session(['MSISDN' => '974'.$request->number, 'Status' => 'active','currentOp'=>ooredoo]);
             $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
 
@@ -725,7 +725,7 @@ class TimweController extends Controller
 
         return $sOutput;
     }
-    
+
     public function logout(){
         session()->forget('userIdentifier');
         session()->forget('status');

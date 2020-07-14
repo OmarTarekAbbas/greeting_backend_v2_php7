@@ -70,6 +70,19 @@
 
       <div class="shbka mt-2">
         <div class="container">
+          <div class="zain_viva">
+            @if(Session::has('success'))
+            <div class="alert alert-success alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              {{ Session::get('success')}}
+            </div>
+            @elseif(Session::has('failed'))
+            <div class="alert alert-danger alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              {{ Session::get('failed')}}
+            </div>
+            @endif
+          </div>
           <h4 class="text-white" style="font-size:25px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
         </div>
       </div>
