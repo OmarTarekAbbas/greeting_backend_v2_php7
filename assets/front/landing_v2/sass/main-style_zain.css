@@ -1,14 +1,12 @@
 @charset "UTF-8";
 /* general */
-@font-face {
-  font-family: myFont;
-  src: url("../font/HSN_sadiyah.ttf");
-}
-
 body {
-  font-family: myFont;
   height: 100%;
   width: 100%;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .main_container {
@@ -160,9 +158,9 @@ body {
 
 .landing_page .cancel {
   text-align: center;
-  color: #fff;
+  color: #53565a;
   padding: 20px 8px 0 8px;
-  font-size: 18px;
+  font-size: small;
 }
 
 /*----------------------------------------- confirm page -----------------------------------------*/
