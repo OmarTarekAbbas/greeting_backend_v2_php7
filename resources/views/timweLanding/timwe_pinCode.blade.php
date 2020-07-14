@@ -87,7 +87,7 @@
             </div>
             @endif
           </div>
-          <h4 class="text-white" style="font-size:25px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
+          <h4 class="text-white" style="font-size:25px;font-weight:bold">قيمة الاشتراك 10 ريال / الاسبوع</h4>
         </div>
       </div>
 
@@ -115,7 +115,7 @@
 
     <div class="container">
       <ul class="terms text-right text-white  pr-3" dir="rtl">
-        <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة 15 ريال فى الاسبوع</li>
+        <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة 10 ريال فى الاسبوع</li>
         <li>يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال UNSUB FL الى 92842</li>
         <li>يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
       </ul>
