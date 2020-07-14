@@ -240,8 +240,9 @@ function getCode() {
 
 
 
+
  function timwe_op_id(){
-  $country = Country::where('name', 'Qatar')->first();
+  $country = Country::where('name', 'qatar')->first();
   if(!empty($country)){
       $op = Operator::where('country_id', $country->id)->where('name', 'ooredoo')->first();
       if(!empty($op)){
