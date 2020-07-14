@@ -16,6 +16,11 @@ use App\timweSubscriber;
 class TimweController extends Controller
 {
 
+    public function ooredoo_qatar_login()
+    {
+        return view('timweLanding.timwe_login');
+    }
+
     public function index()
     {
         return view('timweLanding.timwe_landing');
@@ -450,6 +455,27 @@ class TimweController extends Controller
 
     public function subscriptionOptIn(Request $request, $partnerRole)
     {
+
+      $check = $this->checkStatus($request->number);
+
+        if($check['subscriptionResult'] == 'GET_STATUS_OK'){
+
+            $this->checksub('subscribe', $request->number, $check['timweId']);
+
+            session(['MSISDN' => '974' . $request->number, 'Status' => 'active', 'currentOp' => ooredoo]);
+
+            $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
+
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+            if ($snap) {
+                return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
+            } else {
+                return redirect(url('newdesignv4/' . $Url->UID));
+            }
+
+        }else{
         date_default_timezone_set('Asia/Qatar');
 
         $partnerRoleId = $partnerRole;
@@ -538,6 +564,7 @@ class TimweController extends Controller
                 return redirect('ooredoo_qatar_landing')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
             }
         }
+      }
     }
 
     public function subscriptionConfirm(Request $request, $partnerRole)
@@ -706,6 +733,112 @@ class TimweController extends Controller
             return redirect('ooredoo_qatar_unsub')->with('failed', 'هذا الرقم غير مشترك بالخدمة');
         }
     }
+
+    public function checksub($state, $msisdn, $timeweId){
+      if($state == 'subscribe'){
+          $subscribe = timweSubscriber::where('msisdn', $msisdn)->where('serviceId', productId)->first();
+
+          if (empty($subscribe)) {
+              timweSubscriber::create([
+                  'msisdn' => $msisdn,
+                  'serviceId' => productId,
+                  'requestId' => $timeweId,
+              ]);
+          }
+      }elseif($state == 'unsubscribe'){
+          $subscribe = timweSubscriber::where('msisdn', '974' . $msisdn)->where('serviceId', productId)->first();
+          $subscribe->delete();
+
+          timweUnsubscriber::create([
+              'msisdn' => '974' . $msisdn,
+              'serviceId' => productId,
+              'requestId' => $timeweId,
+          ]);
+      }
+      return 'success';
+    }
+
+    public function checkStatus($number)
+    {
+        $partnerRoleId = partnerRoleId;
+
+        require_once 'uuid/UUID.php';
+        $trxid = \UUID::v4();
+
+        $headers = array(
+            "Content-Type: application/json",
+            "apikey: " . apikeysubscription,
+            "authentication: " . $this->generateKey(presharedkeysubscription),
+            "external-tx-id: " . $trxid,
+        );
+
+        $vars["userIdentifier"] = '974' . $number;
+        $vars["userIdentifierType"] = 'MSISDN';
+        $vars["productId"] = productId;
+        $vars["mcc"] = "427";
+        $vars["mnc"] = "01";
+        $vars["entryChannel"] = 'WEB';
+
+        $JSON = json_encode($vars);
+
+        $actionName = "Check Status";
+
+        $URL = "https://qao.timwe.com/external/v2/subscription/status/" . $partnerRoleId . "/";
+        $ReqResponse = $this->SendRequest($URL, $JSON, $headers);
+        $ReqResponse = json_decode($ReqResponse, true);
+
+        //log request and response
+        $result = [];
+        $result['request'] = $vars;
+        $result['headers'] = $headers;
+        $result['response'] = $ReqResponse;
+        $result['date'] = date('Y-m-d H:i:s');
+
+        $this->log($actionName, $URL, $result);
+
+        $timewe = TimWe::create([
+            'api_request' => $URL,
+            'payload' => json_encode($vars),
+            'response' => json_encode($ReqResponse),
+            'header' => json_encode($headers),
+            'type' => $actionName,
+        ]);
+
+        $response['subscriptionResult'] = $ReqResponse['responseData']['subscriptionResult'];
+        $response['timweId'] = $timewe->id;
+        return $response;
+    }
+
+    public function checkStatusLogin(Request $request){
+
+      $check = $this->checkStatus($request->number);
+
+      if($check['subscriptionResult'] == 'GET_STATUS_SUB_NOT_EXIST'){
+
+          return redirect('ooredoo_qatar_landing')->with('failed', 'انت غير مشترك حاليا, برجاء الاشتراك');
+
+      }elseif($check['subscriptionResult'] == 'GET_STATUS_OK'){
+
+          $this->checksub('subscribe', $request->number, $check['timweId']);
+
+          session(['MSISDN' => '974' . $request->number, 'Status' => 'active', 'currentOp' => ooredoo]);
+
+            $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
+
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+                ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+            if ($snap) {
+                return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
+            } else {
+                return redirect(url('newdesignv4/' . $Url->UID));
+            }
+
+      }else{
+          return redirect('ooredoo_qatar_login')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+      }
+
+   }
 
     public function SendRequest($URL, $JSON, $headers)
     {

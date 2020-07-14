@@ -33,6 +33,7 @@ define('apikeysubscription', '8086e440d80847a6b534c88a6c33a172');
 define('presharedkeysubscription', 'cutfvCPZrlzMo6t8');
 /************* end config Timwe******************/
 
+Route::get('ooredoo_qatar_login', 'TimweController@ooredoo_qatar_login');
 Route::get('ooredoo_qatar_landing', 'TimweController@index');
 Route::get('ooredoo_qatar_pin', 'TimweController@pincode');
 Route::get('ooredoo_qatar_unsub', 'TimweController@unsubscribe');
@@ -41,6 +42,7 @@ Route::get('ooredoo_qatar_logout', 'TimweController@logout');
 //Timwe Api
 Route::post('generateKey', 'TimweController@generateKey');
 Route::post('{channel}/mt/{partnerRoleId}', 'TimweController@sendMt');
+Route::post('checkstatus', 'TimweController@checkStatusLogin');
 Route::post('subscription/optin/{partnerRoleId}', 'TimweController@subscriptionOptIn');
 Route::post('subscription/confirm/{partnerRoleId}', 'TimweController@subscriptionConfirm');
 Route::post('subscription/optout/{partnerRoleId}', 'TimweController@subscriptionOptOut');
