@@ -47,6 +47,10 @@
     font-size: 1.35rem;
     width: 45%;
   }
+
+  .terms {
+    font-size: 0.75rem;
+  }
 </style>
 
 
@@ -86,7 +90,7 @@
         </div>
       </div>
     </div>
-    <div class="cancel text-center mt-4">
+    <div class="cancel text-center mt-2">
       {!! Form::open(['url'=>'subscription/optin/'.partnerRoleId,'method'=>'post','class'=>'form']) !!}
       <div class="form-group">
         <input type="tel" class="form-control" @if(session()->has('pincodephone')) value="{{session()->get('pincodephone')}}" @endif id="phone" required=""

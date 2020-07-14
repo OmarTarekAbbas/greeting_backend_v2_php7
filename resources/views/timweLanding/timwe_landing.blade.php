@@ -50,6 +50,10 @@
     font-size: 1.35rem;
     width: 45%;
   }
+
+  .terms {
+    font-size: 0.75rem;
+  }
 </style>
 
 <body>
@@ -73,8 +77,8 @@
 
       <div class="shbka">
         <div class="container">
-          <h3>اشترك الان</h3>
-          <h4 class="text-white font-weight-bold" style="font-size:22px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
+          <!-- <h3>اشترك الان</h3> -->
+          <h4 class="text-white font-weight-bold mt-2" style="font-size:22px;">قيمة الاشتراك 15 ريال / الاسبوع</h4>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
