@@ -44,7 +44,7 @@ Route::post('{channel}/mt/{partnerRoleId}', 'TimweController@sendMt');
 Route::post('subscription/optin/{partnerRoleId}', 'TimweController@subscriptionOptIn');
 Route::post('subscription/confirm/{partnerRoleId}', 'TimweController@subscriptionConfirm');
 Route::post('subscription/optout/{partnerRoleId}', 'TimweController@subscriptionOptOut');
-Route::post('timwe_logout', 'TimweController@timwe_logout');
+Route::get('timwe_logout', 'TimweController@timwe_logout');
 /********************end ******************* */
 
 //notification Api

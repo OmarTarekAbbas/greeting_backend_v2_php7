@@ -206,7 +206,7 @@ function redirect_operator() {
         return 'landing_mobily_ksa';
     }else if (strpos($operator->name, 'STC') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
       return 'landing_stc_ksa';
-    }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'Qatar') !== false) {
+    }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'qatar') !== false) {
       return 'ooredoo_qatar_landing';
     } else {
         return 'landing_v1';
