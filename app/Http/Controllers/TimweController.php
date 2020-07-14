@@ -726,7 +726,7 @@ class TimweController extends Controller
         return $sOutput;
     }
 
-    public function logout(){
+    public function timwe_logout(){
         session()->forget('userIdentifier');
         session()->forget('status');
         session()->forget('currentOp');
