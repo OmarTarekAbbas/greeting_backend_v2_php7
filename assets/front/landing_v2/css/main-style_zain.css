@@ -23,15 +23,12 @@ body {
 }
 
 /*----------------------------------------- landing page -----------------------------------------*/
-.landing_page {
-  margin-top: 1.65rem;
-}
 .landing_page .start_video {
   display: block;
 }
 .landing_page .start_video video {
   object-fit: cover;
-  height: 13.875rem;
+  height: 12.875rem;
 }
 .landing_page .logo {
   width: 25%;

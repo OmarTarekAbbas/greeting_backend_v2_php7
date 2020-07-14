@@ -94,9 +94,9 @@
                 </div>
             </div>
 
-            <div class="container pt-5">
+            <div class="container pt-1">
                 <div class="form_content">
-                    <form method="post" action="{{url('subscription/optout/'.partnerRoleId)}}"   onsubmit="document.getElementById('zain_submit').disabled='true';"  id="form_zain">
+                    <form method="post" action="{{url('subscription/optout/'.partnerRoleId)}}" onsubmit="document.getElementById('zain_submit').disabled='true';"  id="form_zain">
                         {{ csrf_field() }}
                         <div class="form-group form-inline">
                             <label for="phone"><span>971</span></label>
