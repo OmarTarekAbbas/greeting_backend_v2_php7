@@ -112,6 +112,11 @@ Route::post('subscription/confirm/{partnerRoleId}', 'TimweController@subscriptio
 Route::post('subscription/optout/{partnerRoleId}', 'TimweController@subscriptionOptOut');
 /********************end ******************* */
 
+/************* start ooredoo_qatar_login 14/7 ******************/
+Route::get('ooredoo_qatar_login', 'TimweController@login');
+Route::post('checkstatus', 'TimweController@checkStatusLogin');
+/************* end ooredoo_qatar_login 14/7 ******************/
+
 //notification Api
 Route::post('notification/mo/{partnerRole}', 'TimweController@notificationMo');
 Route::post('notification/mt/dn/{partnerRole}', 'TimweController@notificationMtDn');

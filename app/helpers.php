@@ -223,7 +223,7 @@ function redirect_operator()
     } else if (strpos($operator->name, 'Mobily') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
         return 'landing_rotana_mobily_ksa';
     }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'qatar') !== false) {
-        return 'ooredoo_qatar_landing';
+        return 'ooredoo_qatar_login';
     } else {
         return 'landing_v1';
     }
