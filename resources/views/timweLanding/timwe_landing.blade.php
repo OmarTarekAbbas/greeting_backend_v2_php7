@@ -110,7 +110,13 @@
               <input type="hidden" name="type" value="rotana">
               <label for="phone"><span>974</span></label>
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
+              @if (session()->has('landing_msisdn'))
+              {{-- {{dd('asd')}} --}}
+              <input type="tel" class="form-control" id="phone" required="" value="{{session()->get('landing_msisdn')}}" placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}">
+              @else
+              {{-- {{dd('asd')}} --}}
               <input type="tel" class="form-control" id="phone" required="" placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}">
+              @endif
               <span class="validity"></span>
             </div>
             <!--<button class="btn back">رجوع</button>-->

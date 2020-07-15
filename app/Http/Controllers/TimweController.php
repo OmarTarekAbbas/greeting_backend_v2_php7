@@ -69,6 +69,7 @@ class TimweController extends Controller
     );
 
     $vars["userIdentifier"] = '974' . $number;
+    session()->put('landing_msisdn', $number);
     $vars["userIdentifierType"] = 'MSISDN';
     $vars["productId"] = productId;
     $vars["mcc"] = "427";
