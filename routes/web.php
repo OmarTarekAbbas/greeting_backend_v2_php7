@@ -102,6 +102,8 @@ Route::get('ooredoo_qatar_landing', 'TimweController@index');
 Route::get('ooredoo_qatar_pin', 'TimweController@pincode');
 Route::get('ooredoo_qatar_unsub', 'TimweController@unsubscribe');
 Route::get('timwe_test', 'TimweController@timwe_test');
+Route::get('ooredoo_qatar_login', 'TimweController@login');
+Route::post('checkstatus', 'TimweController@checkStatusLogin');
 
 //Timwe Api
 Route::post('generateKey', 'TimweController@generateKey');
