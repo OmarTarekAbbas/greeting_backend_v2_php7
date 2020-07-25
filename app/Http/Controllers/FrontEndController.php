@@ -3503,6 +3503,15 @@ public function rotana($UID)
           }
         }
 
+        if(OP() ==  du_operator_id)
+        {
+          if(Session::has('currentOp')  && Session::get('currentOp') == du_operator_id   ){  // Du check
+
+          } else{
+              return redirect('du_landing_rotana');
+          }
+        }
+
         if(OP() ==  imi_op_id())
         {
           if(Session::has('currentOp')  && Session::get('currentOp') == imi_op_id()   ){  // Mobily ksa
@@ -3699,6 +3708,15 @@ public function filter_inner($FID, $UID){
 
             } else{
                 return redirect(url(roatan_ksa_redirect_operator()));
+            }
+          }
+
+          if(OP() ==  du_operator_id)
+          {
+            if(Session::has('currentOp')  && Session::get('currentOp') == du_operator_id   ){  // Du check
+  
+            } else{
+                return redirect('du_landing_rotana');
             }
           }
 

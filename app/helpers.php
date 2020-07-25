@@ -307,3 +307,14 @@ function MOBILY_KSA_HE(){
   return 10;
 }
 
+function DU_OP(){
+  $country = Country::where('name', 'United Arab Emirates')->first();
+  if(!empty($country)){
+    $op = Operator::where('country_id', $country->id)->where('name', 'DU')->first();
+    if(!empty($op)){
+      return $op->id;
+    }
+  }
+  return 4;
+}
+

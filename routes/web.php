@@ -401,7 +401,7 @@ Route::get('du_unsubc_v4/{peroid?}/{lang?}', 'HomeController@du_unsubc_v4');
 Route::post('du_unsubcr_v4/{peroid?}/{lang?}', 'HomeController@du_unsubcr_v4');
 define('DU_UNSUB_SYSTEM',"https://du.notifications.digizone.com.kw/api/unsub");
 define('DU_CHECKSUB',"https://du.notifications.digizone.com.kw/api/checkSub");
-define('du_operator_id',4);
+define('du_operator_id',DU_OP());
 //=======================du  Integration ==========================================//
 
 
