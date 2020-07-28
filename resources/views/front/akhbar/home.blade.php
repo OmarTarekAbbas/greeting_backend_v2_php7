@@ -23,7 +23,7 @@
 
     <section class="all_content w-100 mb-3">
       <div class="title">
-        <p class="w-100 text-left font-weight-bold">IG Filters</p>
+        <p class="w-100 text-right font-weight-bold">معرض الانسجرام</p>
       </div>
 
       <div class="row m-0" id="filterajax" action="inactive" page='1'>
