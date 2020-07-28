@@ -9,7 +9,7 @@
         <div class="col-12">
           <div class="filter_2day_title">
             <!-- <h6 class=" text-right">{!! static_lang('usefilter')?static_lang('usefilter') : 'استخدم الفلتر' !!}</h6> -->
-            <h6 class=" text-right">{{ $Rdata->title }}</h6>
+            <h6 class=" text-center">{{ $Rdata->title }}</h6>
           </div>
         </div>
 

@@ -14,7 +14,7 @@
       <div class="row m-0">
         <div class="col-12">
           <div class="filter_2day_title">
-          <h6 class=" text-right scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s" data-wow-offset="100">{{$news->title}}</h6>
+          <h6 class=" text-center scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s" data-wow-offset="100">{{$news->title}}</h6>
           </div>
         </div>
 
@@ -31,8 +31,8 @@
     <div class="row m-0">
       <div class="col-12 p-0">
         <div class="second_slide_title">
-            <h6 class="text-right pt-0 pl-3 scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s" data-wow-offset="100"> فلاتر مقترحة
-              <i class="fas fa-th-large fa-1x float-left pr-3 pulsate-bck wow" data-wow-delay="1s" data-wow-duration="0.9s" data-wow-offset="100"></i>
+            <h6 class="text-right pt-0 pr-3 scale-in-left wow" data-wow-delay="1.5s" data-wow-duration="0.5s" data-wow-offset="100"> فلاتر مقترحة
+              <i class="fas fa-th-large fa-1x float-left pl-3 pulsate-bck wow" data-wow-delay="1s" data-wow-duration="0.9s" data-wow-offset="100"></i>
             </h6>
         </div>
       </div>
