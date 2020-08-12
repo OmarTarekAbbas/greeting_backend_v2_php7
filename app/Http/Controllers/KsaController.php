@@ -286,7 +286,7 @@ class KsaController extends Controller
 
                 // make log
                 $actionName = "STC KSA Pincode Verify Success";
-                $URL = url("stc_ksa_pincode_confirm");
+
                 $parameters_arr = array(
                     'MSISDN' => $msisdn_wcc,
                     'date' => Carbon::now()->format('Y-m-d H:i:s'),
