@@ -329,7 +329,7 @@ class KsaController extends Controller
 
 
               // Redirect to Stc content page
-              session(['MSISDN' => $msisdn, 'Status' => 'active','currentOP'=>STC_OP_ID]);
+              session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>STC_OP_ID]);
               $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
 
               $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -343,7 +343,7 @@ class KsaController extends Controller
 
 
           }elseif ($result == "Theproducthasbeensubscribed.") {  // alreday subscribe
-              session(['MSISDN' => $msisdn, 'Status' => 'active','currentOP'=>STC_OP_ID]);
+              session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>STC_OP_ID]);
               $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
 
               $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
