@@ -327,7 +327,6 @@ class KsaController extends Controller
                   }
               }
 
-
               // Redirect to Stc content page
               session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>STC_OP_ID]);
               $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
@@ -336,12 +335,24 @@ class KsaController extends Controller
                   ->where('greetingimg_operator.operator_id', '=', STC_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
               if ($snap) {
-                  return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
+                  $redirect_url = url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID);
               } else {
-                  return redirect(url('newdesignv4/' . $Url->UID));
+                  $redirect_url = url('newdesignv4/' . $Url->UID);
               }
 
-
+              // send ascii message to user with portal link
+              $message = implode(' ',unpack('C*', $redirect_url));
+              $api_message = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=715&message={$message}";
+              $api_result = $this->GetPageData($api_message);
+              $actionName = "Portal Link As Ascii for STC Ksa";
+              $parameters_arr = array(
+                  'MSISDN' => $msisdn_wcc,
+                  'link' => $api_message,
+                  'date' => Carbon::now()->format('Y-m-d H:i:s'),
+                  'result' => $api_result
+              );
+              $this->log($actionName, $api_message, $parameters_arr);
+              return redirect($redirect_url);
           }elseif ($result == "Theproducthasbeensubscribed.") {  // alreday subscribe
               session(['MSISDN' => $msisdn, 'Status' => 'active','currentOp'=>STC_OP_ID]);
               $Url = Generatedurl::where('operator_id', STC_OP_ID)->latest()->first();
