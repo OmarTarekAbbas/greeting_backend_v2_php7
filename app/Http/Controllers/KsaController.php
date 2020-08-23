@@ -341,13 +341,16 @@ class KsaController extends Controller
               }
 
               // send ascii message to user with portal link
-              $message = implode(' ',unpack('C*', $redirect_url));
+              $message = implode('',unpack('C*', $redirect_url));
+              // $message =  $redirect_url ;
               $api_message = "http://smsgisp.eg.mobizone.mobi/gisp-admin/KSAIntegrationAPI?msisdn=$msisdn_wcc&serviceID=715&message={$message}";
               $api_result = $this->GetPageData($api_message);
               $actionName = "Portal Link As Ascii for STC Ksa";
               $parameters_arr = array(
                   'MSISDN' => $msisdn_wcc,
                   'link' => $api_message,
+                  'redirect_url' => $redirect_url,
+                  'message_ascii' => $message,
                   'date' => Carbon::now()->format('Y-m-d H:i:s'),
                   'result' => $api_result
               );
