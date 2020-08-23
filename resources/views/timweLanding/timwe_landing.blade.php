@@ -78,13 +78,13 @@
       </div>
 
       <div class="strip">
-        <h2>استمتع بوقتك مع فلاتر روتانا</h2>
+        <h2>اشترك في خدمة فلاتر روتانا</h2>
       </div>
 
       <div class="shbka">
         <div class="container">
-          <h3>اشترك الان</h3>
-          <h4 class="text-white font-weight-bold" style="font-size:25px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
+          <h3>اجدد الفلاتر الحصرية</h3>
+
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -112,15 +112,16 @@
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
               @if (session()->has('landing_msisdn'))
               {{-- {{dd('asd')}} --}}
-              <input type="tel" class="form-control" id="phone" required="" value="{{session()->get('landing_msisdn')}}" placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}">
+              <input type="tel" class="form-control" id="phone" required="" value="{{session()->get('landing_msisdn')}}" placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}" >
               @else
               {{-- {{dd('asd')}} --}}
-              <input type="tel" class="form-control" id="phone" required="" placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}">
+              <input type="tel" class="form-control" id="phone" required="" placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}" style="width: 86%">
               @endif
               <span class="validity"></span>
             </div>
             <!--<button class="btn back">رجوع</button>-->
-            <button id="zain_submit" class="btn" type="submit">اشترك</button>
+            <h4 class="text-white font-weight-bold" style="font-size:20px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
+            <button id="zain_submit" class="btn" type="submit" style="width: 100%">اشترك</button>
           </form>
         </div>
       </div>

@@ -71,10 +71,11 @@
 
 
       <div class="strip">
-        <h2>ادخل كود التفعيل</h2>
+        <h2>خدمة فلاتر روتانا</h2>
+        <h4>ادخل كود التفعيل</h4>
       </div>
       <div class="shbka mt-1">
-        <h4 class="text-white" style="font-size:25px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
+
       </div>
 
 
@@ -103,7 +104,8 @@
           <div class="form-group">
             <input style="width: 100% !important" type="tel" style="font-family: cursive" name="pincode" class="form-control" id="pincode" required pattern="[0-9]{4}">
           </div>
-          <button class="btn" type="submit">تأكيد</button>
+          <h4 class="text-white" style="font-size:20px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
+          <button class="btn" type="submit" style="width: 98%;">تأكيد</button>
           {!! Form::close() !!}
         </div>
       </div>
