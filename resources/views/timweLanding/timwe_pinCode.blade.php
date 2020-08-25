@@ -116,9 +116,9 @@
     <div class="cancel text-center mt-4">
       {!! Form::open(['url'=>'subscription/optin/'.partnerRoleId,'method'=>'post','class'=>'form']) !!}
       <div class="form-group">
-        <input type="tel" class="form-control" @if(session()->has('pincodephone'))
+        {{-- <input type="tel" class="form-control" @if(session()->has('pincodephone'))
         value="{{session()->get('pincodephone')}}" @endif id="phone" required=""
-        placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}" hidden>
+        placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}" hidden> --}}
         <input type="submit" value="@lang('messages.repin')">
       </div>
       {!! Form::close() !!}

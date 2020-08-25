@@ -679,13 +679,15 @@ class TimweController extends Controller
 
   public function subscriptionOptIn(Request $request, $partnerRole)
   {
-    $check = $this->checkStatus($request->number);
+    $msisdn = $request->number ?? session('pincodephone');
+
+    $check = $this->checkStatus($msisdn);
 
     if ($check['subscriptionResult'] == 'GET_STATUS_OK') {
 
-      $this->checksub('subscribe', $request->number, $check['timweId']);
+      $this->checksub('subscribe', $msisdn, $check['timweId']);
 
-      session(['MSISDN' => '974' . $request->number, 'Status' => 'active', 'currentOp' => ooredoo]);
+      session(['MSISDN' => '974' . $msisdn, 'Status' => 'active', 'currentOp' => ooredoo]);
       $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
 
       $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -715,9 +717,9 @@ class TimweController extends Controller
       $now = strtotime(now());
       $sendDate = gmdate(DATE_W3C, $now);
 
-      $vars["userIdentifier"] = '974' . $request->number;
-      session()->put('userIdentifier', '974' . $request->number);
-      session()->put('pincodephone', $request->number);
+      $vars["userIdentifier"] = '974' . $msisdn;
+      session()->put('userIdentifier', '974' . $msisdn);
+      session()->put('pincodephone', $msisdn);
       $vars["userIdentifierType"] = "MSISDN";
       $vars["productId"] = productId;
       $vars["mcc"] = "427";
@@ -767,7 +769,7 @@ class TimweController extends Controller
           ]);
         }
 
-        session(['MSISDN' => '974' . $request->number, 'Status' => 'active', 'currentOp' => ooredoo]);
+        session(['MSISDN' => '974' . $msisdn, 'Status' => 'active', 'currentOp' => ooredoo]);
         $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
 
         $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
