@@ -3409,13 +3409,13 @@ public function zain_ksa_test(Request $request){
                 }
             }
 
-            if ( OP() == ooredoo) {
-                if(Session::has('currentOp') && Session::get('currentOp') == ooredoo){
+            // if ( OP() == ooredoo) {
+            //     if(Session::has('currentOp') && Session::get('currentOp') == ooredoo){
 
-                 }else{
-                   return redirect(url(redirect_operator()));
-                 }
-             }
+            //      }else{
+            //        return redirect(url(redirect_operator()));
+            //      }
+            //  }
 
             $rbt_sms = $url->operator->rbt_sms;
             if($request->ajax())
@@ -3494,14 +3494,14 @@ public function rotana($UID)
         }
 
 
-        if(OP() ==  ooredoo)
-        {
-          if(Session::has('currentOp')  && Session::get('currentOp') == ooredoo   ){  // Mobily ksa
+        // if(OP() ==  ooredoo)
+        // {
+        //   if(Session::has('currentOp')  && Session::get('currentOp') == ooredoo   ){  // Mobily ksa
 
-          } else{
-              return redirect(url(roatan_ksa_redirect_operator()));
-          }
-        }
+        //   } else{
+        //       return redirect(url(roatan_ksa_redirect_operator()));
+        //   }
+        // }
 
         /* // comment Du
         if(OP() ==  du_operator_id)
@@ -3703,14 +3703,14 @@ public function filter_inner($FID, $UID){
                 return redirect(url(roatan_ksa_redirect_operator()));
             }
           }
-          if(OP() ==  ooredoo)
-          {
-            if(Session::has('currentOp')  && Session::get('currentOp') == ooredoo   ){   // Timwe
+          // if(OP() ==  ooredoo)
+          // {
+          //   if(Session::has('currentOp')  && Session::get('currentOp') == ooredoo   ){   // Timwe
 
-            } else{
-                return redirect(url(roatan_ksa_redirect_operator()));
-            }
-          }
+          //   } else{
+          //       return redirect(url(roatan_ksa_redirect_operator()));
+          //   }
+          // }
 
           /*  // comment Du close
 

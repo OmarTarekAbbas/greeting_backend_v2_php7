@@ -769,7 +769,7 @@ class TimweController extends Controller
 
       } else {
         if ($ReqResponse['code'] == 'SUCCESS') {
-          return view('timweLanding.timwe_pinCode');
+          return redirect('ooredoo_qatar_pin');
         } else {
           if (session('applocale') == 'ar')
           return redirect('ooredoo_qatar_landing')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');

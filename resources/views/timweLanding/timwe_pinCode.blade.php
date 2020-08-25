@@ -55,7 +55,9 @@
     width: 45%;
   }
 
-  .terms {font-size: 0.8rem;}
+  .terms {
+    font-size: 0.8rem;
+  }
 </style>
 
 <body>
@@ -63,7 +65,8 @@
     <div class="landing_page">
 
       <div class="start_video" id="video">
-        <video width="100%" style="height: 280px;" poster="{{ url('assets/front/landing_v2')}}/video/rotana_post.png" id="my_audio" controls>
+        <video width="100%" style="height: 280px;" poster="{{ url('assets/front/landing_v2')}}/video/rotana_post.png"
+          id="my_audio" controls>
           <source src="{{ url('assets/front/landing_v2')}}/video/1591283770.mp4" type="video/mp4">
           <source src="{{ url('assets/front/landing_v2')}}/video/1591283770.mp4" type="video/ogg">
         </video>
@@ -80,20 +83,20 @@
 
       {{-- <div class="shbka pt-5">
                 <div class="container"> --}}
-                    <div class="zain_viva">
-                      @if(Session::has('success'))
-                      <div class="alert alert-success alert-dismissible">
-                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                          {{ Session::get('success')}}
-                      </div>
-                      @elseif(Session::has('failed'))
-                      <div class="alert alert-danger alert-dismissible">
-                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                          {{ Session::get('failed')}}
-                      </div>
-                      @endif
-                    </div>
-                {{-- </div>
+      <div class="zain_viva w-75" style="margin: 0 auto">
+        @if(Session::has('success'))
+        <div class="alert alert-success alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{ Session::get('success')}}
+        </div>
+        @elseif(Session::has('failed'))
+        <div class="alert alert-danger alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{ Session::get('failed')}}
+        </div>
+        @endif
+      </div>
+      {{-- </div>
             </div> --}}
 
       <div class="container pt-2">
@@ -101,7 +104,8 @@
           <!--<h5>ادخل رقم الهاتف</h5>-->
           {!! Form::open(['url'=>'subscription/confirm/'.partnerRoleId,'method'=>'post','class'=>'form']) !!}
           <div class="form-group">
-            <input style="width: 100% !important" type="tel" style="font-family: cursive" name="pincode" class="form-control" id="pincode" required pattern="[0-9]{4}">
+            <input style="width: 100% !important" type="tel" style="font-family: cursive" name="pincode"
+              class="form-control" id="pincode" required pattern="[0-9]{4}">
           </div>
           <h4 class="text-white" style="font-size:20px;font-weight:bold">@lang('messages.subweek')</h4>
           <button class="btn" type="submit" style="width: 98%;">@lang('messages.confirm')</button>
@@ -112,7 +116,8 @@
     <div class="cancel text-center mt-4">
       {!! Form::open(['url'=>'subscription/optin/'.partnerRoleId,'method'=>'post','class'=>'form']) !!}
       <div class="form-group">
-        <input type="tel" class="form-control" @if(session()->has('pincodephone')) value="{{session()->get('pincodephone')}}" @endif id="phone" required=""
+        <input type="tel" class="form-control" @if(session()->has('pincodephone'))
+        value="{{session()->get('pincodephone')}}" @endif id="phone" required=""
         placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}" hidden>
         <input type="submit" value="@lang('messages.repin')">
       </div>
@@ -121,18 +126,30 @@
     <!-- copyright -->
     @if (session('applocale') == 'ar')
     <ul class="terms text-right text-white" dir="rtl">
-    @else
-    <ul class="terms text-left text-white" dir="">
-    @endif
-    @lang('messages.terms')
-    </ul>
-    <div class="copy">
-      <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
-    </div>
-    <!-- copyright -->
+      @else
+      <ul class="terms text-left text-white" dir="">
+        @endif
+        @lang('messages.terms')
+      </ul>
+      <div class="copy">
+        <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
+      </div>
+      @php
+      $lang = session('applocale') == 'ar' ? 'en' : 'ar';
+      $lang2 = session('applocale') == 'ar' ? 'EN' : 'AR';
+      @endphp
+      @if ($lang == 'en')
+      <a class="btn btn-sm btn-success" style="position: fixed; top: 10px; right: 10px; padding: 10px;"
+        href="{{url('admin/lang/'.$lang)}}">{{$lang2}}</a>
+      @else
+      <a class="btn btn-sm btn-success" style="position: fixed; top: 10px; left: 10px; padding: 10px;"
+        href="{{url('admin/lang/'.$lang)}}">{{$lang2}}</a>
+      @endif
 
-    <!-- loading -->
-    {{-- <div class="loading-overlay">
+      <!-- copyright -->
+
+      <!-- loading -->
+      {{-- <div class="loading-overlay">
         <div class="spinner">
             <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
   </div>

@@ -63,7 +63,9 @@
     width: 45%;
   }
 
-  .terms {font-size: 0.7rem;}
+  .terms {
+    font-size: 0.7rem;
+  }
 </style>
 
 <body>
@@ -71,7 +73,8 @@
     <div class="landing_page">
 
       <div class="start_video" id="video">
-        <video width="100%" style="height: 250px;" poster="{{ url('assets/front/landing_v2')}}/video/rotana_post.png" id="my_audio" controls>
+        <video width="100%" style="height: 250px;" poster="{{ url('assets/front/landing_v2')}}/video/rotana_post.png"
+          id="my_audio" controls>
           <source src="{{ url('assets/front/landing_v2')}}/video/1591283770.mp4" type="video/mp4">
           <source src="{{ url('assets/front/landing_v2')}}/video/1591283770.mp4" type="video/ogg">
         </video>
@@ -85,7 +88,7 @@
         <div class="container">
           <h3>@lang('messages.newfalater')</h3>
 
-          <div class="zain_viva">
+          <div class="zain_viva w-75" style="margin: 0 auto">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -104,7 +107,8 @@
       <div class="container pt-2">
         <div class="form_content">
           <!--<h5>ادخل رقم الهاتف</h5>-->
-          <form method="post" action="{{url('subscription/optin/'.partnerRoleId)}}" onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
+          <form method="post" action="{{url('subscription/optin/'.partnerRoleId)}}"
+            onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
             {{ csrf_field() }}
             <div class="form-group form-inline text-center">
               <input type="hidden" name="type" value="rotana">
@@ -112,10 +116,12 @@
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
               @if (session()->has('landing_msisdn'))
               {{-- {{dd('asd')}} --}}
-              <input type="tel" class="form-control" id="phone" required="" value="{{session()->get('landing_msisdn')}}" placeholder="@lang('messages.enterphone')" name="number" required pattern="[0-9]{8}" >
+              <input type="tel" class="form-control" id="phone" required="" value="{{session()->get('landing_msisdn')}}"
+                placeholder="@lang('messages.enterphone')" name="number" required pattern="[0-9]{8}">
               @else
               {{-- {{dd('asd')}} --}}
-              <input type="tel" class="form-control" id="phone" required="" placeholder="@lang('messages.enterphone')" name="number" required pattern="[0-9]{8}" style="">
+              <input type="tel" class="form-control" id="phone" required="" placeholder="@lang('messages.enterphone')"
+                name="number" required pattern="[0-9]{8}" style="">
               @endif
               <span class="validity"></span>
             </div>
@@ -132,18 +138,29 @@
     <!-- copyright -->
     @if (session('applocale') == 'ar')
     <ul class="terms text-right text-white" dir="rtl">
-    @else
-    <ul class="terms text-left text-white" dir="">
-    @endif
-    @lang('messages.terms')
-    </ul>
-    <div class="copy">
-      <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
-    </div>
-    <!-- copyright -->
+      @else
+      <ul class="terms text-left text-white" dir="">
+        @endif
+        @lang('messages.terms')
+      </ul>
+      <div class="copy">
+        <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
+      </div>
+      @php
+      $lang = session('applocale') == 'ar' ? 'en' : 'ar';
+      $lang2 = session('applocale') == 'ar' ? 'EN' : 'AR';
+      @endphp
+      @if ($lang == 'en')
+      <a class="btn btn-sm btn-success" style="position: fixed; top: 10px; right: 10px; padding: 10px;"
+        href="{{url('admin/lang/'.$lang)}}">{{$lang2}}</a>
+      @else
+      <a class="btn btn-sm btn-success" style="position: fixed; top: 10px; left: 10px; padding: 10px;"
+        href="{{url('admin/lang/'.$lang)}}">{{$lang2}}</a>
+      @endif
+      <!-- copyright -->
 
-    <!-- loading -->
-    {{-- <div class="loading-overlay">
+      <!-- loading -->
+      {{-- <div class="loading-overlay">
         <div class="spinner">
             <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
   </div>
