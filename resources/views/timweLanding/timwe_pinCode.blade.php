@@ -74,11 +74,11 @@
 
 
       <div class="strip">
-        <h2>@lang('messages.falater')</h2>
+        <h5>@lang('messages.falater')</h5>
       </div>
 
       <div class="shbka text-white mt-1">
-        <h3>@lang('messages.enterpin')</h3>
+        <p style="font-weight: bold; font-size:17px">@lang('messages.enterpin')</p style="font-weight: bold">
       </div>
 
       {{-- <div class="shbka pt-5">
@@ -135,8 +135,8 @@
         <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
       </div>
       @php
-      $lang = session('applocale') == 'ar' ? 'en' : 'ar';
-      $lang2 = session('applocale') == 'ar' ? 'EN' : 'AR';
+      $lang = App::getLocale() == 'ar' ? 'en' : 'ar';
+      $lang2 = App::getLocale() == 'ar' ? 'EN' : 'AR';
       @endphp
       @if ($lang == 'en')
       <a class="btn btn-sm btn-success" style="position: fixed; top: 10px; right: 10px; padding: 10px;"

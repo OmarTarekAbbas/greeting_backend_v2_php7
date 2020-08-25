@@ -113,8 +113,8 @@
       </div>
     </div>
     @php
-        $lang = session('applocale') == 'ar' ? 'en' : 'ar';
-        $lang2 = session('applocale') == 'ar' ? 'EN' : 'AR';
+      $lang = App::getLocale() == 'ar' ? 'en' : 'ar';
+      $lang2 = App::getLocale() == 'ar' ? 'EN' : 'AR';
     @endphp
     @if ($lang == 'en')
     <a class="btn btn-sm btn-success" style="position: fixed; top: 10px; right: 10px; padding: 10px;" href="{{url('admin/lang/'.$lang)}}">{{$lang2}}</a>

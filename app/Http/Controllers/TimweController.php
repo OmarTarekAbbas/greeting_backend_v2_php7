@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Generatedurl;
-use App\Greetingimg;
+use Validator;
+use Carbon\Carbon;
+use Monolog\Logger;
+use Illuminate\Http\Request;
+use Monolog\Handler\StreamHandler;
+use Illuminate\Support\Facades\File;
+
 use App\TimWe;
+use App\Greetingimg;
+use App\Generatedurl;
 use App\timweSubscriber;
 use App\timweUnsubscriber;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
-use Validator;
 
 class TimweController extends Controller
 {
@@ -769,7 +770,13 @@ class TimweController extends Controller
 
       } else {
         if ($ReqResponse['code'] == 'SUCCESS') {
+          if($request->has('prev_url'))
           return redirect('ooredoo_qatar_pin');
+
+          if (session('applocale') == 'ar')
+          return redirect('ooredoo_qatar_pin')->with('success', '!تم ارسال رمز التحقق');
+
+          return redirect('ooredoo_qatar_pin')->with('success', 'Pincode Sent!');
         } else {
           if (session('applocale') == 'ar')
           return redirect('ooredoo_qatar_landing')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
