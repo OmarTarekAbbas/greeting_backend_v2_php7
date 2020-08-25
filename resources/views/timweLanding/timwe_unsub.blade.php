@@ -62,13 +62,13 @@
               </div>
 
             <div class="strip">
-                <h2>الغاء الاشتراك</h2>
+                <h5>@lang('messages.unsub')</h5>
             </div>
 
 
             <div class="shbka pt-2">
                 <div class="container">
-                    <h3 style="color: #e8ffe8;">في خدمة فلاتر روتانا</h3>
+                    <h3 style="color: #e8ffe8;">@lang('messages.falater')</h3>
                     <div class="zain_viva pt-4">
                         @if(Session::has('success'))
                         <div class="alert alert-success alert-dismissible">
@@ -99,10 +99,10 @@
                         <div class="form-group form-inline">
                             <label for="phone"><span>971</span></label>
                             <input type="tel" class="form-control" @if(session()->has('userIdentifier')) value="{{substr(session()->get('userIdentifier'), 3)}}" @endif id="phone" required=""
-                                placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}">
+                                placeholder="@lang('messages.du_enter_mob')" name="number" required pattern="[0-9]{8}">
                             <span class="validity"></span>
                         </div>
-                        <button id="zain_submit" class="btn" type="submit">الغاء الاشتراك</button>
+                        <button id="zain_submit" class="btn" type="submit">@lang('messages.du_unsub')</button>
                     </form>
                 </div>
             </div>

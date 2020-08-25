@@ -49,7 +49,9 @@ class TimweController extends Controller
       }
 
     } else {
+      if (session('applocale') == 'ar')
       return redirect('ooredoo_qatar_login')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+      return redirect('ooredoo_qatar_login')->with('failed', 'Error, please try again later');
     }
 
   }
@@ -769,7 +771,9 @@ class TimweController extends Controller
         if ($ReqResponse['code'] == 'SUCCESS') {
           return view('timweLanding.timwe_pinCode');
         } else {
+          if (session('applocale') == 'ar')
           return redirect('ooredoo_qatar_landing')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+          return redirect('ooredoo_qatar_landing')->with('failed', 'Error, please try again later');
         }
       }
     }
@@ -835,7 +839,9 @@ class TimweController extends Controller
 
     if ($ReqResponse['code'] == 'SUCCESS') {
       if ($ReqResponse['responseData']['subscriptionResult'] == 'OPTIN_CONF_WRONG_PIN') {
+        if (session('applocale') == 'ar')
         return redirect('ooredoo_qatar_pin')->with('failed', 'رقم التحقق خاطئ يرجي المحاولة مرة اخري');
+        return redirect('ooredoo_qatar_pin')->with('failed', 'Wrong pincode, please try again');
       }
 
       $subscribe = timweSubscriber::where('msisdn', session('userIdentifier'))->where('serviceId', productId)->first();
@@ -861,7 +867,9 @@ class TimweController extends Controller
       }
 
     } else {
+      if (session('applocale') == 'ar')
       return redirect('ooredoo_qatar_pin')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+      return redirect('ooredoo_qatar_pin')->with('failed', 'Error, please try again later');
     }
   }
 
@@ -936,9 +944,13 @@ class TimweController extends Controller
         'serviceId' => productId,
         'requestId' => $timewe->id,
       ]);
+      if (session('applocale') == 'ar')
       return redirect('ooredoo_qatar_unsub')->with('success', 'تم الغاء الاشتراك بنجاح');
+      return redirect('ooredoo_qatar_unsub')->with('success', 'Unsubscribe succesfully');
     } else {
+      if (session('applocale') == 'ar')
       return redirect('ooredoo_qatar_unsub')->with('failed', 'هذا الرقم غير مشترك بالخدمة');
+      return redirect('ooredoo_qatar_unsub')->with('failed', 'This number is not subscribed');
     }
   }
 

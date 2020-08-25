@@ -78,12 +78,12 @@
       </div>
 
       <div class="strip">
-        <h2>اشترك في خدمة فلاتر روتانا</h2>
+        <h5>@lang('messages.enjoy') @lang('messages.falater')</h5>
       </div>
 
       <div class="shbka">
         <div class="container">
-          <h3>اجدد الفلاتر الحصرية</h3>
+          <h3>@lang('messages.newfalater')</h3>
 
           <div class="zain_viva">
             @if(Session::has('success'))
@@ -106,34 +106,36 @@
           <!--<h5>ادخل رقم الهاتف</h5>-->
           <form method="post" action="{{url('subscription/optin/'.partnerRoleId)}}" onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
             {{ csrf_field() }}
-            <div class="form-group form-inline">
+            <div class="form-group form-inline text-center">
               <input type="hidden" name="type" value="rotana">
               <label for="phone"><span>974</span></label>
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
               @if (session()->has('landing_msisdn'))
               {{-- {{dd('asd')}} --}}
-              <input type="tel" class="form-control" id="phone" required="" value="{{session()->get('landing_msisdn')}}" placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}" >
+              <input type="tel" class="form-control" id="phone" required="" value="{{session()->get('landing_msisdn')}}" placeholder="@lang('messages.enterphone')" name="number" required pattern="[0-9]{8}" >
               @else
               {{-- {{dd('asd')}} --}}
-              <input type="tel" class="form-control" id="phone" required="" placeholder="أدخل رقم هاتفك الجوال" name="number" required pattern="[0-9]{8}" style="width: 86%">
+              <input type="tel" class="form-control" id="phone" required="" placeholder="@lang('messages.enterphone')" name="number" required pattern="[0-9]{8}" style="">
               @endif
               <span class="validity"></span>
             </div>
             <!--<button class="btn back">رجوع</button>-->
-            <h4 class="text-white font-weight-bold" style="font-size:20px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
-            <button id="zain_submit" class="btn" type="submit" style="width: 100%">اشترك</button>
+            <p class="text-white" style="font-size:22px; font-weight:bolder">@lang('messages.subweek')</p>
+            <button id="zain_submit" class="btn" type="submit" style="width: 100%">@lang('messages.subscribe')</button>
           </form>
         </div>
       </div>
     </div>
     <div class="cancel text-center mt-3 text-white">
-      <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('ooredoo_qatar_unsub' )}}">الرابط</a></p>
+      <p>@lang('messages.unsub') <a href="{{url('ooredoo_qatar_unsub' )}}">@lang('messages.link')</a></p>
     </div>
     <!-- copyright -->
+    @if (session('applocale') == 'ar')
     <ul class="terms text-right text-white" dir="rtl">
-      <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة  15 ريال فى الاسبوع</li>
-      <li>يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال Unsub RF الى 92842</li>
-      <li>يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
+    @else
+    <ul class="terms text-left text-white" dir="">
+    @endif
+    @lang('messages.terms')
     </ul>
     <div class="copy">
       <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>

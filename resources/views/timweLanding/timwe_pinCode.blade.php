@@ -71,16 +71,15 @@
 
 
       <div class="strip">
-        <h2>خدمة فلاتر روتانا</h2>
-        <h4>ادخل كود التفعيل</h4>
-      </div>
-      <div class="shbka mt-1">
-
+        <h2>@lang('messages.falater')</h2>
       </div>
 
+      <div class="shbka text-white mt-1">
+        <h3>@lang('messages.enterpin')</h3>
+      </div>
 
-      <!-- <div class="shbka pt-5">
-                <div class="container">
+      {{-- <div class="shbka pt-5">
+                <div class="container"> --}}
                     <div class="zain_viva">
                       @if(Session::has('success'))
                       <div class="alert alert-success alert-dismissible">
@@ -94,8 +93,8 @@
                       </div>
                       @endif
                     </div>
-                </div>
-            </div> -->
+                {{-- </div>
+            </div> --}}
 
       <div class="container pt-2">
         <div class="form_content">
@@ -104,8 +103,8 @@
           <div class="form-group">
             <input style="width: 100% !important" type="tel" style="font-family: cursive" name="pincode" class="form-control" id="pincode" required pattern="[0-9]{4}">
           </div>
-          <h4 class="text-white" style="font-size:20px;font-weight:bold">قيمة الاشتراك 15 ريال / الاسبوع</h4>
-          <button class="btn" type="submit" style="width: 98%;">تأكيد</button>
+          <h4 class="text-white" style="font-size:20px;font-weight:bold">@lang('messages.subweek')</h4>
+          <button class="btn" type="submit" style="width: 98%;">@lang('messages.confirm')</button>
           {!! Form::close() !!}
         </div>
       </div>
@@ -115,15 +114,17 @@
       <div class="form-group">
         <input type="tel" class="form-control" @if(session()->has('pincodephone')) value="{{session()->get('pincodephone')}}" @endif id="phone" required=""
         placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}" hidden>
-        <input type="submit" value=" اضغط لارسال رمز التاكيد مرة اخري">
+        <input type="submit" value="@lang('messages.repin')">
       </div>
       {!! Form::close() !!}
     </div>
     <!-- copyright -->
+    @if (session('applocale') == 'ar')
     <ul class="terms text-right text-white" dir="rtl">
-      <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة  15 ريال فى الاسبوع</li>
-      <li>يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال  Unsub RF الى 92842</li>
-      <li>يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
+    @else
+    <ul class="terms text-left text-white" dir="">
+    @endif
+    @lang('messages.terms')
     </ul>
     <div class="copy">
       <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>

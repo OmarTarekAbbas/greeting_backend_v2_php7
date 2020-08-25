@@ -1,5 +1,23 @@
 <?php
 return [
+    'falater' => 'Falater Rotana',
+    'newfalater' => 'New Filters Daily',
+    'enjoy' => 'Subscribe in',
+    'sub' => 'subscribe now',
+    'subweek' => '15 riyals / week',
+    'enterphone' => 'Enter phone number',
+    'enterphone8' => 'please enter 8 num',
+    'subscribe' => 'Subscribe',
+    'unsub' => 'To unsubscribe, please click on this',
+    'link' => 'link',
+    'terms' => '<li>Renewing the subscription will be automatic and cost effective 15 riyals per week</li>
+  <li>You can stop this service at any time by sending Unsub F to 92842</li>
+  <li>You must be 18 years of age or older or have permission from your parents or the person responsible for paying your bill in order to subscribe to this service</li>',
+    'repin' => 'Resend Pincode',
+    'confirm' => 'confirm',
+    'enterpin' => 'Please Enter Pincode',
+    'unsubscribe' => 'Unsubscribe',
+
     'info' => 'info',
     'du_enjoy' => 'Enjoy your time',
     'du_subscribe' => 'Subscribe ',
@@ -16,8 +34,8 @@ return [
     'end_pin' => 'Code time expires, please send the code again',
     'error_pin_confirm' => 'Activation error. Please enter the correct activation code',
     'du_unsub' => 'Unsubscribe',
-    'du_enjoy_flu' =>  'On your Snapchat Get Exclusive Rotana Snap Filters Cinema Drama Serial Action Movies & Romance',
-    'enter_seng' =>  'To receive your Filters click on Du tab below',
+    'du_enjoy_flu' => 'On your Snapchat Get Exclusive Rotana Snap Filters Cinema Drama Serial Action Movies & Romance',
+    'enter_seng' => 'To receive your Filters click on Du tab below',
 
     'short_code' => 'SHORT CODE',
     'right_to_list' => 'right to left',
@@ -117,7 +135,7 @@ return [
         'list-categories' => 'List Categories',
         'name-category' => 'Category Name',
     ],
-    'rbts' =>[
+    'rbts' => [
         'rbt-tap' => 'Rbt',
         'rbt-code' => 'Rbt Code',
         'operator-name' => 'Operator',
@@ -130,18 +148,18 @@ return [
         'rbt-sec' => 'ٌRbts',
         'update-rbt' => "Update Rbt",
     ],
-    'countries' =>[
+    'countries' => [
         'country' => 'Country',
         'country-title' => 'Country Name',
         'create-country' => 'Add Country',
         'update-country' => 'Update Country',
         'country-sec' => 'Countries',
-        'country_img' => 'Country Image' ,
+        'country_img' => 'Country Image',
         'country-ind' => 'List Countries',
         'create-county' => "Add Country",
         'country-action' => 'Action',
     ],
-    'poemsprov' =>[
+    'poemsprov' => [
         'poemsprov' => 'Poem Provider',
         'poemsprov-title' => 'Name',
         'poemsprov-catid' => 'Poem Category',
@@ -150,7 +168,7 @@ return [
         'update-poem' => "Update Poem Provider",
         'poem-action' => 'Action',
     ],
-    'provcontent' =>[
+    'provcontent' => [
         'provcontent' => 'Poem Provider Content',
         'provconttitle' => 'Title',
         'provcontbody' => 'Content',
@@ -160,7 +178,7 @@ return [
         'update-provcont' => "Update Provider Content",
         'provcont-action' => 'Action',
     ],
-     'posts' =>[
+    'posts' => [
         'post-tap' => 'Post',
         'p_date' => 'Publish Date',
         'post-sec' => 'Posts',
@@ -175,7 +193,7 @@ return [
         'update-post' => "Update Post",
         'post-img' => "Post Image",
     ],
-    'operators' =>[
+    'operators' => [
         'operator-tap' => 'Operator',
         'operator-title' => 'Operator Title',
         'operator-code' => 'Operator Code',
@@ -187,7 +205,7 @@ return [
         'operator-ind' => 'List Operators',
         'update-operator' => "Update Operator",
     ],
-     'content' => [
+    'content' => [
         'content' => 'Content',
         'content-action' => 'Action',
         'content-img' => 'Image',
@@ -196,8 +214,8 @@ return [
         'content-path' => 'URL',
         'content-title' => 'Title',
         'content-body' => 'Body',
-        'image_path'=> 'URL',
-        'file_path'=> 'File URL',
+        'image_path' => 'URL',
+        'file_path' => 'File URL',
         'contents' => 'Contents',
         'add-content' => 'Add Content',
         'create-content' => 'Create Content',
@@ -235,7 +253,7 @@ return [
     ],
     'approve' => [
         'approved' => 'Approved',
-        'not' => 'Not Approved'
+        'not' => 'Not Approved',
     ],
     'group' => [
         'group-name' => 'Group Name',
@@ -284,9 +302,9 @@ return [
         'message_quota' => 'Message Quota',
         'message_sent' => 'Message Sent',
         'role' => 'Role',
-        'phone' => 'Phone'
-      ],
-      'helps' => [
+        'phone' => 'Phone',
+    ],
+    'helps' => [
         'head' => 'How can we help you ?',
         'question' => 'Question',
         'answer' => 'Answer',
@@ -303,34 +321,34 @@ return [
         'quota-error' => 'user quota can not be greater then or equal to message sent',
         'updated' => 'updated successfuly',
         'no_selected_item' => 'No items selected',
-        'deleted' => 'Deleted Successfully'
+        'deleted' => 'Deleted Successfully',
     ],
-     'notification' => 'Notifications' ,
+    'notification' => 'Notifications',
 
-      'reports' => 'Reports' ,
-      'direct-message' => 'Direct Message' ,
-      'template' => [
-          'template' => 'Template',
-          'templates' => 'Templates',
-          'name' => 'Template Name',
-          'add' => 'Add new template',
-          'message' => 'Template message',
-          'delete' => 'Delete',
-          'edit' => 'Edit',
-          'delete_many' => 'Delete Selected'
-        ],
-        'zero' => 'You have Zero messages',
-        'notice' => 'Notice',
-        'audiance-connection' => 'Connection',
-        'connection' => [
-            'connection' => 'Connection',
-            'country' => 'Country',
-            'connections' => 'Connections',
-            'delete' => 'Delete',
-            'add' => 'Add new connection',
-            'edit' => 'Edit',
-            'connection-name' => 'Connection name',
-        ],
+    'reports' => 'Reports',
+    'direct-message' => 'Direct Message',
+    'template' => [
+        'template' => 'Template',
+        'templates' => 'Templates',
+        'name' => 'Template Name',
+        'add' => 'Add new template',
+        'message' => 'Template message',
+        'delete' => 'Delete',
+        'edit' => 'Edit',
+        'delete_many' => 'Delete Selected',
+    ],
+    'zero' => 'You have Zero messages',
+    'notice' => 'Notice',
+    'audiance-connection' => 'Connection',
+    'connection' => [
+        'connection' => 'Connection',
+        'country' => 'Country',
+        'connections' => 'Connections',
+        'delete' => 'Delete',
+        'add' => 'Add new connection',
+        'edit' => 'Edit',
+        'connection-name' => 'Connection name',
+    ],
     'home' => 'Home',
     'profile_info' => 'Profile Info',
     'edit_profile_picture' => 'Edit Profile Picture',
@@ -345,5 +363,5 @@ return [
     'static_translations' => 'static_translations',
     'translation' => 'TRANSLATION',
 
-    'today_filter' => 'Today Filter'
+    'today_filter' => 'Today Filter',
 ];
