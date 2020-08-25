@@ -185,17 +185,27 @@ class TimweController extends Controller
     return view('timweLanding.timwe_landing_he');
   }
 
-  public function msisdnRedirect(Request $request)
+  public function contentLinkWithMsisdn(Request $request)
   {
     $encryptedMsisdn = $request->msisdn;
     $msisdn = $this->decryptMsisdn($encryptedMsisdn);
 
-    return ($msisdn);
+    $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
+
+    $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+      ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+    if ($snap) {
+      return redirect(url('rotanav2/inner/' . $snap->id . '/' . $Url->UID .'?timwe_msisdn='. $msisdn));
+    } else {
+      return redirect(url('rotanav2/' . $Url->UID .'?timwe_msisdn='. $msisdn));
+    }
+
   }
 
   public function heRedirect()
   {
-    return redirect('http://helm.tekmob.com/pim/ooredooqaohe?redirectURL=' . url('/msisdnRedirect') . "&user=" . heUser . "&pass=" . hePass);
+    return redirect('http://helm.tekmob.com/pim/ooredooqaohe?redirectURL=' . url('/contentLinkWithMsisdn') . "&user=" . heUser . "&pass=" . hePass);
   }
 
   public function notificationMo(Request $request, $partnerRole)
@@ -546,11 +556,12 @@ class TimweController extends Controller
     }
   }
 
-  public function decryptMsisdn()
+  public function decryptMsisdn($encryptedMsisdn)
   {
-    $phrasetoEncrypt = base64_decode('IKWpOq9rhTAz/K1ZR0znPA=='); // msisdn encrypted
+    // $phrasetoEncrypt = base64_decode('IKWpOq9rhTAz/K1ZR0znPA=='); // msisdn encrypted
+    $phrasetoEncrypt = $encryptedMsisdn; // msisdn encrypted
 
-    $iv = base64_decode('yzXzUhr3OAt1A47g7zmYxw=='); //key
+    $iv = base64_decode('yzXzUhr3OAt1A47g7zmYxw=='); //iv
     $presharedKey = base64_decode('r/RloSflFkLj3Pq2gFmdBQ=='); //key encryption
     $method = "AES-128-CBC"; // method
 
