@@ -32,12 +32,24 @@
     background-image: url('{{url("assets/front/landing_v2/img/strip_green.png")}}');
   }
 
+  .landing_page .strip h2 {
+    font-size: 1.5rem;
+  }
+
   .landing_page .shbka h3 {
     font-size: 1rem;
-}
+  }
+
+  .landing_page .shbka h4 {
+    font-size: 17px;
+  }
 
   .landing_page .shbka .zain_viva #zain {
     width: 32%;
+  }
+
+  .landing_page .form_content {
+    margin: 0% auto 0 auto;
   }
 
   .landing_page .form_content form .form-group label {
@@ -51,9 +63,7 @@
     width: 45%;
   }
 
-  .terms {
-    font-size: 0.75rem;
-  }
+  .terms {font-size: 0.7rem;}
 </style>
 
 <body>
@@ -65,10 +75,6 @@
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
         </video>
-        <!-- <video width="100%" autoplay muted loop="true">
-                            <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
-                        </video> -->
-        <!-- <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر"> -->
       </div>
 
       <div class="strip">
@@ -77,7 +83,7 @@
 
       <div class="shbka">
         <div class="container">
-          <!-- <h3>اشترك الان</h3> -->
+
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -94,7 +100,7 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="container pt-2">
         <div class="form_content">
           <!--<h5>ادخل رقم الهاتف</h5>-->
           <form method="post" action="{{url('checkstatus')}}" onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
@@ -107,13 +113,14 @@
               <span class="validity"></span>
             </div>
             <!--<button class="btn back">رجوع</button>-->
-            <button id="zain_submit" class="btn" type="submit">اشترك</button>
+            <button id="zain_submit" class="btn" type="submit">دخول</button>
           </form>
         </div>
       </div>
     </div>
 
     <!-- copyright -->
+
     <div class="copy">
       <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
     </div>

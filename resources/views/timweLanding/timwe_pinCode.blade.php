@@ -12,7 +12,6 @@
   <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/main-style_zain.css">
 </head>
-
 <style>
   @media (min-width: 1025px) {
     body {
@@ -33,8 +32,16 @@
     background-image: url('{{url("assets/front/landing_v2/img/strip_green.png")}}');
   }
 
+  .landing_page .shbka h4 {
+    font-size: 17px;
+  }
+
   .landing_page .shbka .zain_viva #zain {
     width: 32%;
+  }
+
+  .landing_page .form_content {
+    margin: 0% auto 0 auto;
   }
 
   .landing_page .form_content form .form-group label {
@@ -49,10 +56,9 @@
   }
 
   .terms {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 </style>
-
 
 <body>
   <div class="main_container">
@@ -63,72 +69,86 @@
           <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/mp4">
           <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/ogg">
         </video>
-        <!-- <video width="100%" autoplay muted loop="true">
-                            <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
-                        </video> -->
-        <!-- <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر"> -->
       </div>
+
+
       <div class="strip">
-        <h2>ادخل كود التفعيل</h2>
+        <h5>@lang('messages.falater')</h5>
       </div>
 
-      <div class="shbka mt-2">
-        <div class="container">
-          <div class="zain_viva">
-            @if(Session::has('success'))
-            <div class="alert alert-success alert-dismissible">
-              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-              {{ Session::get('success')}}
-            </div>
-            @elseif(Session::has('failed'))
-            <div class="alert alert-danger alert-dismissible">
-              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-              {{ Session::get('failed')}}
-            </div>
-            @endif
-          </div>
-          <h4 class="text-white" style="font-size:25px;font-weight:bold">قيمة الاشتراك 10 ريال / الاسبوع</h4>
+      <div class="shbka text-white mt-1">
+        <p style="font-weight: bold; font-size:17px">@lang('messages.enterpin')</p style="font-weight: bold">
+      </div>
+
+      {{-- <div class="shbka pt-5">
+                <div class="container"> --}}
+      <div class="zain_viva w-75" style="margin: 0 auto">
+        @if(Session::has('success'))
+        <div class="alert alert-success alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{ Session::get('success')}}
         </div>
+        @elseif(Session::has('failed'))
+        <div class="alert alert-danger alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{ Session::get('failed')}}
+        </div>
+        @endif
       </div>
+      {{-- </div>
+            </div> --}}
 
-      <div class="container">
+      <div class="container pt-2">
         <div class="form_content">
           <!--<h5>ادخل رقم الهاتف</h5>-->
           {!! Form::open(['url'=>'subscription/confirm/'.partnerRoleId,'method'=>'post','class'=>'form']) !!}
           <div class="form-group">
-            <input style="width: 100% !important" type="tel" style="font-family: cursive" name="pincode" class="form-control" id="pincode" required pattern="[0-9]{4}">
+            <input style="width: 100% !important" type="tel" style="font-family: cursive" name="pincode"
+              class="form-control" id="pincode" required pattern="[0-9]{4}">
           </div>
-          <button class="btn" type="submit">تاكيد</button>
+          <h4 class="text-white" style="font-size:20px;font-weight:bold">@lang('messages.subweek')</h4>
+          <button class="btn" type="submit" style="width: 98%;">@lang('messages.confirm')</button>
           {!! Form::close() !!}
         </div>
       </div>
     </div>
-    <div class="cancel text-center mt-2">
+    <div class="cancel text-center mt-4">
       {!! Form::open(['url'=>'subscription/optin/'.partnerRoleId,'method'=>'post','class'=>'form']) !!}
       <div class="form-group">
-        <input type="tel" class="form-control" @if(session()->has('pincodephone')) value="{{session()->get('pincodephone')}}" @endif id="phone" required=""
-        placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}" hidden>
-        <input type="submit" value=" اضغط لارسال رمز التاكيد مرة اخري">
+        {{-- <input type="tel" class="form-control" @if(session()->has('pincodephone'))
+        value="{{session()->get('pincodephone')}}" @endif id="phone" required=""
+        placeholder="رقم الهاتف" name="number" required pattern="[0-9]{8}" hidden> --}}
+        <input type="submit" value="@lang('messages.repin')">
       </div>
       {!! Form::close() !!}
     </div>
-
-    <div class="container">
-      <ul class="terms text-right text-white  pr-3" dir="rtl">
-        <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة 10 ريال فى الاسبوع</li>
-        <li>يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال UNSUB FL الى 92842</li>
-        <li>يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
+    <!-- copyright -->
+    @if (session('applocale') == 'ar')
+    <ul class="terms text-right text-white" dir="rtl">
+      @else
+      <ul class="terms text-left text-white" dir="">
+        @endif
+        @lang('messages.terms')
       </ul>
-    </div>
+      <div class="copy">
+        <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
+      </div>
+      @php
+      $lang = App::getLocale() == 'ar' ? 'en' : 'ar';
+      $lang2 = App::getLocale() == 'ar' ? 'EN' : 'AR';
+      @endphp
+      @if ($lang == 'en')
+      <a class="btn btn-sm btn-success" style="position: fixed; top: 10px; right: 10px; padding: 10px;"
+        href="{{url('admin/lang/'.$lang)}}">{{$lang2}}</a>
+      @else
+      <a class="btn btn-sm btn-success" style="position: fixed; top: 10px; left: 10px; padding: 10px;"
+        href="{{url('admin/lang/'.$lang)}}">{{$lang2}}</a>
+      @endif
 
-    <!-- copyright -->
-    <div class="copy">
-      <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
-    </div>
-    <!-- copyright -->
+      <!-- copyright -->
 
-    <!-- loading -->
-    {{-- <div class="loading-overlay">
+      <!-- loading -->
+      {{-- <div class="loading-overlay">
         <div class="spinner">
             <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
   </div>

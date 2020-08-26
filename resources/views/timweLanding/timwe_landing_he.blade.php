@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!--Mobile Meta-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Filetrs landing page</title>
+  <title>snap landing page</title>
   <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="{{ url('assets/front/landing_v2')}}/css/main-style_zain.css">
@@ -41,7 +41,7 @@
   }
 
   .landing_page .shbka h4 {
-    font-size: 17px;
+    font-size: 0.9rem;
   }
 
   .landing_page .shbka .zain_viva #zain {
@@ -63,9 +63,7 @@
     width: 45%;
   }
 
-  .terms {
-    font-size: 0.7rem;
-  }
+  .terms {font-size: 0.8rem;}
 </style>
 
 <body>
@@ -73,21 +71,25 @@
     <div class="landing_page">
 
       <div class="start_video" id="video">
-        <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
+        <video width="100%" height="240px" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
         </video>
+        <!-- <video width="100%" autoplay muted loop="true">
+                            <source src="{{ url('assets/front/landing_v2')}}/video/1.mp4" type="video/mp4">
+                        </video> -->
+        <!-- <img width="100%" src="{{ url('assets/front/landing_v2')}}/img/01.jpg" alt="فلاتر"> -->
       </div>
 
       <div class="strip">
-        <h5>@lang('messages.enjoy') @lang('messages.falater')</h5>
+        <h2>استمتع بوقتك مع فلاتر</h2>
       </div>
 
       <div class="shbka">
         <div class="container">
-          <h3>@lang('messages.newfalater')</h3>
-
-          <div class="zain_viva w-75" style="margin: 0 auto">
+          <h3>اشترك الان</h3>
+          <h4 class="text-white">قيمة الاشتراك 10 ريال / الاسبوع</h4>
+          <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -106,60 +108,35 @@
       <div class="container pt-2">
         <div class="form_content">
           <!--<h5>ادخل رقم الهاتف</h5>-->
-          <form method="post" action="{{url('subscription/optin/'.partnerRoleId)}}"
-            onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
+          <form method="post" action="{{url('/heRedirect')}}" onsubmit="document.getElementById('zain_submit').disabled='true';" id="form_zain">
             {{ csrf_field() }}
-            <div class="form-group form-inline text-center">
+            <div class="form-group form-inline">
               <input type="hidden" name="type" value="rotana">
-              <label for="phone"><span>974</span></label>
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
-              @if (session()->has('landing_msisdn'))
-              {{-- {{dd('asd')}} --}}
-              <input type="tel" class="form-control" id="phone" required="" value="{{session()->get('landing_msisdn')}}"
-                placeholder="@lang('messages.enterphone')" name="number" required pattern="[0-9]{8}">
-              @else
-              {{-- {{dd('asd')}} --}}
-              <input type="tel" class="form-control" id="phone" required="" placeholder="@lang('messages.enterphone')"
-                name="number" required pattern="[0-9]{8}" style="">
-              @endif
               <span class="validity"></span>
             </div>
             <!--<button class="btn back">رجوع</button>-->
-            <p class="text-white" style="font-size:22px; font-weight:bolder">@lang('messages.subweek')</p>
-            <button id="zain_submit" class="btn" type="submit" style="width: 100%">@lang('messages.subscribe')</button>
+            <button id="zain_submit" class="btn" type="submit">اشترك</button>
           </form>
         </div>
       </div>
     </div>
     <div class="cancel text-center mt-3 text-white">
-      <p>@lang('messages.unsub') <a href="{{url('ooredoo_qatar_unsub' )}}">@lang('messages.link')</a></p>
+      <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('ooredoo_qatar_unsub' )}}">الرابط</a></p>
     </div>
     <!-- copyright -->
-    @if (session('applocale') == 'ar')
     <ul class="terms text-right text-white" dir="rtl">
-      @else
-      <ul class="terms text-left text-white" dir="">
-        @endif
-        @lang('messages.terms')
-      </ul>
-      <div class="copy">
-        <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
-      </div>
-      @php
-      $lang = App::getLocale() == 'ar' ? 'en' : 'ar';
-      $lang2 = App::getLocale() == 'ar' ? 'EN' : 'AR';
-      @endphp
-      @if ($lang == 'en')
-      <a class="btn btn-sm btn-success" style="position: fixed; top: 10px; right: 10px; padding: 10px;"
-        href="{{url('admin/lang/'.$lang)}}">{{$lang2}}</a>
-      @else
-      <a class="btn btn-sm btn-success" style="position: fixed; top: 10px; left: 10px; padding: 10px;"
-        href="{{url('admin/lang/'.$lang)}}">{{$lang2}}</a>
-      @endif
-      <!-- copyright -->
+      <li>تجديد الاشتراك سيكون تلقائي وفعال بتكلفة  10 ريال فى الاسبوع</li>
+      <li>يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال  SUB RF الى 92842</li>
+      <li>يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
+    </ul>
+    <div class="copy">
+      <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
+    </div>
+    <!-- copyright -->
 
-      <!-- loading -->
-      {{-- <div class="loading-overlay">
+    <!-- loading -->
+    {{-- <div class="loading-overlay">
         <div class="spinner">
             <img src="{{ url('assets/front/landing_v2')}}/img/logo.jpg" alt="loading_snap">
   </div>
