@@ -2,8 +2,9 @@
 return [
   'falater' => 'Falater',
   'enjoy' => 'enjoy with',
+  'newfalater' => 'The Newest Filters',
     'sub' => 'subscribe now',
-    'subweek' => '15 riyals / week',
+    'subweek' => '15 Riyals / week',
     'enterphone' => 'Enter phone number',
     'enterphone8' => 'please enter 8 num',
     'subscribe' => 'Subscribe',
