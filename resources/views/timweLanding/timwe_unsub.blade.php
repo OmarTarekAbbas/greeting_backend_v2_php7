@@ -64,7 +64,7 @@
       </div>
 
       <div class="strip">
-        <h5>@lang('messages.unsub')</h5>
+        <h5>@lang('messages.unsubfalater')</h5>
       </div>
 
 

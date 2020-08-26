@@ -7,6 +7,7 @@ return [
     'enterphone' => 'Enter phone number',
     'enterphone8' => 'please enter 8 num',
     'subscribe' => 'Subscribe',
+    'unsubfalater' => 'Unsubscribe',
     'unsub' => 'To unsubscribe, please click on this',
     'link' => 'link',
     'terms' => '<li>Renewing the subscription will be automatic and cost effective 15 riyals per week</li>
