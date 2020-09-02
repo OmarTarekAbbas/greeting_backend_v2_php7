@@ -672,12 +672,12 @@ class TimweController extends Controller
       } else {
         if ($ReqResponse['code'] == 'SUCCESS') {
           if (session('applocale') == 'ar')
-            return redirect('ooredoo_qatar_pin')->with('success', '!تم ارسال رمز التحقق');
-          return redirect('ooredoo_qatar_pin')->with('success', 'Pincode Sent!');
+            return redirect('ooredoo_q_pin')->with('success', '!تم ارسال رمز التحقق');
+          return redirect('ooredoo_q_pin')->with('success', 'Pincode Sent!');
         } else {
           if (session('applocale') == 'ar')
-            return redirect('ooredoo_qatar_landing')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
-          return redirect('ooredoo_qatar_landing')->with('failed', 'Error, please try again later');
+            return redirect('ooredoo_q')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+          return redirect('ooredoo_q')->with('failed', 'Error, please try again later');
         }
       }
     }
@@ -744,8 +744,8 @@ class TimweController extends Controller
     if ($ReqResponse['code'] == 'SUCCESS') {
       if ($ReqResponse['responseData']['subscriptionResult'] == 'OPTIN_CONF_WRONG_PIN') {
         if (session('applocale') == 'ar')
-        return redirect('ooredoo_qatar_pin')->with('failed', 'رقم التحقق خاطئ يرجي المحاولة مرة اخري');
-        return redirect('ooredoo_qatar_pin')->with('failed', 'Wrong pincode, please try again');
+        return redirect('ooredoo_q_pin')->with('failed', 'رقم التحقق خاطئ يرجي المحاولة مرة اخري');
+        return redirect('ooredoo_q_pin')->with('failed', 'Wrong pincode, please try again');
       }
 
       $subscribe = timweSubscriber::where('msisdn', session('userIdentifier'))->where('serviceId', productId)->first();
@@ -772,8 +772,8 @@ class TimweController extends Controller
 
     } else {
       if (session('applocale') == 'ar')
-        return redirect('ooredoo_qatar_pin')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
-      return redirect('ooredoo_qatar_pin')->with('failed', 'Error, please try again later');
+        return redirect('ooredoo_q_pin')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+      return redirect('ooredoo_q_pin')->with('failed', 'Error, please try again later');
     }
   }
 
@@ -849,12 +849,12 @@ class TimweController extends Controller
         'requestId' => $timewe->id,
       ]);
       if (session('applocale') == 'ar')
-        return redirect('ooredoo_qatar_unsub')->with('success', 'تم الغاء الاشتراك بنجاح');
-      return redirect('ooredoo_qatar_unsub')->with('success', 'Unsubscribe succesfully');
+        return redirect('ooredoo_q_unsub')->with('success', 'تم الغاء الاشتراك بنجاح');
+      return redirect('ooredoo_q_unsub')->with('success', 'Unsubscribe succesfully');
     } else {
       if (session('applocale') == 'ar')
-        return redirect('ooredoo_qatar_unsub')->with('failed', 'هذا الرقم غير مشترك بالخدمة');
-      return redirect('ooredoo_qatar_unsub')->with('failed', 'This number is not subscribed');
+        return redirect('ooredoo_q_unsub')->with('failed', 'هذا الرقم غير مشترك بالخدمة');
+      return redirect('ooredoo_q_unsub')->with('failed', 'This number is not subscribed');
     }
   }
 
@@ -942,7 +942,7 @@ class TimweController extends Controller
 
     if ($check['subscriptionResult'] == 'GET_STATUS_SUB_NOT_EXIST') {
 
-      return redirect('ooredoo_qatar_landing')->with('failed', 'انت غير مشترك حاليا, برجاء الاشتراك');
+      return redirect('ooredoo_q')->with('failed', 'انت غير مشترك حاليا, برجاء الاشتراك');
 
     } elseif ($check['subscriptionResult'] == 'GET_STATUS_OK') {
 
@@ -963,8 +963,8 @@ class TimweController extends Controller
 
     } else {
       if (session('applocale') == 'ar')
-        return redirect('ooredoo_qatar_login')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
-      return redirect('ooredoo_qatar_login')->with('failed', 'Error, please try again later');
+        return redirect('ooredoo_q_login')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
+      return redirect('ooredoo_q_login')->with('failed', 'Error, please try again later');
     }
 
   }
@@ -993,6 +993,6 @@ class TimweController extends Controller
     session()->forget('status');
     session()->forget('currentOp');
 
-    return redirect('ooredoo_qatar_landing');
+    return redirect('ooredoo_q');
   }
 }

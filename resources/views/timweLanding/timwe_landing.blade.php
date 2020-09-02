@@ -264,7 +264,7 @@ if ($lang == 'ar') {
     </ul>
 
     <div class="cancel text-center mt-3 text-white">
-      <p class="mb-0">@lang('messages.unsub') <a href="{{url('ooredoo_qatar_unsub' )}}">@lang('messages.link')</a></p>
+      <p class="mb-0">@lang('messages.unsub') <a href="{{url('ooredoo_q_unsub' )}}">@lang('messages.link')</a></p>
     </div>
 
     <div class="copy">

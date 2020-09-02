@@ -207,7 +207,7 @@ function redirect_operator() {
     }else if (strpos($operator->name, 'STC') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
       return 'landing_stc_ksa';
     }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'qatar') !== false) {
-      return 'ooredoo_qatar_login';
+      return 'ooredoo_q_login';
     } else {
         return 'landing_v1';
     }

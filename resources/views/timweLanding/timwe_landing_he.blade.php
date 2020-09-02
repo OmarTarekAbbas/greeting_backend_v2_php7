@@ -122,7 +122,7 @@
       </div>
     </div>
     <div class="cancel text-center mt-3 text-white">
-      <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('ooredoo_qatar_unsub' )}}">الرابط</a></p>
+      <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('ooredoo_q_unsub' )}}">الرابط</a></p>
     </div>
     <!-- copyright -->
     <ul class="terms text-right text-white" dir="rtl">
