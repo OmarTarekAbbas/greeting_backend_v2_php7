@@ -144,7 +144,7 @@
 
 
             <div class="cancel text-white">
-                <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('ooredoo_qatar_unsub' )}}">الرابط</a></p>
+                <p>لالغاء الاشتراك يرجي الضغط علي هذا <a href="{{url('ooredoo_q_unsub' )}}">الرابط</a></p>
             </div>
 
         </div>

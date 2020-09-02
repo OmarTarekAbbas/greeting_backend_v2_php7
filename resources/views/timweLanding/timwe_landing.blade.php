@@ -133,7 +133,7 @@
       </div>
     </div>
     <div class="cancel text-center mt-3 text-white">
-      <p>@lang('messages.unsub') <a href="{{url('ooredoo_qatar_unsub' )}}">@lang('messages.link')</a></p>
+      <p>@lang('messages.unsub') <a href="{{url('ooredoo_q_unsub' )}}">@lang('messages.link')</a></p>
     </div>
     <!-- copyright -->
     @if (session('applocale') == 'ar')

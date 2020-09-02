@@ -95,14 +95,14 @@ define('apikeysubscription', '8086e440d80847a6b534c88a6c33a172');
 define('presharedkeysubscription', 'cutfvCPZrlzMo6t8');
 /************* end config Timwe******************/
 
-Route::get('/ooredoo_qatar_landing_he', 'TimweController@landing_timwe_he');
+Route::get('/ooredoo_q_he', 'TimweController@landing_timwe_he');
 Route::get('/contentLinkWithMsisdn', 'TimweController@contentLinkWithMsisdn');
 Route::post('/heRedirect', 'TimweController@heRedirect');
-Route::get('ooredoo_qatar_landing', 'TimweController@index');
-Route::get('ooredoo_qatar_pin', 'TimweController@pincode');
-Route::get('ooredoo_qatar_unsub', 'TimweController@unsubscribe');
+Route::get('ooredoo_q', 'TimweController@index');
+Route::get('ooredoo_q_pin', 'TimweController@pincode');
+Route::get('ooredoo_q_unsub', 'TimweController@unsubscribe');
 Route::get('timwe_test', 'TimweController@timwe_test');
-Route::get('ooredoo_qatar_login', 'TimweController@login');
+Route::get('ooredoo_q_login', 'TimweController@login');
 Route::post('checkstatus', 'TimweController@checkStatusLogin');
 
 //Timwe Api

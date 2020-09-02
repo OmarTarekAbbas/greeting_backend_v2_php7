@@ -77,7 +77,7 @@
 </style>
 
 <body class="main_container">
-    
+
   <div class="confirm_page">
     <img src="{{url('assets/front/rotanav2/images/Rorana_flater_logo.png')}}" alt="snap">
 
@@ -106,7 +106,7 @@
                 <button class="btn" type="submit" >تاكيد</button>
              {!! Form::close() !!}
 
-             <p>لم تصلك رسالةالتفعيل؟ اضغط علي <a href="{{url('ooredoo_qatar_landing' )}}">الرابط</a></p>
+             <p>لم تصلك رسالةالتفعيل؟ اضغط علي <a href="{{url('ooredoo_q' )}}">الرابط</a></p>
 
 
         </div>
