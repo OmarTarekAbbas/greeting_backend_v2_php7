@@ -132,9 +132,7 @@
         </div>
       </div>
     </div>
-    <div class="cancel text-center mt-3 text-white">
-      <p>@lang('messages.unsub') <a href="{{url('ooredoo_q_unsub' )}}">@lang('messages.link')</a></p>
-    </div>
+    <br>
     <!-- copyright -->
     @if (App::getLocale()  == 'ar')
     <ul class="terms text-right text-white" dir="rtl">
@@ -143,6 +141,9 @@
         @endif
         @lang('messages.terms')
       </ul>
+      <div class="cancel text-center mt-3 text-white">
+        <p style="font-size:9px">@lang('messages.unsub') <a href="{{url('ooredoo_q_unsub' )}}">@lang('messages.link')</a></p>
+      </div>
       <div class="copy">
         <p>copyright @ <span>{{date('Y')}}</span> Digizone, all rights reserved.</p>
       </div>
