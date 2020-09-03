@@ -136,7 +136,7 @@
       <p>@lang('messages.unsub') <a href="{{url('ooredoo_q_unsub' )}}">@lang('messages.link')</a></p>
     </div>
     <!-- copyright -->
-    @if (session('applocale') == 'ar')
+    @if (App::getLocale()  == 'ar')
     <ul class="terms text-right text-white" dir="rtl">
       @else
       <ul class="terms text-left text-white" dir="">

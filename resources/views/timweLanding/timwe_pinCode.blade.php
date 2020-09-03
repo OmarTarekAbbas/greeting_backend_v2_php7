@@ -124,7 +124,7 @@
       {!! Form::close() !!}
     </div>
     <!-- copyright -->
-    @if (session('applocale') == 'ar')
+    @if (App::getLocale() == 'ar')
     <ul class="terms text-right text-white" dir="rtl">
       @else
       <ul class="terms text-left text-white" dir="">
