@@ -254,7 +254,7 @@ if ($lang == 'ar') {
     </div>
 
     <!-- copyright -->
-    @if (session('applocale') == 'ar')
+    @if ($lang == 'ar')
     <ul class="terms text-right text-white mt-3" dir="rtl">
       @else
       <ul class="terms text-left text-white mt-3" dir="ltr">
