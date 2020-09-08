@@ -18,15 +18,19 @@
 </head>
 
 <style>
-  body{
-    font-family: sans-serif;
+
+  @media (min-width: 1025px) {
+    body {
+      background-image: url('{{url("assets/front/landing_v2/img/BG_new.png")}}');
+      font-family: sans-serif;
+    }
   }
   .main_container {
-    background-image: url('assets/front/landing_v2/img/stc_BG.png');
+    background-image: url('assets/front/landing_v2/img/BG_new.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: unset;
   }
 
   .landing_page .strip {
@@ -48,6 +52,12 @@
     font-size: 1.35rem;
     width: 45%;
   }
+  .confirm_page .confirm .btn {
+     background-color: white;
+    color: #000;
+    margin: 15px;
+    width: 50%;
+}
 </style>
 
 <body>
@@ -79,7 +89,7 @@
                 </div>
                 <input type="hidden"  name="msisdn" value="{{$msisdn}}">
 
-                <button class="btn" type="submit" >تاكيد</button>
+                <button id="zain_submit" class="btn btn-sm" type="submit" >تاكيد</button>
              {!! Form::close() !!}
         </div>
     </div>

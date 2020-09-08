@@ -18,23 +18,35 @@
 </head>
 
 <style>
-  @media (min-width: 1025px) {
-  body {
-    background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
-}
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  @media (min-width: 1025px) {
+    body {
+      background-image: url('{{url("assets/front/landing_v2/img/BG_new.png")}}');
+    }
+  }
+
   .main_container {
-    background-image: url('assets/front/landing_v2/img/stc_BG.png');
+    background-image: url('assets/front/landing_v2/img/BG_new.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: unset;
   }
 
-  .landing_page .strip {
+  /* .landing_page .strip {
     margin-top: -2.5%;
     background-image: url('assets/front/landing_v2/img/strip_green.png');
-  }
+  } */
 
   .landing_page .shbka .zain_viva #zain {
     width: 32%;
@@ -42,20 +54,72 @@
 
   .landing_page .form_content form .form-group label {
     background-color: #141719;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
   }
 
   .landing_page .form_content form .btn {
     background-color: #FFF;
     color: #000;
-    font-size: 1.35rem;
-    width: 45%;
+    width: 49%;
+    font-size: 15px;
+    font-weight: bold;
   }
+
+
+  .terms {
+    font-size: 11px;
+    background: #000000a3;
+    border-radius: 3px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .landing_page .form_content {
+    margin: -9% auto 0 auto;
+  }
+
+  @media (max-width: 1025px) and (min-width: 1024px) {
+
+    .landing_page .form_content {
+      margin: 5% auto 0 auto;
+    }
+
+    .terms {
+      font-size: 29px;
+      background: #000000a3;
+      border-radius: 3px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+  }
+
+  @media (max-width: 1023.9px) and (min-width: 768px) {
+    .landing_page .form_content {
+      margin: 5% auto 0 auto;
+    }
+
+    .landing_page .form_content form .form-group input {
+      width: 69%;
+    }
+    .terms {
+    font-size: 15px;
+    background: #000000a3;
+    border-radius: 3px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+  }
+
+
 </style>
 
 <body>
   <div class="main_container">
     <div class="landing_page">
-
+      <div style="text-align:center">
+        <img src="{{url('assets/front/landing_v2/img/FALATR_LOGO.png')}}" alt="FALATR LOGO" style="width: 45%;padding: 12px;">
+      </div>
       <div class="start_video" id="video">
         <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
@@ -68,12 +132,12 @@
       </div>
 
       <div class="strip">
-        <h3>استمتع بوقتك مع فلاتر </h3>
+        <h4> STC لعملاء شبكة</h4>
+        <h4> احصل علي اروع الفلاتر</h4>
       </div>
 
       <div class="shbka">
         <div class="container">
-          <h3 >اشترك الان</h3>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -99,9 +163,9 @@
                                 <img src="img/viva.png" id="viva">
                             </div>-->
 
-              <div class="col-12">
+              <!-- <div class="col-12">
                 <img src="{{ url('assets/front/landing_v2')}}/img/stc_new.png" id="zain">
-              </div>
+              </div> -->
 
               <!--<div class="col-12">
                                 <img src="img/oredoo.png" id="ooredoo">
@@ -118,22 +182,28 @@
             {{ csrf_field() }}
             <div class="form-group form-inline">
               <label for="phone"><span>+ 966</span></label>
-              <input type="number" class="form-control" id="phone" value="" placeholder="أدخل رقم تليفونك" name="number" required pattern="[0-9]{9}">
+              <input type="number" class="form-control" id="phone" min="0" value="" placeholder="ادخل الرقم هاتفك الاشتراك" name="number" required pattern="[0-9]{9}">
               <i style="display:none" class="ml-2 fa fa-check text-success"></i>
             </div>
             <!--<button class="btn back">رجوع</button>-->
-            <button style="margin-bottom:30px;"  id="zain_submit" class="btn" type="submit">أشترك</button>
+            <button style="margin-bottom:30px;" id="zain_submit" class="btn btn-sm" type=" submit">أشترك</button>
           </form>
-          {{--  <a  href="{{url('stc_ksa_unsub')}}" class="btn btn-primary" type="">الغاء الاشتراك</a>  --}}
+          {{-- <a  href="{{url('stc_ksa_unsub')}}" class="btn btn-primary" type="">الغاء الاشتراك</a> --}}
         </div>
       </div>
-
+      <div class="container">
+        <ul class="terms text-right text-white" dir="rtl">
+          <li> تجديد الاشتراك سيكون تلقائي وفعال بتكلفة 10 ريال فى الاسبوع</li>
+          <li> يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال Unsub ISL الى 92842</li>
+          <li> يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
+        </ul>
+      </div>
     </div>
 
     <!-- copyright -->
-    <div class="copy">
+    <!-- <div class="copy">
       <p>copyright @ <span><?php echo date("Y") ?></span> Digizone, all rights reserved.</p>
-    </div>
+    </div> -->
     <!-- copyright -->
 
 
@@ -142,7 +212,7 @@
   <script src="{{ url('assets/front/landing_v2')}}/js/jquery-3.3.1.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/popper.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
-  {{--  <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script>  --}}
+  {{-- <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script> --}}
 
   <script>
     jQuery(function() {
