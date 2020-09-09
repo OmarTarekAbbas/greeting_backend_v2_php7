@@ -33,6 +33,25 @@
     body {
       background-image: url('{{url("assets/front/landing_v2/img/BG_new.png")}}');
     }
+
+    .main_container {
+      background-image: url('assets/front/landing_v2/img/BG_new.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: unset !important;
+    }
+
+    .terms {
+      padding-right: 22px;
+      padding-left: 0;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .landing_page .start_video {
+      margin-top: 11%;
+    }
   }
 
   .main_container {
@@ -40,7 +59,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: unset;
+    background-attachment: fixed;
   }
 
   /* .landing_page .strip {
@@ -56,6 +75,7 @@
     background-color: #141719;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
+    padding: 4px;
   }
 
   .landing_page .form_content form .btn {
@@ -66,23 +86,37 @@
     font-weight: bold;
   }
 
+  .landing_page .start_video {
+    margin-top: 8%;
+  }
 
   .terms {
     font-size: 11px;
     background: #000000a3;
-    border-radius: 3px;
     padding-bottom: 10px;
     padding-top: 10px;
   }
 
+  .terms li {
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+  }
+
   .landing_page .form_content {
-    margin: -9% auto 0 auto;
+    /* margin: 5% auto 0 auto; */
   }
 
   @media (max-width: 1025px) and (min-width: 1024px) {
-
-    .landing_page .form_content {
+    /* .landing_page .form_content {
       margin: 5% auto 0 auto;
+    } */
+
+    .landing_page .form_content form .form-group input {
+      width: 80%;
+    }
+
+    .landing_page .form_content form i {
+      font-size: 1.75rem;
     }
 
     .terms {
@@ -95,29 +129,32 @@
   }
 
   @media (max-width: 1023.9px) and (min-width: 768px) {
-    .landing_page .form_content {
+    /* .landing_page .form_content {
       margin: 5% auto 0 auto;
-    }
+    } */
 
     .landing_page .form_content form .form-group input {
-      width: 69%;
+      width: 75%;
     }
+
+    .landing_page .form_content form i {
+      font-size: 1.75rem;
+    }
+
     .terms {
-    font-size: 15px;
-    background: #000000a3;
-    border-radius: 3px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
+      font-size: 15px;
+      background: #000000a3;
+      border-radius: 3px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
   }
-
-
 </style>
 
 <body>
   <div class="main_container">
     <div class="landing_page">
-      <div style="text-align:center">
+      <div class="text-center">
         <img src="{{url('assets/front/landing_v2/img/FALATR_LOGO.png')}}" alt="FALATR LOGO" style="width: 45%;padding: 12px;">
       </div>
       <div class="start_video" id="video">
@@ -191,8 +228,9 @@
           {{-- <a  href="{{url('stc_ksa_unsub')}}" class="btn btn-primary" type="">الغاء الاشتراك</a> --}}
         </div>
       </div>
+
       <div class="container">
-        <ul class="terms text-right text-white" dir="rtl">
+        <ul class="terms text-right text-white rounded" dir="rtl">
           <li> تجديد الاشتراك سيكون تلقائي وفعال بتكلفة 10 ريال فى الاسبوع</li>
           <li> يمكنك إيقاف هذه الخدمة في أي وقت عن طريق إرسال Unsub ISL الى 92842</li>
           <li> يجب ان يكون عمرك 18 عاماً أو أكثر أو لديك الإذن من والديك أو الشخص المسؤول عن دفع فاتورتك حتى تستطيع الاشتراك هذه الخدمة</li>
