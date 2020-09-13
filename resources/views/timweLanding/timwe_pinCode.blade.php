@@ -214,6 +214,7 @@ if ($lang == 'ar') {
             <input type="tel" style="font-family: cursive" name="pincode" placeholder="@lang('messages.enterpin')" class="form-control w-100 text-center" id="pincode" required pattern="[0-9]{4}">
           </div>
           <h4 class="text-white" style="font-size:20px;font-weight:bold">@lang('messages.subweek')</h4>
+          <p class="text-white" style="font-size:16px; font-weight:bolder">@lang('messages.renew')</p>
           <button class="btn" type="submit" style="width: 98%;">@lang('messages.confirm')</button>
           {!! Form::close() !!}
         </div>

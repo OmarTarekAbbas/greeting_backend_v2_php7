@@ -2,6 +2,7 @@
 return [
   'falater' => 'Falater',
   'enjoy' => 'enjoy with',
+  'renew' => 'Auto-Renewed',
   'newfalater' => 'The Newest Filters',
     'sub' => 'subscribe now',
     'subweek' => '15 Riyals / week',
