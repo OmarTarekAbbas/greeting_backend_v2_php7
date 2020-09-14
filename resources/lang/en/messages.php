@@ -12,7 +12,7 @@ return [
     'unsubfalater' => 'Unsubscribe',
     'unsub' => 'To unsubscribe, please click on this',
     'link' => 'link',
-    'terms' => '<li>Renewing the subscription will be automatic and cost effective 15 riyals per week</li>
+    'terms' => '<li>Renewing the subscription will be automatic and cost effective 10 riyals per week</li>
   <li>You can stop this service at any time by sending Unsub FL to 92842</li>
   <li>You must be 18 years of age or older or have permission from your parents or the person responsible for paying your bill in order to subscribe to this service</li>',
     'repin' => 'Resend Pincode',
