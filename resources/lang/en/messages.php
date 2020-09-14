@@ -5,7 +5,7 @@ return [
   'renew' => 'Auto-Renewed',
   'newfalater' => 'The Newest Filters',
     'sub' => 'subscribe now',
-    'subweek' => '15 Riyals / week',
+    'subweek' => '10 Riyals / week',
     'enterphone' => 'Enter phone number',
     'enterphone8' => 'please enter 8 num',
     'subscribe' => 'Subscribe',
