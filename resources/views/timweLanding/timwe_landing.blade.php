@@ -127,6 +127,7 @@
             </div>
             <!--<button class="btn back">رجوع</button>-->
             <p class="text-white" style="font-size:22px; font-weight:bolder">@lang('messages.subweek')</p>
+            <p class="text-white" style="font-size:16px; font-weight:bolder">@lang('messages.renew')</p>
             <button id="zain_submit" class="btn" type="submit" style="width: 100%">@lang('messages.subscribe')</button>
           </form>
         </div>

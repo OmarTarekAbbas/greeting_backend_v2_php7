@@ -108,6 +108,7 @@
               class="form-control" id="pincode" required pattern="[0-9]{4}">
           </div>
           <h4 class="text-white" style="font-size:20px;font-weight:bold">@lang('messages.subweek')</h4>
+          <h4 class="text-white" style="font-size:16px;font-weight:bold">@lang('messages.renew')</h4>
           <button class="btn" type="submit" style="width: 98%;">@lang('messages.confirm')</button>
           {!! Form::close() !!}
         </div>

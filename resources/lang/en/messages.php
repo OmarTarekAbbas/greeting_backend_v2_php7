@@ -1,10 +1,11 @@
 <?php
 return [
     'falater' => 'Falater Rotana',
+    'renew' => 'Auto-Renewed',
     'newfalater' => 'New Filters Daily',
     'enjoy' => 'Subscribe in',
     'sub' => 'subscribe now',
-    'subweek' => '15 riyals / week',
+    'subweek' => '10 riyals / week',
     'enterphone' => 'Enter phone number',
     'enterphone8' => 'please enter 8 num',
     'subscribe' => 'Subscribe',
