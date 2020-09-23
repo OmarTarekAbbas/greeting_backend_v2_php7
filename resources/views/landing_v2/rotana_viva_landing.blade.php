@@ -140,7 +140,7 @@
     <br>
     <div class="container">
         <ul class="terms text-right text-white rounded" dir="rtl">
-          <li>0.75 هللة يومياً (شامل قيمة الضريبة المضافة)</li>
+          <li>1 ريال يوميا (شامل قيمة الضريبة المضافة)</li>
           <li>تم تحصيل مبلغ الضريبة لعملاء مسبق الدفع عند عملية شحن الرصيد</li>
         </ul>
       </div>
