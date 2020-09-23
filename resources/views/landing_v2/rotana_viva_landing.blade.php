@@ -138,12 +138,12 @@
 
     </div>
     <br>
-    <div class="container">
+    {{-- <div class="container">
         <ul class="terms text-right text-white rounded" dir="rtl">
           <li>1 ريال يوميا (شامل قيمة الضريبة المضافة)</li>
           <li>تم تحصيل مبلغ الضريبة لعملاء مسبق الدفع عند عملية شحن الرصيد</li>
         </ul>
-      </div>
+      </div> --}}
     </div>
     <!-- copyright -->
     <div class="copy">
