@@ -56,6 +56,15 @@
     font-size: 1.35rem;
     width: 45%;
   }
+  .terms {
+    font-size: 13px;
+      background: #000000a3;
+      border-radius: 3px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+
+
 </style>
 
 <body>
@@ -128,7 +137,14 @@
       </div>
 
     </div>
-
+    <br>
+    <div class="container">
+        <ul class="terms text-right text-white rounded" dir="rtl">
+          <li>0.75 هللة يومياً (شامل قيمة الضريبة المضافة)</li>
+          <li>تم تحصيل مبلغ الضريبة لعملاء مسبق الدفع عند عملية شحن الرصيد</li>
+        </ul>
+      </div>
+    </div>
     <!-- copyright -->
     <div class="copy">
       <p>copyright @ <span><?php echo date("Y") ?></span> Digizone, all rights reserved.</p>
