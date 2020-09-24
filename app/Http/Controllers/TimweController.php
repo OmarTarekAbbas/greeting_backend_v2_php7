@@ -20,6 +20,11 @@ class TimweController extends Controller
 
   public function ooredoo_qatar_login()
   {
+    return view('timweLanding.timwe_login');
+  }
+
+  public function index()
+  {
     $msisdn = $_SERVER['cli '] ?? session()->get('userIdentifier');
     $msisdn = str_replace("974", "", $msisdn);
 
@@ -27,12 +32,7 @@ class TimweController extends Controller
     $URL = url()->current();
     $this->log($actionName, $URL, $_SERVER);
 
-    return view('timweLanding.timwe_login', compact('msisdn'));
-  }
-
-  public function index()
-  {
-    return view('timweLanding.timwe_landing');
+    return view('timweLanding.timwe_landing', 'msisdn');
   }
 
   public function pincode()
