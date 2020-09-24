@@ -25,12 +25,19 @@ class TimweController extends Controller
 
   public function index()
   {
-    $msisdn = $_SERVER['cli '] ?? session()->get('userIdentifier');
+    $msisdn = $_SERVER['HTTP_CLI'] ?? session()->get('userIdentifier');
     $msisdn = str_replace("974", "", $msisdn);
 
     $actionName = 'Timwe_HE';
     $URL = url()->current();
-    $this->log($actionName, $URL, $_SERVER);
+
+    $param['date'] = date();
+    $param['msisdn'] = $msisdn;
+
+    $vars['server'] = $_SERVER;
+    $vars['msisdn'] = $param;
+
+    $this->log($actionName, $URL, $vars);
 
     return view('timweLanding.timwe_landing', 'msisdn');
   }
