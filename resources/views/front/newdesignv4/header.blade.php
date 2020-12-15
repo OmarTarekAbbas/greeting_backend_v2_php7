@@ -29,8 +29,15 @@
 	<link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/animate.css">
 	<!-- Animate CSS-->
 	<link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/magic.css">
-	<!-- Style CSS-->
-	<link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/style.css">
+  <!-- Style CSS-->
+
+@if( OP() == timwe_op_id())
+<link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/style.css">
+@else
+<link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/style.css">
+@endif
+
+
     <style>
     .yousefh3 {
         font-size: 134%;
