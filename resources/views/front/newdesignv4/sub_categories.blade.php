@@ -21,8 +21,11 @@
       <div class="row m-auto" id="categoryStatus" action="inactive" page='1'>
         <div class="col-12 mb-3 swirl-out-bck">
           <div class="sub_img">
-            <img class="w-75 m-auto d-block" src="{{url('assets/front/newdesignv4')}}/images/new_cutting/strip.png"
-              alt="strip">
+          @if( OP() == timwe_op_id())
+          <img class="w-75 m-auto d-block" src="{{url('assets/front/newdesignv4')}}/images/orooedoo/VectorSmart Object114.png" alt="strip">
+          @else
+          <img class="w-75 m-auto d-block" src="{{url('assets/front/newdesignv4')}}/images/new_cutting/strip.png" alt="strip">
+          @endif
             <img class="frame_icon rounded-circle" src="{{url('/'.$Occasion->image)}}" alt="{{$Occasion->getTranslation('title',getCode())}}">
           </div>
 

@@ -32,7 +32,7 @@
   <!-- Style CSS-->
 
 @if( OP() == timwe_op_id())
-<link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/style.css">
+<link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/style_oq.css">
 @else
 <link rel="stylesheet" href="{{url('assets/front/newdesignv4/')}}/css/style.css">
 @endif

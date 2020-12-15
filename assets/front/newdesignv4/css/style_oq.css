@@ -58,7 +58,7 @@ body {
 header {
   width: 100%;
   height: 70px;
-  background-color: #7b407a;
+  background-color: #eb1c23;
   padding: 6px 10px;
 }
 header .h_arrow {
@@ -113,7 +113,7 @@ header .logo-title img {
   left: 7%;
   top: 48%;
   transform: translate(-50%, -50%);
-  color: #7b407a;
+  color: #eb1c23;
   z-index: 2;
 }
 .search #myInput {
@@ -142,7 +142,7 @@ header .logo-title img {
 .search input.input-right + .bord {
   position: absolute;
   bottom: 11px;
-  background-color: #7b407a;
+  background-color: #eb1c23;
   width: 0;
   height: 3px;
   transition: all 0.4s ease-in-out;
@@ -190,10 +190,10 @@ header .logo-title img {
 }
 .main .owl-theme .owl-dots .owl-dot.active span,
 .main .owl-theme .owl-dots .owl-dot:hover span {
-  background-color: #7b407a;
+  background-color: #eb1c23;
 }
 .main .user_filter .use_filter_link {
-  background: linear-gradient(45deg, #793e79, #0f2046);
+  background: linear-gradient(45deg, #eb1c23, #7e2f32);
   color: #FFF;
   cursor: pointer;
   position: absolute;
@@ -310,7 +310,7 @@ header .logo-title img {
 }
 .main .status .s_title {
   text-align: right;
-  color: #7b407a;
+  color: #eb1c23;
   padding: 0 10px;
 }
 .main .status .contant {
@@ -322,7 +322,7 @@ header .logo-title img {
   position: relative;
 }
 .main .status .contant .filter-img i {
-  color: #7b407a;
+  color: #eb1c23;
   position: absolute;
   left: 50%;
   top: 84%;
@@ -351,7 +351,7 @@ header .logo-title img {
 .main .status .contant .owl-carousel.owl-three .item .heart_one,
 .main .status .contant .owl-carousel.owl-three .item .heart_two {
   position: absolute;
-  color: #7b407a;
+  color: #eb1c23;
   cursor: pointer;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -379,7 +379,7 @@ header .logo-title img {
 .main .status .contant .owl-carousel.owl-two button.owl-prev,
 .main .status .contant .owl-carousel.owl-three button.owl-next,
 .main .status .contant .owl-carousel.owl-three button.owl-prev {
-  color: #7b407a;
+  color: #eb1c23;
   position: absolute;
   bottom: 30%;
   font-size: 20px;
@@ -421,7 +421,7 @@ header .logo-title img {
 /*------------------------------------- Start Categories & Sub_cat Page --------------------------------------*/
 .categories_page .s_title {
   text-align: right;
-  color: #7b407a;
+  color: #eb1c23;
   padding: 0 10px;
 }
 .categories_page .s_title h4 {
@@ -437,7 +437,7 @@ header .logo-title img {
   margin-top: 6%;
 }
 .categories_page .categories_page_title {
-  color: #7b407a;
+  color: #eb1c23;
 }
 .categories_page .categories_page_title h3 {
   font-size: 23px;
@@ -493,7 +493,7 @@ header .logo-title img {
   position: relative;
 }
 .categories_page .download_share .background_strip {
-  background-color: #7b407a;
+  background-color: #eb1c23;
   color: #FFF;
   height: 50px;
   border-radius: 50px;
@@ -513,7 +513,7 @@ header .logo-title img {
 }
 .categories_page .download_share .background_strip:hover, .categories_page .download_share .background_strip:focus, .categories_page .download_share .background_strip:active {
   background-color: #FFF;
-  color: #7b407a;
+  color: #eb1c23;
 }
 .categories_page .roll-in-bottom {
   -webkit-animation: roll-in-bottom 1s ease-in-out 1.5s both;
@@ -618,7 +618,7 @@ footer .footer {
   position: fixed;
   width: 100%;
   bottom: 0;
-  background-color: #7b407a;
+  background-color: #eb1c23;
   height: 55px;
   padding: 5px;
   z-index: 2;
@@ -1052,7 +1052,7 @@ footer .footer {
 #snapModal2 .modal-footer a {
   display: inline-block;
   margin: auto;
-  background: #7b407a;
+  background: #eb1c23;
   width: 50%;
   text-align: center;
   height: 35px;
@@ -1073,4 +1073,4 @@ footer .footer {
 
 /*------------------------------------------- End Modal For Share ---------------------------------------*/
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=style_oq.css.map */
