@@ -7,11 +7,23 @@
 .row {
   margin-right: 0;
 }
+</style>
+@if( OP() == timwe_op_id())
+<style>
 .categories_page .categories_page_bg{
   background-color: #ffffff;
-  border-radius: 7px
+  border-radius: 7px;
+  border: 1px solid  #eb1c23;
 }
 </style>
+@else
+<style>
+.categories_page .categories_page_bg{
+  background-color: #ffffff;
+  border-radius: 7px;
+}
+</style>
+@endif
 @include('front.newdesignv4.search')
 
 
