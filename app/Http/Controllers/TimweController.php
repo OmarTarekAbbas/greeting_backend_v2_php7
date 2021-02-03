@@ -39,7 +39,7 @@ class TimweController extends Controller
 
     $this->log($actionName, $URL, $vars);
 
-    return view('timweLanding.timwe_landing', 'msisdn');
+    return view('timweLanding.timwe_landing', compact('msisdn'));
   }
 
   public function pincode()
