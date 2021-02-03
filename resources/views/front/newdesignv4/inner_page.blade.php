@@ -23,7 +23,12 @@
 
         <div class="col-12 mb-3 swirl-out-bck">
           <div class="sub_img">
-            <img class="w-75 m-auto d-block" src="{{url('assets/front/newdesignv4')}}/images/new_cutting/strip.png" alt="strip">
+          @if( OP() == timwe_op_id())
+          <img class="w-75 m-auto d-block" src="{{url('assets/front/newdesignv4')}}/images/orooedoo/VectorSmart Object114.png" alt="strip">
+          @else
+          <img class="w-75 m-auto d-block" src="{{url('assets/front/newdesignv4')}}/images/new_cutting/strip.png" alt="strip">
+          @endif
+
             <img class="frame_icon rounded-circle" src="{{url('/'.$Rdata->path)}}" alt="{{$Rdata->getTranslation('title',getCode())}}">
           </div>
 
@@ -44,7 +49,11 @@
         <div class="col-12 text-center m-auto">
           <div class="download_share">
             <a href="{{$Rdata->snap_link}}">
-              <img class="w-50" src="{{url('assets/front/newdesignv4')}}/images/new_cutting/shape.png" alt="download">
+            @if( OP() == timwe_op_id())
+            <img class="w-50" src="{{url('assets/front/newdesignv4')}}/images/orooedoo/Rounded Rectangle 216.png" alt="download">
+            @else
+            <img class="w-50" src="{{url('assets/front/newdesignv4')}}/images/new_cutting/shape.png" alt="download">
+            @endif
               <h3 class="yousefh3 text-center">{!! static_lang('usefilter')?static_lang('usefilter'): 'استخدم الفلتر' !!}</h3>
             </a>
           </div>
@@ -54,7 +63,11 @@
         <div class="col-12 text-center m-auto">
           <div class="download_share">
             <a href="#" data-toggle="modal" data-target="#snapModal2">
-              <img class="w-50" src="{{url('assets/front/newdesignv4')}}/images/new_cutting/shape.png" alt="Share">
+            @if( OP() == timwe_op_id())
+            <img class="w-50" src="{{url('assets/front/newdesignv4')}}/images/orooedoo/Rounded Rectangle 216.png" alt="download">
+            @else
+            <img class="w-50" src="{{url('assets/front/newdesignv4')}}/images/new_cutting/shape.png" alt="Share">
+            @endif
               <h3 class="yousefh3 text-center">{{static_lang('share')?static_lang('share'): 'مشاركة' }}</h3>
             </a>
           </div>

@@ -31,11 +31,9 @@ class TimweController extends Controller
     $actionName = 'Timwe_HE';
     $URL = url()->current();
 
-    $param['date'] = date('Y-M-d');
-    $param['msisdn'] = $msisdn;
 
     $vars['server'] = $_SERVER;
-    $vars['msisdn'] = $param;
+    $vars['HTTP_CLI'] = $_SERVER['HTTP_CLI'] ?? "";
 
     $this->log($actionName, $URL, $vars);
 
