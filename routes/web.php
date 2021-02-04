@@ -93,7 +93,7 @@ define('serviceNode',"IVAS");
 Route::get('/', function () {
     return redirect('landing');
 });
-Route::get('landing', 'HomeController@he_redirect');
+Route::get('ooredoo_landing', 'HomeController@he_redirect');
 Route::get('ooredoo_login', 'HomeController@login'); // login page without any detection
 Route::get('login', 'HomeController@login');
 Route::get('he_redirect', 'HomeController@he_redirect');  // this redirect to "ooredoo_he"
