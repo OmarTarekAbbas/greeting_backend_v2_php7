@@ -308,6 +308,7 @@ define('SNAP_VIVA_CHANNEL_ID',4493);
 define('viva_kuwait_operator_id',13);
 
 
+
 /* Zain Iraq Landing */
 Route::get('landing_iraq_1', 'FrontEndController@zain_iraq_landing_new');
 Route::get('zain_iraq_landing_old', 'FrontEndController@zain_iraq_landing');
