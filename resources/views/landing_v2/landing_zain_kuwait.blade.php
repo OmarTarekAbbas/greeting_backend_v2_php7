@@ -61,16 +61,20 @@ switch ($os) {
         if (preg_match('/OS 8/', $_SERVER['HTTP_USER_AGENT']) || preg_match('/OS 9/', $_SERVER['HTTP_USER_AGENT'])) {
             $Att = '&body=';
         } else {
-            $Att = ';';
+            $Att = '&body=';
         }
         break;
-    case 'iPad': $Att = '&body=';
+    case 'iPad':
+        $Att = '&body=';
         break;
-    case 'iPod': $Att = '&body=';
+    case 'iPod':
+        $Att = '&body=';
         break;
-    default : $Att = '?body=';
+    default:
+        $Att = '?body=';
         break;
-}?>
+}
+?>
 
 <body>
   <div class="main_container">
