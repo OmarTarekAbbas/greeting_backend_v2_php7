@@ -116,6 +116,7 @@ Route::get('ooredoo_content_mt', 'HomeController@ooredoo_content_mt');
  Route::get('landing_zain_kuwait_old', 'KsaController@landing_zain_kuwait');
  Route::get('landing_zain_kuwait','FrontEndController@landing_zain_kuwait');
  Route::post('/ZainKuwaitPinCodeSend', 'FrontEndController@ZainKuwaitPinCodeSend');
+ Route::get('/ZainKuwaitPinCodeSend', 'FrontEndController@ZainKuwaitPinCodeSend');
 //  end landing_zain_kuwait
 
 
