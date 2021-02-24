@@ -41,7 +41,7 @@
     background-image: url('assets/front/landing_v2/img/strip_green.png');
   }
 
-  @media only screen and (max-width: 1025px) {
+  @media only screen and (min-width: 1025px) {
     .shbka .zain_viva {
       margin-top: unset;
       margin-bottom: unset;
@@ -72,7 +72,7 @@
       </div>
 
       <div class="strip">
-        <h2>استمتع بوقتك مع فلاتر</h2>
+        <h5>استمتع بوقتك مع فلاتر</h5>
       </div>
 
       <div class="shbka">
@@ -110,7 +110,7 @@
           <!--<h5>ادخل رقم الهاتف</h5>-->
           <form method="post" action="ZainKuwaitPinCodeSend" id="form_zain">
             {{ csrf_field() }}
-            <div class="form-group form-inline">
+            <div class="form-group form-inline justify-content-center">
               <label for="phone"><span>965</span></label>
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
               <input type="tel" class="form-control" id="phone" value="{{$MSISDN}}" placeholder="ادخل رقم تليفونك" name="number" required pattern="[0-9]{9}">
