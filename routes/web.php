@@ -107,13 +107,15 @@ Route::get('ooredoo_content_mt', 'HomeController@ooredoo_content_mt');
  Route::get('ooredoo_unsub', 'HomeController@ooredoo_unsub');
  Route::post('ooredoo_unsub_action', 'HomeController@ooredoo_unsub_action');
  Route::get('snap_notification', 'HomeController@snap_notification');
- 
- 
- 
+
+
+
  // ====================== ooredoo sequence  ==========================//
 
-//  Start landing_zain_kuwait
- Route::get('landing_zain_kuwait', 'KsaController@landing_zain_kuwait');
+//  Start landing_zain_kuwait  OTP flow
+ Route::get('landing_zain_kuwait_old', 'KsaController@landing_zain_kuwait');
+ Route::get('landing_zain_kuwait','FrontEndController@landing_zain_kuwait');
+ Route::post('/ZainKuwaitPinCodeSend', 'FrontEndController@ZainKuwaitPinCodeSend');
 //  end landing_zain_kuwait
 
 

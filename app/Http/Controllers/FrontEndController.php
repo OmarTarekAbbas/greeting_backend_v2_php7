@@ -1865,6 +1865,21 @@ class FrontEndController extends Controller
         return view('landing_v2.zain_ksa', compact('MSISDN'));
     }
 
+    public function landing_zain_kuwait(Request $request)
+    {
+
+
+        if (isset($_SERVER['HTTP_MSISDN'])) { // old HE
+            $MSISDN = str_replace("965", "", $_SERVER['HTTP_MSISDN']);
+        } else {
+            $MSISDN = "";
+        }
+
+
+
+        return view('landing_v2.zain_kuwait', compact('MSISDN'));
+    }
+
     public function landing_mobily_ksa(Request $request)
     {
         date_default_timezone_set('Africa/Cairo');
@@ -2041,6 +2056,12 @@ class FrontEndController extends Controller
         $AdvertisingUrl->save();
 
         return view('landing_v2.landing_ksa', compact('MSISDN'));
+    }
+
+    public function ZainKuwaitPinCodeSend(request $request)
+    {
+      $msisdn = "" ;
+      return view('landing_v2.zain_kuwait_pinCode', compact('msisdn'));
     }
 
     public function ZainKsaPinCodeSend(request $request)
