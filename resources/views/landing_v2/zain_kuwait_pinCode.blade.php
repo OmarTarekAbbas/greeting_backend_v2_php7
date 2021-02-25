@@ -55,13 +55,13 @@
         </div>
     </div>
 
-    <div class="start_video" id="video" style="margin-top: -22%;">
+    <div class="start_video" id="video">
         <!-- <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
         </video> -->
 
-        <video width="100%" poster="{{ url('assets/front/landing_v2')}}/img/01.jpg" id="my_audio" controls>
+        <video style="object-fit: cover; height: 12.875rem;" width="100%" poster="{{ url('assets/front/landing_v2')}}/img/01.jpg" id="my_audio" controls>
           <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/mp4">
           <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/ogg">
         </video>

@@ -19,17 +19,25 @@
 </head>
 
 <style type="text/css">
+ @font-face {
+  font-family: myFont;
+  src: url('{{url("assets/front/landing_v2/font/HelveticaNeueLTArabic-Bold.ttf")}}');
+ }
+
+ body {
+   font-family: myFont;
+}
   .landing_page .strip {
     margin-top: 0;
   }
 
   @media (min-width: 1025px) {
   body {
-    background-image: url('{{url("assets/front/landing_v2/img/snap_new_landing/BG.jpg")}}');
+    background-image: url('{{url("assets/front/landing_v2/img/snap_new_landing/zain_kuwait.jpg")}}');
   }
 }
   .main_container {
-    background-image: url('assets/front/landing_v2/img/snap_new_landing/BG.jpg');
+    background-image: url('assets/front/landing_v2/img/snap_new_landing/zain_kuwait.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -39,11 +47,23 @@
   .landing_page .form_content form .btn {
     background-color: #fff;
     color: #000;
+    width: 85%;
     }
 
-    .landing_page .form_content form .form-group label {
-    background-color: #fff;
+    .copy p {
     color: #000;
+}
+
+.copy p span {
+    font-family: 'myFont';
+}
+
+    .landing_page .form_content form .form-group label {
+    background-color: #000;
+    color: #fff;
+    padding: 6px 12px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
     }
 
   .landing_page .strip {
@@ -88,12 +108,13 @@
       <div class="text-center mt-2">
         <!-- <h5>استمتع بوقتك مع فلاتر</h5> -->
 
-        <h5>للحصول على فلاتر خاصة ومميزة</h5>
+        <h5 class="font-weight-bold">احصل علي فلاتر متجددة يومياً</h5>
+        <h5 style="font-size: 1.10rem;">اكثر من 3000 فلتر حصري</h5>
       </div>
 
       <div class="shbka">
         <div class="container">
-          <h3>اشترك الان</h3>
+          <h5 style="font-size: 1.10rem; margin-top: 20%;">سجل رقمك واضغط اشتراك</h5>
           <div class="zain_viva">
             @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible">
@@ -106,17 +127,11 @@
               {{ Session::get('failed')}}
             </div>
             @endif
-            <div class="row justify-content-center">
-
-
+            <!-- <div class="row justify-content-center">
               <div class="col-12">
                 <img src="{{ url('assets/front/landing_v2')}}/operators2/zain_kw_2.png" id="zain">
-
-
               </div>
-
-
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
