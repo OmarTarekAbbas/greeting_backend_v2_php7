@@ -19,23 +19,29 @@
 </head>
 
 <style type="text/css">
- @font-face {
-  font-family: myFont;
-  src: url('{{url("assets/front/landing_v2/font/HelveticaNeueLTArabic-Bold.ttf")}}');
- }
+  @font-face {
+    font-family: myFont;
+    src: url('{{url("assets/front/landing_v2/font/HelveticaNeueLTArabic-Bold.ttf")}}');
+  }
 
- body {
-   font-family: myFont;
-}
+  body {
+    font-family: myFont;
+  }
+
   .landing_page .strip {
     margin-top: 0;
   }
 
-  @media (min-width: 1025px) {
-  body {
-    background-image: url('{{url("assets/front/landing_v2/img/snap_new_landing/zain_kuwait.jpg")}}');
+  @media (min-width: 1025px) and (max-width: 2000px) {
+    .main_container {
+      width: 100% !important;
+      margin: 0 auto;
+      display: block;
+      position: unset;
+      background-attachment: unset !important;
+    }
   }
-}
+
   .main_container {
     background-image: url('assets/front/landing_v2/img/snap_new_landing/zain_kuwait.jpg');
     background-size: cover;
@@ -48,23 +54,23 @@
     background-color: #fff;
     color: #000;
     width: 85%;
-    }
+  }
 
-    .copy p {
+  .copy p {
     color: #000;
-}
+  }
 
-.copy p span {
+  .copy p span {
     font-family: 'myFont';
-}
+  }
 
-    .landing_page .form_content form .form-group label {
+  .landing_page .form_content form .form-group label {
     background-color: #000;
     color: #fff;
     padding: 6px 12px;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    }
+  }
 
   .landing_page .strip {
     background-image: url('assets/front/landing_v2/img/strip_green.png');
@@ -166,7 +172,7 @@
 
   </div>
 
-  <div class="copy" >
+  <div class="copy">
     <p>copyright @ <span><?php echo date("Y") ?></span> Digizone, all rights reserved.</p>
   </div>
   </div>
