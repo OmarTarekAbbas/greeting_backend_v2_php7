@@ -3,16 +3,24 @@
 <style>
   @media (min-width: 1025px) {
     body {
-      background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
+      background-image: url('{{url("assets/front/landing_v2/img/snap_new_landing/BG.jpg")}}');
     }
   }
   .main_container {
-    background-image: url('assets/front/landing_v2/img/stc_BG.png');
+    background-image: url('assets/front/landing_v2/img/snap_new_landing/BG.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
+
+  .confirm_page .confirm {
+    top: 64%;
+  }
+
+  .confirm form input {
+    width: 80%;
+}
 </style>
 
   <div class="confirm_page">
@@ -38,7 +46,7 @@
             <hr>
            {!! Form::open(['url'=>'zain_ksa_pincode_confirm','method'=>'post','class'=>'form','files'=>'true']) !!}
                 <div class="form-group">
-                      <input type="tel" name="pincode"   class="form-control" id="pincode" required>
+                      <input type="tel" name="pincode" placeholder="ادخل كود التفعيل" class="form-control text-center" id="pincode" required>
                 </div>
                 <input type="hidden"  name="msisdn" value="{{$msisdn}}">
 
@@ -46,6 +54,18 @@
              {!! Form::close() !!}
         </div>
     </div>
+
+    <div class="start_video" id="video" style="margin-top: -22%;">
+        <!-- <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
+          <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
+          <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
+        </video> -->
+
+        <video width="100%" poster="{{ url('assets/front/landing_v2')}}/img/01.jpg" id="my_audio" controls>
+          <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/mp4">
+          <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/ogg">
+        </video>
+      </div>
 
     <div id="loginModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
