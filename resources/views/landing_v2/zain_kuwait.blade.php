@@ -25,17 +25,26 @@
 
   @media (min-width: 1025px) {
   body {
-    background-image: url('{{url("assets/front/landing_v2/img/stc_BG.png")}}');
+    background-image: url('{{url("assets/front/landing_v2/img/snap_new_landing/BG.jpg")}}');
   }
 }
   .main_container {
-    background-image: url('assets/front/landing_v2/img/stc_BG.png');
+    background-image: url('assets/front/landing_v2/img/snap_new_landing/BG.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
 
+  .landing_page .form_content form .btn {
+    background-color: #fff;
+    color: #000;
+    }
+
+    .landing_page .form_content form .form-group label {
+    background-color: #fff;
+    color: #000;
+    }
 
   .landing_page .strip {
     background-image: url('assets/front/landing_v2/img/strip_green.png');
@@ -65,14 +74,21 @@
     <div class="landing_page">
 
       <div class="start_video" id="video">
-        <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
+        <!-- <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
           <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
+        </video> -->
+
+        <video width="100%" poster="{{ url('assets/front/landing_v2')}}/img/01.jpg" id="my_audio" controls>
+          <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/mp4">
+          <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/ogg">
         </video>
       </div>
 
-      <div class="strip">
-        <h5>استمتع بوقتك مع فلاتر</h5>
+      <div class="text-center mt-2">
+        <!-- <h5>استمتع بوقتك مع فلاتر</h5> -->
+
+        <h5>للحصول على فلاتر خاصة ومميزة</h5>
       </div>
 
       <div class="shbka">
