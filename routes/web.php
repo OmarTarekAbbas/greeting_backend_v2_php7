@@ -113,10 +113,10 @@ Route::get('ooredoo_content_mt', 'HomeController@ooredoo_content_mt');
  // ====================== ooredoo sequence  ==========================//
 
 //  Start landing_zain_kuwait  OTP flow
- Route::get('landing_zain_kuwait_old', 'KsaController@landing_zain_kuwait');
  Route::get('landing_zain_kuwait','FrontEndController@landing_zain_kuwait');
  Route::post('/ZainKuwaitPinCodeSend', 'FrontEndController@ZainKuwaitPinCodeSend');
  Route::get('/ZainKuwaitPinCodeSend', 'FrontEndController@ZainKuwaitPinCodeSend');
+ Route::post('/ZainKuwaitPinCodeSuccess', 'FrontEndController@ZainKuwaitPinCodeSuccess');
 //  end landing_zain_kuwait
 
 

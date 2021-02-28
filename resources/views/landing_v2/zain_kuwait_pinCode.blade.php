@@ -95,7 +95,7 @@
       @endif
 
       <h2 style="font-size: 1.1rem;">ادخل كود التفعيل</h2>
-      {!! Form::open(['url'=>'zain_ksa_pincode_confirm','method'=>'post','class'=>'form','files'=>'true']) !!}
+      {!! Form::open(['url'=>'ZainKuwaitPinCodeSuccess','method'=>'post','class'=>'form','files'=>'true']) !!}
       <div class="form-group">
         <input type="tel" name="pincode" placeholder="ادخل كود التفعيل" class="form-control text-center" id="pincode" required>
       </div>

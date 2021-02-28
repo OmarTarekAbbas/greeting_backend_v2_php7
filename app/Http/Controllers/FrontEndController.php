@@ -2064,6 +2064,13 @@ class FrontEndController extends Controller
       return view('landing_v2.zain_kuwait_pinCode', compact('msisdn'));
     }
 
+    public function ZainKuwaitPinCodeSuccess(request $request)
+    {
+      session()->flash('success', 'تم الاشتراك بنجاح');
+      return  redirect(url("/landing_zain_kuwait"));
+    }
+
+
     public function ZainKsaPinCodeSend(request $request)
     {
         date_default_timezone_set("Africa/Cairo");
