@@ -26,7 +26,7 @@
 <body>
   <div class="main_container">
         @yield('section')
-      
+
 
         <!-- copyright -->
         <div class="copy">

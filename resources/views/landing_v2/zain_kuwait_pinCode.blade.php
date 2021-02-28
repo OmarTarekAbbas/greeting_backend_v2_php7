@@ -43,8 +43,14 @@
   }
 
   .confirm_page .confirm {
-    top: 62%;
-  }
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 15% auto !important;
+    position: unset;
+    top: unset;
+    left: unset;
+    margin-right: 0;
+    transform: unset;
+}
 
   .confirm form input {
     width: 80%;
@@ -53,6 +59,25 @@
 
 <div class="confirm_page">
   <img src="{{ url('assets/front/landing_v2')}}/img/logo.png" alt="snap">
+
+  <div class="start_video" id="video">
+    <!-- <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
+          <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
+          <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
+        </video> -->
+
+    <video style="object-fit: cover; height: 12.875rem;" width="100%" poster="{{ url('assets/front/landing_v2')}}/img/01.jpg" id="my_audio" controls>
+      <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/mp4">
+      <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/ogg">
+    </video>
+  </div>
+
+  <div class="text-center mt-2">
+    <!-- <h5>استمتع بوقتك مع فلاتر</h5> -->
+
+    <h5 class="font-weight-bold">احصل علي فلاتر متجددة يومياً</h5>
+    <h5 style="font-size: 1.10rem;">اكثر من 3000 فلتر حصري</h5>
+  </div>
 
   <div class="container">
     <div class="confirm">
@@ -79,25 +104,6 @@
       <button class="btn" type="submit">تاكيد</button>
       {!! Form::close() !!}
     </div>
-  </div>
-
-  <div class="start_video" id="video">
-    <!-- <video width="100%" poster="{{ url('assets/front/landing_v2')}}/video/snap2.jpg" id="my_audio" controls>
-          <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/mp4">
-          <source src="{{ url('assets/front/landing_v2')}}/video/New_VID.mp4" type="video/ogg">
-        </video> -->
-
-    <video style="object-fit: cover; height: 12.875rem;" width="100%" poster="{{ url('assets/front/landing_v2')}}/img/01.jpg" id="my_audio" controls>
-      <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/mp4">
-      <source src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/New_VID.mp4" type="video/ogg">
-    </video>
-  </div>
-
-  <div class="text-center mt-2">
-    <!-- <h5>استمتع بوقتك مع فلاتر</h5> -->
-
-    <h5 class="font-weight-bold">احصل علي فلاتر متجددة يومياً</h5>
-    <h5 style="font-size: 1.10rem;">اكثر من 3000 فلتر حصري</h5>
   </div>
 
   <div id="loginModal" class="modal fade" role="dialog">

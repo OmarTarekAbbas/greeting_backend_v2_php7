@@ -51,9 +51,9 @@
   }
 
   .landing_page .form_content form .btn {
-    background-color: #fff;
-    color: #000;
-    width: 85%;
+    background-color: #000;
+    color: #fff;
+    width: 50%;
   }
 
   .copy p {
