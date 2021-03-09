@@ -2772,70 +2772,23 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
 
-        if ($request->input('serviceId') != NULL) {
-            $serviceId = $request->input('serviceId');
-        }
+            $serviceId = $request->input('serviceId')??"";
+            $serviceType = $request->input('serviceType')??"" ;
+            $requestPlan = $request->input('requestPlan')??"" ;
+            $sequenceNo = $request->input('sequenceNo')??"";
+            $chargeAmount = $request->input('chargeAmount')??"";
+            $appliedPlan = $request->input('appliedPlan')??"" ;
+            $discountPlan = $request->input('discountPlan')??"";
+            $validityDays = $request->input('validityDays')??"";
+            $operationId = $request->input('operationId')??"";
+            $bearerId = $request->input('bearerId')??"";
+            $errorCode = $request->input('errorCode')??"";
+            $result = $request->input('result')??"";
+            $contentId = $request->input('contentId')??"";
+            $optParam1 = $request->input('optParam1')??"";
+            $optParam2 = $request->input('optParam2')??"";
+            $optParam3 = $request->input('optParam3')??"";
 
-        if ($request->input('serviceType') != NULL) {
-            $serviceType = $request->input('serviceType');
-        }
-        if ($request->input('requestPlan') != NULL) {
-            $requestPlan = $request->input('requestPlan');
-        }
-
-        if ($request->input('sequenceNo') != NULL) {
-            $sequenceNo = $request->input('sequenceNo');
-        }
-
-        if ($request->input('chargeAmount') != NULL) {
-            $chargeAmount = $request->input('chargeAmount');
-        }
-
-        if ($request->input('appliedPlan') != NULL) {
-            $appliedPlan = $request->input('appliedPlan');
-        }
-
-        if ($request->input('discountPlan') != NULL) {
-            $discountPlan = $request->input('discountPlan');
-        }
-
-        if ($request->input('validityDays') != NULL) {
-            $validityDays = $request->input('validityDays');
-        }
-
-
-
-        if ($request->input('operationId') != NULL) {
-            $operationId = $request->input('operationId');
-        }
-
-        if ($request->input('bearerId') != NULL) {
-            $bearerId = $request->input('bearerId');
-        }
-
-        if ($request->input('errorCode') != NULL) {
-            $errorCode = $request->input('errorCode');
-        }
-
-        if ($request->input('result') != NULL) {
-            $result = $request->input('result');
-        }
-
-        if ($request->input('contentId') != NULL) {
-            $contentId = $request->input('contentId');
-        }
-
-        if ($request->input('optParam1') != NULL) {
-            $optParam1 = $request->input('optParam1');
-        }
-
-        if ($request->input('optParam2') != NULL) {
-            $optParam2 = $request->input('optParam2');
-        }
-
-        if ($request->input('optParam3') != NULL) {
-            $optParam3 = $request->input('optParam3');
-        }
 
 
 
@@ -2850,16 +2803,16 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         );
         $this->log($actionName, $not_URL, $parameters_arr);
 
-        if (isset($serviceId) && isset($serviceType) && $optParam1 && ( $serviceId != serviceId || $serviceType != serviceType || $optParam1 != optParam1 )) {
-            $res = array();
-            $message = "invalid service or Provider";
-            $res['type'] = "dBill Callback Notifications";
-            $res['url'] = $not_URL;
-            $res['message'] = $message;
+        // if (isset($serviceId) && isset($serviceType) && $optParam1 && ( $serviceId != serviceId || $serviceType != serviceType || $optParam1 != optParam1 )) {
+        //     $res = array();
+        //     $message = "invalid service or Provider";
+        //     $res['type'] = "dBill Callback Notifications";
+        //     $res['url'] = $not_URL;
+        //     $res['message'] = $message;
 
-            echo json_encode($res);
-            die;
-        }
+        //     echo json_encode($res);
+        //     die;
+        // }
 
         if (isset($msisdn) && $msisdn != "") {
             // add notify
