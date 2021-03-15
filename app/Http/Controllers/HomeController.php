@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\File;
 use App\Generatedurl;
 use App\Greetingimg;
 use App\DuIntgration;
+use App\PostbackRequest;
 class HomeController extends Controller {
 
     public function test2(Request $request) {
@@ -2225,16 +2226,23 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
 
-            if ($STATUS == "FSC-BL") {  // fist success billing  so hit postback
+            if ($STATUS == "FSC-BL" && $clickid != '') {  // fist success billing  so hit postback
               //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
               $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
-              // here we need to add curl
-              // also make new table postback_requests  :  request / response / msisdn / notification_id  / status : 0 failed / 1 success 
-              /*
-                  {
-                  "status": 1
-                  }
-              */
+              $result =  $this->GetPageData($post_back_url);
+
+              $postback_requests = new PostbackRequest();
+              $postback_requests->req = $post_back_url;
+              $postback_requests->response = $result;
+              $postback_requests->msisdn = $msisdn;
+              $postback_requests->notification_id = $notify->id;
+              $result = (array) json_decode($result);
+              if($result['status'] == '1'){
+                $postback_requests->status = 1 ;
+              }else{
+                $postback_requests->status = 0 ;
+              }
+              $postback_requests->save();
 
           }
 
@@ -2310,6 +2318,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         return Response(array('result' => $result));
     }
+
+
 
 
     public function mobily_notification(request $request)
