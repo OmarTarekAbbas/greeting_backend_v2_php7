@@ -2226,10 +2226,15 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
             if ($STATUS == "FSC-BL") {  // fist success billing  so hit postback
-              //  ttp://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
-              $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid"
+              //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
+              $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
               // here we need to add curl
-              // also make new table postback_requests  :  request / response / msisdn / notification_id
+              // also make new table postback_requests  :  request / response / msisdn / notification_id  / status : 0 failed / 1 success 
+              /*
+                  {
+                  "status": 1
+                  }
+              */
 
           }
 
