@@ -1513,6 +1513,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         }
 
 
+
+        if (isset($_REQUEST['clickid']) && $_REQUEST['clickid'] != "") {
+          $clickid = $_REQUEST['clickid'];
+          $pended_url .= "&clickid=".$clickid;
+      }
+
+
         $URL = "http://cg.mobi-mind.net/?ID=370,458bc531,661,8061,3,IVAS,$ivas_portal_link$pended_url";
 
         // make log
@@ -2107,6 +2114,9 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             return back();
         }
 
+        $clickid =    $request->input('clickid')?? "";
+
+
         // check subscribe
         $Msisdn = Msisdn::where('msisdn', '=', "965" . $msisdn)->where('final_status', '=', 1)->where('operator_id', '=', 51)->orderBy('id', 'DESC')->first();
         if ($Msisdn) {
@@ -2119,7 +2129,10 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 return redirect(url('viewSnap2/'.$snap->id.'/'.$url->UID));
             }
         } else {
-            return redirect(url('/landing_stc_1?msisdn=965' . $msisdn));
+          if( $clickid != "")
+            return redirect(url('/landing_stc_1?msisdn=965' . $msisdn.'&clickid='.$clickid));
+            else
+             return redirect(url('/landing_stc_1?msisdn=965' . $msisdn));
         }
     }
     public function viva_notification(request $request)
@@ -2165,6 +2178,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $User = $request->input('User');
         $Password = $request->input('Password');
         $OperatorID = $request->input('OperatorID');
+        $clickid = $request->input('clickid')??"";
 
         if ($ChannelID == SNAP_VIVA_CHANNEL_ID  && $ServiceID == 808 && $User == "kuwait@idex" && $Password == "kuwait@!dex" && $OperatorID == 41904) {
 
@@ -2183,6 +2197,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             } else {
                 $action = "usub";
             }
+
 
             $parameters_arr = array(
                 'link' => $URL,
@@ -2206,6 +2221,17 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 $notify->action = $action;
                 $notify->status = $STATUS;
                 $notify->save();
+
+
+
+
+            if ($STATUS == "FSC-BL") {  // fist success billing  so hit postback
+              //  ttp://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
+              $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid"
+              // here we need to add curl
+              // also make new table postback_requests  :  request / response / msisdn / notification_id
+
+          }
 
 
                 // update msisdn status

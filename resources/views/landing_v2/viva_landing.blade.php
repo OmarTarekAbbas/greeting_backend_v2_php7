@@ -72,6 +72,7 @@
                         <div class="form-group form-inline">
                             <label for="phone"><span>965</span></label>
                             <input type="hidden" name="prev_url"  value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}"  >
+                            <input type="hidden" name="clickid"  value="{{(isset($_REQUEST['clickid'])?$_REQUEST['clickid']:'')}}"  >
                             <input type="tel" class="form-control" value="{{$msisdn}}" id="phone" placeholder="ادخل رقم تليفونك" name="number" required pattern="[0-9]{8}">
                             <span class="validity"></span>
                         </div>
@@ -104,7 +105,7 @@
         <iframe class="full-screen-preview__frame" src="{{url()->full()}}" name="preview-frame" frameborder="0" noresize="noresize" data-view="fullScreenPreview" style="height: 570px; width: 370px; border-radius: 10px;">
         </iframe>
       </div>
-    
+
   <script>
     if (screen.width <= 1025) {
       // document.location.href = "{{url('front.home')}}";
