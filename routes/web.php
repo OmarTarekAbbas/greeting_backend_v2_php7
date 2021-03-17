@@ -88,7 +88,7 @@ define('serviceNode',"IVAS");
 
 
 /************* Start landing_zain_promotion ******************/
-Route::get('landing_kuwait_promotion','FrontEndController@landing_zain_promotion');
+Route::get('landing_kuwait_promotion','FrontEndController@landing_kuwait_promotion');
 /************* end landing_zain_promotion ******************/
 
 // routes
