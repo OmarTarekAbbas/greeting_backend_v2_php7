@@ -87,7 +87,9 @@ define('optParam1',"IVAS");
 define('serviceNode',"IVAS");
 
 
-
+/************* Start landing_zain_promotion ******************/
+Route::get('landing_zain_promotion','FrontEndController@landing_zain_promotion');
+/************* end landing_zain_promotion ******************/
 
 // routes
 Route::get('/', function () {
@@ -481,6 +483,8 @@ Route::get('rotana/suboccasiontesty/{OID}/{UID}', 'FrontEndController@suboccasio
  ///////////////////////////////////////
  ////////////*Mbc*///////////////
  ///////////////////////////////////////
+
+
 
 
 Route::get('oocasion', function () {
