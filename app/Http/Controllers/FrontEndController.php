@@ -5040,7 +5040,7 @@ class FrontEndController extends Controller
     }
 
 
-    public function landing_zain_promotion (Request $request){
+    public function landing_kuwait_promotion (Request $request){
 
       $ip = $_SERVER["REMOTE_ADDR"];
 
