@@ -2397,7 +2397,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             if($request->clickid){
               $clickid = '&clickid='.$request->clickid;
             }
-            
+
             $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=$productID&pName=$pName&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$transID$clickid";
 
             // make log
