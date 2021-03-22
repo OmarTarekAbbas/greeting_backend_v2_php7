@@ -2441,8 +2441,15 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $subsType = $this->ooredoo_dbill_profile_check($MSISDN);  // profile check
 
             if ($subsType == "3") {    // non ooredoo users
-                session()->flash('failed', 'Non ooredoo users');
-                return redirect("ooredoo_login");
+                // session()->flash('failed', 'Non ooredoo users');
+                // return redirect("ooredoo_login");
+
+                 // Daily plane
+                 $pPrice = "150";
+                 $sRenewalPrice = "150";
+                 $pVal = "1";
+                 $sRenewalValidity = "1";
+
             } elseif ($subsType == "1") {  // postpaid  // monthly
                 // Monthly plane
                 $pPrice = "3000";
