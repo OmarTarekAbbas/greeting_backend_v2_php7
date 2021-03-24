@@ -2584,7 +2584,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
 
-      // sample for data flow :  http://ivascloud.com/waffarly_kuwait/notification?FLOW=DATAFLOW&MSISDN=60791570&Reason=Success_and_accepted_by_user&Result=SUCCESS&Songname=null&TPCGID=190502114641022391&productId=S-WafflyEwMY2&transID=5ccaae6952528
+      // sample for data flow :  https://filters.digizone.com.kw/notification?FLOW=DATAFLOW&MSISDN=60791570&Reason=Success_and_accepted_by_user&Result=SUCCESS&Songname=null&TPCGID=190502114641022391&productId=S-WafflyEwMY2&transID=5ccaae6952528
     public function notification(request $request) {
         $message = "";
         $subscribe_for_first_time = 0;
@@ -2789,11 +2789,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
 
-            return view('front_end.notification', compact('message', 'operator_name'));
+            return  json_encode( $result ) ;
         } else {
-            $message = "MSISDN not found in notification url";
-            $operator_name = "";
-            return view('front_end.notification', compact('message', 'subscribe_for_first_time', 'operator_name'));
+
+            $result['operator_name'] = $operator_name;
+            $result['message'] = $message;
+
+            return  json_encode( $result ) ;
         }
     }
 
@@ -3092,7 +3094,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 );
                 $this->log($actionName, $not_URL, $parameters_arr);
 
-                $subsType = $ob->subsType;
+                $subsType = $ob->subsType ?? "";
                 return $subsType;
             }
 
@@ -3193,8 +3195,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                 );
                 $this->log($actionName, $not_URL, $parameters_arr);
 
-                $result = trim($ob->result);
-                $optionalParameter8 = trim($ob->optionalParameter8);
+                $result = trim($ob->result??"");
+                $optionalParameter8 = trim($ob->optionalParameter8??"");
                 $arr['result'] = $result;
                 $arr['optionalParameter8'] = $optionalParameter8;
 

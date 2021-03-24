@@ -146,7 +146,7 @@ Route::post('/subscribeZainConfirm_v2', 'FrontEndController@subscribeZainConfirm
 Route::post('subscribeZainPincodeConfirm_v2', 'FrontEndController@subscribeZainPincodeConfirm_v2');
 Route::post('/subscribeVivaKuwait_v2', 'FrontEndController@subscribeVivaKuwait_v2');
 // viva
-Route::get('notification','FrontEndController@notification');
+// Route::get('notification','FrontEndController@notification');
 Route::post('vivaCheckSubscribe','FrontEndController@vivaCheckSubscribe');
 Route::post('/subscribeVivaKuwait', 'HomeController@subscribeVivaKuwait');
 Route::get('/viva_profile/{uid}', 'HomeController@viva_profile');
