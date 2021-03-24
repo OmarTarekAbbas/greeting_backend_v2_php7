@@ -5064,10 +5064,10 @@ class FrontEndController extends Controller
       $result['country'] = $country_from_ip;
       $result['deviceModel'] = $deviceModel;
       // $result['AllHeaders'] = $_SERVER;
-      $actionName = "Landing Kuwait Promotion logs";
+      $actionName = "Landing Zain Promotion logs";
       if ($request->has('operator_name')) {
           $result['operator'] = $request->operator_name;
-          $actionName = $request->operator_name . " Kuwait logs";
+          $actionName = $request->operator_name . " Zain logs";
           $URL = $request->fullUrl();
           $respo= new Respo();
           $respo->complete_url = $URL;
@@ -5087,7 +5087,7 @@ class FrontEndController extends Controller
           $respo->respons = "landing";
           $respo->op = null;
           $respo->save();
-    return view('landing_v2.landing_zain_promotion');
+    return view('landing_v2.landing_kuwait_promotion');
     }
 
 

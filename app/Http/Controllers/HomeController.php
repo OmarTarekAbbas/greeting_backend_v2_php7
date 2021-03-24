@@ -2256,7 +2256,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
       if ($STATUS == "FSC-BL" && $transaction_id != '') {  // fist success billing  so hit postback
         //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
-        $post_back_url = " http://shinedigitalworld.offerstrack.net/advBack.php?click_id=$transaction_id" ;
+        $post_back_url = "http://shinedigitalworld.offerstrack.net/advBack.php?click_id=$transaction_id" ;
         // success!
 
         $result =  $this->GetPageData($post_back_url);
@@ -2267,14 +2267,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $postback_requests->msisdn = $msisdn;
         $postback_requests->notification_id = $notify->id;
         $result = $result;
-        if(   $result == "success!"){
+        if($result == "success!"){
           $postback_requests->status = 1 ;
         }else{
           $postback_requests->status = 0 ;
         }
         $postback_requests->save();
-
-    }
+      }
 
 
 
@@ -2431,9 +2430,12 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             if($request->clickid){
               $clickid = '&clickid='.$request->clickid;
             }
+            $transaction_id = '';
+            if($request->transaction_id){
+              $transaction_id = '&transaction_id='.$request->transaction_id;
+            }
 
-            $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=$productID&pName=$pName&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$transID$clickid";
-
+            $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=$productID&pName=$pName&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$transID$clickid$transaction_id";
             // make log
             $actionName = "Ooredoo He Forward";
             $parameters_arr = array(
@@ -3560,6 +3562,33 @@ public function ooredoo_unsub_action() {
     public function logoutadmin(Request $request) {
         \Auth::logout();
         return redirect('/login');
+      }
+
+
+      public function postback_requests(Request $request)
+      {
+        $transaction_id = $request->input('transaction_id')??"";
+        $STATUS = "FSC-BL";
+        $msisdn = '01123656796';
+        if ($STATUS == "FSC-BL" && $transaction_id != '') {  // fist success billing  so hit postback
+          //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
+          $post_back_url = "http://shinedigitalworld.offerstrack.net/advBack.php?click_id=$transaction_id" ;
+          // success!
+
+          $result =  $this->GetPageData($post_back_url);
+          $postback_requests = new PostbackRequest();
+          $postback_requests->req = $post_back_url;
+          $postback_requests->response = $result;
+          $postback_requests->msisdn = $msisdn;
+          $postback_requests->notification_id = 1;
+          $result = $result;
+          if($result == "success!"){
+            $postback_requests->status = 1 ;
+          }else{
+            $postback_requests->status = 0 ;
+          }
+          $postback_requests->save();
+        }
       }
 
 }

@@ -142,18 +142,24 @@
       } else {
         $clickid = false;
       }
+
+      if (app('request')->input('transaction_id')) {
+        $transaction_id = 'transaction_id='.app('request')->input('transaction_id');
+      } else {
+        $transaction_id = false;
+      }
       ?>
       <div class="container">
       <div class="row justify-content-center pt-3 ml-0">
               <div class="col-4 pl-0">
               <!--  -->
-                <a class="operator" sms='oredoo' href="{{ 'https://filters.digizone.com.kw/ooredoo_landing' }}@if($clickid)?@endif{{$clickid}}">
+                <a class="operator" sms='oredoo' href="{{ 'https://filters.digizone.com.kw/ooredoo_landing' }}@if($clickid)?@endif{{$clickid}}@if($transaction_id)?@endif{{$transaction_id}}">
                   <img class="img-fluid w-100" src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/landing_kuwait/02.png" id="oredoo">
                 </a>
               </div>
 
               <div class="col-4 pl-0">
-                <a class="operator" sms='stc' href="{{ 'http://cg.mobi-mind.net/?ID=370,458bc531,661,8061,3,IVAS,https%3A%2F%2Ffiltersnew.digizone.com.kw%2Flanding_stc' }}@if($clickid)&@endif{{$clickid}}">
+                <a class="operator" sms='stc' href="{{ 'http://cg.mobi-mind.net/?ID=370,458bc531,661,8061,3,IVAS,https%3A%2F%2Ffiltersnew.digizone.com.kw%2Flanding_stc' }}@if($clickid)&@endif{{$clickid}} @if($transaction_id)&@endif{{$transaction_id}}">
                   <img class="img-fluid w-100" src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/landing_kuwait/01.png" id="stc">
                 </a>
               </div>

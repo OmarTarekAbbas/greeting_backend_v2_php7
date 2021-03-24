@@ -88,6 +88,7 @@ define('serviceNode',"IVAS");
 
 
 /************* Start landing_zain_promotion ******************/
+Route::get('testpostback_requests','HomeController@postback_requests');
 Route::get('landing_kuwait_promotion','FrontEndController@landing_kuwait_promotion');
 /************* end landing_zain_promotion ******************/
 
@@ -478,6 +479,9 @@ Route::get('rotana/suboccasiontesty/{OID}/{UID}', 'FrontEndController@suboccasio
  Route::get('mbc/suboccasiontesty/{OID}/{UID}', 'FrontEndController@suboccasions_mbc');
  Route::get('mbc/filter/{OID}/{UID}', 'FrontEndController@filter_mbc');
  Route::get('Search_v5/{UID}','FrontEndController@Search_mbc');
+
+
+
 
 
  ///////////////////////////////////////
