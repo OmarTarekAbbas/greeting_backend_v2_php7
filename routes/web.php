@@ -309,7 +309,7 @@ Route::get('admin/lang/{lang}','LanguageController@switchLang');
 /* ------------ viva routes backend ---------------- */
 Route::get('landing_stc', 'HomeController@viva_login');
 Route::post('viva_login_action', 'HomeController@viva_login_action');
-Route::get('viva_notification', 'HomeController@viva_notification');
+Route::get('viva_notification', 'HomeController@viva_notification');  //
 Route::get('landing_stc_1', 'HomeController@subscribeViva_1');
 Route::get('logout_viva/{uid}', 'HomeController@logout');
 define('SNAP_VIVA_URL','https://filtersnew.digizone.com.kw/landing_stc');

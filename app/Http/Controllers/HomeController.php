@@ -2180,6 +2180,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $Password = $request->input('Password');
         $OperatorID = $request->input('OperatorID');
         $clickid = $request->input('clickid')??"";
+        $transaction_id = $request->input('transaction_id')??"";
 
         if ($ChannelID == SNAP_VIVA_CHANNEL_ID  && $ServiceID == 808 && $User == "kuwait@idex" && $Password == "kuwait@!dex" && $OperatorID == 41904) {
 
@@ -2226,6 +2227,9 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
 
+
+
+ // first ads company = clickid    // pedtro
             if ($STATUS == "FSC-BL" && $clickid != '') {  // fist success billing  so hit postback
               //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
               $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
@@ -2245,6 +2249,36 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
               $postback_requests->save();
 
           }
+
+
+
+      // second ads company   transaction_id  //   Santhi
+
+      if ($STATUS == "FSC-BL" && $transaction_id != '') {  // fist success billing  so hit postback
+        //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
+        $post_back_url = " http://shinedigitalworld.offerstrack.net/advBack.php?click_id=$transaction_id" ;
+        // success!
+
+        $result =  $this->GetPageData($post_back_url);
+
+        $postback_requests = new PostbackRequest();
+        $postback_requests->req = $post_back_url;
+        $postback_requests->response = $result;
+        $postback_requests->msisdn = $msisdn;
+        $postback_requests->notification_id = $notify->id;
+        $result = $result;
+        if(   $result == "success!"){
+          $postback_requests->status = 1 ;
+        }else{
+          $postback_requests->status = 0 ;
+        }
+        $postback_requests->save();
+
+    }
+
+
+
+
 
 
                 // update msisdn status
