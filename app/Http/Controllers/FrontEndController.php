@@ -5040,6 +5040,7 @@ class FrontEndController extends Controller
     }
 
 
+    
     public function landing_kuwait_promotion (Request $request){
 
       $ip = $_SERVER["REMOTE_ADDR"];
@@ -5064,10 +5065,10 @@ class FrontEndController extends Controller
       $result['country'] = $country_from_ip;
       $result['deviceModel'] = $deviceModel;
       // $result['AllHeaders'] = $_SERVER;
-      $actionName = "Landing Zain Promotion logs";
+      $actionName = "Landing Kuwait Promotion logs";
       if ($request->has('operator_name')) {
           $result['operator'] = $request->operator_name;
-          $actionName = $request->operator_name . " Zain logs";
+          $actionName = $request->operator_name . " Kuwait logs";
           $URL = $request->fullUrl();
           $respo= new Respo();
           $respo->complete_url = $URL;
