@@ -16,6 +16,7 @@ use App\Generatedurl;
 use App\PostbackRequest;
 use App\timweSubscriber;
 use App\timweUnsubscriber;
+use App\Respo;
 
 class TimweController extends Controller
 {
@@ -27,6 +28,12 @@ class TimweController extends Controller
 
   public function index(Request $request)
   {
+    $URL = $request->fullUrl();
+    $respo= new Respo();
+    $respo->complete_url = $URL;
+    $respo->respons = "landing";
+    $respo->op = "o_q";
+    $respo->save();
 
     if($request->clickid){
       Session::put('clickid', $request->clickid);
