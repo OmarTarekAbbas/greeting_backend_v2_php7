@@ -2407,11 +2407,6 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
     //===============================Viva Integration "David" ==========================================//
 
-
-
-
-
-
     //======================================Ooredoo direct integration =============================================//
 
         // ========= ooredoo sequemce =============== //
@@ -2437,15 +2432,17 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
 
-    if($request->clickid){
-      Session::put('clickid', $request->clickid);
-    }
+            if($request->clickid){
+              Session::put('clickid', $request->clickid);
+            }
+            // dd(Session::get('clickid'));
 
 
 
 
 
             $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=$productID&pName=$pName&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$transID$clickid$transaction_id";
+            // $url = "https://www.google.com/?hl=ar";
             // make log
             $actionName = "Ooredoo He Forward";
             $parameters_arr = array(
@@ -2455,6 +2452,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $this->log($actionName, $url, $parameters_arr);
 
             return redirect($url);
+            // return "Ok";
         }
 
 
@@ -2468,6 +2466,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
       //   $clickid = "";
       // }
 
+      dd(Session::get('clickid'));
 
       //echo Session::get('clickid')  ; die;
 

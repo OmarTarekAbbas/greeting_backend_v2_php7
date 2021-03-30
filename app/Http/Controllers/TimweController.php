@@ -21,6 +21,8 @@ use App\Respo;
 class TimweController extends Controller
 {
 
+ 
+
   public function ooredoo_qatar_login()
   {
     return view('timweLanding.timwe_login');
