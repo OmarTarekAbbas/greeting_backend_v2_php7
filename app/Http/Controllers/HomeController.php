@@ -2435,6 +2435,16 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
               $transaction_id = '&transaction_id='.$request->transaction_id;
             }
 
+
+
+    if($request->clickid){
+      Session::put('clickid', $request->clickid);
+    }
+
+
+
+
+
             $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=$productID&pName=$pName&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$transID$clickid$transaction_id";
             // make log
             $actionName = "Ooredoo He Forward";
@@ -2451,6 +2461,15 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
           //   http://localhost/waffarly_kuwait/ooredoo_he?MSISDN=96550167685
     public function ooredoo_he(Request $request) {
 
+
+      // if(Session::has('clickid')){
+      //   $clickid = "&clickid=".Session::get('clickid');
+      // }else{
+      //   $clickid = "";
+      // }
+
+
+      //echo Session::get('clickid')  ; die;
 
         if ($request->input('MSISDN') != NULL) {  // HE detect
             $MSISDN = $request->input('MSISDN');  // will be in format 965 XXX XXXX
@@ -2558,8 +2577,14 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
           http://testconsent.ooredoo.com.kw:8280/API/CCG?MSISDN=XXXXXXX&productID=<jhdfjshfhf>&pName=<kljseuhsdfm>&pPrice=<price_in_fils>&pVal=<validity_in_days>&CpId=<jkhdNS>&CpPwd=<jdh35e22>&CpName=<sjsisfj>&sRenewalPrice=<price_in_fils>&sRenewalValidity=<validity_in_days>&reqMode=WAP&reqType=Subscription&ismID=<XXX>&transID=1122232&tncFontFamily=times&cpBgColor=silver&Wap_mdata=http://XXX.XXX.XX.XXX/image.jpg
 
          */
+        if(Session::has('clickid')){
+          $clickid = "&clickid=".Session::get('clickid');
+        }else{
+          $clickid = "";
+        }
 
-        $URL_before_encrpty = "http://consent.ooredoo.com.kw:8093/API/CCG?MSISDN=$MSISDN&productID=$productID&pName=$pName&pPrice=$pPrice&pVal=$pVal&CpId=$CpId&CpPwd=$CpPwd&CpName=$CpName&sRenewalPrice=$sRenewalPrice&sRenewalValidity=$sRenewalValidity&reqMode=WAP&reqType=Subscription&ismID=$ismID&transID=$transID&tncFontFamily=times&cpBgColor=silver&Wap_mdata=$image";
+
+        $URL_before_encrpty = "http://consent.ooredoo.com.kw:8093/API/CCG?MSISDN=$MSISDN&productID=$productID&pName=$pName&pPrice=$pPrice&pVal=$pVal&CpId=$CpId&CpPwd=$CpPwd&CpName=$CpName&sRenewalPrice=$sRenewalPrice&sRenewalValidity=$sRenewalValidity&reqMode=WAP&reqType=Subscription&ismID=$ismID&transID=$transID&tncFontFamily=times&cpBgColor=silver&Wap_mdata=$image$clickid";
 
 
 
