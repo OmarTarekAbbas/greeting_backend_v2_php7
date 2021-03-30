@@ -2229,7 +2229,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
 
- // first ads company = clickid    // pedtro
+            // first ads company = clickid    // pedtro
             if ($STATUS == "FSC-BL" && $clickid != '') {  // fist success billing  so hit postback
               //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
               $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;

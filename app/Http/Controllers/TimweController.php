@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use App\TimWe;
 use App\Greetingimg;
 use App\Generatedurl;
+use App\PostbackRequest;
 use App\timweSubscriber;
 use App\timweUnsubscriber;
 
@@ -783,6 +784,27 @@ class TimweController extends Controller
         ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
         // make curl to clickid
+
+         // first ads company = clickid    // pedtro
+          $clickid = Session::get('clickid');
+         if ($STATUS == "FSC-BL" && $clickid != '') {  // fist success billing  so hit postback
+          //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
+          $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
+          $result =  $this->GetPageData($post_back_url);
+          $postback_requests = new PostbackRequest();
+          $postback_requests->req = $post_back_url;
+          $postback_requests->response = $result;
+          $postback_requests->msisdn = $msisdn;
+          $postback_requests->notification_id = $notify->id;
+          $result = (array) json_decode($result);
+          if($result['status'] == '1'){
+            $postback_requests->status = 1 ;
+          }else{
+            $postback_requests->status = 0 ;
+          }
+          $postback_requests->save();
+
+      }
 
       if ($snap) {
         return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
