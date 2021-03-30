@@ -39,6 +39,9 @@ Route::get('ooredoo_q_pin', 'TimweController@pincode');
 Route::get('ooredoo_q_unsub', 'TimweController@unsubscribe');
 Route::get('ooredoo_q_logout', 'TimweController@logout');
 
+
+Route::get('postback_requests_test', 'TimweController@postback_requests_test');
+
 //Timwe Api
 Route::post('generateKey', 'TimweController@generateKey');
 Route::post('{channel}/mt/{partnerRoleId}', 'TimweController@sendMt');

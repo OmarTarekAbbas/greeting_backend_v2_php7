@@ -787,7 +787,8 @@ class TimweController extends Controller
 
          // first ads company = clickid    // pedtro
           $clickid = Session::get('clickid');
-         if ($STATUS == "FSC-BL" && $clickid != '') {  // fist success billing  so hit postback
+          $msisdn = '974' . $request->number;
+         if ($clickid != '') {  // fist success billing  so hit postback
           //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
           $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
           $result =  $this->GetPageData($post_back_url);
@@ -795,7 +796,7 @@ class TimweController extends Controller
           $postback_requests->req = $post_back_url;
           $postback_requests->response = $result;
           $postback_requests->msisdn = $msisdn;
-          $postback_requests->notification_id = $notify->id;
+          $postback_requests->notification_id = "";
           $result = (array) json_decode($result);
           if($result['status'] == '1'){
             $postback_requests->status = 1 ;
@@ -804,7 +805,7 @@ class TimweController extends Controller
           }
           $postback_requests->save();
 
-      }
+          }
 
       if ($snap) {
         return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
@@ -1037,4 +1038,44 @@ class TimweController extends Controller
 
     return redirect('ooredoo_q');
   }
+
+
+      public function postback_requests_test(Request $request)
+      {
+        $clickid = Session::get('clickid');
+        $msisdn = '97412345678';
+       if ($clickid != '') {  // fist success billing  so hit postback
+        //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
+        $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
+        $result =  $this->GetPageData($post_back_url);
+        $postback_requests = new PostbackRequest();
+        $postback_requests->req = $post_back_url;
+        $postback_requests->response = $result;
+        $postback_requests->msisdn = $msisdn;
+        $postback_requests->notification_id = "";
+        $result = (array) json_decode($result);
+        if($result['status'] == '1'){
+          $postback_requests->status = 1 ;
+        }else{
+          $postback_requests->status = 0 ;
+        }
+        $postback_requests->save();
+        }
+      }
+
+      public static function GetPageData($URL)
+      {
+
+          $ch = curl_init();
+          $timeout = 500;
+          curl_setopt($ch, CURLOPT_URL, $URL);
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+          curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+          curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+          curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+          curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+          $data = curl_exec($ch);
+          curl_close($ch);
+          return $data;
+      }
 }
