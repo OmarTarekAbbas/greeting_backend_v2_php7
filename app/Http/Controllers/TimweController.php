@@ -8,6 +8,7 @@ use Monolog\Logger;
 use Illuminate\Http\Request;
 use Monolog\Handler\StreamHandler;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 use App\TimWe;
 use App\Greetingimg;
@@ -23,8 +24,13 @@ class TimweController extends Controller
     return view('timweLanding.timwe_login');
   }
 
-  public function index()
+  public function index(Request $request)
   {
+
+    if($request->clickid){
+      Session::put('clickid', $request->clickid);
+    }
+    // dd(Session::get('clickid'));
     $msisdn = $_SERVER['HTTP_CLI'] ?? session()->get('userIdentifier');
     $msisdn = str_replace("974", "", $msisdn);
 
