@@ -2435,7 +2435,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             if($request->clickid){
               Session::put('clickid', $request->clickid);
             }
-            // dd(Session::get('clickid'));
+
+           //  dd(Session::get('clickid'));
 
 
 
@@ -2466,7 +2467,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
       //   $clickid = "";
       // }
 
-      dd(Session::get('clickid'));
+      //dd(Session::get('clickid'));
 
       //echo Session::get('clickid')  ; die;
 
@@ -2583,7 +2584,9 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         }
 
 
+
         $URL_before_encrpty = "http://consent.ooredoo.com.kw:8093/API/CCG?MSISDN=$MSISDN&productID=$productID&pName=$pName&pPrice=$pPrice&pVal=$pVal&CpId=$CpId&CpPwd=$CpPwd&CpName=$CpName&sRenewalPrice=$sRenewalPrice&sRenewalValidity=$sRenewalValidity&reqMode=WAP&reqType=Subscription&ismID=$ismID&transID=$transID&tncFontFamily=times&cpBgColor=silver&Wap_mdata=$image$clickid";
+
 
 
 
