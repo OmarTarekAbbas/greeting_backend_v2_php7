@@ -2726,11 +2726,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             if (isset($Msisdn) && $Msisdn->final_status == 1 && $Msisdn->renew_date >= $today_date) {
                 session(['phone_number' => $MSISDN, 'status' => 'active']);
                 // return redirect('/');
-                $Url = Generatedurl::where('operator_id', our_ooredoo_id)->latest()->first();
-                if ($Url)
-                    return redirect(url() . "/cuurentSnap/" . $Url->UID);
-                else
-                    return redirect(url() . "/cuurentSnap/2516167");
+                // $Url = Generatedurl::where('operator_id', our_ooredoo_id)->latest()->first();
+                // if ($Url)
+                //     return redirect(url() . "/cuurentSnap/" . $Url->UID);
+                // else
+                //     return redirect(url() . "/cuurentSnap/2516167");
+
+                    return redirect("https://filtersnew.digizone.com.kw/newdesignv4/495729");
             }
             if ($Msisdn) {  // found in our DB
                 $Msisdn->ooredoo_notify_id = $notify->id;
