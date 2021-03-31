@@ -1298,6 +1298,9 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             } elseif ($opsid == 3) { // viva
                 $operator_id = 51;
                 $operator_name = "viva_kuwait";
+            }else{
+              $operator_id = 50;
+              $operator_name = "ooredoo_kuwait";
             }
 
 
