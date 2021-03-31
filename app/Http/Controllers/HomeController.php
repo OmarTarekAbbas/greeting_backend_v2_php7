@@ -2654,6 +2654,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         date_default_timezone_set("Africa/Cairo");
 
         $prefix = "965";
+          $today_date = date("Y-m-d");
 
 
         if ($request->input('MSISDN') != NULL) {
@@ -2754,7 +2755,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                         $Msisdn->type = $type;
                         $Msisdn->plan_id = $subsType;
                         $Msisdn->subscribe_date = date("Y-m-d");
-                        $today_date = date("Y-m-d");
+
                         $time = strtotime($today_date);
 
                         if ($subsType == "1") {  // // postpaid  // monthly
