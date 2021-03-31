@@ -2411,6 +2411,14 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
         // ========= ooredoo sequemce =============== //
         public function he_redirect(Request $request) {   // this must be login page
+
+          if($request->clickid){
+            Session::put('clickid', $request->clickid);
+            $transID =  Session::get('clickid') ;
+          }else{
+            $transID = uniqid();
+          }
+
             // 	HE Detect   //
             $productID = productID;
             $pName = pName;
@@ -2418,7 +2426,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $CpId = CpId;
             $CpPwd = CpPwd;
             $CpName = CpName;
-            $transID = uniqid();
+          
 
             $pName = pName ;
             $clickid = '';
@@ -2429,16 +2437,6 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             if($request->transaction_id){
               $transaction_id = '&transaction_id='.$request->transaction_id;
             }
-
-
-
-            if($request->clickid){
-              Session::put('clickid', $request->clickid);
-            }
-
-           //  dd(Session::get('clickid'));
-
-
 
 
 
@@ -2461,15 +2459,15 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
     public function ooredoo_he(Request $request) {
 
 
-      // if(Session::has('clickid')){
-      //   $clickid = "&clickid=".Session::get('clickid');
-      // }else{
-      //   $clickid = "";
-      // }
+      if(Session::has('clickid')){
+        $clickid = "&clickid=".Session::get('clickid');
+        $transID = Session::get('clickid');
+      }else{
+        $clickid = "";
+        $transID = uniqid();
+      }
 
-      //dd(Session::get('clickid'));
 
-      //echo Session::get('clickid')  ; die;
 
         if ($request->input('MSISDN') != NULL) {  // HE detect
             $MSISDN = $request->input('MSISDN');  // will be in format 965 XXX XXXX
@@ -2567,7 +2565,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $ismID = "483";
         $image = image;
         //  $transID =  $AdvertisingUrl->id;
-        $transID = uniqid();
+      
 
         /*
           production url :
@@ -2577,11 +2575,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
           http://testconsent.ooredoo.com.kw:8280/API/CCG?MSISDN=XXXXXXX&productID=<jhdfjshfhf>&pName=<kljseuhsdfm>&pPrice=<price_in_fils>&pVal=<validity_in_days>&CpId=<jkhdNS>&CpPwd=<jdh35e22>&CpName=<sjsisfj>&sRenewalPrice=<price_in_fils>&sRenewalValidity=<validity_in_days>&reqMode=WAP&reqType=Subscription&ismID=<XXX>&transID=1122232&tncFontFamily=times&cpBgColor=silver&Wap_mdata=http://XXX.XXX.XX.XXX/image.jpg
 
          */
-        if(Session::has('clickid')){
-          $clickid = "&clickid=".Session::get('clickid');
-        }else{
-          $clickid = "";
-        }
+    
 
 
 
@@ -2674,7 +2668,12 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         }
         if ($request->input('transID') != NULL) {
             $transID = $request->input('transID');
+            $clickid = $transID ;
+        }else{
+          $clickid = "" ;
         }
+
+       
 
 
         if ($request->input('TPCGID') != NULL) {
@@ -2770,6 +2769,30 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
 
+                        
+                    // first ads company = clickid    // pedtro
+                    if ($arr['result'] == "OK" &&(  $arr['optionalParameter8'] == "operation#SN" ||  $arr['optionalParameter8'] == "operation#SR" ||  $arr['optionalParameter8'] == "operation#RN"   ) ) {  // fist success billing  so hit postback
+                    //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
+                    $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
+                    $result =  $this->GetPageData($post_back_url);
+
+                    $postback_requests = new PostbackRequest();
+                    $postback_requests->req = $post_back_url;
+                    $postback_requests->response = $result;
+                    $postback_requests->msisdn = $prefix .$MSISDN;
+                    $postback_requests->notification_id = $notify->id;
+                    $result = (array) json_decode($result);
+                    if($result['status'] == '1'){
+                    $postback_requests->status = 1 ;
+                    }else{
+                    $postback_requests->status = 0 ;
+                    }
+                    $postback_requests->save();
+
+                    }
+
+          
+
                         session(['phone_number' => $MSISDN, 'status' => 'active']);
                         //  return redirect('/');
                         // $Url = Generatedurl::where('operator_id', our_ooredoo_id)->latest()->first();
@@ -2831,6 +2854,32 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                         //     return redirect(url() . "/cuurentSnap/" . $Url->UID);
                         // else
                         //     return redirect(url() . "/cuurentSnap/2516167");
+
+
+                      
+                               // Success for new request SN,SR,RN
+                          // first ads company = clickid    // pedtro
+                    if ($arr['result'] == "OK" &&(  $arr['optionalParameter8'] == "operation#SN" ||  $arr['optionalParameter8'] == "operation#SR" ||  $arr['optionalParameter8'] == "operation#RN"   ) ) {  // fist success billing  so hit postback
+                      //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
+                      $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
+                      $result =  $this->GetPageData($post_back_url);
+  
+                      $postback_requests = new PostbackRequest();
+                      $postback_requests->req = $post_back_url;
+                      $postback_requests->response = $result;
+                      $postback_requests->msisdn = $prefix.$MSISDN;
+                      $postback_requests->notification_id = $notify->id;
+                      $result = (array) json_decode($result);
+                      if($result['status'] == '1'){
+                      $postback_requests->status = 1 ;
+                      }else{
+                      $postback_requests->status = 0 ;
+                      }
+                      $postback_requests->save();
+  
+                      }
+
+
 
                             return redirect("https://filtersnew.digizone.com.kw/newdesignv4/495729");
                     } elseif ($arr['result'] == "DBILL:You have Already Subscribed Requested Services") {
