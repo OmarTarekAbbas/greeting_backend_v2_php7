@@ -21,7 +21,7 @@ use App\Respo;
 class TimweController extends Controller
 {
 
- 
+
 
   public function ooredoo_qatar_login()
   {
@@ -40,7 +40,15 @@ class TimweController extends Controller
     if($request->clickid){
       Session::put('clickid', $request->clickid);
     }
-    // dd(Session::get('clickid'));
+
+    if($request->click_id3){
+      Session::put('click_id3', $request->click_id3);
+    }
+
+    if($request->aff_id3){
+      Session::put('aff_id3', $request->aff_id3);
+    }
+
     $msisdn = $_SERVER['HTTP_CLI'] ?? session()->get('userIdentifier');
     $msisdn = str_replace("974", "", $msisdn);
 
@@ -816,6 +824,28 @@ class TimweController extends Controller
 
           }
 
+         // Third ads company
+         $click_id3 = Session::get('click_id3');
+         $aff_id3 = Session::get('aff_id3');
+         if ($click_id3 != '' && $aff_id3 != '') {
+          $post_back_url = "https://nuvonia.offerstrack.net/advBack.php?click_id=$click_id3&adv_id=1026&offer_id=2179&aff_id=$aff_id3&security_code=2fd9f2ee6c5becde10e99a293a857b87" ;
+
+          $result =  $this->getAdsCompanyApiResponseCode($post_back_url);
+
+          $postback_requests = new PostbackRequest();
+          $postback_requests->req = $post_back_url;
+          $postback_requests->response = $result;
+          $postback_requests->msisdn = $msisdn;
+          $postback_requests->notification_id = "";
+          if($result == '200'){
+            $postback_requests->status = 1 ;
+          }else{
+            $postback_requests->status = 0 ;
+          }
+          $postback_requests->save();
+          }
+          
+
       if ($snap) {
         return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
       } else {
@@ -827,6 +857,20 @@ class TimweController extends Controller
         return redirect('ooredoo_q_pin')->with('failed', 'لقد حدث خطأ, برجاء المحاولة لاحقا');
       return redirect('ooredoo_q_pin')->with('failed', 'Error, please try again later');
     }
+  }
+
+  public function getAdsCompanyApiResponseCode($url)
+  {
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+    curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    $output = curl_exec($ch);
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    return $httpcode;
   }
 
   public function subscriptionOptOut(Request $request, $partnerRole)
