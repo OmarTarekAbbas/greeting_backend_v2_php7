@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Respo;
+use App\TimWe;
 use Validator;
 use Carbon\Carbon;
 use Monolog\Logger;
+use App\Greetingimg;
+use App\Generatedurl;
+
+use App\AdvertisingUrl;
+use App\PostbackRequest;
+use App\timweSubscriber;
+use App\timweUnsubscriber;
 use Illuminate\Http\Request;
 use Monolog\Handler\StreamHandler;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
-
-use App\TimWe;
-use App\Greetingimg;
-use App\Generatedurl;
-use App\PostbackRequest;
-use App\timweSubscriber;
-use App\timweUnsubscriber;
-use App\Respo;
 
 class TimweController extends Controller
 {
@@ -53,13 +54,24 @@ class TimweController extends Controller
     $msisdn = str_replace("974", "", $msisdn);
 
     $actionName = 'Timwe_HE';
-    $URL = url()->current();
+    $URL = url()->full();
 
 
-    $vars['server'] = $_SERVER;
+    // $vars['server'] = $_SERVER;
     $vars['HTTP_CLI'] = $_SERVER['HTTP_CLI'] ?? "";
 
     $this->log($actionName, $URL, $vars);
+
+  $AdvertisingUrl = new AdvertisingUrl();
+  $AdvertisingUrl->adv_url =  $URL;
+  $AdvertisingUrl->msisdn =  $_SERVER['HTTP_CLI'] ?? session()->get('userIdentifier');
+  $AdvertisingUrl->operatorId = 51;
+  $AdvertisingUrl->operatorName = "oq";
+  $AdvertisingUrl->ads_compnay_name = "intech";
+  $AdvertisingUrl->publisherId_macro = session::get('click_id3')??"";
+  $AdvertisingUrl->transaction_id = session::get('aff_id3')??"";
+  $AdvertisingUrl->save();
+
 
     return view('timweLanding.timwe_landing', compact('msisdn'));
   }
@@ -515,6 +527,8 @@ class TimweController extends Controller
     } else {
       return redirect(url('newdesignv4/' . $Url->UID));
     }
+
+
 
   }
 
@@ -1095,6 +1109,8 @@ class TimweController extends Controller
 
       public function postback_requests_test(Request $request)
       {
+
+        /*
         $clickid = Session::get('clickid');
         $msisdn = '97412345678';
        if ($clickid != '') {  // fist success billing  so hit postback
@@ -1114,6 +1130,37 @@ class TimweController extends Controller
         }
         $postback_requests->save();
         }
+*/
+
+
+
+        
+     // Third ads company
+     $click_id3 = Session::get('click_id3');
+     $aff_id3 = Session::get('aff_id3');
+     $msisdn = '97412345678';
+     if ($click_id3 != '' && $aff_id3 != '') {
+      $post_back_url = "https://nuvonia.offerstrack.net/advBack.php?click_id=$click_id3&adv_id=1026&offer_id=2179&aff_id=$aff_id3&security_code=2fd9f2ee6c5becde10e99a293a857b87" ;
+
+      $result =  $this->getAdsCompanyApiResponseCode($post_back_url);
+
+      $postback_requests = new PostbackRequest();
+      $postback_requests->req = $post_back_url;
+      $postback_requests->response = $result;
+      $postback_requests->msisdn = $msisdn;
+      $postback_requests->notification_id = "";
+      if($result == '200'){
+        $postback_requests->status = 1 ;
+      }else{
+        $postback_requests->status = 0 ;
+      }
+      $postback_requests->save();
+      }
+
+        
+
+
+
       }
 
       public static function GetPageData($URL)
