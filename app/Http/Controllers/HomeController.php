@@ -2422,6 +2422,14 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $transID = uniqid();
           }
 
+          if($request->click_id3){
+            Session::put('click_id3', $request->click_id3);
+            Session::put('aff_id3', $request->aff_id3);
+            $transID =  Session::get('click_id3'). '-ads3-'. Session::get('aff_id3') ;
+          }else{
+            $transID = uniqid();
+          }
+
             // 	HE Detect   //
             $productID = productID;
             $pName = pName;
@@ -2429,21 +2437,31 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $CpId = CpId;
             $CpPwd = CpPwd;
             $CpName = CpName;
-          
+
 
             $pName = pName ;
+
             $clickid = '';
             if($request->clickid){
               $clickid = '&clickid='.$request->clickid;
             }
+
             $transaction_id = '';
             if($request->transaction_id){
               $transaction_id = '&transaction_id='.$request->transaction_id;
             }
 
+            $click_id3 = '';
+            if($request->click_id3){
+              $click_id3 = '&click_id3='.$request->click_id3;
+            }
 
+            $aff_id3 = '';
+            if($request->aff_id3){
+              $aff_id3 = '&aff_id3='.$request->aff_id3;
+            }
 
-            $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=$productID&pName=$pName&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$transID$clickid$transaction_id";
+            $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=$productID&pName=$pName&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$transID$clickid$transaction_id$click_id3$aff_id3";
             // $url = "https://www.google.com/?hl=ar";
             // make log
             $actionName = "Ooredoo He Forward";
@@ -2467,6 +2485,14 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $transID = Session::get('clickid');
       }else{
         $clickid = "";
+        $transID = uniqid();
+      }
+
+      if($request->click_id3){
+        Session::put('click_id3', $request->click_id3);
+        Session::put('aff_id3', $request->aff_id3);
+        $transID =  Session::get('click_id3'). '-ads3-'. Session::get('aff_id3') ;
+      }else{
         $transID = uniqid();
       }
 
@@ -2568,7 +2594,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $ismID = "483";
         $image = image;
         //  $transID =  $AdvertisingUrl->id;
-      
+
 
         /*
           production url :
@@ -2578,7 +2604,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
           http://testconsent.ooredoo.com.kw:8280/API/CCG?MSISDN=XXXXXXX&productID=<jhdfjshfhf>&pName=<kljseuhsdfm>&pPrice=<price_in_fils>&pVal=<validity_in_days>&CpId=<jkhdNS>&CpPwd=<jdh35e22>&CpName=<sjsisfj>&sRenewalPrice=<price_in_fils>&sRenewalValidity=<validity_in_days>&reqMode=WAP&reqType=Subscription&ismID=<XXX>&transID=1122232&tncFontFamily=times&cpBgColor=silver&Wap_mdata=http://XXX.XXX.XX.XXX/image.jpg
 
          */
-    
+
 
 
 
@@ -2646,6 +2672,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
       // sample for data flow :  https://filters.digizone.com.kw/notification?FLOW=DATAFLOW&MSISDN=60791570&Reason=Success_and_accepted_by_user&Result=SUCCESS&Songname=null&TPCGID=190502114641022391&productId=S-WafflyEwMY2&transID=5ccaae6952528
     public function notification(request $request) {
+
+
         $message = "";
         $subscribe_for_first_time = 0;
         date_default_timezone_set("Africa/Cairo");
@@ -2672,11 +2700,18 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         if ($request->input('transID') != NULL) {
             $transID = $request->input('transID');
             $clickid = $transID ;
+            // adds 3
+            $explode_transID = (explode("-ads3-",$transID));
+            $click_id3 = $explode_transID[0];
+            $aff_id3 = $explode_transID[1];
+
         }else{
           $clickid = "" ;
+          $click_id3 = "" ;
+          $aff_id3 = "" ;
         }
 
-       
+
 
 
         if ($request->input('TPCGID') != NULL) {
@@ -2772,10 +2807,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
 
-                        
+
                     // first ads company = clickid    // pedtro
                     if ($arr['result'] == "OK" &&(  $arr['optionalParameter8'] == "operation#SN" ||  $arr['optionalParameter8'] == "operation#SR" ||  $arr['optionalParameter8'] == "operation#RN"   ) ) {  // fist success billing  so hit postback
                     //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
+/*
+                    //company one
+
                     $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
                     $result =  $this->GetPageData($post_back_url);
 
@@ -2791,10 +2829,27 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     $postback_requests->status = 0 ;
                     }
                     $postback_requests->save();
+*/
 
+                    if ($click_id3 != '' && $aff_id3 != '') {
+                      $post_back_url = "https://nuvonia.offerstrack.net/advBack.php?click_id=$click_id3&adv_id=1026&offer_id=2179&aff_id=$aff_id3&security_code=2fd9f2ee6c5becde10e99a293a857b87" ;
+
+                      $result =  $this->getAdsCompanyApiResponseCode($post_back_url);
+
+                      $postback_requests = new PostbackRequest();
+                      $postback_requests->req = $post_back_url;
+                      $postback_requests->response = $result;
+                      $postback_requests->msisdn = $prefix .$MSISDN;
+                      $postback_requests->notification_id = $notify->id;
+                      if($result == '200'){
+                        $postback_requests->status = 1 ;
+                      }else{
+                        $postback_requests->status = 0 ;
+                      }
+                      $postback_requests->save();
                     }
 
-          
+
 
                         session(['phone_number' => $MSISDN, 'status' => 'active']);
                         //  return redirect('/');
@@ -2859,14 +2914,14 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                         //     return redirect(url() . "/cuurentSnap/2516167");
 
 
-                      
+
                                // Success for new request SN,SR,RN
                           // first ads company = clickid    // pedtro
                     if ($arr['result'] == "OK" &&(  $arr['optionalParameter8'] == "operation#SN" ||  $arr['optionalParameter8'] == "operation#SR" ||  $arr['optionalParameter8'] == "operation#RN"   ) ) {  // fist success billing  so hit postback
                       //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
                       $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
                       $result =  $this->GetPageData($post_back_url);
-  
+
                       $postback_requests = new PostbackRequest();
                       $postback_requests->req = $post_back_url;
                       $postback_requests->response = $result;
@@ -2879,7 +2934,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                       $postback_requests->status = 0 ;
                       }
                       $postback_requests->save();
-  
+
                       }
 
 
@@ -2923,8 +2978,19 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $result['message'] = $message;
 
             return  json_encode( $result ) ;
-        }
+                }
+
+
+
+
     }
+    }
+
+
+
+
+
+
 
     /*
 
@@ -3156,530 +3222,537 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
 
                 $soap_request = "<?xml version='1.0' encoding='UTF-8'?>
-                    <ocsRequest>
-                    <requestType>1001</requestType>
-                    <serviceNode>$serviceNode</serviceNode>
-                    <sequenceNo>$sequenceNo</sequenceNo>
-                    <callingParty>$callingParty</callingParty>
-                    <serviceType>$serviceType</serviceType>
-                    <serviceId>$serviceId</serviceId>
-                    <bearerId>WAP</bearerId>
-                    <chargeAmount>-1</chargeAmount>
-                    <planId>-1</planId>
-                    <asyncFlag>N</asyncFlag>
-                    <renewalFlag>-1</renewalFlag>
-                    <bundleType>N</bundleType>
-                    <serviceUsage>-1</serviceUsage>
-                    <promoId>-1</promoId>
-                    <subscriptionFlag>S</subscriptionFlag>
-                    <optionalParameter1>circleName#-1</optionalParameter1>
-                    <optionalParameter2>serviceProviderId#-1</optionalParameter2>
-                    <optionalParameter3>subService#-1</optionalParameter3>
-                    <optionalParameter4>languageId#en</optionalParameter4>
-                    <optionalParameter5>channelCode#-1</optionalParameter5>
-                    <optionalParameter6>genereID#-1</optionalParameter6>
-                    <optionalParameter7>categoryId#-1</optionalParameter7>
-                    <optionalParameter8>toneCategory#-1</optionalParameter8>
-                    <optionalParameter9>rbtFeature#-1</optionalParameter9>
-                    <optionalParameter10>contentId#-1</optionalParameter10>
-                    <optionalParameter11>msgText#-1</optionalParameter11>
-                    </ocsRequest>
-        ";
-
-                $header = array(
-                    "Content-type: text/xml;charset=\"utf-8\"",
-                    "Accept: text/xml",
-                    "Cache-Control: no-cache",
-                    "Pragma: no-cache",
-                    "SOAPAction: \"run\"",
-                    "Content-length: " . strlen($soap_request),
-                );
-
-                $soap_do = curl_init();
-                curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
-                curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
-                curl_setopt($soap_do, CURLOPT_TIMEOUT, 10);
-                curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt($soap_do, CURLOPT_POST, true);
-                curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
-                curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
-
-                $data = curl_exec($soap_do);
-                curl_close($soap_do);
-                //print_r($data);
-
-                $ob = simplexml_load_string($data);
-                //  print_r($ob);
-                // make log for every hit
-                $actionName = "Ooredoo dBill Profile Check Api";
-                $not_URL = "ooredoo_dbill_profile_check";
-                $parameters_arr = array(
-                    'response' => (array) $ob,
-                    'date' => Carbon::now()->format('Y-m-d H:i:s'),
-                );
-                $this->log($actionName, $not_URL, $parameters_arr);
-
-                $subsType = $ob->subsType ?? "";
-                return $subsType;
-            }
-
-            public function ooredoo_dbill_subscribe($MSISDN, $subsType, $TPCGID) {
-
-        //   SAMPLE SUBSCRIPTION  API    //
-
-
-                $serviceNode = serviceNode;
-                //  $sequenceNo = uniqid();
-                $sequenceNo = $TPCGID;
-                // $callingParty = "96550167685";
-                $callingParty = "965" . $MSISDN;
-                $serviceType = serviceType;
-                $serviceId = serviceId;
-                $bearerId = "WAP";
-                $asyncFlag = "N";
-                $planId = "CONTENTD1";
-
-
-                if ($subsType == "1") {  // Postpaid
-                    $planId = "CONTENT30";
-                } elseif ($subsType == "2") {  // Prepaid
-                    $planId = "CONTENTD1";
-                } elseif ($subsType == "3") {  // Data/blacklisted/Non ooredoo numbers
-                } else {
-                    $planId = "";
-                }
-
-
-
-                $soap_request = "<?xml version='1.0' encoding='UTF-8'?>
-        <ocsRequest>
-        <requestType>1006</requestType>
-        <serviceNode>$serviceNode</serviceNode>
-        <sequenceNo>$sequenceNo</sequenceNo>
-        <callingParty>$callingParty</callingParty>
-        <serviceType>$serviceType</serviceType>
-        <serviceId>$serviceId</serviceId>
-        <bearerId>$bearerId</bearerId>
-        <chargeAmount>-1</chargeAmount>
-        <planId>$planId</planId>
-        <asyncFlag>N</asyncFlag>
-        <renewalFlag>-1</renewalFlag>
-        <bundleType>$asyncFlag</bundleType>
-        <serviceUsage>-1</serviceUsage>
-        <promoId>-1</promoId>
-        <subscriptionFlag>S</subscriptionFlag>
-        <optionalParameter1>circleName#-1</optionalParameter1>
-        <optionalParameter2>serviceProviderId#-1</optionalParameter2>
-        <optionalParameter3>subService#-1</optionalParameter3>
-        <optionalParameter4>languageId#en</optionalParameter4>
-        <optionalParameter5>channelCode#-1</optionalParameter5>
-        <optionalParameter6>genereID#-1</optionalParameter6>
-        <optionalParameter7>categoryId#-1</optionalParameter7>
-        <optionalParameter8>toneCategory#-1</optionalParameter8>
-        <optionalParameter9>rbtFeature#-1</optionalParameter9>
-        <optionalParameter10>contentId#-1</optionalParameter10>
-        <optionalParameter11>msgText#-1</optionalParameter11>
-        </ocsRequest>";
-
-
-
-
-
-                $header = array(
-                    "Content-type: text/xml;charset=\"utf-8\"",
-                    "Accept: text/xml",
-                    "Cache-Control: no-cache",
-                    "Pragma: no-cache",
-                    "SOAPAction: \"run\"",
-                    "Content-length: " . strlen($soap_request),
-                );
-
-                $soap_do = curl_init();
-                curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
-                curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
-                curl_setopt($soap_do, CURLOPT_TIMEOUT, 10);
-                curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt($soap_do, CURLOPT_POST, true);
-                curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
-                curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
-
-                $data = curl_exec($soap_do);
-                curl_close($soap_do);
-                // print_r($data);
-
-                $ob = simplexml_load_string($data);
-                //  print_r($ob);
-                // make log for every hit
-                $actionName = "Ooredoo dBill Subscribe Api";
-                $not_URL = "ooredoo_dbill_subscribe";
-                $parameters_arr = array(
-                    'response' => (array) $ob,
-                    'date' => Carbon::now()->format('Y-m-d H:i:s'),
-                );
-                $this->log($actionName, $not_URL, $parameters_arr);
-
-                $result = trim($ob->result??"");
-                $optionalParameter8 = trim($ob->optionalParameter8??"");
-                $arr['result'] = $result;
-                $arr['optionalParameter8'] = $optionalParameter8;
-
-                return $arr;
-            }
-
-            public function ooredoo_dbill_unsub($MSISDN) {
-
-        // 	SAMPLE PROFILE CHECK API   //
-                $serviceNode = $serviceNode;
-                $sequenceNo = uniqid();
-                //   $callingParty = "96550167685";
-                $callingParty = "965" . $MSISDN;
-
-                $serviceType = serviceType;
-                $serviceId = serviceId;
-                $bearerId = "WAP";
-                $asyncFlag = "N";
-                $planId = "CONTENTD1";
-
-
-                $soap_request = "<?xml version='1.0' encoding='UTF-8'?>
-        <ocsRequest>
-        <requestType>1007</requestType>
-        <serviceNode>IVAS</serviceNode>
-        <sequenceNo>$sequenceNo</sequenceNo>
-        <callingParty>$callingParty</callingParty>
-        <serviceType>$serviceType</serviceType>
-        <serviceId>$serviceId</serviceId>
-        <bearerId>WAP</bearerId>
-        <chargeAmount>-1</chargeAmount>
-        <planId>$planId</planId>
-        <asyncFlag>N</asyncFlag>
-        <renewalFlag>-1</renewalFlag>
-        <bundleType>N</bundleType>
-        <serviceUsage>-1</serviceUsage>
-        <promoId>-1</promoId>
-        <subscriptionFlag>S</subscriptionFlag>
-        <optionalParameter1>circleName#-1</optionalParameter1>
-        <optionalParameter2>serviceProviderId#-1</optionalParameter2>
-        <optionalParameter3>subService#-1</optionalParameter3>
-        <optionalParameter4>languageId#en</optionalParameter4>
-        <optionalParameter5>channelCode#-1</optionalParameter5>
-        <optionalParameter6>genereID#-1</optionalParameter6>
-        <optionalParameter7>categoryId#-1</optionalParameter7>
-        <optionalParameter8>toneCategory#-1</optionalParameter8>
-        <optionalParameter9>rbtFeature#-1</optionalParameter9>
-        <optionalParameter10>contentId#-1</optionalParameter10>
-        <optionalParameter11>msgText#-1</optionalParameter11>
-        </ocsRequest>
-        ";
-
-                $header = array(
-                    "Content-type: text/xml;charset=\"utf-8\"",
-                    "Accept: text/xml",
-                    "Cache-Control: no-cache",
-                    "Pragma: no-cache",
-                    "SOAPAction: \"run\"",
-                    "Content-length: " . strlen($soap_request),
-                );
-
-                $soap_do = curl_init();
-                curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
-                curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
-                curl_setopt($soap_do, CURLOPT_TIMEOUT, 10);
-                curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt($soap_do, CURLOPT_POST, true);
-                curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
-                curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
-
-                $data = curl_exec($soap_do);
-                curl_close($soap_do);
-                // print_r($data);
-
-                $ob = simplexml_load_string($data);
-                //  print_r($ob);
-                // make log for every hit
-                $actionName = "Ooredoo DBill Unsub Api";
-                $not_URL = "ooredoo_dbill_unsub";
-                $parameters_arr = array(
-                    'response' => (array) $ob,
-                    'date' => Carbon::now()->format('Y-m-d H:i:s'),
-                );
-                $this->log($actionName, $not_URL, $parameters_arr);
-
-
-                $result = $ob->result;
-                $optionalParameter8 = $ob->optionalParameter8;
-
-                $arr['result'] = $result;  // OK   //  DBILL:You have not subscribed this service      "if user is alreday unsub before"
-                $arr['optionalParameter8'] = $optionalParameter8;  // operation#SS   //  operation#N/A    "if user is alreday unsub before"
-                //  print_r($arr);
-                return $arr;
-            }
-
-            public function ooredoo_sms_mt(request $request) {
-
-        // 	SAMPLE SMS MT API   //
-                $serviceNode = serviceNode;
-                $sequenceNo = uniqid();
-                $callingParty = "96550167685";
-                // $callingParty = "965" . $MSISDN;
-
-                $serviceType = serviceType;
-                $serviceId = serviceId;
-                $bearerId = "WAP";
-                $asyncFlag = "N";
-                $planId = "CONTENTD1";
-                $message = "hello";
-                $cli_SenderID = "1757";
-                $reqSource_SenderID = "1757";
-
-
-                $soap_request = "<?xml version='1.0' encoding='UTF-8'?>
-        <ocsRequest>
-           <requestType>2015</requestType>
-           <serviceNode>$serviceNode</serviceNode>
-           <bearerId>$bearerId</bearerId>
-           <sequenceNo>$sequenceNo</sequenceNo>
-           <callingParty>$callingParty</callingParty>
-           <serviceId>S-$serviceId</serviceId>
-           <serviceType>$serviceType</serviceType>
-           <chargeAmount>-1</chargeAmount>
-           <planId>$planId</planId>
-           <promoId>-1</promoId>
-           <subscriptionFlag>S</subscriptionFlag>
-           <bundleType>N</bundleType>
-           <serviceUsage>-1</serviceUsage>
-           <asyncFlag>N</asyncFlag>
-           <renewalFlag>-1</renewalFlag>
-           <optionalParameter1>$cli_SenderID</optionalParameter1>
-           <optionalParameter2>-1</optionalParameter2>
-           <optionalParameter3>-1</optionalParameter3>
-           <optionalParameter4>-1</optionalParameter4>
-           <optionalParameter5>-1</optionalParameter5>
-           <optionalParameter6>-1</optionalParameter6>
-           <optionalParameter7>ipr#P</optionalParameter7>
-           <optionalParameter8>$reqSource_SenderID</optionalParameter8>
-           <optionalParameter9>languageId#-1</optionalParameter9>
-           <optionalParameter10>contentId#-1</optionalParameter10>
-           <optionalParameter11>$message</optionalParameter11>
-           <optionalParameter12>categoryId#-1</optionalParameter12>
-        </ocsRequest>
-        ";
-
-                $header = array(
-                    "Content-type: text/xml;charset=\"utf-8\"",
-                    "Accept: text/xml",
-                    "Cache-Control: no-cache",
-                    "Pragma: no-cache",
-                    "SOAPAction: \"run\"",
-                    "Content-length: " . strlen($soap_request),
-                );
-
-                $soap_do = curl_init();
-                curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
-                curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
-                curl_setopt($soap_do, CURLOPT_TIMEOUT, 10);
-                curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt($soap_do, CURLOPT_POST, true);
-                curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
-                curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
-
-                $data = curl_exec($soap_do);
-                curl_close($soap_do);
-                // print_r($data);
-                // make log for every hit
-                $actionName = "Ooredoo Sms Mt Api";
-                $not_URL = "ooredoo_sms_mt";
-                $parameters_arr = array(
-                    'response' => (array) $ob,
-                    'date' => Carbon::now()->format('Y-m-d H:i:s'),
-                );
-                $this->log($actionName, $not_URL, $parameters_arr);
-
-                $ob = simplexml_load_string($data);
-                print_r($ob);
-                $result = $ob->result; // OK
-            }
-
-
-             public function ooredoo_content_mt(request $request) {
-
-        // 	SAMPLE content send for all service subscribers   //
-                $serviceNode = serviceNode;
-                $sequenceNo = uniqid();
-
-
-                $serviceType = serviceType;
-                $serviceId = serviceId;
-
-
-        $DlNAME = "dl:taisna" ;
-        $message = "http://ivascloud.com/snapchat/viewSnap2/938/738989";
-
-        $shortCode = 1368 ;
-
-                $soap_request = "<?xml version='1.0' encoding='UTF-8' ?>
-        <request>
-        <seqNo> $sequenceNo</seqNo>
-        <dl>$DlNAME</dl>
-        <cli>$shortCode</cli>
-        <serviceId>$serviceId</serviceId>
-        <serviceType>$serviceType</serviceType>
-        <serviceNode>$serviceNode</serviceNode>
-        <message><content><![CDATA[$message]]></content></message>
-        </request>";
-
-                $header = array(
-                    "Content-type: text/xml;charset=\"utf-8\"",
-                    "Accept: text/xml",
-                    "Cache-Control: no-cache",
-                    "Pragma: no-cache",
-                    "SOAPAction: \"run\"",
-                    "Content-length: " . strlen($soap_request),
-                );
-
-                $soap_do = curl_init();
-                curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dl/service");   // https://dbill.ooredoo.com.kw/dl/service
-                curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
-                curl_setopt($soap_do, CURLOPT_TIMEOUT, 10);
-                curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt($soap_do, CURLOPT_POST, true);
-                curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
-                curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
-
-                $data = curl_exec($soap_do);
-                curl_close($soap_do);
-                 var_dump($data);  // OK  for success message
-                // make log for every hit
-                $actionName = "Ooredoo Content Mt Api";
-                $not_URL = "ooredoo_content_mt";
-                $parameters_arr = array(
-                     'request' =>  $soap_request,
-                    'response' => (array) $data,
-                    'date' => Carbon::now()->format('Y-m-d H:i:s'),
-                );
-                $this->log($actionName, $not_URL, $parameters_arr);
-
-             //   $ob = simplexml_load_string($data);
-             //   print_r($ob);
-                // $result = $ob->result; // OK
-            }
-
-
-
-            	// Ooredoo Encryption function
-	public function aes256_cbc_encrypt($key, $data) {
-		$key = base64_decode($key);
-
-		 echo '<br>';
-		//echo strlen($iv);
-		$iv = base64_decode("AAAAAAAAAAAAAAAAAAAAAA==");
-		echo '<br>';
-		if(32 !== strlen($key)) $key = hash('SHA256', $key, true);
-		if(16 !== strlen($iv)) $iv = hash('MD5', $iv, true);
-		$data = $this->pkcs7_pad($data , 16);
-	   //echo $data;
-		echo '<br>';
-         // return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);  // this for php 5
-         return openssl_encrypt($data, 'aes-256-cbc' , $key, OPENSSL_RAW_DATA | OPENSSL_NO_PADDING, $iv);  // encryptiom in php 7.3
-	  }
-
-
-	  public function pkcs7_pad($text, $blocksize)
-	  {
-		  $pad = $blocksize - (strlen($text) % $blocksize);
-		  return $text . str_repeat(chr($pad), $pad);
-	  }
-
-
-
-	public function hextobin($hexstr)
-	{
-		$n = strlen($hexstr);
-		$sbin="";
-		$i=0;
-		while($i<$n)
-		{
-			$a =substr($hexstr,$i,2);
-			$c = pack("H*",$a);
-			if ($i==0){$sbin=$c;}
-			else {$sbin.=$c;}
-			$i+=2;
-		}
-		return $sbin;
-	}
-
-
-
-	public function ooredoo_unsub() {
-        $MSISDN = Session::get('phone_number');
-        return view('ooredoo_landing_unsub', compact('MSISDN'));
+<ocsRequest>
+    <requestType>1001</requestType>
+    <serviceNode>$serviceNode</serviceNode>
+    <sequenceNo>$sequenceNo</sequenceNo>
+    <callingParty>$callingParty</callingParty>
+    <serviceType>$serviceType</serviceType>
+    <serviceId>$serviceId</serviceId>
+    <bearerId>WAP</bearerId>
+    <chargeAmount>-1</chargeAmount>
+    <planId>-1</planId>
+    <asyncFlag>N</asyncFlag>
+    <renewalFlag>-1</renewalFlag>
+    <bundleType>N</bundleType>
+    <serviceUsage>-1</serviceUsage>
+    <promoId>-1</promoId>
+    <subscriptionFlag>S</subscriptionFlag>
+    <optionalParameter1>circleName#-1</optionalParameter1>
+    <optionalParameter2>serviceProviderId#-1</optionalParameter2>
+    <optionalParameter3>subService#-1</optionalParameter3>
+    <optionalParameter4>languageId#en</optionalParameter4>
+    <optionalParameter5>channelCode#-1</optionalParameter5>
+    <optionalParameter6>genereID#-1</optionalParameter6>
+    <optionalParameter7>categoryId#-1</optionalParameter7>
+    <optionalParameter8>toneCategory#-1</optionalParameter8>
+    <optionalParameter9>rbtFeature#-1</optionalParameter9>
+    <optionalParameter10>contentId#-1</optionalParameter10>
+    <optionalParameter11>msgText#-1</optionalParameter11>
+</ocsRequest>
+";
+
+$header = array(
+"Content-type: text/xml;charset=\"utf-8\"",
+"Accept: text/xml",
+"Cache-Control: no-cache",
+"Pragma: no-cache",
+"SOAPAction: \"run\"",
+"Content-length: " . strlen($soap_request),
+);
+
+$soap_do = curl_init();
+curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
+curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
+curl_setopt($soap_do, CURLOPT_TIMEOUT, 10);
+curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
+curl_setopt($soap_do, CURLOPT_POST, true);
+curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
+curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
+
+$data = curl_exec($soap_do);
+curl_close($soap_do);
+//print_r($data);
+
+$ob = simplexml_load_string($data);
+// print_r($ob);
+// make log for every hit
+$actionName = "Ooredoo dBill Profile Check Api";
+$not_URL = "ooredoo_dbill_profile_check";
+$parameters_arr = array(
+'response' => (array) $ob,
+'date' => Carbon::now()->format('Y-m-d H:i:s'),
+);
+$this->log($actionName, $not_URL, $parameters_arr);
+
+$subsType = $ob->subsType ?? "";
+return $subsType;
 }
 
-public function ooredoo_unsub_action() {
-        $MSISDN = Session::get('phone_number');
-        $arr = $this->ooredoo_dbill_unsub($MSISDN);
+public function ooredoo_dbill_subscribe($MSISDN, $subsType, $TPCGID) {
 
-        if ($arr['result'] == "OK" || $arr['optionalParameter8'] == "operation#SS") {
+//  SAMPLE SUBSCRIPTION API //
 
-                $Msisdn = Msisdn::where('phone_number', '=', "965" . $MSISDN)->where('operator_id', '=', 50)->orderBy('id', 'DESC')->first();
-                if ($Msisdn) {
-                        $Msisdn->final_status = 0;
-                        $Msisdn->save();
 
-                        session()->flash('success', 'تم الغاء الاشتراك بنجاخ');
-                } else {
-                        session()->flash('failed', 'هذا التليفون غير موجود');
-                }
-        } else {
-                session()->flash('success', 'انت غير مشرك يالفعل');
-        }
+$serviceNode = serviceNode;
+// $sequenceNo = uniqid();
+$sequenceNo = $TPCGID;
+// $callingParty = "96550167685";
+$callingParty = "965" . $MSISDN;
+$serviceType = serviceType;
+$serviceId = serviceId;
+$bearerId = "WAP";
+$asyncFlag = "N";
+$planId = "CONTENTD1";
 
-        return redirect('/login');
+
+if ($subsType == "1") { // Postpaid
+$planId = "CONTENT30";
+} elseif ($subsType == "2") { // Prepaid
+$planId = "CONTENTD1";
+} elseif ($subsType == "3") { // Data/blacklisted/Non ooredoo numbers
+} else {
+$planId = "";
 }
+
+
+
+$soap_request = "
+<?xml version='1.0' encoding='UTF-8'?>
+<ocsRequest>
+    <requestType>1006</requestType>
+    <serviceNode>$serviceNode</serviceNode>
+    <sequenceNo>$sequenceNo</sequenceNo>
+    <callingParty>$callingParty</callingParty>
+    <serviceType>$serviceType</serviceType>
+    <serviceId>$serviceId</serviceId>
+    <bearerId>$bearerId</bearerId>
+    <chargeAmount>-1</chargeAmount>
+    <planId>$planId</planId>
+    <asyncFlag>N</asyncFlag>
+    <renewalFlag>-1</renewalFlag>
+    <bundleType>$asyncFlag</bundleType>
+    <serviceUsage>-1</serviceUsage>
+    <promoId>-1</promoId>
+    <subscriptionFlag>S</subscriptionFlag>
+    <optionalParameter1>circleName#-1</optionalParameter1>
+    <optionalParameter2>serviceProviderId#-1</optionalParameter2>
+    <optionalParameter3>subService#-1</optionalParameter3>
+    <optionalParameter4>languageId#en</optionalParameter4>
+    <optionalParameter5>channelCode#-1</optionalParameter5>
+    <optionalParameter6>genereID#-1</optionalParameter6>
+    <optionalParameter7>categoryId#-1</optionalParameter7>
+    <optionalParameter8>toneCategory#-1</optionalParameter8>
+    <optionalParameter9>rbtFeature#-1</optionalParameter9>
+    <optionalParameter10>contentId#-1</optionalParameter10>
+    <optionalParameter11>msgText#-1</optionalParameter11>
+</ocsRequest>";
+
+
+
+
+
+$header = array(
+"Content-type: text/xml;charset=\"utf-8\"",
+"Accept: text/xml",
+"Cache-Control: no-cache",
+"Pragma: no-cache",
+"SOAPAction: \"run\"",
+"Content-length: " . strlen($soap_request),
+);
+
+$soap_do = curl_init();
+curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
+curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
+curl_setopt($soap_do, CURLOPT_TIMEOUT, 10);
+curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
+curl_setopt($soap_do, CURLOPT_POST, true);
+curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
+curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
+
+$data = curl_exec($soap_do);
+curl_close($soap_do);
+// print_r($data);
+
+$ob = simplexml_load_string($data);
+// print_r($ob);
+// make log for every hit
+$actionName = "Ooredoo dBill Subscribe Api";
+$not_URL = "ooredoo_dbill_subscribe";
+$parameters_arr = array(
+'response' => (array) $ob,
+'date' => Carbon::now()->format('Y-m-d H:i:s'),
+);
+$this->log($actionName, $not_URL, $parameters_arr);
+
+$result = trim($ob->result??"");
+$optionalParameter8 = trim($ob->optionalParameter8??"");
+$arr['result'] = $result;
+$arr['optionalParameter8'] = $optionalParameter8;
+
+return $arr;
+}
+
+public function ooredoo_dbill_unsub($MSISDN) {
+
+//  SAMPLE PROFILE CHECK API //
+$serviceNode = $serviceNode;
+$sequenceNo = uniqid();
+// $callingParty = "96550167685";
+$callingParty = "965" . $MSISDN;
+
+$serviceType = serviceType;
+$serviceId = serviceId;
+$bearerId = "WAP";
+$asyncFlag = "N";
+$planId = "CONTENTD1";
+
+
+$soap_request = "
+<?xml version='1.0' encoding='UTF-8'?>
+<ocsRequest>
+    <requestType>1007</requestType>
+    <serviceNode>IVAS</serviceNode>
+    <sequenceNo>$sequenceNo</sequenceNo>
+    <callingParty>$callingParty</callingParty>
+    <serviceType>$serviceType</serviceType>
+    <serviceId>$serviceId</serviceId>
+    <bearerId>WAP</bearerId>
+    <chargeAmount>-1</chargeAmount>
+    <planId>$planId</planId>
+    <asyncFlag>N</asyncFlag>
+    <renewalFlag>-1</renewalFlag>
+    <bundleType>N</bundleType>
+    <serviceUsage>-1</serviceUsage>
+    <promoId>-1</promoId>
+    <subscriptionFlag>S</subscriptionFlag>
+    <optionalParameter1>circleName#-1</optionalParameter1>
+    <optionalParameter2>serviceProviderId#-1</optionalParameter2>
+    <optionalParameter3>subService#-1</optionalParameter3>
+    <optionalParameter4>languageId#en</optionalParameter4>
+    <optionalParameter5>channelCode#-1</optionalParameter5>
+    <optionalParameter6>genereID#-1</optionalParameter6>
+    <optionalParameter7>categoryId#-1</optionalParameter7>
+    <optionalParameter8>toneCategory#-1</optionalParameter8>
+    <optionalParameter9>rbtFeature#-1</optionalParameter9>
+    <optionalParameter10>contentId#-1</optionalParameter10>
+    <optionalParameter11>msgText#-1</optionalParameter11>
+</ocsRequest>
+";
+
+$header = array(
+"Content-type: text/xml;charset=\"utf-8\"",
+"Accept: text/xml",
+"Cache-Control: no-cache",
+"Pragma: no-cache",
+"SOAPAction: \"run\"",
+"Content-length: " . strlen($soap_request),
+);
+
+$soap_do = curl_init();
+curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
+curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
+curl_setopt($soap_do, CURLOPT_TIMEOUT, 10);
+curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
+curl_setopt($soap_do, CURLOPT_POST, true);
+curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
+curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
+
+$data = curl_exec($soap_do);
+curl_close($soap_do);
+// print_r($data);
+
+$ob = simplexml_load_string($data);
+// print_r($ob);
+// make log for every hit
+$actionName = "Ooredoo DBill Unsub Api";
+$not_URL = "ooredoo_dbill_unsub";
+$parameters_arr = array(
+'response' => (array) $ob,
+'date' => Carbon::now()->format('Y-m-d H:i:s'),
+);
+$this->log($actionName, $not_URL, $parameters_arr);
+
+
+$result = $ob->result;
+$optionalParameter8 = $ob->optionalParameter8;
+
+$arr['result'] = $result; // OK // DBILL:You have not subscribed this service  "if user is alreday unsub before"
+$arr['optionalParameter8'] = $optionalParameter8; // operation#SS // operation#N/A  "if user is alreday unsub before"
+// print_r($arr);
+return $arr;
+}
+
+public function ooredoo_sms_mt(request $request) {
+
+//  SAMPLE SMS MT API //
+$serviceNode = serviceNode;
+$sequenceNo = uniqid();
+$callingParty = "96550167685";
+// $callingParty = "965" . $MSISDN;
+
+$serviceType = serviceType;
+$serviceId = serviceId;
+$bearerId = "WAP";
+$asyncFlag = "N";
+$planId = "CONTENTD1";
+$message = "hello";
+$cli_SenderID = "1757";
+$reqSource_SenderID = "1757";
+
+
+$soap_request = "
+<?xml version='1.0' encoding='UTF-8'?>
+<ocsRequest>
+    <requestType>2015</requestType>
+    <serviceNode>$serviceNode</serviceNode>
+    <bearerId>$bearerId</bearerId>
+    <sequenceNo>$sequenceNo</sequenceNo>
+    <callingParty>$callingParty</callingParty>
+    <serviceId>S-$serviceId</serviceId>
+    <serviceType>$serviceType</serviceType>
+    <chargeAmount>-1</chargeAmount>
+    <planId>$planId</planId>
+    <promoId>-1</promoId>
+    <subscriptionFlag>S</subscriptionFlag>
+    <bundleType>N</bundleType>
+    <serviceUsage>-1</serviceUsage>
+    <asyncFlag>N</asyncFlag>
+    <renewalFlag>-1</renewalFlag>
+    <optionalParameter1>$cli_SenderID</optionalParameter1>
+    <optionalParameter2>-1</optionalParameter2>
+    <optionalParameter3>-1</optionalParameter3>
+    <optionalParameter4>-1</optionalParameter4>
+    <optionalParameter5>-1</optionalParameter5>
+    <optionalParameter6>-1</optionalParameter6>
+    <optionalParameter7>ipr#P</optionalParameter7>
+    <optionalParameter8>$reqSource_SenderID</optionalParameter8>
+    <optionalParameter9>languageId#-1</optionalParameter9>
+    <optionalParameter10>contentId#-1</optionalParameter10>
+    <optionalParameter11>$message</optionalParameter11>
+    <optionalParameter12>categoryId#-1</optionalParameter12>
+</ocsRequest>
+";
+
+$header = array(
+"Content-type: text/xml;charset=\"utf-8\"",
+"Accept: text/xml",
+"Cache-Control: no-cache",
+"Pragma: no-cache",
+"SOAPAction: \"run\"",
+"Content-length: " . strlen($soap_request),
+);
+
+$soap_do = curl_init();
+curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dbill/smsc?serviceNode=IVAS");
+curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
+curl_setopt($soap_do, CURLOPT_TIMEOUT, 10);
+curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
+curl_setopt($soap_do, CURLOPT_POST, true);
+curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
+curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
+
+$data = curl_exec($soap_do);
+curl_close($soap_do);
+// print_r($data);
+// make log for every hit
+$actionName = "Ooredoo Sms Mt Api";
+$not_URL = "ooredoo_sms_mt";
+$parameters_arr = array(
+'response' => (array) $ob,
+'date' => Carbon::now()->format('Y-m-d H:i:s'),
+);
+$this->log($actionName, $not_URL, $parameters_arr);
+
+$ob = simplexml_load_string($data);
+print_r($ob);
+$result = $ob->result; // OK
+}
+
+
+public function ooredoo_content_mt(request $request) {
+
+//  SAMPLE content send for all service subscribers //
+$serviceNode = serviceNode;
+$sequenceNo = uniqid();
+
+
+$serviceType = serviceType;
+$serviceId = serviceId;
+
+
+$DlNAME = "dl:taisna" ;
+$message = "http://ivascloud.com/snapchat/viewSnap2/938/738989";
+
+$shortCode = 1368 ;
+
+$soap_request = "
+<?xml version='1.0' encoding='UTF-8' ?>
+<request>
+    <seqNo> $sequenceNo</seqNo>
+    <dl>$DlNAME</dl>
+    <cli>$shortCode</cli>
+    <serviceId>$serviceId</serviceId>
+    <serviceType>$serviceType</serviceType>
+    <serviceNode>$serviceNode</serviceNode>
+    <message>
+        <content>
+            <![CDATA[$message]]>
+        </content>
+    </message>
+</request>";
+
+$header = array(
+"Content-type: text/xml;charset=\"utf-8\"",
+"Accept: text/xml",
+"Cache-Control: no-cache",
+"Pragma: no-cache",
+"SOAPAction: \"run\"",
+"Content-length: " . strlen($soap_request),
+);
+
+$soap_do = curl_init();
+curl_setopt($soap_do, CURLOPT_URL, "https://dbill.ooredoo.com.kw/dl/service"); //
+https://dbill.ooredoo.com.kw/dl/service
+curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
+curl_setopt($soap_do, CURLOPT_TIMEOUT, 10);
+curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
+curl_setopt($soap_do, CURLOPT_POST, true);
+curl_setopt($soap_do, CURLOPT_POSTFIELDS, $soap_request);
+curl_setopt($soap_do, CURLOPT_HTTPHEADER, $header);
+
+$data = curl_exec($soap_do);
+curl_close($soap_do);
+var_dump($data); // OK for success message
+// make log for every hit
+$actionName = "Ooredoo Content Mt Api";
+$not_URL = "ooredoo_content_mt";
+$parameters_arr = array(
+'request' => $soap_request,
+'response' => (array) $data,
+'date' => Carbon::now()->format('Y-m-d H:i:s'),
+);
+$this->log($actionName, $not_URL, $parameters_arr);
+
+// $ob = simplexml_load_string($data);
+// print_r($ob);
+// $result = $ob->result; // OK
+}
+
+
+
+// Ooredoo Encryption function
+public function aes256_cbc_encrypt($key, $data) {
+$key = base64_decode($key);
+
+echo '<br>';
+//echo strlen($iv);
+$iv = base64_decode("AAAAAAAAAAAAAAAAAAAAAA==");
+echo '<br>';
+if(32 !== strlen($key)) $key = hash('SHA256', $key, true);
+if(16 !== strlen($iv)) $iv = hash('MD5', $iv, true);
+$data = $this->pkcs7_pad($data , 16);
+//echo $data;
+echo '<br>';
+// return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv); // this for php 5
+return openssl_encrypt($data, 'aes-256-cbc' , $key, OPENSSL_RAW_DATA | OPENSSL_NO_PADDING, $iv); // encryptiom in php
+}
+
+
+public function pkcs7_pad($text, $blocksize)
+{
+$pad = $blocksize - (strlen($text) % $blocksize);
+return $text . str_repeat(chr($pad), $pad);
+}
+
+
+
+public function hextobin($hexstr)
+{
+$n = strlen($hexstr);
+$sbin="";
+$i=0;
+while($i<$n) { $a=substr($hexstr,$i,2); $c=pack("H*",$a); if ($i==0){$sbin=$c;} else {$sbin.=$c;} $i+=2; } return $sbin;
+    } public function ooredoo_unsub() { $MSISDN=Session::get('phone_number'); return view('ooredoo_landing_unsub',
+    compact('MSISDN')); } public function ooredoo_unsub_action() { $MSISDN=Session::get('phone_number'); $arr=$this->
+    ooredoo_dbill_unsub($MSISDN);
+
+    if ($arr['result'] == "OK" || $arr['optionalParameter8'] == "operation#SS") {
+
+    $Msisdn = Msisdn::where('phone_number', '=', "965" . $MSISDN)->where('operator_id', '=', 50)->orderBy('id',
+    'DESC')->first();
+    if ($Msisdn) {
+    $Msisdn->final_status = 0;
+    $Msisdn->save();
+
+    session()->flash('success', 'تم الغاء الاشتراك بنجاخ');
+    } else {
+    session()->flash('failed', 'هذا التليفون غير موجود');
+    }
+    } else {
+    session()->flash('success', 'انت غير مشرك يالفعل');
+    }
+
+    return redirect('/login');
+    }
 
 
     //======================================Ooredoo direct integration =============================================//
 
     public function logoutadmin(Request $request) {
-        \Auth::logout();
-        return redirect('/login');
-      }
+    \Auth::logout();
+    return redirect('/login');
+    }
 
 
-      public function postback_requests(Request $request)
-      {
-        $transaction_id = $request->input('transaction_id')??"";
-        $STATUS = "FSC-BL";
-        $msisdn = '01123656796';
-        if ($STATUS == "FSC-BL" && $transaction_id != '') {  // fist success billing  so hit postback
-          //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
-          $post_back_url = "http://shinedigitalworld.offerstrack.net/advBack.php?click_id=$transaction_id" ;
-          // success!
+    public function postback_requests(Request $request)
+    {
+    $transaction_id = $request->input('transaction_id')??"";
+    $STATUS = "FSC-BL";
+    $msisdn = '01123656796';
+    if ($STATUS == "FSC-BL" && $transaction_id != '') { // fist success billing so hit postback
+    // http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
+    $post_back_url = "http://shinedigitalworld.offerstrack.net/advBack.php?click_id=$transaction_id" ;
+    // success!
 
-          $result =  $this->GetPageData($post_back_url);
-          $postback_requests = new PostbackRequest();
-          $postback_requests->req = $post_back_url;
-          $postback_requests->response = $result;
-          $postback_requests->msisdn = $msisdn;
-          $postback_requests->notification_id = 1;
-          $result = $result;
-          if($result == "success!"){
-            $postback_requests->status = 1 ;
-          }else{
-            $postback_requests->status = 0 ;
-          }
-          $postback_requests->save();
-        }
-      }
+    $result = $this->GetPageData($post_back_url);
+    $postback_requests = new PostbackRequest();
+    $postback_requests->req = $post_back_url;
+    $postback_requests->response = $result;
+    $postback_requests->msisdn = $msisdn;
+    $postback_requests->notification_id = 1;
+    $result = $result;
+    if($result == "success!"){
+    $postback_requests->status = 1 ;
+    }else{
+    $postback_requests->status = 0 ;
+    }
+    $postback_requests->save();
+    }
+    }
 
-}
+    public function getAdsCompanyApiResponseCode($url)
+    {
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HEADER, true); // we want headers
+    curl_setopt($ch, CURLOPT_NOBODY, true); // we don't need body
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    $output = curl_exec($ch);
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    return $httpcode;
+    }
+
+    }

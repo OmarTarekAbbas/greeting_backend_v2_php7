@@ -24,11 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $URL = request()->fullUrl();
-        if (strpos($URL, 'ooredoo_q') !== false) {
-            $lang = 'en';
-            session()->put('applocale', $lang);
-        }
+        // $URL = request()->fullUrl();
+        // if (strpos($URL, 'ooredoo_q') !== false) {
+        //     $lang = 'en';
+        //     session()->put('applocale', $lang);
+        // }
 
         Schema::defaultStringLength(191);
     }
