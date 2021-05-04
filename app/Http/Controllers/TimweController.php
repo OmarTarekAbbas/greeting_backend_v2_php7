@@ -50,8 +50,16 @@ class TimweController extends Controller
       Session::put('aff_id3', $request->aff_id3);
     }
 
-    $msisdn = $_SERVER['HTTP_CLI'] ?? session()->get('userIdentifier');
+    if(isset($_SERVER['HTTP_CLI'])){
+      $msisdn = $_SERVER['HTTP_CLI'] ;
+      session()->put('userIdentifier',$msisdn);
+    }else{
+      $msisdn =  session()->get('userIdentifier');
+    }
+
     $msisdn = str_replace("974", "", $msisdn);
+
+
 
     $actionName = 'Timwe_HE';
     $URL = url()->full();
@@ -858,7 +866,7 @@ class TimweController extends Controller
           }
           $postback_requests->save();
           }
-          
+
 
       if ($snap) {
         return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
@@ -971,11 +979,11 @@ class TimweController extends Controller
   public function checksub($state, $msisdn, $timeweId)
   {
     if ($state == 'subscribe') {
-      $subscribe = timweSubscriber::where('msisdn', $msisdn)->where('serviceId', productId)->first();
+      $subscribe = timweSubscriber::where('msisdn', '974' . $msisdn)->where('serviceId', productId)->first();
 
       if (empty($subscribe)) {
         timweSubscriber::create([
-          'msisdn' => $msisdn,
+          'msisdn' => '974' . $msisdn,
           'serviceId' => productId,
           'requestId' => $timeweId,
         ]);
@@ -1134,7 +1142,7 @@ class TimweController extends Controller
 
 
 
-        
+
      // Third ads company
      $click_id3 = Session::get('click_id3');
      $aff_id3 = Session::get('aff_id3');
@@ -1157,7 +1165,7 @@ class TimweController extends Controller
       $postback_requests->save();
       }
 
-        
+
 
 
 
