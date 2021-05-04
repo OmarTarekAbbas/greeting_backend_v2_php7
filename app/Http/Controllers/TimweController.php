@@ -857,7 +857,7 @@ class TimweController extends Controller
           $postback_requests = new PostbackRequest();
           $postback_requests->req = $post_back_url;
           $postback_requests->response = $result;
-          $postback_requests->msisdn = $msisdn;
+          $postback_requests->msisdn = session('userIdentifier');
           $postback_requests->notification_id = "";
           if($result == '200'){
             $postback_requests->status = 1 ;
