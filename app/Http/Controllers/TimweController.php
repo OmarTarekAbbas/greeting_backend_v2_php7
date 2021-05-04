@@ -31,7 +31,7 @@ class TimweController extends Controller
 
   public function index(Request $request)
   {
-    $URL = $request->fullUrl();
+    $URL = request()->fullUrl();
     $respo= new Respo();
     $respo->complete_url = $URL;
     $respo->respons = "landing";
@@ -858,7 +858,7 @@ class TimweController extends Controller
           }
           $postback_requests->save();
           }
-          
+
 
       if ($snap) {
         return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
@@ -1134,7 +1134,7 @@ class TimweController extends Controller
 
 
 
-        
+
      // Third ads company
      $click_id3 = Session::get('click_id3');
      $aff_id3 = Session::get('aff_id3');
@@ -1157,7 +1157,7 @@ class TimweController extends Controller
       $postback_requests->save();
       }
 
-        
+
 
 
 
