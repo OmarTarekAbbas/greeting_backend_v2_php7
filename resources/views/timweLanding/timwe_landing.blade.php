@@ -294,6 +294,10 @@ if ($lang == 'ar') {
         $('#form').submit()
       }
     });
+
+    $('form').submit(function() {
+      $(this).find("button[type='submit']").prop('disabled',true);
+    });
   </script>
 
 </body>
