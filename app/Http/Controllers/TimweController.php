@@ -50,14 +50,11 @@ class TimweController extends Controller
       Session::put('aff_id3', $request->aff_id3);
     }
 
-    if(isset($_SERVER['HTTP_CLI'])){
-      $msisdn = $_SERVER['HTTP_CLI'] ;
-      session()->put('userIdentifier',$msisdn);
-    }else{
-      $msisdn =  session()->get('userIdentifier');
-    }
 
+
+    $msisdn = $_SERVER['HTTP_CLI'] ?? session()->get('userIdentifier');
     $msisdn = str_replace("974", "", $msisdn);
+
 
 
 
@@ -816,17 +813,20 @@ class TimweController extends Controller
         ]);
       }
 
-      session(['MSISDN' => '974' . $request->number, 'Status' => 'active', 'currentOp' => ooredoo]);
+      session(['MSISDN' => session('userIdentifier'), 'Status' => 'active', 'currentOp' => ooredoo]);
       $Url = Generatedurl::where('operator_id', ooredoo)->latest()->first();
 
       $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
         ->where('greetingimg_operator.operator_id', '=', ooredoo)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
+
+        $msisdn = session('userIdentifier');
+
         // make curl to clickid
 
          // first ads company = clickid    // pedtro
+          /*
           $clickid = Session::get('clickid');
-          $msisdn = '974' . $request->number;
          if ($clickid != '') {  // fist success billing  so hit postback
           //  http://offers.moneytize.affise.com/postback?clickid=604f4dc8d8f7150001b5bbc1
           $post_back_url = "http://offers.moneytize.affise.com/postback?clickid=$clickid" ;
@@ -845,6 +845,7 @@ class TimweController extends Controller
           $postback_requests->save();
 
           }
+          */
 
          // Third ads company
          $click_id3 = Session::get('click_id3');

@@ -192,25 +192,37 @@ function check_favourtite($number, $id) {
 
 function redirect_operator() {
     $operator = Operator::find(OP());
-    $country = Country::find($operator->country_id);
-    $current_url = \Request::fullUrl();
-    if (strpos($operator->name, 'Zain') !== false && strpos($country->name, 'Kuwait') !== false) {
-        return 'landing_zain';
-    } else if (strpos($operator->name, 'Viva') !== false && strpos($country->name, 'Kuwait') !== false) {
-        return 'landing_viva';
-    } else if (strpos($operator->name, 'Ooredoo') !== false && strpos($country->name, 'Kuwait') !== false) {
-        return 'landing_ooredoo';
-    } else if (strpos($operator->name, 'Zain') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
-        return 'landing_zain_ksa';
-    }else if (strpos($operator->name, 'Mobily') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
-        return 'landing_mobily_ksa';
-    }else if (strpos($operator->name, 'STC') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
-      return 'landing_stc_ksa';
-    }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'qatar') !== false) {
-      return 'ooredoo_q_login';
-    } else {
-        return 'landing_v1';
-    }
+    if($operator){
+          $country = Country::find($operator->country_id);
+
+          if( $country){
+              $current_url = \Request::fullUrl();
+              if (strpos($operator->name, 'Zain') !== false && strpos($country->name, 'Kuwait') !== false) {
+                  return 'landing_zain';
+              } else if (strpos($operator->name, 'Viva') !== false && strpos($country->name, 'Kuwait') !== false) {
+                  return 'landing_viva';
+              } else if (strpos($operator->name, 'Ooredoo') !== false && strpos($country->name, 'Kuwait') !== false) {
+                  return 'landing_ooredoo';
+              } else if (strpos($operator->name, 'Zain') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
+                  return 'landing_zain_ksa';
+              }else if (strpos($operator->name, 'Mobily') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
+                  return 'landing_mobily_ksa';
+              }else if (strpos($operator->name, 'STC') !== false && strpos($country->name, 'Saudi Arabia') !== false) {
+                return 'landing_stc_ksa';
+              }else if (strpos($operator->name, 'ooredoo') !== false && strpos($country->name, 'qatar') !== false) {
+                return 'ooredoo_q_login';
+              }
+
+
+          }else {
+            return 'landing_v1';
+        }
+
+    }else {
+      return 'landing_v1';
+  }
+
+
 }
 function getCode() {
 
