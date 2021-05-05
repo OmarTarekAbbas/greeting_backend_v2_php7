@@ -850,6 +850,8 @@ class TimweController extends Controller
          // Third ads company
          $click_id3 = Session::get('click_id3');
          $aff_id3 = Session::get('aff_id3');
+
+
          if ($click_id3 != '' && $aff_id3 != '') {
           $post_back_url = "https://nuvonia.offerstrack.net/advBack.php?click_id=$click_id3&adv_id=1026&offer_id=2179&aff_id=$aff_id3&security_code=2fd9f2ee6c5becde10e99a293a857b87" ;
 
