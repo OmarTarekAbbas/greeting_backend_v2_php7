@@ -31,7 +31,7 @@ class TimweController extends Controller
 
   public function index(Request $request)
   {
-    $URL = $request->fullUrl();
+    $URL = request()->fullUrl();
     $respo= new Respo();
     $respo->complete_url = $URL;
     $respo->respons = "landing";
