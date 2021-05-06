@@ -2183,6 +2183,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $Password = $request->input('Password');
         $OperatorID = $request->input('OperatorID');
         $clickid = $request->input('clickid')??"";
+        $click_id3 = $request->input('click_id3')??"";
+        $aff_id3 = $request->input('aff_id3')??"";
         $transaction_id = $request->input('transaction_id')??"";
 
         if ($ChannelID == SNAP_VIVA_CHANNEL_ID  && $ServiceID == 808 && $User == "kuwait@idex" && $Password == "kuwait@!dex" && $OperatorID == 41904) {
@@ -2278,7 +2280,23 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $postback_requests->save();
       }
 
+      // third ads company   click_id3 and aff_id3
 
+      if ($STATUS == "FSC-BL" && $click_id3 != '' && $aff_id3 != '') {
+        $post_back_url = "https://nuvonia.offerstrack.net/advBack.php?click_id=$click_id3&adv_id=1026&offer_id=2179&aff_id=$aff_id3&security_code=2fd9f2ee6c5becde10e99a293a857b87" ;
+        $result =  $this->getAdsCompanyApiResponseCode($post_back_url);
+        $postback_requests = new PostbackRequest();
+        $postback_requests->req = $post_back_url;
+        $postback_requests->response = $result;
+        $postback_requests->msisdn = $msisdn;
+        $postback_requests->notification_id = $notify->id;
+          if($result == '200'){
+            $postback_requests->status = 1 ;
+          }else{
+            $postback_requests->status = 0 ;
+          }
+        $postback_requests->save();
+      }
 
 
 
