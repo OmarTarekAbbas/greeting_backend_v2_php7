@@ -2849,8 +2849,12 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     $postback_requests->save();
 */
 
+
+
+                  // Yasser campaign postback  = campaign 3
                     if ($click_id3 != '' && $aff_id3 != '') {
                       $post_back_url = "https://nuvonia.offerstrack.net/advBack.php?click_id=$click_id3&adv_id=1026&offer_id=2179&aff_id=$aff_id3&security_code=2fd9f2ee6c5becde10e99a293a857b87" ;
+
 
                       $result =  $this->getAdsCompanyApiResponseCode($post_back_url);
 
