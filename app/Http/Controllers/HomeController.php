@@ -2271,8 +2271,6 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $postback_requests->response = $result;
         $postback_requests->msisdn = $msisdn;
         $postback_requests->notification_id = $notify->id;
-        $postback_requests->operator_id = 'sk';
-        $postback_requests->click_id = $click_id3;
         $result = $result;
         if($result == "success!"){
           $postback_requests->status = 1 ;
@@ -2292,6 +2290,8 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $postback_requests->response = $result;
         $postback_requests->msisdn = $msisdn;
         $postback_requests->notification_id = $notify->id;
+        $postback_requests->operator_id = 'sk';
+        $postback_requests->click_id = $click_id3;
           if($result == '200'){
             $postback_requests->status = 1 ;
           }else{
