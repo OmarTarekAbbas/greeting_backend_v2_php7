@@ -152,7 +152,11 @@
   <script src="{{ url('assets/front/landing_v2')}}/js/popper.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
   <script src="{{ url('assets/front/landing_v2')}}/js/script_zain.js"></script>
-
+<script>
+ $('form').submit(function() {
+      $(this).find("button[type='submit']").prop('disabled',true);
+    });
+</script>
 </body>
 
 </html>

@@ -42,7 +42,7 @@ $('#viva, #zain, #ooredoo').click(function () {
 // });
 $('#phone').keyup(function() {
         var phone = $("#phone").val();
-        if (phone != "" && phone.length == 8) {
+        if (phone != "" && phone.length == 9) {
             $("#zain_submit").attr('disabled', false)
         } else {
             $("#zain_submit").attr('disabled', true)
@@ -61,7 +61,7 @@ $('#phone').keyup(function() {
 
 $('#zain_submit').focusin(function() {
     var phone = $("#phone").val();
-    if (phone != "" && phone.length == 8) {
+    if (phone != "" && phone.length == 9) {
         $('#form_zain').submit();
     } else {
         return false;
