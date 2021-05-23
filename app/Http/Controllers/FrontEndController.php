@@ -2249,7 +2249,7 @@ class FrontEndController extends Controller
         $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/ZainKSAAPI?msisdn=$msisdn_wcc&serv=f";
         //  $result = preg_replace('/\s+/', '', file_get_contents($URL));
         $result = preg_replace('/\s+/', '', $this->GetPageData($URL));
-        $result = 1;
+        // $result = 1;
         // make log
         $company = $this->detectCompnay();
         $actionName = "Zain KSA Pincode Send";
@@ -2453,7 +2453,7 @@ class FrontEndController extends Controller
             );
             $this->log($actionName, $URL, $parameters_arr);
 
-            if ($result == "Youraccountdoesnotexistandyoucannotperformthisoperation.") { // pincode verify success and the user is now subscribe
+            if ($result == "0") { // pincode verify success and the user is now subscribe
                 //update my database
                 // $AdvertisingUrl = new AdvertisingUrl();
                 // $AdvertisingUrl->adv_url = session::get('adv_params');
