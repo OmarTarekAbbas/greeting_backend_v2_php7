@@ -100,7 +100,7 @@ class KsaController extends Controller
        $respo= new Respo();
        $respo->complete_url = $URL;
        $respo->respons = "landing";
-       $respo->op = "Stc Ksa";
+       $respo->op = "Zain Ksa";
        $respo->save();
 
 
