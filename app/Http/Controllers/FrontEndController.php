@@ -1865,7 +1865,7 @@ class FrontEndController extends Controller
         // $AdvertisingUrl->save();
 
 
-        // make response table 
+        // make response table
        $respo= new Respo();
        $respo->complete_url = $URL;
        $respo->respons = "landing";
@@ -1876,7 +1876,7 @@ class FrontEndController extends Controller
        if($request->click_id3){
          Session::put('click_id3', $request->click_id3);
        }
-   
+
        if($request->aff_id3){
          Session::put('aff_id3', $request->aff_id3);
        }
@@ -1978,7 +1978,7 @@ class FrontEndController extends Controller
         $parameters_arr = $result;
         $this->log($actionName, $URL, $parameters_arr);
 
-        // make response table 
+        // make response table
         $respo= new Respo();
         $respo->complete_url = $URL;
         $respo->respons = "landing";
@@ -1989,12 +1989,12 @@ class FrontEndController extends Controller
         if($request->click_id3){
           Session::put('click_id3', $request->click_id3);
         }
-    
+
         if($request->aff_id3){
           Session::put('aff_id3', $request->aff_id3);
         }
-        
-        // make AdvertisingUrl table 
+
+        // make AdvertisingUrl table
         // $AdvertisingUrl = new AdvertisingUrl();
         // $AdvertisingUrl->adv_url = session::get('adv_params');
         // $AdvertisingUrl->msisdn = $MSISDN;
@@ -2005,8 +2005,8 @@ class FrontEndController extends Controller
         // $AdvertisingUrl->ads_compnay_name = $company; //  intech  or headway
         // $AdvertisingUrl->save();
 
-        // make AdvertisingUrl table 
-        
+        // make AdvertisingUrl table
+
         $AdvertisingUrl = new AdvertisingUrl();
         $AdvertisingUrl->adv_url =  $URL;
         $AdvertisingUrl->msisdn =  $MSISDN;
@@ -2225,7 +2225,7 @@ class FrontEndController extends Controller
           $AdvertisingUrl->publisherId_macro = session::get('click_id3');
           $AdvertisingUrl->transaction_id = session::get('aff_id3');
           }
-        
+
         $AdvertisingUrl->save();
 
         if ($Msisdn) {
@@ -2372,7 +2372,7 @@ class FrontEndController extends Controller
           $AdvertisingUrl->publisherId_macro = session::get('click_id3');
           $AdvertisingUrl->transaction_id = session::get('aff_id3');
           }
-        
+
         $AdvertisingUrl->save();
 
         if ($Msisdn) {
@@ -2391,7 +2391,7 @@ class FrontEndController extends Controller
 
         //  Mobily KSA send Pincode
         $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=$msisdn_wcc&serv=f";
-        
+
         //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
         $result = preg_replace('/\s+/', '', $this->GetPageData($URL));
         // $result = 1;
@@ -2408,6 +2408,7 @@ class FrontEndController extends Controller
         );
         $this->log($actionName, $URL, $parameters_arr);
 
+      
         if ($result == "7" || $result == "1") { // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
 
             return view('landing_v2.mobily_ksa_pinCode', compact('msisdn'));
@@ -2452,7 +2453,6 @@ class FrontEndController extends Controller
                 'result' => $result,
             );
             $this->log($actionName, $URL, $parameters_arr);
-
             if ($result == "0") { // pincode verify success and the user is now subscribe
                 //update my database
                 // $AdvertisingUrl = new AdvertisingUrl();
@@ -2480,7 +2480,7 @@ class FrontEndController extends Controller
                   $AdvertisingUrl->publisherId_macro = session::get('click_id3');
                   $AdvertisingUrl->transaction_id = session::get('aff_id3');
                   }
-                
+
                 $AdvertisingUrl->save();
 
                 // update msisdn
@@ -2495,11 +2495,11 @@ class FrontEndController extends Controller
 
                 $click_id3 = Session::get('click_id3');
                 $aff_id3 = Session::get('aff_id3');
-  
-  
+
+
                 if ($click_id3 != '' && $aff_id3 != '') {
                 $post_back_url = "https://nuvonia.offerstrack.net/advBack.php?click_id=$click_id3&adv_id=1026&offer_id=2179&aff_id=$aff_id3&security_code=2fd9f2ee6c5becde10e99a293a857b87" ;
-  
+
                 $result =  $this->getAdsCompanyApiResponseCode($post_back_url);
                 $postback_requests = new PostbackRequest();
                 $postback_requests->req = $post_back_url;
@@ -2626,7 +2626,7 @@ class FrontEndController extends Controller
             //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
             $result = preg_replace('/\s+/', '', $this->GetPageData($URL));
             // dd($result);
-            
+
             // make log
             $company = $this->detectCompnay();
             $actionName = "Mobily KSA Pincode verify";
@@ -2665,7 +2665,7 @@ class FrontEndController extends Controller
                   $AdvertisingUrl->publisherId_macro = session::get('click_id3');
                   $AdvertisingUrl->transaction_id = session::get('aff_id3');
                   }
-                
+
                 $AdvertisingUrl->save();
 
                 // update msisdn
@@ -2679,11 +2679,11 @@ class FrontEndController extends Controller
 
                 $click_id3 = Session::get('click_id3');
                 $aff_id3 = Session::get('aff_id3');
-  
-  
+
+
                 if ($click_id3 != '' && $aff_id3 != '') {
                 $post_back_url = "https://nuvonia.offerstrack.net/advBack.php?click_id=$click_id3&adv_id=1026&offer_id=2179&aff_id=$aff_id3&security_code=2fd9f2ee6c5becde10e99a293a857b87" ;
-  
+
                 $result =  $this->getAdsCompanyApiResponseCode($post_back_url);
                 $postback_requests = new PostbackRequest();
                 $postback_requests->req = $post_back_url;
@@ -2736,21 +2736,25 @@ class FrontEndController extends Controller
                 //  $request->session()->flash('success', 'تم الاشتراك بنجاح');
                 //return view('landing_v2.zain_ksa', compact('MSISDN'));
 
-                session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOP' => MOBILY_OP_ID]);
+
+                session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => MOBILY_OP_ID]);
                 $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
 
                 $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
                     ->where('greetingimg_operator.operator_id', '=', MOBILY_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
-                if ($snap) {
-                    $url = Generatedurl::where('operator_id', MOBILY_OP_ID)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
-                } else {
-                    return redirect(url('cuurentSnap/' . $Url->UID));
-                }
+
+                    if ($snap) {
+                      return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
+                    } else {
+                      return redirect(url('newdesignv4/' . $Url->UID));
+                    }
+
+                
+
 
             } elseif ($result == "Theproducthasbeensubscribed.") { // alreday subscribe
-                session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOP' => MOBILY_OP_ID]);
+                session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => MOBILY_OP_ID]);
                 $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
 
                 $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
@@ -2774,6 +2778,32 @@ class FrontEndController extends Controller
         }
 
     }
+
+
+
+    public function mobily_ksa_test_login()
+    {
+      $msisdn = "123456789";
+
+      session(['MSISDN' => $msisdn, 'Status' => 'active', 'currentOp' => MOBILY_OP_ID]);   // currentOp
+      $Url = Generatedurl::where('operator_id', MOBILY_OP_ID)->latest()->first();
+
+      $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator', 'greetingimg_operator.greetingimg_id', '=', 'greetingimgs.id')
+      ->where('greetingimg_operator.operator_id', '=', MOBILY_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
+
+
+      if ($snap) {
+       //dd(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID)) ;
+        return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
+      } else {
+        return redirect(url('newdesignv4/' . $Url->UID));
+      }
+
+
+
+    }
+
+
 
 
     public function getAdsCompanyApiResponseCode($url)
@@ -3596,6 +3626,8 @@ class FrontEndController extends Controller
         $current_url = \Request::fullUrl();
         if (!check_op() || (Session::has('MSISDN') && Session::get('Status') == 'active')) {
 
+
+
             $rbt_sms = $code = $title = null;
 
             $url = Generatedurl::where('UID', $UID)->first();
@@ -3612,6 +3644,7 @@ class FrontEndController extends Controller
             }
 
             if ( OP() == MOBILY_OP_ID) {
+
                if(Session::has('currentOp') && Session::get('currentOp') == MOBILY_OP_ID){
 
                 }else{

@@ -189,6 +189,7 @@ Route::get('landing_mobily_ksa','FrontEndController@landing_mobily_ksa');
 Route::post('/MobilyKsaPinCodeSend', 'FrontEndController@MobilyKsaPinCodeSend');
 Route::post('/mobily_ksa_pincode_confirm', 'FrontEndController@mobily_ksa_pincode_confirm');
 Route::get('logout_mobily_ksa/{uid}', 'FrontEndController@logout_mobily_ksa');
+Route::get('mobily_ksa_test_login', 'FrontEndController@mobily_ksa_test_login');
 define('MOBILY_OP_ID',14);
 //================================= Flatter Mobily KSA ==============================//
 
