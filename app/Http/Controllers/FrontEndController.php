@@ -2246,7 +2246,6 @@ class FrontEndController extends Controller
 
     public function MobilyKsaPinCodeSend(request $request)
     {
-      // dd("omar");
         date_default_timezone_set("Africa/Cairo");
         $msisdn = $request->input('number');
         $msisdn_wcc = zain_ksa_prefix . $msisdn;

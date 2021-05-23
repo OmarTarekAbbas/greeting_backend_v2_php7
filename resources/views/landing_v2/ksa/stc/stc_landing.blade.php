@@ -223,7 +223,7 @@
               <i style="display:none" class="ml-2 fa fa-check text-success"></i>
             </div>
             <!--<button class="btn back">رجوع</button>-->
-            <button style="margin-bottom:30px;" id="zain_submit" class="btn btn-sm" type=" submit">أشترك</button>
+            <button style="margin-bottom:30px;" id="zain_submit" class="btn btn-sm" type="submit">أشترك</button>
           </form>
           {{-- <a  href="{{url('stc_ksa_unsub')}}" class="btn btn-primary" type="">الغاء الاشتراك</a> --}}
         </div>
@@ -251,6 +251,12 @@
   <script src="{{ url('assets/front/landing_v2')}}/js/bootstrap.min.js"></script>
   {{-- <script src="{{ url('assets/front/landing_v2')}}/js/script_viva.js"></script> --}}
 
+
+<script>
+ $('form').submit(function() {
+      $(this).find("button[type='submit']").prop('disabled',true);
+    });
+</script>
   <script>
     jQuery(function() {
       $("#phone").keyup(function() {
@@ -293,6 +299,8 @@
       event.preventDefault();
     });
   </script>
+
+
 
 </body>
 
