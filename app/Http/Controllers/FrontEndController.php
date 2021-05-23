@@ -11,6 +11,7 @@ use App\Msisdn;
 use App\Notify;
 use App\Occasion;
 use App\Operator;
+use App\PostbackRequest;
 use App\Processedimg;
 use App\Processedvid;
 use App\rbtCode;
@@ -1949,16 +1950,45 @@ class FrontEndController extends Controller
         $parameters_arr = $result;
         $this->log($actionName, $URL, $parameters_arr);
 
+        // make response table 
+        $respo= new Respo();
+        $respo->complete_url = $URL;
+        $respo->respons = "landing";
+        $respo->op = "Mobily Ksa";
+        $respo->save();
+
+
+        if($request->click_id3){
+          Session::put('click_id3', $request->click_id3);
+        }
+    
+        if($request->aff_id3){
+          Session::put('aff_id3', $request->aff_id3);
+        }
+        
+        // make AdvertisingUrl table 
+        // $AdvertisingUrl = new AdvertisingUrl();
+        // $AdvertisingUrl->adv_url = session::get('adv_params');
+        // $AdvertisingUrl->msisdn = $MSISDN;
+        // $AdvertisingUrl->operatorId = MOBILY_OP_ID; // Mobily KSA
+        // $AdvertisingUrl->status = 1; // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
+        // $AdvertisingUrl->transaction_id = $transaction_id; // for Headway ads
+        // $AdvertisingUrl->publisherId_macro = $publisherId_macro; // for Headway  ads
+        // $AdvertisingUrl->ads_compnay_name = $company; //  intech  or headway
+        // $AdvertisingUrl->save();
+
+        // make AdvertisingUrl table 
+        
         $AdvertisingUrl = new AdvertisingUrl();
-        $AdvertisingUrl->adv_url = session::get('adv_params');
-        $AdvertisingUrl->msisdn = $MSISDN;
+        $AdvertisingUrl->adv_url =  $URL;
+        $AdvertisingUrl->msisdn =  $MSISDN;
         $AdvertisingUrl->operatorId = MOBILY_OP_ID; // Mobily KSA
         $AdvertisingUrl->status = 1; // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
-        $AdvertisingUrl->transaction_id = $transaction_id; // for Headway ads
-        $AdvertisingUrl->publisherId_macro = $publisherId_macro; // for Headway  ads
+        $AdvertisingUrl->operatorName = "Mobily Ksa Landing";
         $AdvertisingUrl->ads_compnay_name = $company; //  intech  or headway
+        $AdvertisingUrl->publisherId_macro = session::get('click_id3') ?? "";
+        $AdvertisingUrl->transaction_id = session::get('aff_id3') ?? "";
         $AdvertisingUrl->save();
-
         return view('landing_v2.mobily_ksa', compact('MSISDN'));
     }
 
@@ -2216,6 +2246,7 @@ class FrontEndController extends Controller
 
     public function MobilyKsaPinCodeSend(request $request)
     {
+      // dd("omar");
         date_default_timezone_set("Africa/Cairo");
         $msisdn = $request->input('number');
         $msisdn_wcc = zain_ksa_prefix . $msisdn;
@@ -2275,26 +2306,38 @@ class FrontEndController extends Controller
         }
 
         // insert log in our database
+        // $AdvertisingUrl = new AdvertisingUrl();
+        // $AdvertisingUrl->adv_url = session::get('adv_params');
+        // $AdvertisingUrl->msisdn = $msisdn_wcc;
+        // $AdvertisingUrl->operatorId = MOBILY_OP_ID;
+        // $AdvertisingUrl->status = 2; // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
+        // $AdvertisingUrl->operatorName = "mobily ksa";
+        // $AdvertisingUrl->ads_compnay_name = $company;
+        // if (session::get('publisherId_macro') !== null && session::get('publisherId_macro') != "") {
+        //     $AdvertisingUrl->publisherId_macro = session::get('publisherId_macro');
+        //     $AdvertisingUrl->transaction_id = session::get('transaction_id');
+        // }
+        // $AdvertisingUrl->save();
+
         $AdvertisingUrl = new AdvertisingUrl();
-        $AdvertisingUrl->adv_url = session::get('adv_params');
-        $AdvertisingUrl->msisdn = $msisdn_wcc;
-        $AdvertisingUrl->operatorId = MOBILY_OP_ID;
+        $AdvertisingUrl->adv_url =  $request->fullUrl();
+        $AdvertisingUrl->msisdn =  $msisdn_wcc;
+        $AdvertisingUrl->operatorId = MOBILY_OP_ID; // Mobily KSA
         $AdvertisingUrl->status = 2; // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
-        $AdvertisingUrl->operatorName = "mobily_ksa";
-        $AdvertisingUrl->ads_compnay_name = $company;
-        if (session::get('publisherId_macro') !== null && session::get('publisherId_macro') != "") {
-            $AdvertisingUrl->publisherId_macro = session::get('publisherId_macro');
-            $AdvertisingUrl->transaction_id = session::get('transaction_id');
-        }
+        $AdvertisingUrl->operatorName = "Mobily Ksa Pincode";
+        $AdvertisingUrl->ads_compnay_name = $company; //  intech  or headway
+        if (session::get('click_id3') !== null && session::get('aff_id3') != "") {
+          $AdvertisingUrl->publisherId_macro = session::get('click_id3');
+          $AdvertisingUrl->transaction_id = session::get('aff_id3');
+          }
+        
         $AdvertisingUrl->save();
 
         if ($Msisdn) {
-
         } else {
             $Msisdn = new Msisdn();
             $Msisdn->msisdn = $msisdn_wcc;
         }
-
         $Msisdn->ad_company = $company;
         $Msisdn->operator_id = MOBILY_OP_ID; // Mobily ksa
         $Msisdn->ads_ur_id = $AdvertisingUrl->id;
@@ -2306,8 +2349,10 @@ class FrontEndController extends Controller
 
         //  Mobily KSA send Pincode
         $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=$msisdn_wcc&serv=f";
+        
         //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
         $result = preg_replace('/\s+/', '', $this->GetPageData($URL));
+        // $result = 1;
 
         // make log
         $company = $this->detectCompnay();
@@ -2322,6 +2367,7 @@ class FrontEndController extends Controller
         $this->log($actionName, $URL, $parameters_arr);
 
         if ($result == "7" || $result == "1") { // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
+
             return view('landing_v2.mobily_ksa_pinCode', compact('msisdn'));
         } else { // error
             $request->session()->flash('failed', 'pincode send is failed');
@@ -2496,7 +2542,8 @@ class FrontEndController extends Controller
             $URL = "http://smsgisp.eg.mobizone.mobi/gisp-admin/MobilyKSAAPI?msisdn=$msisdn_wcc&serv=f&pincode=$pincode"; // mobily
             //   $result = preg_replace('/\s+/', '', file_get_contents($URL));
             $result = preg_replace('/\s+/', '', $this->GetPageData($URL));
-
+            // dd($result);
+            
             // make log
             $company = $this->detectCompnay();
             $actionName = "Mobily KSA Pincode verify";
@@ -2511,17 +2558,31 @@ class FrontEndController extends Controller
 
             if ($result == "0") { // pincode verify success and the user is now subscribe
                 //update my database
+                // $AdvertisingUrl = new AdvertisingUrl();
+                // $AdvertisingUrl->adv_url = session::get('adv_params');
+                // $AdvertisingUrl->msisdn = $msisdn_wcc;
+                // $AdvertisingUrl->operatorId = MOBILY_OP_ID;
+                // $AdvertisingUrl->status = 3; // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
+                // $AdvertisingUrl->operatorName = "zain_ksa";
+                // $AdvertisingUrl->ads_compnay_name = $company;
+                // if (session::get('publisherId_macro') !== null && session::get('publisherId_macro') != "") {
+                //     $AdvertisingUrl->publisherId_macro = session::get('publisherId_macro');
+                //     $AdvertisingUrl->transaction_id = session::get('transaction_id');
+                // }
+                // $AdvertisingUrl->save();
+
                 $AdvertisingUrl = new AdvertisingUrl();
-                $AdvertisingUrl->adv_url = session::get('adv_params');
-                $AdvertisingUrl->msisdn = $msisdn_wcc;
-                $AdvertisingUrl->operatorId = MOBILY_OP_ID;
+                $AdvertisingUrl->adv_url =  $request->fullUrl();
+                $AdvertisingUrl->msisdn =  $msisdn_wcc;
+                $AdvertisingUrl->operatorId = MOBILY_OP_ID; // Mobily KSA
                 $AdvertisingUrl->status = 3; // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
-                $AdvertisingUrl->operatorName = "zain_ksa";
-                $AdvertisingUrl->ads_compnay_name = $company;
-                if (session::get('publisherId_macro') !== null && session::get('publisherId_macro') != "") {
-                    $AdvertisingUrl->publisherId_macro = session::get('publisherId_macro');
-                    $AdvertisingUrl->transaction_id = session::get('transaction_id');
-                }
+                $AdvertisingUrl->operatorName = "Mobily Ksa PinSuccess";
+                $AdvertisingUrl->ads_compnay_name = $company; //  intech  or headway
+                if (session::get('click_id3') !== null && session::get('aff_id3') != "") {
+                  $AdvertisingUrl->publisherId_macro = session::get('click_id3');
+                  $AdvertisingUrl->transaction_id = session::get('aff_id3');
+                  }
+                
                 $AdvertisingUrl->save();
 
                 // update msisdn
@@ -2533,36 +2594,59 @@ class FrontEndController extends Controller
                 $Msisdn->final_status = 1;
                 $Msisdn->save();
 
-                // update intech
-                if ($company == "intech") { // intech integration
-                    // call intech  api to notify that msisdn is subscribe successfully
-                    $ADV_URL = "http://ict.intech-mena.com/Universal/v2.0/API/Postback?msisdn=" . $msisdn_wcc . "&operaterName=zain_ksa&operatorId=16&" . session::get('adv_params');
-                    $adv_result = $this->GetPageData($ADV_URL);
-                    $adv_result = (array) json_decode($adv_result);
-
-                    if ($adv_result['UET Offer Log'] == "SUCCESS") {
-                        $AdvertisingUrl = new AdvertisingUrl();
-                        $AdvertisingUrl->adv_url = session::get('adv_params');
-                        $AdvertisingUrl->msisdn = $msisdn;
-                        $AdvertisingUrl->operatorId = MOBILY_OP_ID;
-                        $AdvertisingUrl->status = 4; // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
-                        $AdvertisingUrl->operatorName = "zain_ksa";
-                        $AdvertisingUrl->ads_compnay_name = $company;
-                        $AdvertisingUrl->save();
-
-                        // make log
-                        $company = $this->detectCompnay();
-                        $actionName = "Intech Mobily KSA Subscribe Success";
-                        $URL = $ADV_URL;
-                        $parameters_arr = array(
-                            'MSISDN' => $msisdn_wcc,
-                            'link' => $ADV_URL,
-                            'date' => Carbon::now()->format('Y-m-d H:i:s'),
-                            'result' => $adv_result,
-                        );
-                        $this->log($actionName, $URL, $parameters_arr);
-                    }
+                $click_id3 = Session::get('click_id3');
+                $aff_id3 = Session::get('aff_id3');
+  
+  
+                if ($click_id3 != '' && $aff_id3 != '') {
+                $post_back_url = "https://nuvonia.offerstrack.net/advBack.php?click_id=$click_id3&adv_id=1026&offer_id=2179&aff_id=$aff_id3&security_code=2fd9f2ee6c5becde10e99a293a857b87" ;
+  
+                $result =  $this->getAdsCompanyApiResponseCode($post_back_url);
+                $postback_requests = new PostbackRequest();
+                $postback_requests->req = $post_back_url;
+                $postback_requests->response = $result;
+                $postback_requests->msisdn = $msisdn_wcc;
+                $postback_requests->notification_id = "";
+                $postback_requests->operator_id = 'Mobily Ksa';
+                $postback_requests->click_id = $click_id3;
+                if($result == '200'){
+                $postback_requests->status = 1 ;
+                }else{
+                $postback_requests->status = 0 ;
                 }
+                $postback_requests->save();
+                }
+
+                // update intech
+                // if ($company == "intech") { // intech integration
+                //     // call intech  api to notify that msisdn is subscribe successfully
+                //     $ADV_URL = "http://ict.intech-mena.com/Universal/v2.0/API/Postback?msisdn=" . $msisdn_wcc . "&operaterName=zain_ksa&operatorId=16&" . session::get('adv_params');
+                //     $adv_result = $this->GetPageData($ADV_URL);
+                //     $adv_result = (array) json_decode($adv_result);
+
+                //     if ($adv_result['UET Offer Log'] == "SUCCESS") {
+                //         $AdvertisingUrl = new AdvertisingUrl();
+                //         $AdvertisingUrl->adv_url = session::get('adv_params');
+                //         $AdvertisingUrl->msisdn = $msisdn;
+                //         $AdvertisingUrl->operatorId = MOBILY_OP_ID;
+                //         $AdvertisingUrl->status = 4; // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
+                //         $AdvertisingUrl->operatorName = "zain_ksa";
+                //         $AdvertisingUrl->ads_compnay_name = $company;
+                //         $AdvertisingUrl->save();
+
+                //         // make log
+                //         $company = $this->detectCompnay();
+                //         $actionName = "Intech Mobily KSA Subscribe Success";
+                //         $URL = $ADV_URL;
+                //         $parameters_arr = array(
+                //             'MSISDN' => $msisdn_wcc,
+                //             'link' => $ADV_URL,
+                //             'date' => Carbon::now()->format('Y-m-d H:i:s'),
+                //             'result' => $adv_result,
+                //         );
+                //         $this->log($actionName, $URL, $parameters_arr);
+                //     }
+                // }
 
 //                session()->flash('success', 'تم تسجيلك بنجاح في خدمة  فلاتر سناب شات');
                 //                return redirect("/notification?action=5&mnc=103&msisdn=$msisdn_wcc&opsid=4&status=SS");
@@ -2607,6 +2691,21 @@ class FrontEndController extends Controller
         }
 
     }
+
+
+    public function getAdsCompanyApiResponseCode($url)
+  {
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+    curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    $output = curl_exec($ch);
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    return $httpcode;
+  }
 
     public function subscribeZain_v2(request $request)
     {
@@ -5040,7 +5139,7 @@ class FrontEndController extends Controller
     }
 
 
-    
+
     public function landing_kuwait_promotion (Request $request){
 
       $ip = $_SERVER["REMOTE_ADDR"];
