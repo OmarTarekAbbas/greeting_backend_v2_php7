@@ -217,7 +217,7 @@
           <!--<h5>ادخل رقم الهاتف</h5>-->
           <form method="post" action="{{url('/StcKsaPinCodeSend')}}" id="form_zain">
             {{ csrf_field() }}
-            <div class="form-group form-inline">
+            <div class="form-group form-inline justify-content-center">
               <label for="phone"><span>+ 966</span></label>
               <input type="number" class="form-control" id="phone" min="0" value="" placeholder="ادخل الرقم هاتفك الاشتراك" name="number" required pattern="[0-9]{9}">
               <i style="display:none" class="ml-2 fa fa-check text-success"></i>

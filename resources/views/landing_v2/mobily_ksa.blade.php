@@ -112,7 +112,7 @@
           <!--<h5>ادخل رقم الهاتف</h5>-->
           <form method="post" action="MobilyKsaPinCodeSend" id="form_zain">
             {{ csrf_field() }}
-            <div class="form-group form-inline">
+            <div class="form-group form-inline justify-content-center">
               <label for="phone"><span>{{zain_ksa_prefix}}</span></label>
               <input type="hidden" name="prev_url" value="{{(isset($_REQUEST['prev_url'])?$_REQUEST['prev_url']:'')}}">
               <input type="tel" class="form-control" id="phone" value="{{$MSISDN}}" placeholder="ادخل رقم تليفونك" name="number" required pattern="[0-9]{9}">
