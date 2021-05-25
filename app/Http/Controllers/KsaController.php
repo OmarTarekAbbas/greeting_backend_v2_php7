@@ -96,7 +96,7 @@ class KsaController extends Controller
       $this->log($actionName, $URL, $parameters_arr);
 
 
-       // make response table 
+       // make response table
        $respo= new Respo();
        $respo->complete_url = $URL;
        $respo->respons = "landing";
@@ -107,7 +107,7 @@ class KsaController extends Controller
        if($request->click_id3){
          Session::put('click_id3', $request->click_id3);
        }
-   
+
        if($request->aff_id3){
          Session::put('aff_id3', $request->aff_id3);
        }
@@ -199,7 +199,7 @@ class KsaController extends Controller
           $AdvertisingUrl->publisherId_macro = session::get('click_id3');
           $AdvertisingUrl->transaction_id = session::get('aff_id3');
           }
-        
+
         $AdvertisingUrl->save();
 
 
@@ -318,7 +318,7 @@ class KsaController extends Controller
                   $AdvertisingUrl->publisherId_macro = session::get('click_id3');
                   $AdvertisingUrl->transaction_id = session::get('aff_id3');
                   }
-                
+
                 $AdvertisingUrl->save();
 
 
@@ -345,11 +345,11 @@ class KsaController extends Controller
 
                 $click_id3 = Session::get('click_id3');
                 $aff_id3 = Session::get('aff_id3');
-  
-  
+
+
                 if ($click_id3 != '' && $aff_id3 != '') {
                 $post_back_url = "https://nuvonia.offerstrack.net/advBack.php?click_id=$click_id3&adv_id=1026&offer_id=2179&aff_id=$aff_id3&security_code=2fd9f2ee6c5becde10e99a293a857b87" ;
-  
+
                 $result =  $this->getAdsCompanyApiResponseCode($post_back_url);
                 $postback_requests = new PostbackRequest();
                 $postback_requests->req = $post_back_url;

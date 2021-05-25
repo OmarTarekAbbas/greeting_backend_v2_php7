@@ -2408,7 +2408,7 @@ class FrontEndController extends Controller
         );
         $this->log($actionName, $URL, $parameters_arr);
 
-      
+
         if ($result == "7" || $result == "1") { // pincode send successfully  // 7 : the number is new on Arpu   1 : the number is saved in DB on Arpu
 
             return view('landing_v2.mobily_ksa_pinCode', compact('msisdn'));
@@ -2573,11 +2573,9 @@ class FrontEndController extends Controller
                     ->where('greetingimg_operator.operator_id', '=', 16)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
                 if ($snap) {
-                    $url = Generatedurl::where('operator_id', 16)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
+                  return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
                 } else {
-
-                    return redirect(url('cuurentSnap/' . $Url->UID));
+                  return redirect(url('newdesignv4/' . $Url->UID));
                 }
 
             } elseif ($result == "Theproducthasbeensubscribed.") { // alreday subscribe
@@ -2588,11 +2586,9 @@ class FrontEndController extends Controller
                     ->where('greetingimg_operator.operator_id', '=', 16)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
                 if ($snap) {
-                    $url = Generatedurl::where('operator_id', 16)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
+                  return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
                 } else {
-
-                    return redirect(url('cuurentSnap/' . $Url->UID));
+                  return redirect(url('newdesignv4/' . $Url->UID));
                 }
 
             } else {
@@ -2750,7 +2746,7 @@ class FrontEndController extends Controller
                       return redirect(url('newdesignv4/' . $Url->UID));
                     }
 
-                
+
 
 
             } elseif ($result == "Theproducthasbeensubscribed.") { // alreday subscribe
@@ -2761,10 +2757,9 @@ class FrontEndController extends Controller
                     ->where('greetingimg_operator.operator_id', '=', MOBILY_OP_ID)->where('greetingimgs.snap', 1)->where('greetingimgs.Rdate', '<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate', 'desc')->first();
 
                 if ($snap) {
-                    $url = Generatedurl::where('operator_id', MOBILY_OP_ID)->orderBy('created_at', 'desc')->first();
-                    return redirect(url('viewSnap2/' . $snap->id . '/' . $url->UID));
+                  return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
                 } else {
-                    return redirect(url('cuurentSnap/' . $Url->UID));
+                  return redirect(url('newdesignv4/' . $Url->UID));
                 }
 
             } else {
