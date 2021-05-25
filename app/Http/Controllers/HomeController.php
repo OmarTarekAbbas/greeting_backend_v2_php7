@@ -2461,28 +2461,28 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
             $pName = pName ;
 
-            $clickid = '';
-            if($request->clickid){
-              $clickid = '&clickid='.$request->clickid;
-            }
+            // $clickid = '';
+            // if($request->clickid){
+            //   $clickid = '&clickid='.$request->clickid;
+            // }
 
-            $transaction_id = '';
-            if($request->transaction_id){
-              $transaction_id = '&transaction_id='.$request->transaction_id;
-            }
+            // $transaction_id = '';
+            // if($request->transaction_id){
+            //   $transaction_id = '&transaction_id='.$request->transaction_id;
+            // }
 
-            $click_id3 = '';
-            if($request->click_id3){
-              $click_id3 = '&click_id3='.$request->click_id3;
-            }
+            // $click_id3 = '';
+            // if($request->click_id3){
+            //   $click_id3 = '&click_id3='.$request->click_id3;
+            // }
 
-            $aff_id3 = '';
-            if($request->aff_id3){
-              $aff_id3 = '&aff_id3='.$request->aff_id3;
-            }
+            // $aff_id3 = '';
+            // if($request->aff_id3){
+            //   $aff_id3 = '&aff_id3='.$request->aff_id3;
+            // }
 
-            $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=$productID&pName=$pName&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$transID$clickid$transaction_id$click_id3$aff_id3";
-            // $url = "https://www.google.com/?hl=ar";
+            $url = "http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=$productID&pName=$pName&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=$transID";
+            // ex:    http://singlehe.ooredoo.com.kw:9989/SingleSiteHE/getHE?productID=S-SnaFiEwMY2&pName=SnapFilters&CpId=IVAS&CpPwd=iva@123&CpName=IVAS&transID=6061e5f830444
             // make log
             $actionName = "Ooredoo He Forward";
             $parameters_arr = array(
@@ -2498,25 +2498,27 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
 
           //   http://localhost/waffarly_kuwait/ooredoo_he?MSISDN=96550167685
     public function ooredoo_he(Request $request) {
+// this is simple for redirect url
+// https://filters.digizone.com.kw/ooredoo_he?MSISDN=96599290948&Reason=DATA&productId=S-SnaFiEwMY2&transID=6061e5f830444
+
+      // if(Session::has('clickid')){
+      //   $clickid = "&clickid=".Session::get('clickid');
+      //   $transID = Session::get('clickid');
+      // }else{
+      //   $clickid = "";
+      //   $transID = uniqid();
+      // }
+
+      // if($request->click_id3){
+      //   Session::put('click_id3', $request->click_id3);
+      //   Session::put('aff_id3', $request->aff_id3);
+      //   $transID =  Session::get('click_id3'). '-ads3-'. Session::get('aff_id3') ;
+      // }else{
+      //   $transID = uniqid();
+      // }
 
 
-      if(Session::has('clickid')){
-        $clickid = "&clickid=".Session::get('clickid');
-        $transID = Session::get('clickid');
-      }else{
-        $clickid = "";
-        $transID = uniqid();
-      }
-
-      if($request->click_id3){
-        Session::put('click_id3', $request->click_id3);
-        Session::put('aff_id3', $request->aff_id3);
-        $transID =  Session::get('click_id3'). '-ads3-'. Session::get('aff_id3') ;
-      }else{
-        $transID = uniqid();
-      }
-
-
+           $transID = $request->input('transID');
 
         if ($request->input('MSISDN') != NULL) {  // HE detect
             $MSISDN = $request->input('MSISDN');  // will be in format 965 XXX XXXX
