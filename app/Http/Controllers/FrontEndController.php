@@ -2506,7 +2506,7 @@ class FrontEndController extends Controller
                 $postback_requests->response = $result;
                 $postback_requests->msisdn = $msisdn_wcc;
                 $postback_requests->notification_id = "";
-                $postback_requests->operator_id = 'Stc Ksa';
+                $postback_requests->operator_id = 'Zain Ksa';
                 $postback_requests->click_id = $click_id3;
                 if($result == '200'){
                 $postback_requests->status = 1 ;
