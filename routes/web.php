@@ -320,7 +320,7 @@ Route::get('logout_viva/{uid}', 'HomeController@logout');
 define('SNAP_VIVA_URL','https://filtersnew.digizone.com.kw/landing_stc');
 define('SNAP_VIVA_CHANNEL_ID',4493);
 define('viva_kuwait_operator_id',13);
-Route::post('viva_test_login', 'HomeController@viva_test_login');
+Route::get('viva_test_login', 'HomeController@viva_test_login');
 
 
 
