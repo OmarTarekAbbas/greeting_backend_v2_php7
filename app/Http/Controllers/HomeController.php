@@ -2129,6 +2129,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
                     ->where('greetingimg_operator.operator_id','=',13)->where('greetingimgs.snap',1)->where('greetingimgs.Rdate','<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate','desc')->first();
 
             if ($snap) {
+              $Url = Generatedurl::where('operator_id', 13)->latest()->first();
               return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
             } else {
               return redirect(url('newdesignv4/' . $Url->UID));
