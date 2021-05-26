@@ -2139,6 +2139,30 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
              return redirect(url('/landing_stc_1?msisdn=965' . $msisdn));
         }
     }
+
+
+    public function viva_test_login(request $request)
+    {
+
+        // check subscribe
+        $Msisdn = Msisdn::where('msisdn', '=', "96556509719")->where('final_status', '=', 1)->where('operator_id', '=', 51)->orderBy('id', 'DESC')->first();
+        if ($Msisdn) {
+            session(['MSISDN' => $msisdn, 'status' => 'active']);
+            $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator','greetingimg_operator.greetingimg_id','=','greetingimgs.id')
+                    ->where('greetingimg_operator.operator_id','=',13)->where('greetingimgs.snap',1)->where('greetingimgs.Rdate','<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate','desc')->first();
+
+                    dd($snap) ;
+            if($snap){
+                $url = Generatedurl::where('operator_id',13)->where('occasion_id',$snap->occasion_id)->orderBy('created_at','desc')->first();
+                return redirect(url('viewSnap2/'.$snap->id.'/'.$url->UID));
+            }
+        } else {
+          if( $clickid != "")
+            return redirect(url('/landing_stc_1?msisdn=965' . $msisdn.'&clickid='.$clickid));
+            else
+             return redirect(url('/landing_stc_1?msisdn=965' . $msisdn));
+        }
+    }
     public function viva_notification(request $request)
     {
 
