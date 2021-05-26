@@ -2128,10 +2128,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $snap = Greetingimg::select('greetingimgs.*')->join('greetingimg_operator','greetingimg_operator.greetingimg_id','=','greetingimgs.id')
                     ->where('greetingimg_operator.operator_id','=',13)->where('greetingimgs.snap',1)->where('greetingimgs.Rdate','<=', Carbon::now()->format('Y-m-d'))->orderBy('greetingimgs.Rdate','desc')->first();
 
-            if($snap){
-                $url = Generatedurl::where('operator_id',13)->where('occasion_id',$snap->occasion_id)->orderBy('created_at','desc')->first();
-                return redirect(url('viewSnap2/'.$snap->id.'/'.$url->UID));
+            if ($snap) {
+              return redirect(url('newdesignv4/filter/' . $snap->id . '/' . $Url->UID));
+            } else {
+              return redirect(url('newdesignv4/' . $Url->UID));
             }
+
+
         } else {
           if( $clickid != "")
             return redirect(url('/landing_stc_1?msisdn=965' . $msisdn.'&clickid='.$clickid));
