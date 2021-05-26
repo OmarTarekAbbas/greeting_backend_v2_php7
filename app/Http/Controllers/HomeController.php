@@ -2145,6 +2145,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
     {
 
         // check subscribe
+        $msisdn = "56509719"  ;
         $Msisdn = Msisdn::where('msisdn', '=', "96556509719")->where('final_status', '=', 1)->where('operator_id', '=', 51)->orderBy('id', 'DESC')->first();
         if ($Msisdn) {
             session(['MSISDN' => $msisdn, 'status' => 'active']);
