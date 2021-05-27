@@ -165,7 +165,7 @@
               </div>
 
               <div class="col-4 pl-0">
-                <a class="operator" sms='stc' href="{{ 'http://cg.mobi-mind.net/?ID=370,458bc531,661,8061,3,IVAS,https%3A%2F%2Ffiltersnew.digizone.com.kw%2Flanding_stc' }}@if($clickid)&@endif{{$clickid}} @if($transaction_id)&@endif{{$transaction_id}} @if($click_id3)&@endif{{$click_id3}}">
+                <a class="operator" sms='stc' href="{{ 'http://cg.mobi-mind.net/?ID=370,458bc531,661,8061,3,IVAS,https%3A%2F%2Ffiltersnew.digizone.com.kw%2Flanding_stc' }}@if($clickid)&@endif{{$clickid}} @if($transaction_id)&@endif{{$transaction_id}} @if($click_id3)@endif{{$click_id3}}">
                   <img class="img-fluid w-100" src="{{ url('assets/front/landing_v2')}}/img/snap_new_landing/landing_kuwait/01.png" id="stc">
                 </a>
               </div>

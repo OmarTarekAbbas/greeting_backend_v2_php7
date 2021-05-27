@@ -2216,7 +2216,7 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
         $aff_id3 = $request->input('aff_id3')??"";
         $transaction_id = $request->input('transaction_id')??"";
 
-        if ($ChannelID == SNAP_VIVA_CHANNEL_ID  && $ServiceID == 808 && $User == "kuwait@idex" && $Password == "kuwait@!dex" && $OperatorID == 41904) {
+      //  if ($ChannelID == SNAP_VIVA_CHANNEL_ID  && $ServiceID == 808 && $User == "kuwait@idex" && $Password == "kuwait@!dex" && $OperatorID == 41904) {
 
 
             /*
@@ -2393,13 +2393,13 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $result['url'] = $URL;
             $result['status'] = $STATUS;
             $result['message'] = $message;
-        } else {
-            $result = array();
-            $result['status'] = "Fail";
-            $result['type'] = "viva_notification_url";
-            $result['url'] = $URL;
-            $result['message'] = "wrong parameters";
-        }
+        // } else {
+        //     $result = array();
+        //     $result['status'] = "Fail";
+        //     $result['type'] = "viva_notification_url";
+        //     $result['url'] = $URL;
+        //     $result['message'] = "wrong parameters";
+        // }
 
         return Response(array('result' => $result));
     }
