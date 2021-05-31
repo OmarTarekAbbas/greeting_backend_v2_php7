@@ -2471,13 +2471,16 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $transID = uniqid();
           }
 
-          if($request->click_id3){
-            Session::put('click_id3', $request->click_id3);
-            Session::put('aff_id3', $request->aff_id3);
-            $transID =  Session::get('click_id3'). '-ads3-'. Session::get('aff_id3') ;
-          }else{
-            $transID = uniqid();
-          }
+          // if($request->click_id3){
+          //   Session::put('click_id3', $request->click_id3);
+          //   Session::put('aff_id3', $request->aff_id3);
+          //   $transID =  Session::get('click_id3'). '-ads3-'. Session::get('aff_id3') ;
+          // }else{
+          //   $transID = uniqid();
+          // }
+
+
+          $transID = uniqid();
 
             // 	HE Detect   //
             $productID = productID;
@@ -2752,9 +2755,9 @@ $URL = "http://consent.ooredoo.com.kw:8093/API/CCG?requestParam=$result&checksum
             $transID = $request->input('transID');
             $clickid = $transID ;
             // adds 3
-            $explode_transID = (explode("-ads3-",$transID));
-            $click_id3 = $explode_transID[0];
-            $aff_id3 = $explode_transID[1];
+            // $explode_transID = (explode("-ads3-",$transID));
+            // $click_id3 = $explode_transID[0];
+            // $aff_id3 = $explode_transID[1];
 
         }else{
           $clickid = "" ;
