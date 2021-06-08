@@ -120,7 +120,7 @@ switch ($os) {
           @if($country == 'KSA')
           <div class="col-4">
             <a href="sms:606068{{$Att}}37" class="click_op" data-country = "{{$country}}" data-operator="Mobily">
-              <img   width="100px" height="100px"  src="{{ url('assets/front/landing_v2')}}/operators2/MOBILE.png" alt="">
+              <img   width="100px" height="100px"  src="{{ url('assets/front/landing_v2')}}/operators2/MOBILE.png" alt=""> 
               <p>Mobily</p>
             </a>
 

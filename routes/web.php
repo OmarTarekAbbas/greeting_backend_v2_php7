@@ -230,6 +230,11 @@ Route::post('/unsubscribeOoredoo', 'HomeController@unsubscribeOoredoo');
 
 Route::get('/logout', 'FrontEndController@logout');
 
+//================================= KSA lANDING PROMOTION ==========================//
+Route::get('ksa_landing_promotion', 'KsaPromotionController@getLanding');
+//================================= KSA lANDING PROMOTION ==========================//
+
+
 //================================= Flatter KSA( STC )==============================//
 // STC KSA (Flatter)
 Route::get('landing_stc_ksa', 'KsaController@landing_stc_ksa');
