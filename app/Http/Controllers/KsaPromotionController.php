@@ -6,58 +6,23 @@ use Illuminate\Http\Request;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Carbon\Carbon;
-use App\Msisdn;
 use App\AdvertisingUrl;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Redirect;
-use App\Generatedurl;
-use App\Greetingimg;
-use App\PostbackRequest;
-use App\Respo;
 
 class KsaPromotionController extends Controller
 {
   public function getLanding(Request $request)
   {
-
-    date_default_timezone_set('Africa/Cairo');
-    session::forget('message');
-    session::forget('adv_params');
-    session::forget('transaction_id');
-    session::forget('publisherId_macro');
-
-
     if (isset($_SERVER['HTTP_MSISDN'])) {
       $MSISDN = str_replace("965", "", $_SERVER['HTTP_MSISDN']);
     } else {
       $MSISDN = "";
     }
 
-
-    /*
-      // setting all sessions
-      Session::put('adv_params', $_SERVER['QUERY_STRING']);
-
-      // make check on transaction_id ( clickid_macro ) for headwar ads company
-      if (isset($_REQUEST['transaction_id']) && $_REQUEST['transaction_id'] != "") {
-          $transaction_id = $_REQUEST['transaction_id'];
-          Session::put('transaction_id', $transaction_id);
-      } else {
-          $transaction_id = "";
-      }
-
-
-      if (isset($_REQUEST['publisherId_macro']) && $_REQUEST['publisherId_macro'] != "") {
-          $publisherId_macro = $_REQUEST['publisherId_macro'];
-          Session::put('publisherId_macro', $publisherId_macro);
-      } else {
-          $publisherId_macro = "";
-      }
-
-
-      // make log with all parameters
+     // make log with all parameters
       $result = array();
+
       // get client ip
       $ip = $_SERVER["REMOTE_ADDR"];
 
@@ -74,7 +39,6 @@ class KsaPromotionController extends Controller
       }
 
       $company = $this->detectCompnay();
-
       $country_from_ip = $this->ip_info("Visitor", "Country");
       $result['date'] = Carbon::now()->format('Y-m-d H:i:s');
       $result['ip'] = $ip;
@@ -82,7 +46,6 @@ class KsaPromotionController extends Controller
       $result['HeadeEnriched'] = $MSISDN;
       $result['adsCompnayName'] = $company;
       $result['deviceModel'] = $deviceModel;
-     // $result['AllHeaders'] = $_SERVER;
 
       // make log
       $actionName = "Ksa Landing Promotion";
@@ -102,15 +65,29 @@ class KsaPromotionController extends Controller
       $AdvertisingUrl = new AdvertisingUrl();
       $AdvertisingUrl->adv_url =  $URL;
       $AdvertisingUrl->msisdn =  $MSISDN;
-      $AdvertisingUrl->operatorId = STC_OP_ID; // Mobily KSA
+      $AdvertisingUrl->operatorId = 0; // General KSA Landing
       $AdvertisingUrl->status = 1; // 1 = hit , 2 = pincode send  , 3 pincode verify success  , 4 = intech subscribe success
-      $AdvertisingUrl->operatorName = "Stc Ksa Landing";
+      $AdvertisingUrl->operatorName = "Ksa Landing Promotion";
       $AdvertisingUrl->ads_compnay_name = $company; //  intech  or headway
       $AdvertisingUrl->publisherId_macro = session::get('click_id3') ?? "";
       $AdvertisingUrl->transaction_id = session::get('aff_id3') ?? "";
       $AdvertisingUrl->save();
-      */
+
 
     return view('landing_v2.ksa_landing_promotion', compact('MSISDN'));
+  }
+
+  public function log($actionName, $URL, $parameters_arr)
+  {
+      date_default_timezone_set("Africa/Cairo");
+      $date = date("Y-m-d");
+      $log = new Logger($actionName);
+      // to create new folder with current date  // if folder is not found create new one
+      if (!File::exists(storage_path('logs/' . $date . '/' . $actionName))) {
+          File::makeDirectory(storage_path('logs/' . $date . '/' . $actionName), 0775, true, true);
+      }
+
+      $log->pushHandler(new StreamHandler(storage_path('logs/' . $date . '/' . $actionName . '/logFile.log', Logger::INFO)));
+      $log->addInfo($URL, $parameters_arr);
   }
 }
